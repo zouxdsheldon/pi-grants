@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全球 PI 资助追踪 — Xiaodong Zou / MSKCC</title>
+<style>
+:root{--dark:#2C3E50;--red:#C0392B;--green:#27AE60;--yel:#E6A817;--blue:#2980B9;
+--greenf:#D5F5E3;--yelf:#FCF3CF;--redf:#FADBD2;--greyf:#EAECEE;--bluef:#EAF2F8;
+--bg:#F4F6F8;--card:#FFF;--line:#E2E8F0;--txt:#1A2530;--muted:#64748B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55;padding-bottom:60px}
+header{background:linear-gradient(135deg,#2C3E50,#1A2530);color:#fff;padding:22px 24px}
+header h1{font-size:21px}header .sub{opacity:.82;font-size:13px;margin-top:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.tabs{display:flex;gap:8px;margin:18px 0 0;border-bottom:2px solid var(--line);flex-wrap:wrap}
+.tab{padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab.active{color:var(--dark);border-bottom-color:var(--red)}
+.panel{display:none;animation:fade .2s}.panel.active{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.searchbar{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.searchbar .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.searchbar input[type=text]{flex:1;min-width:220px;padding:10px 13px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+.searchbar select{padding:10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff}
+.presets{margin-top:10px;display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:12.5px;padding:5px 12px;border-radius:16px;background:var(--bluef);color:var(--blue);border:1px solid #D3E4F3;cursor:pointer}
+.chip:hover{background:var(--blue);color:#fff}
+.status{font-size:13px;color:var(--muted);margin:12px 2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:.15s}
+.card:hover{box-shadow:0 4px 14px rgba(0,0,0,.09);transform:translateY(-1px)}
+.card .top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:5px}
+.card .name{font-size:15px;font-weight:700;color:var(--dark);flex:1;min-width:200px}
+.card .name a{color:var(--dark);text-decoration:none}.card .name a:hover{color:var(--red);text-decoration:underline}
+.badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.st-posted{background:var(--greenf);color:#1E7E45}.st-forecasted{background:var(--yelf);color:#8A6D0B}
+.rel-高{background:var(--red);color:#fff}.rel-中{background:var(--yel);color:#fff}.rel-低{background:#C6CDD4;color:#556}
+.fit-高{background:var(--red);color:#fff}.fit-中{background:var(--yel);color:#fff}.fit-低{background:#B0B0B0;color:#fff}
+.elig{font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px}
+.el-ok{background:var(--greenf);color:#1E7E45}.el-warn{background:var(--yelf);color:#8A6D0B}.el-no{background:var(--redf);color:#A03225}
+.funder{font-size:12.5px;color:var(--muted);margin-bottom:5px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:4px 16px;font-size:13px;margin:5px 0}
+.meta .k{color:var(--muted);font-size:11px;display:block}
+.soon{color:var(--red);font-weight:700}
+.note{font-size:12.5px;color:#444;background:#FafBfc;border-left:3px solid var(--line);padding:7px 10px;border-radius:0 6px 6px 0;margin-top:7px}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;background:var(--greyf);color:#555}
+.verify-official{background:var(--greenf);color:#1E7E45}
+.cat-title{font-size:14px;font-weight:700;color:var(--dark);padding:8px 12px;background:var(--bluef);border-radius:8px;margin:16px 0 9px}
+.headline{background:var(--card);border-left:5px solid var(--red);border-radius:10px;padding:15px 17px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.headline h2{font-size:15px;color:var(--red);margin-bottom:8px}.headline ol{margin-left:20px;font-size:13.5px}.headline li{margin:5px 0}
+.snapbar{background:#FFF7E6;border:1px solid #F0D999;border-radius:8px;padding:9px 13px;font-size:12.5px;color:#7A5B00;margin:14px 0}
+.tracker-btn{font-size:11px;padding:3px 9px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--muted)}
+.tracker-btn.tracked{background:var(--greenf);color:#1E7E45;border-color:#A8D5B8;font-weight:700}
+footer{text-align:center;font-size:12px;color:var(--muted);margin-top:30px;padding:0 20px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>🌐 全球 PI 资助追踪面板</h1>
+<div class="sub">Xiaodong Zou · MSKCC / Eric Lai 实验室 · RNA 降解与代谢方向</div>
+</div></header>
+<div class="wrap">
+
+<div class="tabs">
+  <button class="tab active" data-p="live">🇺🇸 联邦机会(<span id="liveN">…</span>)</button>
+  <button class="tab" data-p="curated">⭐ 国际/基金会/亚洲 PI</button>
+  <button class="tab" data-p="tracked">📌 我关注的</button>
+</div>
+
+<div class="panel active" id="live">
+  <div class="snapbar" id="snapbar">正在加载数据…</div>
+  <div class="searchbar">
+    <div class="row">
+      <input type="text" id="q" placeholder="搜标题/机构/编号,如 RNA、cancer、career、K99…">
+      <select id="rel"><option value="">相关度(全部)</option><option>高</option><option>中</option><option>低</option></select>
+      <select id="status"><option value="">状态(全部)</option><option value="posted">在招</option><option value="forecasted">预告</option></select>
+      <select id="sort"><option value="rel">按相关度</option><option value="deadline">按截止(近→远)</option></select>
+    </div>
+    <div class="presets" id="presets"></div>
+  </div>
+  <div class="status" id="liveStatus"></div>
+  <div id="liveList"></div>
+</div>
+
+<div class="panel" id="curated">
+  <div class="headline">
+    <h2>★ 最关键结论(这些无公开 API,靠人工核实维护)</h2>
+    <ol>
+      <li><b>NCI K99/R00(PAR-25-135)= 头号目标</b>:6 年博后窗口、无公民要求、临时签证可申。联邦机会页搜 "K99" 或 "Pathway to Independence" 看最新公告。</li>
+      <li><b>海外优青 / NRF / 香港 RGC</b>:亚洲青年 PI 平行路线,直接给独立职位,细则以当年官网为准。</li>
+      <li><b>明星博后奖</b>(Damon Runyon 等)大概率已过窗口。</li>
+    </ol>
+  </div>
+  <div class="searchbar"><div class="row">
+    <input type="text" id="cq" placeholder="🔍 搜索精选清单…">
+    <select id="cfit"><option value="">契合(全部)</option><option>高</option><option>中</option><option>低</option></select>
+    <select id="celig"><option value="">资格(全部)</option><option value="✅">✅ 可申</option><option value="⚠️">⚠️ 边界</option><option value="❌">❌ 过窗口</option></select>
+  </div></div>
+  <div class="status" id="curStatus"></div>
+  <div id="curList"></div>
+</div>
+
+<div class="panel" id="tracked">
+  <div class="status">你点"📌 关注"的项目存在这台设备的浏览器里,下次打开还在。</div>
+  <div id="trackList"></div>
+</div>
+
+<footer>
+  联邦数据由 GitHub Actions 每日自动从 Grants.gov 抓取更新。精选清单为人工核实,亚洲/基金会项目以当年官网为准。<br>
+  关注列表存于浏览器 localStorage(仅本设备)。
+</footer>
+</div>
+
+<script>
+const PRESETS=["RNA","cancer","diabetes","metabolic","fibrosis","muscle","career development","K99","non-coding"];
+let LIVE=[], CURATED=[], META={};
+
+/* tabs */
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");document.getElementById(t.dataset.p).classList.add("active");
+  if(t.dataset.p==="tracked")renderTracked();
+});
+
+/* tracker */
+const TKEY="pi_grants_tracked";
+const getTracked=()=>{try{return JSON.parse(localStorage.getItem(TKEY)||"{}")}catch(e){return{}}};
+const setTracked=o=>localStorage.setItem(TKEY,JSON.stringify(o));
+function toggleTrack(id,title,agency,close,url){
+  const t=getTracked(); if(t[id])delete t[id]; else t[id]={title,agency,close,url};
+  setTracked(t);renderLive();
+}
+
+/* load data (same-origin — no CORS) */
+async function loadData(){
+  try{
+    const [g,c]=await Promise.all([
+      fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
+      fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
+    ]);
+    LIVE=g.grants||[]; META=g; CURATED=c.grants||[];
+    document.getElementById("liveN").textContent=LIVE.length+" 条";
+    document.getElementById("snapbar").innerHTML=
+      `📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(GitHub 每日自动刷新)`;
+    buildPresets(); renderLive(); renderCurated();
+  }catch(e){
+    document.getElementById("snapbar").innerHTML=
+      `<b style="color:#A03225">数据加载失败:${e.message}</b> — 若你是直接双击本地文件打开,请通过网址访问已部署的网站(GitHub Pages),或用本地服务器打开。`;
+  }
+}
+
+function buildPresets(){
+  const el=document.getElementById("presets"); el.innerHTML="";
+  PRESETS.forEach(p=>{const c=document.createElement("span");c.className="chip";c.textContent=p;
+    c.onclick=()=>{document.getElementById("q").value=p;renderLive();};el.appendChild(c);});
+}
+
+const relrank={"高":0,"中":1,"低":2};
+function renderLive(){
+  const q=document.getElementById("q").value.toLowerCase();
+  const rel=document.getElementById("rel").value, st=document.getElementById("status").value, sort=document.getElementById("sort").value;
+  const tracked=getTracked();
+  let rows=LIVE.filter(g=>{
+    if(rel&&g.rel!==rel)return false;
+    if(st&&g.status!==st)return false;
+    if(q&&!((g.title||"")+(g.agency||"")+(g.number||"")).toLowerCase().includes(q))return false;
+    return true;});
+  if(sort==="deadline")rows.sort((a,b)=>(a.days==null?9999:a.days)-(b.days==null?9999:b.days));
+  else rows.sort((a,b)=>relrank[a.rel]-relrank[b.rel]||((a.days==null?9999:a.days)-(b.days==null?9999:b.days)));
+  document.getElementById("liveStatus").innerHTML=`显示 <b>${rows.length}</b> / ${LIVE.length} 个联邦机会`;
+  const list=document.getElementById("liveList");list.innerHTML="";
+  rows.slice(0,150).forEach(g=>{
+    const dlTxt=g.closeDate?(g.days!=null&&g.days>=0?`${g.closeDate}(${g.days} 天)`:g.closeDate):"—";
+    const cls=(g.days!=null&&g.days>=0&&g.days<=45)?"soon":"";
+    const isT=!!tracked[g.id];
+    const d=document.createElement("div");d.className="card";
+    d.innerHTML=`<div class="top">
+      <span class="name"><a href="${g.url}" target="_blank">${g.title||"(无标题)"}</a></span>
+      <span class="badge rel-${g.rel}">相关 ${g.rel}</span>
+      <span class="badge st-${g.status}">${g.status}</span>
+      <button class="tracker-btn ${isT?'tracked':''}">${isT?'✓ 已关注':'📌 关注'}</button></div>
+      <div class="funder">${g.agency||""} · 编号 ${g.number||"—"}</div>
+      <div class="meta">
+        <div><span class="k">开放</span>${g.openDate||"—"}</div>
+        <div><span class="k">截止</span><span class="${cls}">${dlTxt}</span></div>
+        <div><span class="k">CFDA</span>${g.cfda||"—"}</div></div>`;
+    d.querySelector(".tracker-btn").onclick=()=>toggleTrack(g.id,g.title,g.agency,g.closeDate,g.url);
+    list.appendChild(d);
+  });
+  if(rows.length>150)list.insertAdjacentHTML("beforeend",`<p style="color:var(--muted);padding:10px;font-size:12.5px">仅显示前 150 条,用搜索/筛选缩小范围。</p>`);
+  if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配。放宽筛选或换关键词。</p>';
+}
+["q","rel","status","sort"].forEach(id=>document.getElementById(id).addEventListener("input",renderLive));
+
+function renderTracked(){
+  const t=getTracked();const keys=Object.keys(t);
+  const list=document.getElementById("trackList");
+  if(!keys.length){list.innerHTML='<p style="color:var(--muted);padding:16px">还没有关注的项目。去"联邦机会"点 📌 关注。</p>';return;}
+  list.innerHTML="";
+  keys.forEach(id=>{const g=t[id];const d=document.createElement("div");d.className="card";
+    d.innerHTML=`<div class="top"><span class="name"><a href="${g.url}" target="_blank">${g.title}</a></span>
+      <button class="tracker-btn tracked">✓ 取消关注</button></div>
+      <div class="funder">${g.agency||""} · 截止 ${g.close||"—"}</div>`;
+    d.querySelector(".tracker-btn").onclick=()=>{const o=getTracked();delete o[id];setTracked(o);renderTracked();};
+    list.appendChild(d);});
+}
+
+const eligClass=s=>s.startsWith("✅")?"el-ok":s.startsWith("⚠️")?"el-warn":"el-no";
+const eligKey=s=>s.startsWith("✅")?"✅":s.startsWith("⚠️")?"⚠️":"❌";
+const fitRank={"高":0,"中":1,"低":2};
+function renderCurated(){
+  const q=document.getElementById("cq").value.toLowerCase();
+  const ff=document.getElementById("cfit").value, fe=document.getElementById("celig").value;
+  let rows=CURATED.filter(g=>{
+    if(ff&&g.fit!==ff)return false;
+    if(fe&&eligKey(g.elig)!==fe)return false;
+    if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount).toLowerCase().includes(q))return false;
+    return true;});
+  rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
+  document.getElementById("curStatus").innerHTML=`${rows.length} / ${CURATED.length} 个项目`;
+  const byCat={};rows.forEach(g=>{(byCat[g.cat]=byCat[g.cat]||[]).push(g);});
+  const list=document.getElementById("curList");list.innerHTML="";
+  Object.keys(byCat).sort().forEach(cat=>{
+    const t=document.createElement("div");t.className="cat-title";t.textContent=cat;list.appendChild(t);
+    byCat[cat].forEach(g=>{const d=document.createElement("div");d.className="card";
+      d.innerHTML=`<div class="top"><span class="name">${g.name}</span>
+        <span class="elig ${eligClass(g.elig)}">${g.elig}</span>
+        <span class="badge fit-${g.fit}">契合 ${g.fit}</span>
+        ${g.verify&&g.verify.includes("官方")?'<span class="pill verify-official">✔ 官方核实</span>':'<span class="pill">待核实</span>'}</div>
+        <div class="funder">${g.funder}</div>
+        <div class="meta">
+          <div><span class="k">博后年限窗口</span>${g.window||"—"}</div>
+          <div><span class="k">金额(概)</span>${g.amount||"—"}</div>
+          <div><span class="k">截止(概)</span>${g.deadline||"—"}</div>
+          <div><span class="k">国籍与签证</span>${g.cite_req||"—"}</div></div>
+        <div class="note"><b>为什么:</b>${g.cite}<br><b>备注:</b>${g.note}</div>`;
+      list.appendChild(d);});
+  });
+  if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配项目。</p>';
+}
+["cq","cfit","celig"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
+
+loadData();
+</script>
+</body>
+</html>
