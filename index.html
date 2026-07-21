@@ -79,6 +79,10 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .note{font-size:12px;color:#444;background:#FafBfc;border-left:3px solid var(--line);padding:6px 9px;border-radius:0 6px 6px 0;margin-top:6px}
 .pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:12px;background:var(--greyf);color:#555}
 .verify-official{background:var(--greenf);color:#1E7E45}
+.src{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.src-pivot{background:#E8DAEF;color:#6C3483}
+.src-curated{background:#D5F5E3;color:#1E7E45}
+.src-govt{background:#D6EAF8;color:#1F618D}
 .cat-title{font-size:13.5px;font-weight:700;color:var(--dark);padding:7px 11px;background:var(--bluef);border-radius:8px;margin:14px 0 8px}
 .headline{background:var(--card);border-left:5px solid var(--red);border-radius:10px;padding:13px 15px;margin-bottom:14px}
 .headline h2{font-size:14px;color:var(--red);margin-bottom:7px}.headline ol{margin-left:19px;font-size:13px}.headline li{margin:4px 0}
@@ -169,6 +173,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <div class="srow">
       <select id="cfit"><option value="">契合(全部)</option><option>高</option><option>中</option><option>低</option></select>
       <select id="celig"><option value="">资格(全部)</option><option value="✅">✅ 可申</option><option value="⚠️">⚠️ 边界</option><option value="❌">❌ 过窗口</option></select>
+      <select id="csrc"><option value="">来源(全部)</option><option value="pivot">Pivot-RP</option><option value="curated">手工策展</option></select>
     </div>
   </div>
   <div class="status" id="curStatus"></div>
@@ -356,6 +361,7 @@ function renderLive(){
     d.innerHTML=`<div class="top">
       <span class="name"><a href="${g.url}" target="_blank">${g.title||"(无标题)"}</a></span>
       <span class="badge rel-${g.rel}">相关 ${g.rel}</span>
+      <span class="src src-govt">来源 Grants.gov(美政府)</span>
       <span class="ftype">${g.ftype}</span>
       <span class="badge st-${g.status}">${g.status}</span></div>
       <div class="funder">${g.agency||""} · 编号 ${g.number||"—"}</div>
@@ -384,6 +390,7 @@ const fitRank={"高":0,"中":1,"低":2};
 function renderCurated(){
   const q=document.getElementById("cq").value.toLowerCase();
   const ff=document.getElementById("cfit").value, fe=document.getElementById("celig").value;
+  const fs=document.getElementById("csrc").value;
   // region chip bar (built once)
   const chipWrap=document.getElementById("regionChips");
   if(chipWrap && !chipWrap.dataset.built){
@@ -401,6 +408,7 @@ function renderCurated(){
     if(CUR_REGION&&g.region!==CUR_REGION)return false;
     if(ff&&g.fit!==ff)return false;
     if(fe&&eligKey(g.elig)!==fe)return false;
+    if(fs&&(g.source||"curated")!==fs)return false;
     if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount+g.region).toLowerCase().includes(q))return false;
     return true;});
   rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
@@ -418,6 +426,7 @@ function renderCurated(){
       d.innerHTML=`<div class="top"><span class="name">${g.name}</span>
         <span class="sc sc-elig-${eligClass(g.elig)}" style="padding:2px 9px">${g.elig}</span>
         <span class="badge fit-${g.fit}">契合 ${g.fit}</span>
+        <span class="src src-${g.source||'curated'}">来源 ${g.src_label||(g.source==='pivot'?'Pivot-RP':'手工策展')}</span>
         ${g.verify&&g.verify.includes("官方")?'<span class="pill verify-official">✔ 官方核实</span>':'<span class="pill">待核实</span>'}${link}</div>
         <div class="funder">${g.funder}</div>
         <div class="scorecard">
@@ -430,7 +439,7 @@ function renderCurated(){
   });
   if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配项目。</p>';
 }
-["cq","cfit","celig"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
+["cq","cfit","celig","csrc"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
 
 /* ---------- render WHAT'S NEW ---------- */
 function renderChanges(){

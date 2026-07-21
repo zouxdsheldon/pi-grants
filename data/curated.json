@@ -17,7 +17,9 @@
    "cite": "你约4年→有余量;MSKCC为NCI指定中心;TDMD/miRNA属癌症相关",
    "note": "首选。R00把独立经费带进教职谈判,是非公民最强转轨路径。",
    "cite_req": "无公民要求;临时签证OK",
-   "verify": "已核实(官方NOFO)"
+   "verify": "已核实(官方NOFO)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -33,7 +35,9 @@
    "cite": "若课题含临床试验成分走此号",
    "note": "你的机制课题多数走 PAR-25-135。",
    "cite_req": "无公民要求",
-   "verify": "已核实(官方NOFO)"
+   "verify": "已核实(官方NOFO)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -49,7 +53,9 @@
    "cite": "若课题偏代谢(NIDDK)/基础机制(NIGMS)走此路",
    "note": "注意:parent 窗口是≤4年,比NCI的6年紧;按你博后年限抓紧。",
    "cite_req": "无公民要求;临时签证OK",
-   "verify": "已核实(官方NOFO)"
+   "verify": "已核实(官方NOFO)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -65,7 +71,9 @@
    "cite": "落地教职后的主力研究经费",
    "note": "非公民可作PI,但需美国机构聘任。",
    "cite_req": "机构须为美国境内",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -81,7 +89,9 @@
    "cite": "纽约地区、非公民友好、资深博后",
    "note": "地域限纽约,MSKCC符合。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -97,7 +107,9 @@
    "cite": "癌症相关、非公民可申",
    "note": "与TDMD/癌症契合。",
    "cite_req": "部分需美国机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -113,7 +125,9 @@
    "cite": "多疾病方向(含癌症、糖尿病相关)",
    "note": "关注 PRCRP/相关计划年度公告。",
    "cite_req": "多数不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -129,7 +143,9 @@
    "cite": "顶级癌症博后奖,但要求申请时资历浅",
    "note": "你4年博后大概率已超起始窗口,确认截止规则。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇺🇸 美国",
@@ -145,7 +161,9 @@
    "cite": "基础生物医学,窗口早",
    "note": "同上,窗口偏早。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇪🇺 欧洲(欧盟)",
@@ -161,7 +179,9 @@
    "cite": "顶级独立启动经费;需在欧盟/associated国家机构任职",
    "note": "若你考虑赴欧建组,这是最强选项;PhD后2-7年窗口对你合适。",
    "cite_req": "不限国籍,须欧洲东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇪🇺 欧洲(欧盟)",
@@ -177,7 +197,9 @@
    "cite": "非常适合从美国转欧洲的博后;流动性要求",
    "note": "'European Fellowships'接受任何国籍来欧;适合过渡到欧洲PI。",
    "cite_req": "流动性规则(近3年不在东道国)",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇪🇺 欧洲(欧盟)",
@@ -193,7 +215,9 @@
    "cite": "国际化、跨学科;但PhD后≤3年窗口偏紧",
    "note": "窗口对你可能偏紧,确认起算规则。",
    "cite_req": "不限国籍,需跨国流动",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇪🇺 欧洲(欧盟)",
@@ -209,7 +233,9 @@
    "cite": "分子生物学顶尖;窗口很紧、需流动到欧洲",
    "note": "窗口≤2年,你大概率已过。",
    "cite_req": "需流动到EMBC成员国",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇪🇺 欧洲(欧盟)",
@@ -225,7 +251,9 @@
    "cite": "在特定成员国(如葡/波/土等)建组的启动经费",
    "note": "若在指定国家落地教职则很有用。",
    "cite_req": "限特定EMBC国家",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇬🇧 英国",
@@ -241,7 +269,9 @@
    "cite": "英国生物医学顶级早期独立经费",
    "note": "需英国/爱尔兰东道机构支持。",
    "cite_req": "需英国东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇬🇧 英国",
@@ -257,7 +287,9 @@
    "cite": "跨领域、灵活、金额高",
    "note": "需英国机构提名/东道。",
    "cite_req": "需英国东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇬🇧 英国",
@@ -273,7 +305,9 @@
    "cite": "自然科学、含生命科学",
    "note": "窗口对你合适,需英国机构。",
    "cite_req": "居留要求见官方",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇨🇳 中国大陆",
@@ -289,7 +323,9 @@
    "cite": "你的博士(吉大)+海外经历+机制课题非常契合;直接给独立PI职位+启动经费",
    "note": "平行于K99的最强亚洲路线,直接落地教职。核对年龄与海外年限。",
    "cite_req": "面向海外留学人员/华人及外籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇨🇳 中国大陆",
@@ -305,7 +341,9 @@
    "cite": "落地国内单位后的起步经费",
    "note": "须先有国内聘任。",
    "cite_req": "需国内依托单位",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇨🇳 中国大陆",
@@ -321,7 +359,9 @@
    "cite": "海外优青的并行/衔接人才通道",
    "note": "与海外优青常配套,咨询目标高校人事处。",
    "cite_req": "面向海外引进",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇨🇳 中国大陆",
@@ -337,7 +377,9 @@
    "cite": "主要为访学/合作,非独立PI经费",
    "note": "作为补充了解。",
    "cite_req": "中国公民为主",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇭🇰 香港",
@@ -353,7 +395,9 @@
    "cite": "落地香港高校后主力;ECS专为新任PI",
    "note": "需先获香港八大之一聘任。",
    "cite_req": "需香港东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇭🇰 香港",
@@ -369,7 +413,9 @@
    "cite": "香港近年大力引进STEM人才",
    "note": "与香港高校谈教职时可对接。",
    "cite_req": "面向全球引进",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇭🇰 香港",
@@ -385,7 +431,9 @@
    "cite": "若想先落地香港做资深博后再转PI",
    "note": "过渡选项。",
    "cite_req": "需香港东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇸🇬 新加坡",
@@ -401,7 +449,9 @@
    "cite": "直接给独立PI+大额启动经费,不限国籍,顶级平行路线",
    "note": "与海外优青并列你最应主攻的亚洲路线。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇸🇬 新加坡",
@@ -417,7 +467,9 @@
    "cite": "新加坡国家研究机构,生物医学强",
    "note": "可对接 A*STAR 研究所 PI 职位。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇸🇬 新加坡",
@@ -433,7 +485,9 @@
    "cite": "两校均有校长博后计划+教职引才",
    "note": "作为落地新加坡的通道。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇯🇵 日本",
@@ -449,7 +503,9 @@
    "cite": "需日本东道研究者邀请;适合过渡",
    "note": "经日本合作PI提交;窗口对你合适。",
    "cite_req": "面向外籍研究者",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇯🇵 日本",
@@ -465,7 +521,9 @@
    "cite": "日本生物医学主力资助机构",
    "note": "多数需日本依托单位。",
    "cite_req": "需日本机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇯🇵 日本",
@@ -481,7 +539,9 @@
    "cite": "落地日本教职后的起步经费",
    "note": "须先有日本聘任。",
    "cite_req": "需日本机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇰🇷 韩国",
@@ -497,7 +557,9 @@
    "cite": "韩国国家研究基金;含引才通道",
    "note": "可对接韩国高校/IBS职位。",
    "cite_req": "部分面向外籍引进",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇰🇷 韩国",
@@ -513,7 +575,9 @@
    "cite": "韩国基础科学重镇,大力引进海外人才",
    "note": "若考虑韩国,IBS是最具吸引力平台。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇦🇺 澳大利亚",
@@ -529,7 +593,9 @@
    "cite": "澳洲生物医学主力人才经费;EL1面向早期",
    "note": "需澳洲机构支持。",
    "cite_req": "需澳洲东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇦🇺 澳大利亚",
@@ -545,7 +611,9 @@
    "cite": "基础研究、早期职业专属",
    "note": "窗口对你合适,需澳洲机构。",
    "cite_req": "需澳洲东道机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇨🇦 加拿大",
@@ -561,7 +629,9 @@
    "cite": "加拿大健康研究主力",
    "note": "需加拿大机构聘任。",
    "cite_req": "需加拿大机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🇨🇦 加拿大",
@@ -577,7 +647,9 @@
    "cite": "顶级博后奖,窗口≤3年偏紧",
    "note": "窗口对你可能偏紧。",
    "cite_req": "不限国籍",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🌍 国际/跨国",
@@ -593,7 +665,9 @@
    "cite": "已在欧洲区详列,此处仅索引",
    "note": "见🇪🇺欧洲区条目。",
    "cite_req": "—",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🌍 国际/跨国",
@@ -609,7 +683,9 @@
    "cite": "落地美国教职后的明星学者奖,多需机构提名",
    "note": "这是'当上PI之后'的下一步,先记档。",
    "cite_req": "多数需美国机构+提名",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "region": "🌍 国际/跨国",
@@ -625,7 +701,9 @@
    "cite": "纽约地区癌症新PI,MSKCC符合地域",
    "note": "落地MSKCC/纽约教职后可申。",
    "cite_req": "需纽约地区机构",
-   "verify": "待核实(官方链接)"
+   "verify": "待核实(官方链接)",
+   "source": "curated",
+   "src_label": "手工策展"
   },
   {
    "name": "Australia Fellowship Program",
@@ -642,7 +720,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "NSW-RRTN Strategic Fund",
@@ -659,7 +738,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Prix alnylam pharmaceuticals",
@@ -676,7 +756,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Precision Mitochondria",
@@ -693,7 +774,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "TRANSCAN-4 Joint Transnational Call: Translational Research on Cancer Metabolism: Multidisciplinary Approaches for Diagnosis and Treatment",
@@ -710,7 +792,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Metabolites Journal travel award",
@@ -727,7 +810,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "NEOF Pilot Multiomics Competition",
@@ -744,7 +828,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Multiomics in Metabolic Disease",
@@ -761,7 +846,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Else Kröner Fresenius Prize for Medical Research",
@@ -778,7 +864,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Epitranscriptomics - Innovative research approaches from method to application",
@@ -795,7 +882,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "CSP (Community Science Program) New Investigator Call",
@@ -812,7 +900,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "iNext Awards North America",
@@ -829,7 +918,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Challenge Award for Trainees",
@@ -846,7 +936,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Ascending investigator grant within endocrinology and metabolism - Nordic region",
@@ -863,7 +954,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Seedcorn funding programme",
@@ -880,7 +972,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Translationale Forschung zum Krebsmetabolismus: Multidisziplinäre Ansätze für Diagnose und Behandlung“ im Rahmen des EU-Netzwerks TRANSCAN-4: Deutsche Antragsteller",
@@ -897,7 +990,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "GeneNovate Investors' Day 2026",
@@ -914,7 +1008,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Metabolic Ageing – Collaborative project grants for studying ageing and metabolic dysfunction",
@@ -931,7 +1026,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Energy Track: Early-Career Research Fellowship",
@@ -948,7 +1044,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Discovery Network",
@@ -965,7 +1062,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "ESPEN Broaden your Horizons Grant",
@@ -982,7 +1080,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Joint Risk Resilience Partnership - Behavioral Shifts for Longevity: Matching Individuals to Scalable Metabolic Health Interventions",
@@ -999,7 +1098,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "The Sagol Network GerOmic Award for Junior Faculty",
@@ -1016,7 +1116,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Anitschkow prize",
@@ -1033,7 +1134,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Engineering Biology Challenge",
@@ -1050,7 +1152,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Diabetes Research Grants",
@@ -1067,7 +1170,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Allocations de recherche SFD-Industrie",
@@ -1084,7 +1188,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Clinical Trials Advancing Metabolic Therapies for T1D",
@@ -1101,7 +1206,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Prof J Terpstra young investigator award",
@@ -1118,7 +1224,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Forschungspreis der AG 23 Herz und Diabetes",
@@ -1135,7 +1242,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Communicatie en verspreiding van partnership diabetes onderzoeksresultaten",
@@ -1152,7 +1260,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Allocations de recherche SFD",
@@ -1169,7 +1278,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Health & Life Sciences Research Grants",
@@ -1186,7 +1296,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Project grants",
@@ -1203,7 +1314,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01 Clinical Trial Required)",
@@ -1220,7 +1332,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Consortia Developing New Modalities as Therapeutics for ALS",
@@ -1237,7 +1350,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Funding for Company-driven RNA Innovation | AReNA",
@@ -1254,7 +1368,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Innovative Concept Submissions Promoting Impactful Research (INSPIRE) Program",
@@ -1271,7 +1386,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Prix Auguste Loubatières",
@@ -1288,7 +1404,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Cariplo Foundation-Telethon joint call",
@@ -1305,7 +1422,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Passion to Find a Cure Grants",
@@ -1322,7 +1440,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Personalisierte Medizin für Herz-Kreislauf-, Stoffwechsel- und Nierenerkrankungen (CARMEN2026) innerhalb der Europäischen Partnerschaft für Personalisierte Medizin (EP PerMed): für deutsche Bewerber",
@@ -1339,7 +1458,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Call for Projects – Intercenter Structuring Initiatives of the Cardiometabolic Heath, Diabetes and Obesity Research Network",
@@ -1356,7 +1476,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Travel Awards",
@@ -1373,7 +1494,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)",
@@ -1390,7 +1512,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "PhD fellowships",
@@ -1407,7 +1530,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Fellowships",
@@ -1424,7 +1548,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Meeting Bursaries",
@@ -1441,7 +1566,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Bando Giovani: Early-career award",
@@ -1458,7 +1584,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Career Development Bridge Funding Award: K Bridge",
@@ -1475,7 +1602,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Award for Outstanding Achievement in Basic Cancer Research",
@@ -1492,7 +1620,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Career Development Award",
@@ -1509,7 +1638,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Hallas-Møller emerging investigator grants - bioscience and basic biomedicine",
@@ -1526,7 +1656,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Metabolites Journal young investigator award",
@@ -1543,7 +1674,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Early-career microbiologist award",
@@ -1560,7 +1692,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Sloan research fellowships",
@@ -1577,7 +1710,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Priming grants",
@@ -1594,7 +1728,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Exploration grants",
@@ -1611,7 +1746,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Academic Start-up Fund",
@@ -1628,7 +1764,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Breakthrough immunology award",
@@ -1645,7 +1782,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "AMRF First Fellowship",
@@ -1662,7 +1800,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Starting grant",
@@ -1679,7 +1818,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Family Support Awards",
@@ -1696,7 +1836,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Early Clinical Investigator Award (ECI)",
@@ -1713,7 +1854,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Searle Scholars Program",
@@ -1730,7 +1872,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Lung Foundation Australia - Lizotte Family Grant for Pulmonary Fibrosis Research",
@@ -1747,7 +1890,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Rheumatoid Arthritis Research Fund",
@@ -1764,7 +1908,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Grant-in-Aid for Investigator-Led Pulmonary Fibrosis Clinical Research.",
@@ -1781,7 +1926,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Career Development Bridge Funding Award: R Bridge",
@@ -1798,7 +1944,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "HRCI-HRB Joint Funding Scheme - Breakthrough Cancer Research",
@@ -1815,7 +1962,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Validation Center for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U54 Clinical Trials Not Allowed)",
@@ -1832,7 +1980,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Development and Testing of a Multi-use Frameworks Playbook for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U01 Clinical Trial Not Allowed)",
@@ -1849,7 +1998,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Innovator Awards",
@@ -1866,7 +2016,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "International PhD programme",
@@ -1883,7 +2034,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Pilot Grants for Gastrointestinal Biology Research",
@@ -1900,7 +2052,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Ivan Cash Grant for Pulmonary Fibrosis Research",
@@ -1917,7 +2070,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Al and Val Rosenstrauss research fellowship",
@@ -1934,7 +2088,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Medical Research Grants",
@@ -1951,7 +2106,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Jerry Mendell Award for Translational Science",
@@ -1968,7 +2124,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Research Grants",
@@ -1985,7 +2142,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "DoW Duchenne Muscular Dystrophy Clinical/Translational Award",
@@ -2002,7 +2160,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Call for research grants on neuromuscular diseases",
@@ -2019,7 +2178,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Idea Awards",
@@ -2036,7 +2196,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Congresses and conferences",
@@ -2053,7 +2214,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Clinical Research Network Grants (CRNG)",
@@ -2070,7 +2232,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Waite-Griffin SBMA Fellowship",
@@ -2087,7 +2250,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Basic Research Funding Opportunities",
@@ -2104,7 +2268,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Project grants",
@@ -2121,7 +2286,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Research Grants (RG)",
@@ -2138,7 +2304,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Research Infrastructure Grants (RIG)",
@@ -2155,7 +2322,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "PhD fellowships",
@@ -2172,7 +2340,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Pilot Grant Program",
@@ -2189,7 +2358,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Call 'Accelerator XL'",
@@ -2206,7 +2376,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "AACR-Debbie’s Dream Foundation Gastric Cancer Innovation and Discovery Grant",
@@ -2223,7 +2394,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "R. Robert & Sally Funderburg Research Award in Gastric Cancer",
@@ -2240,7 +2412,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Transpacific Gastric and Esophageal Cancer Research Partnership Grant",
@@ -2257,7 +2430,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "ESMO preceptorship on gastric cancer – Singapore",
@@ -2274,7 +2448,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Michael F. Price Memorial Grant",
@@ -2291,7 +2466,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Ulla Malmnäs Tjernlunds forskningsfond",
@@ -2308,7 +2484,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "AGA-Torrey Coast Foundation Fellowship-to-Faculty Transition Award in Upper GI Cancer",
@@ -2325,7 +2502,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "AACR-Debbie’s Dream Foundation Career Development Award for Gastric Cancer Research",
@@ -2342,7 +2520,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Swiss Cancer Institute/Astellas GU-Oncology Award",
@@ -2359,7 +2538,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Metastatic Bowel Cancer Project Grants",
@@ -2376,7 +2556,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "AGA-Gastric Cancer Foundation Ben Feinstein Memorial Research Scholar Award in Gastric Cancer",
@@ -2393,7 +2574,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Research grants",
@@ -2410,7 +2592,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Early Career Investigator Award",
@@ -2427,7 +2610,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "NCI / SPORE Program",
@@ -2444,7 +2628,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Derek Butler fellowship",
@@ -2461,7 +2646,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Appel à projets « Démonstration de la valeur des organoïdes et organes sur puce »",
@@ -2478,7 +2664,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Organoids and Beyond: From Development to Disease",
@@ -2495,7 +2682,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "NICHD Resource Program Grants in Bioinformatics (P41 Clinical Trial Not Allowed)",
@@ -2512,7 +2700,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Robert Blackburn Travel Grant",
@@ -2529,7 +2718,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Joan Oefner Travel Grant",
@@ -2546,7 +2736,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Bruce Cattanach prize",
@@ -2563,7 +2754,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Ideas Advancement Fund",
@@ -2580,7 +2772,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Partnerships for Social Innovation Fund",
@@ -2597,7 +2790,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "DNA-Protein Epigenetic Chemistry Engineering (D-PECHE)",
@@ -2614,7 +2808,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Animation nationale et inter-régionale pour mêler enjeux ruraux et agricoles (ANIMERA)",
@@ -2631,7 +2826,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Genome informatics conference bursaries",
@@ -2648,7 +2844,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "CSP (Community Science Program) Large Scale Call",
@@ -2665,7 +2862,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Writing Competition for Early-Career Scientists",
@@ -2682,7 +2880,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "iDEA-TECH Awards North America",
@@ -2699,7 +2898,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Illumina awards",
@@ -2716,7 +2916,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Spain: Molecular Biology and Biotechnology at the Universidad de Murcia",
@@ -2733,7 +2934,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Priority Programme “Holistic Design of Molecular Communication Systems (HoD-MoCS)”",
@@ -2750,7 +2952,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Research Grants",
@@ -2767,7 +2970,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "Career Development Awards",
@@ -2784,7 +2988,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   },
   {
    "name": "AI X BIO bursary",
@@ -2801,7 +3006,8 @@
    "verify": "来自你的 Pivot 导出",
    "cite": "来自你在 Pivot-RP 的检索清单;详情以官方页为准(仅并入事实字段,不含 Pivot 版权描述)。",
    "note": "",
-   "source": "pivot"
+   "source": "pivot",
+   "src_label": "Pivot-RP"
   }
  ]
 }
