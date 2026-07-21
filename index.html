@@ -97,6 +97,25 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .honest{background:#EAF2F8;border:1px solid #C5DBEE;border-radius:8px;padding:9px 12px;font-size:12px;color:#1B4F72;margin-bottom:12px}
 .soon{color:var(--red);font-weight:700}
 
+/* calendar */
+.calbanner{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
+.calbanner .kpi{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:8px;padding:9px 12px}
+.calbanner .kpi b{font-size:22px;display:block;color:var(--dark)}
+.calbanner .kpi.k30{border-left-color:#E67E22}.calbanner .kpi.k90{border-left-color:var(--yel)}.calbanner .kpi.kmine{border-left-color:var(--green)}
+.calmonth{background:#fff;border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+.calmonth>h3{margin:0;padding:9px 14px;background:var(--dark);color:#fff;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.calmonth>h3 .mc{font-weight:400;font-size:12px;opacity:.85}
+.calmonth.past>h3{background:#9AA5B1}
+.calitem{display:flex;gap:10px;align-items:flex-start;padding:8px 14px;border-top:1px solid var(--line);font-size:12.5px}
+.calitem.mine{background:#F0FBF3;border-left:4px solid var(--green)}
+.calitem .cd{min-width:52px;font-weight:700;color:var(--red);text-align:center}
+.calitem .cbody{flex:1}
+.calitem .cbody .ct{font-weight:600;color:var(--dark)}
+.calitem .cbody .cm{color:var(--muted);font-size:11.5px;margin-top:2px}
+.calitem .cr{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:9px;white-space:nowrap;height:fit-content}
+.cr.高{background:#C6EFCE;color:#0A6}.cr.中{background:#FFEB9C;color:#8A6D00}.cr.低{background:#EEE;color:#888}
+.calitem a{color:#0563C1;text-decoration:none;font-size:11.5px;white-space:nowrap}
+.mine-badge{background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:6px}
 /* pipeline table */
 table.pipe{width:100%;border-collapse:collapse;background:#fff;border-radius:9px;overflow:hidden;font-size:12.5px}
 table.pipe th,table.pipe td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
@@ -137,6 +156,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="tabs">
   <button class="tab active" data-p="live">🇺🇸 联邦机会(<span id="liveN">…</span>)</button>
   <button class="tab" data-p="curated">🌐 各国 PI 资助(<span id="curN">…</span>)</button>
+  <button class="tab" data-p="calendar">📅 截止日历(<span id="calN">…</span>)</button>
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
 </div>
@@ -198,6 +218,17 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <!-- PIPELINE -->
+<div class="panel" id="calendar">
+  <div class="honest">📅 所有资助按<b>截止月份</b>排布(2026–2027)。<b style="color:var(--green)">绿色高亮 = 你能申</b>(身份含博后/早期、非美籍专属、未过窗口)。顶部提示本月及未来到期。精选项多为「每年约X月」周期受理,日期为近似(±2周),投递前点链接核对官方受理日。</div>
+  <div id="calBanner" class="calbanner"></div>
+  <div class="actions" style="margin:8px 0 4px">
+    <label style="font-size:13px;font-weight:700;cursor:pointer"><input type="checkbox" id="calOnlyMine" checked> ✅ 只看我能申的</label>
+    <select id="calRel"><option value="">相关度(全部)</option><option value="高">高</option><option value="中">中</option><option value="低">低</option></select>
+    <span class="status" id="calStatus" style="margin:0"></span>
+  </div>
+  <div id="calWrap"></div>
+</div>
+
 <div class="panel" id="pipeline">
   <div class="honest">📋 你点"关注"的项目进入这里管理。状态/笔记存在<b>本设备浏览器</b>。点"导出 CSV"可下载到你的申请追踪表。</div>
   <div class="actions" style="margin-bottom:10px">
@@ -273,7 +304,79 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   t.classList.add("active");document.getElementById(t.dataset.p).classList.add("active");
   if(t.dataset.p==="pipeline")renderPipeline();
   if(t.dataset.p==="whatsnew")renderChanges();
+  if(t.dataset.p==="calendar")renderCalendar();
 });
+
+/* ---------- calendar ---------- */
+const CN_MON={'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'11':11,'12':12};
+function isMine(apply){apply=apply||[];return apply.includes("博后/早期")||apply.includes("不限身份");}
+function fedDate(g){
+  if(g.closeDate){const m=/(\d{2})\/(\d{2})\/(\d{4})/.exec(g.closeDate);if(m)return new Date(+m[3],+m[1]-1,+m[2]);}
+  if(g.days!=null){const d=new Date();d.setDate(d.getDate()+ +g.days);return d;}
+  return null;
+}
+function curMonths(txt){
+  if(!txt)return[];if(/滚动|常开|按.*公告/.test(txt))return["roll"];
+  const s=new Set();let m;const re=/(\d{1,2})\s*月/g;while((m=re.exec(txt)))if(+m[1]>=1&&+m[1]<=12)s.add(+m[1]);
+  [["春",4],["夏",7],["秋",10],["冬",1],["年底",12],["年中",6],["年初",2]].forEach(([w,mm])=>{if(txt.includes(w))s.add(mm);});
+  return s.size?[...s].sort((a,b)=>a-b):["unk"];
+}
+function buildCalEvents(){
+  const now=new Date(),Y0=2026,Y1=2027,ev=[];
+  LIVE.forEach(g=>{const dt=fedDate(g);if(!dt)return;if(dt.getFullYear()<Y0||dt.getFullYear()>Y1)return;
+    ev.push({dt,mine:isMine(g.apply),rel:g.rel||"低",title:g.title,agency:g.agency,region:"🇺🇸美国",
+      apply:(g.apply||[]).join(" / "),amount:g.amount||"见官方",cycle:g.closeDate?"单次":"约"+g.days+"天后",
+      exact:!!g.closeDate,url:g.url});});
+  CURATED.forEach(c=>{const ms=curMonths(c.deadline);if(ms[0]==="roll"||ms[0]==="unk")return;
+    const usOnly=/United States/.test(c.cite_req||"")&&!/临时签证/.test(c.cite_req||"");
+    ms.forEach(mm=>[Y0,Y1].forEach(yr=>{const dt=new Date(yr,mm-1,15);if(dt<now)return;
+      ev.push({dt,mine:isMine(c.apply)&&!usOnly&&!/❌/.test(c.elig||""),rel:c.fit||"中",title:c.name,
+        agency:c.funder,region:c.region,apply:(c.apply||[]).join(" / "),amount:c.amount||"",
+        cycle:"每年约"+mm+"月(±2周)",exact:false,url:c.url});}));});
+  ev.sort((a,b)=>a.dt-b.dt);return ev;
+}
+let CAL_EV=null;
+function renderCalendar(){
+  if(!CAL_EV)CAL_EV=buildCalEvents();
+  const onlyMine=document.getElementById("calOnlyMine").checked;
+  const relF=document.getElementById("calRel").value;
+  const now=new Date();now.setHours(0,0,0,0);
+  let ev=CAL_EV.filter(e=>(!onlyMine||e.mine)&&(!relF||e.rel===relF));
+  // banner KPIs
+  const mine=ev.filter(e=>e.mine);
+  const d30=ev.filter(e=>{const dd=(e.dt-now)/864e5;return dd>=0&&dd<=30;});
+  const d90=ev.filter(e=>{const dd=(e.dt-now)/864e5;return dd>=0&&dd<=90;});
+  const thisMon=ev.filter(e=>e.dt.getFullYear()===now.getFullYear()&&e.dt.getMonth()===now.getMonth()&&e.dt>=now);
+  document.getElementById("calBanner").innerHTML=
+    `<div class="kpi"><b>${thisMon.length}</b>本月内到期</div>`+
+    `<div class="kpi k30"><b>${d30.length}</b>未来 30 天</div>`+
+    `<div class="kpi k90"><b>${d90.length}</b>未来 90 天</div>`+
+    `<div class="kpi kmine"><b>${mine.length}</b>你能申(已筛)</div>`;
+  document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
+  document.getElementById("calStatus").textContent=`共 ${ev.length} 个截止事件`;
+  // bucket by month
+  const buckets={};ev.forEach(e=>{const k=e.dt.getFullYear()+"-"+String(e.dt.getMonth()+1).padStart(2,"0");(buckets[k]=buckets[k]||[]).push(e);});
+  const MN=["","1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+  let html="";
+  Object.keys(buckets).sort().forEach(k=>{
+    const[y,m]=k.split("-");const items=buckets[k];const nm=items.filter(e=>e.mine).length;
+    const past=new Date(+y,+m,0)<now;
+    html+=`<div class="calmonth${past?" past":""}"><h3><span>${y} 年 ${MN[+m]} <span class="mc">${items.length} 项</span></span><span class="mc">✅ 你能申 ${nm}</span></h3>`;
+    items.forEach(e=>{
+      const dd=Math.round((e.dt-now)/864e5);
+      const dstr=e.exact?`${+m}/${e.dt.getDate()}`:`~${+m}月`;
+      html+=`<div class="calitem${e.mine?" mine":""}"><div class="cd">${dstr}<br><span style="font-size:10px;color:#888;font-weight:400">${dd>=0?dd+"天":"已过"}</span></div>`+
+        `<div class="cbody"><div class="ct">${e.title}${e.mine?'<span class="mine-badge">能申</span>':''}</div>`+
+        `<div class="cm">${e.region} · ${e.agency||""} · 👤${e.apply} · ${e.amount} · ${e.cycle}</div></div>`+
+        `<span class="cr ${e.rel}">${e.rel}</span>`+
+        (e.url?`<a href="${e.url}" target="_blank">🔗</a>`:"")+`</div>`;
+    });
+    html+="</div>";
+  });
+  document.getElementById("calWrap").innerHTML=html||'<div class="honest">没有符合条件的事件。</div>';
+}
+document.getElementById("calOnlyMine").addEventListener("change",renderCalendar);
+document.getElementById("calRel").addEventListener("change",renderCalendar);
 
 /* ---------- tracker / pipeline ---------- */
 const TKEY="pi_grants_tracked";
@@ -299,6 +402,7 @@ async function loadData(){
     chgN.textContent=CHANGES.length;
     snapbar.innerHTML=`📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(每日自动刷新 + 金额/资格补全)`;
     buildSidebar(); renderLive(); renderCurated(); renderChanges();
+    CAL_EV=buildCalEvents(); document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
   }catch(e){
     snapbar.innerHTML=`<b style="color:#A03225">数据加载失败:${e.message}</b> — 请通过部署好的网址访问(不要双击本地文件)。`;
   }
