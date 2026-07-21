@@ -23,3 +23,16 @@
 ## 调整搜索范围
 
 编辑 `scripts/fetch_grants.py` 顶部的 `KEYWORDS` 列表(增删关键词),以及 `HI`/`MID`(相关度打分词)。改动 push 后下次运行即生效。
+
+## 从 Pivot-RP 导入(合法用法)
+
+MSKCC 订阅的 Pivot-RP 没有面向个人的 API,且其编辑描述是 Clarivate 版权内容,不能整段搬运。
+正确做法是把它当**发现工具**,导出后只并入**事实字段 + 官方链接**:
+
+1. Pivot-RP 里勾选想要的机会 → **Export**(导出 CSV)。
+2. 把文件放到 `data/pivot_export.csv`。
+3. 运行 `python3 scripts/import_pivot.py data/pivot_export.csv`。
+4. 条目会以地区「📥 我的 Pivot 精选」写入 `data/curated.json`,网站自动出现该地区筛选。
+5. `git add -A && git commit -m "import pivot" && git push` → 自动重新部署。
+
+脚本只保留项目名/资助方/截止日/金额/链接;描述留空,请用你自己的话补 `note`。
