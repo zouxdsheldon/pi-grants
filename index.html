@@ -156,6 +156,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
             <option value="deadline">排序:截止近→远</option>
             <option value="amount">排序:金额高→低</option>
           </select>
+          <select id="lwho"><option value="">谁能申(全部)</option><option value="博后">博后/早期</option><option value="独立PI">独立PI/教职</option><option value="研究生">研究生/博士生</option></select>
         </div>
       </div>
       <div class="status" id="liveStatus"></div>
@@ -335,6 +336,8 @@ function baseFiltered(ignore){
       if(selDeadline==="none"&&d!=null)return false;
     }
     if(q&&!((g.title||"")+(g.agency||"")+(g.number||"")).toLowerCase().includes(q))return false;
+    const lw=document.getElementById("lwho").value;
+    if(lw&&!(g.apply||[]).some(t=>t.includes(lw)))return false;
     if(!passAuto(g))return false;
     return true;});
 }
@@ -402,6 +405,7 @@ function renderLive(){
   if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配。放宽筛选或关闭"隐藏不符资格"。</p>';
 }
 ["q","sort"].forEach(id=>document.getElementById(id).addEventListener("input",renderLive));
+document.getElementById("lwho").addEventListener("change",renderLive);
 
 /* ---------- render CURATED ---------- */
 const eligClass=s=>s.startsWith("✅")?"ok":s.startsWith("⚠️")?"warn":"no";
