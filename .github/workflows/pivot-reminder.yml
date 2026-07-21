@@ -1,0 +1,78 @@
+name: Pivot data reminder (every 2 weeks)
+
+on:
+  schedule:
+    # GitHub cron has no native "every 2 weeks"; the 1st and 15th ≈ bi-weekly.
+    - cron: '0 13 1,15 * *'   # 13:00 UTC (~09:00 US Eastern) on the 1st & 15th
+  workflow_dispatch: {}        # manual "Run workflow" button for testing
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      # --- Reminder 1: open a GitHub Issue (zero setup; GitHub emails the repo owner) ---
+      - name: Open reminder issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().slice(0,10);
+            const body = [
+              '## ⏰ Pivot-RP 数据更新提醒',
+              '',
+              '距离上次更新已约 2 周。请刷新 grant 数据,保持网站最新:',
+              '',
+              '**手动更新步骤(约 5 分钟):**',
+              '1. 登录 MSKCC Pivot-RP,用保存的检索式导出最新 CSV(`pivot_search_keywords.xlsx` 里有 Boolean 检索式)',
+              '2. 把导出的 `opps_export_*.csv` 交给助手 / 运行 `scripts/import_pivot.py` 合并进 `data/curated.json`',
+              '3. `git add data/curated.json && git commit && git push` → Pages 自动重新部署',
+              '',
+              '政府类 grant(`data/grants.json`)已由 `update.yml` 每日自动刷新,无需手动。',
+              '',
+              '> 关掉此提醒:在 Actions 里 disable `Pivot data reminder` 工作流。',
+              '',
+              `_自动生成于 ${today}_`
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `⏰ 更新 Pivot 数据 — ${today}`,
+              body,
+              assignees: [context.repo.owner]
+            });
+
+      # --- Reminder 2 (optional): email zoux1@mskcc.org directly ---
+      # Activates automatically once you add repo secrets MAIL_USERNAME + MAIL_PASSWORD.
+      # (Settings → Secrets and variables → Actions → New repository secret)
+      # Use a Gmail address + a Gmail "App Password" (not your normal password).
+      - name: Email reminder (if SMTP secret configured)
+        if: ${{ env.MAIL_PASSWORD != '' }}
+        env:
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "⏰ Reminder: update Pivot grant data (bi-weekly)"
+          to: zoux1@mskcc.org
+          from: Grant Site Bot <${{ secrets.MAIL_USERNAME }}>
+          body: |
+            Hi Xiaodong,
+
+            This is your bi-weekly reminder to refresh Pivot-RP grant data
+            for the grant-search site (https://zouxdsheldon.github.io/pi-grants/).
+
+            Quick steps:
+              1. Export latest CSVs from MSKCC Pivot-RP (saved Boolean queries)
+              2. Merge via scripts/import_pivot.py into data/curated.json
+              3. git commit + push -> Pages auto-redeploys
+
+            Government grants (data/grants.json) auto-refresh daily; no action needed there.
+
+            - Grant Site Bot
