@@ -6,19 +6,14 @@ No API key required.
 """
 import json, urllib.request, socket, time, datetime, os
 
-socket.setdefaulttimeout(30)
+socket.setdefaulttimeout(45)
 API = "https://api.grants.gov/v1/api/search2"
 
-# Keywords tuned to Xiaodong Zou's profile: RNA biology, decay, metabolism, disease models
-KEYWORDS = [
-    "microRNA", "RNA", "non-coding RNA", "RNA decay", "small RNA",
-    "cancer", "diabetes", "metabolic", "fibrosis", "muscle",
-    "career development", "Pathway to Independence", "epigenetic", "gene regulation",
-]
-
+# Fetch ALL active opportunities (not just the PI's direction). Relevance tags
+# are still computed so the user can filter back to their field on demand.
 HI  = ["microrna","mirna","non-coding","noncoding","rna decay","small rna","argonaute"]
-MID = ["rna","metabol","diabet","fibrosis","ampk","muscle","cancer","epigen",
-       "career development","pathway to independence","k99","gene regulation"]
+MID = ["rna","metabol","diabet","fibrosis","ampk","muscle","cancer","epigen","organoid",
+       "career development","pathway to independence","k99","gene regulation","genom","cell"]
 
 def gg(body):
     req = urllib.request.Request(
@@ -27,8 +22,32 @@ def gg(body):
     with urllib.request.urlopen(req) as r:
         return json.load(r)
 
-def relevance(title):
-    t = (title or "").lower()
+def fetch_all(status, page=100):
+    """Paginate through every opportunity of a given status."""
+    out, start = [], 0
+    while True:
+        for attempt in range(3):
+            try:
+                r = gg({"rows": page, "keyword": "", "oppStatuses": status,
+                        "startRecordNum": start})
+                break
+            except Exception as e:
+                print(f"WARN {status}@{start} try{attempt}: {type(e).__name__} {e}")
+                time.sleep(1.5)
+        else:
+            break
+        d = r.get("data", {})
+        hits = d.get("oppHits", [])
+        total = d.get("hitCount", 0)
+        out.extend(hits)
+        start += page
+        if start >= total or not hits:
+            break
+        time.sleep(0.2)
+    return out
+
+def relevance(title, agency):
+    t = ((title or "") + " " + (agency or "")).lower()
     if any(k in t for k in HI):  return "高"
     if any(k in t for k in MID): return "中"
     return "低"
@@ -44,28 +63,24 @@ def days_left(mmddyyyy, today):
 def main():
     today = datetime.date.today()
     seen = {}
-    for kw in KEYWORDS:
-        for status in ("posted", "forecasted"):
-            try:
-                r = gg({"rows": 100, "keyword": kw, "oppStatuses": status})
-                for h in r.get("data", {}).get("oppHits", []):
-                    seen[h["id"]] = h
-            except Exception as e:
-                print(f"WARN {kw}/{status}: {type(e).__name__} {e}")
-            time.sleep(0.15)
+    for status in ("posted", "forecasted"):
+        for h in fetch_all(status):
+            seen[h["id"]] = h
+    print(f"Collected {len(seen)} unique opportunities across all statuses")
 
     rows = []
     for h in seen.values():
         dl = days_left(h.get("closeDate"), today)
         if dl is not None and dl < 0:
             continue  # drop expired
+        agency = h.get("agency") or h.get("agencyCode")
         rows.append({
             "id": h["id"], "number": h.get("number"), "title": h.get("title"),
-            "agency": h.get("agency") or h.get("agencyCode"),
+            "agency": agency,
             "openDate": h.get("openDate"), "closeDate": h.get("closeDate"),
             "status": h.get("oppStatus"), "days": dl,
             "cfda": ", ".join(h.get("cfdaList") or []),
-            "rel": relevance(h.get("title")),
+            "rel": relevance(h.get("title"), agency),
             "url": "https://www.grants.gov/search-results-detail/" + str(h["id"]),
         })
     relrank = {"高": 0, "中": 1, "低": 2}
