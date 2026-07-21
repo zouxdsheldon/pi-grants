@@ -83,6 +83,14 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .src-pivot{background:#E8DAEF;color:#6C3483}
 .src-curated{background:#D5F5E3;color:#1E7E45}
 .src-govt{background:#D6EAF8;color:#1F618D}
+.who{margin:5px 0 2px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.who .wlab{font-size:11px;color:#666;font-weight:600;margin-right:2px}
+.atag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:12px;background:#FEF3D7;color:#9C6A00;border:1px solid #F5D98B}
+.atag.pi{background:#E3EEFB;color:#1A5490;border-color:#B9D4F2}
+.atag.postdoc{background:#E5F6EC;color:#1E7E45;border-color:#B8E6C8}
+.atag.grad{background:#F3E8FB;color:#7D3C98;border-color:#DFC2F0}
+.atag.senior{background:#FBE9E7;color:#B03A2E;border-color:#F2C4BC}
+.atag.na{background:#EEE;color:#777;border-color:#DDD}
 .cat-title{font-size:13.5px;font-weight:700;color:var(--dark);padding:7px 11px;background:var(--bluef);border-radius:8px;margin:14px 0 8px}
 .headline{background:var(--card);border-left:5px solid var(--red);border-radius:10px;padding:13px 15px;margin-bottom:14px}
 .headline h2{font-size:14px;color:var(--red);margin-bottom:7px}.headline ol{margin-left:19px;font-size:13px}.headline li{margin:4px 0}
@@ -174,6 +182,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <select id="cfit"><option value="">契合(全部)</option><option>高</option><option>中</option><option>低</option></select>
       <select id="celig"><option value="">资格(全部)</option><option value="✅">✅ 可申</option><option value="⚠️">⚠️ 边界</option><option value="❌">❌ 过窗口</option></select>
       <select id="csrc"><option value="">来源(全部)</option><option value="pivot">Pivot-RP</option><option value="curated">手工策展</option></select>
+      <select id="cwho"><option value="">谁能申(全部)</option><option value="博后">博后/早期</option><option value="独立PI">独立PI/教职</option><option value="研究生">研究生/博士生</option><option value="资深">中期-资深</option></select>
     </div>
   </div>
   <div class="status" id="curStatus"></div>
@@ -205,6 +214,16 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <script>
 let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
+function atagClass(t){
+  if(t.includes("PI")||t.includes("教职"))return"pi";
+  if(t.includes("博后")||t.includes("早期"))return"postdoc";
+  if(t.includes("研究生")||t.includes("博士生"))return"grad";
+  if(t.includes("资深")||t.includes("中期"))return"senior";
+  return"na";}
+function whoRow(apply){
+  if(!apply||!apply.length)return"";
+  const chips=apply.map(t=>`<span class="atag ${atagClass(t)}">${t}</span>`).join("");
+  return`<div class="who"><span class="wlab">👤 谁能申:</span>${chips}</div>`;}
 const relrank={"高":0,"中":1,"低":2};
 
 /* ---------- profile (localStorage) ---------- */
@@ -365,6 +384,7 @@ function renderLive(){
       <span class="ftype">${g.ftype}</span>
       <span class="badge st-${g.status}">${g.status}</span></div>
       <div class="funder">${g.agency||""} · 编号 ${g.number||"—"}</div>
+      ${whoRow(g.apply)}
       <div class="scorecard">
         <div class="sc sc-elig-${e.cls}"><span class="lab">资格</span><span class="val">${e.txt}</span></div>
         <div class="sc sc-dl"><span class="lab">截止</span><span class="val ${(g.days!=null&&g.days<=45)?'soon':''}">${dlTxt}</span>${pbar(g.days)}</div>
@@ -391,6 +411,7 @@ function renderCurated(){
   const q=document.getElementById("cq").value.toLowerCase();
   const ff=document.getElementById("cfit").value, fe=document.getElementById("celig").value;
   const fs=document.getElementById("csrc").value;
+  const fw=document.getElementById("cwho").value;
   // region chip bar (built once)
   const chipWrap=document.getElementById("regionChips");
   if(chipWrap && !chipWrap.dataset.built){
@@ -409,6 +430,7 @@ function renderCurated(){
     if(ff&&g.fit!==ff)return false;
     if(fe&&eligKey(g.elig)!==fe)return false;
     if(fs&&(g.source||"curated")!==fs)return false;
+    if(fw&&!(g.apply||[]).some(t=>t.includes(fw)))return false;
     if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount+g.region).toLowerCase().includes(q))return false;
     return true;});
   rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
@@ -429,6 +451,7 @@ function renderCurated(){
         <span class="src src-${g.source||'curated'}">来源 ${g.src_label||(g.source==='pivot'?'Pivot-RP':'手工策展')}</span>
         ${g.verify&&g.verify.includes("官方")?'<span class="pill verify-official">✔ 官方核实</span>':'<span class="pill">待核实</span>'}${link}</div>
         <div class="funder">${g.funder}</div>
+        ${whoRow(g.apply)}
         <div class="scorecard">
           <div class="sc sc-dl"><span class="lab">资格窗口</span><span class="val">${g.window||"—"}</span></div>
           <div class="sc sc-amt"><span class="lab">金额(概)</span><span class="val">${g.amount||"—"}</span></div>
@@ -439,7 +462,7 @@ function renderCurated(){
   });
   if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配项目。</p>';
 }
-["cq","cfit","celig","csrc"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
+["cq","cfit","celig","csrc","cwho"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
 
 /* ---------- render WHAT'S NEW ---------- */
 function renderChanges(){
