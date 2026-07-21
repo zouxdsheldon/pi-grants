@@ -41,7 +41,9 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .fgroup label .cnt{margin-left:auto;color:var(--muted);font-size:11px}
 .qbtns{display:flex;flex-wrap:wrap;gap:5px}
 .qbtn{font-size:11.5px;padding:4px 10px;border-radius:14px;background:var(--bluef);color:var(--blue);border:1px solid #D3E4F3;cursor:pointer}
-.qbtn.sel{background:var(--blue);color:#fff}
+.qbtn.sel,.qbtn.on{background:var(--blue);color:#fff}
+.oflink{margin-left:auto;font-size:11px;padding:3px 10px;border-radius:12px;background:var(--blue);color:#fff;text-decoration:none;white-space:nowrap}
+.oflink:hover{opacity:.85}
 
 .searchbar{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:12px}
 .searchbar input[type=text]{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:8px;font-size:14px}
@@ -122,7 +124,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="wrap">
 <div class="tabs">
   <button class="tab active" data-p="live">🇺🇸 联邦机会(<span id="liveN">…</span>)</button>
-  <button class="tab" data-p="curated">⭐ 精选/亚洲 PI</button>
+  <button class="tab" data-p="curated">🌐 各国 PI 资助(<span id="curN">…</span>)</button>
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
 </div>
@@ -153,15 +155,17 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <!-- CURATED -->
 <div class="panel" id="curated">
   <div class="headline">
-    <h2>★ 最关键结论(无公开 API,人工核实维护)</h2>
+    <h2>★ 各国早期 PI / 独立研究经费(按国家分区,人工核实)</h2>
     <ol>
-      <li><b>NCI K99/R00(PAR-25-135)= 头号目标</b>:6 年博后窗口、无公民要求、临时签证可申。</li>
-      <li><b>海外优青 / NRF / 香港 RGC</b>:亚洲青年 PI 平行路线,直接给独立职位。</li>
-      <li><b>明星博后奖</b>(Damon Runyon 等)大概率已过窗口。</li>
+      <li><b>🇺🇸 NCI K99/R00(PAR-25-135)</b>:6 年博后窗口、无公民要求、临时签证可申 —— 头号目标。</li>
+      <li><b>🇨🇳 海外优青 · 🇸🇬 NRF Fellowship · 🇭🇰 RGC 引才</b>:亚洲青年 PI 平行路线,直接给独立职位 + 启动经费。</li>
+      <li><b>🇪🇺 ERC Starting / MSCA</b>:若考虑赴欧建组,PhD 后 2–7 年窗口对你合适。</li>
     </ol>
   </div>
+  <div class="honest">🌐 <b>为什么这一层是人工维护:</b>除美国 Grants.gov 外,各国政府基本<b>没有开放的"在招机会"API</b>(欧盟 ERC/Horizon 的接口对匿名访问持续报错;英/澳/加多数只暴露已中标项目;整个亚洲无机会 API)。付费的 Pivot-RP 靠商业团队人工聚合两万多源——我无法复制它。所以这里是<b>对你(生物医学 / 早期 PI / 非美籍 / 瞄准亚洲+全球独立职位)真正相关</b>的项目,按国家分区、每条附<b>官方链接</b>;金额/截止标"约,以官方为准"。</div>
   <div class="searchbar">
-    <input type="text" id="cq" placeholder="🔍 搜索精选清单…">
+    <input type="text" id="cq" placeholder="🔍 搜索(机构 / 项目名 / 关键词)…">
+    <div id="regionChips" class="qbtns" style="margin-bottom:9px"></div>
     <div class="srow">
       <select id="cfit"><option value="">契合(全部)</option><option>高</option><option>中</option><option>低</option></select>
       <select id="celig"><option value="">资格(全部)</option><option value="✅">✅ 可申</option><option value="⚠️">⚠️ 边界</option><option value="❌">❌ 过窗口</option></select>
@@ -195,7 +199,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <script>
-let LIVE=[], CURATED=[], CHANGES=[], META={};
+let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
 const relrank={"高":0,"中":1,"低":2};
 
 /* ---------- profile (localStorage) ---------- */
@@ -380,25 +384,44 @@ const fitRank={"高":0,"中":1,"低":2};
 function renderCurated(){
   const q=document.getElementById("cq").value.toLowerCase();
   const ff=document.getElementById("cfit").value, fe=document.getElementById("celig").value;
+  // region chip bar (built once)
+  const chipWrap=document.getElementById("regionChips");
+  if(chipWrap && !chipWrap.dataset.built){
+    const order=["🇺🇸 美国","🇨🇳 中国大陆","🇭🇰 香港","🇸🇬 新加坡","🇯🇵 日本","🇰🇷 韩国","🇪🇺 欧洲(欧盟)","🇬🇧 英国","🇦🇺 澳大利亚","🇨🇦 加拿大","🌍 国际/跨国"];
+    const counts={};CURATED.forEach(g=>counts[g.region]=(counts[g.region]||0)+1);
+    const regs=order.filter(r=>counts[r]);
+    const mk=(label,val)=>{const b=document.createElement("button");b.className="qbtn";b.textContent=label;
+      b.onclick=()=>{CUR_REGION=val;chipWrap.querySelectorAll(".qbtn").forEach(x=>x.classList.remove("on"));b.classList.add("on");renderCurated();};
+      if(val===CUR_REGION)b.classList.add("on");chipWrap.appendChild(b);};
+    mk(`全部 (${CURATED.length})`,"");
+    regs.forEach(r=>mk(`${r} (${counts[r]})`,r));
+    chipWrap.dataset.built="1";
+  }
   let rows=CURATED.filter(g=>{
+    if(CUR_REGION&&g.region!==CUR_REGION)return false;
     if(ff&&g.fit!==ff)return false;
     if(fe&&eligKey(g.elig)!==fe)return false;
-    if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount).toLowerCase().includes(q))return false;
+    if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount+g.region).toLowerCase().includes(q))return false;
     return true;});
   rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
   document.getElementById("curStatus").innerHTML=`${rows.length} / ${CURATED.length} 个项目`;
-  const byCat={};rows.forEach(g=>{(byCat[g.cat]=byCat[g.cat]||[]).push(g);});
+  const cn=document.getElementById("curN");if(cn)cn.textContent=CURATED.length;
+  // group by region
+  const regOrder=["🇺🇸 美国","🇨🇳 中国大陆","🇭🇰 香港","🇸🇬 新加坡","🇯🇵 日本","🇰🇷 韩国","🇪🇺 欧洲(欧盟)","🇬🇧 英国","🇦🇺 澳大利亚","🇨🇦 加拿大","🌍 国际/跨国"];
+  const byReg={};rows.forEach(g=>{(byReg[g.region]=byReg[g.region]||[]).push(g);});
   const list=document.getElementById("curList");list.innerHTML="";
-  Object.keys(byCat).sort().forEach(cat=>{
-    const t=document.createElement("div");t.className="cat-title";t.textContent=cat;list.appendChild(t);
-    byCat[cat].forEach(g=>{const d=document.createElement("div");d.className="card";
+  const seen=regOrder.filter(r=>byReg[r]).concat(Object.keys(byReg).filter(r=>!regOrder.includes(r)));
+  seen.forEach(reg=>{
+    const t=document.createElement("div");t.className="cat-title";t.textContent=`${reg} · ${byReg[reg].length} 项`;list.appendChild(t);
+    byReg[reg].forEach(g=>{const d=document.createElement("div");d.className="card";
+      const link=g.url?`<a class="oflink" href="${g.url}" target="_blank" rel="noopener">官方页 ↗</a>`:"";
       d.innerHTML=`<div class="top"><span class="name">${g.name}</span>
         <span class="sc sc-elig-${eligClass(g.elig)}" style="padding:2px 9px">${g.elig}</span>
         <span class="badge fit-${g.fit}">契合 ${g.fit}</span>
-        ${g.verify&&g.verify.includes("官方")?'<span class="pill verify-official">✔ 官方核实</span>':'<span class="pill">待核实</span>'}</div>
+        ${g.verify&&g.verify.includes("官方")?'<span class="pill verify-official">✔ 官方核实</span>':'<span class="pill">待核实</span>'}${link}</div>
         <div class="funder">${g.funder}</div>
         <div class="scorecard">
-          <div class="sc sc-dl"><span class="lab">博后年限窗口</span><span class="val">${g.window||"—"}</span></div>
+          <div class="sc sc-dl"><span class="lab">资格窗口</span><span class="val">${g.window||"—"}</span></div>
           <div class="sc sc-amt"><span class="lab">金额(概)</span><span class="val">${g.amount||"—"}</span></div>
           <div class="sc sc-dl"><span class="lab">截止(概)</span><span class="val">${g.deadline||"—"}</span></div>
           <div class="sc sc-elig-na"><span class="lab">国籍与签证</span><span class="val" style="font-size:11.5px">${g.cite_req||"—"}</span></div></div>
