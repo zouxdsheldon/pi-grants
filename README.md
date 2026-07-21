@@ -36,3 +36,8 @@ MSKCC 订阅的 Pivot-RP 没有面向个人的 API,且其编辑描述是 Clariva
 5. `git add -A && git commit -m "import pivot" && git push` → 自动重新部署。
 
 脚本只保留项目名/资助方/截止日/金额/链接;描述留空,请用你自己的话补 `note`。
+
+**自动归国**:导入时按资助方名自动判定国家/地区(NIH→🇺🇸、ERC→🇪🇺、Wellcome→🇬🇧、
+NSFC→🇨🇳、JSPS→🇯🇵、A*STAR/NRF→🇸🇬、NHMRC→🇦🇺、CIHR→🇨🇦、HFSP→🌍…),
+落到对应国旗分区;识别不到的资助方进「📥 我的 Pivot 精选」兜底。运行后会打印归国报告,
+想补规则就编辑 `scripts/import_pivot.py` 顶部的 `REGION_RULES`。
