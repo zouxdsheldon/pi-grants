@@ -222,7 +222,9 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="honest">📅 所有资助按<b>截止月份</b>排布(2026–2027)。<b style="color:var(--green)">绿色高亮 = 你能申</b>(身份含博后/早期、非美籍专属、未过窗口)。顶部提示本月及未来到期。精选项多为「每年约X月」周期受理,日期为近似(±2周),投递前点链接核对官方受理日。</div>
   <div id="calBanner" class="calbanner"></div>
   <div class="actions" style="margin:8px 0 4px">
-    <a class="abtn" href="data/grant_deadlines.ics" download="资助截止日历_2026-2027.ics" style="text-decoration:none">📥 下载日历订阅(.ics)</a>
+    <a class="abtn tracked" href="webcal://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics" style="text-decoration:none">🔔 订阅日历(自动更新)</a>
+    <a class="abtn" href="data/grant_deadlines.ics" download="资助截止日历.ics" style="text-decoration:none">📥 下载 .ics(静态)</a>
+    <button class="abtn" id="copyIcs" onclick="navigator.clipboard.writeText('https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics').then(()=>{this.textContent='✅ 已复制订阅网址'})">📋 复制订阅网址</button>
     <label style="font-size:13px;font-weight:700;cursor:pointer"><input type="checkbox" id="calOnlyMine" checked> ✅ 只看我能申的</label>
     <select id="calRel"><option value="">相关度(全部)</option><option value="高">高</option><option value="中">中</option><option value="低">低</option></select>
     <span class="status" id="calStatus" style="margin:0"></span>
