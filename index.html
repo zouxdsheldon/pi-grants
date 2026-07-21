@@ -76,6 +76,18 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .abtn{font-size:11.5px;padding:4px 11px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer;color:#445}
 .abtn.tracked{background:var(--greenf);color:#1E7E45;border-color:#A8D5B8;font-weight:700}
 .abtn:hover{background:var(--bluef)}
+.hcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
+.hcard h3{margin:0 0 10px;font-size:15.5px}
+.htab{border-collapse:collapse;width:100%;font-size:13px}
+.htab th,.htab td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+.htab th{background:var(--bluef);font-weight:700}
+.hsteps{margin:8px 0;padding-left:20px;font-size:13.5px;line-height:1.7}
+.hnote{font-size:12.5px;color:#667;margin:8px 0 4px}
+.promptbox{position:relative;margin:6px 0 12px}
+.promptbox pre{background:#f6f8fa;border:1px solid var(--line);border-radius:8px;padding:12px 13px;padding-right:70px;margin:0;white-space:pre-wrap;word-break:break-word;font-size:12.5px;line-height:1.55;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.copybtn{position:absolute;top:8px;right:8px;font-size:11.5px;padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer;color:#445;z-index:2}
+.copybtn:hover{background:var(--bluef)}
+.copybtn.done{background:var(--greenf);color:#1E7E45;border-color:#A8D5B8;font-weight:700}
 .note{font-size:12px;color:#444;background:#FafBfc;border-left:3px solid var(--line);padding:6px 9px;border-radius:0 6px 6px 0;margin-top:6px}
 .pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:12px;background:var(--greyf);color:#555}
 .verify-official{background:var(--greenf);color:#1E7E45}
@@ -159,6 +171,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="calendar">📅 截止日历(<span id="calN">…</span>)</button>
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
+  <button class="tab" data-p="howto">📖 使用/更新说明</button>
 </div>
 
 <!-- LIVE -->
@@ -241,6 +254,79 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div id="pipeWrap"></div>
 </div>
 
+<div class="panel" id="howto">
+  <div class="honest">📖 本页说明网站怎么自动更新、以及需要你手动更新时怎么做。每个灰框右上角有 <b>📋 复制</b> 按钮——复制后<b>打开 Claude Science / Pathy 新开对话粘进去</b>即可(Pivot 更新时把导出的 CSV 一起拖进去)。</div>
+
+  <div class="hcard">
+    <h3>🟢 全自动(你什么都不用做)</h3>
+    <table class="htab">
+      <tr><th>内容</th><th>更新方式</th><th>频率</th></tr>
+      <tr><td>美国联邦资助(1748+ 条,Grants.gov)</td><td>GitHub Actions 自动抓取</td><td><b>每天</b> UTC 11:00(美东早 7 点)</td></tr>
+      <tr><td>截止日历 .ics</td><td>随联邦数据自动重新生成</td><td>每天</td></tr>
+      <tr><td>网站部署上线</td><td>数据一变自动重新部署</td><td>每天</td></tr>
+    </table>
+    <p class="hnote">想立刻手动刷一次:仓库 → <b>Actions → "Update grants data" → Run workflow</b>。</p>
+  </div>
+
+  <div class="hcard">
+    <h3>🟡 唯一需要你手动的:Pivot-RP 精选(每 2–3 个月)</h3>
+    <p>Pivot 需要 MSKCC 账号登录才能导出,抓不了。步骤:</p>
+    <ol class="hsteps">
+      <li>登录 MSKCC Pivot-RP,用你的检索式搜索 → 勾选机会 → <b>Export → CSV</b>(可多个文件)。</li>
+      <li>下面这段 <b>📋 复制</b> → Claude Science 新开对话粘进去 → <b>把导出的 CSV 一起拖进消息</b>。</li>
+      <li>附一个有 <code>repo</code> 权限的 GitHub token(用完到 GitHub 撤销)。</li>
+    </ol>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我更新 pi-grants 资助网站的 Pivot 精选层。我把从 Pivot-RP 导出的 CSV 附在这条消息里了。
+请:
+1. 把这些 CSV 用 scripts/import_pivot.py 的口径并入 data/curated.json —— 只保留事实字段
+   (项目名/资助方/截止日/金额/官方链接)+ 我的申请人身份标签(Career Stage → 博后/早期·
+   独立PI/教职·研究生;Citizenship → 公民/签证要求),不复制 Pivot 的 AI 描述原文(版权)。
+2. 去重(按项目名+资助方),保留已有的手工策展条目。
+3. 重新生成 .ics 日历(python3 scripts/build_ics.py)。
+4. git commit + push 到 github.com/zouxdsheldon/pi-grants,确认 Actions 部署成功。
+仓库在工作区 pi-grants-site/。我的身份:MSKCC Research Associate、博后/早期、中国籍持签证,
+筛「我能申」= 身份含博后/早期 + 非美籍专属 + 未过窗口。</pre>
+    </div>
+  </div>
+
+  <div class="hcard">
+    <h3>🔧 其它按需更新(复制对应一段)</h3>
+    <p class="hnote">A · 手动立刻刷新一次联邦数据(不等每天的定时)</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我手动触发 pi-grants 仓库的 "Update grants data" workflow,抓最新联邦资助,
+重新生成 .ics,确认部署成功。附 GitHub token。</pre>
+    </div>
+    <p class="hnote">B · 改日历提醒节奏 / 筛选口径</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我改 pi-grants 的 scripts/build_ics.py:把提醒改成截止前 __ 天和 __ 天
+(或改「我能申」的筛选口径为 ______)。重新生成 .ics、push、确认部署。附 GitHub token。</pre>
+    </div>
+    <p class="hnote">C · 手工加/改几条精选资助(不走 Pivot)</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我在 pi-grants 的 data/curated.json 里加/改这几条资助:
+- 项目名:__ / 资助方:__ / 截止:__ / 金额:__ / 官方链接:__ / 地区:__
+重新生成 .ics、push、确认部署。附 GitHub token。</pre>
+    </div>
+  </div>
+
+  <div class="hcard">
+    <h3>📅 日历订阅(一次设置,之后自动同步)</h3>
+    <p>「📅 截止日历」标签 → 左上角 <b>🔔 订阅日历(自动更新)</b>,或 <b>📋 复制订阅网址</b> 粘进 Google/Apple 日历的「通过网址添加日历」:</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics</pre>
+    </div>
+    <p class="hnote">⚠️ 一定用「订阅网址」而非「下载导入」——订阅才会跟着网站每天自动更新。</p>
+  </div>
+
+  <p class="hnote" style="margin-top:14px">存档邮箱 zouxdsheldon@gmail.com · 仓库 github.com/zouxdsheldon/pi-grants · 日历用滚动年份,始终显示未来两年不会过期。</p>
+</div>
+
 <footer>
   联邦数据由 GitHub Actions 每日自动从 Grants.gov 抓取 + 详情补全 + 变更对比。<br>
   精选清单人工核实。个人资料、关注、管线笔记均存于本设备 localStorage。
@@ -298,6 +384,15 @@ function passAuto(g){
   if(!autoFilter.classList.contains("on"))return true;
   const e=eligLive(g);
   return e.cls!=="no"; // hide only clearly-ineligible
+}
+
+/* ---------- copy prompt ---------- */
+function cp(btn){
+  const pre=btn.parentElement.querySelector("pre");
+  navigator.clipboard.writeText(pre.textContent).then(()=>{
+    const o=btn.textContent;btn.textContent="✅ 已复制";btn.classList.add("done");
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove("done")},1800);
+  });
 }
 
 /* ---------- tabs ---------- */
