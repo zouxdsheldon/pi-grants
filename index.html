@@ -172,6 +172,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
   <button class="tab" data-p="howto">📖 使用/更新说明</button>
+  <button class="tab" data-p="writing">✍️ 写作指导</button>
 </div>
 
 <!-- LIVE -->
@@ -292,6 +293,49 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
 
   <div class="hcard">
+    <h3>🔎 Pivot-RP 检索关键词(搜新机会时用)</h3>
+    <p class="hnote">登录 MSKCC Pivot-RP → Funding → Advanced Search → 把整条检索式粘进关键词框(字段选 All Fields 或 Abstract)。<b>建议先跑带 ★★★ 的 #1 / #2 / #8</b>,最贴你的护城河。</p>
+    <p class="hnote" style="color:#a15">⚠️ 别用 ZSWIM8 / TDMD 这类基因或机制词搜——资助方项目描述几乎从不出现具体基因名,会几乎 0 命中。正确做法:用宽 RNA 词抓住资助方,再用疾病/技术/职业阶段词收窄。</p>
+
+    <p class="hnote"><b>#1 ★★★ 旗舰:RNA × 代谢(最核心,先跑这条)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "miRNA" OR "non-coding RNA" OR "RNA metabolism" OR "RNA decay") AND ("metabolism" OR "AMPK" OR "lactate" OR "energy stress" OR "metabolic")</pre></div>
+
+    <p class="hnote"><b>#2 ★★★ RNA × 糖尿病/代谢病(转化落点)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "RNA" OR "non-coding RNA") AND ("type 2 diabetes" OR "diabetes" OR "metabolic disease" OR "metabolic memory")</pre></div>
+
+    <p class="hnote"><b>#8 ★★★ 早期 PI 通道 × RNA</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("early career" OR "new investigator" OR "career development" OR "fellowship") AND ("RNA" OR "microRNA" OR "metabolism")</pre></div>
+
+    <p class="hnote"><b>#3 ★★ RNA × 纤维化(心/肠/多器官)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "non-coding RNA" OR "RNA") AND ("fibrosis" OR "intestinal fibrosis" OR "cardiac fibrosis" OR "inflammatory bowel disease")</pre></div>
+
+    <p class="hnote"><b>#4 ★★ RNA × 肌肉/DMD</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "RNA" OR "non-coding RNA") AND ("muscular dystrophy" OR "muscle" OR "satellite cell")</pre></div>
+
+    <p class="hnote"><b>#5 ★★ RNA × 胃肠肿瘤/MSI</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "RNA" OR "non-coding RNA") AND ("gastric cancer" OR "microsatellite instability" OR "gastrointestinal")</pre></div>
+
+    <p class="hnote"><b>#6 ★★ 技术平台(类器官/编辑/大动物)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("organoid" OR "base editing" OR "prime editing" OR "genome editing" OR "pig model" OR "large animal model") AND ("RNA" OR "microRNA" OR "metabolism")</pre></div>
+
+    <p class="hnote"><b>#7 ★ 宽网兜底(RNA 生物学全部,防漏;量大,配职业阶段/金额过滤)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>"microRNA" OR "miRNA" OR "non-coding RNA" OR "small RNA" OR "RNA biology" OR "post-transcriptional regulation"</pre></div>
+
+    <p class="hnote" style="margin-top:10px"><b>右侧过滤面收窄:</b> Applicant Type = Individual · Career Stage = Early Career · Citizenship/Eligibility 看是否限本国 · Amount 设下限 · Deadline 选未来 3–12 个月 → Export CSV。</p>
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:700">📚 展开:5 层分层关键词库(自己组合检索式时用)</summary>
+      <table class="htab" style="margin-top:8px">
+        <tr><th>层级</th><th>Pivot 检索词(英文,直接粘贴)</th><th>对应你的方向</th></tr>
+        <tr><td><b>A 宽词·RNA 核心</b></td><td>microRNA; miRNA; "non-coding RNA"; "small RNA"; "RNA biology"; "RNA metabolism"; "gene regulation"; "post-transcriptional regulation"; "RNA decay"; "RNA turnover"</td><td>miRNA 生物发生主线;TDMD=miRNA 降解(用 RNA decay/turnover 命中)</td></tr>
+        <tr><td><b>B 机制·代谢/能量</b></td><td>metabolism; "energy metabolism"; AMPK; "energy stress"; "metabolic signaling"; lactate; lactylation; cholesterol; "lipid metabolism"; "metabolic memory"</td><td>旗舰机制层:乳酸/AMPK/胆固醇护城河</td></tr>
+        <tr><td><b>C 疾病·转化落点</b></td><td>"type 2 diabetes"; diabetes; "metabolic disease"; fibrosis; "organ fibrosis"; "inflammatory bowel disease"; "intestinal fibrosis"; "cardiac fibrosis"; "muscular dystrophy"; "gastric cancer"; "microsatellite instability"</td><td>T2D / 肠纤维化 / 心肌 / DMD / 胃癌</td></tr>
+        <tr><td><b>D 技术·平台</b></td><td>organoid; "base editing"; "prime editing"; "genome editing"; CRISPR; "large animal model"; "pig model"; "single-cell"</td><td>类器官 / 碱基编辑 / 猪模型</td></tr>
+        <tr><td><b>E 职业阶段</b></td><td>"early career"; "early-career investigator"; "new investigator"; "career development"; fellowship; "young investigator"; "starting grant"</td><td>海外优青 / RGC / NRF 早期 PI 通道</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <div class="hcard">
     <h3>🔧 其它按需更新(复制对应一段)</h3>
     <p class="hnote">A · 手动立刻刷新一次联邦数据(不等每天的定时)</p>
     <div class="promptbox">
@@ -325,6 +369,104 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
 
   <p class="hnote" style="margin-top:14px">存档邮箱 zouxdsheldon@gmail.com · 仓库 github.com/zouxdsheldon/pi-grants · 日历用滚动年份,始终显示未来两年不会过期。</p>
+</div>
+
+<div class="panel" id="writing">
+  <div class="honest">✍️ 每类基金<b>官方模板去哪下</b> + <b>逐节怎么写</b> + <b>可复制的起草提示词</b>。你已经有一份完整的 AMPK–TDMD 旗舰提案(本项目 artifacts 里的 <code>proposal_AMPK_TDMD.md</code> / <code>proposal_zh.md</code>),下面的提示词就是让 Claude Science 把它<b>改写成各基金要求的格式</b>——复制 → 新开对话粘进去即可。</div>
+
+  <div class="hcard" style="border-color:#E6C200;background:#FFFDF2">
+    <h3>⚠️ 先看:这些是「落地后/落地用」的机制</h3>
+    <p style="font-size:13.5px;line-height:1.7;margin:4px 0">海外优青 / RGC ECS / NRF Fellowship 都要求你<b>先与东道机构建立聘任关系</b>(签意向、或已是助理教授)。它们是你从博后转 PI 的<b>「落地」通道</b>,不是纯博后奖。<b>现在能做的</b>:把研究计划正文(Research Proposal)按它们的结构写好——这部分与你有没有落地无关,写好了随时能投。NIH K99/R00 才是唯一的博后阶段直接申请通道(需美国机构 + 你窗口内)。</p>
+  </div>
+
+  <div class="hcard">
+    <h3>📥 官方模板去哪下(每类基金)</h3>
+    <table class="htab">
+      <tr><th>基金</th><th>官方模板来源</th><th>关键章节</th><th>篇幅限制</th><th>关键门槛</th></tr>
+      <tr><td><b>海外优青</b><br>(NSFC)</td><td>登录 <b>grants.nsfc.gov.cn</b> → 新建"优秀青年科学基金项目(海外)"→ 系统内自带<b>《撰写提纲》</b>与填报说明</td><td>研究背景与意义 · 研究基础(简历+代表作)· 拟开展工作(目标/内容/方案/关键科学问题)· 工作条件</td><td>按系统撰写提纲;<b>中文或英文</b></td><td>需与国内依托单位<b>签工作合同/意向协议</b>;每年约 4 月开放填报</td></tr>
+      <tr><td><b>NIH K99/R00</b><br>(PAR-25-135)</td><td><b>SF424 Application Guide</b> Part 7(K 类专属说明)+ NOFO 正文;grants.nih.gov 页面篇幅表</td><td>Specific Aims · Candidate Info & Career Development · Research Strategy(Significance/Innovation/Approach)· RCR · 导师/合作者信</td><td>Aims <b>1 页</b>;Candidate+Strategy <b>合计 12 页</b>;RCR 1 页;导师信 6 页;机构环境/承诺各 1 页</td><td>需美国机构 + 你的资格窗口内;<b>3–5 封推荐信</b>;研究计划须同时覆盖 K99 与 R00 两阶段</td></tr>
+      <tr><td><b>RGC ECS</b><br>(香港)</td><td><b>ugc.edu.hk/eng/rgc</b> → ECS 申请表 + <b>Guidance Notes for GRF/ECS</b>(每年更新);经 RGC Electronic System 提交</td><td>研究目标 · 背景 · 研究计划 · 现有设施(Facilities)· 预算理据</td><td>Facilities <b>≤400 词</b>;项目 ≤HK$2M / ≤60 月</td><td>需<b>已是助理教授(入职 3 年内)</b>——先落地香港高校</td></tr>
+      <tr><td><b>NRF Fellowship</b><br>(新加坡)</td><td>经 <b>IGMS</b>(Integrated Grant Management System)提交;NRF 官网 grant call synopsis + information sheet</td><td>研究提案(Research Proposal)· CV · 论文列表 · 登记表</td><td>系统模板;研究经费 <b>≤SGD 3.25M</b></td><td>绑定东道机构 <b>tenure-track</b> 教职;面向所有科技领域</td></tr>
+    </table>
+    <p class="hnote">篇幅/门槛以<b>当年官方 Guidance/NOFO 为准</b>(每年会变),投前务必点官方链接核对。上表为核实后的近期版本。</p>
+  </div>
+
+  <div class="hcard">
+    <h3>🧱 通用写作骨架(几乎所有 research proposal 都是这个结构)</h3>
+    <ol class="hsteps">
+      <li><b>Specific Aims / 研究目标(最重要,先写)</b> — 1 段背景引入 → 关键知识缺口 → 中心假说 → 2–3 个 Aim(每个一句话目标)→ 1 段"预期学到什么、为何重要"。</li>
+      <li><b>Significance / 意义</b> — 这个问题为什么重要?不解决会怎样?你的疾病模型(T2D/纤维化)让它更有分量。</li>
+      <li><b>Innovation / 创新</b> — 概念创新(代谢控制 miRNA 衰变,而非经典生成)+ 技术创新(碱基/先导编辑、类器官)。</li>
+      <li><b>Approach / 研究方案(篇幅主体)</b> — 每个 Aim 按:① Rationale 依据 → ② Preliminary Data 预实验(你现有的 PSSM 打分、GPS 预测、一作证据)→ ③ Experimental Design 实验设计 → ④ Expected Outcomes 预期结果 → ⑤ Pitfalls & Alternatives 风险与备选。</li>
+      <li><b>Timeline / 时间线</b> + <b>Rigor / 严谨性</b>(阳性对照、样本量、可重复性、生物学变量如性别)。</li>
+    </ol>
+    <p class="hnote">你的 AMPK–TDMD 提案已经是这个结构 → 改投任何基金,本质是"重排 + 套壳 + 调篇幅",不是从零写。</p>
+  </div>
+
+  <div class="hcard">
+    <h3>📋 起草提示词(复制 → Claude Science 新开对话)</h3>
+
+    <p class="hnote">① 海外优青 —— 把旗舰提案套进 NSFC 撰写提纲</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>我要申请国家自然科学基金优秀青年科学基金项目(海外)。请调用本项目 artifacts 里我的
+AMPK–TDMD 旗舰提案(proposal_zh.md / proposal_AMPK_TDMD.md),按 NSFC《优青(海外)撰写提纲》
+的结构改写成中文申请书正文草稿,分节:
+(一)研究背景与科学意义;(二)研究基础(结合我 7 篇一作代表作 + 现有 PSSM/GPS 预实验);
+(三)拟开展的研究工作(总体目标、研究内容、研究方案、拟解决的关键科学问题);(四)工作条件。
+要求:面向评审通俗有力、突出"代谢控制 miRNA 衰变"的原创性与我的疾病模型护城河;
+每节标注还需我补充的材料(依托单位、经费、附件)。</pre>
+    </div>
+
+    <p class="hnote">② NIH K99/R00 —— Specific Aims + Research Strategy(两阶段)</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>我要申请 NIH K99/R00(PAR-25-135)。请用本项目 artifacts 里我的 AMPK–TDMD 提案,产出英文草稿:
+1. Specific Aims(严格 1 页):背景→缺口→中心假说→3 个 Aim,并标注哪些 Aim 在 K99 阶段(前 2 年
+   导师指导下完成)、哪些延伸到 R00 独立阶段,结尾点明对建立独立实验室的意义。
+2. Research Strategy 提纲:Significance / Innovation / Approach,每个 Aim 含 rationale、
+   preliminary data、design、expected outcomes、pitfalls & alternatives,并说明 K99 如何逻辑
+   过渡到 R00。
+3. 另列 Candidate Info & Career Development 要点(我要在 K99 学的 3–5 项技能 + 如何学)。
+遵守篇幅:Aims 1 页;Candidate+Strategy 合计 12 页。RCR、导师信、机构承诺另附,先给我清单。</pre>
+    </div>
+
+    <p class="hnote">③ RGC ECS(香港)/ NRF Fellowship(新加坡)—— 独立 PI 视角</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>我要申请 香港 RGC ECS(或 新加坡 NRF Fellowship)。请用本项目 artifacts 里我的 AMPK–TDMD 提案,
+改写成英文研究计划草稿,并特别做到:
+- 明确"我正在超越导师的课题、开辟独立研究方向"(评审最看重这点);
+- 一个清晰的科学问题 + 可行工作计划 + 可信的高影响产出路径;
+- ECS:控制在 ≤HK$2M/≤60 月 的体量,单列"现有设施"一段(≤400 词);
+- NRF:突出面向新加坡东道机构的独立建组愿景。
+先给我正文草稿 + 一份"还需准备的材料/门槛"清单(如落地机构、CV、论文列表)。</pre>
+    </div>
+
+    <p class="hnote">④ 通用打磨 —— Specific Aims 逐句批评 + 模拟评审</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>这是我的 Specific Aims 草稿(粘在下面 / 见附件)。请扮演该基金的评审专家:
+1. 逐段指出哪里"卖点不够、假说不清、可行性存疑、创新性没讲透";
+2. 检查 3 个 Aim 是否相互独立又统一在一个中心假说下(避免 Aim2 依赖 Aim1 成功);
+3. 给出 3 条最能提高评分的修改建议,并示范改写开头段与假说句;
+4. 用该基金的评分维度(意义/创新/方案/申请人)各打分并说明扣分点。
+基金类型:____。我的护城河:代谢/AMPK 信号 + 疾病模型 + 编辑技术 + 类器官。
+
+[在此粘贴你的草稿]</pre>
+    </div>
+  </div>
+
+  <div class="hcard">
+    <h3>🔗 官方权威链接</h3>
+    <ul class="hsteps">
+      <li>海外优青(NSFC):<b>grants.nsfc.gov.cn</b> · 指南 nsfc.gov.cn</li>
+      <li>NIH K99/R00:<b>grants.nih.gov</b>(SF424 Guide + Page Limits 表)· NOFO PAR-25-135</li>
+      <li>RGC GRF/ECS:<b>ugc.edu.hk/eng/rgc/funding_opport</b>(Guidance Notes)</li>
+      <li>NRF Fellowship:<b>nrf.gov.sg</b> · 提交系统 IGMS</li>
+    </ul>
+    <p class="hnote">💡 我(Claude Science)不能替你下载需登录的官方模板文件,但你把系统里的空白模板/撰写提纲复制粘给我,我就能按它逐格填、逐节写。</p>
+  </div>
 </div>
 
 <footer>
