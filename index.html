@@ -53,6 +53,18 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .snapbar{background:#FFF7E6;border:1px solid #F0D999;border-radius:8px;padding:8px 12px;font-size:12px;color:#7A5B00;margin-bottom:12px}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:9px;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:.15s}
+.tierhdr{margin:18px 0 8px;padding:8px 13px;border-radius:9px;font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px}
+.tierhdr .tc{font-size:12.5px;font-weight:600;color:#555;margin-left:auto}
+.tier-A{background:#EAF6EC;border-left:6px solid #2E7D32;color:#1B5E20}
+.tier-B{background:#FFF7E8;border-left:6px solid #E67E22;color:#9A5B00}
+.tier-C{background:#F3F1FA;border-left:6px solid #6A1B9A;color:#4A148C}
+.mrow{border-left:5px solid #ccc}
+.mrow.A{border-left-color:#2E7D32}.mrow.B{border-left-color:#E67E22}.mrow.C{border-left-color:#6A1B9A}
+.mtags{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0}
+.mtag{font-size:11px;padding:2px 8px;border-radius:11px;background:#EEF2F7;color:#334;border:1px solid #dde3ec}
+.mtag.hit{background:#E8F5E9;color:#1B5E20;border-color:#c3e6c8}
+.mtag.warn{background:#FDECEA;color:#B71C1C;border-color:#f5c6c0}
+.msc{font-weight:800;font-size:13px;padding:1px 9px;border-radius:8px;background:#1B5E20;color:#fff}
 .card:hover{box-shadow:0 4px 14px rgba(0,0,0,.09)}
 .card .top{display:flex;flex-wrap:wrap;gap:7px;align-items:baseline;margin-bottom:7px}
 .card .name{font-size:14.5px;font-weight:700;color:var(--dark);flex:1;min-width:200px}
@@ -175,6 +187,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="curated">🌐 各国 PI 资助(<span id="curN">…</span>)</button>
   <button class="tab" data-p="calendar">📅 截止日历(<span id="calN">…</span>)</button>
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
+  <button class="tab" data-p="myapps">🎯 我能申的(<span id="myN">…</span>)</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
   <button class="tab" data-p="howto">📖 使用/更新说明</button>
   <button class="tab" data-p="writing">✍️ 写作指导</button>
@@ -249,6 +262,18 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="status" id="calStatus" style="margin:0"></span>
   </div>
   <div id="calWrap"></div>
+</div>
+
+<div class="panel" id="myapps">
+  <div class="honest">🎯 本页<b>自动</b>把「联邦机会」+「各国 PI 资助」两个数据源,按你的<b>研究方向(miRNA/TDMD/代谢/AMPK/纤维化等)</b>和<b>身份资格(非美籍博后·MSKCC·≤40岁·7 篇一作)</b>筛一遍并分档。数据每日刷新时,本页<b>同步重算</b>——无需手动维护。判定为启发式,最终以各资助官方 NOFO 为准。</div>
+  <div id="myBanner" class="calbanner" style="margin:10px 0"></div>
+  <div class="actions" style="margin:6px 0 12px;flex-wrap:wrap;gap:8px">
+    <label style="font-size:12.5px"><input type="checkbox" id="my_onlyopen" checked> 只看当前开放/常开</label>
+    <label style="font-size:12.5px"><input type="checkbox" id="my_hidepi"> 隐藏「需独立 PI」的(你暂不符合)</label>
+    <input id="myq" placeholder="🔍 再过滤(标题/机构/方向)…" style="flex:1;min-width:200px;padding:7px 10px;border:1px solid #cbd3e1;border-radius:8px;font-size:13px">
+    <span class="status" id="myStatus" style="margin:0"></span>
+  </div>
+  <div id="myWrap"></div>
 </div>
 
 <div class="panel" id="pipeline">
@@ -1305,6 +1330,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
   document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
   t.classList.add("active");document.getElementById(t.dataset.p).classList.add("active");
+  if(t.dataset.p==="myapps")renderMyApps();
   if(t.dataset.p==="pipeline")renderPipeline();
   if(t.dataset.p==="whatsnew")renderChanges();
   if(t.dataset.p==="calendar")renderCalendar();
@@ -1406,6 +1432,7 @@ async function loadData(){
     snapbar.innerHTML=`📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(每日自动刷新 + 金额/资格补全)`;
     buildSidebar(); renderLive(); renderCurated(); renderChanges();
     CAL_EV=buildCalEvents(); document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
+    try{renderMyApps();}catch(e){console.warn("myapps",e);}
   }catch(e){
     snapbar.innerHTML=`<b style="color:#A03225">数据加载失败:${e.message}</b> — 请通过部署好的网址访问(不要双击本地文件)。`;
   }
@@ -1748,6 +1775,140 @@ function goWrite(type){
   renderWriteFor(type);
   window.scrollTo({top:0,behavior:"smooth"});
 }
+
+/* ================= 🎯 我能申的 · 自动筛选引擎 =================
+   数据源:LIVE(联邦) + CURATED(各国 PI 资助)。每次 loadData/切换到本页/
+   改筛选时重算 —— 数据每日刷新后自动跟着更新,无需人工维护。
+   判定 = 研究方向契合(关键词打分) × 身份资格(启发式)。以官方 NOFO 为准。*/
+const ME={us_inst:true,citizen:false,stage:"postdoc",age_under40:true,hk_pos:false,sg_pos:false,will_return:true};
+// 研究护城河关键词(强项权重×2)
+const KW_STRONG=["zswim8","tdmd","mirna","microrna","micro-rna","ampk","metabol","lactate","lactyl","cholesterol","non-coding","noncoding","non coding"];
+const KW_WEAK=["rna","ago2","argonaute","drosha","dicer","dgcr8","diabet","t2d","insulin","fibrosis","fibrotic","muscle","dmd","dystroph","ibd","organoid","base edit","prime edit","gastric","msi","cancer","tumor","tumour","epigenet","post-transcript","transcriptom","small rna","gene regulat","beta cell","β-cell"];
+function researchScore(txt){
+  txt=(txt||"").toLowerCase();let s=0;const hits=[];
+  KW_STRONG.forEach(k=>{if(txt.includes(k)){s+=2;hits.push(k);}});
+  KW_WEAK.forEach(k=>{if(txt.includes(k)){s+=1;hits.push(k);}});
+  return {s,hits:[...new Set(hits)].slice(0,6)};
+}
+// 联邦资格推断
+function eligFed(g){
+  if(g.cit_req===true&&!ME.citizen)return{cls:"no",why:"需美国公民/绿卡"};
+  const ap=g.apply||[];
+  if(g.career){
+    if(ap.some(t=>t.includes("博后")||t.includes("早期")))return{cls:"yes",why:"career/转轨机制 · 博后可申 · 不限国籍(以 NOFO 为准)",pi:false};
+    return{cls:"cond",why:"career 机制 · 核对阶段窗口",pi:false};
+  }
+  if(ap.length&&ap.every(t=>t.includes("PI")||t.includes("教职")))return{cls:"cond",why:"研究/机构类 · 需独立 PI 身份(你暂不符合,作参考)",pi:true};
+  return{cls:"cond",why:"机构级 · 个人资格见 NOFO",pi:false};
+}
+// 各国 PI 资助(已人工策展 elig/fit,直接采信 + 位置门槛)
+function eligCur(c){
+  const e=c.elig||"";const cr=(c.cite_req||"")+"";
+  if(e.startsWith("❌"))return{cls:"no",why:e.replace(/^❌\s*/,"")||"资格不符"};
+  if(/United States|美国公民|美籍|permanent resident/i.test(cr)&&!/临时签证|无公民|不限|临时/.test(cr))return{cls:"no",why:"需美国公民/绿卡"};
+  // 位置门槛:港/新需当地教职
+  if(/🇭🇰/.test(c.region)&&!ME.hk_pos&&/助理教授|assistant prof|教职|faculty/i.test((c.window||"")+(c.elig||"")))return{cls:"cond",why:"需先获香港高校教职:"+e.replace(/^[✅⚠️]\s*/,"")};
+  if(/🇸🇬/.test(c.region)&&!ME.sg_pos&&/host|东道|机构|faculty|教职/i.test((c.window||"")+(c.note||"")))return{cls:"cond",why:"需新加坡东道机构:"+e.replace(/^[✅⚠️]\s*/,"")};
+  if(e.startsWith("✅"))return{cls:"yes",why:e.replace(/^✅\s*/,"")};
+  if(e.startsWith("⚠️"))return{cls:"cond",why:e.replace(/^⚠️\s*/,"")};
+  return{cls:"cond",why:e||"资格待核"};
+}
+function tierOf(rf,ecls){
+  if(ecls==="no")return null;
+  if(ecls==="yes"&&rf>=3)return"A";
+  if(ecls==="yes"&&rf>=1)return"B";
+  if(ecls==="cond"&&rf>=3)return"B";
+  if(rf>=1)return"C";
+  return null;
+}
+function screenMine(){
+  const rows=[];
+  (LIVE||[]).forEach(g=>{
+    const rs=researchScore((g.title||"")+" "+(g.agency||"")+" "+(g.ftype||""));
+    const el=eligFed(g);const rf=rs.s+(g.rel==="高"?2:g.rel==="中"?1:0);
+    const tier=tierOf(rf,el.cls);if(!tier)return;
+    rows.push({src:"live",id:g.id,tier,score:rf,hits:rs.hits,elig:el,pi:!!el.pi,
+      title:g.title,org:g.agency,region:"🇺🇸 美国",amount:g.amount||"见 NOFO",
+      days:g.days,close:g.closeDate,url:g.url,type:grantType(g),open:(g.days==null||g.days>=0)});
+  });
+  (CURATED||[]).forEach(c=>{
+    const rs=researchScore((c.name||"")+" "+(c.funder||"")+" "+(c.cite||"")+" "+(c.note||"")+" "+(c.cat||""));
+    const el=eligCur(c);let rf=rs.s+(c.fit==="高"?2:c.fit==="中"?1:0);
+    const tier=tierOf(rf,el.cls);if(!tier)return;
+    const pi=(c.apply||[]).length>0&&(c.apply||[]).every(t=>t.includes("PI")||t.includes("教职"))&&!(c.apply||[]).some(t=>t.includes("博后"));
+    rows.push({src:"curated",id:"cur_"+(c.name||"").slice(0,40),tier,score:rf,hits:rs.hits,elig:el,pi,
+      title:c.name,org:c.funder,region:c.region,amount:c.amount||"见官方",
+      days:null,close:null,dl:c.deadline,url:c.url,type:grantType(c),open:true});
+  });
+  const ord={A:0,B:1,C:2};
+  rows.sort((a,b)=>ord[a.tier]-ord[b.tier]||b.score-a.score||((a.days==null?9999:a.days)-(b.days==null?9999:b.days)));
+  return rows;
+}
+function myTrack(o){
+  const t=getTracked();
+  if(t[o.id])delete t[o.id];
+  else t[o.id]={title:o.title,agency:o.org,close:o.close,url:o.url,amount:o.amount,status:"感兴趣",notes:""};
+  setTracked(t);renderMyApps();
+}
+const TIER_META={A:{t:"🟢 A 档 · 现在就能投 + 方向高度契合",d:"资格满足且命中你的核心方向"},
+  B:{t:"🟠 B 档 · 契合但有条件 / 需核对窗口",d:"方向相关,资格需转身份或核对阶段"},
+  C:{t:"🟣 C 档 · 方向相关 · 值得跟踪",d:"科学相关,资格待定或需独立 PI 身份"}};
+function renderMyApps(){
+  const rows=screenMine();
+  const onlyOpen=document.getElementById("my_onlyopen").checked;
+  const hidePi=document.getElementById("my_hidepi").checked;
+  const q=document.getElementById("myq").value.toLowerCase();
+  let R=rows.filter(r=>{
+    if(onlyOpen&&!r.open)return false;
+    if(hidePi&&r.pi)return false;
+    if(q&&!((r.title||"")+(r.org||"")+(r.hits.join(" "))).toLowerCase().includes(q))return false;
+    return true;});
+  const A=R.filter(r=>r.tier==="A"),B=R.filter(r=>r.tier==="B"),C=R.filter(r=>r.tier==="C");
+  const soon=R.filter(r=>r.days!=null&&r.days>=0&&r.days<=60).length;
+  document.getElementById("myBanner").innerHTML=
+    `<div class="kpi"><b>${A.length}</b>🟢 现在就能投</div>`+
+    `<div class="kpi k30"><b>${B.length}</b>🟠 有条件契合</div>`+
+    `<div class="kpi k90"><b>${C.length}</b>🟣 值得跟踪</div>`+
+    `<div class="kpi kmine"><b>${soon}</b>⏰ 60 天内截止</div>`;
+  document.getElementById("myN").textContent=A.length+B.length;
+  document.getElementById("myStatus").textContent=`共筛出 ${R.length} 个匹配(A ${A.length} · B ${B.length} · C ${C.length})`;
+  const tracked=getTracked();
+  let html="";
+  [["A",A],["B",B],["C",C]].forEach(([k,arr])=>{
+    if(!arr.length)return;
+    html+=`<div class="tierhdr tier-${k}">${TIER_META[k].t}<span class="tc">${TIER_META[k].d} · ${arr.length} 项</span></div>`;
+    arr.forEach(r=>{
+      const isT=!!tracked[r.id];
+      const dlTxt=r.close?(r.days!=null&&r.days>=0?`${r.close} · ${r.days} 天`:r.close):(r.dl?r.dl:"常开/滚动");
+      const hitTags=r.hits.length?r.hits.map(h=>`<span class="mtag hit">🎯 ${h}</span>`).join(""):`<span class="mtag">方向:综合匹配</span>`;
+      const eligTag=r.elig.cls==="yes"?`<span class="mtag hit">✅ 资格满足</span>`:`<span class="mtag warn">⚠️ 有条件</span>`;
+      const piTag=r.pi?`<span class="mtag warn">需独立 PI</span>`:"";
+      html+=`<div class="card mrow ${r.tier}">
+        <div class="top">
+          <span class="name"><a href="${r.url}" target="_blank">${r.title||"(无标题)"}</a></span>
+          <span class="msc">匹配 ${r.score}</span>
+          <span class="ftype">${r.region}</span>
+          <span class="src ${r.src==="live"?"src-govt":""}">${r.src==="live"?"Grants.gov":"手工策展"}</span>
+        </div>
+        <div class="funder">${r.org||""}</div>
+        <div class="mtags">${eligTag}${piTag}${hitTags}</div>
+        <div class="scorecard">
+          <div class="sc sc-dl"><span class="lab">截止</span><span class="val ${(r.days!=null&&r.days<=60)?'soon':''}">${dlTxt}</span>${r.days!=null?pbar(r.days):""}</div>
+          <div class="sc sc-amt"><span class="lab">金额</span><span class="val">${r.amount}</span></div>
+        </div>
+        <div class="note"><b>为什么给你:</b>${r.elig.why}</div>
+        <div class="actions">
+          <button class="abtn track ${isT?'tracked':''}" onclick='myTrack(${JSON.stringify({id:r.id,title:r.title,org:r.org,close:r.close,url:r.url,amount:r.amount}).replace(/'/g,"&#39;")})'>${isT?'✓ 已加入管线':'📌 加入管线'}</button>
+          <a class="abtn" href="${r.url}" target="_blank">📄 官方页</a>
+          <button class="abtn wbtn" onclick="goWrite('${r.type}')">✍️ 怎么写这个</button>
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById("myWrap").innerHTML=html||'<p style="color:var(--muted);padding:16px">没有匹配。放宽筛选(取消勾选/清空搜索),或去「联邦机会 / 各国 PI 资助」用宽 RNA 词搜。</p>';
+}
+["my_onlyopen","my_hidepi"].forEach(id=>document.getElementById(id).addEventListener("change",renderMyApps));
+document.getElementById("myq").addEventListener("input",renderMyApps);
 
 function checkElig(){
   const g=id=>document.getElementById(id).checked;
