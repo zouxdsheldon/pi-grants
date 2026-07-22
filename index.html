@@ -75,6 +75,8 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .abtn{font-size:11.5px;padding:4px 11px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer;color:#445}
 .abtn.tracked{background:var(--greenf);color:#1E7E45;border-color:#A8D5B8;font-weight:700}
+.wbtn{background:#6A1B9A!important;color:#fff!important;border-color:#6A1B9A!important;font-weight:700}
+.wbtn:hover{background:#4A148C!important}
 .abtn:hover{background:var(--bluef)}
 .hcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
 .hcard h3{margin:0 0 10px;font-size:15.5px}
@@ -494,8 +496,45 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <div class="panel" id="writing">
   <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
+  <!-- ===== 基金类型选择器 + 双向匹配 ===== -->
+  <div class="hcard" style="border-color:#1565C0;background:#EEF5FF">
+    <h3 style="color:#0D47A1">🎯 先选你要写的基金类型（或从「找资助」页卡片点「✍️怎么写这个」自动带过来）</h3>
+    <p style="font-size:13px;color:#444;margin:4px 0 8px">选中后，下方会给出<b>该类基金的官方说明 · 篇幅 · 资格 · 必写章节 · 针对性技巧</b>，并列出<b>当前还开着的同类资助</b>（点标题一键跳回搜索）。</p>
+    <select id="fundSel" onchange="renderWriteFor(this.value)" style="font-size:14.5px;padding:7px 10px;border:1px solid #90A4AE;border-radius:8px;min-width:280px">
+      <option value="">— 请选择基金类型 —</option>
+      <option value="k99">🇺🇸 NCI K99/R00（博后→PI，不限国籍 · 你的头号目标）</option>
+      <option value="f32">🇺🇸 NRSA F32 博后 Fellowship（多需美籍/绿卡）</option>
+      <option value="r01">🇺🇸 R01 独立研究项目（学结构用）</option>
+      <option value="youqing">🇨🇳 海外优青（≤40岁 · 回国任 PI）</option>
+      <option value="ecs">🇭🇰 RGC ECS（香港助理教授）</option>
+      <option value="nrf">🇸🇬 NRF Fellowship（新加坡早期 PI）</option>
+      <option value="generic">🌐 其它 / 通用骨架</option>
+    </select>
+    <div id="writeMatch" style="margin-top:10px"></div>
+  </div>
+
+  <!-- ===== 🚀 手把手写作流水线：真实一页 Specific Aims 范例 ===== -->
+  <div class="hcard" style="border-color:#6A1B9A;background:#FAF4FF">
+    <h3 style="color:#4A148C">🚀 手把手写作流水线 — 用你自己的 AMPK–TDMD 项目，逐段填出一页 Specific Aims</h3>
+    <p style="font-size:13px;line-height:1.7;color:#333;margin:4px 0 8px">这不是空模板，而是<b>用你本项目的真实内容写出来的完整一页</b>（NIH Specific Aims 标准结构：开场钩子 → 知识缺口 → 长期目标+假设 → 三个 Aim → 收尾影响）。左看<b>骨架的作用</b>，右看<b>已填好的真实句子</b>。换个课题时，把方括号 <code>[…]</code> 换成你的即可。</p>
+    <div style="max-height:640px;overflow:auto;border:1px solid #D1C4E9;border-radius:8px">
+    <table class="htab" style="margin:0;font-size:12.8px">
+      <tr><th style="width:26%;background:#EDE7F6">段落 · 作用</th><th style="background:#EDE7F6">✅ 真实范例（AMPK–TDMD 旗舰项目）</th></tr>
+      <tr><td><b>① 开场钩子</b><br>1 句点出重要生物学问题</td><td>MicroRNAs are degraded on a physiological timescale by target-directed miRNA decay (TDMD), in which the ZSWIM8 ubiquitin ligase recognizes an AGO2–miRNA complex engaged by a highly complementary target and marks AGO2 for destruction.</td></tr>
+      <tr><td><b>② 知识缺口</b><br>已知什么 / 缺什么</td><td>Although the ZSWIM8 TDMD machinery is now structurally defined, how it is <b>tuned by cellular metabolic state</b> is unknown. Whether the energy sensor AMPK—activated under nutrient stress—directly controls the rate of miRNA turnover has not been tested.</td></tr>
+      <tr><td><b>③ 长期目标 + 中心假设</b><br>你想解决什么 + 一句可证伪假设</td><td>Our long-term goal is to define metabolic control of miRNA stability. <b>Our central hypothesis is that AMPK phosphorylates ZSWIM8 at S608, accelerating TDMD of anti-fibrotic miR-29 and thereby encoding a metabolic memory of prior nutrient stress.</b> This hypothesis is based on our motif scan placing S608 in a textbook AMPK recognition context (…KRR-<b>S</b>608…) within a disordered, kinase-accessible region.</td></tr>
+      <tr><td><b>④ Aim 1</b><br>建立分子事件（最可控）</td><td><b>Aim 1. Test whether AMPK directly phosphorylates ZSWIM8 at S608.</b> In vitro kinase assays with recombinant AMPK + ZSWIM8 fragments, phospho-specific detection, and S608A/S608D mutants will establish direct phosphorylation and its dependence on the predicted motif.</td></tr>
+      <tr><td><b>⑤ Aim 2</b><br>连到功能读出</td><td><b>Aim 2. Determine how S608 phosphorylation controls the rate of TDMD.</b> Using miR-29 decay kinetics in ZSWIM8-reconstituted cells (S608A / S608D / WT), we will measure whether phospho-mimetic S608D accelerates, and S608A blunts, miRNA turnover under AMPK activation.</td></tr>
+      <tr><td><b>⑥ Aim 3</b><br>拔高到疾病/记忆</td><td><b>Aim 3. Test whether AMPK-driven ZSWIM8 activity encodes a metabolic memory in a fibrosis model.</b> In intestinal/cardiac fibrosis organoids, we will ask whether a transient nutrient-stress pulse produces a durable, S608-dependent drop in miR-29 and a lasting pro-fibrotic shift.</td></tr>
+      <tr><td><b>⑦ 收尾影响</b><br>成功 = 领域获得什么</td><td>Successful completion will establish the first metabolic input to the TDMD machinery, define a phospho-switch (S608) as a druggable node, and open metabolic control of miRNA stability as a new axis in fibrosis and metabolic memory.</td></tr>
+      <tr><td colspan="2" style="background:#F3E5F5;font-size:12px"><b>🔧 换课题怎么用：</b>把 <code>[激酶]</code>=AMPK、<code>[底物+位点]</code>=ZSWIM8-S608、<code>[miRNA]</code>=miR-29、<code>[疾病模型]</code>=纤维化 这四个变量替换成你的新课题变量，七段骨架不动，即可套出新的一页 Aims。想要英文/中文双语句式，见下方 <b>⑤ 语料库</b>（50 句，按功能/语气分类，可复制）。</td></tr>
+    </table>
+    </div>
+    <p class="hnote" style="margin-top:8px">📎 完整旗舰提案（含 Significance/Innovation/Approach/预算/参考文献）在本项目 artifacts：<code>proposal_AMPK_TDMD.md</code>（英）/ <code>proposal_zh.md</code>（中）。这页 Aims 就是从它抽出来的——你可以反过来照它扩写其余章节。</p>
+  </div>
   <div class="lang-zh">
   <div class="honest">✍️ 一站式<b>基金写作指导</b>:六步法(明确类型 → 官方说明 → 成功范例 → 逐节模板 → 语料库 → 实时更新)+ 每类基金<b>官方模板去哪下</b> + <b>可复制的起草提示词</b>。你已有一份完整的 AMPK–TDMD 旗舰提案(本项目 artifacts 里的 <code>proposal_AMPK_TDMD.md</code> / <code>proposal_zh.md</code>),下面的提示词就是让 Claude Science 把它<b>改写成各基金要求的格式</b>——复制 → 新开对话粘进去即可。</div>
+
 
   <div class="hcard" style="border-color:#E6C200;background:#FFFDF2">
     <h3>⚠️ 先看:这些是「落地后/落地用」的机制</h3>
@@ -1331,6 +1370,7 @@ function renderLive(){
       <div class="actions">
         <button class="abtn track ${isT?'tracked':''}">${isT?'✓ 已加入管线':'📌 加入管线'}</button>
         <a class="abtn" href="${g.url}" target="_blank">📄 查看详情</a>
+        <button class="abtn wbtn" onclick="goWrite('${grantType(g)}')">✍️ 怎么写这个</button>
       </div>`;
     d.querySelector(".track").onclick=()=>toggleTrack(g);
     list.appendChild(d);
@@ -1395,7 +1435,8 @@ function renderCurated(){
           <div class="sc sc-amt"><span class="lab">金额(概)</span><span class="val">${g.amount||"—"}</span></div>
           <div class="sc sc-dl"><span class="lab">截止(概)</span><span class="val">${g.deadline||"—"}</span></div>
           <div class="sc sc-elig-na"><span class="lab">国籍与签证</span><span class="val" style="font-size:11.5px">${g.cite_req||"—"}</span></div></div>
-        <div class="note"><b>为什么:</b>${g.cite}<br><b>备注:</b>${g.note}</div>`;
+        <div class="note"><b>为什么:</b>${g.cite}<br><b>备注:</b>${g.note}</div>
+        <div class="actions"><button class="abtn wbtn" onclick="goWrite('${grantType(g)}')">✍️ 怎么写这个</button></div>`;
       list.appendChild(d);});
   });
   if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配项目。</p>';
@@ -1452,6 +1493,129 @@ document.getElementById("exportCsv").onclick=()=>{
   const b=new Blob([csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");
   a.href=URL.createObjectURL(b);a.download="my_grant_pipeline.csv";a.click();
 };
+
+
+/* ================= CROSSTALK: 找资助 ↔ 写作 ================= */
+const FUND_GUIDE={
+  k99:{name:"NCI K99/R00（Pathway to Independence）",region:"🇺🇸 美国",
+    official:{label:"PAR-25-135 (NOFO)",url:"https://grants.nih.gov/grants/guide/pa-files/PAR-25-135.html"},
+    pages:"研究计划 ≤12 页（K99 6 页 + R00 6 页）",
+    sections:["Specific Aims (1 页)","Research Strategy: Significance / Innovation / Approach","Candidate 背景与职业发展计划","Training / 导师团队"],
+    tips:["博后阶段 ≤4 年可申；无公民要求、临时签证可申 —— 你的头号目标。",
+      "K99 段强调『在导师指导下完成的过渡性工作』，R00 段强调『独立后要做什么』——两段要能明显区分。",
+      "职业发展计划要具体到课程/技能/时间表，评审很看重 mentored→independent 的逻辑。",
+      "Aims 里 K99 与 R00 的工作要能拆开：K99 打基础，R00 才是你独立实验室的招牌。"],
+    elig:"博后 ≤4 年 · 不限国籍 · 临时签证可申"},
+  f32:{name:"NRSA F32 博后 Fellowship",region:"🇺🇸 美国",
+    official:{label:"NIH Fellowship 指南",url:"https://grants.nih.gov/grants/guide/"},
+    pages:"Research Training Plan ≤6 页",
+    sections:["Specific Aims","Research Strategy","Training Goals & Objectives","Sponsor & Institutional 环境"],
+    tips:["⚠️ F32 通常要求美国公民或永久居民——申前务必核对 NOFO 资格栏。",
+      "重心是『训练』而非纯科研产出：要写清这个项目让你学到什么新技能。",
+      "导师的 track record 和训练计划占很大权重。"],
+    elig:"多数要求 美公民/绿卡 —— 先核对"},
+  r01:{name:"R01 独立研究项目",region:"🇺🇸 美国",
+    official:{label:"NIH R01 指南",url:"https://grants.nih.gov/grants/guide/"},
+    pages:"Research Strategy ≤12 页",
+    sections:["Specific Aims","Significance","Innovation","Approach（含 Rigor & 可行性）"],
+    tips:["现阶段你还不能作为 PI 申 R01，但要吃透它的结构——K99→R00→R01 是同一套逻辑的放大。",
+      "Approach 里每个 Aim 都要有：假设→实验→预期结果→备选方案→陷阱。",
+      "把 R01 当作你 5 年后的目标模板，现在积累的语料都能复用。"],
+    elig:"需独立 PI 身份（你暂不符合，重在学结构）"},
+  youqing:{name:"海外优青（NSFC 优秀青年科学基金·海外）",region:"🇨🇳 中国大陆",
+    official:{label:"NSFC 官网",url:"https://www.nsfc.gov.cn/"},
+    pages:"正文按当年指南（通常含研究基础 + 拟开展研究）",
+    sections:["研究领域与科学问题","已有研究基础与代表性成果","拟解决的关键科学问题","研究方案与可行性"],
+    tips:["面向 40 岁以下、海外获博士或有海外经历、承诺全职回国——直接给独立 PI 职位 + 启动经费。",
+      "代表作（你 7 篇一作）是核心竞争力，要突出你能『拥有』的证据链。",
+      "科学问题要凝练成 1 句话，评审多为国内同行，写法比 NIH 更强调国家需求与学科前沿。"],
+    elig:"≤40 岁 · 海外博士/经历 · 承诺全职回国"},
+  ecs:{name:"RGC ECS（香港·杰出青年学者计划）",region:"🇭🇰 香港",
+    official:{label:"RGC 官网",url:"https://www.ugc.edu.hk/eng/rgc/"},
+    pages:"Project 计划书按 RGC 模板",
+    sections:["Project Objectives","Background & Significance","Research Plan & Methodology","Impact"],
+    tips:["面向在港高校刚获聘的助理教授（受聘 3 年内），需已有香港高校职位。",
+      "写法接近英式 grant：Objectives 清单化，方法学要详实。",
+      "强调国际竞争力与对香港/大湾区的贡献。"],
+    elig:"需香港高校助理教授职位（受聘≤3 年）"},
+  nrf:{name:"NRF Fellowship（新加坡）",region:"🇸🇬 新加坡",
+    official:{label:"NRF 官网",url:"https://www.nrf.gov.sg/"},
+    pages:"Research Proposal 按 NRF 模板",
+    sections:["Research Vision","Track Record","Research Plan","Budget & Host Institution"],
+    tips:["面向早期 PI，提供 5 年大额启动经费 + 独立职位，竞争激烈。",
+      "Track Record + Vision 权重高：要讲清你独立后的 5 年蓝图。",
+      "需新加坡 host institution 支持。"],
+    elig:"早期 PI · 需新加坡东道机构"},
+  generic:{name:"通用（未识别到具体类型）",region:"🌐",
+    official:{label:"先读该资助的官方 NOFO/指南",url:""},
+    pages:"按该资助官方要求",
+    sections:["Specific Aims / 研究目标","Significance / 意义","Innovation / 创新","Approach / 方案"],
+    tips:["先在资助卡片点『官方页』找到 NOFO/指南，篇幅和结构以官方为准。",
+      "无论哪类,骨架都是:目标→意义→创新→方案→可行性。用下方④逐节模板 + ⑤语料库套写。"],
+    elig:"以官方文件为准"}
+};
+function grantType(g){
+  const t=((g.title||g.name||"")+" "+(g.number||"")+" "+(g.agency||g.funder||"")+" "+(g.cite||"")).toLowerCase();
+  if(/k99|r00|pathway to independence|par-25-135/.test(t))return"k99";
+  if(/\bf32\b|nrsa|ruth kirschstein|postdoctoral fellow/.test(t))return"f32";
+  if(/\br01\b/.test(t))return"r01";
+  if(/优青|海外优青|nsfc|自然科学基金|excellent young/.test(t))return"youqing";
+  if(/ecs|early career scheme|rgc|research grants council|香港/.test(t))return"ecs";
+  if(/\bnrf\b|national research foundation|新加坡|singapore fellowship/.test(t))return"nrf";
+  if(/career|fellowship|new investigator|early.?career|优青|starting grant/.test(t))return"youqing";
+  return"generic";
+}
+function openMatches(type){
+  const out=[];
+  (window.LIVE||[]).forEach(g=>{if(grantType(g)===type)out.push({src:"live",id:g.id,title:g.title,extra:g.closeDate||(g.days!=null?g.days+"天后":"")});});
+  (window.CURATED||[]).forEach(g=>{if(grantType(g)===type)out.push({src:"curated",id:g.id,title:g.name,extra:g.region});});
+  return out;
+}
+function jumpToGrant(src,title){
+  const tabsel=src==="live"?"live":"curated";
+  document.querySelector('.tab[data-p="'+tabsel+'"]').click();
+  const box=document.getElementById(src==="live"?"q":"cq");
+  if(box){box.value=title;box.dispatchEvent(new Event("input"));}
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderWriteFor(type){
+  const G=FUND_GUIDE[type]||FUND_GUIDE.generic;
+  const m=openMatches(type);
+  const off=G.official.url?`<a href="${G.official.url}" target="_blank"><b>${G.official.label}</b> ↗</a>`:`<b>${G.official.label}</b>`;
+  const secs=G.sections.map(x=>`<li>${x}</li>`).join("");
+  const tips=G.tips.map(x=>`<li>${x}</li>`).join("");
+  let matchHtml;
+  if(m.length){
+    matchHtml=`<p class="hnote" style="margin-top:8px"><b>🔎 现在还开着的「${G.name.split("（")[0]}」类资助（${m.length}）——点标题跳回搜索：</b></p>`+
+      `<div style="display:flex;flex-wrap:wrap;gap:6px">`+
+      m.slice(0,12).map(x=>`<button class="qbtn" onclick="jumpToGrant('${x.src}',${JSON.stringify(x.title).replace(/"/g,'&quot;')})">${x.title.length>42?x.title.slice(0,42)+"…":x.title}${x.extra?` · ${x.extra}`:""}</button>`).join("")+
+      `</div>`;
+  } else {
+    matchHtml=`<p class="hnote" style="margin-top:8px">🔎 当前搜索结果里暂无该类资助（可能已过期或未收录）。可去「🇺🇸 联邦机会 / 🌐 各国 PI 资助」用宽 RNA 词搜。</p>`;
+  }
+  document.getElementById("writeMatch").innerHTML=
+    `<div class="hcard" style="border-color:#1565C0;background:#F5F9FF">
+      <h3 style="color:#0D47A1">📝 正在为你定位：${G.name}　<span style="font-size:12px;color:#666">${G.region}</span></h3>
+      <table class="htab" style="margin:6px 0">
+        <tr><th style="width:22%">官方说明</th><td>${off}</td></tr>
+        <tr><th>篇幅</th><td>${G.pages}</td></tr>
+        <tr><th>资格要点</th><td><b style="color:#C62828">${G.elig}</b></td></tr>
+        <tr><th>必写章节</th><td><ul style="margin:4px 0 0;padding-left:18px">${secs}</ul></td></tr>
+        <tr><th>针对性技巧</th><td><ul style="margin:4px 0 0;padding-left:18px">${tips}</ul></td></tr>
+      </table>
+      ${matchHtml}
+      <p class="hnote" style="margin-top:8px">↓ 往下看 <b>④ 逐节写作模板</b> 套骨架、<b>⑤ 语料库</b> 挑句式；想要完整一页范例点顶部 <b>🚀 手把手流水线</b>。</p>
+    </div>`;
+}
+function goWrite(type){
+  document.querySelector('.tab[data-p="writing"]').click();
+  const sel=document.getElementById("fundSel");
+  if(sel){sel.value=type;}
+  renderWriteFor(type);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// init fund selector default
 
 loadProfile();
 loadData();
