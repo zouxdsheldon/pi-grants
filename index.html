@@ -140,6 +140,9 @@ table.pipe textarea{width:100%;border:1px solid var(--line);border-radius:5px;fo
 .chg .k{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:10px;margin-right:6px}
 .chg .k.new{background:var(--greenf);color:#1E7E45}.chg .k.updated{background:var(--bluef);color:#1B4F72}
 footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;padding:0 20px}
+.langbar{display:flex;gap:6px;margin:0 0 12px}
+.langbtn{padding:5px 14px;border:1px solid #bbb;border-radius:16px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:#333}
+.langbtn.active{background:#1565C0;color:#fff;border-color:#1565C0}
 </style>
 </head>
 <body>
@@ -256,6 +259,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="howto">
+  <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
+  <div class="lang-zh">
   <div class="honest">📖 本页说明网站怎么自动更新、以及需要你手动更新时怎么做。每个灰框右上角有 <b>📋 复制</b> 按钮——复制后<b>打开 Claude Science / Pathy 新开对话粘进去</b>即可(Pivot 更新时把导出的 CSV 一起拖进去)。</div>
 
   <div class="hcard">
@@ -369,9 +374,127 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
 
   <p class="hnote" style="margin-top:14px">存档邮箱 zouxdsheldon@gmail.com · 仓库 github.com/zouxdsheldon/pi-grants · 日历用滚动年份,始终显示未来两年不会过期。</p>
+  </div>
+  <div class="lang-en" style="display:none">
+<div class="honest">📖 This page explains how the website updates automatically, and what to do when you need to update it manually. Every gray box has a <b>📋 Copy</b> button in the top-right corner — after copying, <b>open a new Claude Science / Pathy conversation and paste it in</b> (when updating Pivot, drag the exported CSV in along with it).</div>
+
+  <div class="hcard">
+    <h3>🟢 Fully automatic (nothing for you to do)</h3>
+    <table class="htab">
+      <tr><th>Content</th><th>Update method</th><th>Frequency</th></tr>
+      <tr><td>US federal funding (1748+ entries, Grants.gov)</td><td>GitHub Actions automatic scraping</td><td><b>Daily</b> at UTC 11:00 (7am US Eastern)</td></tr>
+      <tr><td>Deadline calendar .ics</td><td>Automatically regenerated alongside federal data</td><td>Daily</td></tr>
+      <tr><td>Website deployment</td><td>Automatically redeploys whenever data changes</td><td>Daily</td></tr>
+    </table>
+    <p class="hnote">To trigger an immediate manual refresh: repository → <b>Actions → "Update grants data" → Run workflow</b>.</p>
+  </div>
+
+  <div class="hcard">
+    <h3>🟡 The only thing you need to do manually: Pivot-RP curated picks (every 2–3 months)</h3>
+    <p>Pivot requires an MSKCC account login to export, so it can't be scraped automatically. Steps:</p>
+    <ol class="hsteps">
+      <li>Log in to MSKCC Pivot-RP, search using your query strings → check the opportunities → <b>Export → CSV</b> (can be multiple files).</li>
+      <li><b>📋 Copy</b> the block below → open a new Claude Science conversation and paste it in → <b>drag the exported CSVs into the message as well</b>.</li>
+      <li>Attach a GitHub token with <code>repo</code> permission (revoke it on GitHub once you're done).</li>
+    </ol>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我更新 pi-grants 资助网站的 Pivot 精选层。我把从 Pivot-RP 导出的 CSV 附在这条消息里了。
+请:
+1. 把这些 CSV 用 scripts/import_pivot.py 的口径并入 data/curated.json —— 只保留事实字段
+   (项目名/资助方/截止日/金额/官方链接)+ 我的申请人身份标签(Career Stage → 博后/早期·
+   独立PI/教职·研究生;Citizenship → 公民/签证要求),不复制 Pivot 的 AI 描述原文(版权)。
+2. 去重(按项目名+资助方),保留已有的手工策展条目。
+3. 重新生成 .ics 日历(python3 scripts/build_ics.py)。
+4. git commit + push 到 github.com/zouxdsheldon/pi-grants,确认 Actions 部署成功。
+仓库在工作区 pi-grants-site/。我的身份:MSKCC Research Associate、博后/早期、中国籍持签证,
+筛「我能申」= 身份含博后/早期 + 非美籍专属 + 未过窗口。</pre>
+    </div>
+  </div>
+
+  <div class="hcard">
+    <h3>🔎 Pivot-RP search keywords (use when searching for new opportunities)</h3>
+    <p class="hnote">Log in to MSKCC Pivot-RP → Funding → Advanced Search → paste the entire query string into the keyword box (field select All Fields or Abstract). <b>We recommend running the ★★★ #1 / #2 / #8 first</b>, as they best match your niche.</p>
+    <p class="hnote" style="color:#a15">⚠️ Don't search using gene or mechanism terms like ZSWIM8 / TDMD — funder program descriptions almost never contain specific gene names, so this will yield almost 0 hits. The right approach: use broad RNA terms to catch the funders, then narrow using disease/technology/career-stage terms.</p>
+
+    <p class="hnote"><b>#1 ★★★ Flagship: RNA × Metabolism (most core, run this one first)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "miRNA" OR "non-coding RNA" OR "RNA metabolism" OR "RNA decay") AND ("metabolism" OR "AMPK" OR "lactate" OR "energy stress" OR "metabolic")</pre></div>
+
+    <p class="hnote"><b>#2 ★★★ RNA × Diabetes/Metabolic disease (translational landing point)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "RNA" OR "non-coding RNA") AND ("type 2 diabetes" OR "diabetes" OR "metabolic disease" OR "metabolic memory")</pre></div>
+
+    <p class="hnote"><b>#8 ★★★ Early-career PI pathway × RNA</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("early career" OR "new investigator" OR "career development" OR "fellowship") AND ("RNA" OR "microRNA" OR "metabolism")</pre></div>
+
+    <p class="hnote"><b>#3 ★★ RNA × Fibrosis (cardiac/intestinal/multi-organ)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "non-coding RNA" OR "RNA") AND ("fibrosis" OR "intestinal fibrosis" OR "cardiac fibrosis" OR "inflammatory bowel disease")</pre></div>
+
+    <p class="hnote"><b>#4 ★★ RNA × Muscle/DMD</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "RNA" OR "non-coding RNA") AND ("muscular dystrophy" OR "muscle" OR "satellite cell")</pre></div>
+
+    <p class="hnote"><b>#5 ★★ RNA × GI tumors/MSI</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("microRNA" OR "RNA" OR "non-coding RNA") AND ("gastric cancer" OR "microsatellite instability" OR "gastrointestinal")</pre></div>
+
+    <p class="hnote"><b>#6 ★★ Technology platforms (organoids/editing/large animals)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>("organoid" OR "base editing" OR "prime editing" OR "genome editing" OR "pig model" OR "large animal model") AND ("RNA" OR "microRNA" OR "metabolism")</pre></div>
+
+    <p class="hnote"><b>#7 ★ Broad safety net (all RNA biology, to avoid missing anything; high volume, pair with career-stage/amount filters)</b></p>
+    <div class="promptbox"><button class="copybtn" onclick="cp(this)">📋 复制</button><pre>"microRNA" OR "miRNA" OR "non-coding RNA" OR "small RNA" OR "RNA biology" OR "post-transcriptional regulation"</pre></div>
+
+    <p class="hnote" style="margin-top:10px"><b>Narrow further with the right-hand filter panel:</b> Applicant Type = Individual · Career Stage = Early Career · check Citizenship/Eligibility for domestic-only restrictions · set a minimum Amount · Deadline within the next 3–12 months → Export CSV.</p>
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:700">📚 Expand: 5-tier layered keyword library (for building your own query strings)</summary>
+      <table class="htab" style="margin-top:8px">
+        <tr><th>Tier</th><th>Pivot search terms (English, paste directly)</th><th>Corresponding direction for you</th></tr>
+        <tr><td><b>A Broad terms · RNA core</b></td><td>microRNA; miRNA; "non-coding RNA"; "small RNA"; "RNA biology"; "RNA metabolism"; "gene regulation"; "post-transcriptional regulation"; "RNA decay"; "RNA turnover"</td><td>Main line of miRNA biogenesis; TDMD = miRNA degradation (caught via RNA decay/turnover)</td></tr>
+        <tr><td><b>B Mechanism · Metabolism/Energy</b></td><td>metabolism; "energy metabolism"; AMPK; "energy stress"; "metabolic signaling"; lactate; lactylation; cholesterol; "lipid metabolism"; "metabolic memory"</td><td>Flagship mechanism tier: lactate/AMPK/cholesterol niche</td></tr>
+        <tr><td><b>C Disease · Translational landing point</b></td><td>"type 2 diabetes"; diabetes; "metabolic disease"; fibrosis; "organ fibrosis"; "inflammatory bowel disease"; "intestinal fibrosis"; "cardiac fibrosis"; "muscular dystrophy"; "gastric cancer"; "microsatellite instability"</td><td>T2D / intestinal fibrosis / cardiac / DMD / gastric cancer</td></tr>
+        <tr><td><b>D Technology · Platform</b></td><td>organoid; "base editing"; "prime editing"; "genome editing"; CRISPR; "large animal model"; "pig model"; "single-cell"</td><td>Organoids / base editing / pig models</td></tr>
+        <tr><td><b>E Career stage</b></td><td>"early career"; "early-career investigator"; "new investigator"; "career development"; fellowship; "young investigator"; "starting grant"</td><td>Overseas High-Level Talent / RGC / NRF early-PI pathways</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <div class="hcard">
+    <h3>🔧 Other updates as needed (copy the relevant section)</h3>
+    <p class="hnote">A · Manually refresh federal data immediately (without waiting for the daily schedule)</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我手动触发 pi-grants 仓库的 "Update grants data" workflow,抓最新联邦资助,
+重新生成 .ics,确认部署成功。附 GitHub token。</pre>
+    </div>
+    <p class="hnote">B · Change calendar reminder timing / filter criteria</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我改 pi-grants 的 scripts/build_ics.py:把提醒改成截止前 __ 天和 __ 天
+(或改「我能申」的筛选口径为 ______)。重新生成 .ics、push、确认部署。附 GitHub token。</pre>
+    </div>
+    <p class="hnote">C · Manually add/edit a few curated grants (not via Pivot)</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>帮我在 pi-grants 的 data/curated.json 里加/改这几条资助:
+- 项目名:__ / 资助方:__ / 截止:__ / 金额:__ / 官方链接:__ / 地区:__
+重新生成 .ics、push、确认部署。附 GitHub token。</pre>
+    </div>
+  </div>
+
+  <div class="hcard">
+    <h3>📅 Calendar subscription (set up once, then syncs automatically)</h3>
+    <p>「📅 Deadline Calendar」tab → <b>🔔 Subscribe to calendar (auto-update)</b> in the top-left corner, or <b>📋 Copy subscription URL</b> and paste it into "Add calendar by URL" in Google/Apple Calendar:</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics</pre>
+    </div>
+    <p class="hnote">⚠️ Be sure to use "subscribe by URL" rather than "download and import" — only subscribing will keep it automatically updated with the website every day.</p>
+  </div>
+
+  <p class="hnote" style="margin-top:14px">Archive email zouxdsheldon@gmail.com · Repository github.com/zouxdsheldon/pi-grants · The calendar uses a rolling year, always showing the next two years so it never expires.</p>
+  </div>
 </div>
 
 <div class="panel" id="writing">
+  <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
+  <div class="lang-zh">
   <div class="honest">✍️ 一站式<b>基金写作指导</b>:六步法(明确类型 → 官方说明 → 成功范例 → 逐节模板 → 语料库 → 实时更新)+ 每类基金<b>官方模板去哪下</b> + <b>可复制的起草提示词</b>。你已有一份完整的 AMPK–TDMD 旗舰提案(本项目 artifacts 里的 <code>proposal_AMPK_TDMD.md</code> / <code>proposal_zh.md</code>),下面的提示词就是让 Claude Science 把它<b>改写成各基金要求的格式</b>——复制 → 新开对话粘进去即可。</div>
 
   <div class="hcard" style="border-color:#E6C200;background:#FFFDF2">
@@ -560,6 +683,197 @@ AMPK–TDMD 旗舰提案(proposal_zh.md / proposal_AMPK_TDMD.md),按 NSFC《优�
     </ul>
     <p class="hnote">💡 我(Claude Science)不能替你下载需登录的官方模板文件,但你把系统里的空白模板/撰写提纲复制粘给我,我就能按它逐格填、逐节写。</p>
   </div>
+  </div>
+  <div class="lang-en" style="display:none">
+<div class="honest">✍️ One-stop <b>grant writing guidance</b>: a six-step method (clarify type → official guidelines → successful examples → section-by-section templates → corpus building → real-time updates) + where to download the <b>official templates</b> for each grant type + <b>copy-ready drafting prompts</b>. You already have a complete AMPK–TDMD flagship proposal (<code>proposal_AMPK_TDMD.md</code> / <code>proposal_zh.md</code> in this project's artifacts) — the prompts below are for having Claude Science <b>rewrite it into the format required by each grant</b>: just copy → paste into a new conversation.</div>
+
+  <div class="hcard" style="border-color:#E6C200;background:#FFFDF2">
+    <h3>⚠️ Read first: these are "post-landing / landing-stage" mechanisms</h3>
+    <p style="font-size:13.5px;line-height:1.7;margin:4px 0">Overseas Outstanding Young Scholars / RGC ECS / NRF Fellowship all require you to <b>first establish an appointment relationship with a host institution</b> (a signed letter of intent, or already being an assistant professor). These are your "landing" pathway from postdoc to PI, not pure postdoc awards. <b>What you can do now</b>: write the body of the research plan (Research Proposal) according to their structure — this part is independent of whether you've landed a position yet, and once written it can be submitted anytime. NIH <b>K99/R00</b> is the only pathway that can be directly applied for at the postdoc stage and is <b>open to non-US citizens</b>. <b>F32</b> usually requires US citizenship/permanent residency, which is likely a barrier for you; <b>R01</b> cannot yet be applied for as PI at this stage, but thoroughly understanding its structure is extremely helpful for writing the body of your K99/Outstanding Young Scholars application.</p>
+  </div>
+
+  <div class="hcard" style="border-color:#2E7D32;background:#F3FBF4">
+    <h3>🧭 Six-Step Method Overview (click each step to see how)</h3>
+    <ol class="hsteps">
+      <li><b>Step 1 · Clarify grant type</b> — Understand each grant's goals, eligibility (especially nationality), length requirements, and priority → see "① Grant Type Comparison Table" below.</li>
+      <li><b>Step 2 · Find official guidelines</b> — FOA/NOFO has the highest priority, followed by SF424 Guide, Format Pages, NSF PAPPG → see "② Official Resource Navigation + Where to Download Templates".</li>
+      <li><b>Step 3 · Search for successful examples</b> — NIAID/NIDCD/NIA Sample Applications + search NIH RePORTER by keyword for funded projects → see "③ Where to Find Successful Examples".</li>
+      <li><b>Step 4 · Break down into reusable templates</b> — Borrow the <b>structure and logic</b>, not the content; break down Specific Aims/Significance/Innovation/Approach section by section → see "④ Section-by-Section Writing Templates".</li>
+      <li><b>Step 5 · Build a corpus</b> — Systematically collect high-quality sentence patterns, categorized by function/tone, for easy retrieval and reuse → see "⑤ Corpus Building Plan".</li>
+      <li><b>Step 6 · Update in real time</b> — Monitor the NIH Guide/policy notices, verify example dates, use your institution's Sponsored Programs Office → see "⑥ Information Update Mechanism".</li>
+    </ol>
+  </div>
+
+  <div class="hcard">
+    <h3>① Grant Type Comparison Table (from a postdoc's perspective)</h3>
+    <table class="htab">
+      <tr><th>Type</th><th>Core Goal</th><th>Key Eligibility (esp. nationality)</th><th>Duration / Amount (approx.)</th><th>Priority for you</th></tr>
+      <tr><td><b>NIH K99/R00</b><br>(PAR-25-135)</td><td>Postdoc→independent faculty transition: 2 years of mentored K99 stage, 3 years of independent R00 launch stage</td><td><b>Open to non-US citizens</b>; requires a US institution; postdoc experience usually ≤4 years (verify with the current year's NOFO)</td><td>K99 ~2 years + R00 ~3 years; R00 approx. $249K/year direct costs</td><td style="background:#E8F5E9"><b>★★★ Top priority</b>—the only pathway a postdoc can apply for directly, regardless of nationality</td></tr>
+      <tr><td><b>NIH F32</b></td><td>An individual fellowship providing in-depth research training for postdocs</td><td><b>Usually requires US citizenship / permanent residency</b> (check Eligibility for each specific program)</td><td>1–3 years; includes stipend + partial research funds</td><td>★ Nationality is largely a hard barrier — consider only if your status qualifies</td></tr>
+      <tr><td><b>NIH R01</b></td><td>A mature research project led by an independent investigator (the "gold standard")</td><td>Generally applied for by <b>faculty/independent investigators</b>; postdocs cannot serve as PI</td><td>4–5 years; $250K+/year direct costs common</td><td>◐ Not applying now, but <b>thoroughly understanding the structure</b> is useful for writing the research plan for K99/Outstanding Young Scholars</td></tr>
+      <tr><td><b>Overseas Outstanding Young Scholars</b><br>(NSFC)</td><td>Attracting outstanding young overseas scholars to return and build labs in China</td><td>Chinese or English; requires <b>signing an employment contract/letter of intent</b> with a domestic host institution; age/degree-year limits (verify with the current year's notice)</td><td>3 years; approx. RMB 1–3 million</td><td style="background:#E8F5E9"><b>★★★ Main pathway for returning to China</b>—opens around April each year</td></tr>
+      <tr><td><b>RGC ECS</b><br>(Hong Kong)</td><td>Funds early-career scholars who have just started their appointments</td><td>Requires <b>already being an assistant professor (within 3 years of appointment)</b>—must first land a position at a Hong Kong institution</td><td>≤60 months; ≤HK$2M</td><td>★★ Primary option if landing in Hong Kong</td></tr>
+      <tr><td><b>NRF Fellowship</b><br>(Singapore)</td><td>Attracts young scientists to build independent labs in Singapore</td><td>Tied to a <b>tenure-track</b> faculty position at a host institution; open to all science and technology fields</td><td>5 years; research funding ≤SGD 3.25M</td><td>★★ Primary option if landing in Singapore</td></tr>
+    </table>
+    <p class="hnote">Eligibility/duration limits/amounts <b>are subject to the current year's official NOFO/notice</b> (they change annually). The K99 postdoc-year limit and the Outstanding Young Scholars age cap especially need to be verified before submission.</p>
+  </div>
+
+  <div class="hcard">
+    <h3>② Official Resource Navigation + Where to Download Templates</h3>
+    <p class="hnote">Iron rule of priority: <b>specific funding announcement (FOA/NOFO) &gt; general application guide (SF424/PAPPG) &gt; other sources</b>. The length/eligibility/budget rules written in the announcement <b>supersede</b> the general guide.</p>
+    <table class="htab">
+      <tr><th>Grant</th><th>Must-Read Official Documents</th><th>Key Sections</th><th>Length Limit (approx.)</th><th>Key Thresholds</th></tr>
+      <tr><td><b>Overseas Outstanding Young Scholars</b><br>(NSFC)</td><td>Log in to <b>grants.nsfc.gov.cn</b> → create a new "Excellent Young Scientists Fund Project (Overseas)" → the system provides its own <b>"Writing Outline"</b> and submission instructions</td><td>Research background and significance · Research foundation (CV + representative publications) · Proposed work (goals/content/plan/key scientific questions) · Working conditions</td><td>Per the system's writing outline; <b>Chinese or English</b></td><td>Requires <b>signing an employment contract/letter of intent</b> with a domestic host institution; opens around April each year</td></tr>
+      <tr><td><b>NIH K99/R00</b><br>(PAR-25-135)</td><td><b>SF424 (R&amp;R) Application Guide</b> Part 7 (K-series specific) + NOFO text; NIH <b>Format Pages</b> (official Biosketch/Other Support templates); <b>SciENcv</b> to generate CVs</td><td>Specific Aims · Candidate Info &amp; Career Development · Research Strategy (Significance/Innovation/Approach) · RCR · mentor/collaborator letters</td><td>Aims <b>1 page</b>; Candidate+Strategy <b>12 pages combined</b>; RCR 1 page; mentor letter 6 pages; institutional environment/commitment 1 page each</td><td>Requires a US institution + within the eligibility window; <b>3–5 letters of recommendation</b>; plan must cover both K99 and R00 stages</td></tr>
+      <tr><td><b>RGC ECS</b><br>(Hong Kong)</td><td><b>ugc.edu.hk/eng/rgc</b> → ECS application form + <b>Guidance Notes for GRF/ECS</b> (updated annually); submitted via the RGC electronic system</td><td>Research objectives · Background · Research plan · Existing facilities · Budget justification</td><td>Facilities <b>≤400 words</b>; project ≤HK$2M / ≤60 months</td><td>Requires <b>already being an assistant professor (within 3 years of appointment)</b></td></tr>
+      <tr><td><b>NRF Fellowship</b><br>(Singapore)</td><td>Submitted via <b>IGMS</b> (Integrated Grant Management System); NRF website grant call synopsis + information sheet</td><td>Research proposal · CV · Publication list · Registration form</td><td>System template; research funding ≤SGD 3.25M</td><td>Tied to a <b>tenure-track</b> faculty position at a host institution</td></tr>
+      <tr><td><b>NSF General</b></td><td><b>PAPPG</b> (Proposal &amp; Award Policies &amp; Procedures Guide)—NSF's "official handbook"; Preparing Your Proposal; CV via <b>SciENcv</b></td><td>Project Summary · Project Description · Various attachments</td><td>Per the current year's PAPPG version</td><td>Most programs require a US institutional PI</td></tr>
+    </table>
+    <p class="hnote">💡 I can't download the official template files that require login on your behalf, but if you copy and paste the <b>blank template / writing outline</b> from the system to me, I can fill it in field by field and write it section by section.</p>
+  </div>
+
+  <div class="hcard">
+    <h3>③ Where to Find Successful Examples (Sample Applications)</h3>
+    <p style="font-size:13.5px;line-height:1.7;margin:4px 0">The most effective way to learn grant writing is to read <b>full funded applications + summary review comments</b>. Multiple NIH institutes publicly share these:</p>
+    <ul class="hsteps">
+      <li><b>NIH central repository</b> — "Sample Applications &amp; More" aggregates links from multiple institutes.</li>
+      <li><b>NIAID</b> (National Institute of Allergy and Infectious Diseases) — the <b>most comprehensive</b> collection of examples, covering R01/R21/K/F series; the R01 examples are especially classic.</li>
+      <li><b>NIDCD</b> — provides R01 and other examples.</li>
+      <li><b>NIA</b> (National Institute on Aging) — has K99/R00 examples, including a <b>complete comparison of a first failed attempt vs. a subsequent successful one</b>, which is extremely instructive.</li>
+      <li><b>NIH RePORTER</b> — search <b>funded projects</b> using keywords from your field, read abstracts to learn topic selection and phrasing; you can try politely contacting the PI for a copy of the application.</li>
+      <li><b>Keyword search</b> — directly search "NIH K99 sample application", "NIH R01 sample [your field]".</li>
+    </ul>
+    <p class="hnote">⚠️ Correct usage: examples are "templates" for learning <b>structure, logic, and storytelling</b>, <b>not</b> objects to copy content from. Plagiarism will trigger similarity checks and academic misconduct flags.</p>
+  </div>
+
+  <div class="hcard">
+    <h3>④ Section-by-Section Writing Templates (centered on the Research Strategy for NIH K99/R00 / R01)</h3>
+
+    <p class="hnote">General skeleton: almost all research proposals follow this order</p>
+    <ol class="hsteps">
+      <li><b>Specific Aims / Research Objectives (most important, write this first)</b> — 1 paragraph of background introduction → key knowledge gap → central hypothesis → 2–3 Aims (one-sentence goal each) → 1 paragraph on "what we expect to learn and why it matters".</li>
+      <li><b>Significance</b> → <b>Innovation</b> → <b>Approach (the bulk of the length)</b> → <b>Timeline + Rigor</b>.</li>
+    </ol>
+    <p class="hnote">Your AMPK–TDMD proposal already follows this structure → adapting it for any other grant is essentially "reordering + reformatting + adjusting length", not writing from scratch.</p>
+
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-weight:700;color:#1565C0">▸ Expand: section-by-section breakdown of the four core sections (core question / writing goal / standard structure / tips &amp; common mistakes)</summary>
+      <table class="htab" style="margin-top:8px">
+        <tr><th>Section</th><th>Core Question</th><th>Writing Goal &amp; Standard Structure</th><th>Key Tips / Common Mistakes</th></tr>
+        <tr><td><b>Specific Aims</b><br>(1 page)</td><td>What problem are you solving? What's the central hypothesis? How is it broken into 2–3 independently achievable Aims?</td><td><b>Goal</b>: get reviewers to grasp "important + feasible + you can do it" within 60 seconds. <b>Structure</b>: ① 1–2 sentence background hook → ② field gap → ③ central hypothesis + rationale → ④ each Aim in turn (start with a verb: Determine/Define/Test) → ⑤ closing: expected impact and outputs.</td><td>✅ Each Aim understandable in one sentence; Aims are <b>independent</b> of each other yet unified under one hypothesis.<br>❌ Aim 2 depends on Aim 1 succeeding; vague hypothesis; treating "methods" as "goals"; information overload.</td></tr>
+        <tr><td><b>Significance</b></td><td>Why does this problem matter? What happens if it isn't solved? What knowledge/clinical gap does it fill?</td><td><b>Goal</b>: prove it's "worth funding". <b>Structure</b>: ① the scientific/clinical weight of the problem → ② limitations of current understanding → ③ how your work will advance the field/change practice.</td><td>✅ Use your <b>disease models (T2D/fibrosis)</b> to amplify the significance; cite authoritative literature.<br>❌ Vaguely claiming it's "very important" without evidence; conflating with Innovation.</td></tr>
+        <tr><td><b>Innovation</b></td><td>What's "new" about your idea/approach? Is it conceptually new or technically new?</td><td><b>Goal</b>: highlight the distinction from existing approaches. <b>Structure</b>: ① conceptual innovation (<b>metabolic control of miRNA decay</b>, rather than the classical generative view) → ② technical innovation (<b>base/prime editing, organoids</b>) → ③ why no one has succeeded at this before.</td><td>✅ Clearly contrast "conventional approach vs. your approach".<br>❌ Treating "first time done in a certain species" as innovation; treating "using a new kit" as conceptual innovation.</td></tr>
+        <tr><td><b>Approach</b><br>(bulk of the proposal)</td><td>How exactly will each Aim be carried out? How will data be interpreted? What if problems arise?</td><td><b>Goal</b>: convince reviewers it's "achievable". <b>Five-part structure for each Aim</b>: ① Rationale → ② Preliminary Data (your PSSM scoring/GPS predictions/first-author evidence) → ③ Experimental Design → ④ Expected Outcomes → ⑤ Pitfalls &amp; Alternatives.</td><td>✅ Let preliminary data figures speak for themselves; clearly state <b>positive controls, sample size, sex and other biological variables</b> (Rigor).<br>❌ Having a plan with no alternatives; piling up methods without logic; lacking evidence of feasibility.</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <div class="hcard">
+    <h3>⑤ Corpus Building Plan (accumulating reusable high-quality sentence patterns)</h3>
+    <p style="font-size:13.5px;line-height:1.7;margin:4px 0"><b>Sources</b>: ① Significance/Innovation sections of successful examples · ② NIH official Sample Language · ③ introductions/discussions of high-impact papers · ④ funded applications from your mentor and colleagues (text that has been battle-tested in real review is the most valuable).</p>
+    <p style="font-size:13.5px;line-height:1.7;margin:4px 0"><b>Categorization</b>: by <b>function</b>—opening hook / gap statement / goal statement / innovation statement / method description / limitations & alternatives; by <b>tone</b>—confident statement / cautious speculation / emphasis on urgency.</p>
+    <p style="font-size:13.5px;line-height:1.7;margin:4px 0"><b>Management &amp; retrieval</b>: build a table (function | tone | sentence pattern | source | notes), or just drop the material into this project's artifacts, and I'll help you retrieve, imitate, and adapt it to your own project's terminology by tag.</p>
+  </div>
+
+  <div class="hcard">
+    <h3>⑥ Information Update Mechanism (don't use outdated templates)</h3>
+    <ul class="hsteps">
+      <li><b>NIH Guide for Grants &amp; Contracts</b> — the official release channel for all policy changes / new announcements; check regularly.</li>
+      <li><b>NIH Notices of Policy Changes</b> — pay special attention, e.g. the <b>Data Management and Sharing (DMS) policy effective since 2023-01-25</b>—earlier examples may not include this section.</li>
+      <li><b>Check dates</b> — before using any example/template, check its submission date first; older examples may follow a format that's no longer valid.</li>
+      <li><b>Your institution's Sponsored Programs Office (MSKCC)</b> — the most up-to-date and accurate first-hand information and internal deadlines; always ask them first.</li>
+    </ul>
+  </div>
+
+  <div class="hcard">
+    <h3>📋 Drafting Prompts (copy → new conversation with Claude Science)</h3>
+
+    <p class="hnote">① Overseas Outstanding Young Scholars — fitting the flagship proposal into the NSFC writing outline</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>我要申请国家自然科学基金优秀青年科学基金项目(海外)。请调用本项目 artifacts 里我的
+AMPK–TDMD 旗舰提案(proposal_zh.md / proposal_AMPK_TDMD.md),按 NSFC《优青(海外)撰写提纲》
+的结构改写成中文申请书正文草稿,分节:
+(一)研究背景与科学意义;(二)研究基础(结合我 7 篇一作代表作 + 现有 PSSM/GPS 预实验);
+(三)拟开展的研究工作(总体目标、研究内容、研究方案、拟解决的关键科学问题);(四)工作条件。
+要求:面向评审通俗有力、突出"代谢控制 miRNA 衰变"的原创性与我的疾病模型护城河;
+每节标注还需我补充的材料(依托单位、经费、附件)。</pre>
+    </div>
+
+    <p class="hnote">② NIH K99/R00 — Specific Aims + Research Strategy (two stages)</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>我要申请 NIH K99/R00(PAR-25-135)。请用本项目 artifacts 里我的 AMPK–TDMD 提案,产出英文草稿:
+1. Specific Aims(严格 1 页):背景→缺口→中心假说→3 个 Aim,并标注哪些 Aim 在 K99 阶段(前 2 年
+   导师指导下完成)、哪些延伸到 R00 独立阶段,结尾点明对建立独立实验室的意义。
+2. Research Strategy 提纲:Significance / Innovation / Approach,每个 Aim 含 rationale、
+   preliminary data、design、expected outcomes、pitfalls & alternatives,并说明 K99 如何逻辑
+   过渡到 R00。
+3. 另列 Candidate Info & Career Development 要点(我要在 K99 学的 3–5 项技能 + 如何学)。
+遵守篇幅:Aims 1 页;Candidate+Strategy 合计 12 页。RCR、导师信、机构承诺另附,先给我清单。</pre>
+    </div>
+
+    <p class="hnote">③ RGC ECS (Hong Kong) / NRF Fellowship (Singapore) — from an independent PI perspective</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>我要申请 香港 RGC ECS(或 新加坡 NRF Fellowship)。请用本项目 artifacts 里我的 AMPK–TDMD 提案,
+改写成英文研究计划草稿,并特别做到:
+- 明确"我正在超越导师的课题、开辟独立研究方向"(评审最看重这点);
+- 一个清晰的科学问题 + 可行工作计划 + 可信的高影响产出路径;
+- ECS:控制在 ≤HK$2M/≤60 月 的体量,单列"现有设施"一段(≤400 词);
+- NRF:突出面向新加坡东道机构的独立建组愿景。
+先给我正文草稿 + 一份"还需准备的材料/门槛"清单(如落地机构、CV、论文列表)。</pre>
+    </div>
+
+    <p class="hnote">④ General Polishing — sentence-by-sentence critique of Specific Aims + mock review</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>这是我的 Specific Aims 草稿(粘在下面 / 见附件)。请扮演该基金的评审专家:
+1. 逐段指出哪里"卖点不够、假说不清、可行性存疑、创新性没讲透";
+2. 检查 3 个 Aim 是否相互独立又统一在一个中心假说下(避免 Aim2 依赖 Aim1 成功);
+3. 给出 3 条最能提高评分的修改建议,并示范改写开头段与假说句;
+4. 用该基金的评分维度(意义/创新/方案/申请人)各打分并说明扣分点。
+基金类型:____。我的护城河:代谢/AMPK 信号 + 疾病模型 + 编辑技术 + 类器官。
+
+[在此粘贴你的草稿]</pre>
+    </div>
+
+    <p class="hnote">⑤ Example Deconstruction — breaking down a funded example into a reusable structural template</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>下面(或附件)是一份获批的 NIH/NSF 申请范例。请把它解构成一份"可套用的结构模板":
+1. 逐节列出它的段落骨架(每段一句话概括功能:钩子/缺口/假说/依据/设计/预期/风险);
+2. 标出作者是怎么"讲故事"把复杂想法讲清楚的(过渡句、逻辑连接词、强调手法);
+3. 提炼出 5–10 个可直接改写复用的高质量句式(注明用在哪一节);
+4. 最后给我一张"空白模板"——每节留出提示,便于我填入自己的 AMPK–TDMD 内容。
+注意:只学结构与表达,不要照抄任何具体内容。</pre>
+    </div>
+
+    <p class="hnote">⑥ Corpus — batch-extracting sentence patterns from examples/papers and cataloging them</p>
+    <div class="promptbox">
+      <button class="copybtn" onclick="cp(this)">📋 复制</button>
+      <pre>请帮我建"基金写作语料库"。素材见下方/附件(范例段落 + 我领域的高影响力论文引言)。请:
+1. 抽取其中高质量、可复用的句式;
+2. 每条打两类标签——功能(开场钩子/领域空白/目标陈述/创新表述/方法描述/局限与备选)
+   与语气(自信陈述/谨慎推测/强调紧迫性);
+3. 输出成一张表:功能 | 语气 | 句式(挖空成模板) | 出处 | 适用基金;
+4. 存成 Excel 到本项目 artifacts,方便我以后按标签检索。</pre>
+    </div>
+  </div>
+
+  <div class="hcard">
+    <h3>🔗 Official Authoritative Links</h3>
+    <ul class="hsteps">
+      <li>Overseas Outstanding Young Scholars (NSFC): <b>grants.nsfc.gov.cn</b> · guidelines nsfc.gov.cn</li>
+      <li>NIH application main portal: <b>grants.nih.gov</b> → How to Apply / Write Application (SF424 Guide + Page Limits + Format Pages)</li>
+      <li>NIH K99/R00: NOFO <b>PAR-25-135</b>; examples from NIAID / NIA "Sample Applications"; funded projects via <b>NIH RePORTER</b></li>
+      <li>NSF: <b>PAPPG</b> (nsf.gov) · CV via <b>SciENcv</b> (ncbi.nlm.nih.gov/sciencv)</li>
+      <li>RGC GRF/ECS: <b>ugc.edu.hk/eng/rgc/funding_opport</b> (Guidance Notes)</li>
+      <li>NRF Fellowship: <b>nrf.gov.sg</b> · submission system IGMS</li>
+    </ul>
+    <p class="hnote">💡 I (Claude Science) can't download the official template files that require login on your behalf, but if you copy and paste the blank template/writing outline from the system to me, I can fill it in field by field and write it section by section.</p>
+  </div>
+  </div>
 </div>
 
 <footer>
@@ -570,6 +884,14 @@ AMPK–TDMD 旗舰提案(proposal_zh.md / proposal_AMPK_TDMD.md),按 NSFC《优�
 
 <script>
 let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
+function setLang(l){
+  document.querySelectorAll('.lang-zh').forEach(function(e){e.style.display=(l==='en'?'none':'');});
+  document.querySelectorAll('.lang-en').forEach(function(e){e.style.display=(l==='en'?'':'none');});
+  document.querySelectorAll('.langbtn').forEach(function(b){b.classList.toggle('active',b.dataset.l===l);});
+  try{localStorage.setItem('pg_lang',l);}catch(e){}
+}
+try{setLang(localStorage.getItem('pg_lang')||'zh');}catch(e){}
+
 function atagClass(t){
   if(t.includes("PI")||t.includes("教职"))return"pi";
   if(t.includes("博后")||t.includes("早期"))return"postdoc";
