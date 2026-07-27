@@ -48,6 +48,12 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .searchbar{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:12px}
 .searchbar input[type=text]{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:8px;font-size:14px}
 .srow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.fbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin:8px 0 10px}
+.fbar input[type=text]{flex:1;min-width:190px;padding:7px 10px;border:1px solid #cbd3e1;border-radius:8px;font-size:13px;font-family:inherit}
+.fbar select{padding:6px 9px;border:1px solid #cbd3e1;border-radius:8px;font-size:12.5px;background:#fff;font-family:inherit}
+.fbar label{font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.fbar .rst{padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:12.5px;font-family:inherit}
+.fbar .rst:hover{background:#F3E5F5;border-color:#4A148C}
 .srow select{padding:8px;border:1px solid var(--line);border-radius:8px;font-size:12.5px;background:#fff}
 .status{font-size:12.5px;color:var(--muted);margin:2px 2px 10px}
 .snapbar{background:#FFF7E6;border:1px solid #F0D999;border-radius:8px;padding:8px 12px;font-size:12px;color:#7A5B00;margin-bottom:12px}
@@ -243,6 +249,9 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <select id="celig"><option value="">资格(全部)</option><option value="✅">✅ 可申</option><option value="⚠️">⚠️ 边界</option><option value="❌">❌ 过窗口</option></select>
       <select id="csrc"><option value="">来源(全部)</option><option value="pivot">Pivot-RP</option><option value="curated">手工策展</option></select>
       <select id="cwho"><option value="">谁能申(全部)</option><option value="博后">博后/早期</option><option value="独立PI">独立PI/教职</option><option value="研究生">研究生/博士生</option><option value="资深">中期-资深</option></select>
+      <select id="cregSel"><option value="">地区(全部)</option></select>
+      <select id="csort"><option value="fit">排序:契合度优先</option><option value="name">排序:项目名 A→Z</option><option value="funder">排序:资助机构 A→Z</option></select>
+      <button class="rst" id="cRst">↺ 重置</button>
     </div>
   </div>
   <div class="status" id="curStatus"></div>
@@ -251,8 +260,17 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <!-- WHATS NEW -->
 <div class="panel" id="whatsnew">
-  <div class="honest">🔄 每日自动对比昨天的快照:<b>新增</b>的机会、<b>截止日期或金额变动</b>的机会都会列在这里。这替代了"邮件周报"(静态网站无邮件服务器)——把本页加书签,每天扫一眼即可。</div>
-  <div class="status" id="chgStatus"></div>
+  <div class="honest">🔄 每日自动对比昨天的快照:<b>新增</b>的机会、<b>截止日期或金额变动</b>的机会都会列在这里。这替代了"邮件周报"(静态网站无邮件服务器)——把本页加书签,每天扫一眼即可。<br>⚠️ <b>诚实说明:</b>变更列表来自 Grants.gov 全库,<b>大部分与你方向无关</b>。下面的筛选条默认<b>只看与你研究相关</b>——相关度是把变更的项目号回连到联邦机会库取的(约 2/3 能对上,对不上的标「未知」)。</div>
+  <div class="fbar">
+    <input type="text" id="chgq" placeholder="🔍 搜标题 / 机构…">
+    <select id="chgKind"><option value="">类型(全部)</option><option value="new">🆕 仅新增</option><option value="updated">🔄 仅变更</option></select>
+    <select id="chgRel"><option value="mine">🎯 只看与我相关</option><option value="">相关度(全部)</option><option value="高">仅高</option><option value="中">仅中</option><option value="低">仅低</option><option value="unk">仅未知</option></select>
+    <select id="chgCareer"><option value="">资助阶段(全部)</option><option value="1">仅 career/早期机制</option></select>
+    <select id="chgAgency"><option value="">机构(全部)</option></select>
+    <select id="chgSort"><option value="rel">排序:相关度优先</option><option value="date">排序:日期新→旧</option><option value="title">排序:标题 A→Z</option></select>
+    <button class="rst" id="chgRst">↺ 重置</button>
+    <span class="status" id="chgStatus" style="margin:0"></span>
+  </div>
   <div id="chgList"></div>
 </div>
 
@@ -264,8 +282,16 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <a class="abtn tracked" href="webcal://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics" style="text-decoration:none">🔔 订阅日历(自动更新)</a>
     <a class="abtn" href="data/grant_deadlines.ics" download="资助截止日历.ics" style="text-decoration:none">📥 下载 .ics(静态)</a>
     <button class="abtn" id="copyIcs" onclick="navigator.clipboard.writeText('https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics').then(()=>{this.textContent='✅ 已复制订阅网址'})">📋 复制订阅网址</button>
-    <label style="font-size:13px;font-weight:700;cursor:pointer"><input type="checkbox" id="calOnlyMine" checked> ✅ 只看我能申的</label>
+  </div>
+  <div class="fbar">
+    <input type="text" id="calq" placeholder="🔍 搜项目 / 资助机构…">
+    <label><input type="checkbox" id="calOnlyMine" checked> ✅ 只看我能申</label>
     <select id="calRel"><option value="">相关度(全部)</option><option value="高">高</option><option value="中">中</option><option value="低">低</option></select>
+    <select id="calRegion"><option value="">地区(全部)</option></select>
+    <select id="calWin"><option value="">时间窗(全部)</option><option value="30">未来 30 天</option><option value="90">未来 90 天</option><option value="180">未来 180 天</option><option value="365">未来 1 年</option></select>
+    <select id="calSrc"><option value="">来源(全部)</option><option value="fed">仅联邦(确切日期)</option><option value="cur">仅精选(约期)</option></select>
+    <label><input type="checkbox" id="calHidePast" checked> 隐藏已过期</label>
+    <button class="rst" id="calRst">↺ 重置</button>
     <span class="status" id="calStatus" style="margin:0"></span>
   </div>
   <div id="calWrap"></div>
@@ -274,10 +300,21 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="panel" id="myapps">
   <div class="honest">🎯 本页<b>自动</b>把「联邦机会」+「各国 PI 资助」两个数据源,按你的<b>研究方向(miRNA/TDMD/代谢/AMPK/纤维化等)</b>和<b>身份资格(非美籍博后·MSKCC·≤40岁·7 篇一作)</b>筛一遍并分档。数据每日刷新时,本页<b>同步重算</b>——无需手动维护。判定为启发式,最终以各资助官方 NOFO 为准。</div>
   <div id="myBanner" class="calbanner" style="margin:10px 0"></div>
-  <div class="actions" style="margin:6px 0 12px;flex-wrap:wrap;gap:8px">
-    <label style="font-size:12.5px"><input type="checkbox" id="my_onlyopen" checked> 只看当前开放/常开</label>
-    <label style="font-size:12.5px"><input type="checkbox" id="my_hidepi"> 隐藏「需独立 PI」的(你暂不符合)</label>
-    <input id="myq" placeholder="🔍 再过滤(标题/机构/方向)…" style="flex:1;min-width:200px;padding:7px 10px;border:1px solid #cbd3e1;border-radius:8px;font-size:13px">
+  <div class="fbar">
+    <input type="text" id="myq" placeholder="🔍 搜标题 / 机构 / 方向关键词…">
+    <select id="myTier"><option value="">分档(全部)</option><option value="A">仅 🟢 A 档</option><option value="B">仅 🟠 B 档</option><option value="C">仅 🟣 C 档</option><option value="AB">A + B 档</option></select>
+    <select id="myRegion"><option value="">地区(全部)</option></select>
+    <select id="mySrc"><option value="">来源(全部)</option><option value="live">仅 Grants.gov</option><option value="curated">仅手工策展</option></select>
+    <select id="myWin"><option value="">截止窗(全部)</option><option value="30">30 天内</option><option value="60">60 天内</option><option value="90">90 天内</option><option value="roll">仅常开/滚动</option></select>
+    <select id="mySort"><option value="tier">排序:分档+匹配度</option><option value="days">排序:截止近→远</option><option value="score">排序:匹配度高→低</option></select>
+    <button class="rst" id="myRst">↺ 重置</button>
+  </div>
+  <div class="fbar" style="margin-top:-4px">
+    <label><input type="checkbox" id="my_onlyopen" checked> 只看当前开放/常开</label>
+    <label><input type="checkbox" id="my_hidepi"> 隐藏「需独立 PI」(你暂不符合)</label>
+    <label><input type="checkbox" id="my_onlyhit"> 只看命中我方向关键词的</label>
+    <label><input type="checkbox" id="my_onlytrk"> 只看已加入管线的</label>
+    <span style="flex:1"></span>
     <span class="status" id="myStatus" style="margin:0"></span>
   </div>
   <div id="myWrap"></div>
@@ -290,8 +327,15 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="chip lvl active" data-lvl="all">全部</span>
     <span class="chip lvl" data-lvl="faculty">🎓 教职 / PI</span>
     <span class="chip lvl" data-lvl="postdoc">🔬 博后 / 研究员</span>
-    <span style="flex:1"></span>
-    <input id="jobq" placeholder="🔍 搜标题 / 机构 / 关键词…" style="padding:6px 10px;border:1px solid var(--line);border-radius:8px;min-width:200px">
+  </div>
+  <div class="fbar">
+    <input type="text" id="jobq" placeholder="🔍 搜标题 / 机构 / 关键词…">
+    <select id="jobSrc"><option value="">来源(全部)</option><option value="jobRxiv">jobRxiv</option><option value="jobs.ac.uk">jobs.ac.uk</option><option value="Nature Careers">Nature Careers</option><option value="Science Careers">Science Careers</option></select>
+    <select id="jobFit"><option value="">契合度(全部)</option><option value="3">≥3 高度契合</option><option value="2">≥2 相关</option><option value="1">≥1 有关键词</option></select>
+    <select id="jobDays"><option value="">发布时间(全部)</option><option value="7">近 7 天</option><option value="30">近 30 天</option><option value="90">近 90 天</option></select>
+    <select id="jobSort"><option value="def">排序:教职优先+契合度</option><option value="score">排序:契合度高→低</option><option value="date">排序:发布新→旧</option><option value="org">排序:机构 A→Z</option></select>
+    <label><input type="checkbox" id="job_onlytrk"> 只看已关注</label>
+    <button class="rst" id="jobRst">↺ 重置</button>
   </div>
   <div class="actions" style="margin:0 0 6px" id="jobRegionChips"></div>
   <div class="status" id="jobStatus" style="margin:4px 0"></div>
@@ -304,17 +348,37 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="chip ifit active" data-ifit="">全部</span>
     <span class="chip ifit" data-ifit="5">⭐ 只看最契合</span>
   </div>
+  <div class="fbar">
+    <input type="text" id="instq" placeholder="🔍 搜院所名 / 备注(如 RNA、代谢、Group Leader)…">
+    <select id="instRegSel"><option value="">国家/地区(全部)</option></select>
+    <select id="instFitSel"><option value="">契合度(全部)</option><option value="5">仅 ★★★★★</option><option value="4">≥ ★★★★</option><option value="3">≥ ★★★</option></select>
+    <select id="instStatus"><option value="">链接状态(全部)</option><option value="verified">仅已核实</option><option value="entry">仅入口页(未核实)</option></select>
+    <select id="instSort"><option value="reg">排序:按地区分组</option><option value="fit">排序:契合度高→低</option><option value="name">排序:院所名 A→Z</option></select>
+    <label><input type="checkbox" id="inst_onlytrk"> 只看已关注</label>
+    <button class="rst" id="instRst">↺ 重置</button>
+    <span class="status" id="instStat" style="margin:0"></span>
+  </div>
   <div class="calbanner" id="instRegionChips" style="margin-bottom:12px"></div>
   <div id="instWrap"></div>
 
   <!-- ===== 领域招聘板 ===== -->
   <div class="tierhdr" style="background:#0D47A1;color:#fff">📌 领域招聘板 —— 建议常年盯着的几个站</div>
+  <div class="fbar">
+    <input type="text" id="boardq" placeholder="🔍 搜招聘板名 / 说明…">
+    <span class="status" id="boardStat" style="margin:0"></span>
+  </div>
   <div id="boardWrap"></div>
 </div>
 
 <div class="panel" id="pipeline">
   <div class="honest">📋 你点"关注"的项目进入这里管理。状态/笔记存在<b>本设备浏览器</b>。点"导出 CSV"可下载到你的申请追踪表。</div>
-  <div class="actions" style="margin-bottom:10px">
+  <div class="fbar">
+    <input type="text" id="pipeq" placeholder="🔍 搜项目 / 机构 / 笔记…">
+    <select id="pipeStat"><option value="">状态(全部)</option><option value="感兴趣">感兴趣</option><option value="起草中">起草中</option><option value="已提交">已提交</option><option value="已获奖">已获奖</option><option value="被拒">被拒</option></select>
+    <select id="pipeType"><option value="">类型(全部)</option><option value="grant">仅资助</option><option value="job">仅职位</option><option value="inst">仅院所</option></select>
+    <select id="pipeWin"><option value="">倒计时(全部)</option><option value="7">7 天内</option><option value="30">30 天内</option><option value="90">90 天内</option><option value="past">已过期</option><option value="roll">常年/滚动</option></select>
+    <select id="pipeSort"><option value="days">排序:截止近→远</option><option value="status">排序:按状态</option><option value="title">排序:项目名 A→Z</option></select>
+    <button class="rst" id="pipeRst">↺ 重置</button>
     <button class="abtn" id="exportCsv">⬇️ 导出 CSV</button>
     <span class="status" id="pipeStatus" style="margin:0"></span>
   </div>
@@ -1392,13 +1456,13 @@ function curMonths(txt){
 function buildCalEvents(){
   const now=new Date(),Y0=2026,Y1=2027,ev=[];
   LIVE.forEach(g=>{const dt=fedDate(g);if(!dt)return;if(dt.getFullYear()<Y0||dt.getFullYear()>Y1)return;
-    ev.push({dt,mine:isMine(g.apply),rel:g.rel||"低",title:g.title,agency:g.agency,region:"🇺🇸美国",
+    ev.push({dt,src:"fed",mine:isMine(g.apply),rel:g.rel||"低",title:g.title,agency:g.agency,region:"🇺🇸美国",
       apply:(g.apply||[]).join(" / "),amount:g.amount||"见官方",cycle:g.closeDate?"单次":"约"+g.days+"天后",
       exact:!!g.closeDate,url:g.url});});
   CURATED.forEach(c=>{const ms=curMonths(c.deadline);if(ms[0]==="roll"||ms[0]==="unk")return;
     const usOnly=/United States/.test(c.cite_req||"")&&!/临时签证/.test(c.cite_req||"");
     ms.forEach(mm=>[Y0,Y1].forEach(yr=>{const dt=new Date(yr,mm-1,15);if(dt<now)return;
-      ev.push({dt,mine:isMine(c.apply)&&!usOnly&&!/❌/.test(c.elig||""),rel:c.fit||"中",title:c.name,
+      ev.push({dt,src:"cur",mine:isMine(c.apply)&&!usOnly&&!/❌/.test(c.elig||""),rel:c.fit||"中",title:c.name,
         agency:c.funder,region:c.region,apply:(c.apply||[]).join(" / "),amount:c.amount||"",
         cycle:"每年约"+mm+"月(±2周)",exact:false,url:c.url});}));});
   ev.sort((a,b)=>a.dt-b.dt);return ev;
@@ -1409,7 +1473,28 @@ function renderCalendar(){
   const onlyMine=document.getElementById("calOnlyMine").checked;
   const relF=document.getElementById("calRel").value;
   const now=new Date();now.setHours(0,0,0,0);
-  let ev=CAL_EV.filter(e=>(!onlyMine||e.mine)&&(!relF||e.rel===relF));
+  // region dropdown, built once from event data
+  const rsel=document.getElementById("calRegion");
+  if(!rsel.dataset.built){
+    const cnt={};CAL_EV.forEach(e=>{if(e.region)cnt[e.region]=(cnt[e.region]||0)+1;});
+    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(r=>
+      rsel.insertAdjacentHTML("beforeend",`<option value="${r}">${r} (${cnt[r]})</option>`));
+    rsel.dataset.built="1";
+  }
+  const q=(document.getElementById("calq").value||"").toLowerCase();
+  const regF=rsel.value, srcF=document.getElementById("calSrc").value;
+  const winF=+document.getElementById("calWin").value||0;
+  const hidePast=document.getElementById("calHidePast").checked;
+  let ev=CAL_EV.filter(e=>{
+    if(onlyMine&&!e.mine)return false;
+    if(relF&&e.rel!==relF)return false;
+    if(regF&&e.region!==regF)return false;
+    if(srcF&&e.src!==srcF)return false;
+    const dd=(e.dt-now)/864e5;
+    if(hidePast&&dd<0)return false;
+    if(winF&&(dd<0||dd>winF))return false;
+    if(q&&!((e.title||"")+(e.agency||"")+(e.apply||"")).toLowerCase().includes(q))return false;
+    return true;});
   // banner KPIs
   const mine=ev.filter(e=>e.mine);
   const d30=ev.filter(e=>{const dd=(e.dt-now)/864e5;return dd>=0&&dd<=30;});
@@ -1443,8 +1528,14 @@ function renderCalendar(){
   });
   document.getElementById("calWrap").innerHTML=html||'<div class="honest">没有符合条件的事件。</div>';
 }
-document.getElementById("calOnlyMine").addEventListener("change",renderCalendar);
-document.getElementById("calRel").addEventListener("change",renderCalendar);
+["calOnlyMine","calRel","calRegion","calWin","calSrc","calHidePast","calq"].forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener(id==="calq"?"input":"change",renderCalendar);});
+document.getElementById("calRst").onclick=()=>{
+  document.getElementById("calq").value="";
+  ["calRel","calRegion","calWin","calSrc"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("calOnlyMine").checked=true;
+  document.getElementById("calHidePast").checked=true;renderCalendar();};
 
 /* ---------- tracker / pipeline ---------- */
 const TKEY="pi_grants_tracked";
@@ -1607,15 +1698,26 @@ function renderCurated(){
     regs.forEach(r=>mk(`${r} (${counts[r]})`,r));
     chipWrap.dataset.built="1";
   }
+  const crs=document.getElementById("cregSel");
+  if(!crs.dataset.built){
+    const cc={};CURATED.forEach(g=>cc[g.region]=(cc[g.region]||0)+1);
+    Object.keys(cc).sort((a,b)=>cc[b]-cc[a]).forEach(r=>
+      crs.insertAdjacentHTML("beforeend",`<option value="${r}">${r} (${cc[r]})</option>`));
+    crs.dataset.built="1";
+  }
+  const frg=crs.value, fso=document.getElementById("csort").value;
   let rows=CURATED.filter(g=>{
     if(CUR_REGION&&g.region!==CUR_REGION)return false;
+    if(frg&&g.region!==frg)return false;
     if(ff&&g.fit!==ff)return false;
     if(fe&&eligKey(g.elig)!==fe)return false;
     if(fs&&(g.source||"curated")!==fs)return false;
     if(fw&&!(g.apply||[]).some(t=>t.includes(fw)))return false;
     if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount+g.region).toLowerCase().includes(q))return false;
     return true;});
-  rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
+  if(fso==="name")rows.sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+  else if(fso==="funder")rows.sort((a,b)=>String(a.funder).localeCompare(String(b.funder))||fitRank[a.fit]-fitRank[b.fit]);
+  else rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
   document.getElementById("curStatus").innerHTML=`${rows.length} / ${CURATED.length} 个项目`;
   const cn=document.getElementById("curN");if(cn)cn.textContent=CURATED.length;
   // group by region
@@ -1645,21 +1747,87 @@ function renderCurated(){
   });
   if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配项目。</p>';
 }
-["cq","cfit","celig","csrc","cwho"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
+["cq","cfit","celig","csrc","cwho","cregSel","csort"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
+document.getElementById("cRst").onclick=()=>{
+  document.getElementById("cq").value="";
+  ["cfit","celig","csrc","cwho","cregSel"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("csort").value="fit";
+  CUR_REGION="";
+  const cw=document.getElementById("regionChips");
+  if(cw)cw.querySelectorAll(".qbtn").forEach((x,k)=>x.classList.toggle("on",k===0));
+  renderCurated();};
 
 /* ---------- render WHAT'S NEW ---------- */
+/* Enrich each change by joining its opportunity id back to the federal
+   library, so relevance / career-stage can be filtered. ~2/3 join; the
+   remainder are honestly labelled 未知 rather than silently scored. */
+let CHG_ENR=null;
+function enrichChanges(){
+  const byId={};(LIVE||[]).forEach(g=>{byId[String(g.id)]=g;});
+  return (CHANGES||[]).map(c=>{
+    const g=byId[String(c.id)];
+    const rs=researchScore((c.title||"")+" "+(c.agency||""));
+    return Object.assign({},c,{
+      rel:g?(g.rel||"低"):"unk", career:g?!!g.career:false,
+      amount:g?g.amount:"", days:g?g.days:null,
+      rscore:rs.s, hits:rs.hits, joined:!!g});
+  });
+}
 function renderChanges(){
   const list=document.getElementById("chgList");
-  document.getElementById("chgStatus").innerHTML=`最近 <b>${CHANGES.length}</b> 条变更`;
-  if(!CHANGES.length){list.innerHTML='<p style="color:var(--muted);padding:16px">暂无变更记录。系统从今天起每日对比,明天起这里会显示新增/改动的机会。</p>';return;}
-  list.innerHTML="";
-  CHANGES.forEach(c=>{const d=document.createElement("div");d.className="chg "+(c.kind==="new"?"new":"");
-    d.innerHTML=`<span class="k ${c.kind}">${c.kind==="new"?"🆕 新增":"🔄 更新"}</span>
+  if(!CHANGES.length){document.getElementById("chgStatus").textContent="暂无变更";
+    list.innerHTML='<p style="color:var(--muted);padding:16px">暂无变更记录。系统每日对比,明天起这里会显示新增/改动的机会。</p>';return;}
+  if(!CHG_ENR)CHG_ENR=enrichChanges();
+  // agency dropdown, built once, ordered by frequency
+  const asel=document.getElementById("chgAgency");
+  if(!asel.dataset.built){
+    const cnt={};CHG_ENR.forEach(c=>{if(c.agency)cnt[c.agency]=(cnt[c.agency]||0)+1;});
+    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(a=>{
+      asel.insertAdjacentHTML("beforeend",`<option value="${a.replace(/"/g,'&quot;')}">${a.length>42?a.slice(0,42)+"…":a} (${cnt[a]})</option>`);});
+    asel.dataset.built="1";
+  }
+  const q=(document.getElementById("chgq").value||"").toLowerCase();
+  const kind=document.getElementById("chgKind").value;
+  const rel=document.getElementById("chgRel").value;
+  const car=document.getElementById("chgCareer").value;
+  const ag=document.getElementById("chgAgency").value;
+  const sort=document.getElementById("chgSort").value;
+  let R=CHG_ENR.filter(c=>{
+    if(kind&&c.kind!==kind)return false;
+    if(rel==="mine"){if(!(c.rscore>0||c.rel==="高"||c.rel==="中"||c.career))return false;}
+    else if(rel&&c.rel!==rel)return false;
+    if(car&&!c.career)return false;
+    if(ag&&c.agency!==ag)return false;
+    if(q&&!((c.title||"")+(c.agency||"")+(c.detail||"")).toLowerCase().includes(q))return false;
+    return true;});
+  const RW={"高":3,"中":2,"低":1,"unk":0};
+  if(sort==="rel")R.sort((a,b)=>(b.rscore-a.rscore)||(RW[b.rel]-RW[a.rel])||(b.career-a.career));
+  else if(sort==="date")R.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
+  else R.sort((a,b)=>String(a.title||"").localeCompare(String(b.title||"")));
+  const nj=R.filter(c=>c.joined).length;
+  document.getElementById("chgStatus").innerHTML=
+    `共 <b>${CHG_ENR.length}</b> 条变更 → 当前筛出 <b>${R.length}</b> 条(${nj} 条已关联到机会库)`;
+  if(!R.length){list.innerHTML='<p style="color:var(--muted);padding:16px">该筛选下没有变更。把「相关度」放宽到「全部」或清空搜索。</p>';return;}
+  list.innerHTML=R.map(c=>{
+    const relTag=c.rel==="unk"?`<span class="mtag">相关度未知</span>`:`<span class="mtag ${c.rel==="高"?"hit":""}">相关度 ${c.rel}</span>`;
+    const carTag=c.career?`<span class="mtag hit">🎯 career/早期机制</span>`:"";
+    const hitTags=(c.hits||[]).map(h=>`<span class="mtag hit">🎯 ${h}</span>`).join("");
+    return `<div class="chg ${c.kind==="new"?"new":""}">
+      <span class="k ${c.kind}">${c.kind==="new"?"🆕 新增":"🔄 更新"}</span>
       <a href="${c.url}" target="_blank" style="font-weight:700;color:var(--dark)">${c.title}</a>
       <div style="color:var(--muted);margin-top:3px">${c.agency||""} · ${c.date||""}</div>
-      ${c.kind==="updated"?`<div style="margin-top:4px">${c.detail}</div>`:""}`;
-    list.appendChild(d);});
+      ${c.kind==="updated"?`<div style="margin-top:4px">${c.detail}</div>`:""}
+      <div class="mtags" style="margin-top:5px">${relTag}${carTag}${hitTags}</div>
+    </div>`;}).join("");
 }
+["chgq","chgKind","chgRel","chgCareer","chgAgency","chgSort"].forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener(id==="chgq"?"input":"change",renderChanges);});
+document.getElementById("chgRst").onclick=()=>{
+  document.getElementById("chgq").value="";
+  ["chgKind","chgCareer","chgAgency"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("chgRel").value="mine";
+  document.getElementById("chgSort").value="rel";renderChanges();};
 
 /* ---------- render PIPELINE ---------- */
 const STATUSES=["感兴趣","起草中","已提交","已获奖","被拒"];
@@ -1669,16 +1837,44 @@ function daysTo(close){
   return Math.round((new Date(+m[3],+m[1]-1,+m[2])-new Date())/864e5);
 }
 function renderPipeline(){
-  const t=getTracked();const keys=Object.keys(t);
+  const t=getTracked();const allKeys=Object.keys(t);
   const wrap=document.getElementById("pipeWrap");
-  document.getElementById("pipeStatus").textContent=`${keys.length} 个项目`;
-  if(!keys.length){wrap.innerHTML='<p style="color:var(--muted);padding:16px">还没有项目。去"联邦机会"或搜索后点 📌 加入管线。</p>';return;}
+  if(!allKeys.length){document.getElementById("pipeStatus").textContent="0 个项目";
+    wrap.innerHTML='<p style="color:var(--muted);padding:16px">还没有项目。去「联邦机会」/「学术职位」/「院所目录」点 📌 加入管线。</p>';return;}
+  const pq=(document.getElementById("pipeq").value||"").toLowerCase();
+  const pSt=document.getElementById("pipeStat").value;
+  const pTy=document.getElementById("pipeType").value;
+  const pWin=document.getElementById("pipeWin").value;
+  const pSort=document.getElementById("pipeSort").value;
+  const typeOf=k=>k.startsWith("job_")?"job":(k.startsWith("inst_")?"inst":"grant");
+  let keys=allKeys.filter(k=>{
+    const g=t[k];
+    if(pSt&&(g.status||"感兴趣")!==pSt)return false;
+    if(pTy&&typeOf(k)!==pTy)return false;
+    const dc=daysTo(g.close);
+    if(pWin==="roll"){if(dc!=null)return false;}
+    else if(pWin==="past"){if(dc==null||dc>=0)return false;}
+    else if(pWin){if(dc==null||dc<0||dc>+pWin)return false;}
+    if(pq&&!((g.title||"")+(g.agency||"")+(g.notes||"")).toLowerCase().includes(pq))return false;
+    return true;});
+  const SW={"感兴趣":0,"起草中":1,"已提交":2,"已获奖":3,"被拒":4};
+  if(pSort==="status")keys.sort((a,b)=>(SW[t[a].status]??9)-(SW[t[b].status]??9));
+  else if(pSort==="title")keys.sort((a,b)=>String(t[a].title||"").localeCompare(String(t[b].title||"")));
+  else keys.sort((a,b)=>{const x=daysTo(t[a].close),y=daysTo(t[b].close);
+    return (x==null?9999:x)-(y==null?9999:y);});
+  document.getElementById("pipeStatus").innerHTML=`共 <b>${allKeys.length}</b> 个 → 筛出 <b>${keys.length}</b> 个`;
+  if(!keys.length){wrap.innerHTML='<p style="color:var(--muted);padding:16px">该筛选下没有项目。点「↺ 重置」。</p>';return;}
   let html=`<table class="pipe"><tr><th>项目</th><th>状态</th><th>截止倒计时</th><th>MSKCC 内部笔记</th><th></th></tr>`;
   keys.forEach(id=>{const g=t[id];const dc=daysTo(g.close);
     const cd=dc==null?"—":(dc<0?`已过 ${-dc} 天`:`${dc} 天`);
     const col=dc==null?"#556":(dc<0?"#999":dc<=7?"var(--red)":dc<=30?"#E67E22":"var(--green)");
     html+=`<tr>
-      <td><a href="${g.url}" target="_blank" style="font-weight:700;color:var(--dark)">${g.title}</a><div style="color:var(--muted);font-size:11px">${g.agency||""}</div></td>
+      <td><a href="${g.url}" target="_blank" style="font-weight:700;color:var(--dark)">${g.title}</a>
+        <div style="color:var(--muted);font-size:11px">${g.agency||""} ${
+          {grant:'<span class="jlvl fac" style="font-size:10px">💰 资助</span>',
+           job:'<span class="jlvl pd" style="font-size:10px">🎓 职位</span>',
+           inst:'<span class="jlvl fac" style="font-size:10px;background:#00695C">🏛️ 院所</span>'}[typeOf(id)]
+        }</div></td>
       <td><select data-id="${id}" class="pstat">${STATUSES.map(s=>`<option ${g.status===s?"selected":""}>${s}</option>`).join("")}</select></td>
       <td class="countdown" style="color:${col}">${cd}</td>
       <td><textarea data-id="${id}" class="pnote" placeholder="如:等待 FDT 反馈…">${g.notes||""}</textarea></td>
@@ -1688,6 +1884,13 @@ function renderPipeline(){
   wrap.querySelectorAll(".pnote").forEach(n=>n.onchange=e=>{const o=getTracked();o[e.target.dataset.id].notes=e.target.value;setTracked(o);});
   wrap.querySelectorAll(".premove").forEach(b=>b.onclick=e=>{const o=getTracked();delete o[e.target.dataset.id];setTracked(o);renderPipeline();});
 }
+["pipeStat","pipeType","pipeWin","pipeSort"].forEach(id=>
+  document.getElementById(id).addEventListener("change",renderPipeline));
+document.getElementById("pipeq").addEventListener("input",renderPipeline);
+document.getElementById("pipeRst").onclick=()=>{
+  document.getElementById("pipeq").value="";
+  ["pipeStat","pipeType","pipeWin"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("pipeSort").value="days";renderPipeline();};
 document.getElementById("exportCsv").onclick=()=>{
   const t=getTracked();const keys=Object.keys(t);
   if(!keys.length){alert("管线为空。");return;}
@@ -1889,9 +2092,20 @@ function renderJobs(){
     document.querySelectorAll("#jobs .chip.lvl").forEach(c=>c.onclick=()=>{document.querySelectorAll("#jobs .chip.lvl").forEach(x=>x.classList.remove("active"));c.classList.add("active");JOB_LVL=c.dataset.lvl;renderJobs();});
   }
   const q=(document.getElementById("jobq").value||"").toLowerCase();
+  const srcF=document.getElementById("jobSrc").value;
+  const fitF=+document.getElementById("jobFit").value||0;
+  const dayF=+document.getElementById("jobDays").value||0;
+  const sortF=document.getElementById("jobSort").value;
+  const onlyTrk=document.getElementById("job_onlytrk").checked;
+  const trkNow=getTracked();
+  const nowMs=Date.now();
   let R=JOBS.filter(j=>{
     if(JOB_LVL!=="all"&&j.level!==JOB_LVL)return false;
     if(JOB_REGION&&j.region!==JOB_REGION)return false;
+    if(srcF&&j.src!==srcF)return false;
+    if(fitF&&(j.score||0)<fitF)return false;
+    if(onlyTrk&&!trkNow["job_"+(j.url||j.title).slice(0,40)])return false;
+    if(dayF){const t=Date.parse(j.date||"");if(isNaN(t)||(nowMs-t)/864e5>dayF)return false;}
     if(q&&!((j.title||"")+(j.company||"")+(j.hits||[]).join(" ")+(j.desc||"")).toLowerCase().includes(q))return false;
     return true;});
   const nf=R.filter(j=>j.level==="faculty").length, np=R.length-nf;
@@ -1902,9 +2116,14 @@ function renderJobs(){
     `<div class="kpi k90"><b>${np}</b>博后 / 研究员</div>`+
     `<div class="kpi kmine"><b>${hi}</b>🎯 高度契合(≥3)</div>`;
   document.getElementById("jobN").textContent=nf;
-  document.getElementById("jobStatus").textContent=`来源 jobRxiv (${JOBMETA.n_jobrxiv||0}) + jobs.ac.uk (${JOBMETA.n_uk||0}) · 最后刷新 ${JOBMETA.updated||"?"} · 当前筛选 ${R.length} 个`;
+  const bs=JOBMETA.by_src||{};
+  const srcTxt=Object.keys(bs).length?Object.keys(bs).map(k=>`${k} (${bs[k]})`).join(" + "):"—";
+  document.getElementById("jobStatus").textContent=`来源 ${srcTxt} · 共 ${JOBMETA.count||JOBS.length} 条 · 最后刷新 ${JOBMETA.updated||"?"} · 当前筛出 ${R.length} 个`;
   const tracked=getTracked();
-  R=R.sort((a,b)=>(a.level==="faculty"?0:1)-(b.level==="faculty"?0:1)||b.score-a.score);
+  if(sortF==="score")R=R.sort((a,b)=>b.score-a.score);
+  else if(sortF==="date")R=R.sort((a,b)=>(Date.parse(b.date||"")||0)-(Date.parse(a.date||"")||0));
+  else if(sortF==="org")R=R.sort((a,b)=>String(a.company||"").localeCompare(String(b.company||"")));
+  else R=R.sort((a,b)=>(a.level==="faculty"?0:1)-(b.level==="faculty"?0:1)||b.score-a.score);
   let html="";
   R.forEach(j=>{
     const isT=!!tracked["job_"+(j.url||j.title).slice(0,40)];
@@ -1933,6 +2152,17 @@ function renderJobs(){
   wrap.innerHTML=html||'<p style="color:var(--muted);padding:16px">没有匹配。放宽级别/地区筛选或清空搜索。</p>';
 }
 document.getElementById("jobq").addEventListener("input",renderJobs);
+["jobSrc","jobFit","jobDays","jobSort","job_onlytrk"].forEach(id=>
+  document.getElementById(id).addEventListener("change",renderJobs));
+document.getElementById("jobRst").onclick=()=>{
+  document.getElementById("jobq").value="";
+  ["jobSrc","jobFit","jobDays"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("jobSort").value="def";
+  document.getElementById("job_onlytrk").checked=false;
+  JOB_LVL="all";JOB_REGION="";
+  document.querySelectorAll("#jobs .chip.lvl").forEach(x=>x.classList.toggle("active",x.dataset.lvl==="all"));
+  document.querySelectorAll("#jobs .chip.rg").forEach(x=>x.classList.toggle("active",x.dataset.rg===""));
+  renderJobs();};
 
 /* ---------- TOP 院所直投目录 + 领域招聘板 ---------- */
 function instTrack(idx){
@@ -1943,6 +2173,25 @@ function instTrack(idx){
               amount:"教职直投",status:"感兴趣",
               notes:"契合 "+i.fit+"/5 · "+i.note};
   setTracked(t);renderInsts();
+}
+function instCard(i,idx,TRK){
+  const stars="★".repeat(i.fit)+"☆".repeat(5-i.fit);
+  const vb=i.status==="verified"
+    ? `<span class="jlvl fac" title="本次已核实为招聘/申请页">✓ 已核实</span>`
+    : `<span class="jlvl pd" title="院所主招聘入口,未逐一核实;若失效点右侧「搜索」">入口页</span>`;
+  return `<div class="card mrow" style="padding:10px 13px">
+    <div class="top">
+      <span class="name"><a href="${i.url}" target="_blank">${i.name}</a></span>
+      <span class="msc" title="与你研究方向的契合度">${stars}</span>
+      ${vb}
+    </div>
+    <div class="funder" style="margin:2px 0 5px">${i.note}</div>
+    <div class="actions" style="margin:0">
+      <a class="abtn" href="${i.url}" target="_blank">🏛️ 招聘页</a>
+      <a class="abtn" href="${i.fallback}" target="_blank">🔍 搜索(链接失效时用)</a>
+      <span class="abtn" style="cursor:pointer" onclick="instTrack(${idx})">${TRK["inst_"+i.name]?"✅ 已关注":"➕ 关注"}</span>
+    </div>
+  </div>`;
 }
 function renderInsts(){
   const wrap=document.getElementById("instWrap");
@@ -1960,41 +2209,69 @@ function renderInsts(){
     document.querySelectorAll("#jobs .chip.ifit").forEach(c=>c.onclick=()=>{document.querySelectorAll("#jobs .chip.ifit").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_FIT=c.dataset.ifit;renderInsts();});
   }
   const TRK=getTracked();
-  let R=INSTS.filter(i=>(!INST_REGION||i.region===INST_REGION)&&(!INST_FIT||i.fit>=+INST_FIT));
+  const rsel=document.getElementById("instRegSel");
+  if(!rsel.dataset.built){
+    const cnt={};INSTS.forEach(i=>{cnt[i.region]=(cnt[i.region]||0)+1;});
+    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(r=>
+      rsel.insertAdjacentHTML("beforeend",`<option value="${r}">${r} (${cnt[r]})</option>`));
+    rsel.dataset.built="1";
+  }
+  const iq=(document.getElementById("instq").value||"").toLowerCase();
+  const regSel=rsel.value;
+  const fitSel=+document.getElementById("instFitSel").value||0;
+  const stSel=document.getElementById("instStatus").value;
+  const iSort=document.getElementById("instSort").value;
+  const iTrk=document.getElementById("inst_onlytrk").checked;
+  let R=INSTS.filter(i=>{
+    if(INST_REGION&&i.region!==INST_REGION)return false;
+    if(INST_FIT&&i.fit<+INST_FIT)return false;
+    if(regSel&&i.region!==regSel)return false;
+    if(fitSel&&i.fit<fitSel)return false;
+    if(stSel==="verified"&&i.status!=="verified")return false;
+    if(stSel==="entry"&&i.status==="verified")return false;
+    if(iTrk&&!TRK["inst_"+i.name])return false;
+    if(iq&&!((i.name||"")+(i.note||"")+(i.region||"")).toLowerCase().includes(iq))return false;
+    return true;});
+  document.getElementById("instStat").innerHTML=`筛出 <b>${R.length}</b> / ${INSTS.length} 家`;
+  if(iSort!=="reg"){
+    const S=R.slice();
+    if(iSort==="fit")S.sort((a,b)=>b.fit-a.fit||a.name.localeCompare(b.name));
+    else S.sort((a,b)=>a.name.localeCompare(b.name));
+    wrap.innerHTML=S.length?S.map(i=>instCard(i,INSTS.indexOf(i),TRK)).join(""):
+      '<p style="color:var(--muted);padding:16px">该筛选下没有院所。点「↺ 重置」。</p>';
+    return;
+  }
   // group by region; regions with more entries first, fit desc inside each
   const byReg={};R.forEach(i=>{(byReg[i.region]=byReg[i.region]||[]).push(i);});
   let html="";
+  if(!R.length)html='<p style="color:var(--muted);padding:16px">该筛选下没有院所。点「↺ 重置」。</p>';
   Object.keys(byReg).sort((a,b)=>byReg[b].length-byReg[a].length).forEach(reg=>{
     const list=byReg[reg].slice().sort((a,b)=>b.fit-a.fit);
     html+=`<div style="margin:14px 0 7px;font-weight:700;font-size:14.5px;color:#4A148C">${reg} <span style="color:var(--muted);font-weight:400;font-size:12.5px">· ${list.length} 家</span></div>`;
-    list.forEach(i=>{
-      const idx=INSTS.indexOf(i);
-      const stars="★".repeat(i.fit)+"☆".repeat(5-i.fit);
-      const vb=i.status==="verified"
-        ? `<span class="jlvl fac" title="本次已核实为招聘/申请页">✓ 已核实</span>`
-        : `<span class="jlvl pd" title="院所主招聘入口,未逐一核实;若失效点右侧「搜索」">入口页</span>`;
-      html+=`<div class="card mrow" style="padding:10px 13px">
-        <div class="top">
-          <span class="name"><a href="${i.url}" target="_blank">${i.name}</a></span>
-          <span class="msc" title="与你研究方向的契合度">${stars}</span>
-          ${vb}
-        </div>
-        <div class="funder" style="margin:2px 0 5px">${i.note}</div>
-        <div class="actions" style="margin:0">
-          <a class="abtn" href="${i.url}" target="_blank">🏛️ 招聘页</a>
-          <a class="abtn" href="${i.fallback}" target="_blank">🔍 搜索(链接失效时用)</a>
-          <span class="abtn" style="cursor:pointer" onclick="instTrack(${idx})">${TRK["inst_"+i.name]?"✅ 已关注":"➕ 关注"}</span>
-        </div>
-      </div>`;
-    });
+    list.forEach(i=>{html+=instCard(i,INSTS.indexOf(i),TRK);});
   });
   wrap.innerHTML=html||'<p style="color:var(--muted);padding:12px">该筛选下没有院所。</p>';
+  const bq=(document.getElementById("boardq").value||"").toLowerCase();
+  const BR=BOARDS.filter(b=>!bq||((b.name||"")+(b.note||"")).toLowerCase().includes(bq));
+  document.getElementById("boardStat").innerHTML=`筛出 <b>${BR.length}</b> / ${BOARDS.length} 个站`;
   const bw=document.getElementById("boardWrap");
-  bw.innerHTML=BOARDS.map(b=>`<div class="card mrow" style="padding:9px 13px">
+  bw.innerHTML=BR.map(b=>`<div class="card mrow" style="padding:9px 13px">
       <div class="top"><span class="name"><a href="${b.url}" target="_blank">${b.name}</a></span></div>
       <div class="funder">${b.note}</div>
-    </div>`).join("")||"";
+    </div>`).join("")||'<p style="color:var(--muted);padding:12px">没有匹配的招聘板。</p>';
 }
+["instq","instRegSel","instFitSel","instStatus","instSort","inst_onlytrk","boardq"].forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener(id==="instq"||id==="boardq"?"input":"change",renderInsts);});
+document.getElementById("instRst").onclick=()=>{
+  document.getElementById("instq").value="";
+  ["instRegSel","instFitSel","instStatus"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("instSort").value="reg";
+  document.getElementById("inst_onlytrk").checked=false;
+  INST_REGION="";INST_FIT="";
+  document.querySelectorAll("#jobs .chip.irg").forEach(x=>x.classList.toggle("active",x.dataset.irg===""));
+  document.querySelectorAll("#jobs .chip.ifit").forEach(x=>x.classList.toggle("active",x.dataset.ifit===""));
+  renderInsts();};
 
 function screenMine(){
   const rows=[];
@@ -2030,14 +2307,40 @@ const TIER_META={A:{t:"🟢 A 档 · 现在就能投 + 方向高度契合",d:"�
   C:{t:"🟣 C 档 · 方向相关 · 值得跟踪",d:"科学相关,资格待定或需独立 PI 身份"}};
 function renderMyApps(){
   const rows=screenMine();
+  const rsel=document.getElementById("myRegion");
+  if(!rsel.dataset.built){
+    const cnt={};rows.forEach(r=>{if(r.region)cnt[r.region]=(cnt[r.region]||0)+1;});
+    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(x=>
+      rsel.insertAdjacentHTML("beforeend",`<option value="${x}">${x} (${cnt[x]})</option>`));
+    rsel.dataset.built="1";
+  }
   const onlyOpen=document.getElementById("my_onlyopen").checked;
   const hidePi=document.getElementById("my_hidepi").checked;
+  const onlyHit=document.getElementById("my_onlyhit").checked;
+  const onlyTrk=document.getElementById("my_onlytrk").checked;
   const q=document.getElementById("myq").value.toLowerCase();
+  const tierF=document.getElementById("myTier").value;
+  const regF=rsel.value, srcF=document.getElementById("mySrc").value;
+  const winF=document.getElementById("myWin").value;
+  const sortF=document.getElementById("mySort").value;
+  const trkNow=getTracked();
   let R=rows.filter(r=>{
     if(onlyOpen&&!r.open)return false;
     if(hidePi&&r.pi)return false;
+    if(onlyHit&&!r.hits.length)return false;
+    if(onlyTrk&&!trkNow[r.id])return false;
+    if(tierF==="AB"){if(r.tier==="C")return false;}
+    else if(tierF&&r.tier!==tierF)return false;
+    if(regF&&r.region!==regF)return false;
+    if(srcF&&r.src!==srcF)return false;
+    if(winF==="roll"){if(r.days!=null)return false;}
+    else if(winF){if(r.days==null||r.days<0||r.days>+winF)return false;}
     if(q&&!((r.title||"")+(r.org||"")+(r.hits.join(" "))).toLowerCase().includes(q))return false;
     return true;});
+  const ord={A:0,B:1,C:2};
+  if(sortF==="days")R.sort((a,b)=>(a.days==null?9999:a.days)-(b.days==null?9999:b.days));
+  else if(sortF==="score")R.sort((a,b)=>b.score-a.score);
+  else R.sort((a,b)=>ord[a.tier]-ord[b.tier]||b.score-a.score);
   const A=R.filter(r=>r.tier==="A"),B=R.filter(r=>r.tier==="B"),C=R.filter(r=>r.tier==="C");
   const soon=R.filter(r=>r.days!=null&&r.days>=0&&r.days<=60).length;
   document.getElementById("myBanner").innerHTML=
@@ -2082,8 +2385,16 @@ function renderMyApps(){
   });
   document.getElementById("myWrap").innerHTML=html||'<p style="color:var(--muted);padding:16px">没有匹配。放宽筛选(取消勾选/清空搜索),或去「联邦机会 / 各国 PI 资助」用宽 RNA 词搜。</p>';
 }
-["my_onlyopen","my_hidepi"].forEach(id=>document.getElementById(id).addEventListener("change",renderMyApps));
+["my_onlyopen","my_hidepi","my_onlyhit","my_onlytrk","myTier","myRegion","mySrc","myWin","mySort"]
+  .forEach(id=>document.getElementById(id).addEventListener("change",renderMyApps));
 document.getElementById("myq").addEventListener("input",renderMyApps);
+document.getElementById("myRst").onclick=()=>{
+  document.getElementById("myq").value="";
+  ["myTier","myRegion","mySrc","myWin"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("mySort").value="tier";
+  document.getElementById("my_onlyopen").checked=true;
+  ["my_hidepi","my_onlyhit","my_onlytrk"].forEach(i=>document.getElementById(i).checked=false);
+  renderMyApps();};
 
 function checkElig(){
   const g=id=>document.getElementById(id).checked;
