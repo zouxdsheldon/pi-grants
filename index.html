@@ -284,7 +284,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="jobs">
-  <div class="honest">🎓 本页分三层:<b>① 每日自动抓取</b>的职位(<b>jobRxiv</b> + <b>jobs.ac.uk</b>,生命科学教职/PI/博后,按你的方向 RNA/miRNA/TDMD/代谢/AMPK 打分排序)→ <b>② TOP 院所直投目录</b>(56 家顶尖院所官方招聘页,聚合板抓不到的部分)→ <b>③ 领域招聘板</b>。数据由 GitHub Actions 每日刷新,你无需维护;职位以官方页面为准。</div>
+  <div class="honest">🎓 本页分三层:<b>① 每日自动抓取</b>的职位(4 个源:<b>jobRxiv · jobs.ac.uk · Nature Careers · Science Careers</b>,生命科学教职/PI/博后,按你的方向 RNA/miRNA/TDMD/代谢/AMPK 打分排序)→ <b>② TOP 院所直投目录</b>(100 家顶尖院所官方招聘页,聚合板<b>抓不到</b>的部分)→ <b>③ 领域招聘板</b>。数据由 GitHub Actions 每日刷新,你无需维护;职位以官方页面为准。任何一条都能点「➕ 关注」进 📋 我的申请管线。</div>
   <div class="calbanner" id="jobBanner"></div>
   <div class="actions" style="margin:10px 0">
     <span class="chip lvl active" data-lvl="all">全部</span>
@@ -1935,6 +1935,15 @@ function renderJobs(){
 document.getElementById("jobq").addEventListener("input",renderJobs);
 
 /* ---------- TOP 院所直投目录 + 领域招聘板 ---------- */
+function instTrack(idx){
+  const i=INSTS[idx]; if(!i)return;
+  const t=getTracked(), id="inst_"+i.name;
+  if(t[id])delete t[id];
+  else t[id]={title:"【院所】"+i.name,agency:i.region,close:"常年/滚动",url:i.url,
+              amount:"教职直投",status:"感兴趣",
+              notes:"契合 "+i.fit+"/5 · "+i.note};
+  setTracked(t);renderInsts();
+}
 function renderInsts(){
   const wrap=document.getElementById("instWrap");
   if(!INSTS.length){wrap.innerHTML='<p style="color:var(--muted);padding:12px">院所目录数据未加载。</p>';return;}
@@ -1950,14 +1959,16 @@ function renderInsts(){
     rc.querySelectorAll(".chip.irg").forEach(c=>c.onclick=()=>{rc.querySelectorAll(".chip.irg").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_REGION=c.dataset.irg;renderInsts();});
     document.querySelectorAll("#jobs .chip.ifit").forEach(c=>c.onclick=()=>{document.querySelectorAll("#jobs .chip.ifit").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_FIT=c.dataset.ifit;renderInsts();});
   }
+  const TRK=getTracked();
   let R=INSTS.filter(i=>(!INST_REGION||i.region===INST_REGION)&&(!INST_FIT||i.fit>=+INST_FIT));
-  // group by region, preserve declared order within region
+  // group by region; regions with more entries first, fit desc inside each
   const byReg={};R.forEach(i=>{(byReg[i.region]=byReg[i.region]||[]).push(i);});
   let html="";
-  Object.keys(byReg).forEach(reg=>{
+  Object.keys(byReg).sort((a,b)=>byReg[b].length-byReg[a].length).forEach(reg=>{
     const list=byReg[reg].slice().sort((a,b)=>b.fit-a.fit);
     html+=`<div style="margin:14px 0 7px;font-weight:700;font-size:14.5px;color:#4A148C">${reg} <span style="color:var(--muted);font-weight:400;font-size:12.5px">· ${list.length} 家</span></div>`;
     list.forEach(i=>{
+      const idx=INSTS.indexOf(i);
       const stars="★".repeat(i.fit)+"☆".repeat(5-i.fit);
       const vb=i.status==="verified"
         ? `<span class="jlvl fac" title="本次已核实为招聘/申请页">✓ 已核实</span>`
@@ -1972,6 +1983,7 @@ function renderInsts(){
         <div class="actions" style="margin:0">
           <a class="abtn" href="${i.url}" target="_blank">🏛️ 招聘页</a>
           <a class="abtn" href="${i.fallback}" target="_blank">🔍 搜索(链接失效时用)</a>
+          <span class="abtn" style="cursor:pointer" onclick="instTrack(${idx})">${TRK["inst_"+i.name]?"✅ 已关注":"➕ 关注"}</span>
         </div>
       </div>`;
     });

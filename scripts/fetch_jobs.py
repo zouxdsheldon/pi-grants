@@ -62,28 +62,86 @@ def clean(html):
     return re.sub(r'<[^>]+>', '', html or '').replace('&amp;', '&').replace('&nbsp;', ' ').strip()
 
 
-def region_of(loc):
+US_STATES = ["alabama","alaska","arizona","arkansas","california","colorado","connecticut","delaware",
+ "florida","georgia","hawaii","idaho","illinois","indiana","iowa","kansas","kentucky","louisiana","maine",
+ "maryland","massachusetts","michigan","minnesota","mississippi","missouri","montana","nebraska","nevada",
+ "new hampshire","new jersey","new mexico","new york","north carolina","north dakota","ohio","oklahoma",
+ "oregon","pennsylvania","rhode island","south carolina","south dakota","tennessee","texas","utah",
+ "vermont","virginia","washington","west virginia","wisconsin","wyoming","district of columbia"]
+US_ABBR = re.compile(r',\s*(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|'
+                     r'MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)\b')
+US_ORG = re.compile(r'\b(NIH|NCI|NIA|NIAID|NIDDK|St Jude|Baylor|Rutgers|Dana-Farber|UW-Madison|Penn State|'
+                    r'Texas Tech|Cal Poly|Kenyon|Holy Cross|Mayo|Cleveland Clinic|Scripps|Salk|Broad|'
+                    r'Whitehead|Jackson Lab|Vanderbilt|Dartmouth|Wesleyan|LSU)\b', re.I)
+CN_CITY = ["beijing","shanghai","shenzhen","hangzhou","guangzhou","nanjing","suzhou","wuhan","chengdu",
+ "tianjin","xi'an","xian","jinan","qingdao","hefei","changsha","xiamen","dalian","harbin","chongqing",
+ "zhejiang","jiangsu","guangdong","shandong","sichuan","fujian","hubei","hunan","shaanxi","(cn)","china"]
+EU_CITY = ["frankfurt","warsaw","dublin","vienna","aachen","aarhus","stockholm","copenhagen","munich",
+ "berlin","heidelberg","hamburg","cologne","dresden","leipzig","gottingen","g\u00f6ttingen","tubingen",
+ "t\u00fcbingen","amsterdam","utrecht","leiden","rotterdam","groningen","zurich","z\u00fcrich","basel",
+ "geneva","lausanne","bern","paris","lyon","marseille","toulouse","strasbourg","grenoble","montpellier",
+ "barcelona","madrid","valencia","milan","rome","turin","bologna","naples","trieste","lisbon","porto",
+ "brussels","leuven","ghent","antwerp","oslo","bergen","helsinki","turku","uppsala","lund","gothenburg",
+ "prague","budapest","krakow","poznan","athens","ljubljana","zagreb","tallinn","riga","vilnius","bucharest",
+ "sofia","luxembourg","(pl)","(de)","(fr)","(nl)","(dk)","(se)","(ch)","(at)","(es)","(it)","(be)","(no)",
+ "(fi)","(ie)","(pt)","(cz)","(gr)"]
+UK_CITY = ["london","oxford","edinburgh","glasgow","manchester","bristol","leeds","sheffield","birmingham",
+ "nottingham","norwich","cardiff","belfast","dundee","aberdeen","southampton","exeter","liverpool",
+ "newcastle","bath","warwick","durham","coventry","reading","surrey","sussex","kent","essex","leicester",
+ "st andrews","swansea","hatfield","loughborough","guildford","kiel","harwell","didcot","cambridge","york",
+ "bangor","stirling","lancaster","keele","bradford","hull","plymouth","portsmouth","brighton",
+ "milton keynes","cranfield","egham","uxbridge"]
+
+
+def _region_core(loc):
+    """Map a location string to a display region. Order matters: explicit country
+    names first, then unambiguous cities, then US state names last (a bare state
+    name is the weakest signal)."""
     l = (loc or '').lower()
-    if 'united states' in l or '(us)' in l: return '🇺🇸 美国'
-    if 'canada' in l: return '🇨🇦 加拿大'
-    if 'united kingdom' in l or '(uk)' in l or 'england' in l or 'scotland' in l: return '🇬🇧 英国'
-    if any(c in l for c in ['germany','france','denmark','netherlands','sweden',
-        'switzerland','spain','italy','austria','belgium','norway','finland','ireland','portugal']):
-        return '🇪🇺 欧洲'
-    if 'china' in l: return '🇨🇳 中国大陆'
-    if 'hong kong' in l: return '🇭🇰 香港'
-    if 'singapore' in l: return '🇸🇬 新加坡'
-    if 'japan' in l: return '🇯🇵 日本'
-    if 'korea' in l: return '🇰🇷 韩国'
-    if 'australia' in l or 'new zealand' in l: return '🇦🇺 澳新'
-    # jobs.ac.uk gives bare UK city / region names
-    if any(c in l for c in ['london','oxford','cambridge','edinburgh','glasgow','manchester',
-        'bristol','leeds','sheffield','birmingham','nottingham','norwich','york','cardiff',
-        'belfast','dundee','aberdeen','southampton','exeter','liverpool','newcastle','bath',
-        'warwick','durham','coventry','reading','surrey','sussex','kent','essex','leicester',
-        'st andrews','swansea','hatfield','loughborough','uk']):
-        return '🇬🇧 英国'
-    return '🌍 其它/国际'
+    if not l.strip():
+        return ''
+    if 'united states' in l or '(us)' in l or ', usa' in l: return '\U0001F1FA\U0001F1F8 \u7f8e\u56fd'
+    if 'canada' in l or '(ca)' in l or any(c in l for c in ['toronto','vancouver','montreal','ottawa',
+        'calgary','edmonton','quebec','ontario','british columbia','alberta']): return '\U0001F1E8\U0001F1E6 \u52a0\u62ff\u5927'
+    if 'hong kong' in l: return '\U0001F1ED\U0001F1F0 \u9999\u6e2f'
+    if 'taiwan' in l or 'taipei' in l: return '\U0001F30F \u53f0\u6e7e'
+    if 'singapore' in l: return '\U0001F1F8\U0001F1EC \u65b0\u52a0\u5761'
+    if 'japan' in l or any(c in l for c in ['tokyo','osaka','kyoto','nagoya','sendai','tsukuba','fukuoka',
+        'okinawa']): return '\U0001F1EF\U0001F1F5 \u65e5\u672c'
+    if 'korea' in l or any(c in l for c in ['seoul','daejeon','busan']): return '\U0001F1F0\U0001F1F7 \u97e9\u56fd'
+    if any(c in l for c in CN_CITY): return '\U0001F1E8\U0001F1F3 \u4e2d\u56fd\u5927\u9646'
+    if any(c in l for c in ['australia','new zealand','sydney','melbourne','brisbane','adelaide','perth',
+        'canberra','auckland','wellington','dunedin','queensland']): return '\U0001F1E6\U0001F1FA \u6fb3\u65b0'
+    if any(c in l for c in ['united kingdom','(uk)','england','scotland','wales','northern ireland']):
+        return '\U0001F1EC\U0001F1E7 \u82f1\u56fd'
+    if any(c in l for c in ['germany','france','denmark','netherlands','sweden','switzerland','spain',
+        'italy','austria','belgium','norway','finland','ireland','portugal','poland','czech','greece',
+        'hungary','luxembourg','estonia','latvia','lithuania','romania','bulgaria','slovenia','croatia',
+        'iceland','\u00f6sterreich','wien']): return '\U0001F1EA\U0001F1FA \u6b27\u6d32'
+    if any(c in l for c in EU_CITY): return '\U0001F1EA\U0001F1FA \u6b27\u6d32'
+    if any(c in l for c in UK_CITY): return '\U0001F1EC\U0001F1E7 \u82f1\u56fd'
+    if any(c in l for c in ['israel','tel aviv','jerusalem','rehovot','haifa']): return '\U0001F1EE\U0001F1F1 \u4ee5\u8272\u5217'
+    if any(c in l for c in ['saudi','abu dhabi','dubai','qatar','thuwal']): return '\U0001F30D \u4e2d\u4e1c'
+    if any(c in l for c in ['india','bangalore','mumbai','delhi','hyderabad','(in)']): return '\U0001F1EE\U0001F1F3 \u5370\u5ea6'
+    if 'brazil' in l or 'paulo' in l: return '\U0001F30E \u62c9\u7f8e'
+    if US_ABBR.search(loc or ''): return '\U0001F1FA\U0001F1F8 \u7f8e\u56fd'
+    if any(s in l for s in US_STATES): return '\U0001F1FA\U0001F1F8 \u7f8e\u56fd'
+    return ''
+
+
+def region_of(loc, extra=""):
+    """Region for a posting. Nature/Science entries often carry no location field,
+    so fall back to employer name + description text before giving up."""
+    r = _region_core(loc)
+    if r:
+        return r
+    if extra:
+        r = _region_core(extra)
+        if r:
+            return r
+        if US_ORG.search(extra):
+            return '\U0001F1FA\U0001F1F8 \u7f8e\u56fd'
+    return '\U0001F30D \u5176\u5b83/\u56fd\u9645'
 
 
 def score(blob):
@@ -124,6 +182,65 @@ def parse_uk(body):
     return out
 
 
+NAT_BASE = "https://www.nature.com/naturecareers/jobs/search?keywords="
+NAT_TERMS = ["RNA", "gene+regulation", "faculty", "group+leader", "tenure+track",
+             "molecular+biology", "biochemistry", "metabolism"]
+SCI_BASE = "https://jobs.sciencecareers.org/jobsrss/?keywords="
+SCI_TERMS = ["RNA", "faculty", "tenure+track", "assistant+professor",
+             "molecular+biology", "biochemistry", "gene+regulation"]
+
+
+def parse_nature(body):
+    """Parse Nature Careers listing cards. NB: hrefs contain embedded newlines,
+    so whitespace must be normalised before matching."""
+    import html as ihtml
+    body = re.sub(r'\s+', ' ', body)
+    out = []
+    for blk in body.split('class="lister__item')[1:]:
+        m = re.search(r'lister__header"><a href=" ?(/naturecareers/job/[^"?\s]+)[^"]*" [^>]*>'
+                      r'(?:<span>)?(.*?)(?:</span>)?</a>', blk)
+        if not m:
+            continue
+        def g(pat):
+            x = re.search(pat, blk)
+            return ihtml.unescape(re.sub(r'<[^>]+>', '', x.group(1))).strip() if x else ""
+        out.append({
+            "link": "https://www.nature.com" + m.group(1),
+            "title": ihtml.unescape(re.sub(r'<[^>]+>', '', m.group(2))).strip(),
+            "company": g(r'lister__meta-item--recruiter">(.*?)</li>') or g(r'alt="(.*?) logo"'),
+            "location": g(r'lister__meta-item--location">(.*?)</li>'),
+            "description": g(r'lister__meta-item--salary">(.*?)</li>'),
+            "job_type": "Academic post", "pubDate": "", "_src": "Nature Careers",
+        })
+    return out
+
+
+def parse_science(body):
+    """Parse the Science Careers (AAAS) RSS feed. Titles are 'Institution: Role'."""
+    import xml.etree.ElementTree as ET
+    out = []
+    try:
+        root = ET.fromstring(body)
+    except Exception:
+        return out
+    for it in root.findall('.//item'):
+        def t(tag):
+            e = it.find(tag)
+            return (e.text or "").strip() if e is not None else ""
+        raw = t('title')
+        org, _, role = raw.partition(':')
+        out.append({
+            "link": t('link'),
+            "title": (role.strip() or raw),
+            "company": (org.strip() if role.strip() else ""),
+            "location": "",
+            "description": re.sub(r'\s+', ' ', t('description'))[:400],
+            "job_type": "Academic post", "pubDate": t('pubDate'),
+            "_src": "Science Careers",
+        })
+    return out
+
+
 def main():
     seen = {}
     for kw in KW_QUERIES:
@@ -145,6 +262,27 @@ def main():
             time.sleep(0.6)
     print(f"Collected {len(seen) - n0} additional postings from jobs.ac.uk")
 
+    n0 = len(seen)
+    for t in NAT_TERMS:
+        for pg in (1, 2, 3):
+            url = f"{NAT_BASE}{t}" + (f"&page={pg}" if pg > 1 else "")
+            body = fetch(url)
+            if body:
+                for r in parse_nature(body.decode('utf-8', 'ignore')):
+                    seen[r['link']] = r
+            time.sleep(0.6)
+    print(f"Collected {len(seen) - n0} additional postings from Nature Careers")
+
+    n0 = len(seen)
+    for t in SCI_TERMS:
+        body = fetch(f"{SCI_BASE}{t}")
+        if body:
+            for r in parse_science(body):
+                if r.get('link'):
+                    seen[r['link']] = r
+        time.sleep(0.6)
+    print(f"Collected {len(seen) - n0} additional postings from Science Careers")
+
     jobs = []
     for r in seen.values():
         title = r.get('title', '')
@@ -162,7 +300,8 @@ def main():
             "title": title,
             "company": r.get('company', ''),
             "location": r.get('location', ''),
-            "region": region_of(r.get('location', '')),
+            "region": region_of(r.get('location', ''),
+                                r.get('company', '') + " " + desc[:250]),
             "type": r.get('job_type', ''),
             "level": "faculty" if is_fac else "postdoc",
             "date": r.get('pubDate', ''),
@@ -170,7 +309,7 @@ def main():
             "desc": desc[:400],
             "score": sc,
             "hits": hits,
-            "src": "jobs.ac.uk" if r.get('_uk') else "jobRxiv",
+            "src": r.get('_src') or ("jobs.ac.uk" if r.get('_uk') else "jobRxiv"),
         })
     jobs.sort(key=lambda j: (0 if j['level'] == 'faculty' else 1, -j['score']))
     today = datetime.date.today()
@@ -180,9 +319,12 @@ def main():
         "count": len(jobs),
         "n_faculty": sum(1 for j in jobs if j['level'] == 'faculty'),
         "n_postdoc": sum(1 for j in jobs if j['level'] == 'postdoc'),
-        "source": "jobRxiv + jobs.ac.uk — screened for life-sciences faculty/PI + postdoc",
+        "source": "jobRxiv + jobs.ac.uk + Nature Careers + Science Careers — "
+                  "screened for life-sciences faculty/PI + postdoc",
         "n_jobrxiv": sum(1 for j in jobs if j.get('src') == 'jobRxiv'),
         "n_uk": sum(1 for j in jobs if j.get('src') == 'jobs.ac.uk'),
+        "by_src": {s: sum(1 for j in jobs if j.get('src') == s)
+                   for s in ["jobRxiv", "jobs.ac.uk", "Nature Careers", "Science Careers"]},
         "jobs": jobs,
     }
     with open("data/jobs.json", "w", encoding="utf-8") as f:

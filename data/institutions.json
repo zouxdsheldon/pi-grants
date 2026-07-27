@@ -1,7 +1,7 @@
 {
  "updated": "2026-07-27",
- "count": 56,
- "n_regions": 17,
+ "count": 100,
+ "n_regions": 21,
  "institutions": [
   {
    "region": "🇺🇸 美国",
@@ -506,6 +506,402 @@
    "fit": 3,
    "status": "root",
    "fallback": "https://duckduckgo.com/?q=Univ.%20of%20Melbourne%20/%20WEHI%20/%20Garvan%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Rockefeller University",
+   "url": "https://www.rockefeller.edu/faculty-positions/",
+   "note": "小而精,head-of-lab 制,直接独立 PI;RNA/代谢强",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Rockefeller%20University%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Caltech (Biology & Bioeng)",
+   "url": "https://www.caltech.edu/about/careers",
+   "note": "规模小、资源足;分子机制导向",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Caltech%20%28Biology%20%26%20Bioeng%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Princeton (LSI / Molecular Bio)",
+   "url": "https://puwebp.princeton.edu/AcadHire/",
+   "note": "定量生物 + 基因调控;招聘系统公开",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Princeton%20%28LSI%20/%20Molecular%20Bio%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "UC Berkeley (MCB)",
+   "url": "https://aprecruit.berkeley.edu/",
+   "note": "MCB RNA 组极强(Doudna 体系)",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=UC%20Berkeley%20%28MCB%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "UCSD / Salk Institute",
+   "url": "https://apol-recruit.ucsd.edu/",
+   "note": "RNA 剪接/代谢;Salk 独立 PI 路线",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=UCSD%20/%20Salk%20Institute%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "UCLA (MBI / Broad Stem Cell)",
+   "url": "https://recruit.apo.ucla.edu/",
+   "note": "干细胞 + RNA;加州体系统一投递",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=UCLA%20%28MBI%20/%20Broad%20Stem%20Cell%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "University of Michigan (Life Sci)",
+   "url": "https://careers.umich.edu/",
+   "note": "代谢/糖尿病(MDRC)极强,与你 T2D 契合",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Michigan%20%28Life%20Sci%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "University of Chicago (BSD)",
+   "url": "https://apply.interfolio.com/",
+   "note": "代谢/内分泌传统强校",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Chicago%20%28BSD%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Mayo Clinic (Biochem & Mol Bio)",
+   "url": "https://jobs.mayoclinic.org/",
+   "note": "转化医学 + 代谢;资源充足",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Mayo%20Clinic%20%28Biochem%20%26%20Mol%20Bio%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Cleveland Clinic Lerner",
+   "url": "https://jobs.clevelandclinic.org/",
+   "note": "心血管/代谢转化;与 MYBPC3 心肌纤维化契合",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Cleveland%20Clinic%20Lerner%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Dana-Farber / Harvard Cancer",
+   "url": "https://careers.dana-farber.org/",
+   "note": "肿瘤 RNA 生物学;PI 岗常年开",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Dana-Farber%20/%20Harvard%20Cancer%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Fred Hutchinson Cancer Center",
+   "url": "https://careers.fredhutch.org/",
+   "note": "基础肿瘤 + RNA;独立 PI 传统",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Fred%20Hutchinson%20Cancer%20Center%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Scripps Research",
+   "url": "https://www.scripps.edu/careers/",
+   "note": "化学生物学 + RNA 靶向",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Scripps%20Research%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Whitehead Institute (MIT)",
+   "url": "https://wi.mit.edu/about/jobs",
+   "note": "Fellows 制 = 无需博后直接独立",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Whitehead%20Institute%20%28MIT%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Janelia Research Campus (HHMI)",
+   "url": "https://www.janelia.org/you-janelia/careers",
+   "note": "Group Leader:长期滚动支持、无教学任务、无需自筹经费",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Janelia%20Research%20Campus%20%28HHMI%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇺🇸 美国",
+   "name": "Icahn School of Medicine (Mount Sinai)",
+   "url": "https://careers.mountsinai.org/",
+   "note": "代谢/肝病强;纽约同城可先接触",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Icahn%20School%20of%20Medicine%20%28Mount%20Sinai%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇬🇧 英国",
+   "name": "MRC LMB Cambridge",
+   "url": "https://www2.mrc-lmb.cam.ac.uk/careers/",
+   "note": "结构 + RNA 顶级;Group Leader 制",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=MRC%20LMB%20Cambridge%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇬🇧 英国",
+   "name": "Wellcome Sanger Institute",
+   "url": "https://www.sanger.ac.uk/about/careers/",
+   "note": "基因组学规模化;Faculty 独立组",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Wellcome%20Sanger%20Institute%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇬🇧 英国",
+   "name": "University of Manchester (FBMH)",
+   "url": "https://www.jobs.manchester.ac.uk/",
+   "note": "代谢/肌肉生物学;英国北方大校",
+   "fit": 3,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Manchester%20%28FBMH%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇬🇧 英国",
+   "name": "University of Dundee (MRC PPU)",
+   "url": "https://www.jobs.dundee.ac.uk/",
+   "note": "⭐ AMPK 研究发源地之一(Hardie 体系),与你 AMPK 主线正对",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Dundee%20%28MRC%20PPU%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇩🇪 德国",
+   "name": "MPI for Metabolism Research (Köln)",
+   "url": "https://www.sf.mpg.de/career",
+   "note": "代谢神经生物学;与能量应激主线契合",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=MPI%20for%20Metabolism%20Research%20%28K%C3%B6ln%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇩🇪 德国",
+   "name": "MPI of Biochemistry (Martinsried)",
+   "url": "https://www.biochem.mpg.de/career/independent-research-group",
+   "note": "独立组长申请通道明确",
+   "fit": 5,
+   "status": "verified",
+   "fallback": "https://duckduckgo.com/?q=MPI%20of%20Biochemistry%20%28Martinsried%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇩🇪 德国",
+   "name": "CECAD Cologne",
+   "url": "https://cecad.uni-koeln.de/career",
+   "note": "衰老 + 代谢卓越集群",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=CECAD%20Cologne%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇩🇪 德国",
+   "name": "BIMSB / MDC Berlin (RNA)",
+   "url": "https://www.mdc-berlin.de/career",
+   "note": "⭐ RNA 生物学系统中心,TDMD/miRNA 极对口",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=BIMSB%20/%20MDC%20Berlin%20%28RNA%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇨🇭 瑞士",
+   "name": "University of Zurich (DMMD)",
+   "url": "https://www.jobs.uzh.ch/",
+   "note": "分子医学;瑞士经费充裕",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Zurich%20%28DMMD%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇦🇹 奥地利",
+   "name": "Max Perutz Labs Vienna",
+   "url": "https://www.maxperutzlabs.ac.at/career",
+   "note": "RNA 生物学重镇;Group Leader 公开招",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Max%20Perutz%20Labs%20Vienna%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇫🇷 法国",
+   "name": "IGBMC Strasbourg",
+   "url": "https://www.igbmc.fr/en/igbmc/jobs",
+   "note": "RNA/染色质;ATIP-Avenir 独立组",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=IGBMC%20Strasbourg%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇫🇷 法国",
+   "name": "Institut Pasteur Paris",
+   "url": "https://research.pasteur.fr/en/jobs/",
+   "note": "G5 青年组长制 = 直接独立",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Institut%20Pasteur%20Paris%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇮🇹 意大利",
+   "name": "EMBL Rome / Human Technopole",
+   "url": "https://www.humantechnopole.it/en/careers/",
+   "note": "新建大所,大量 Group Leader 位",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=EMBL%20Rome%20/%20Human%20Technopole%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇪🇸 西班牙",
+   "name": "CRG Barcelona / IRB",
+   "url": "https://www.crg.eu/en/content/careers",
+   "note": "RNA 生物学强;Junior Group Leader 制",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=CRG%20Barcelona%20/%20IRB%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇳🇱 荷兰",
+   "name": "Oncode Institute",
+   "url": "https://www.oncode.nl/careers",
+   "note": "肿瘤研究经费联盟;PI 独立",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Oncode%20Institute%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇸🇪 瑞典",
+   "name": "Umeå University (MIMS/Nordic EMBL)",
+   "url": "https://www.umu.se/en/work-with-us/",
+   "note": "Nordic EMBL 伙伴组长制",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Ume%C3%A5%20University%20%28MIMS/Nordic%20EMBL%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇩🇰 丹麦",
+   "name": "NNF Center for Basic Metabolic Research",
+   "url": "https://employment.ku.dk/",
+   "note": "⭐ 诺和诺德代谢中心,T2D 代谢正对口",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=NNF%20Center%20for%20Basic%20Metabolic%20Research%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇫🇮 芬兰",
+   "name": "University of Helsinki / FIMM",
+   "url": "https://www.helsinki.fi/en/about-us/careers",
+   "note": "分子医学;北欧经费稳定",
+   "fit": 3,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Helsinki%20/%20FIMM%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇨🇦 加拿大",
+   "name": "University of Ottawa / OHRI",
+   "url": "https://uottawa.wd3.myworkdayjobs.com/",
+   "note": "肌肉/DMD 研究强,与你 DMD 方向契合",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=University%20of%20Ottawa%20/%20OHRI%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇨🇦 加拿大",
+   "name": "Université de Montréal / IRIC",
+   "url": "https://iric.ca/en/careers",
+   "note": "化学生物 + RNA;法语区经费独立",
+   "fit": 3,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Universit%C3%A9%20de%20Montr%C3%A9al%20/%20IRIC%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇸🇬 新加坡",
+   "name": "Genome Institute of Singapore (A*STAR)",
+   "url": "https://www.a-star.edu.sg/Careers",
+   "note": "⭐ NRF Fellowship 起始包丰厚",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Genome%20Institute%20of%20Singapore%20%28A%2ASTAR%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇭🇰 香港",
+   "name": "HKUST / PolyU / CityU",
+   "url": "https://www.ust.hk/careers",
+   "note": "RGC ECS 门槛适中;可用中文背景",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=HKUST%20/%20PolyU%20/%20CityU%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇨🇳 中国大陆",
+   "name": "中山大学 / 浙江大学 / 复旦",
+   "url": "https://rsc.sysu.edu.cn/",
+   "note": "海外优青依托单位;启动经费高",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%20/%20%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%20/%20%E5%A4%8D%E6%97%A6%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇨🇳 中国大陆",
+   "name": "中国农业大学 / 华中农大",
+   "url": "https://rsc.cau.edu.cn/",
+   "note": "⭐ 猪 T2D / 家畜模型资源,与你独有资源契合",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=%E4%B8%AD%E5%9B%BD%E5%86%9C%E4%B8%9A%E5%A4%A7%E5%AD%A6%20/%20%E5%8D%8E%E4%B8%AD%E5%86%9C%E5%A4%A7%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇯🇵 日本",
+   "name": "OIST 冲绳科技大学院大学",
+   "url": "https://www.oist.jp/careers",
+   "note": "英语环境,独立 PI 起始包大",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=OIST%20%E5%86%B2%E7%BB%B3%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇰🇷 韩国",
+   "name": "Seoul National University / KIST",
+   "url": "https://www.snu.ac.kr/",
+   "note": "BK21 经费;RNA 领域上升期",
+   "fit": 3,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Seoul%20National%20University%20/%20KIST%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇦🇺 澳新",
+   "name": "Garvan / Victor Chang (Sydney)",
+   "url": "https://www.garvan.org.au/careers",
+   "note": "代谢 + 心血管;NHMRC 经费",
+   "fit": 4,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Garvan%20/%20Victor%20Chang%20%28Sydney%29%20faculty%20position%20assistant%20professor%20RNA%20biology"
+  },
+  {
+   "region": "🇮🇱 以色列",
+   "name": "Weizmann Institute of Science",
+   "url": "https://www.weizmann.ac.il/pages/careers",
+   "note": "小而顶尖;Senior Scientist 即独立组,起始包大",
+   "fit": 5,
+   "status": "root",
+   "fallback": "https://duckduckgo.com/?q=Weizmann%20Institute%20of%20Science%20faculty%20position%20assistant%20professor%20RNA%20biology"
   }
  ],
  "boards": [
