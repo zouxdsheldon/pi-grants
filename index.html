@@ -133,7 +133,9 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .chip{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;font-size:13px;user-select:none;transition:.12s}
 .chip:hover{border-color:var(--dark)}
 .chip.active{background:var(--dark);color:#fff;border-color:var(--dark)}
-.chip.rg{font-size:12.5px;padding:4px 10px}
+.chip.rg,.chip.qbtn2,.chip.irg{font-size:12.5px;padding:4px 10px}
+.chip.qbtn2{background:var(--bluef);color:var(--blue);border-color:#D3E4F3}
+.chip.qbtn2.active{background:var(--blue);color:#fff;border-color:var(--blue)}
 .jlvl{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
 .jlvl.fac{background:#4A148C}.jlvl.pd{background:#0D47A1}
 .calbanner{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
@@ -1373,10 +1375,50 @@ function atagClass(t){
   if(t.includes("研究生")||t.includes("博士生"))return"grad";
   if(t.includes("资深")||t.includes("中期"))return"senior";
   return"na";}
-function whoRow(apply){
-  if(!apply||!apply.length)return"";
-  const chips=apply.map(t=>`<span class="atag ${atagClass(t)}">${t}</span>`).join("");
-  return`<div class="who"><span class="wlab">👤 谁能申:</span>${chips}</div>`;}
+/* ---------- 联邦机会「谁能申」推导 ----------
+   Grants.gov 的 API 不提供个人层面的 apply 字段(它是机构级数据),
+   所以 LIVE 记录里没有 .apply。这里从 *可获取的真实字段* 推导:
+     明确 = 标题/编号里出现 NIH 机制码(K99/R00/F32/DP2/R01…)或 "postdoctoral"/"early-stage investigator" 等措辞
+     推断 = 只能按 ftype(培训/转轨/R类)或 career 布尔标志判断
+     未定 = 无任何可用信号 → 标 "见 NOFO",不猜
+   精选清单(CURATED)本来就有人工核实的 .apply,直接用,不走这里。 */
+const FED_CODE=[
+  [/\b(K99|R00|K01|K08|K22|K23|K25|K76|K43)\b/,          ["博后/早期","独立PI/教职"]],
+  [/\b(F30|F31|F32|F33|F99|T32|T35|T90)\b/,              ["研究生/博士生","博后/早期"]],
+  [/\b(DP2|DP5)\b|NEW INNOVATOR|EARLY INDEPENDENCE/,     ["博后/早期","独立PI/教职"]],
+  [/\b(R01|R21|R35|R37|U01|P01|P30|P50)\b/,              ["独立PI/教职"]],
+  [/POSTDOCTORAL|POST-DOCTORAL|EARLY-STAGE INVESTIGATOR|EARLY STAGE INVESTIGATOR|PATHWAY TO INDEPENDENCE/, ["博后/早期"]],
+  [/PREDOCTORAL|PRE-DOCTORAL|GRADUATE STUDENT|DOCTORAL DISSERTATION/, ["研究生/博士生"]],
+  [/\bEARLY CAREER\b|EARLY-CAREER/,                      ["博后/早期","独立PI/教职"]],
+];
+const FED_NONRES=/JOURNALIS|RIOT|CROWD CONTROL|LOGISTICS|TRAVEL AND|LAW ENFORCEMENT|MILITARY|DISASTER COVERAGE|ENGLISH LANGUAGE|EXCHANGE PROGRAM|CULTURAL/i;
+function applyOf(g){
+  if(g._ap)return g._ap;
+  if(Array.isArray(g.apply)&&g.apply.length){        // CURATED: 人工核实过
+    g._ap={list:g.apply,lvl:"核实"};return g._ap;
+  }
+  const t=((g.title||"")+" "+(g.number||"")).toUpperCase();
+  const s=new Set();
+  FED_CODE.forEach(([rx,aud])=>{if(rx.test(t))aud.forEach(a=>s.add(a));});
+  if(s.size){g._ap={list:[...s],lvl:"明确"};return g._ap;}
+  const w=new Set();
+  if(g.ftype==="培训/Fellowship"&&!FED_NONRES.test(g.title||"")){w.add("研究生/博士生");w.add("博后/早期");}
+  else if(g.ftype==="转轨奖(K/独立)"){w.add("博后/早期");w.add("独立PI/教职");}
+  else if(g.ftype==="研究项目(R类)"){w.add("独立PI/教职");}
+  else if(g.career===true){w.add("博后/早期");}
+  g._ap=w.size?{list:[...w],lvl:"推断"}:{list:[],lvl:"未定"};
+  return g._ap;
+}
+function whoRow2(g){
+  const a=applyOf(g);
+  if(!a.list.length)return`<div class="who"><span class="wlab">👤 谁能申:</span><span class="atag" style="background:#EEE;color:#666">未定 · 见 NOFO</span></div>`;
+  const tag={"核实":'<span class="atag" style="background:#E8F5E9;color:#1B5E20">✔ 人工核实</span>',
+             "明确":'<span class="atag" style="background:#E3F2FD;color:#0D47A1">机制码明确</span>',
+             "推断":'<span class="atag" style="background:#FFF8E1;color:#8D6E00">按类型推断</span>'}[a.lvl]||"";
+  return`<div class="who"><span class="wlab">👤 谁能申:</span>`+
+    a.list.map(t=>`<span class="atag ${atagClass(t)}">${t}</span>`).join("")+tag+`</div>`;
+}
+
 const relrank={"高":0,"中":1,"低":2};
 
 /* ---------- profile (localStorage) ---------- */
@@ -1441,7 +1483,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
 
 /* ---------- calendar ---------- */
 const CN_MON={'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'11':11,'12':12};
-function isMine(apply){apply=apply||[];return apply.includes("博后/早期")||apply.includes("不限身份");}
+function isMine(g){const a=applyOf(g).list;return a.includes("博后/早期")||a.includes("不限身份");}
 function fedDate(g){
   if(g.closeDate){const m=/(\d{2})\/(\d{2})\/(\d{4})/.exec(g.closeDate);if(m)return new Date(+m[3],+m[1]-1,+m[2]);}
   if(g.days!=null){const d=new Date();d.setDate(d.getDate()+ +g.days);return d;}
@@ -1456,14 +1498,14 @@ function curMonths(txt){
 function buildCalEvents(){
   const now=new Date(),Y0=2026,Y1=2027,ev=[];
   LIVE.forEach(g=>{const dt=fedDate(g);if(!dt)return;if(dt.getFullYear()<Y0||dt.getFullYear()>Y1)return;
-    ev.push({dt,src:"fed",mine:isMine(g.apply),rel:g.rel||"低",title:g.title,agency:g.agency,region:"🇺🇸美国",
-      apply:(g.apply||[]).join(" / "),amount:g.amount||"见官方",cycle:g.closeDate?"单次":"约"+g.days+"天后",
+    ev.push({dt,src:"fed",mine:isMine(g),rel:g.rel||"低",title:g.title,agency:g.agency,region:"🇺🇸美国",
+      apply:applyOf(g).list.join(" / ")||"见 NOFO",amount:g.amount||"见官方",cycle:g.closeDate?"单次":"约"+g.days+"天后",
       exact:!!g.closeDate,url:g.url});});
   CURATED.forEach(c=>{const ms=curMonths(c.deadline);if(ms[0]==="roll"||ms[0]==="unk")return;
     const usOnly=/United States/.test(c.cite_req||"")&&!/临时签证/.test(c.cite_req||"");
     ms.forEach(mm=>[Y0,Y1].forEach(yr=>{const dt=new Date(yr,mm-1,15);if(dt<now)return;
-      ev.push({dt,src:"cur",mine:isMine(c.apply)&&!usOnly&&!/❌/.test(c.elig||""),rel:c.fit||"中",title:c.name,
-        agency:c.funder,region:c.region,apply:(c.apply||[]).join(" / "),amount:c.amount||"",
+      ev.push({dt,src:"cur",mine:isMine(c)&&!usOnly&&!/❌/.test(c.elig||""),rel:c.fit||"中",title:c.name,
+        agency:c.funder,region:c.region,apply:applyOf(c).list.join(" / "),amount:c.amount||"",
         cycle:"每年约"+mm+"月(±2周)",exact:false,url:c.url});}));});
   ev.sort((a,b)=>a.dt-b.dt);return ev;
 }
@@ -1473,28 +1515,28 @@ function renderCalendar(){
   const onlyMine=document.getElementById("calOnlyMine").checked;
   const relF=document.getElementById("calRel").value;
   const now=new Date();now.setHours(0,0,0,0);
-  // region dropdown, built once from event data
   const rsel=document.getElementById("calRegion");
-  if(!rsel.dataset.built){
-    const cnt={};CAL_EV.forEach(e=>{if(e.region)cnt[e.region]=(cnt[e.region]||0)+1;});
-    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(r=>
-      rsel.insertAdjacentHTML("beforeend",`<option value="${r}">${r} (${cnt[r]})</option>`));
-    rsel.dataset.built="1";
-  }
   const q=(document.getElementById("calq").value||"").toLowerCase();
-  const regF=rsel.value, srcF=document.getElementById("calSrc").value;
+  const srcF=document.getElementById("calSrc").value;
   const winF=+document.getElementById("calWin").value||0;
   const hidePast=document.getElementById("calHidePast").checked;
-  let ev=CAL_EV.filter(e=>{
-    if(onlyMine&&!e.mine)return false;
-    if(relF&&e.rel!==relF)return false;
-    if(regF&&e.region!==regF)return false;
-    if(srcF&&e.src!==srcF)return false;
+  /* One predicate, parameterised so a facet can exclude its own dimension.
+     Static facet counts were the bug: the region dropdown said "(908)" while
+     the list showed 26, because counts were computed once over all events. */
+  const pass=(e,skip)=>{
+    if(skip!=="mine"&&onlyMine&&!e.mine)return false;
+    if(skip!=="rel"&&relF&&e.rel!==relF)return false;
+    if(skip!=="region"&&rsel.value&&e.region!==rsel.value)return false;
+    if(skip!=="src"&&srcF&&e.src!==srcF)return false;
     const dd=(e.dt-now)/864e5;
-    if(hidePast&&dd<0)return false;
-    if(winF&&(dd<0||dd>winF))return false;
-    if(q&&!((e.title||"")+(e.agency||"")+(e.apply||"")).toLowerCase().includes(q))return false;
-    return true;});
+    if(skip!=="win"){
+      if(hidePast&&dd<0)return false;
+      if(winF&&(dd<0||dd>winF))return false;
+    }
+    if(skip!=="q"&&q&&!((e.title||"")+(e.agency||"")+(e.apply||"")).toLowerCase().includes(q))return false;
+    return true;};
+  facetSel(rsel,"地区(全部)",CAL_EV,e=>e.region,e=>pass(e,"region"));
+  let ev=CAL_EV.filter(e=>pass(e,null));
   // banner KPIs
   const mine=ev.filter(e=>e.mine);
   const d30=ev.filter(e=>{const dd=(e.dt-now)/864e5;return dd>=0&&dd<=30;});
@@ -1605,7 +1647,7 @@ function baseFiltered(ignore){
     }
     if(q&&!((g.title||"")+(g.agency||"")+(g.number||"")).toLowerCase().includes(q))return false;
     const lw=document.getElementById("lwho").value;
-    if(lw&&!(g.apply||[]).some(t=>t.includes(lw)))return false;
+    if(lw&&!applyOf(g).list.some(t=>t.includes(lw)))return false;
     if(!passAuto(g))return false;
     return true;});
 }
@@ -1655,7 +1697,7 @@ function renderLive(){
       <span class="ftype">${g.ftype}</span>
       <span class="badge st-${g.status}">${g.status}</span></div>
       <div class="funder">${g.agency||""} · 编号 ${g.number||"—"}</div>
-      ${whoRow(g.apply)}
+      ${whoRow2(g)}
       <div class="scorecard">
         <div class="sc sc-elig-${e.cls}"><span class="lab">资格</span><span class="val">${e.txt}</span></div>
         <div class="sc sc-dl"><span class="lab">截止</span><span class="val ${(g.days!=null&&g.days<=45)?'soon':''}">${dlTxt}</span>${pbar(g.days)}</div>
@@ -1680,41 +1722,56 @@ document.getElementById("lwho").addEventListener("change",renderLive);
 const eligClass=s=>s.startsWith("✅")?"ok":s.startsWith("⚠️")?"warn":"no";
 const eligKey=s=>s.startsWith("✅")?"✅":s.startsWith("⚠️")?"⚠️":"❌";
 const fitRank={"高":0,"中":1,"低":2};
+/* ---------- 动态 facet 计数 ----------
+   Bug fixed: facet counts were computed once from the full dataset, so a
+   dropdown could read "(908)" while the visible list held 26 rows. Both
+   helpers recount on every render against all OTHER active filters
+   (skip-own-dimension), and preserve the current selection. */
+function facetSel(sel, ph, items, keyOf, passOther){
+  if(!sel)return "";
+  const cur=sel.value, cnt={}, all={};
+  items.forEach(x=>{const k=keyOf(x); if(k===null||k===undefined||k==="")return;
+    all[k]=1; if(passOther(x))cnt[k]=(cnt[k]||0)+1;});
+  sel.innerHTML=`<option value="">${ph}</option>`+
+    Object.keys(all).sort((a,b)=>(cnt[b]||0)-(cnt[a]||0)).map(k=>{
+      const v=String(k).replace(/"/g,"&quot;");
+      const lab=String(k).length>42?String(k).slice(0,42)+"…":k;
+      return `<option value="${v}"${String(k)===cur?" selected":""}>${lab} (${cnt[k]||0})</option>`;
+    }).join("");
+  sel.value=cur;                       // survives if the option still exists
+  return sel.value;
+}
+function facetChips(wrap, cls, dkey, items, keyOf, passOther, cur, allLabel, onPick){
+  if(!wrap)return;
+  const cnt={}, all={};
+  items.forEach(x=>{const k=keyOf(x); if(!k)return; all[k]=1; if(passOther(x))cnt[k]=(cnt[k]||0)+1;});
+  const tot=items.filter(passOther).length;
+  wrap.innerHTML=`<span class="chip ${cls}${cur===""?" active":""}" data-${dkey}="">${allLabel} (${tot})</span>`+
+    Object.keys(all).sort((a,b)=>(cnt[b]||0)-(cnt[a]||0)).map(r=>
+      `<span class="chip ${cls}${cur===r?" active":""}" data-${dkey}="${r}">${r} (${cnt[r]||0})</span>`).join("");
+  wrap.querySelectorAll(".chip."+cls).forEach(c=>c.onclick=()=>onPick(c.dataset[dkey]));
+}
 function renderCurated(){
   const q=document.getElementById("cq").value.toLowerCase();
   const ff=document.getElementById("cfit").value, fe=document.getElementById("celig").value;
   const fs=document.getElementById("csrc").value;
   const fw=document.getElementById("cwho").value;
-  // region chip bar (built once)
-  const chipWrap=document.getElementById("regionChips");
-  if(chipWrap && !chipWrap.dataset.built){
-    const order=["🇺🇸 美国","🇨🇳 中国大陆","🇭🇰 香港","🇸🇬 新加坡","🇯🇵 日本","🇰🇷 韩国","🇪🇺 欧洲(欧盟)","🇬🇧 英国","🇦🇺 澳大利亚","🇨🇦 加拿大","🌍 国际/跨国"];
-    const counts={};CURATED.forEach(g=>counts[g.region]=(counts[g.region]||0)+1);
-    const regs=order.filter(r=>counts[r]);
-    const mk=(label,val)=>{const b=document.createElement("button");b.className="qbtn";b.textContent=label;
-      b.onclick=()=>{CUR_REGION=val;chipWrap.querySelectorAll(".qbtn").forEach(x=>x.classList.remove("on"));b.classList.add("on");renderCurated();};
-      if(val===CUR_REGION)b.classList.add("on");chipWrap.appendChild(b);};
-    mk(`全部 (${CURATED.length})`,"");
-    regs.forEach(r=>mk(`${r} (${counts[r]})`,r));
-    chipWrap.dataset.built="1";
-  }
   const crs=document.getElementById("cregSel");
-  if(!crs.dataset.built){
-    const cc={};CURATED.forEach(g=>cc[g.region]=(cc[g.region]||0)+1);
-    Object.keys(cc).sort((a,b)=>cc[b]-cc[a]).forEach(r=>
-      crs.insertAdjacentHTML("beforeend",`<option value="${r}">${r} (${cc[r]})</option>`));
-    crs.dataset.built="1";
-  }
-  const frg=crs.value, fso=document.getElementById("csort").value;
-  let rows=CURATED.filter(g=>{
-    if(CUR_REGION&&g.region!==CUR_REGION)return false;
-    if(frg&&g.region!==frg)return false;
+  const fso=document.getElementById("csort").value;
+  const cpass=(g,skip)=>{
+    if(skip!=="chip"&&CUR_REGION&&g.region!==CUR_REGION)return false;
+    if(skip!=="reg"&&crs.value&&g.region!==crs.value)return false;
     if(ff&&g.fit!==ff)return false;
     if(fe&&eligKey(g.elig)!==fe)return false;
     if(fs&&(g.source||"curated")!==fs)return false;
-    if(fw&&!(g.apply||[]).some(t=>t.includes(fw)))return false;
+    if(fw&&!applyOf(g).list.some(t=>t.includes(fw)))return false;
     if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount+g.region).toLowerCase().includes(q))return false;
-    return true;});
+    return true;};
+  facetChips(document.getElementById("regionChips"),"qbtn2","rg2",CURATED,
+    g=>g.region,g=>cpass(g,"chip"),CUR_REGION,"全部",
+    v=>{CUR_REGION=v;renderCurated();});
+  facetSel(crs,"地区(全部)",CURATED,g=>g.region,g=>cpass(g,"reg"));
+  let rows=CURATED.filter(g=>cpass(g,null));
   if(fso==="name")rows.sort((a,b)=>String(a.name).localeCompare(String(b.name)));
   else if(fso==="funder")rows.sort((a,b)=>String(a.funder).localeCompare(String(b.funder))||fitRank[a.fit]-fitRank[b.fit]);
   else rows.sort((a,b)=>fitRank[a.fit]-fitRank[b.fit]);
@@ -1735,7 +1792,7 @@ function renderCurated(){
         <span class="src src-${g.source||'curated'}">来源 ${g.src_label||(g.source==='pivot'?'Pivot-RP':'手工策展')}</span>
         ${g.verify&&g.verify.includes("官方")?'<span class="pill verify-official">✔ 官方核实</span>':'<span class="pill">待核实</span>'}${link}</div>
         <div class="funder">${g.funder}</div>
-        ${whoRow(g.apply)}
+        ${whoRow2(g)}
         <div class="scorecard">
           <div class="sc sc-dl"><span class="lab">资格窗口</span><span class="val">${g.window||"—"}</span></div>
           <div class="sc sc-amt"><span class="lab">金额(概)</span><span class="val">${g.amount||"—"}</span></div>
@@ -1753,8 +1810,7 @@ document.getElementById("cRst").onclick=()=>{
   ["cfit","celig","csrc","cwho","cregSel"].forEach(i=>document.getElementById(i).value="");
   document.getElementById("csort").value="fit";
   CUR_REGION="";
-  const cw=document.getElementById("regionChips");
-  if(cw)cw.querySelectorAll(".qbtn").forEach((x,k)=>x.classList.toggle("on",k===0));
+  /* region chips rebuild themselves from CUR_REGION on re-render */
   renderCurated();};
 
 /* ---------- render WHAT'S NEW ---------- */
@@ -1778,28 +1834,22 @@ function renderChanges(){
   if(!CHANGES.length){document.getElementById("chgStatus").textContent="暂无变更";
     list.innerHTML='<p style="color:var(--muted);padding:16px">暂无变更记录。系统每日对比,明天起这里会显示新增/改动的机会。</p>';return;}
   if(!CHG_ENR)CHG_ENR=enrichChanges();
-  // agency dropdown, built once, ordered by frequency
   const asel=document.getElementById("chgAgency");
-  if(!asel.dataset.built){
-    const cnt={};CHG_ENR.forEach(c=>{if(c.agency)cnt[c.agency]=(cnt[c.agency]||0)+1;});
-    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(a=>{
-      asel.insertAdjacentHTML("beforeend",`<option value="${a.replace(/"/g,'&quot;')}">${a.length>42?a.slice(0,42)+"…":a} (${cnt[a]})</option>`);});
-    asel.dataset.built="1";
-  }
   const q=(document.getElementById("chgq").value||"").toLowerCase();
   const kind=document.getElementById("chgKind").value;
   const rel=document.getElementById("chgRel").value;
   const car=document.getElementById("chgCareer").value;
-  const ag=document.getElementById("chgAgency").value;
   const sort=document.getElementById("chgSort").value;
-  let R=CHG_ENR.filter(c=>{
+  const gpass=(c,skip)=>{
     if(kind&&c.kind!==kind)return false;
     if(rel==="mine"){if(!(c.rscore>0||c.rel==="高"||c.rel==="中"||c.career))return false;}
     else if(rel&&c.rel!==rel)return false;
     if(car&&!c.career)return false;
-    if(ag&&c.agency!==ag)return false;
+    if(skip!=="ag"&&asel.value&&c.agency!==asel.value)return false;
     if(q&&!((c.title||"")+(c.agency||"")+(c.detail||"")).toLowerCase().includes(q))return false;
-    return true;});
+    return true;};
+  facetSel(asel,"资助机构(全部)",CHG_ENR,c=>c.agency,c=>gpass(c,"ag"));
+  let R=CHG_ENR.filter(c=>gpass(c,null));
   const RW={"高":3,"中":2,"低":1,"unk":0};
   if(sort==="rel")R.sort((a,b)=>(b.rscore-a.rscore)||(RW[b.rel]-RW[a.rel])||(b.career-a.career));
   else if(sort==="date")R.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
@@ -2039,7 +2089,7 @@ function researchScore(txt){
 // 联邦资格推断
 function eligFed(g){
   if(g.cit_req===true&&!ME.citizen)return{cls:"no",why:"需美国公民/绿卡"};
-  const ap=g.apply||[];
+  const ap=applyOf(g).list;
   if(g.career){
     if(ap.some(t=>t.includes("博后")||t.includes("早期")))return{cls:"yes",why:"career/转轨机制 · 博后可申 · 不限国籍(以 NOFO 为准)",pi:false};
     return{cls:"cond",why:"career 机制 · 核对阶段窗口",pi:false};
@@ -2082,14 +2132,11 @@ function renderJobs(){
   const wrap=document.getElementById("jobWrap");
   if(!JOBS.length){wrap.innerHTML='<p style="color:var(--muted);padding:16px">职位数据尚未生成(首次部署后等每日任务运行,或手动触发 Actions 的 fetch_jobs)。</p>';
     document.getElementById("jobN").textContent="0";return;}
-  // region chips (build once from data)
-  const rc=document.getElementById("jobRegionChips");
-  if(!rc.dataset.built){
-    const regs=[...new Set(JOBS.map(j=>j.region))].sort((a,b)=>JOBS.filter(x=>x.region===b).length-JOBS.filter(x=>x.region===a).length);
-    rc.innerHTML=`<span class="chip rg active" data-rg="">全部地区</span>`+regs.map(r=>`<span class="chip rg" data-rg="${r}">${r} (${JOBS.filter(x=>x.region===r).length})</span>`).join("");
-    rc.dataset.built="1";
-    rc.querySelectorAll(".chip.rg").forEach(c=>c.onclick=()=>{rc.querySelectorAll(".chip.rg").forEach(x=>x.classList.remove("active"));c.classList.add("active");JOB_REGION=c.dataset.rg;renderJobs();});
-    document.querySelectorAll("#jobs .chip.lvl").forEach(c=>c.onclick=()=>{document.querySelectorAll("#jobs .chip.lvl").forEach(x=>x.classList.remove("active"));c.classList.add("active");JOB_LVL=c.dataset.lvl;renderJobs();});
+  if(!document.body.dataset.jobLvlWired){
+    document.querySelectorAll("#jobs .chip.lvl").forEach(c=>c.onclick=()=>{
+      document.querySelectorAll("#jobs .chip.lvl").forEach(x=>x.classList.remove("active"));
+      c.classList.add("active");JOB_LVL=c.dataset.lvl;renderJobs();});
+    document.body.dataset.jobLvlWired="1";
   }
   const q=(document.getElementById("jobq").value||"").toLowerCase();
   const srcF=document.getElementById("jobSrc").value;
@@ -2099,15 +2146,24 @@ function renderJobs(){
   const onlyTrk=document.getElementById("job_onlytrk").checked;
   const trkNow=getTracked();
   const nowMs=Date.now();
-  let R=JOBS.filter(j=>{
-    if(JOB_LVL!=="all"&&j.level!==JOB_LVL)return false;
-    if(JOB_REGION&&j.region!==JOB_REGION)return false;
-    if(srcF&&j.src!==srcF)return false;
+  const jpass=(j,skip)=>{
+    if(skip!=="lvl"&&JOB_LVL!=="all"&&j.level!==JOB_LVL)return false;
+    if(skip!=="rg"&&JOB_REGION&&j.region!==JOB_REGION)return false;
+    if(skip!=="src"&&srcF&&j.src!==srcF)return false;
     if(fitF&&(j.score||0)<fitF)return false;
     if(onlyTrk&&!trkNow["job_"+(j.url||j.title).slice(0,40)])return false;
     if(dayF){const t=Date.parse(j.date||"");if(isNaN(t)||(nowMs-t)/864e5>dayF)return false;}
     if(q&&!((j.title||"")+(j.company||"")+(j.hits||[]).join(" ")+(j.desc||"")).toLowerCase().includes(q))return false;
-    return true;});
+    return true;};
+  facetChips(document.getElementById("jobRegionChips"),"rg","rg",JOBS,
+    j=>j.region,j=>jpass(j,"rg"),JOB_REGION,"全部地区",
+    v=>{JOB_REGION=v;renderJobs();});
+  facetSel(document.getElementById("jobSrc"),"来源(全部)",JOBS,j=>j.src,j=>jpass(j,"src"));
+  document.querySelectorAll("#jobs .chip.lvl").forEach(c=>{
+    const k=c.dataset.lvl;
+    const n=JOBS.filter(j=>jpass(j,"lvl")&&(k==="all"||j.level===k)).length;
+    c.textContent=c.textContent.replace(/\s*\(\d+\)$/,"")+` (${n})`;});
+  let R=JOBS.filter(j=>jpass(j,null));
   const nf=R.filter(j=>j.level==="faculty").length, np=R.length-nf;
   const hi=R.filter(j=>j.score>=3).length;
   document.getElementById("jobBanner").innerHTML=
@@ -2198,40 +2254,38 @@ function renderInsts(){
   if(!INSTS.length){wrap.innerHTML='<p style="color:var(--muted);padding:12px">院所目录数据未加载。</p>';return;}
   document.getElementById("instN").textContent=INSTS.length;
   document.getElementById("instR").textContent=new Set(INSTS.map(i=>i.region)).size;
-  const rc=document.getElementById("instRegionChips");
-  if(!rc.dataset.built){
-    const regs=[...new Set(INSTS.map(i=>i.region))];
-    regs.sort((a,b)=>INSTS.filter(x=>x.region===b).length-INSTS.filter(x=>x.region===a).length);
-    rc.innerHTML=`<span class="chip irg active" data-irg="">全部地区</span>`+
-      regs.map(r=>`<span class="chip irg" data-irg="${r}">${r} (${INSTS.filter(x=>x.region===r).length})</span>`).join("");
-    rc.dataset.built="1";
-    rc.querySelectorAll(".chip.irg").forEach(c=>c.onclick=()=>{rc.querySelectorAll(".chip.irg").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_REGION=c.dataset.irg;renderInsts();});
-    document.querySelectorAll("#jobs .chip.ifit").forEach(c=>c.onclick=()=>{document.querySelectorAll("#jobs .chip.ifit").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_FIT=c.dataset.ifit;renderInsts();});
+  if(!document.body.dataset.instFitWired){
+    document.querySelectorAll("#jobs .chip.ifit").forEach(c=>c.onclick=()=>{
+      document.querySelectorAll("#jobs .chip.ifit").forEach(x=>x.classList.remove("active"));
+      c.classList.add("active");INST_FIT=c.dataset.ifit;renderInsts();});
+    document.body.dataset.instFitWired="1";
   }
   const TRK=getTracked();
   const rsel=document.getElementById("instRegSel");
-  if(!rsel.dataset.built){
-    const cnt={};INSTS.forEach(i=>{cnt[i.region]=(cnt[i.region]||0)+1;});
-    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(r=>
-      rsel.insertAdjacentHTML("beforeend",`<option value="${r}">${r} (${cnt[r]})</option>`));
-    rsel.dataset.built="1";
-  }
   const iq=(document.getElementById("instq").value||"").toLowerCase();
-  const regSel=rsel.value;
   const fitSel=+document.getElementById("instFitSel").value||0;
   const stSel=document.getElementById("instStatus").value;
   const iSort=document.getElementById("instSort").value;
   const iTrk=document.getElementById("inst_onlytrk").checked;
-  let R=INSTS.filter(i=>{
-    if(INST_REGION&&i.region!==INST_REGION)return false;
-    if(INST_FIT&&i.fit<+INST_FIT)return false;
-    if(regSel&&i.region!==regSel)return false;
+  const ipass=(i,skip)=>{
+    if(skip!=="chip"&&INST_REGION&&i.region!==INST_REGION)return false;
+    if(skip!=="ifit"&&INST_FIT&&i.fit<+INST_FIT)return false;
+    if(skip!=="reg"&&rsel.value&&i.region!==rsel.value)return false;
     if(fitSel&&i.fit<fitSel)return false;
     if(stSel==="verified"&&i.status!=="verified")return false;
     if(stSel==="entry"&&i.status==="verified")return false;
     if(iTrk&&!TRK["inst_"+i.name])return false;
     if(iq&&!((i.name||"")+(i.note||"")+(i.region||"")).toLowerCase().includes(iq))return false;
-    return true;});
+    return true;};
+  facetChips(document.getElementById("instRegionChips"),"irg","irg",INSTS,
+    i=>i.region,i=>ipass(i,"chip"),INST_REGION,"全部地区",
+    v=>{INST_REGION=v;renderInsts();});
+  facetSel(rsel,"地区(全部)",INSTS,i=>i.region,i=>ipass(i,"reg"));
+  document.querySelectorAll("#jobs .chip.ifit").forEach(c=>{
+    const k=c.dataset.ifit;
+    const n=INSTS.filter(i=>ipass(i,"ifit")&&(!k||i.fit>=+k)).length;
+    c.textContent=c.textContent.replace(/\s*\(\d+\)$/,"")+` (${n})`;});
+  let R=INSTS.filter(i=>ipass(i,null));
   document.getElementById("instStat").innerHTML=`筛出 <b>${R.length}</b> / ${INSTS.length} 家`;
   if(iSort!=="reg"){
     const S=R.slice();
@@ -2287,7 +2341,7 @@ function screenMine(){
     const rs=researchScore((c.name||"")+" "+(c.funder||"")+" "+(c.cite||"")+" "+(c.note||"")+" "+(c.cat||""));
     const el=eligCur(c);let rf=rs.s+(c.fit==="高"?2:c.fit==="中"?1:0);
     const tier=tierOf(rf,el.cls);if(!tier)return;
-    const pi=(c.apply||[]).length>0&&(c.apply||[]).every(t=>t.includes("PI")||t.includes("教职"))&&!(c.apply||[]).some(t=>t.includes("博后"));
+    const _ca=applyOf(c).list;const pi=_ca.length>0&&_ca.every(t=>t.includes("PI")||t.includes("教职"))&&!_ca.some(t=>t.includes("博后"));
     rows.push({src:"curated",id:"cur_"+(c.name||"").slice(0,40),tier,score:rf,hits:rs.hits,elig:el,pi,
       title:c.name,org:c.funder,region:c.region,amount:c.amount||"见官方",
       days:null,close:null,dl:c.deadline,url:c.url,type:grantType(c),open:true});
@@ -2308,35 +2362,31 @@ const TIER_META={A:{t:"🟢 A 档 · 现在就能投 + 方向高度契合",d:"�
 function renderMyApps(){
   const rows=screenMine();
   const rsel=document.getElementById("myRegion");
-  if(!rsel.dataset.built){
-    const cnt={};rows.forEach(r=>{if(r.region)cnt[r.region]=(cnt[r.region]||0)+1;});
-    Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(x=>
-      rsel.insertAdjacentHTML("beforeend",`<option value="${x}">${x} (${cnt[x]})</option>`));
-    rsel.dataset.built="1";
-  }
   const onlyOpen=document.getElementById("my_onlyopen").checked;
   const hidePi=document.getElementById("my_hidepi").checked;
   const onlyHit=document.getElementById("my_onlyhit").checked;
   const onlyTrk=document.getElementById("my_onlytrk").checked;
   const q=document.getElementById("myq").value.toLowerCase();
   const tierF=document.getElementById("myTier").value;
-  const regF=rsel.value, srcF=document.getElementById("mySrc").value;
+  const srcF=document.getElementById("mySrc").value;
   const winF=document.getElementById("myWin").value;
   const sortF=document.getElementById("mySort").value;
   const trkNow=getTracked();
-  let R=rows.filter(r=>{
+  const mpass=(r,skip)=>{
     if(onlyOpen&&!r.open)return false;
     if(hidePi&&r.pi)return false;
     if(onlyHit&&!r.hits.length)return false;
     if(onlyTrk&&!trkNow[r.id])return false;
     if(tierF==="AB"){if(r.tier==="C")return false;}
     else if(tierF&&r.tier!==tierF)return false;
-    if(regF&&r.region!==regF)return false;
+    if(skip!=="reg"&&rsel.value&&r.region!==rsel.value)return false;
     if(srcF&&r.src!==srcF)return false;
     if(winF==="roll"){if(r.days!=null)return false;}
     else if(winF){if(r.days==null||r.days<0||r.days>+winF)return false;}
     if(q&&!((r.title||"")+(r.org||"")+(r.hits.join(" "))).toLowerCase().includes(q))return false;
-    return true;});
+    return true;};
+  facetSel(rsel,"地区(全部)",rows,r=>r.region,r=>mpass(r,"reg"));
+  let R=rows.filter(r=>mpass(r,null));
   const ord={A:0,B:1,C:2};
   if(sortF==="days")R.sort((a,b)=>(a.days==null?9999:a.days)-(b.days==null?9999:b.days));
   else if(sortF==="score")R.sort((a,b)=>b.score-a.score);
