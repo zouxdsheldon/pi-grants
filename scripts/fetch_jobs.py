@@ -76,6 +76,13 @@ def region_of(loc):
     if 'japan' in l: return '🇯🇵 日本'
     if 'korea' in l: return '🇰🇷 韩国'
     if 'australia' in l or 'new zealand' in l: return '🇦🇺 澳新'
+    # jobs.ac.uk gives bare UK city / region names
+    if any(c in l for c in ['london','oxford','cambridge','edinburgh','glasgow','manchester',
+        'bristol','leeds','sheffield','birmingham','nottingham','norwich','york','cardiff',
+        'belfast','dundee','aberdeen','southampton','exeter','liverpool','newcastle','bath',
+        'warwick','durham','coventry','reading','surrey','sussex','kent','essex','leicester',
+        'st andrews','swansea','hatfield','loughborough','uk']):
+        return '🇬🇧 英国'
     return '🌍 其它/国际'
 
 
@@ -88,6 +95,35 @@ def score(blob):
     return s, list(dict.fromkeys(hits))[:6]
 
 
+UK_BASE = "https://www.jobs.ac.uk/search/?keywords="
+UK_TERMS = ["RNA+biology", "microRNA", "gene+regulation", "molecular+biology",
+            "RNA+metabolism", "biochemistry+lecturer", "group+leader+biology"]
+
+
+def parse_uk(body):
+    """Parse jobs.ac.uk search-result cards (UK + EU academic posts)."""
+    import html as ihtml
+    out = []
+    for blk in body.split('class="j-search-result__result')[1:]:
+        m = re.search(r'<a href="(/job/[^"]+)">\s*(.*?)\s*</a>', blk, re.S)
+        if not m:
+            continue
+        def grab(pat):
+            g = re.search(pat, blk, re.S)
+            return ihtml.unescape(re.sub(r'<[^>]+>', '', g.group(1))).strip() if g else ""
+        out.append({
+            "link": "https://www.jobs.ac.uk" + m.group(1),
+            "title": ihtml.unescape(re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', m.group(2)))).strip(),
+            "company": grab(r'j-search-result__employer">\s*<b>(.*?)</b>'),
+            "location": grab(r'<div>Location:\s*(.*?)\s*</div>'),
+            "description": grab(r'j-search-result__department">\s*(.*?)\s*</div>'),
+            "job_type": "Academic post",
+            "pubDate": "closes " + grab(r'j-search-result__date--blue[^>]*>\s*(.*?)\s*</span>'),
+            "_uk": True,
+        })
+    return out
+
+
 def main():
     seen = {}
     for kw in KW_QUERIES:
@@ -97,7 +133,17 @@ def main():
                 if r.get('link'):
                     seen[r['link']] = r
         time.sleep(0.6)
-    print(f"Collected {len(seen)} unique postings")
+    print(f"Collected {len(seen)} unique postings from jobRxiv")
+
+    n0 = len(seen)
+    for t in UK_TERMS:
+        for pg in (1, 2):
+            body = fetch(f"{UK_BASE}{t}&page={pg}")
+            if body:
+                for r in parse_uk(body.decode('utf-8', 'ignore')):
+                    seen[r['link']] = r
+            time.sleep(0.6)
+    print(f"Collected {len(seen) - n0} additional postings from jobs.ac.uk")
 
     jobs = []
     for r in seen.values():
@@ -124,6 +170,7 @@ def main():
             "desc": desc[:400],
             "score": sc,
             "hits": hits,
+            "src": "jobs.ac.uk" if r.get('_uk') else "jobRxiv",
         })
     jobs.sort(key=lambda j: (0 if j['level'] == 'faculty' else 1, -j['score']))
     today = datetime.date.today()
@@ -133,7 +180,9 @@ def main():
         "count": len(jobs),
         "n_faculty": sum(1 for j in jobs if j['level'] == 'faculty'),
         "n_postdoc": sum(1 for j in jobs if j['level'] == 'postdoc'),
-        "source": "jobRxiv (academic job board) — screened for life-sciences faculty/PI + postdoc",
+        "source": "jobRxiv + jobs.ac.uk — screened for life-sciences faculty/PI + postdoc",
+        "n_jobrxiv": sum(1 for j in jobs if j.get('src') == 'jobRxiv'),
+        "n_uk": sum(1 for j in jobs if j.get('src') == 'jobs.ac.uk'),
         "jobs": jobs,
     }
     with open("data/jobs.json", "w", encoding="utf-8") as f:

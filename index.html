@@ -284,7 +284,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="jobs">
-  <div class="honest">🎓 本页自动抓取 <b>jobRxiv</b>(学术预印本社区招聘板)的<b>生命科学教职 / PI / 博后</b>职位,按你的研究方向(RNA/miRNA/TDMD/代谢/AMPK…)打分排序。数据由 GitHub Actions <b>每日自动刷新</b>,你无需维护。职位以官方页面为准。</div>
+  <div class="honest">🎓 本页分三层:<b>① 每日自动抓取</b>的职位(<b>jobRxiv</b> + <b>jobs.ac.uk</b>,生命科学教职/PI/博后,按你的方向 RNA/miRNA/TDMD/代谢/AMPK 打分排序)→ <b>② TOP 院所直投目录</b>(56 家顶尖院所官方招聘页,聚合板抓不到的部分)→ <b>③ 领域招聘板</b>。数据由 GitHub Actions 每日刷新,你无需维护;职位以官方页面为准。</div>
   <div class="calbanner" id="jobBanner"></div>
   <div class="actions" style="margin:10px 0">
     <span class="chip lvl active" data-lvl="all">全部</span>
@@ -296,6 +296,20 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="actions" style="margin:0 0 6px" id="jobRegionChips"></div>
   <div class="status" id="jobStatus" style="margin:4px 0"></div>
   <div id="jobWrap"></div>
+
+  <!-- ===== TOP 院所直投目录 ===== -->
+  <div class="tierhdr" style="background:#4A148C;color:#fff">🏛️ TOP 院所「直投目录」—— 顶尖高校/研究所官方招聘门户</div>
+  <div class="honest">大多数顶尖院所的 PI 岗<b>只发在自己官网</b>,不会出现在任何聚合板 —— 这是上面列表<b>抓不到</b>的部分。目录按<b>国家 + 与你方向的契合度</b>排好,点击直达对方招聘页;<b>⭐ = 建议优先</b>。共 <b id="instN">…</b> 家 / <b id="instR">…</b> 个国家或地区。若院所改版导致链接失效,点「🔍 搜索」用备用查询找当前页面。</div>
+  <div class="calbanner" style="margin-bottom:10px">
+    <span class="chip ifit active" data-ifit="">全部</span>
+    <span class="chip ifit" data-ifit="5">⭐ 只看最契合</span>
+  </div>
+  <div class="calbanner" id="instRegionChips" style="margin-bottom:12px"></div>
+  <div id="instWrap"></div>
+
+  <!-- ===== 领域招聘板 ===== -->
+  <div class="tierhdr" style="background:#0D47A1;color:#fff">📌 领域招聘板 —— 建议常年盯着的几个站</div>
+  <div id="boardWrap"></div>
 </div>
 
 <div class="panel" id="pipeline">
@@ -1280,6 +1294,7 @@ paragraphs + introductions from high-impact papers in my field). Please:
 <script>
 let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
 let JOBS=[], JOBMETA={}, JOB_LVL="all", JOB_REGION="";
+let INSTS=[], BOARDS=[], INST_REGION="", INST_FIT="";
 function setLang(l){
   document.querySelectorAll('.lang-zh').forEach(function(e){e.style.display=(l==='en'?'none':'');});
   document.querySelectorAll('.lang-en').forEach(function(e){e.style.display=(l==='en'?'':'none');});
@@ -1445,13 +1460,15 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb]=await Promise.all([
+    const [g,c,ch,jb,inst]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
       fetch("data/jobs.json?_="+Date.now()).then(r=>r.ok?r.json():{jobs:[]}).catch(()=>({jobs:[]})),
+      fetch("data/institutions.json?_="+Date.now()).then(r=>r.ok?r.json():{institutions:[]}).catch(()=>({institutions:[]})),
     ]);
     LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
+    INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
     liveN.textContent=LIVE.length;
     chgN.textContent=CHANGES.length;
     snapbar.innerHTML=`📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(每日自动刷新 + 金额/资格补全)`;
@@ -1858,6 +1875,7 @@ function jobTrack(o){
   setTracked(t);renderJobs();
 }
 function renderJobs(){
+  try{renderInsts();}catch(e){console.warn("insts",e);}
   const wrap=document.getElementById("jobWrap");
   if(!JOBS.length){wrap.innerHTML='<p style="color:var(--muted);padding:16px">职位数据尚未生成(首次部署后等每日任务运行,或手动触发 Actions 的 fetch_jobs)。</p>';
     document.getElementById("jobN").textContent="0";return;}
@@ -1884,7 +1902,7 @@ function renderJobs(){
     `<div class="kpi k90"><b>${np}</b>博后 / 研究员</div>`+
     `<div class="kpi kmine"><b>${hi}</b>🎯 高度契合(≥3)</div>`;
   document.getElementById("jobN").textContent=nf;
-  document.getElementById("jobStatus").textContent=`来源 jobRxiv · 最后刷新 ${JOBMETA.updated||"?"} · 共 ${R.length} 个匹配`;
+  document.getElementById("jobStatus").textContent=`来源 jobRxiv (${JOBMETA.n_jobrxiv||0}) + jobs.ac.uk (${JOBMETA.n_uk||0}) · 最后刷新 ${JOBMETA.updated||"?"} · 当前筛选 ${R.length} 个`;
   const tracked=getTracked();
   R=R.sort((a,b)=>(a.level==="faculty"?0:1)-(b.level==="faculty"?0:1)||b.score-a.score);
   let html="";
@@ -1915,6 +1933,56 @@ function renderJobs(){
   wrap.innerHTML=html||'<p style="color:var(--muted);padding:16px">没有匹配。放宽级别/地区筛选或清空搜索。</p>';
 }
 document.getElementById("jobq").addEventListener("input",renderJobs);
+
+/* ---------- TOP 院所直投目录 + 领域招聘板 ---------- */
+function renderInsts(){
+  const wrap=document.getElementById("instWrap");
+  if(!INSTS.length){wrap.innerHTML='<p style="color:var(--muted);padding:12px">院所目录数据未加载。</p>';return;}
+  document.getElementById("instN").textContent=INSTS.length;
+  document.getElementById("instR").textContent=new Set(INSTS.map(i=>i.region)).size;
+  const rc=document.getElementById("instRegionChips");
+  if(!rc.dataset.built){
+    const regs=[...new Set(INSTS.map(i=>i.region))];
+    regs.sort((a,b)=>INSTS.filter(x=>x.region===b).length-INSTS.filter(x=>x.region===a).length);
+    rc.innerHTML=`<span class="chip irg active" data-irg="">全部地区</span>`+
+      regs.map(r=>`<span class="chip irg" data-irg="${r}">${r} (${INSTS.filter(x=>x.region===r).length})</span>`).join("");
+    rc.dataset.built="1";
+    rc.querySelectorAll(".chip.irg").forEach(c=>c.onclick=()=>{rc.querySelectorAll(".chip.irg").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_REGION=c.dataset.irg;renderInsts();});
+    document.querySelectorAll("#jobs .chip.ifit").forEach(c=>c.onclick=()=>{document.querySelectorAll("#jobs .chip.ifit").forEach(x=>x.classList.remove("active"));c.classList.add("active");INST_FIT=c.dataset.ifit;renderInsts();});
+  }
+  let R=INSTS.filter(i=>(!INST_REGION||i.region===INST_REGION)&&(!INST_FIT||i.fit>=+INST_FIT));
+  // group by region, preserve declared order within region
+  const byReg={};R.forEach(i=>{(byReg[i.region]=byReg[i.region]||[]).push(i);});
+  let html="";
+  Object.keys(byReg).forEach(reg=>{
+    const list=byReg[reg].slice().sort((a,b)=>b.fit-a.fit);
+    html+=`<div style="margin:14px 0 7px;font-weight:700;font-size:14.5px;color:#4A148C">${reg} <span style="color:var(--muted);font-weight:400;font-size:12.5px">· ${list.length} 家</span></div>`;
+    list.forEach(i=>{
+      const stars="★".repeat(i.fit)+"☆".repeat(5-i.fit);
+      const vb=i.status==="verified"
+        ? `<span class="jlvl fac" title="本次已核实为招聘/申请页">✓ 已核实</span>`
+        : `<span class="jlvl pd" title="院所主招聘入口,未逐一核实;若失效点右侧「搜索」">入口页</span>`;
+      html+=`<div class="card mrow" style="padding:10px 13px">
+        <div class="top">
+          <span class="name"><a href="${i.url}" target="_blank">${i.name}</a></span>
+          <span class="msc" title="与你研究方向的契合度">${stars}</span>
+          ${vb}
+        </div>
+        <div class="funder" style="margin:2px 0 5px">${i.note}</div>
+        <div class="actions" style="margin:0">
+          <a class="abtn" href="${i.url}" target="_blank">🏛️ 招聘页</a>
+          <a class="abtn" href="${i.fallback}" target="_blank">🔍 搜索(链接失效时用)</a>
+        </div>
+      </div>`;
+    });
+  });
+  wrap.innerHTML=html||'<p style="color:var(--muted);padding:12px">该筛选下没有院所。</p>';
+  const bw=document.getElementById("boardWrap");
+  bw.innerHTML=BOARDS.map(b=>`<div class="card mrow" style="padding:9px 13px">
+      <div class="top"><span class="name"><a href="${b.url}" target="_blank">${b.name}</a></span></div>
+      <div class="funder">${b.note}</div>
+    </div>`).join("")||"";
+}
 
 function screenMine(){
   const rows=[];
