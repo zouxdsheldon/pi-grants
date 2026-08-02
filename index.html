@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grants Finder Pro — Xiaodong Zou / MSKCC</title>
+<title>Grants Finder Pro</title>
 <style>
 :root{--dark:#2C3E50;--red:#C0392B;--green:#27AE60;--yel:#E6A817;--blue:#2980B9;
 --greenf:#D5F5E3;--yelf:#FCF3CF;--redf:#FADBD2;--greyf:#EAECEE;--bluef:#EAF2F8;
@@ -201,28 +201,113 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 .langbar{display:flex;gap:6px;margin:0 0 12px}
 .langbtn{padding:5px 14px;border:1px solid #bbb;border-radius:16px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:#333}
 .langbtn.active{background:#1565C0;color:#fff;border-color:#1565C0}
+
+/* ===== 通用化：档案条 / 弹层 / 引导 ===== */
+.pfchip{display:inline-flex;align-items:center;gap:6px;background:#F3E9FB;border:1px solid #D9C2EC;
+  color:#4A148C;border-radius:20px;padding:4px 12px;font-size:12.5px;max-width:520px}
+.pfchip.set{background:#E8F5E9;border-color:#B8DCBB;color:#1B5E20}
+.pfbtn{background:#4A148C;color:#fff;border:0;border-radius:7px;padding:5px 12px;font-size:12.3px;
+  cursor:pointer;font-family:inherit}
+.pfbtn:hover{background:#6A1B9A}
+.pfbtn.ghost{background:#fff;color:#4A148C;border:1px solid #D9C2EC}
+.pfbtn.ghost:hover{background:#F3E9FB}
+.pfbtn.done{background:#1B5E20}
+.pfbtn.done:hover{background:#2E7D32}
+.pfbtn[disabled]{opacity:.4;cursor:not-allowed}
+.modal{display:none;position:fixed;inset:0;background:rgba(20,10,30,.45);z-index:200;
+  align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.modal.open{display:flex}
+.mbox{background:#fff;border-radius:12px;max-width:760px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.mhead{display:flex;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);font-size:15px}
+.mhead b{flex:1}
+.mx{cursor:pointer;color:var(--muted);font-size:17px;padding:0 4px}
+.mx:hover{color:#000}
+.mnote{margin:12px 18px 0;background:#FFF8E1;border:1px solid #F0DFA8;border-radius:8px;
+  padding:9px 12px;font-size:12.2px;line-height:1.6;color:#5D4037}
+.msteps{display:flex;gap:8px;padding:12px 18px 0;flex-wrap:wrap}
+.mstep{font-size:12px;color:var(--muted);background:#F5F5F7;border-radius:14px;padding:3px 11px;
+  border:1px solid var(--line);cursor:pointer}
+.mstep.active{background:#4A148C;color:#fff;border-color:#4A148C}
+.mstep.done{background:#E8F5E9;color:#1B5E20;border-color:#B8DCBB}
+.mbody{padding:14px 18px;max-height:52vh;overflow:auto}
+.mfoot{display:flex;align-items:center;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
+.frow{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.frow>label{min-width:210px;font-size:12.8px;padding-top:5px}
+.frow input[type=text],.frow input[type=number],.frow select{
+  border:1px solid var(--line);border-radius:7px;padding:5px 9px;font-size:12.8px;font-family:inherit;min-width:200px}
+.fhelp{flex-basis:100%;margin-left:220px;font-size:11.6px;color:var(--muted);line-height:1.5}
+.fmulti{display:flex;flex-wrap:wrap;gap:7px;max-width:470px}
+.fmulti span{border:1px solid var(--line);border-radius:14px;padding:3px 11px;font-size:12.2px;cursor:pointer;background:#fff}
+.fmulti span.on{background:#4A148C;color:#fff;border-color:#4A148C}
+.kwbox{width:100%;min-height:120px;border:1px solid var(--line);border-radius:8px;padding:9px;
+  font:12.3px ui-monospace,Menlo,monospace;line-height:1.55}
+/* 资格结果卡 */
+.eligrow{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);
+  border-radius:9px;margin-bottom:8px;background:#fff}
+.eligrow.yes{border-color:#B8DCBB;background:#F4FBF5}
+.eligrow.no{border-color:#EBC9C9;background:#FDF6F6}
+.eligrow.unk{border-color:#E4D6B8;background:#FFFCF3}
+.eligicon{font-size:16px;line-height:1.3}
+.eligmain{flex:1;min-width:0}
+.eligname{font-size:13.2px;font-weight:600}
+.eligwhy{font-size:11.9px;color:var(--muted);line-height:1.6;margin-top:3px}
+.eligwhy code{background:#F5F5F7;border-radius:3px;padding:0 4px}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-<h1>🔎 Grants Finder Pro</h1>
-<div class="sub">Xiaodong Zou · MSKCC / Eric Lai 实验室 · 全球 PI 资助搜索(每日自动更新)</div>
+<h1 id="siteTitle">🔎 Grants Finder Pro</h1>
+<div class="sub" id="siteSub">全球 PI 资助 · 学术职位 · 文献追踪(每日自动更新)</div>
 </div></header>
 
 <!-- sticky profile widget -->
 <div class="profile"><div class="in">
-  <span class="pf">公民身份 <select id="pf_cit">
-    <option value="noncit">非美国 / 无绿卡</option>
-    <option value="pr">绿卡(PR)</option>
-    <option value="citizen">美国公民</option></select></span>
-  <span class="pf">博后年限 <select id="pf_yrs">
-    <option>1</option><option>2</option><option>3</option><option selected>4</option>
-    <option>5</option><option>6</option><option>7+</option></select> 年</span>
-  <span class="pf">目标 <select id="pf_stage">
-    <option value="pi" selected>独立 PI / 教职</option>
-    <option value="postdoc">博后阶段</option></select></span>
+  <span id="pfChip" class="pfchip">👤 <b>未设置档案</b> — 资格判定与匹配度都依赖它</span>
+  <button class="pfbtn" id="pfEdit">✏️ 编辑我的档案</button>
+  <button class="pfbtn ghost" id="pfDemo">📄 载入示例档案</button>
   <span class="toggle">🔒 隐藏不符合资格
     <span class="switch" id="autoFilter"></span></span>
+  <span style="flex:1"></span>
+  <button class="pfbtn ghost" id="pfIO">⇅ 导入 / 导出</button>
+</div></div>
+
+<!-- ============ 首访引导 / 档案编辑 弹层 ============ -->
+<div class="modal" id="pfModal"><div class="mbox">
+  <div class="mhead">
+    <b id="pfmTitle">👤 设置我的档案</b>
+    <span class="mx" id="pfClose">✕</span>
+  </div>
+  <div class="mnote">
+    本站是<b>开源模板</b>:所有个性化信息只存在<b>你自己浏览器的 localStorage</b> 里 —— 不上传、不发送到任何服务器,
+    换台电脑要重填(或用下方「导出」存成 JSON 带走)。留空的字段不会瞎猜,相关判定会显示「信息不足」。
+  </div>
+  <div class="msteps">
+    <span class="mstep active" data-st="1">① 基本信息</span>
+    <span class="mstep" data-st="2">② 资格相关</span>
+    <span class="mstep" data-st="3">③ 研究方向</span>
+  </div>
+  <div class="mbody" id="pfForm"></div>
+  <div class="mfoot">
+    <span class="status" id="pfStat" style="margin:0"></span>
+    <span style="flex:1"></span>
+    <button class="pfbtn ghost" id="pfPrev">← 上一步</button>
+    <button class="pfbtn" id="pfNext">下一步 →</button>
+    <button class="pfbtn done" id="pfSave">✓ 保存并应用</button>
+  </div>
+</div></div>
+
+<div class="modal" id="ioModal"><div class="mbox" style="max-width:620px">
+  <div class="mhead"><b>⇅ 导入 / 导出我的全部本地数据</b><span class="mx" id="ioClose">✕</span></div>
+  <div class="mnote">导出内容包含:个人档案、申请管线、文献收藏/标签/笔记。换电脑或清缓存前导出一份,到新机器粘回来即可。</div>
+  <div class="mbody">
+    <textarea id="ioText" style="width:100%;height:230px;font:11.5px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:8px;padding:9px"></textarea>
+  </div>
+  <div class="mfoot">
+    <span class="status" id="ioStat" style="margin:0"></span><span style="flex:1"></span>
+    <button class="pfbtn ghost" id="ioExp">导出到上框</button>
+    <button class="pfbtn ghost" id="ioDl">下载 .json</button>
+    <button class="pfbtn done" id="ioImp">从上框导入</button>
+  </div>
 </div></div>
 
 <div class="wrap">
@@ -273,7 +358,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <li><b>🇪🇺 ERC Starting / MSCA</b>:若考虑赴欧建组,PhD 后 2–7 年窗口对你合适。</li>
     </ol>
   </div>
-  <div class="honest">🌐 <b>为什么这一层是人工维护:</b>除美国 Grants.gov 外,各国政府基本<b>没有开放的"在招机会"API</b>(欧盟 ERC/Horizon 的接口对匿名访问持续报错;英/澳/加多数只暴露已中标项目;整个亚洲无机会 API)。付费的 Pivot-RP 靠商业团队人工聚合两万多源——我无法复制它。所以这里是<b>对你(生物医学 / 早期 PI / 非美籍 / 瞄准亚洲+全球独立职位)真正相关</b>的项目,按国家分区、每条附<b>官方链接</b>;金额/截止标"约,以官方为准"。</div>
+  <div class="honest">🌐 <b>为什么这一层是人工维护:</b>除美国 Grants.gov 外,各国政府基本<b>没有开放的"在招机会"API</b>(欧盟 ERC/Horizon 的接口对匿名访问持续报错;英/澳/加多数只暴露已中标项目;整个亚洲无机会 API)。付费的 Pivot-RP 靠商业团队人工聚合两万多源——我无法复制它。所以这里是<b>人工策展</b>的一批面向早期 PI / 独立职位的项目,按国家分区、每条附<b>官方链接</b>;金额/截止标"约,以官方为准"。想增删条目就改 <code>data/curated.json</code>(或用 <code>scripts/import_pivot.py</code> 从机构订阅的 Pivot-RP 导出合并)。</div>
   <div class="searchbar">
     <input type="text" id="cq" placeholder="🔍 搜索(机构 / 项目名 / 关键词)…">
     <div id="regionChips" class="qbtns" style="margin-bottom:9px"></div>
@@ -309,12 +394,12 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <!-- PIPELINE -->
 <div class="panel" id="calendar">
-  <div class="honest">📅 所有资助按<b>截止月份</b>排布(2026–2027)。<b style="color:var(--green)">绿色高亮 = 你能申</b>(身份含博后/早期、非美籍专属、未过窗口)。顶部提示本月及未来到期。精选项多为「每年约X月」周期受理,日期为近似(±2周),投递前点链接核对官方受理日。</div>
+  <div class="honest">📅 所有资助按<b>截止月份</b>排布(2026–2027)。<b style="color:var(--green)">绿色高亮 = 按你填的档案判定「现在能投」</b>(档案留空则不做判定)。日历文件默认<b>收录全部未过期截止</b>;想只留早期项目,改 <code>data/config.json</code> 的 <code>ics_filter</code>。顶部提示本月及未来到期。精选项多为「每年约X月」周期受理,日期为近似(±2周),投递前点链接核对官方受理日。</div>
   <div id="calBanner" class="calbanner"></div>
   <div class="actions" style="margin:8px 0 4px">
-    <a class="abtn tracked" href="webcal://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics" style="text-decoration:none">🔔 订阅日历(自动更新)</a>
+    <a class="abtn tracked" id="icsWebcal" href="#" style="text-decoration:none">🔔 订阅日历(自动更新)</a>
     <a class="abtn" href="data/grant_deadlines.ics" download="资助截止日历.ics" style="text-decoration:none">📥 下载 .ics(静态)</a>
-    <button class="abtn" id="copyIcs" onclick="navigator.clipboard.writeText('https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics').then(()=>{this.textContent='✅ 已复制订阅网址'})">📋 复制订阅网址</button>
+    <button class="abtn" id="icsCopy">📋 复制订阅链接</button>
   </div>
   <div class="fbar">
     <input type="text" id="calq" placeholder="🔍 搜项目 / 资助机构…">
@@ -331,7 +416,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="myapps">
-  <div class="honest">🎯 本页<b>自动</b>把「联邦机会」+「各国 PI 资助」两个数据源,按你的<b>研究方向(miRNA/TDMD/代谢/AMPK/纤维化等)</b>和<b>身份资格(非美籍博后·MSKCC·≤40岁·7 篇一作)</b>筛一遍并分档。数据每日刷新时,本页<b>同步重算</b>——无需手动维护。判定为启发式,最终以各资助官方 NOFO 为准。</div>
+  <div class="honest">🎯 本页<b>自动</b>把「联邦机会」+「各国 PI 资助」两个数据源,按你在<b>档案</b>里填的<b>研究方向关键词</b>和<b>身份资格</b>筛一遍并分档(点右上角「✏️ 填写/修改档案」)。数据每日刷新时,本页<b>同步重算</b>——无需手动维护。判定为启发式,最终以各资助官方 NOFO 为准。</div>
   <div id="myBanner" class="calbanner" style="margin:10px 0"></div>
   <div class="fbar">
     <input type="text" id="myq" placeholder="🔍 搜标题 / 机构 / 方向关键词…">
@@ -354,7 +439,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="jobs">
-  <div class="honest">🎓 本页分三层:<b>① 每日自动抓取</b>的职位(4 个源:<b>jobRxiv · jobs.ac.uk · Nature Careers · Science Careers</b>,生命科学教职/PI/博后,按你的方向 RNA/miRNA/TDMD/代谢/AMPK 打分排序)→ <b>② TOP 院所直投目录</b>(100 家顶尖院所官方招聘页,聚合板<b>抓不到</b>的部分)→ <b>③ 领域招聘板</b>。数据由 GitHub Actions 每日刷新,你无需维护;职位以官方页面为准。任何一条都能点「➕ 关注」进 📋 我的申请管线。</div>
+  <div class="honest">🎓 本页分三层:<b>① 每日自动抓取</b>的职位(4 个源:<b>jobRxiv · jobs.ac.uk · Nature Careers · Science Careers</b>,生命科学教职/PI/博后,按 <code>data/interests.json</code> 里你配置的方向词库打分排序)→ <b>② TOP 院所直投目录</b>(100 家顶尖院所官方招聘页,聚合板<b>抓不到</b>的部分)→ <b>③ 领域招聘板</b>。数据由 GitHub Actions 每日刷新,你无需维护;职位以官方页面为准。任何一条都能点「➕ 关注」进 📋 我的申请管线。</div>
   <div class="calbanner" id="jobBanner"></div>
   <div class="actions" style="margin:10px 0">
     <span class="chip lvl active" data-lvl="all">全部</span>
@@ -407,11 +492,11 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="snapbar" id="papbar" style="margin-bottom:10px">📚 文献数据加载中…</div>
 
   <div class="calbanner" style="margin-bottom:10px">
-    <b>这个面板做什么:</b>把你的 8 个研究方向变成每日自动检索式,跨 6 个来源抓取新文献,去重后按<b>透明可核验的规则</b>打相关性分,
+    <b>这个面板做什么:</b>把 <code>data/interests.json</code> 里配置的研究方向变成每日自动检索式,跨 6 个来源抓取新文献,去重后按<b>透明可核验的规则</b>打相关性分,
     并标出三类信号 —— <span class="ptag hotspot">🔥 Hotspot</span> 引用速率/新鲜度/预印本转正、
     <span class="ptag gap">🕳️ Gap</span> 摘要里明写"尚不清楚/缺乏证据"的句子、
     <span class="ptag question">❓ Question</span> 作者自己提的 future work。
-    每个分数都可点开看<b>命中了哪些词、TF-IDF 余弦是多少</b>——没有黑箱。
+    每个分数都可点开看<b>命中了哪些词、TF-IDF 余弦是多少</b>——没有黑箱。<br><span style="color:#7A5A00">当前方向词库是示例(miRNA 降解 / 代谢);换成你自己的课题就编辑 <code>data/interests.json</code>,写法见 <code>data/interests.template.json</code>。</span>
   </div>
 
   <div class="snapnote" id="snapProgress"></div>
@@ -495,6 +580,49 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="panel" id="howto">
   <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
   <div class="lang-zh">
+  <div class="honest" style="border-left-color:#1B5E20;background:#F1F8F2">
+    🧬 <b>这是一个开源模板，任何人都可以 fork 后填成自己的站点。</b>
+    你的个人信息只存在你自己的浏览器里（localStorage），不会上传；
+    要换成「你的」站点，只需改 <code>data/</code> 里的几个 JSON，<b>不用动 index.html</b>。
+  </div>
+
+  <div class="hcard" style="border-color:#1B5E20">
+    <h3 style="color:#1B5E20">🚀 三分钟把它变成你自己的站</h3>
+    <ol class="hsteps">
+      <li><b>只是想用一下？</b> 直接点右上角 <b>✏️ 填写/修改档案</b> 填完三步即可
+      —— 资格自查、匹配度排序、文献相关性都会立刻按你的信息重算。什么都不用部署。</li>
+      <li><b>想要属于自己的一份（含每日自动抓取）？</b> Fork 本仓库 → 仓库 Settings → Pages →
+      Source 选 <code>GitHub Actions</code> → Actions 页点一次 <b>Run workflow</b>。十分钟后你的
+      <code>https://&lt;你的用户名&gt;.github.io/&lt;仓库名&gt;/</code> 就活了。</li>
+      <li><b>改成你自己的研究方向</b>（决定文献抓什么、资助怎么排序）：编辑
+      <code>data/interests.json</code>。字段写法见同目录的
+      <code>data/interests.template.json</code>（每个字段都有注释）。</li>
+    </ol>
+
+    <table class="htab" style="margin-top:10px">
+      <tr><th>改什么</th><th>文件</th><th>作用</th></tr>
+      <tr><td>站名 / 副标题 / 仓库链接</td><td><code>data/config.json</code></td><td>页头与页脚显示</td></tr>
+      <tr><td>研究方向与关键词</td><td><code>data/interests.json</code></td><td>决定文献抓取检索式、相关性评分、资助匹配度</td></tr>
+      <tr><td>资助清单与资格规则</td><td><code>data/funds.json</code></td><td>资格自查那一栏；增删基金不用改代码</td></tr>
+      <tr><td>档案表单有哪些字段</td><td><code>data/profile_schema.json</code></td><td>引导弹层里问你什么</td></tr>
+      <tr><td>示例档案</td><td><code>data/profile.example.json</code></td><td>「载入示例档案」按钮读它</td></tr>
+      <tr><td>院所 / 职位板清单</td><td><code>data/institutions.json</code></td><td>「院所目录」那一栏,<code>fit</code> 是契合度评分</td></tr>
+      <tr><td>院所搜索兜底词</td><td><code>data/config.json</code> → <code>job_search_topic</code></td><td>官网链接失效时 🔍 按钮拼出的搜索词</td></tr>
+      <tr><td>日历收录范围</td><td><code>data/config.json</code> → <code>ics_filter</code></td><td>留空=全部收录;可只留早期项目、可剔除限定公民身份的</td></tr>
+    </table>
+
+    <p class="hnote" style="margin-top:9px">
+      <b>关于「我能不能申」的诚实说明：</b>规则引擎只用你填过的字段判定。
+      <b>留空 = 显示「信息不足」，绝不猜成「能申」</b>。
+      而且规则是各基金公开条款的<b>简化版</b>（窗口延期、机构豁免、特殊通道都没编进去），
+      最终一律以官方 NOFO / 申报指南为准 —— 每条判定旁边都有官方链接，请点进去核对。
+    </p>
+    <p class="hnote">
+      <b>数据去哪了：</b>档案、申请管线、文献收藏与笔记全部存在浏览器 localStorage，
+      不发往任何服务器。换电脑或清缓存前，用档案条上的 <b>⇅ 导入 / 导出</b> 存一份 JSON 带走。
+    </p>
+  </div>
+
   <div class="honest">📖 本页说明网站怎么自动更新、以及需要你手动更新时怎么做。每个灰框右上角有 <b>📋 复制</b> 按钮——复制后<b>打开 Claude Science / Pathy 新开对话粘进去</b>即可(Pivot 更新时把导出的 CSV 一起拖进去)。</div>
 
   <div class="hcard">
@@ -510,9 +638,9 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
   <div class="hcard">
     <h3>🟡 唯一需要你手动的:Pivot-RP 精选(每 2–3 个月)</h3>
-    <p>Pivot 需要 MSKCC 账号登录才能导出,抓不了。步骤:</p>
+    <p>Pivot 需要机构账号登录才能导出,抓不了。步骤:</p>
     <ol class="hsteps">
-      <li>登录 MSKCC Pivot-RP,用你的检索式搜索 → 勾选机会 → <b>Export → CSV</b>(可多个文件)。</li>
+      <li>登录本机构的 Pivot-RP,用你的检索式搜索 → 勾选机会 → <b>Export → CSV</b>(可多个文件)。</li>
       <li>下面这段 <b>📋 复制</b> → Claude Science 新开对话粘进去 → <b>把导出的 CSV 一起拖进消息</b>。</li>
       <li>附一个有 <code>repo</code> 权限的 GitHub token(用完到 GitHub 撤销)。</li>
     </ol>
@@ -525,15 +653,15 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
    独立PI/教职·研究生;Citizenship → 公民/签证要求),不复制 Pivot 的 AI 描述原文(版权)。
 2. 去重(按项目名+资助方),保留已有的手工策展条目。
 3. 重新生成 .ics 日历(python3 scripts/build_ics.py)。
-4. git commit + push 到 github.com/zouxdsheldon/pi-grants,确认 Actions 部署成功。
-仓库在工作区 pi-grants-site/。我的身份:MSKCC Research Associate、博后/早期、中国籍持签证,
-筛「我能申」= 身份含博后/早期 + 非美籍专属 + 未过窗口。</pre>
+4. git commit + push 到我的仓库,确认 Actions 部署成功。
+仓库在工作区 pi-grants-site/。我的身份:〔机构〕〔职称〕、〔职业阶段〕、〔国籍/签证状态〕,
+筛「我能申」= 职业阶段匹配 + 国籍要求满足 + 未过窗口。</pre>
     </div>
   </div>
 
   <div class="hcard">
     <h3>🔎 Pivot-RP 检索关键词(搜新机会时用)</h3>
-    <p class="hnote">登录 MSKCC Pivot-RP → Funding → Advanced Search → 把整条检索式粘进关键词框(字段选 All Fields 或 Abstract)。<b>建议先跑带 ★★★ 的 #1 / #2 / #8</b>,最贴你的护城河。</p>
+    <p class="hnote">登录本机构的 Pivot-RP → Funding → Advanced Search → 把整条检索式粘进关键词框(字段选 All Fields 或 Abstract)。<b>建议先跑带 ★★★ 的 #1 / #2 / #8</b>,最贴你的护城河。</p>
     <p class="hnote" style="color:#a15">⚠️ 别用 ZSWIM8 / TDMD 这类基因或机制词搜——资助方项目描述几乎从不出现具体基因名,会几乎 0 命中。正确做法:用宽 RNA 词抓住资助方,再用疾病/技术/职业阶段词收窄。</p>
 
     <p class="hnote"><b>#1 ★★★ 旗舰:RNA × 代谢(最核心,先跑这条)</b></p>
@@ -602,14 +730,60 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <p>「📅 截止日历」标签 → 左上角 <b>🔔 订阅日历(自动更新)</b>,或 <b>📋 复制订阅网址</b> 粘进 Google/Apple 日历的「通过网址添加日历」:</p>
     <div class="promptbox">
       <button class="copybtn" onclick="cp(this)">📋 复制</button>
-      <pre>https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics</pre>
+      <pre class="icsUrlBox">（页面加载后自动填入本站的订阅网址）</pre>
     </div>
     <p class="hnote">⚠️ 一定用「订阅网址」而非「下载导入」——订阅才会跟着网站每天自动更新。</p>
   </div>
 
-  <p class="hnote" style="margin-top:14px">存档邮箱 zouxdsheldon@gmail.com · 仓库 github.com/zouxdsheldon/pi-grants · 日历用滚动年份,始终显示未来两年不会过期。</p>
+  <p class="hnote" style="margin-top:14px">仓库 <a data-cfg-repo href="#" target="_blank" rel="noopener">（见 data/config.json）</a> · 日历用滚动年份,始终显示未来两年不会过期。</p>
   </div>
   <div class="lang-en" style="display:none">
+  <div class="honest" style="border-left-color:#1B5E20;background:#F1F8F2">
+    🧬 <b>This is an open-source template — fork it and fill in your own information.</b>
+    Everything personal lives only in your own browser (localStorage) and is never uploaded.
+    To make it "yours", edit a few JSON files under <code>data/</code> — <b>no need to touch index.html</b>.
+  </div>
+
+  <div class="hcard" style="border-color:#1B5E20">
+    <h3 style="color:#1B5E20">🚀 Make it your own in three minutes</h3>
+    <ol class="hsteps">
+      <li><b>Just want to use it?</b> Click <b>✏️ Edit my profile</b> at the top right and complete
+      the three steps. Eligibility self-check, funding match ranking and paper relevance all
+      recompute immediately. Nothing to deploy.</li>
+      <li><b>Want your own copy with daily auto-fetching?</b> Fork this repo → Settings → Pages →
+      set Source to <code>GitHub Actions</code> → go to Actions and click <b>Run workflow</b> once.
+      Ten minutes later <code>https://&lt;your-username&gt;.github.io/&lt;repo&gt;/</code> is live.</li>
+      <li><b>Switch to your own research directions</b> (this drives what literature is fetched and
+      how grants are ranked): edit <code>data/interests.json</code>. Field syntax is documented in
+      <code>data/interests.template.json</code>.</li>
+    </ol>
+
+    <table class="htab" style="margin-top:10px">
+      <tr><th>What to change</th><th>File</th><th>Effect</th></tr>
+      <tr><td>Site name / subtitle / repo link</td><td><code>data/config.json</code></td><td>Header and footer</td></tr>
+      <tr><td>Research directions and keywords</td><td><code>data/interests.json</code></td><td>Literature queries, relevance scoring, grant matching</td></tr>
+      <tr><td>Fund catalogue and eligibility rules</td><td><code>data/funds.json</code></td><td>The self-check panel; add or remove funds without touching code</td></tr>
+      <tr><td>Profile form fields</td><td><code>data/profile_schema.json</code></td><td>What the setup wizard asks</td></tr>
+      <tr><td>Example profile</td><td><code>data/profile.example.json</code></td><td>Read by the "Load example profile" button</td></tr>
+      <tr><td>Institutions / job boards</td><td><code>data/institutions.json</code></td><td>The "Institutions" tab; <code>fit</code> is a subjective 1-5 match score</td></tr>
+      <tr><td>Job-search fallback terms</td><td><code>data/config.json</code> → <code>job_search_topic</code></td><td>Query the 🔍 button builds when an official link breaks</td></tr>
+      <tr><td>Calendar scope</td><td><code>data/config.json</code> → <code>ics_filter</code></td><td>Empty = include everything; can keep early-career only or drop citizenship-restricted calls</td></tr>
+    </table>
+
+    <p class="hnote" style="margin-top:9px">
+      <b>An honest note on "can I apply":</b> the rule engine only judges on fields you actually filled in.
+      <b>Blank means "insufficient information" — it will never guess a "yes".</b>
+      The rules are a <b>simplified</b> reading of each funder's public terms (window extensions,
+      institutional waivers and special tracks are not encoded). The official NOFO / call document
+      always governs — every verdict carries a link, please check it.
+    </p>
+    <p class="hnote">
+      <b>Where your data goes:</b> profile, application pipeline, paper favourites and notes all live
+      in browser localStorage and are sent nowhere. Before switching machines or clearing your cache,
+      use <b>⇅ Import / Export</b> on the profile bar to save a JSON copy.
+    </p>
+  </div>
+
 <div class="honest">📖 This page explains how the website updates automatically, and what to do when you need to update it manually. Every gray box has a <b>📋 Copy</b> button in the top-right corner — after copying, <b>open a new Claude Science / Pathy conversation and paste it in</b> (when updating Pivot, drag the exported CSV in along with it).</div>
 
   <div class="hcard">
@@ -625,9 +799,9 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
   <div class="hcard">
     <h3>🟡 The only thing you need to do manually: Pivot-RP curated picks (every 2–3 months)</h3>
-    <p>Pivot requires an MSKCC account login to export, so it can't be scraped automatically. Steps:</p>
+    <p>Pivot requires an institutional account login to export, so it can't be scraped automatically. Steps:</p>
     <ol class="hsteps">
-      <li>Log in to MSKCC Pivot-RP, search using your query strings → check the opportunities → <b>Export → CSV</b> (can be multiple files).</li>
+      <li>Log in to your institution's Pivot-RP, search using your query strings → check the opportunities → <b>Export → CSV</b> (can be multiple files).</li>
       <li><b>📋 Copy</b> the block below → open a new Claude Science conversation and paste it in → <b>drag the exported CSVs into the message as well</b>.</li>
       <li>Attach a GitHub token with <code>repo</code> permission (revoke it on GitHub once you're done).</li>
     </ol>
@@ -640,15 +814,15 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
    独立PI/教职·研究生;Citizenship → 公民/签证要求),不复制 Pivot 的 AI 描述原文(版权)。
 2. 去重(按项目名+资助方),保留已有的手工策展条目。
 3. 重新生成 .ics 日历(python3 scripts/build_ics.py)。
-4. git commit + push 到 github.com/zouxdsheldon/pi-grants,确认 Actions 部署成功。
-仓库在工作区 pi-grants-site/。我的身份:MSKCC Research Associate、博后/早期、中国籍持签证,
-筛「我能申」= 身份含博后/早期 + 非美籍专属 + 未过窗口。</pre>
+4. git commit + push 到我的仓库,确认 Actions 部署成功。
+仓库在工作区 pi-grants-site/。我的身份:〔机构〕〔职称〕、〔职业阶段〕、〔国籍/签证状态〕,
+筛「我能申」= 职业阶段匹配 + 国籍要求满足 + 未过窗口。</pre>
     </div>
   </div>
 
   <div class="hcard">
     <h3>🔎 Pivot-RP search keywords (use when searching for new opportunities)</h3>
-    <p class="hnote">Log in to MSKCC Pivot-RP → Funding → Advanced Search → paste the entire query string into the keyword box (field select All Fields or Abstract). <b>We recommend running the ★★★ #1 / #2 / #8 first</b>, as they best match your niche.</p>
+    <p class="hnote">Log in to your institution's Pivot-RP → Funding → Advanced Search → paste the entire query string into the keyword box (field select All Fields or Abstract). <b>We recommend running the ★★★ #1 / #2 / #8 first</b>, as they best match your niche.</p>
     <p class="hnote" style="color:#a15">⚠️ Don't search using gene or mechanism terms like ZSWIM8 / TDMD — funder program descriptions almost never contain specific gene names, so this will yield almost 0 hits. The right approach: use broad RNA terms to catch the funders, then narrow using disease/technology/career-stage terms.</p>
 
     <p class="hnote"><b>#1 ★★★ Flagship: RNA × Metabolism (most core, run this one first)</b></p>
@@ -717,16 +891,25 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <p>「📅 Deadline Calendar」tab → <b>🔔 Subscribe to calendar (auto-update)</b> in the top-left corner, or <b>📋 Copy subscription URL</b> and paste it into "Add calendar by URL" in Google/Apple Calendar:</p>
     <div class="promptbox">
       <button class="copybtn" onclick="cp(this)">📋 复制</button>
-      <pre>https://zouxdsheldon.github.io/pi-grants/data/grant_deadlines.ics</pre>
+      <pre class="icsUrlBox">（页面加载后自动填入本站的订阅网址）</pre>
     </div>
     <p class="hnote">⚠️ Be sure to use "subscribe by URL" rather than "download and import" — only subscribing will keep it automatically updated with the website every day.</p>
   </div>
 
-  <p class="hnote" style="margin-top:14px">Archive email zouxdsheldon@gmail.com · Repository github.com/zouxdsheldon/pi-grants · The calendar uses a rolling year, always showing the next two years so it never expires.</p>
+  <p class="hnote" style="margin-top:14px">Repository <a data-cfg-repo href="#" target="_blank" rel="noopener">(see data/config.json)</a> · The calendar uses a rolling year, always showing the next two years so it never expires.</p>
   </div>
 </div>
 
 <div class="panel" id="writing">
+  <div class="honest" style="border-left-color:#4A148C;background:#FAF4FF">
+    <b>关于本页的示例内容：</b>本页的完整范文、六类基金草稿与语料库，都是围绕
+    <b>一个具体研究方向的示例</b>（miRNA 降解 × 能量应激代谢记忆）写出来的
+    —— 它演示的是 <b>结构与句式</b>，不是要你照抄科学内容。
+    换成你自己的课题：把每段的科学名词替换掉即可，六部分骨架（Significance / Innovation /
+    Approach / Career / 预算 / 检查清单）对任何方向都通用。
+    研究方向关键词在 <code>data/interests.json</code> 里改；基金清单在 <code>data/funds.json</code> 里增删。
+  </div>
+
   <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
   <!-- ===== 基金类型选择器 + 双向匹配 ===== -->
   <div class="hcard" style="border-color:#1565C0;background:#EEF5FF">
@@ -822,18 +1005,15 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       </ul></details>
   </div>
 
-  <!-- ===== ① 个人资格自查 ===== -->
+  <!-- ===== ① 个人资格自查（由 data/funds.json 驱动，改那个文件即可增删基金） ===== -->
   <div class="hcard" style="border-color:#C62828;background:#FFF6F5">
-    <h3 style="color:#B71C1C">✅ 先查你能不能申 — 个人资格自查（勾选后自动亮/灭每类基金）</h3>
-    <p style="font-size:12.5px;color:#444;margin:4px 0 8px">按你的真实情况勾选，下方立刻标出<b>每类基金你现在能不能投</b>。这是六步法「第一步·明确类型」的落地工具。</p>
-    <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:13px;margin-bottom:8px">
-      <label><input type="checkbox" id="q_us" onchange="checkElig()"> 我有/即将有<b>美国机构</b>职位</label>
-      <label><input type="checkbox" id="q_citizen" onchange="checkElig()"> 我是<b>美籍/绿卡</b></label>
-      <label><input type="checkbox" id="q_pd4" onchange="checkElig()" checked> 我博后<b>≤4 年</b></label>
-      <label><input type="checkbox" id="q_age40" onchange="checkElig()" checked> 我<b>≤40 岁</b></label>
-      <label><input type="checkbox" id="q_hk" onchange="checkElig()"> 我有/即将有<b>香港助理教授</b>职位</label>
-      <label><input type="checkbox" id="q_sg" onchange="checkElig()"> 我有<b>新加坡东道机构</b>支持</label>
-      <label><input type="checkbox" id="q_return" onchange="checkElig()" checked> 我愿<b>全职回国任 PI</b></label>
+    <h3 style="color:#B71C1C">✅ 先查你能不能申 — 个人资格自查</h3>
+    <p style="font-size:12.5px;color:#444;margin:4px 0 8px">判定<b>完全基于你在顶部「✏️ 编辑我的档案」里填的信息</b>，逐条列出依据。没填的字段不猜，会显示「信息不足」而不是替你回答。资助规则每年变，最终以官方指南为准。</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      <button class="pfbtn" onclick="openPf(1)">✏️ 填 / 改我的档案</button>
+      <button class="pfbtn ghost" onclick="loadExample()">📄 载入示例档案看效果</button>
+      <label style="font-size:12.5px;display:flex;align-items:center;gap:5px">
+        <input type="checkbox" id="eligOnlyYes" onchange="checkElig()"> 只看「现在能投」</label>
     </div>
     <div id="eligResult"></div>
   </div>
@@ -1060,7 +1240,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <tr><td style="font-size:12px">紧迫 Urgency<br><span style="color:#C62828;font-weight:700">紧迫</span></td><td style="font-size:12.5px"><code style="background:#F5F7FA;padding:1px 3px">With no approved therapy that restores anti-fibrotic miR-29, defining a metabolic lever on its decay is an urgent and tractable goal.</code></td><td style="font-size:12px">紧迫收束句(空白+可操作性并列)。</td><td style="font-size:11px;color:#777">NIH/优青</td></tr>
     </table>
     </div>
-    <p class="hnote" style="margin-top:8px">📥 完整语料库 Excel（50 条 × 7 列，可筛选、可自行追加）：<a href="data/grant_writing_corpus.xlsx" download><b>grant_writing_corpus_Sheldon.xlsx</b></a>。以后读到好句子按同样格式追加，或把新范例段落丢给我自动抽句打标签并入表。</p>
+    <p class="hnote" style="margin-top:8px">📥 完整语料库 Excel（50 条 × 7 列，可筛选、可自行追加）：<a href="data/grant_writing_corpus.xlsx" download><b>grant_writing_corpus.xlsx</b></a>。以后读到好句子按同样格式追加，或把新范例段落丢给我自动抽句打标签并入表。</p>
   </div>
 
   <div class="hcard">
@@ -1069,7 +1249,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <li><b>NIH Guide for Grants &amp; Contracts</b> — 所有政策变化 / 新公告的官方发布渠道,定期扫。</li>
       <li><b>NIH Notices of Policy Changes</b> — 重点关注,如<b>数据管理与共享(DMS)政策自 2023-01-25 起生效</b>,更早的范例可能没有这部分。</li>
       <li><b>核对日期</b> — 用任何范例/模板前先看提交日期,老范例的格式可能已作废。</li>
-      <li><b>本机构 Sponsored Programs Office(MSKCC)</b> — 最新、最准的第一手信息和内部截止日,永远先问他们。</li>
+      <li><b>本机构 Sponsored Programs Office</b> — 最新、最准的第一手信息和内部截止日,永远先问他们。</li>
     </ul>
   </div>
 
@@ -1323,7 +1503,7 @@ AMPK–TDMD 旗舰提案(proposal_zh.md / proposal_AMPK_TDMD.md),按 NSFC《优�
         <tr><td style="font-size:12px">Urgency<br><span style="color:#C62828;font-weight:700">Urgency</span></td><td style="font-size:12.5px"><code style="background:#F5F7FA;padding:1px 3px">There is an urgent, unmet need to [action], as [consequence of inaction].</code></td><td style="font-size:11px;color:#777">NIH/优青</td></tr>
     </table>
     </div>
-    <p class="hnote" style="margin-top:8px">📥 Full corpus Excel (50 entries × 7 columns, filterable, and you can add your own): <a href="data/grant_writing_corpus.xlsx" download><b>grant_writing_corpus_Sheldon.xlsx</b></a>. In the future, append good sentences you come across in the same format, or hand me a new example paragraph and I'll automatically extract sentences, tag them, and add them to the table.</p>
+    <p class="hnote" style="margin-top:8px">📥 Full corpus Excel (50 entries × 7 columns, filterable, and you can add your own): <a href="data/grant_writing_corpus.xlsx" download><b>grant_writing_corpus.xlsx</b></a>. In the future, append good sentences you come across in the same format, or hand me a new example paragraph and I'll automatically extract sentences, tag them, and add them to the table.</p>
   </div>
 
   <div class="hcard">
@@ -1332,7 +1512,7 @@ AMPK–TDMD 旗舰提案(proposal_zh.md / proposal_AMPK_TDMD.md),按 NSFC《优�
       <li><b>NIH Guide for Grants &amp; Contracts</b> — the official channel for all policy changes / new announcements; scan regularly.</li>
       <li><b>NIH Notices of Policy Changes</b> — pay particular attention, e.g., the <b>Data Management and Sharing (DMS) policy effective since 2023-01-25</b> — earlier examples may not include this part.</li>
       <li><b>Check the dates</b> — before using any example/template, check its submission date first; the format of old examples may already be obsolete.</li>
-      <li><b>Your institution's Sponsored Programs Office (MSKCC)</b> — the most current and accurate first-hand information and internal deadlines; always ask them first.</li>
+      <li><b>Your institution's Sponsored Programs Office</b> — the most current and accurate first-hand information and internal deadlines; always ask them first.</li>
     </ul>
   </div>
 
@@ -1527,37 +1707,188 @@ function whoRow2(g){
 
 const relrank={"高":0,"中":1,"低":2};
 
-/* ---------- profile (localStorage) ---------- */
+/* =========================================================================
+   个人档案（localStorage，纯本地，不上传）
+   字段定义来自 data/profile_schema.json —— 想加字段改那个文件，不用改这里。
+   ========================================================================= */
 const PKEY="pi_profile";
+let PSCHEMA={fields:[],groups:{}}, PEXAMPLE=null, FUNDS=[], SITECFG={};
 function getProfile(){try{return JSON.parse(localStorage.getItem(PKEY)||"{}")}catch(e){return{}}}
-function saveProfile(){
-  localStorage.setItem(PKEY,JSON.stringify({
-    cit:pf_cit.value,yrs:pf_yrs.value,stage:pf_stage.value,auto:autoFilter.classList.contains("on")
-  }));
+function setProfile(o){localStorage.setItem(PKEY,JSON.stringify(o));}
+function profileIsSet(){
+  const p=getProfile();
+  return !!(p.career_stage||p.citizenship||(p.has_position||[]).length);
+}
+function saveProfile(){ /* 兼容旧调用点：档案由弹层保存，这里只持久化开关 */
+  const p=getProfile(); p.auto=document.getElementById("autoFilter").classList.contains("on");
+  setProfile(p);
 }
 function loadProfile(){
   const p=getProfile();
-  if(p.cit)pf_cit.value=p.cit; if(p.yrs)pf_yrs.value=p.yrs; if(p.stage)pf_stage.value=p.stage;
-  if(p.auto)autoFilter.classList.add("on");
+  if(p.auto)document.getElementById("autoFilter").classList.add("on");
+  paintChip();
 }
-["pf_cit","pf_yrs","pf_stage"].forEach(id=>document.getElementById(id).addEventListener("change",()=>{saveProfile();renderLive();}));
-autoFilter.onclick=()=>{autoFilter.classList.toggle("on");saveProfile();renderLive();};
-
-/* ---------- eligibility inference (HONEST) ----------
-   Federal data has no per-person citizenship field. We infer a coarse badge
-   from what IS in the data + user profile, and always link to the NOFO. */
-function eligLive(g){
-  // career/PI-transition mechanisms are the ones that matter to this user
+function paintChip(){
+  const c=document.getElementById("pfChip"); if(!c)return;
   const p=getProfile();
-  const yrs=parseInt((p.yrs||"4"),10);
-  if(!g.career){
-    // not a career/fellowship mechanism → eligibility is institution-level, N/A to person
-    return {cls:"na",txt:"机构级 · 见 NOFO",why:"此类为机构/研究项目类,个人资格以 NOFO 为准"};
+  if(!profileIsSet()){
+    c.className="pfchip";
+    c.innerHTML="👤 <b>未设置档案</b> — 资格判定与匹配度都依赖它";
+    return;
   }
-  // career mechanism: postdoc-year window heuristic (K99 ≤4 parent / ≤6 NCI)
-  let cls="warn",txt="需查签证/窗口",why="career 机制,公民要求见 NOFO";
-  if(p.stage==="pi") why="转轨/独立方向匹配你的目标";
-  if(yrs>=7){cls="no";txt="可能超窗口";why="多数转轨奖要求 ≤4–6 年博后";}
+  const lbl=k=>{
+    const f=PSCHEMA.fields.find(x=>x.key===k); if(!f||!f.options)return p[k];
+    const o=f.options.find(x=>x.v===p[k]); return o?(o.zh||o.v):p[k];
+  };
+  const bits=[];
+  if(p.display_name)bits.push(p.display_name);
+  if(p.institution)bits.push(p.institution);
+  if(p.career_stage)bits.push(lbl("career_stage"));
+  if(p.citizenship)bits.push(lbl("citizenship"));
+  if(p.postdoc_years!=null&&p.postdoc_years!=="")bits.push("博后 "+p.postdoc_years+" 年");
+  if((p.has_position||[]).length)bits.push("职位地:"+p.has_position.join("/"));
+  c.className="pfchip set";
+  c.innerHTML="👤 <b>"+esc(bits.slice(0,4).join(" · ")||"已设置")+"</b>";
+  c.title=bits.join(" · ");
+}
+
+/* ---------- 声明式资格求值：规则写在 data/funds.json，这里只负责执行 ---------- */
+/* 返回 {status:"yes"|"no"|"unknown", reasons:[{ok,text}]} —— 任一规则缺数据即 unknown，
+   绝不拿默认值替用户回答。 */
+function evalRule(r,p){
+  const v=p[r.field];
+  const missing = (v===undefined||v===null||v===""||(Array.isArray(v)&&!v.length));
+  if(missing)return {ok:null,text:"缺少「"+fieldLabel(r.field)+"」信息，无法判定"};
+  const fill=t=>String(t||"").replace("{v}",Array.isArray(v)?v.join("/"):v);
+  let ok;
+  switch(r.op){
+    case "eq":  ok = v===r.value; break;
+    case "ne":  ok = v!==r.value; break;
+    case "gte": ok = Number(v)>=Number(r.value); break;
+    case "lte": ok = Number(v)<=Number(r.value); break;
+    case "in":  ok = (r.value||[]).indexOf(v)>=0; break;
+    case "has": ok = Array.isArray(v) && v.indexOf(r.value)>=0; break;
+    case "nhas": ok = Array.isArray(v) && v.indexOf(r.value)<0; break;
+    case "truthy": ok = !!v; break;
+    case "falsy":  ok = !v; break;
+    default: return {ok:null,text:"未知规则算子 "+r.op};
+  }
+  return {ok:ok, text: fill(ok? r.pass_zh : r.fail_zh)};
+}
+function fieldLabel(k){
+  const f=PSCHEMA.fields.find(x=>x.key===k);
+  return f?(f.label_zh||k):k;
+}
+function evalFund(f,p){
+  const reasons=(f.rules||[]).map(r=>evalRule(r,p));
+  let status="yes";
+  if(reasons.some(r=>r.ok===false))status="no";
+  else if(reasons.some(r=>r.ok===null))status="unknown";
+  if(!reasons.length)status="unknown";
+  return {status,reasons};
+}
+
+/* ---------- 档案表单（三步引导） ---------- */
+let PFSTEP=1, PFDRAFT={};
+function fieldHTML(f,val){
+  const id="pff_"+f.key;
+  let ctl="";
+  if(f.type==="text")   ctl=`<input type="text" id="${id}" value="${esc(val||"")}">`;
+  else if(f.type==="number")
+    ctl=`<input type="number" id="${id}" value="${val===undefined||val===null?"":esc(String(val))}" min="${f.min!=null?f.min:0}" max="${f.max!=null?f.max:999}" placeholder="留空 = 不填">`;
+  else if(f.type==="select"){
+    ctl=`<select id="${id}"><option value="">— 未选择 —</option>`+
+        (f.options||[]).map(o=>`<option value="${esc(o.v)}"${o.v===val?" selected":""}>${esc(o.zh||o.v)}</option>`).join("")+
+        `</select>`;
+  } else if(f.type==="multi"){
+    const cur=Array.isArray(val)?val:[];
+    ctl=`<div class="fmulti" id="${id}">`+
+        (f.options||[]).map(o=>`<span data-v="${esc(o.v)}" class="${cur.indexOf(o.v)>=0?"on":""}">${esc(o.zh||o.v)}</span>`).join("")+
+        `</div>`;
+  }
+  return `<div class="frow"><label for="${id}">${esc(f.label_zh||f.key)}</label>${ctl}`+
+         (f.help_zh?`<div class="fhelp">${f.help_zh}</div>`:"")+`</div>`;
+}
+function renderPfForm(){
+  const box=document.getElementById("pfForm");
+  document.querySelectorAll(".mstep").forEach(x=>{
+    const n=+x.dataset.st;
+    x.classList.toggle("active",n===PFSTEP);
+    x.classList.toggle("done",n<PFSTEP);
+  });
+  if(PFSTEP===1||PFSTEP===2){
+    const grp=PFSTEP===1?"basic":"eligibility";
+    box.innerHTML=PSCHEMA.fields.filter(f=>(f.group||"basic")===grp)
+                    .map(f=>fieldHTML(f,PFDRAFT[f.key])).join("");
+    box.querySelectorAll(".fmulti span").forEach(sp=>sp.onclick=()=>sp.classList.toggle("on"));
+  } else {
+    const kws=(PFDRAFT.keywords||[]).join("\n");
+    box.innerHTML=
+      `<div class="mnote" style="margin:0 0 12px">这一步决定「📚 文献追踪」和「🎯 我能申的」怎么给你打分。
+       每行一个关键词或短语，越具体越准。<b>只影响本浏览器里的高亮与排序</b>；
+       要让服务器端每日抓取也换成你的方向，需 fork 仓库并改 <code>data/interests.json</code>（见「📖 使用说明」）。</div>
+       <textarea class="kwbox" id="pff_keywords" placeholder="例如：\nmicroRNA decay\nAMPK signaling\nintestinal fibrosis">${esc(kws)}</textarea>`;
+  }
+  document.getElementById("pfPrev").disabled=(PFSTEP===1);
+  document.getElementById("pfNext").style.display=(PFSTEP===3?"none":"");
+  document.getElementById("pfSave").style.display=(PFSTEP===3?"":"none");
+}
+function collectStep(){
+  if(PFSTEP===3){
+    const t=document.getElementById("pff_keywords");
+    if(t)PFDRAFT.keywords=t.value.split("\n").map(x=>x.trim()).filter(Boolean);
+    return;
+  }
+  const grp=PFSTEP===1?"basic":"eligibility";
+  PSCHEMA.fields.filter(f=>(f.group||"basic")===grp).forEach(f=>{
+    const el=document.getElementById("pff_"+f.key); if(!el)return;
+    if(f.type==="multi"){
+      PFDRAFT[f.key]=[...el.querySelectorAll("span.on")].map(x=>x.dataset.v);
+    } else if(f.type==="number"){
+      PFDRAFT[f.key]= el.value===""?undefined:Number(el.value);
+    } else PFDRAFT[f.key]=el.value||undefined;
+  });
+}
+function openPf(step){
+  PFDRAFT=Object.assign({},getProfile());
+  PFSTEP=step||1; renderPfForm();
+  document.getElementById("pfModal").classList.add("open");
+}
+function closePf(){document.getElementById("pfModal").classList.remove("open");}
+
+/* ---------- 导入 / 导出全部本地数据 ---------- */
+const LS_KEYS=["pi_profile","pi_tracked","pi_papers_state"];
+function exportAll(){
+  const o={_app:"grants-finder-pro",_exported:new Date().toISOString()};
+  LS_KEYS.forEach(k=>{try{o[k]=JSON.parse(localStorage.getItem(k)||"null")}catch(e){o[k]=null}});
+  return JSON.stringify(o,null,1);
+}
+function importAll(txt){
+  let o; try{o=JSON.parse(txt)}catch(e){return "❌ 不是合法 JSON："+e.message;}
+  let n=0;
+  LS_KEYS.forEach(k=>{ if(o[k]!==undefined&&o[k]!==null){localStorage.setItem(k,JSON.stringify(o[k]));n++;} });
+  return n? ("✅ 已导入 "+n+" 项，正在刷新…") : "⚠️ 文件里没有本站认识的数据键";
+}
+
+/* ---------- 联邦机会的资格徽章（诚实推断） ----------
+   Grants.gov 没有「个人是否符合」的字段——资格数据是机构级的，公民身份写在 NOFO 正文里。
+   所以这里只用「数据里真有的字段 + 用户档案里真填了的项」做粗判，并永远给出 NOFO 链接。
+   用户没填的项一律返回 unknown，不用默认值代答。 */
+function eligLive(g){
+  const p=getProfile();
+  if(!g.career){
+    return {cls:"na",txt:"机构级 · 见 NOFO",why:"此类为机构/研究项目类，个人资格以 NOFO 为准"};
+  }
+  const yrs = (p.postdoc_years===undefined||p.postdoc_years===null||p.postdoc_years==="")
+              ? null : Number(p.postdoc_years);
+  if(yrs===null){
+    return {cls:"warn",txt:"需填档案判定",
+            why:"这是 career/fellowship 机制，窗口按博后年限卡；请在顶部「编辑我的档案」填写后再看"};
+  }
+  let cls="warn",txt="需查签证/窗口",why="career 机制，公民身份要求见 NOFO 正文";
+  if(p.career_stage==="faculty_junior"||p.career_stage==="faculty_senior")
+    why="你已是独立 PI，career 转轨类机制多数不再适用，请优先看研究项目类（R01 等）";
+  if(yrs>=7){cls="no";txt="可能超窗口";why="博后已 "+yrs+" 年；多数转轨奖要求 ≤4–6 年（部分所可延期，先问项目官员）";}
   return {cls,txt,why};
 }
 function passAuto(g){
@@ -1700,7 +2031,7 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb,inst,pp,ints]=await Promise.all([
+    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
@@ -1708,11 +2039,17 @@ async function loadData(){
       fetch("data/institutions.json?_="+Date.now()).then(r=>r.ok?r.json():{institutions:[]}).catch(()=>({institutions:[]})),
       fetch("data/papers.json?_="+Date.now()).then(r=>r.ok?r.json():{papers:[]}).catch(()=>({papers:[]})),
       fetch("data/interests.json?_="+Date.now()).then(r=>r.ok?r.json():{interests:[]}).catch(()=>({interests:[]})),
+      fetch("data/config.json?_="+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
+      fetch("data/funds.json?_="+Date.now()).then(r=>r.ok?r.json():{funds:[]}).catch(()=>({funds:[]})),
+      fetch("data/profile_schema.json?_="+Date.now()).then(r=>r.ok?r.json():{fields:[]}).catch(()=>({fields:[]})),
     ]);
     LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
     INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
     PAPERS=pp.papers||[]; PAPMETA=pp.meta||{}; INTERESTS=(ints.interests||[]);
     INTMAP={}; INTERESTS.forEach(i=>INTMAP[i.id]=i);
+    SITECFG=scfg||{}; FUNDS=(fnd.funds||[]); PSCHEMA=(psch&&psch.fields)?psch:{fields:[],groups:{}};
+    applySiteConfig(); paintChip(); try{checkElig();}catch(e){console.warn("elig",e);}
+    maybeOnboard();
     document.getElementById("papN").textContent=PAPERS.length;
     liveN.textContent=LIVE.length;
     chgN.textContent=CHANGES.length;
@@ -2027,7 +2364,7 @@ function renderPipeline(){
     return (x==null?9999:x)-(y==null?9999:y);});
   document.getElementById("pipeStatus").innerHTML=`共 <b>${allKeys.length}</b> 个 → 筛出 <b>${keys.length}</b> 个`;
   if(!keys.length){wrap.innerHTML='<p style="color:var(--muted);padding:16px">该筛选下没有项目。点「↺ 重置」。</p>';return;}
-  let html=`<table class="pipe"><tr><th>项目</th><th>状态</th><th>截止倒计时</th><th>MSKCC 内部笔记</th><th></th></tr>`;
+  let html=`<table class="pipe"><tr><th>项目</th><th>状态</th><th>截止倒计时</th><th>机构内部笔记</th><th></th></tr>`;
   keys.forEach(id=>{const g=t[id];const dc=daysTo(g.close);
     const cd=dc==null?"—":(dc<0?`已过 ${-dc} 天`:`${dc} 天`);
     const col=dc==null?"#556":(dc<0?"#999":dc<=7?"var(--red)":dc<=30?"#E67E22":"var(--green)");
@@ -2357,10 +2694,15 @@ function instCard(i,idx,TRK){
     <div class="funder" style="margin:2px 0 5px">${i.note}</div>
     <div class="actions" style="margin:0">
       <a class="abtn" href="${i.url}" target="_blank">🏛️ 招聘页</a>
-      <a class="abtn" href="${i.fallback}" target="_blank">🔍 搜索(链接失效时用)</a>
+      <a class="abtn" href="${instFallback(i)}" target="_blank">🔍 搜索(链接失效时用)</a>
       <span class="abtn" style="cursor:pointer" onclick="instTrack(${idx})">${TRK["inst_"+i.name]?"✅ 已关注":"➕ 关注"}</span>
     </div>
   </div>`;
+}
+/* 院所搜索兜底链接：按 data/config.json 的 job_search_topic 现算，而不是写死在数据里 */
+function instFallback(i){
+  const topic=(SITECFG&&SITECFG.job_search_topic)||"faculty position assistant professor";
+  return "https://duckduckgo.com/?q="+encodeURIComponent(i.name+" "+topic);
 }
 function renderInsts(){
   const wrap=document.getElementById("instWrap");
@@ -2560,26 +2902,131 @@ document.getElementById("myRst").onclick=()=>{
   renderMyApps();};
 
 function checkElig(){
-  const g=id=>document.getElementById(id).checked;
-  const us=g("q_us"),cit=g("q_citizen"),pd4=g("q_pd4"),age=g("q_age40"),hk=g("q_hk"),sg=g("q_sg"),ret=g("q_return");
-  const rules=[
-    {n:"🇺🇸 NCI K99/R00",ok:us&&pd4,why:us&&pd4?"可申：有美国机构 + 博后≤4年，且不限国籍——你的头号目标。":(!us?"缺：需美国机构职位。":"缺：博后已超 4 年（可问项目官员能否延期）。")},
-    {n:"🇺🇸 NRSA F32",ok:us&&cit,why:us&&cit?"可申：有美国机构 + 美籍/绿卡。":(!cit?"多半不行：F32 通常要求美籍/绿卡——先核对该 NOFO。":"缺：需美国机构。")},
-    {n:"🇺🇸 R01 (as PI)",ok:false,why:"现阶段不行：需独立 PI 身份。建议当作结构模板学习，K99→R00→R01。"},
-    {n:"🇨🇳 海外优青",ok:age&&ret,why:age&&ret?"可申：≤40岁 + 愿全职回国。突出 7 篇一作代表作。":(!age?"缺：通常要求≤40岁（女性可放宽，看当年指南）。":"缺：需承诺全职回国。")},
-    {n:"🇭🇰 RGC ECS",ok:hk,why:hk?"可申：有香港助理教授职位（受聘≤3年）。":"缺：需先获香港高校助理教授职位。"},
-    {n:"🇸🇬 NRF Fellowship",ok:sg,why:sg?"可申：有新加坡东道机构支持。":"缺：需新加坡 host institution。"}
-  ];
-  document.getElementById("eligResult").innerHTML=rules.map(r=>
-    `<div style="padding:6px 10px;margin:4px 0;border-radius:7px;border-left:4px solid ${r.ok?'#2E7D32':'#C62828'};background:${r.ok?'#F1F8F2':'#FDF2F2'}">
-      <b style="color:${r.ok?'#1B5E20':'#B71C1C'}">${r.ok?'✅ 现在能投':'⛔ 暂不满足'}</b> · <b>${r.n}</b>
-      <button class="abtn wbtn" style="margin-left:8px;font-size:10.5px" onclick="goWrite('${({"🇺🇸 NCI K99/R00":"k99","🇺🇸 NRSA F32":"f32","🇺🇸 R01 (as PI)":"r01","🇨🇳 海外优青":"youqing","🇭🇰 RGC ECS":"ecs","🇸🇬 NRF Fellowship":"nrf"})[r.n]}')">✍️ 看怎么写</button>
-      <div style="font-size:12px;color:#555;margin-top:2px">${r.why}</div>
-    </div>`).join("");
+  const box=document.getElementById("eligResult"); if(!box)return;
+  if(!FUNDS.length){box.innerHTML='<p style="color:var(--muted);font-size:12.5px">资助目录 data/funds.json 未能载入。</p>';return;}
+  const p=getProfile();
+  const noProf=!profileIsSet();
+  const hint = noProf ? '<div class="eligrow unk"><span class="eligicon">👤</span><div class="eligmain">'+
+      '<div class="eligname">还没有档案 — 下面 '+FUNDS.length+' 个资助全部显示「信息不足」</div>'+
+      '<div class="eligwhy">点右上角「✏️ 填写/修改档案」用 1 分钟填完，或「👤 载入示例档案」先看这块长什么样。'+
+      '本站不猜你没填的信息：留空的字段一律判为信息不足，不会给你一个假的「能申」。</div>'+
+      '</div></div>' : "";
+  const onlyYes=(document.getElementById("eligOnlyYes")||{}).checked;
+  const ICON={yes:"✅",no:"⛔",unknown:"❓"};
+  const HEAD={yes:"现在能投",no:"暂不满足",unknown:"信息不足"};
+  const rows=FUNDS.map(f=>{
+    const r=evalFund(f,p);
+    if(onlyYes&&r.status!=="yes")return "";
+    const why=r.reasons.map(x=>
+      `<div>${x.ok===true?"✔":x.ok===false?"✘":"·"} ${esc(x.text)}</div>`).join("");
+    const note=f.note_zh?`<div style="margin-top:4px">${f.note_zh}</div>`:"";
+    const wbtn=f.write_key?`<button class="pfbtn ghost" style="font-size:11px;padding:3px 9px;margin-left:8px" onclick="goWrite('${f.write_key}')">✍️ 看怎么写</button>`:"";
+    return `<div class="eligrow ${r.status==="unknown"?"unk":r.status}">
+      <span class="eligicon">${ICON[r.status]}</span>
+      <div class="eligmain">
+        <div class="eligname">${esc(f.flag||"")} ${esc(f.name)}
+          <span style="font-weight:400;color:var(--muted);font-size:11.5px"> · ${esc(f.agency||"")} · ${esc(f.region||"")}</span>
+          ${wbtn}</div>
+        <div class="eligwhy"><b>${HEAD[r.status]}</b> — ${esc(f.summary_zh||"")}${why}${note}
+          ${f.url?` <a href="${esc(f.url)}" target="_blank" rel="noopener">官方页面 ↗</a>`:""}</div>
+      </div></div>`;
+  }).filter(Boolean).join("");
+  box.innerHTML = hint + (rows || '<p style="color:var(--muted);font-size:12.5px">按当前档案，没有「现在能投」的项目 —— 取消勾选可看全部及缺什么。</p>');
 }
 
 
 // init fund selector default
+
+
+/* =========================================================================
+   通用化装配：站点配置 → 页面；首访引导；档案弹层与导入导出的事件绑定
+   ========================================================================= */
+function applySiteConfig(){
+  const c=SITECFG||{};
+  if(c.site_title)document.getElementById("siteTitle").textContent=c.site_title;
+  const sub=[];
+  if(c.owner_display)sub.push(c.owner_display);
+  sub.push(c.site_subtitle_zh||"全球 PI 资助 · 学术职位 · 文献追踪(每日自动更新)");
+  document.getElementById("siteSub").textContent=sub.join(" · ");
+  if(c.site_title)document.title=c.site_title.replace(/^[^\w\u4e00-\u9fa5]+/,"").trim()||document.title;
+  /* 日历订阅链接：用当前站点地址推导，不写死任何人的用户名 */
+  const icsAbs=new URL("data/grant_deadlines.ics",location.href).href;
+  const wc=document.getElementById("icsWebcal");
+  if(wc)wc.href="webcal://"+icsAbs.replace(/^https?:\/\//,"");
+  document.querySelectorAll("pre.icsUrlBox").forEach(el=>el.textContent=icsAbs);
+  const cp=document.getElementById("icsCopy");
+  if(cp)cp.onclick=()=>navigator.clipboard.writeText(icsAbs).then(()=>{cp.textContent="✅ 已复制";setTimeout(()=>cp.textContent="📋 复制订阅链接",1800);});
+  /* 仓库地址：优先用 config，其次从 <user>.github.io/<repo>/ 反推 */
+  let repo=c.repo_url||"";
+  if(!repo){
+    const m=location.hostname.match(/^([^.]+)\.github\.io$/);
+    const seg=location.pathname.split("/").filter(Boolean)[0];
+    if(m)repo="https://github.com/"+m[1]+(seg?"/"+seg:"");
+  }
+  document.querySelectorAll("[data-cfg-repo]").forEach(el=>{
+    if(repo){el.textContent=repo.replace(/^https?:\/\//,"");el.href=repo;}
+    else{el.textContent="（在 data/config.json 里填 repo_url）";el.removeAttribute("href");}
+  });
+}
+
+const ONBOARD_KEY="pi_onboarded";
+function maybeOnboard(){
+  if(localStorage.getItem(ONBOARD_KEY))return;
+  if(profileIsSet()){localStorage.setItem(ONBOARD_KEY,"1");return;}
+  openPf(1);
+  localStorage.setItem(ONBOARD_KEY,"1");
+}
+function loadExample(){
+  fetch("data/profile.example.json?_="+Date.now()).then(r=>r.json()).then(j=>{
+    const prev=getProfile();
+    setProfile(Object.assign({},j.profile||{},{auto:prev.auto}));
+    PEXAMPLE=j; afterProfileChange("✅ 已载入示例档案（"+(j.label_zh||"示例")+"）");
+  }).catch(e=>alert("载入示例失败："+e.message));
+}
+function afterProfileChange(msg){
+  paintChip();
+  try{checkElig();}catch(e){}
+  try{renderLive();}catch(e){}
+  try{renderMyApps();}catch(e){}
+  try{renderPapers();}catch(e){}
+  const st=document.getElementById("pfStat"); if(st&&msg)st.textContent=msg;
+}
+
+/* --- 事件绑定（元素在 DOM 里一定存在，直接绑） --- */
+(function wireProfileUI(){
+  const $=id=>document.getElementById(id);
+  $("pfEdit").onclick=()=>openPf(1);
+  $("pfDemo").onclick=()=>{loadExample();};
+  $("pfClose").onclick=closePf;
+  $("pfPrev").onclick=()=>{collectStep();PFSTEP=Math.max(1,PFSTEP-1);renderPfForm();};
+  $("pfNext").onclick=()=>{collectStep();PFSTEP=Math.min(3,PFSTEP+1);renderPfForm();};
+  $("pfSave").onclick=()=>{
+    collectStep();
+    const prev=getProfile();
+    PFDRAFT.auto=prev.auto;
+    setProfile(PFDRAFT);
+    closePf(); afterProfileChange("");
+  };
+  document.querySelectorAll(".mstep").forEach(x=>x.onclick=()=>{collectStep();PFSTEP=+x.dataset.st;renderPfForm();});
+  $("pfModal").onclick=e=>{if(e.target.id==="pfModal")closePf();};
+
+  $("pfIO").onclick=()=>{$("ioText").value=exportAll();$("ioStat").textContent="";$("ioModal").classList.add("open");};
+  $("ioClose").onclick=()=>$("ioModal").classList.remove("open");
+  $("ioModal").onclick=e=>{if(e.target.id==="ioModal")$("ioModal").classList.remove("open");};
+  $("ioExp").onclick=()=>{$("ioText").value=exportAll();$("ioStat").textContent="已导出到文本框，全选复制即可。";};
+  $("ioDl").onclick=()=>{
+    const b=new Blob([exportAll()],{type:"application/json"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(b);
+    a.download="grants-finder-profile-"+new Date().toISOString().slice(0,10)+".json";
+    a.click();URL.revokeObjectURL(a.href);
+  };
+  $("ioImp").onclick=()=>{
+    const msg=importAll($("ioText").value);
+    $("ioStat").textContent=msg;
+    if(msg.startsWith("✅")){setTimeout(()=>location.reload(),900);}
+  };
+})();
 
 loadProfile();
 

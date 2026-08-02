@@ -1,0 +1,229 @@
+{
+ "_doc": "个人档案的字段说明。站点用 localStorage 保存你的档案（不上传、不外发）；本文件只是字段字典 + 下拉选项，供前端渲染表单与资格判定使用。",
+ "fields": [
+  {
+   "key": "display_name",
+   "type": "text",
+   "label_zh": "姓名（仅显示在页首，可留空）",
+   "label_en": "Display name",
+   "group": "basic"
+  },
+  {
+   "key": "institution",
+   "type": "text",
+   "label_zh": "现单位",
+   "label_en": "Current institution",
+   "group": "basic"
+  },
+  {
+   "key": "citizenship",
+   "type": "select",
+   "label_zh": "公民身份",
+   "label_en": "Citizenship",
+   "group": "basic",
+   "options": [
+    {
+     "v": "other",
+     "zh": "非美籍、无绿卡",
+     "en": "Non-US, no green card"
+    },
+    {
+     "v": "us_pr",
+     "zh": "美国永久居民（绿卡）",
+     "en": "US permanent resident"
+    },
+    {
+     "v": "us_citizen",
+     "zh": "美国公民",
+     "en": "US citizen"
+    },
+    {
+     "v": "eu",
+     "zh": "欧盟公民",
+     "en": "EU citizen"
+    },
+    {
+     "v": "uk",
+     "zh": "英国公民",
+     "en": "UK citizen"
+    }
+   ]
+  },
+  {
+   "key": "career_stage",
+   "type": "select",
+   "label_zh": "当前阶段",
+   "label_en": "Career stage",
+   "group": "basic",
+   "options": [
+    {
+     "v": "phd",
+     "zh": "博士在读",
+     "en": "PhD student"
+    },
+    {
+     "v": "postdoc",
+     "zh": "博士后 / Research Associate",
+     "en": "Postdoc / Research Associate"
+    },
+    {
+     "v": "faculty_junior",
+     "zh": "助理教授 / 独立 PI（早期）",
+     "en": "Assistant Prof / early PI"
+    },
+    {
+     "v": "faculty_senior",
+     "zh": "副教授及以上",
+     "en": "Associate Prof and above"
+    }
+   ]
+  },
+  {
+   "key": "postdoc_years",
+   "type": "number",
+   "label_zh": "已做博后年数",
+   "label_en": "Years as postdoc",
+   "group": "eligibility",
+   "min": 0,
+   "max": 15,
+   "help_zh": "多数转轨奖（K99 等）按此卡窗口。未开始填 0。"
+  },
+  {
+   "key": "years_since_phd",
+   "type": "number",
+   "label_zh": "博士毕业至今年数",
+   "label_en": "Years since PhD",
+   "group": "eligibility",
+   "min": 0,
+   "max": 25,
+   "help_zh": "ERC / MSCA / HFSP 按此卡窗口，而不是按年龄。"
+  },
+  {
+   "key": "age",
+   "type": "number",
+   "label_zh": "年龄",
+   "label_en": "Age",
+   "group": "eligibility",
+   "min": 20,
+   "max": 70,
+   "help_zh": "仅中国大陆部分人才项目按年龄卡窗口；不想填可留空，相关判定会显示「信息不足」。"
+  },
+  {
+   "key": "first_author_papers",
+   "type": "number",
+   "label_zh": "一作 / 通讯论文篇数",
+   "label_en": "First/corresponding-author papers",
+   "group": "eligibility",
+   "min": 0,
+   "max": 200
+  },
+  {
+   "key": "has_position",
+   "type": "multi",
+   "label_zh": "我在这些国家/地区有（或即将有）职位",
+   "label_en": "I have (or will have) a position in",
+   "group": "eligibility",
+   "options": [
+    {
+     "v": "US",
+     "zh": "美国"
+    },
+    {
+     "v": "CN",
+     "zh": "中国大陆"
+    },
+    {
+     "v": "HK",
+     "zh": "香港"
+    },
+    {
+     "v": "SG",
+     "zh": "新加坡"
+    },
+    {
+     "v": "UK",
+     "zh": "英国"
+    },
+    {
+     "v": "EU",
+     "zh": "欧盟"
+    },
+    {
+     "v": "JP",
+     "zh": "日本"
+    },
+    {
+     "v": "KR",
+     "zh": "韩国"
+    },
+    {
+     "v": "CA",
+     "zh": "加拿大"
+    },
+    {
+     "v": "AU",
+     "zh": "澳大利亚"
+    }
+   ]
+  },
+  {
+   "key": "willing_relocate",
+   "type": "multi",
+   "label_zh": "我愿意去这些地方任职",
+   "label_en": "I am willing to relocate to",
+   "group": "eligibility",
+   "options": [
+    {
+     "v": "US",
+     "zh": "美国"
+    },
+    {
+     "v": "CN",
+     "zh": "中国大陆"
+    },
+    {
+     "v": "HK",
+     "zh": "香港"
+    },
+    {
+     "v": "SG",
+     "zh": "新加坡"
+    },
+    {
+     "v": "UK",
+     "zh": "英国"
+    },
+    {
+     "v": "EU",
+     "zh": "欧盟"
+    },
+    {
+     "v": "JP",
+     "zh": "日本"
+    },
+    {
+     "v": "KR",
+     "zh": "韩国"
+    },
+    {
+     "v": "CA",
+     "zh": "加拿大"
+    },
+    {
+     "v": "AU",
+     "zh": "澳大利亚"
+    }
+   ]
+  }
+ ],
+ "groups": {
+  "basic": {
+   "zh": "基本信息",
+   "en": "Basics"
+  },
+  "eligibility": {
+   "zh": "资格相关",
+   "en": "Eligibility"
+  }
+ }
+}

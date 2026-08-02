@@ -1,0 +1,309 @@
+{
+ "_doc": "资助资格规则目录。rules 由前端 evalRule() 求值，字段名对应 profile.json 的键。改这里就能增删基金，无需改 JS。fail 文案里的 {v} 会替换为该字段当前值。",
+ "funds": [
+  {
+   "id": "k99",
+   "flag": "🇺🇸",
+   "name": "NIH K99/R00 (Pathway to Independence)",
+   "agency": "NIH",
+   "region": "美国",
+   "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-135.html",
+   "write_key": "k99",
+   "summary_zh": "博后→独立 PI 转轨奖。K99 阶段 1–2 年在导师实验室，R00 阶段 3 年带着钱去新单位启动独立实验室。",
+   "summary_en": "Postdoc-to-PI transition award. K99 phase in mentor's lab, R00 phase portable to your own lab.",
+   "rules": [
+    {
+     "field": "career_stage",
+     "op": "in",
+     "value": [
+      "postdoc"
+     ],
+     "pass_zh": "处于博士后阶段 —— K99 正是为这个阶段设计的",
+     "fail_zh": "当前身份为「{v}」；K99 要求申请时仍是博士后（已获教职者请看 R01 等研究项目类）"
+    },
+    {
+     "field": "has_position",
+     "op": "has",
+     "value": "US",
+     "pass_zh": "有美国机构职位",
+     "fail_zh": "需要美国机构的职位（K99 必须由美国单位申报）"
+    },
+    {
+     "field": "postdoc_years",
+     "op": "lte",
+     "value": 4,
+     "pass_zh": "博后 {v} 年，在 ≤4 年窗口内",
+     "fail_zh": "博后已 {v} 年，超过一般 ≤4 年窗口（NCI 等所可放宽至 ≤6 年，且可申请延期——先问项目官员）"
+    }
+   ],
+   "no_citizenship_req": true,
+   "note_zh": "⭐ 不限国籍 —— 对非美籍博后而言，这是极少数可直接申请的美国联邦通道。"
+  },
+  {
+   "id": "f32",
+   "flag": "🇺🇸",
+   "name": "NIH NRSA F32 (Individual Postdoctoral Fellowship)",
+   "agency": "NIH",
+   "region": "美国",
+   "url": "https://researchtraining.nih.gov/programs/fellowships/F32",
+   "write_key": "f32",
+   "summary_zh": "博后个人训练奖，重「训练计划」轻「产出承诺」，篇幅短。",
+   "summary_en": "Individual postdoctoral training fellowship; emphasises the training plan over deliverables.",
+   "rules": [
+    {
+     "field": "career_stage",
+     "op": "in",
+     "value": [
+      "postdoc"
+     ],
+     "pass_zh": "处于博士后阶段",
+     "fail_zh": "当前身份为「{v}」；F32 是博后个人 fellowship，教职阶段不适用"
+    },
+    {
+     "field": "has_position",
+     "op": "has",
+     "value": "US",
+     "pass_zh": "有美国机构职位",
+     "fail_zh": "需要美国机构的职位"
+    },
+    {
+     "field": "citizenship",
+     "op": "in",
+     "value": [
+      "us_citizen",
+      "us_pr"
+     ],
+     "pass_zh": "美籍 / 绿卡，符合 NRSA 身份要求",
+     "fail_zh": "NRSA 通常要求美国公民或永久居民——请逐条核对该 NOFO 的 Eligibility 段"
+    }
+   ],
+   "note_zh": "若不符合身份要求，同层级的替代方向是 K99（不限国籍）或私人基金会博后奖。"
+  },
+  {
+   "id": "r01",
+   "flag": "🇺🇸",
+   "name": "NIH R01 (Research Project Grant)",
+   "agency": "NIH",
+   "region": "美国",
+   "url": "https://grants.nih.gov/grants/funding/r01.htm",
+   "write_key": "r01",
+   "summary_zh": "标准研究项目基金,需以独立 PI 身份申请。申报单位须为 NIH 认可的机构;境外机构可以申请但受限,具体看该 NOFO 的 \"Eligible Institutions\" 条款。",
+   "summary_en": "Standard research project grant; requires independent PI status. Applicant institution must be NIH-eligible — foreign institutions may apply but with restrictions; check the NOFO's Eligible Institutions section.",
+   "rules": [
+    {
+     "field": "career_stage",
+     "op": "in",
+     "value": [
+      "faculty_junior",
+      "faculty_senior",
+      "pi"
+     ],
+     "pass_zh": "已具独立 PI / 教职身份",
+     "fail_zh": "现阶段需先取得独立 PI 身份；建议按 K99→R00→R01 路径推进，此模板可先当结构范本学习"
+    }
+   ]
+  },
+  {
+   "id": "youqing",
+   "flag": "🇨🇳",
+   "name": "国家自然科学基金 · 海外优青",
+   "agency": "NSFC",
+   "region": "中国大陆",
+   "url": "https://www.nsfc.gov.cn/",
+   "write_key": "youqing",
+   "summary_zh": "面向海外优秀青年学者的回国启动通道，给编制 + 启动经费。",
+   "summary_en": "NSFC scheme recruiting overseas early-career scholars back to mainland China.",
+   "rules": [
+    {
+     "field": "age",
+     "op": "lte",
+     "value": 40,
+     "pass_zh": "{v} 岁，在 ≤40 岁窗口内",
+     "fail_zh": "当前 {v} 岁，一般要求 ≤40 岁（女性常放宽至 43，以当年指南为准）"
+    },
+    {
+     "field": "willing_relocate",
+     "op": "has",
+     "value": "CN",
+     "pass_zh": "愿全职回中国大陆任职",
+     "fail_zh": "需承诺全职回国工作"
+    },
+    {
+     "field": "has_position",
+     "op": "nhas",
+     "value": "CN",
+     "pass_zh": "目前任职单位在中国大陆以外 —— 符合「海外」要求",
+     "fail_zh": "目前已在中国大陆任职（{v}）——海外优青要求申报时在境外工作，已回国者请看优青/青基等国内序列"
+    }
+   ],
+   "note_zh": "评审重「代表作证据链」：把一作论文与拟研究方向串成一条因果线，比堆篇数有效。"
+  },
+  {
+   "id": "ecs",
+   "flag": "🇭🇰",
+   "name": "RGC Early Career Scheme (ECS)",
+   "agency": "香港研资局 RGC",
+   "region": "香港",
+   "url": "https://www.ugc.edu.hk/eng/rgc/",
+   "write_key": "ecs",
+   "summary_zh": "香港高校助理教授专属的早期项目，须先有教职。",
+   "summary_en": "Hong Kong scheme restricted to junior faculty at UGC-funded institutions.",
+   "rules": [
+    {
+     "field": "has_position",
+     "op": "has",
+     "value": "HK",
+     "pass_zh": "有香港高校教职",
+     "fail_zh": "需先获香港 UGC 资助院校的助理教授职位（通常受聘 ≤3 年内）"
+    }
+   ]
+  },
+  {
+   "id": "nrf",
+   "flag": "🇸🇬",
+   "name": "NRF Fellowship (Singapore)",
+   "agency": "新加坡 NRF",
+   "region": "新加坡",
+   "url": "https://www.nrf.gov.sg/",
+   "write_key": "nrf",
+   "summary_zh": "新加坡面向早期独立研究者的高额个人奖，需东道机构支持。",
+   "summary_en": "Singapore's flagship early-career independent researcher fellowship; needs a host institution.",
+   "rules": [
+    {
+     "field": "has_position",
+     "op": "has",
+     "value": "SG",
+     "pass_zh": "有新加坡东道机构支持",
+     "fail_zh": "需新加坡 host institution 出具支持"
+    }
+   ]
+  },
+  {
+   "id": "erc_stg",
+   "flag": "🇪🇺",
+   "name": "ERC Starting Grant",
+   "agency": "European Research Council",
+   "region": "欧盟",
+   "url": "https://erc.europa.eu/apply-grant/starting-grant",
+   "write_key": "",
+   "summary_zh": "欧盟旗舰早期独立奖，按「博士毕业后年数」而非年龄卡窗口。",
+   "summary_en": "EU flagship early-career grant; window counted from PhD award date, not age.",
+   "rules": [
+    {
+     "field": "career_stage",
+     "op": "in",
+     "value": [
+      "postdoc",
+      "faculty_junior"
+     ],
+     "pass_zh": "处于博后或早期独立 PI 阶段 —— ERC StG 的目标窗口",
+     "fail_zh": "当前身份为「{v}」；ERC Starting Grant 面向即将或刚建立独立课题组的研究者（资深教职请看 Consolidator/Advanced）"
+    },
+    {
+     "field": "years_since_phd",
+     "op": "lte",
+     "value": 7,
+     "pass_zh": "博士毕业 {v} 年，在 2–7 年窗口内",
+     "fail_zh": "博士毕业已 {v} 年，超出 2–7 年窗口（产假/兵役等可顺延）"
+    },
+    {
+     "field": "willing_relocate",
+     "op": "has",
+     "value": "EU",
+     "pass_zh": "愿在欧盟/联系国机构任职",
+     "fail_zh": "需在欧盟或 Horizon 联系国的机构执行项目"
+    }
+   ],
+   "note_zh": "ERC 只看「你这个人 + 这个想法」，不要求所在机构出配套，是少数不看国籍的通道。"
+  },
+  {
+   "id": "mscf",
+   "flag": "🇪🇺",
+   "name": "Marie Skłodowska-Curie Postdoctoral Fellowship",
+   "agency": "European Commission",
+   "region": "欧盟",
+   "url": "https://marie-sklodowska-curie-actions.ec.europa.eu/",
+   "write_key": "",
+   "summary_zh": "欧盟博后流动奖，不限国籍，但受「流动性规则」约束。",
+   "summary_en": "EU postdoctoral mobility fellowship; nationality-blind but bound by the mobility rule.",
+   "rules": [
+    {
+     "field": "career_stage",
+     "op": "in",
+     "value": [
+      "postdoc",
+      "phd"
+     ],
+     "pass_zh": "处于博后/博士阶段",
+     "fail_zh": "当前身份为「{v}」；MSCA 博后 fellowship 面向已获博士学位、尚未独立的研究者"
+    },
+    {
+     "field": "years_since_phd",
+     "op": "lte",
+     "value": 8,
+     "pass_zh": "博士毕业 {v} 年，符合 ≤8 年",
+     "fail_zh": "博士毕业已 {v} 年，超过 ≤8 年上限"
+    },
+    {
+     "field": "willing_relocate",
+     "op": "has",
+     "value": "EU",
+     "pass_zh": "愿赴欧盟机构",
+     "fail_zh": "需赴欧盟/联系国机构"
+    }
+   ],
+   "note_zh": "流动性规则：申请截止前 3 年内，在东道国居住/工作不得超过 12 个月。"
+  },
+  {
+   "id": "hfsp",
+   "flag": "🌐",
+   "name": "HFSP Postdoctoral Fellowship",
+   "agency": "Human Frontier Science Program",
+   "region": "国际",
+   "url": "https://www.hfsp.org/funding/hfsp-funding/postdoctoral-fellowships",
+   "write_key": "",
+   "summary_zh": "不限国籍的国际博后奖，要求「跨国 + 跨领域」的真转向。",
+   "summary_en": "Nationality-blind international postdoctoral fellowship; requires a genuine country and discipline change.",
+   "rules": [
+    {
+     "field": "career_stage",
+     "op": "in",
+     "value": [
+      "postdoc",
+      "phd"
+     ],
+     "pass_zh": "处于博后/博士阶段 —— HFSP 长期博后 fellowship 的目标人群",
+     "fail_zh": "当前身份为「{v}」；HFSP Long-Term Fellowship 面向即将或刚开始博后的研究者"
+    },
+    {
+     "field": "years_since_phd",
+     "op": "lte",
+     "value": 3,
+     "pass_zh": "博士毕业 {v} 年，符合 ≤3 年",
+     "fail_zh": "博士毕业已 {v} 年，超过 ≤3 年上限"
+    }
+   ],
+   "note_zh": "HFSP 明确奖励「换领域」：若你从生化转向计算/影像等，这是加分而非风险。"
+  },
+  {
+   "id": "wellcome_ec",
+   "flag": "🇬🇧",
+   "name": "Wellcome Early-Career Award",
+   "agency": "Wellcome Trust",
+   "region": "英国 / 爱尔兰 / 低中收入国家",
+   "url": "https://wellcome.org/research-funding/schemes/early-career-awards",
+   "write_key": "",
+   "summary_zh": "面向即将独立的研究者，5 年经费 + 明确的独立性支持。",
+   "summary_en": "For researchers moving to independence; five years of support.",
+   "rules": [
+    {
+     "field": "has_position",
+     "op": "has",
+     "value": "UK",
+     "pass_zh": "有英国/爱尔兰东道机构",
+     "fail_zh": "需英国、爱尔兰或指定低中收入国家的东道机构"
+    }
+   ]
+  }
+ ]
+}

@@ -14,7 +14,30 @@ import json, os, re, datetime, html, xml.sax.saxutils as sx
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
-SITE = "https://zouxdsheldon.github.io/pi-grants"
+def _cfg():
+    fp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "config.json")
+    try:
+        return json.load(open(fp))
+    except Exception:
+        return {}
+
+def _site_url(cfg):
+    """站点地址：config.site_url 优先；否则从 GitHub Actions 环境推出 Pages 地址。"""
+    u = (cfg.get("site_url") or "").rstrip("/")
+    if u:
+        return u
+    repo = os.environ.get("GITHUB_REPOSITORY", "")      # "owner/name"
+    if "/" in repo:
+        owner, name = repo.split("/", 1)
+        if name.lower() == owner.lower() + ".github.io":
+            return "https://%s.github.io" % owner
+        return "https://%s.github.io/%s" % (owner, name)
+    return ""
+
+CFG = _cfg()
+SITE = _site_url(CFG)
+SITE_TITLE = CFG.get("site_title", "Grants Finder Pro").strip()
+FEED_TITLE = (CFG.get("owner_display") or SITE_TITLE) + " · 文献追踪"
 TODAY = datetime.date.today()
 
 TIERLAB = {"T1": "顶刊层级", "T2": "一流专业刊", "T3": "本领域主力刊",
@@ -154,7 +177,7 @@ def build_html(dig):
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>每日文献摘要 · {dig["date"]} · Sheldon Zou</title>
+<title>每日文献摘要 · {dig["date"]} · {html.escape(SITE_TITLE)}</title>
 <style>
 :root{{--pp:#4A148C;--bl:#0D47A1}}
 *{{box-sizing:border-box}}
@@ -259,9 +282,9 @@ def build_rss(dig):
     now = datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
-  <title>Sheldon Zou · miRNA 生物发生方向文献追踪</title>
+  <title>{sx.escape(FEED_TITLE)}</title>
   <link>{SITE}/digest.html</link>
-  <description>八个研究方向 × 六个数据源,每日自动抓取、去重、透明打分,并标注 Hotspot / Gap / Question。</description>
+  <description>按 data/interests.json 里配置的研究方向 × 六个数据源,每日自动抓取、去重、透明打分,并标注 Hotspot / Gap / Question。</description>
   <language>zh-cn</language>
   <lastBuildDate>{now}</lastBuildDate>
   <generator>scripts/build_digest.py</generator>

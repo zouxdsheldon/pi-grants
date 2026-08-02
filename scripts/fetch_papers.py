@@ -28,7 +28,7 @@ from collections import Counter, defaultdict
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
-UA = "pi-grants-paper-tracker/1.0 (+https://zouxdsheldon.github.io/pi-grants/)"
+UA = "grants-finder-paper-tracker/1.0"
 # NCBI/EBI 礼貌参数:仅当环境变量存在时附带,脚本内不硬编码任何邮箱
 CONTACT = os.environ.get("NCBI_EMAIL", "").strip()
 WINDOW_DAYS = int(os.environ.get("PAPER_WINDOW_DAYS", "540"))   # 抓取时间窗

@@ -1,6 +1,6 @@
 {
  "updated": "2026-07-31",
- "owner": "Xiaodong (Sheldon) Zou · Eric Lai lab, MSKCC",
+ "owner": "",
  "note": "权重与词表完全可见可改。相关性分数 = Σ(命中词权重) 归一化 后与 TF-IDF 余弦相似度加权合并;明细逐条显示在卡片上。",
  "score_weights": {
   "keyword": 0.65,
@@ -320,5 +320,6 @@
   "arxiv",
   "crossref"
  ],
- "notes_openalex": "OpenAlex 需 API key,用户未授权 → 已移除;被引数改由 Europe PMC(citedByCount)与 Crossref(is-referenced-by-count)提供。"
+ "notes_openalex": "OpenAlex 需 API key,用户未授权 → 已移除;被引数改由 Europe PMC(citedByCount)与 Crossref(is-referenced-by-count)提供。",
+ "_doc": "换成你自己的方向：改 interests[] 即可。每个方向需要 id / name / w(权重) / color / core(核心词，命中权重高) / peri(外围词) + 各源检索式 q_pubmed / q_epmc / q_arxiv / q_crossref。检索式语法各源不同，写法见 data/interests.template.json 的注释。改完 push，GitHub Actions 次日自动按新词库抓取；想立刻生效就手动触发 Actions 的 update workflow。"
 }

@@ -1,46 +1,123 @@
-# 全球 PI 资助追踪网站
+# Grants Finder Pro — 早期 PI 资助 / 职位 / 文献追踪站(开源模板)
 
-一个**在线、可自动更新**的资助搜索网站,为 Xiaodong Zou(MSKCC / Eric Lai 实验室,RNA 降解与代谢方向)定制。
+一个**纯静态、自动更新**的网站模板,把早期研究者找钱、找教职、追文献这三件事放在一个页面里。
+**任何人 fork 后填自己的信息即可使用** —— 个人信息只存在使用者自己的浏览器里,不进仓库、不上传服务器。
 
-## 它怎么工作
+在线示例:fork 后你的地址是 `https://<你的用户名>.github.io/<仓库名>/`
 
-- **前端**(`index.html`):纯静态页面,打开后从同域的 `data/*.json` 读数据 → 无 CORS 问题,加载快。三个标签:联邦机会 / 国际·基金会·亚洲 PI 精选 / 我关注的。
-- **数据**(`data/grants.json`):美国联邦全量资助机会(NIH / NSF / DoD / HHS 等),已按你的研究方向打相关度标签、剔除过期、按截止排序。
-- **自动更新**(`.github/workflows/update.yml`):GitHub Actions 每天在 GitHub 的服务器上运行 `scripts/fetch_grants.py`,重新抓 Grants.gov 并提交最新数据。**抓取在 GitHub 端完成,与你本地网络无关** —— 这就绕开了 MSKCC 内网访问 grants.gov 的限制。你的浏览器只连 `*.github.io`。
+---
 
-## 部署(3 步,一次性)
+## 三分钟上手
 
-1. 在 GitHub 新建一个仓库(比如 `pi-grants`),把本文件夹所有内容上传。
-2. 仓库 **Settings → Pages → Source 选 `Deploy from a branch` → `main` / `root`** → 保存。几分钟后得到网址:`https://<你的用户名>.github.io/pi-grants/`。
-3. 仓库 **Settings → Actions → General → Workflow permissions 选 `Read and write permissions`** → 保存(让定时任务能提交更新)。
+**只是想用一下(不部署)**
+打开站点 → 右上角 **✏️ 填写/修改档案** → 三步填完。资格自查、资助匹配排序、文献相关性会立刻按你的信息重算。
+不确定要填什么,先点 **👤 载入示例档案** 看效果。
 
-完成后:收藏那个网址,任何设备打开都是最新。
+**想要属于自己的一份(含每日自动抓取)**
 
-## 手动更新
+1. Fork 本仓库。
+2. 仓库 **Settings → Pages → Source 选 `GitHub Actions`**。
+3. 仓库 **Settings → Actions → General → Workflow permissions 选 `Read and write permissions`**(让定时任务能提交数据)。
+4. **Actions 标签 → `Update grants data` → Run workflow** 跑一次。十分钟后站点就活了。
 
-不想等每天定时?仓库 **Actions 标签 → 选 "Update grants data" → Run workflow** 即可立刻刷新。
+---
 
-## 调整搜索范围
+## 要改的只有 `data/` 里这几个 JSON,不用动 `index.html`
 
-编辑 `scripts/fetch_grants.py` 顶部的 `KEYWORDS` 列表(增删关键词),以及 `HI`/`MID`(相关度打分词)。改动 push 后下次运行即生效。
+| 改什么 | 文件 | 作用 |
+|---|---|---|
+| 站名 / 副标题 / 仓库链接 | `data/config.json` | 页头页脚显示。`site_url`、`repo_url` 留空时,脚本与页面会从 GitHub Pages 地址自动推导 |
+| **研究方向与关键词** | `data/interests.json` | 最重要的一个。决定文献抓取用什么检索式、相关性怎么算、资助怎么排序。字段写法见 `data/interests.template.json` |
+| 资助清单与资格规则 | `data/funds.json` | 「资格自查」那一栏。增删基金、改判定规则都在这里,不用碰代码 |
+| 档案表单问哪些字段 | `data/profile_schema.json` | 引导弹层的字段定义 |
+| 示例档案 | `data/profile.example.json` | 「载入示例档案」按钮读它 |
+| 院所 / 职位板清单 | `data/institutions.json` | 「院所目录」那一栏。`fit` 是契合度评分,按自己方向重排或整份替换 |
+| 院所搜索兜底词 | `data/config.json` 的 `job_search_topic` | 官网链接失效时,🔍 按钮拼出的搜索词(例如 `assistant professor synthetic biology`) |
+| 日历收录范围 | `data/config.json` 的 `ics_filter` | `career_stages` 留空=全部收录;`exclude_citizenship_required` 剔除限定公民身份的项目 |
 
-## 从 Pivot-RP 导入(合法用法)
+### `data/funds.json` 的规则语法
 
-MSKCC 订阅的 Pivot-RP 没有面向个人的 API,且其编辑描述是 Clarivate 版权内容,不能整段搬运。
-正确做法是把它当**发现工具**,导出后只并入**事实字段 + 官方链接**:
+每个基金一条记录,`rules` 是一个数组,全部通过才判「现在能投」:
+
+```json
+{
+  "id": "k99",
+  "name": "NIH K99/R00 (Pathway to Independence)",
+  "flag": "🇺🇸", "agency": "NIH", "region": "美国",
+  "url": "https://grants.nih.gov/...",
+  "summary_zh": "博后→独立 PI 转轨奖。",
+  "write_key": "k99",
+  "rules": [
+    {"field": "career_stage", "op": "in", "value": ["postdoc"],
+     "pass_zh": "处于博士后阶段", "fail_zh": "当前身份为「{v}」,K99 要求申请时仍是博士后"},
+    {"field": "postdoc_years", "op": "lte", "value": 4,
+     "pass_zh": "博后 {v} 年,在 ≤4 年窗口内", "fail_zh": "博后已 {v} 年,超出窗口"}
+  ]
+}
+```
+
+算子:`eq` / `ne` / `gte` / `lte` / `in`(值在列表里)/ `has`(多选字段包含某项)/ `nhas`(不包含)/ `truthy` / `falsy`。
+`{v}` 会替换成用户填的值。`write_key` 指向写作面板里对应的草稿模板。
+
+### 资格判定的诚实边界
+
+- **只用你填过的字段判定。留空 = 显示「信息不足」,绝不猜成「能申」。** 一个字段都没填时,所有基金一律显示「信息不足」,不给任何假阳性。
+- 规则是各基金公开条款的**简化版**。窗口延期、机构豁免、特殊通道、逐年变动的细则都没编进去。
+- **最终一律以官方 NOFO / 申报指南为准。** 每条判定旁边都有官方链接,请点进去核对。
+- 联邦机会卡片上的资格徽章更弱:Grants.gov 的资格字段是**机构级**的,公民身份写在 NOFO 正文里,数据里根本没有。所以那里只用「数据里真有的字段 + 你填的职业阶段」做粗筛,标注为启发式。
+
+---
+
+## 隐私:你的数据在哪
+
+档案、申请管线、文献收藏/标签/笔记 —— 全部存在**你自己浏览器的 localStorage**,不发往任何服务器,也不会进 git。
+后果是:换电脑或清缓存就没了。所以档案条上有 **⇅ 导入 / 导出**,存成一个 JSON 文件带走即可。
+
+仓库里不含任何人的个人信息。fork 之后你也不需要往仓库里写自己的信息。
+
+---
+
+## 写作面板里的示例内容
+
+写作指导面板里的完整范文、六类基金草稿(K99/R00、F32、R01、海外优青、RGC ECS、NRF)和语料库,
+都是围绕**一个具体研究方向的示例**(miRNA 降解 × 能量应激代谢记忆)写出来的。
+它演示的是**结构与句式**,不是要你照抄科学内容 —— 六部分骨架
+(Significance / Innovation / Approach / Career / 预算 / 检查清单)对任何方向都通用,
+换成你自己的课题时把科学名词替换掉即可。
+
+---
+
+## 数据来源与自动化
+
+- **美国联邦机会** `data/grants.json` — `scripts/fetch_grants.py` 抓 Grants.gov,每日刷新,剔除过期,按截止排序。抓取在 GitHub 的服务器上完成,与你本地网络无关。
+- **各国 PI 资助精选** `data/curated.json` — 人工策展 + 可选的 Pivot-RP 导入。
+- **学术职位** `data/jobs.json` — `scripts/fetch_jobs.py`。
+- **文献** `data/papers.json` — `scripts/fetch_papers.py`,六源抓取,详见下方「文献追踪面板」章节。
+- **截止日历** `data/grant_deadlines.ics` — `scripts/build_ics.py`,滚动两年不过期,可用 webcal 订阅。
+- **每日摘要与 RSS** — `scripts/build_digest.py` 生成 `digest.html` 与 `feed.xml`。
+
+不想等定时任务:**Actions → 选对应 workflow → Run workflow**。
+
+### 调整联邦机会的搜索范围
+
+编辑 `scripts/fetch_grants.py` 顶部的 `KEYWORDS` 列表,以及 `HI`/`MID`(相关度打分词)。push 后下次运行生效。
+
+### 从 Pivot-RP 导入(合法用法)
+
+Pivot-RP 没有面向个人的 API,且其编辑描述是 Clarivate 版权内容,不能整段搬运。
+把它当**发现工具**,导出后只并入**事实字段 + 官方链接**:
 
 1. Pivot-RP 里勾选想要的机会 → **Export**(导出 CSV)。
-2. 把文件放到 `data/pivot_export.csv`。
+2. 放到 `data/pivot_export.csv`。
 3. 运行 `python3 scripts/import_pivot.py data/pivot_export.csv`。
-4. 条目会以地区「📥 我的 Pivot 精选」写入 `data/curated.json`,网站自动出现该地区筛选。
-5. `git add -A && git commit -m "import pivot" && git push` → 自动重新部署。
+4. 脚本只保留项目名/资助方/截止日/金额/链接;描述留空,请用你自己的话补 `note`。
+5. `git add -A && git commit && git push` → 自动重新部署。
 
-脚本只保留项目名/资助方/截止日/金额/链接;描述留空,请用你自己的话补 `note`。
+**自动归国**:按资助方名判定国家/地区(NIH→🇺🇸、ERC→🇪🇺、Wellcome→🇬🇧、NSFC→🇨🇳、
+JSPS→🇯🇵、A*STAR/NRF→🇸🇬、NHMRC→🇦🇺、CIHR→🇨🇦、HFSP→🌍…),识别不到的进兜底分区。
+补规则编辑 `scripts/import_pivot.py` 顶部的 `REGION_RULES`。
 
-**自动归国**:导入时按资助方名自动判定国家/地区(NIH→🇺🇸、ERC→🇪🇺、Wellcome→🇬🇧、
-NSFC→🇨🇳、JSPS→🇯🇵、A*STAR/NRF→🇸🇬、NHMRC→🇦🇺、CIHR→🇨🇦、HFSP→🌍…),
-落到对应国旗分区;识别不到的资助方进「📥 我的 Pivot 精选」兜底。运行后会打印归国报告,
-想补规则就编辑 `scripts/import_pivot.py` 顶部的 `REGION_RULES`。
+没有 Pivot 订阅完全不影响使用 —— 联邦数据源和文献追踪都不依赖它。
 
 ---
 

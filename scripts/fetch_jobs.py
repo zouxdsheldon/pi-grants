@@ -4,7 +4,7 @@
 Runs on GitHub Actions (unrestricted internet). Pulls jobRxiv (a free, academic,
 preprint-community job board with an RSS/job_feed endpoint) across several
 faculty/PI keyword queries, de-duplicates, keeps faculty + postdoc-level roles
-in life sciences, scores each for research fit to Sheldon's profile
+in life sciences, scores each for research fit against data/interests.json
 (RNA / miRNA / TDMD / metabolism / AMPK ...), and writes data/jobs.json.
 
 Design mirrors fetch_grants.py: the page reads data/jobs.json same-origin and

@@ -1,0 +1,21 @@
+{
+ "_doc": "站点级配置。Fork 本仓库后改这里即可换成你自己的站点，无需动 index.html。site_url 留空时，脚本会用 GitHub Actions 的 GITHUB_REPOSITORY 自动推出 Pages 地址。",
+ "site_title": "🔎 Grants Finder Pro",
+ "site_subtitle_zh": "全球 PI 资助 · 学术职位 · 文献追踪（每日自动更新）",
+ "site_subtitle_en": "Global PI funding · Faculty jobs · Literature tracking (daily auto-update)",
+ "owner_display": "",
+ "owner_note_zh": "本站为开源模板，任何人可 fork 后填入自己的信息使用。",
+ "owner_note_en": "Open-source template — fork it and fill in your own profile.",
+ "repo_url": "",
+ "contact_email": "",
+ "default_lang": "zh",
+ "example_profile_label_zh": "示例档案（miRNA / TDMD 方向）",
+ "example_profile_label_en": "Example profile (miRNA / TDMD)",
+ "site_url": "",
+ "ics_filter": {
+  "_comment": "日历筛选。career_stages 留空数组=全部收录；填 [\"博后/早期\",\"不限身份\"] 只留早期项目。exclude_citizenship_required=true 时剔除限定公民身份的项目。",
+  "career_stages": [],
+  "exclude_citizenship_required": false
+ },
+ "job_search_topic": "faculty position assistant professor"
+}

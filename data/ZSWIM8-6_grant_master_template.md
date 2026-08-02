@@ -2,8 +2,8 @@
 ## "Energy-stress–driven metabolic memory via ZSWIM8-dependent miRNA decay"
 ### 写一次核心内容 → 套用所有基金类型 (K99/R00 · F32 · R01 · 海外优青 · RGC ECS · NRF)
 
-> **怎么用这份模板**:第 1 部分是**核心内容库**——同一个项目按 NIH 全长写出来的 Aims / Significance / Innovation / Approach / Career,方括号 `[…]` 已用你的真实课题词填好。第 2 部分是**每类基金的裁剪指南**——告诉你把核心内容删到多少页、加哪一节、强调什么。真正写作时:先复制第 1 部分对应段落 → 按第 2 部分你目标基金那一列裁剪/补写 → 完成。
-> **数据口径(重要)**:本模板所有数字与图均为 **predicted / schematic(预期/示意)**,不是实测数据。可行性由 (a) 你自建的透明 AMPK 底物 PSSM 打分、(b) 已发表文献、(c) 你的独家资源(T2D 猪模型、类器官、小 RNA 测序体系、碱基/先导编辑)三者支撑。真正投稿前,凡有预实验结果的地方替换为真实图/值。
+> **怎么用这份模板**:第 1 部分是**核心内容库**——同一个项目按 NIH 全长写出来的 Aims / Significance / Innovation / Approach / Career,方括号 `[…]` 已用一个具体示例课题的词填好。第 2 部分是**每类基金的裁剪指南**——告诉你把核心内容删到多少页、加哪一节、强调什么。真正写作时:先复制第 1 部分对应段落 → 换成你自己的科学内容 → 按第 2 部分你目标基金那一列裁剪/补写 → 完成。
+> **数据口径(重要)**:本模板所有数字与图均为 **predicted / schematic(预期/示意)**,不是实测数据。示例中的可行性由 (a) 自建的透明激酶底物 PSSM 打分、(b) 已发表文献、(c) 申请人独有的模型与技术资源三者支撑。真正投稿前,凡有预实验结果的地方替换为真实图/值。
 
 ---
 
@@ -68,10 +68,10 @@
 
 | 基金 | 研究计划篇幅 | 必写章节 | 从核心内容裁剪 | 额外要加 | 语气/侧重 |
 |---|---|---|---|---|---|
-| **🇺🇸 NCI K99/R00** (PAR-25-135) | ≤12 页(K99 6 + R00 6) | Aims·Significance·Innovation·Approach·**Candidate·职业发展** | 全部 1.1–1.5 都用;Approach 按 K99/R00 两段拆 | 职业发展计划(课程/技能/时间表)、导师团队、机构环境 | K99 段=导师指导下的过渡工作;R00 段=独立后招牌。**你的头号目标** |
+| **🇺🇸 NCI K99/R00** (PAR-25-135) | ≤12 页(K99 6 + R00 6) | Aims·Significance·Innovation·Approach·**Candidate·职业发展** | 全部 1.1–1.5 都用;Approach 按 K99/R00 两段拆 | 职业发展计划(课程/技能/时间表)、导师团队、机构环境 | K99 段=导师指导下的过渡工作;R00 段=独立后招牌。示例中的首选目标 |
 | **🇺🇸 NRSA F32** | ≤6 页 | Aims·Approach·**Training Goals**·Sponsor 环境 | 1.1 全用;1.2/1.3 压成半页;1.4 用 Aim1–2 为主 | **训练目标**(学什么新技能)、导师 track record | 重"训练"轻"产出"。⚠️ 多要求美籍/绿卡——先核对资格 |
 | **🇺🇸 R01** | ≤12 页 | Aims·Significance·Innovation·Approach | 1.1–1.4 全长;不需 Career | 更深的 preliminary data、更多备选方案 | 现阶段学结构用;K99→R00→R01 同逻辑放大 |
-| **🇨🇳 海外优青** | 按当年指南(研究基础+拟开展研究) | 科学问题·研究基础·关键问题·研究方案 | 1.1 凝练成"1 句科学问题";1.4 作研究方案;1.5 作研究基础 | **代表作证据链**(7 篇一作)、回国后国家需求、学科前沿 | 评审多为国内同行:强调国家需求+你能"拥有"的独立性 |
+| **🇨🇳 海外优青** | 按当年指南(研究基础+拟开展研究) | 科学问题·研究基础·关键问题·研究方案 | 1.1 凝练成"1 句科学问题";1.4 作研究方案;1.5 作研究基础 | **代表作证据链**(逐篇量化)、回国后国家需求、学科前沿 | 评审多为国内同行:强调国家需求+你能"拥有"的独立性 |
 | **🇭🇰 RGC ECS** | 按 RGC 模板 | Objectives·Background·Methodology·Impact | 1.1→Objectives 清单化;1.4→Methodology(要详实) | 对香港/大湾区的贡献、国际竞争力 | 英式:Objectives 列点、方法学详尽 |
 | **🇸🇬 NRF Fellowship** | 按 NRF 模板 | Vision·Track Record·Research Plan·Budget | 1.2→Vision(5 年蓝图);1.4→Plan;1.5→Track Record | 独立后 5 年愿景、新加坡东道机构支持 | Track Record + Vision 权重最高 |
 
@@ -98,4 +98,4 @@
 
 ---
 
-*本模板基于你的 executive_summary_PI_directions.xlsx 中"旗舰① ZSWIM8-6"方向构建。配套完整旗舰提案见 proposal_AMPK_TDMD.md(英)/ proposal_zh.md(中);101 句写作语料见 grant_writing_corpus.xlsx。*
+*本模板以一个具体研究方向为示例构建,演示的是**结构与句式**,不是要照抄科学内容。配套写作语料见 grant_writing_corpus.xlsx。换成你自己的课题时替换科学名词即可。*

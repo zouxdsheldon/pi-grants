@@ -1,0 +1,25 @@
+{
+ "_doc": "示例档案。站点首页「载入示例档案」按钮读取本文件。Fork 后可替换成你自己的，或直接删掉。",
+ "label_zh": "示例：RNA 生物学方向的非美籍博后",
+ "label_en": "Example: non-US postdoc in RNA biology",
+ "profile": {
+  "display_name": "",
+  "institution": "（示例单位）",
+  "citizenship": "other",
+  "career_stage": "postdoc",
+  "postdoc_years": 4,
+  "years_since_phd": 4,
+  "age": 34,
+  "first_author_papers": 7,
+  "has_position": [
+   "US"
+  ],
+  "willing_relocate": [
+   "CN",
+   "HK",
+   "SG",
+   "US"
+  ]
+ },
+ "keywords_hint_zh": "示例档案配套的关键词词库见 data/interests.json（miRNA / TDMD / 代谢方向）。"
+}

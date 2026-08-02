@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """Build data/grant_deadlines.ics from data/grants.json + data/curated.json.
 
-Emits one VEVENT per eligible deadline (博后/早期 · 非美籍专属 · 未过窗口),
-each with two DISPLAY alarms (-30d, -7d). Run after fetch_grants.py so the
-subscription feed stays in sync with the daily data refresh.
+Emits one VEVENT per un-expired deadline, each with two DISPLAY alarms
+(-30d, -7d). Run after fetch_grants.py so the subscription feed stays in
+sync with the daily data refresh.
+
+Filtering is OPTIONAL and lives in data/config.json -> "ics_filter":
+    {"career_stages": ["博后/早期", "不限身份"],   # [] or missing = keep all
+     "exclude_citizenship_required": false}       # true = drop 需要特定公民身份的项目
+Defaults keep EVERYTHING, because a generic template should not silently
+drop opportunities that some forks' owners are in fact eligible for.
 """
 import json, re, hashlib, os
 from datetime import date, datetime, timedelta
@@ -13,9 +19,20 @@ DATA = os.path.join(ROOT, "data")
 TODAY = date.today()
 
 
+try:
+    _CFG = json.load(open(os.path.join(DATA, "config.json"), encoding="utf-8"))
+except Exception:
+    _CFG = {}
+_ICSF = _CFG.get("ics_filter") or {}
+_STAGES = _ICSF.get("career_stages") or []          # [] -> no stage filtering
+_DROP_CIT = bool(_ICSF.get("exclude_citizenship_required"))
+
+
 def is_mine(apply):
-    apply = apply or []
-    return "博后/早期" in apply or "不限身份" in apply
+    """Keep the event? Empty career_stages config = keep everything."""
+    if not _STAGES:
+        return True
+    return any(s in (apply or []) for s in _STAGES)
 
 
 def fed_date(g):
@@ -46,7 +63,7 @@ def collect_events():
     cur = json.load(open(f"{DATA}/curated.json", encoding="utf-8"))["grants"]
     events = []
     for g in live:
-        if not is_mine(g.get("apply")) or g.get("cit_req") is True:
+        if not is_mine(g.get("apply")) or (_DROP_CIT and g.get("cit_req") is True):
             continue
         dt = fed_date(g)
         if not dt or not (TODAY.year <= dt.year <= TODAY.year + 1):
@@ -59,7 +76,8 @@ def collect_events():
     for c in cur:
         if not is_mine(c.get("apply")) or "❌" in (c.get("elig") or ""):
             continue
-        if "United States" in (c.get("cite_req") or "") and "临时签证" not in (c.get("cite_req") or ""):
+        if _DROP_CIT and "United States" in (c.get("cite_req") or "") \
+                and "临时签证" not in (c.get("cite_req") or ""):
             continue
         ms = cur_months(c.get("deadline"))
         if ms and ms[0] in ("roll", "unk"):
@@ -101,10 +119,10 @@ def build():
     now_stamp = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
     y0, y1 = TODAY.year, TODAY.year + 1
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0",
-             "PRODID:-//Sheldon Zou//Grant Deadlines//CN", "CALSCALE:GREGORIAN",
-             "METHOD:PUBLISH", f"X-WR-CALNAME:资助申请截止 {y0}-{y1}",
+             "PRODID:-//Grants Finder Pro//Grant Deadlines//CN", "CALSCALE:GREGORIAN",
+             "METHOD:PUBLISH", f"X-WR-CALNAME:{_CFG.get('site_title','Grants Finder Pro')} · 资助截止 {y0}-{y1}",
              "X-WR-TIMEZONE:America/New_York",
-             "X-WR-CALDESC:可申请的资助截止日历(博后/早期·非美籍专属·未过窗口)·每日自动刷新"]
+             "X-WR-CALDESC:资助申请截止日历 · 每日自动刷新 · 由 Grants Finder Pro 生成"]
     relmark = {"高": "🟢", "中": "🟡", "低": "⚪"}
     for i, e in enumerate(events):
         d = e["dt"]

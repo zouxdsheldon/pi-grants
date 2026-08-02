@@ -2,3 +2,7 @@
 .venv/
 __pycache__/
 *.pyc
+
+# 本地中间产物，不进仓库（含个人书目/排序草稿）
+handoff/
+scholar_future_directions.md

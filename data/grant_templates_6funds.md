@@ -1,7 +1,8 @@
 # ZSWIM8-6 旗舰方向 · 六类基金"即用型"完整草稿集
 **方向:** Energy-stress–driven metabolic memory via ZSWIM8-dependent miRNA decay
 （AMPK 磷酸化 ZSWIM8-S608 → 加速代谢 miRNA 的 TDMD → T2D 中可逆的代谢记忆）
-**申请人:** Xiaodong (Sheldon) Zou · Eric Lai Lab, MSKCC
+**申请人:** 〔FILL: 你的姓名 · 实验室 / 导师 · 所在单位〕
+**说明:** 本文件是**示例草稿**——科学内容围绕一个具体方向(miRNA 降解 × 能量应激代谢记忆)写成,用来演示各基金的章节结构、篇幅与句式。换成你自己的课题时替换科学名词即可。
 **生成日期:** 2026-07-22
 
 > **使用说明:** 以下六份草稿已按各基金的**真实章节结构与篇幅**预先裁剪好,ZSWIM8-6 内容已填入。你只需把 `〔FILL: …〕` 标记替换成真实数据/履历/预算即可投稿,无需再从母版剪裁。所有预期结果图/数字均标注 predicted/schematic。
@@ -200,7 +201,7 @@ Rigor & reproducibility: both sexes will be studied and sex included as a biolog
 Clinical burden. Metabolic memory drives the persistence of diabetic complications despite glycemic control; no therapy erases this memory. A metabolic lever on miRNA decay would be a mechanistically novel entry point. Mechanistic advance. Establishing AMPK as an upstream regulator of TDMD would convert miRNA turnover from a housekeeping process into a signal-responsive, druggable pathway. Conceptual reach. Because ZSWIM8 governs decay of many miRNAs, a metabolic input would have consequences across the miRNAome, not a single miRNA.
 
 **申请人研究基础:**
-〔FILL: 用你的 7 篇一作串成证据链——代谢/乳酸/胆固醇/AMPK 方向的既往工作如何为本项目铺路;T2D 猪模型、类器官、碱基/先导编辑等独特资源;吉林大学生化博士训练。每篇代表作一句话点明与本课题的逻辑关系。〕
+〔FILL: 用你的代表作串成证据链——既往工作如何为本项目铺路;你独有的模型/资源/技术平台;博士与博后训练背景。每篇代表作一句话点明与本课题的逻辑关系。〕
 
 ## 三、研究方案（对应三大目标）
 **目标一(机制):** Rationale: our motif scan flags S608 (…KRR-S608…) in a disordered, accessible region. Design: recombinant AMPK + ZSWIM8-fragment kinase assays ± AMP; phospho-specific antibody/mass spectrometry; S608A and S608D point mutants. Readout: stoichiometry of S608 phosphorylation. Predicted result (schematic): AMP-dependent phosphorylation, abolished by S608A. Alternative: if S608 is insufficient, test the neighboring S609 and S1202 sites (also flagged by our scan) and screen AMPK-independent kinases. Pitfall & mitigation: S608D may not fully mimic phospho-S608; corroborate with in-vitro-phosphorylated protein and phospho-specific antibodies.
@@ -277,7 +278,7 @@ I will establish that **cellular energy state is transduced into durable, revers
 〔FILL: NRF 要 10 年尺度的愿景,不只这个项目;写清你要开创的"子领域"。〕
 
 ## TRACK RECORD（个人履历与代表成果）
-〔FILL: 7 篇一作 + 生化 PhD(吉林大学)+ 代谢/AMPK/编辑技术专长 + 独特模型资源。NRF 极看重 PI 个人潜力,用量化指标(被引、期刊、独立性证据)。〕
+〔FILL: 一作论文数 + 博士学科与授予单位 + 你的核心技术专长 + 独特模型资源。NRF 极看重 PI 个人潜力,用量化指标(被引、期刊层级、独立性证据)。〕
 
 ## RESEARCH PLAN
 **Aim 1.** Rationale: our motif scan flags S608 (…KRR-S608…) in a disordered, accessible region. Design: recombinant AMPK + ZSWIM8-fragment kinase assays ± AMP; phospho-specific antibody/mass spectrometry; S608A and S608D point mutants. Readout: stoichiometry of S608 phosphorylation. Predicted result (schematic): AMP-dependent phosphorylation, abolished by S608A. Alternative: if S608 is insufficient, test the neighboring S609 and S1202 sites (also flagged by our scan) and screen AMPK-independent kinases. Pitfall & mitigation: S608D may not fully mimic phospho-S608; corroborate with in-vitro-phosphorylated protein and phospho-specific antibodies.
