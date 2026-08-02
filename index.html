@@ -130,6 +130,36 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .soon{color:var(--red);font-weight:700}
 
 /* calendar */
+/* ---------- 文献追踪面板 ---------- */
+.pcard{background:var(--card);border:1px solid var(--line);border-left:4px solid #CFD6E4;border-radius:10px;padding:12px 15px;margin-bottom:9px;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:.15s}
+.pcard:hover{box-shadow:0 4px 14px rgba(0,0,0,.09)}
+.pcard.b-high{border-left-color:#4A148C}.pcard.b-medium{border-left-color:#1565C0}.pcard.b-low{border-left-color:#BDC5D4}
+.pcard .ptitle{font-size:14.3px;font-weight:700;color:var(--dark);line-height:1.45}
+.pcard .ptitle a{color:var(--dark);text-decoration:none}.pcard .ptitle a:hover{color:var(--red);text-decoration:underline}
+.pmeta{font-size:12px;color:var(--muted);margin:5px 0 6px;line-height:1.6}
+.pabs{font-size:12.6px;color:#37414F;line-height:1.62;margin:6px 0 4px}
+.ptag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:12px;margin-right:5px;white-space:nowrap}
+.ptag.hotspot{background:#FDE8E4;color:#B03A2E;border:1px solid #F3C0B7}
+.ptag.gap{background:#FFF4D6;color:#8A6100;border:1px solid #F0D38A}
+.ptag.question{background:#E7F0FC;color:#14538F;border:1px solid #BAD3F1}
+.ptag.oa{background:#E5F6EC;color:#1E7E45;border:1px solid #B8E6C8}
+.ptag.pre{background:#F3E8FB;color:#7D3C98;border:1px solid #DFC2F0}
+.ptag.t1{background:#4A148C;color:#fff;border:1px solid #4A148C}
+.ptag.t2{background:#EDE7F6;color:#4A148C;border:1px solid #C9B8E8}
+.ptag.t3{background:#EEF2F8;color:#3A4A61;border:1px solid #CFD8E6}
+.ptag.t4{background:#F4F5F7;color:#6B7280;border:1px solid #E1E5EB}
+.pscore{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:12px;background:#EDE7F6;color:#4A148C;border:1px solid #C9B8E8;cursor:help}
+.pev{background:#FBF9FE;border:1px dashed #D6C9EC;border-radius:7px;padding:8px 11px;margin:7px 0;font-size:12.2px;line-height:1.6;color:#3B3350}
+.pev b{color:#4A148C}
+.pbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.pnote{width:100%;box-sizing:border-box;margin-top:7px;padding:6px 9px;border:1px solid #cbd3e1;border-radius:7px;font-size:12.3px;font-family:inherit;resize:vertical;min-height:34px}
+.mytag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:11px;background:#FFF0F5;color:#A02060;border:1px solid #F0C0D5;margin-right:4px;cursor:pointer}
+.vizbox{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.vizbox h4{margin:0 0 4px;font-size:13.5px;color:#4A148C}
+.vizbox .vnote{font-size:11.8px;color:var(--muted);margin-bottom:8px;line-height:1.55}
+.vizgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:10px}
+.snapnote{background:#FFF8E6;border:1px solid #F0D38A;border-radius:8px;padding:9px 13px;font-size:12.4px;color:#7A5A00;margin:8px 0;line-height:1.6}
+.dirpill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:11px;margin-right:4px;color:#fff}
 .chip{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;font-size:13px;user-select:none;transition:.12s}
 .chip:hover{border-color:var(--dark)}
 .chip.active{background:var(--dark);color:#fff;border-color:var(--dark)}
@@ -203,6 +233,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
   <button class="tab" data-p="myapps">🎯 我能申的(<span id="myN">…</span>)</button>
   <button class="tab" data-p="jobs">🎓 学术职位(<span id="jobN">…</span>)</button>
+  <button class="tab" data-p="papers">📚 文献追踪(<span id="papN">…</span>)</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
   <button class="tab" data-p="howto">📖 使用/更新说明</button>
   <button class="tab" data-p="writing">✍️ 写作指导</button>
@@ -370,6 +401,80 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="status" id="boardStat" style="margin:0"></span>
   </div>
   <div id="boardWrap"></div>
+</div>
+
+<div class="panel" id="papers">
+  <div class="snapbar" id="papbar" style="margin-bottom:10px">📚 文献数据加载中…</div>
+
+  <div class="calbanner" style="margin-bottom:10px">
+    <b>这个面板做什么:</b>把你的 8 个研究方向变成每日自动检索式,跨 6 个来源抓取新文献,去重后按<b>透明可核验的规则</b>打相关性分,
+    并标出三类信号 —— <span class="ptag hotspot">🔥 Hotspot</span> 引用速率/新鲜度/预印本转正、
+    <span class="ptag gap">🕳️ Gap</span> 摘要里明写"尚不清楚/缺乏证据"的句子、
+    <span class="ptag question">❓ Question</span> 作者自己提的 future work。
+    每个分数都可点开看<b>命中了哪些词、TF-IDF 余弦是多少</b>——没有黑箱。
+  </div>
+
+  <div class="snapnote" id="snapProgress"></div>
+
+  <div class="calbanner" style="background:#F5F0FF;border-color:#D8C7F0;margin-bottom:10px">
+    <b>📰 每日摘要 &amp; 订阅:</b>
+    <a href="digest.html" target="_blank" rel="noopener"><b>打开今日摘要页</b></a>(近 7 天新发 + 三类标记,可直接打印/转发)
+    · <a href="feed.xml" target="_blank" rel="noopener"><b>RSS 订阅</b></a>(把这个链接加进 Feedly / Inoreader / NetNewsWire 等阅读器即可每日推送)
+    <br><span style="color:#7A5A00">不做邮件推送的原因:发信需要 SMTP 账号密码,放进公开仓库不安全;RSS 效果相同且零凭据。</span>
+  </div>
+
+  <div class="fbar">
+    <input type="text" id="papq" placeholder="搜索标题/摘要/作者/期刊/单位…">
+    <select id="papDir"></select>
+    <select id="papSrc"></select>
+    <select id="papJournal"></select>
+    <select id="papTier"></select>
+    <select id="papType"></select>
+    <select id="papBand">
+      <option value="">相关度(全部)</option>
+      <option value="high">🟣 高相关</option>
+      <option value="medium">🔵 中相关</option>
+      <option value="low">⚪ 低相关</option>
+    </select>
+    <select id="papWin">
+      <option value="">时间(全部)</option>
+      <option value="30">近 30 天</option>
+      <option value="90">近 90 天</option>
+      <option value="180">近 180 天</option>
+      <option value="365">近 1 年</option>
+    </select>
+    <select id="papSort">
+      <option value="score">按相关性↓</option>
+      <option value="date">按日期↓</option>
+      <option value="cites">按被引↓</option>
+      <option value="rate">按引用速率↓</option>
+      <option value="hot">按 Hotspot↓</option>
+    </select>
+    <label><input type="checkbox" id="pap_oa"> 仅开放获取</label>
+    <label><input type="checkbox" id="pap_hot"> 🔥 Hotspot</label>
+    <label><input type="checkbox" id="pap_gap"> 🕳️ Gap</label>
+    <label><input type="checkbox" id="pap_q"> ❓ Question</label>
+    <label><input type="checkbox" id="pap_star"> ⭐ 仅收藏</label>
+    <label><input type="checkbox" id="pap_unread"> 📬 仅未读</label>
+    <button class="rst" id="papRst">↺ 重置</button>
+  </div>
+
+  <div class="calbanner" id="papTagChips" style="margin-bottom:8px"></div>
+  <div class="fbar" style="padding:8px 12px">
+    <span style="font-size:12.5px;font-weight:600">⬇️ 导出当前筛选结果:</span>
+    <button class="abtn" id="expBib">BibTeX</button>
+    <button class="abtn" id="expRis">RIS (EndNote/Zotero)</button>
+    <button class="abtn" id="expEnw">EndNote (.enw)</button>
+    <button class="abtn" id="expApa">APA 参考文献表</button>
+    <button class="abtn" id="expCsv">CSV</button>
+    <button class="abtn" id="expMd">Markdown 简报</button>
+    <span class="status" id="expStat" style="margin:0"></span>
+  </div>
+
+  <div id="papVizWrap"></div>
+
+  <span class="status" id="papStat"></span>
+  <div id="papWrap"></div>
 </div>
 
 <div class="panel" id="pipeline">
@@ -1361,6 +1466,7 @@ paragraphs + introductions from high-impact papers in my field). Please:
 let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
 let JOBS=[], JOBMETA={}, JOB_LVL="all", JOB_REGION="";
 let INSTS=[], BOARDS=[], INST_REGION="", INST_FIT="";
+let PAPERS=[], PAPMETA={}, INTERESTS=[], INTMAP={}, PAP_TAGFILT="", PAP_WIRED=false;
 function setLang(l){
   document.querySelectorAll('.lang-zh').forEach(function(e){e.style.display=(l==='en'?'none':'');});
   document.querySelectorAll('.lang-en').forEach(function(e){e.style.display=(l==='en'?'':'none');});
@@ -1479,6 +1585,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   if(t.dataset.p==="pipeline")renderPipeline();
   if(t.dataset.p==="whatsnew")renderChanges();
   if(t.dataset.p==="calendar")renderCalendar();
+  if(t.dataset.p==="papers")renderPapers();
 });
 
 /* ---------- calendar ---------- */
@@ -1593,15 +1700,20 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb,inst]=await Promise.all([
+    const [g,c,ch,jb,inst,pp,ints]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
       fetch("data/jobs.json?_="+Date.now()).then(r=>r.ok?r.json():{jobs:[]}).catch(()=>({jobs:[]})),
       fetch("data/institutions.json?_="+Date.now()).then(r=>r.ok?r.json():{institutions:[]}).catch(()=>({institutions:[]})),
+      fetch("data/papers.json?_="+Date.now()).then(r=>r.ok?r.json():{papers:[]}).catch(()=>({papers:[]})),
+      fetch("data/interests.json?_="+Date.now()).then(r=>r.ok?r.json():{interests:[]}).catch(()=>({interests:[]})),
     ]);
     LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
     INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
+    PAPERS=pp.papers||[]; PAPMETA=pp.meta||{}; INTERESTS=(ints.interests||[]);
+    INTMAP={}; INTERESTS.forEach(i=>INTMAP[i.id]=i);
+    document.getElementById("papN").textContent=PAPERS.length;
     liveN.textContent=LIVE.length;
     chgN.textContent=CHANGES.length;
     snapbar.innerHTML=`📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(每日自动刷新 + 金额/资格补全)`;
@@ -1609,6 +1721,7 @@ async function loadData(){
     CAL_EV=buildCalEvents(); document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
     try{renderMyApps();}catch(e){console.warn("myapps",e);}
     try{renderJobs();}catch(e){console.warn("jobs",e);}
+    try{renderPapers();}catch(e){console.warn("papers",e);}
   }catch(e){
     snapbar.innerHTML=`<b style="color:#A03225">数据加载失败:${e.message}</b> — 请通过部署好的网址访问(不要双击本地文件)。`;
   }
@@ -2469,6 +2582,545 @@ function checkElig(){
 // init fund selector default
 
 loadProfile();
+
+/* =========================================================================
+   📚 文献追踪面板
+   本地状态(localStorage): 收藏 / 已读 / 自定义标签 / 笔记
+   ========================================================================= */
+const PAPKEY="pi_papers_state";
+const getPS=()=>{try{return JSON.parse(localStorage.getItem(PAPKEY)||"{}")}catch(e){return{}}};
+const setPS=o=>{try{localStorage.setItem(PAPKEY,JSON.stringify(o))}catch(e){}};
+function pkey(pa){return pa.doi||pa.pmid||("t:"+(pa.title||"").slice(0,60));}
+function pstate(pa){const st=getPS();return st[pkey(pa)]||{};}
+function setPstate(pa,patch){const st=getPS();const k=pkey(pa);st[k]=Object.assign({},st[k]||{},patch);setPS(st);}
+
+function esc(x){return String(x==null?"":x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+const SRCLAB={pubmed:"PubMed",epmc:"Europe PMC",epmc_ppr:"Europe PMC 预印本",biorxiv:"bioRxiv",medrxiv:"medRxiv",arxiv:"arXiv",crossref:"Crossref"};
+const TIERLAB={T1:"顶刊层级",T2:"高影响层级",T3:"专业期刊层级",T4:"其它期刊",preprint:"预印本"};
+
+/* ---------- 单一可跳过维度的筛选谓词(与站内其它面板同一写法) ---------- */
+function ppass(pa,skip){
+  const q=(document.getElementById("papq").value||"").trim().toLowerCase();
+  const dir=document.getElementById("papDir").value;
+  const src=document.getElementById("papSrc").value;
+  const jr=document.getElementById("papJournal").value;
+  const tr=document.getElementById("papTier").value;
+  const ty=document.getElementById("papType").value;
+  const bd=document.getElementById("papBand").value;
+  const win=document.getElementById("papWin").value;
+  const st=pstate(pa);
+  if(skip!=="q"&&q){
+    const blob=[pa.title,pa.abstract,(pa.authors||[]).join(" "),pa.journal,pa.affil,(pa.keywords||[]).join(" "),(st.tags||[]).join(" "),st.note||""].join(" ").toLowerCase();
+    if(!blob.includes(q))return false;
+  }
+  if(skip!=="dir"&&dir&&!(pa.dirs&&pa.dirs[dir]))return false;
+  if(skip!=="src"&&src&&!(pa.src||[]).includes(src))return false;
+  if(skip!=="jr"&&jr&&pa.journal!==jr)return false;
+  if(skip!=="tier"&&tr&&pa.tier!==tr)return false;
+  if(skip!=="type"&&ty&&pa.ptype!==ty)return false;
+  if(skip!=="band"&&bd&&pa.band!==bd)return false;
+  if(skip!=="win"&&win){
+    if(!pa.date)return false;
+    const d=(Date.now()-new Date(pa.date+"T00:00:00").getTime())/86400000;
+    if(!(d<=parseInt(win)))return false;
+  }
+  if(document.getElementById("pap_oa").checked&&!pa.is_oa)return false;
+  if(document.getElementById("pap_hot").checked&&!(pa.tags||[]).includes("hotspot"))return false;
+  if(document.getElementById("pap_gap").checked&&!(pa.tags||[]).includes("gap"))return false;
+  if(document.getElementById("pap_q").checked&&!(pa.tags||[]).includes("question"))return false;
+  if(document.getElementById("pap_star").checked&&!st.star)return false;
+  if(document.getElementById("pap_unread").checked&&st.read)return false;
+  if(skip!=="mytag"&&PAP_TAGFILT&&!((st.tags||[]).includes(PAP_TAGFILT)))return false;
+  return true;
+}
+
+function scoreTip(pa){
+  const w=(PAPMETA.weights)||{};
+  const lines=Object.keys(pa.dirs||{}).sort((a,b)=>pa.dirs[b].score-pa.dirs[a].score).map(k=>{
+    const d=pa.dirs[k], nm=(INTMAP[k]||{}).name||k;
+    return `${nm}: ${d.score.toFixed(3)}  (关键词分 ${d.kw.toFixed(2)} · TF-IDF 余弦 ${d.cos.toFixed(3)}` +
+           (d.core.length?` · 核心词 ${d.core.join("/")}`:"") + (d.peri.length?` · 外围词 ${d.peri.join("/")}`:"") + ")";
+  });
+  return `总分 ${pa.score.toFixed(3)} = 最高方向分 + 0.15×(命中方向数-1) − 排除词罚分\n` + lines.join("\n") +
+         (pa.penalized?"\n⚠️ 命中排除词,已扣分":"");
+}
+
+function dirPills(pa){
+  return Object.keys(pa.dirs||{}).sort((a,b)=>pa.dirs[b].score-pa.dirs[a].score).slice(0,3).map(k=>{
+    const it=INTMAP[k]||{};
+    return `<span class="dirpill" style="background:${it.color||'#666'}">${esc(it.name||k)} ${pa.dirs[k].score.toFixed(2)}</span>`;
+  }).join("");
+}
+
+function evBox(pa){
+  const ev=pa.evidence||{}; const out=[];
+  if(ev.hotspot){
+    const h=ev.hotspot;
+    const noCite=(h.cites===null||h.cites===undefined||h.cites===0);
+    let t=`<b>🔥 Hotspot 依据:</b>`;
+    if(noCite){
+      // 诚实标注:被引为 0 或数据库尚未收录时,Hotspot 完全由"新鲜度 + 预印本转正"驱动,
+      // 不能让 🔥 图标暗示"已被大量引用"。
+      t+=`<span style="color:#B45309"><b>暂无被引数据</b>(数据库尚未收录引用,不代表无人引用)</span>`+
+         ` —— 本条的 🔥 来自<b>新鲜度</b>(发表 ${h.age_days} 天前)`+
+         (h.published_as?`+<b>预印本已被期刊接收</b>`:``)+`,<b>而非引用热度</b>`;
+    }else{
+      t+=`被引 ${h.cites} 次 · 引用速率 <b>${h.cite_rate}/月</b> · 发表 ${h.age_days} 天前`;
+    }
+    if(h.accel!==null&&h.accel!==undefined)t+=` · <b>引用加速度 ${h.accel}/月</b>(本站快照实测)`;
+    else t+=` · 引用加速度:快照天数不足,暂不计算`;
+    if(h.published_as)t+=` · 正式版 DOI ${esc(h.published_as)}`;
+    out.push(t);
+  }
+  if(ev.gap)out.push(`<b>🕳️ Gap 原句:</b>` + ev.gap.map(x=>`"${esc(x)}"`).join(" / "));
+  if(ev.question)out.push(`<b>❓ 作者提出的问题:</b>` + ev.question.map(x=>`"${esc(x)}"`).join(" / "));
+  if(ev.limitation)out.push(`<b>⚠️ 作者自述局限:</b>` + ev.limitation.map(x=>`"${esc(x)}"`).join(" / "));
+  return out.length?`<div class="pev">${out.join("<br>")}</div>`:"";
+}
+
+function papCard(pa){
+  const st=pstate(pa);
+  const tags=(pa.tags||[]);
+  const tagHtml=(tags.includes("hotspot")?`<span class="ptag hotspot">🔥 Hotspot</span>`:"")+
+                (tags.includes("gap")?`<span class="ptag gap">🕳️ Gap</span>`:"")+
+                (tags.includes("question")?`<span class="ptag question">❓ Question</span>`:"")+
+                (pa.is_oa?`<span class="ptag oa">🔓 OA</span>`:"")+
+                (pa.preprint?`<span class="ptag pre">📄 预印本</span>`:"")+
+                (pa.tier&&pa.tier!=="preprint"?`<span class="ptag ${pa.tier.toLowerCase()}" title="期刊层级代理(非 JCR 影响因子)">${pa.tier} ${TIERLAB[pa.tier]||""}</span>`:"");
+  const auth=(pa.authors||[]);
+  const authStr=auth.length>6?auth.slice(0,5).join(", ")+" … "+auth[auth.length-1]:auth.join(", ");
+  const srcStr=(pa.src||[]).map(x=>SRCLAB[x]||x).join(" · ");
+  const abs=(pa.abstract||"");
+  const shortAbs=abs.length>340?abs.slice(0,340)+"…":abs;
+  const links=[];
+  if(pa.url)links.push(`<a href="${esc(pa.url)}" target="_blank" rel="noopener">原文</a>`);
+  if(pa.pdf)links.push(`<a href="${esc(pa.pdf)}" target="_blank" rel="noopener">PDF</a>`);
+  if(pa.doi)links.push(`<a href="https://doi.org/${esc(pa.doi)}" target="_blank" rel="noopener">DOI</a>`);
+  if(pa.pmid)links.push(`<a href="https://pubmed.ncbi.nlm.nih.gov/${esc(pa.pmid)}/" target="_blank" rel="noopener">PubMed</a>`);
+  const myTags=(st.tags||[]).map(t=>`<span class="mytag" data-mt="${esc(t)}" title="点击按此标签筛选">🏷️ ${esc(t)}</span>`).join("");
+  return `<div class="pcard b-${pa.band}" data-i="${pa.i}">
+    <div class="ptitle">${pa.url?`<a href="${esc(pa.url)}" target="_blank" rel="noopener">${esc(pa.title)}</a>`:esc(pa.title)}</div>
+    <div class="pmeta">
+      <span class="pscore" title="${esc(scoreTip(pa))}">相关性 ${pa.score.toFixed(2)} ▸</span> ${tagHtml}
+      ${st.star?'<span class="ptag" style="background:#FFF3D6;color:#8A6100;border:1px solid #F0D38A">⭐ 收藏</span>':""}
+      ${st.read?"":'<span class="ptag" style="background:#E7F0FC;color:#14538F;border:1px solid #BAD3F1">📬 未读</span>'}
+      <br>${esc(pa.journal||"—")}${pa.date?" · "+esc(pa.date):""}${pa.cites!=null?` · 被引 <b>${pa.cites}</b>(${pa.cite_rate}/月)`:""}
+      ${pa.published_as?` · <b>预印本已发表</b>`:""}
+      <br>${esc(authStr)}
+      ${pa.affil?`<br><span style="color:#8892A4">${esc(pa.affil.slice(0,140))}</span>`:""}
+      <br><span style="color:#8892A4">来源:${esc(srcStr)}</span> · ${dirPills(pa)}
+      ${links.length?"<br>"+links.join(" · "):""}
+    </div>
+    ${shortAbs?`<div class="pabs">${esc(shortAbs)}</div>`:""}
+    ${evBox(pa)}
+    <div class="pbar">
+      <button class="abtn ${st.star?"tracked":""}" data-act="star" data-i="${pa.i}">${st.star?"★ 已收藏":"☆ 收藏"}</button>
+      <button class="abtn ${st.read?"tracked":""}" data-act="read" data-i="${pa.i}">${st.read?"✓ 已读":"○ 标为已读"}</button>
+      <button class="abtn" data-act="tag" data-i="${pa.i}">🏷️ 加标签</button>
+      <button class="abtn" data-act="note" data-i="${pa.i}">📝 ${st.note?"改笔记":"写笔记"}</button>
+      ${myTags}
+    </div>
+    ${st.note?`<div class="pev" style="border-style:solid;border-color:#C9B8E8"><b>我的笔记:</b>${esc(st.note)}</div>`:""}
+  </div>`;
+}
+
+function renderPapers(){
+  if(!document.getElementById("papWrap"))return;
+  wirePapersOnce();
+  const rows=PAPERS.filter(x=>ppass(x,null));
+  /* 动态计数(每次渲染按其它已生效条件重算) */
+  papDirSel();
+  papMultiSel();
+  const sort=document.getElementById("papSort").value;
+  const cmp={score:(a,b)=>b.score-a.score||((b.date||"")<(a.date||"")?-1:1),
+             date:(a,b)=>((b.date||"")>(a.date||"")?1:-1)||b.score-a.score,
+             cites:(a,b)=>(b.cites||0)-(a.cites||0),
+             rate:(a,b)=>(b.cite_rate||0)-(a.cite_rate||0),
+             hot:(a,b)=>(b.hot_score||0)-(a.hot_score||0)}[sort]||((a,b)=>b.score-a.score);
+  rows.sort(cmp);
+  const st=getPS();
+  const nStar=Object.values(st).filter(v=>v&&v.star).length;
+  const nUnread=PAPERS.filter(x=>!pstate(x).read).length;
+  document.getElementById("papStat").innerHTML=
+    `共 <b>${PAPERS.length}</b> 篇(去重后)· 当前筛选 <b>${rows.length}</b> 篇 · ⭐ 收藏 ${nStar} · 📬 未读 ${nUnread} · `+
+    `🔥 ${PAPERS.filter(x=>(x.tags||[]).includes("hotspot")).length} · 🕳️ ${PAPERS.filter(x=>(x.tags||[]).includes("gap")).length} · ❓ ${PAPERS.filter(x=>(x.tags||[]).includes("question")).length}`;
+  document.getElementById("papWrap").innerHTML=
+    rows.length?rows.slice(0,400).map(papCard).join("")+(rows.length>400?`<div class="status">仅显示前 400 篇,请用筛选缩小范围。</div>`:""):
+    `<div class="card">没有符合条件的文献。试试放宽相关度或时间窗。</div>`;
+  wirePapCards();
+  renderMyTagChips();
+  renderPapViz(rows);
+  const m=PAPMETA;
+  document.getElementById("papbar").innerHTML=
+    `📚 文献数据最后更新:<b>${esc(m.updated||"?")}</b> · 抓取窗口 ${esc((m.window||{}).since||"?")} → ${esc((m.window||{}).until||"?")} · `+
+    `原始 ${m.n_raw||0} 条 → 去重后 <b>${m.n||0}</b> 篇 · OA ${m.oa_n||0} · 预印本 ${m.preprint_n||0} · 来源 ${(m.sources||[]).map(x=>SRCLAB[x]||x).join(" / ")}`;
+  const sd=m.snapshot_days||0;
+  document.getElementById("snapProgress").innerHTML=
+    sd>=7?`✅ <b>引用快照已积累 ${sd} 天</b> —— Hotspot 的「引用加速度」已是本站实测值,不是估算。`
+         :`⏳ <b>引用快照积累中:${sd}/7 天</b>(首次快照 ${esc(m.snapshot_first||"今天")})。`+
+          `诚实说明:Web of Science/Google Scholar 无免费接口,可用 API 只返回<b>当前</b>被引数、不返回历史曲线,`+
+          `所以「引用加速度」无法凭空算出。本站从上线当天开始每日存一份被引快照,满 7 天后自动切换为真实加速度;`+
+          `在此之前 Hotspot 只用<b>当日可核验</b>的信号:引用速率(被引数÷发表月数)、新鲜度、预印本是否已被期刊接收。`;
+}
+
+/* 方向下拉:动态计数 */
+function papDirSel(){
+  const sel=document.getElementById("papDir");
+  const cur=sel.value, cnt={};
+  INTERESTS.forEach(i=>cnt[i.id]=0);
+  PAPERS.forEach(x=>{if(!ppass(x,"dir"))return;Object.keys(x.dirs||{}).forEach(k=>cnt[k]=(cnt[k]||0)+1);});
+  sel.innerHTML=`<option value="">研究方向(全部)</option>`+
+    INTERESTS.slice().sort((a,b)=>(cnt[b.id]||0)-(cnt[a.id]||0)).map(i=>
+      `<option value="${i.id}"${i.id===cur?" selected":""}>${esc(i.name)} (${cnt[i.id]||0})</option>`).join("");
+  sel.value=cur;
+}
+function papMultiSel(){
+  /* 来源是数组字段(一篇可命中多源),facetSel 只处理标量,故手写 */
+  const ss=document.getElementById("papSrc"), cur=ss.value, cnt={};
+  PAPERS.forEach(x=>{if(!ppass(x,"src"))return;(x.src||[]).forEach(k=>cnt[k]=(cnt[k]||0)+1);});
+  const allSrc=Object.keys(SRCLAB).filter(k=>PAPERS.some(x=>(x.src||[]).includes(k)));
+  ss.innerHTML=`<option value="">来源(全部)</option>`+allSrc.sort((a,b)=>(cnt[b]||0)-(cnt[a]||0)).map(k=>
+    `<option value="${k}"${k===cur?" selected":""}>${SRCLAB[k]} (${cnt[k]||0})</option>`).join("");
+  ss.value=cur;
+  facetSel(document.getElementById("papJournal"),"期刊(全部)",PAPERS,x=>x.journal,x=>ppass(x,"jr"));
+  const ts=document.getElementById("papTier"), tcur=ts.value, tc={};
+  PAPERS.forEach(x=>{if(!ppass(x,"tier"))return;if(x.tier)tc[x.tier]=(tc[x.tier]||0)+1;});
+  ts.innerHTML=`<option value="">期刊层级(全部)</option>`+["T1","T2","T3","T4","preprint"].filter(k=>tc[k]!==undefined||PAPERS.some(x=>x.tier===k)).map(k=>
+    `<option value="${k}"${k===tcur?" selected":""}>${k==="preprint"?"预印本":k+" "+(TIERLAB[k]||"")} (${tc[k]||0})</option>`).join("");
+  ts.value=tcur;
+  const yt=document.getElementById("papType"), ycur=yt.value, yc={};
+  PAPERS.forEach(x=>{if(!ppass(x,"type"))return;yc[x.ptype]=(yc[x.ptype]||0)+1;});
+  const TYLAB={article:"研究论文",review:"综述",preprint:"预印本"};
+  yt.innerHTML=`<option value="">文献类型(全部)</option>`+Object.keys(yc).sort((a,b)=>yc[b]-yc[a]).map(k=>
+    `<option value="${k}"${k===ycur?" selected":""}>${TYLAB[k]||k} (${yc[k]})</option>`).join("");
+  yt.value=ycur;
+}
+
+function renderMyTagChips(){
+  const st=getPS(), cnt={};
+  Object.values(st).forEach(v=>{(v&&v.tags||[]).forEach(t=>cnt[t]=(cnt[t]||0)+1);});
+  const keys=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]);
+  const w=document.getElementById("papTagChips");
+  if(!keys.length){w.innerHTML=`<b>🏷️ 我的标签:</b>还没有。点任意卡片的「🏷️ 加标签」建立自己的分类(如 <i>要读</i>/<i>写基金引用</i>/<i>竞争对手</i>),标签只存在本设备。`;return;}
+  w.innerHTML=`<b>🏷️ 我的标签:</b> `+
+    `<span class="chip mtg${PAP_TAGFILT===""?" active":""}" data-mtg="">全部</span> `+
+    keys.map(t=>`<span class="chip mtg${PAP_TAGFILT===t?" active":""}" data-mtg="${esc(t)}">${esc(t)} (${cnt[t]})</span>`).join(" ");
+  w.querySelectorAll(".chip.mtg").forEach(c=>c.onclick=()=>{PAP_TAGFILT=c.dataset.mtg;renderPapers();});
+}
+
+function wirePapCards(){
+  document.querySelectorAll("#papWrap [data-act]").forEach(b=>b.onclick=()=>{
+    const pa=PAPERS.find(x=>x.i===parseInt(b.dataset.i)); if(!pa)return;
+    const st=pstate(pa);
+    if(b.dataset.act==="star")setPstate(pa,{star:!st.star});
+    if(b.dataset.act==="read")setPstate(pa,{read:!st.read});
+    if(b.dataset.act==="tag"){
+      const cur=(st.tags||[]).join(", ");
+      const v=prompt("给这篇文献打标签(逗号分隔,可留空清除):",cur);
+      if(v===null)return;
+      setPstate(pa,{tags:v.split(",").map(x=>x.trim()).filter(Boolean)});
+    }
+    if(b.dataset.act==="note"){
+      const v=prompt("这篇文献的笔记(为什么重要 / 打算怎么用):",st.note||"");
+      if(v===null)return;
+      setPstate(pa,{note:v.trim()});
+    }
+    renderPapers();
+  });
+  document.querySelectorAll("#papWrap .mytag").forEach(c=>c.onclick=()=>{PAP_TAGFILT=c.dataset.mt;renderPapers();});
+}
+
+/* ---------------------------------------------------------------- 导出 */
+function curPapers(){
+  const sort=document.getElementById("papSort").value;
+  const rows=PAPERS.filter(x=>ppass(x,null));
+  rows.sort({score:(a,b)=>b.score-a.score,date:(a,b)=>((b.date||"")>(a.date||"")?1:-1),
+             cites:(a,b)=>(b.cites||0)-(a.cites||0),rate:(a,b)=>(b.cite_rate||0)-(a.cite_rate||0),
+             hot:(a,b)=>(b.hot_score||0)-(a.hot_score||0)}[sort]||((a,b)=>b.score-a.score));
+  return rows;
+}
+function dl(name,text,mime){
+  const b=new Blob([text],{type:(mime||"text/plain")+";charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  document.getElementById("expStat").textContent=`已导出 ${name}`;
+}
+function citeKey(pa,n){
+  const a=((pa.authors||[])[0]||"anon").split(/[ ,]/)[0].replace(/[^A-Za-z]/g,"")||"anon";
+  return (a+(pa.year||"")+"_"+String(n)).toLowerCase();
+}
+function toBib(rows){
+  return rows.map((pa,n)=>{
+    const ty=pa.preprint?"misc":(pa.ptype==="review"?"article":"article");
+    const L=[`  title = {${(pa.title||"").replace(/[{}]/g,"")}}`,
+             `  author = {${(pa.authors||[]).join(" and ")}}`,
+             `  year = {${pa.year||""}}`];
+    if(pa.journal)L.push(`  journal = {${pa.journal}}`);
+    if(pa.doi)L.push(`  doi = {${pa.doi}}`);
+    if(pa.pmid)L.push(`  pmid = {${pa.pmid}}`);
+    if(pa.url)L.push(`  url = {${pa.url}}`);
+    const st=pstate(pa);
+    const kw=[(INTMAP[pa.top_dir]||{}).name||pa.top_dir].concat(st.tags||[]).filter(Boolean);
+    if(kw.length)L.push(`  keywords = {${kw.join(", ")}}`);
+    if(st.note)L.push(`  note = {${st.note.replace(/[{}]/g,"")}}`);
+    return `@${ty}{${citeKey(pa,n+1)},\n${L.join(",\n")}\n}`;
+  }).join("\n\n")+"\n";
+}
+function toRis(rows){
+  return rows.map(pa=>{
+    const L=[`TY  - ${pa.preprint?"UNPB":(pa.ptype==="review"?"JOUR":"JOUR")}`];
+    (pa.authors||[]).forEach(a=>L.push(`AU  - ${a}`));
+    L.push(`TI  - ${pa.title||""}`);
+    if(pa.journal)L.push(`JO  - ${pa.journal}`);
+    if(pa.year)L.push(`PY  - ${pa.year}`);
+    if(pa.date)L.push(`DA  - ${pa.date.replace(/-/g,"/")}`);
+    if(pa.abstract)L.push(`AB  - ${pa.abstract}`);
+    if(pa.doi)L.push(`DO  - ${pa.doi}`);
+    if(pa.url)L.push(`UR  - ${pa.url}`);
+    const st=pstate(pa);
+    [(INTMAP[pa.top_dir]||{}).name||pa.top_dir].concat(st.tags||[]).filter(Boolean).forEach(k=>L.push(`KW  - ${k}`));
+    if(st.note)L.push(`N1  - ${st.note}`);
+    L.push("ER  - ");
+    return L.join("\n");
+  }).join("\n\n")+"\n";
+}
+function toEnw(rows){
+  return rows.map(pa=>{
+    const L=[`%0 ${pa.preprint?"Unpublished Work":"Journal Article"}`];
+    (pa.authors||[]).forEach(a=>L.push(`%A ${a}`));
+    L.push(`%T ${pa.title||""}`);
+    if(pa.journal)L.push(`%J ${pa.journal}`);
+    if(pa.year)L.push(`%D ${pa.year}`);
+    if(pa.doi)L.push(`%R ${pa.doi}`);
+    if(pa.url)L.push(`%U ${pa.url}`);
+    if(pa.abstract)L.push(`%X ${pa.abstract}`);
+    const st=pstate(pa);
+    if(st.note)L.push(`%Z ${st.note}`);
+    return L.join("\n");
+  }).join("\n\n")+"\n";
+}
+function toApa(rows){
+  return rows.map(pa=>{
+    const A=(pa.authors||[]);
+    let au=A.length===0?"":(A.length<=20?A.join(", "):A.slice(0,19).join(", ")+", … "+A[A.length-1]);
+    let s=`${au} (${pa.year||"n.d."}). ${pa.title||""}. `;
+    if(pa.journal)s+=`*${pa.journal}*. `;
+    if(pa.doi)s+=`https://doi.org/${pa.doi}`;
+    else if(pa.url)s+=pa.url;
+    return s.trim();
+  }).sort().join("\n\n")+"\n";
+}
+function toCsv(rows){
+  const cols=["score","band","top_dir","title","journal","tier","date","year","cites","cite_rate","cite_accel","is_oa","preprint","ptype","doi","pmid","url","tags","my_tags","my_note","src","hits"];
+  const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+  const out=[cols.join(",")];
+  rows.forEach(pa=>{const st=pstate(pa);
+    out.push(cols.map(c=>{
+      if(c==="tags")return q((pa.tags||[]).join("|"));
+      if(c==="my_tags")return q((st.tags||[]).join("|"));
+      if(c==="my_note")return q(st.note||"");
+      if(c==="src")return q((pa.src||[]).join("|"));
+      if(c==="hits")return q((pa.hits||[]).join("|"));
+      if(c==="top_dir")return q((INTMAP[pa.top_dir]||{}).name||pa.top_dir);
+      return q(pa[c]);
+    }).join(","));});
+  return "\ufeff"+out.join("\n")+"\n";
+}
+function toMd(rows){
+  const g={};
+  rows.forEach(pa=>{const k=(INTMAP[pa.top_dir]||{}).name||pa.top_dir||"未分类";(g[k]=g[k]||[]).push(pa);});
+  let s=`# 文献简报 · ${new Date().toISOString().slice(0,10)}\n\n当前筛选 ${rows.length} 篇。相关性分数与标记规则见站内 README。\n\n`;
+  Object.keys(g).forEach(k=>{
+    s+=`## ${k}(${g[k].length})\n\n`;
+    g[k].forEach(pa=>{
+      const st=pstate(pa);
+      s+=`- **${pa.title}** — ${pa.journal||"—"}${pa.date?", "+pa.date:""}`;
+      s+=` · 相关性 ${pa.score.toFixed(2)}`;
+      if(pa.cites!=null)s+=` · 被引 ${pa.cites}(${pa.cite_rate}/月)`;
+      if((pa.tags||[]).length)s+=` · ${pa.tags.map(t=>({hotspot:"🔥",gap:"🕳️",question:"❓"}[t]||t)).join("")}`;
+      if(pa.doi)s+=` · doi:${pa.doi}`;
+      s+="\n";
+      const ev=pa.evidence||{};
+      if(ev.gap)s+=`  - 🕳️ ${ev.gap[0]}\n`;
+      if(ev.question)s+=`  - ❓ ${ev.question[0]}\n`;
+      if(st.note)s+=`  - 📝 我的笔记:${st.note}\n`;
+    });
+    s+="\n";
+  });
+  return s;
+}
+
+
+/* =========================================================================
+   可视化(纯内联 SVG,无外部库):
+   ① 关键词趋势(按季度堆叠折线)  ② 关键词共现热图  ③ 合作者网络
+   全部由当前筛选结果实时计算 —— 换筛选条件图就跟着变。
+   ========================================================================= */
+function svgEl(w,h,body,extra){
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${w}px;height:auto;font-family:inherit" ${extra||""}>${body}</svg>`;
+}
+function quarter(d){
+  if(!d)return null;
+  const y=d.slice(0,4), m=parseInt(d.slice(5,7)||"1");
+  if(!/^\d{4}$/.test(y))return null;
+  return y+"Q"+Math.min(4,Math.max(1,Math.ceil(m/3)));
+}
+
+/* ---------- ① 关键词趋势 ---------- */
+function vizTrend(rows){
+  const qs={}, keyOf={};
+  const terms=[];
+  INTERESTS.forEach(i=>terms.push({id:i.id,name:i.name,color:i.color||"#666",words:i.core}));
+  rows.forEach(pa=>{
+    const q=quarter(pa.date); if(!q)return;
+    qs[q]=qs[q]||{}; keyOf[q]=1;
+    Object.keys(pa.dirs||{}).forEach(k=>qs[q][k]=(qs[q][k]||0)+1);
+    qs[q]._n=(qs[q]._n||0)+1;
+  });
+  const cols=Object.keys(qs).sort();
+  if(cols.length<2)return `<div class="vizbox"><h4>① 关键词趋势</h4><div class="vnote">当前筛选结果跨度不足 2 个季度,无法画趋势。放宽时间窗试试。</div></div>`;
+  const use=terms.filter(t=>cols.some(c=>(qs[c][t.id]||0)>0)).slice(0,8);
+  const W=760,H=300,L=48,R=140,T=18,B=42;
+  const iw=W-L-R, ih=H-T-B;
+  const maxv=Math.max(1,...cols.map(c=>Math.max(...use.map(t=>qs[c][t.id]||0))));
+  const x=i=>L+(cols.length===1?iw/2:i*iw/(cols.length-1));
+  const y=v=>T+ih-(v/maxv)*ih;
+  let b=`<rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>`;
+  for(let g=0;g<=4;g++){const yy=T+ih-g*ih/4;
+    b+=`<line x1="${L}" y1="${yy.toFixed(1)}" x2="${L+iw}" y2="${yy.toFixed(1)}" stroke="#EDF0F5"/>`;
+    b+=`<text x="${L-7}" y="${(yy+4).toFixed(1)}" font-size="10" fill="#8892A4" text-anchor="end">${Math.round(maxv*g/4)}</text>`;}
+  cols.forEach((c,i)=>{
+    const step=Math.ceil(cols.length/9);
+    if(i%step===0||i===cols.length-1)
+      b+=`<text x="${x(i).toFixed(1)}" y="${H-B+16}" font-size="10" fill="#5A6472" text-anchor="middle">${c}</text>`;});
+  use.forEach(t=>{
+    const pts=cols.map((c,i)=>`${x(i).toFixed(1)},${y(qs[c][t.id]||0).toFixed(1)}`).join(" ");
+    b+=`<polyline points="${pts}" fill="none" stroke="${t.color}" stroke-width="2.1" stroke-linejoin="round"/>`;
+    cols.forEach((c,i)=>{b+=`<circle cx="${x(i).toFixed(1)}" cy="${y(qs[c][t.id]||0).toFixed(1)}" r="2.6" fill="${t.color}"><title>${esc(t.name)} · ${c}: ${qs[c][t.id]||0} 篇</title></circle>`;});
+  });
+  use.forEach((t,k)=>{
+    b+=`<rect x="${L+iw+12}" y="${T+k*22}" width="11" height="11" rx="2" fill="${t.color}"/>`;
+    const nm=t.name.length>16?t.name.slice(0,16)+"…":t.name;
+    b+=`<text x="${L+iw+28}" y="${T+k*22+10}" font-size="10.5" fill="#3A4351">${esc(nm)}<title>${esc(t.name)}</title></text>`;});
+  b+=`<line x1="${L}" y1="${T+ih}" x2="${L+iw}" y2="${T+ih}" stroke="#CBD3E1"/>`;
+  b+=`<line x1="${L}" y1="${T}" x2="${L}" y2="${T+ih}" stroke="#CBD3E1"/>`;
+  b+=`<text x="${L}" y="${H-6}" font-size="10.5" fill="#8892A4">季度(按发表日期)</text>`;
+  return `<div class="vizbox"><h4>① 关键词趋势:各研究方向每季度命中论文数</h4>
+    <div class="vnote">纵轴 = 当前筛选结果里落在该方向的论文数。<b>注意</b>:最近一个季度通常偏低 —— 数据库收录有滞后,不代表领域降温。</div>
+    ${svgEl(W,H,b)}</div>`;
+}
+
+/* ---------- ② 关键词共现热图 ---------- */
+function vizCooc(rows){
+  const ids=INTERESTS.map(i=>i.id);
+  const co={}, self={};
+  ids.forEach(a=>{self[a]=0;ids.forEach(b=>co[a+"|"+b]=0);});
+  rows.forEach(pa=>{
+    const ks=Object.keys(pa.dirs||{});
+    ks.forEach(a=>{self[a]=(self[a]||0)+1;
+      ks.forEach(b=>{if(a!==b)co[a+"|"+b]=(co[a+"|"+b]||0)+1;});});
+  });
+  const use=ids.filter(a=>self[a]>0);
+  if(use.length<2)return `<div class="vizbox"><h4>② 共现热图</h4><div class="vnote">当前筛选结果只命中 ${use.length} 个方向,无法计算共现。</div></div>`;
+  const cell=44, LB=132, TB=118;
+  const W=LB+cell*use.length+16, H=TB+cell*use.length+16;
+  const mx=Math.max(1,...use.flatMap(a=>use.filter(b=>b!==a).map(b=>co[a+"|"+b])));
+  let b=`<rect width="${W}" height="${H}" fill="#fff"/>`;
+  use.forEach((a,i)=>{
+    const nm=(INTMAP[a]||{}).name||a;
+    const shortNm=nm.length>15?nm.slice(0,15)+"…":nm;
+    b+=`<text x="${LB-8}" y="${TB+i*cell+cell/2+4}" font-size="10.5" fill="#3A4351" text-anchor="end">${esc(shortNm)}<title>${esc(nm)}</title></text>`;
+    b+=`<text transform="translate(${LB+i*cell+cell/2},${TB-8}) rotate(-45)" font-size="10.5" fill="#3A4351" text-anchor="start">${esc(shortNm)}<title>${esc(nm)}</title></text>`;
+  });
+  use.forEach((a,i)=>use.forEach((b2,j)=>{
+    const v=(a===b2)?self[a]:co[a+"|"+b2];
+    const isDiag=(a===b2);
+    const t=isDiag?1:(v/mx);
+    const col=isDiag?"#4A148C":`rgb(${Math.round(255-115*t)},${Math.round(255-200*t)},${Math.round(255-100*t)})`;
+    b+=`<rect x="${LB+j*cell}" y="${TB+i*cell}" width="${cell-2}" height="${cell-2}" rx="3" fill="${col}" stroke="#fff" stroke-width="1">`+
+       `<title>${esc((INTMAP[a]||{}).name||a)} × ${esc((INTMAP[b2]||{}).name||b2)}: ${v} 篇${isDiag?"(该方向总数)":""}</title></rect>`;
+    if(v>0)b+=`<text x="${LB+j*cell+(cell-2)/2}" y="${TB+i*cell+(cell-2)/2+4}" font-size="10.5" text-anchor="middle" `+
+              `fill="${isDiag||t>0.55?"#fff":"#333"}" font-weight="${isDiag?700:400}">${v}</text>`;
+  }));
+  return `<div class="vizbox"><h4>② 方向共现热图:哪两个方向常出现在同一篇论文里</h4>
+    <div class="vnote">对角线(深紫)= 该方向命中总数;非对角格 = 同时命中两个方向的论文数。
+    <b>怎么用:</b>共现数<b>高</b>说明这个交叉已被人做;共现数<b>低而两端各自都很热</b>的格子,才是你可以切入的空白交叉点。</div>
+    ${svgEl(W,H,b)}</div>`;
+}
+
+/* ---------- ③ 合作者网络 ---------- */
+function vizNet(rows){
+  const cnt={}, edge={};
+  rows.forEach(pa=>{
+    const A=(pa.authors||[]).slice(0,12);
+    A.forEach(a=>cnt[a]=(cnt[a]||0)+1);
+    for(let i=0;i<A.length;i++)for(let j=i+1;j<A.length;j++){
+      const k=[A[i],A[j]].sort().join("||");edge[k]=(edge[k]||0)+1;}
+  });
+  const top=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).slice(0,26);
+  if(top.length<4)return `<div class="vizbox"><h4>③ 合作者网络</h4><div class="vnote">当前筛选结果作者太少,无法成网。</div></div>`;
+  const idx={};top.forEach((a,i)=>idx[a]=i);
+  const es=Object.keys(edge).map(k=>{const[a,b]=k.split("||");return{a,b,w:edge[k]};})
+    .filter(e=>idx[e.a]!==undefined&&idx[e.b]!==undefined&&e.w>=2)
+    .sort((x,y)=>y.w-x.w).slice(0,90);
+  const W=760,H=470,cx=W/2,cy=H/2;
+  const deg={};top.forEach(a=>deg[a]=0);es.forEach(e=>{deg[e.a]++;deg[e.b]++;});
+  /* 度数高的排内圈 —— 无需物理仿真也能看出核心圈层 */
+  const order=top.slice().sort((a,b)=>deg[b]-deg[a]);
+  const pos={};
+  const inner=order.slice(0,9), outer=order.slice(9);
+  inner.forEach((a,i)=>{const th=i*2*Math.PI/inner.length-Math.PI/2;
+    pos[a]=[cx+128*Math.cos(th),cy+118*Math.sin(th)];});
+  outer.forEach((a,i)=>{const th=i*2*Math.PI/Math.max(1,outer.length)-Math.PI/2+0.18;
+    pos[a]=[cx+218*Math.cos(th),cy+196*Math.sin(th)];});
+  const mw=Math.max(1,...es.map(e=>e.w));
+  let b=`<rect width="${W}" height="${H}" fill="#fff"/>`;
+  es.forEach(e=>{const[x1,y1]=pos[e.a],[x2,y2]=pos[e.b];
+    b+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" `+
+       `stroke="#4A148C" stroke-opacity="${(0.1+0.45*e.w/mw).toFixed(2)}" stroke-width="${(0.7+2.4*e.w/mw).toFixed(2)}">`+
+       `<title>${esc(e.a)} ↔ ${esc(e.b)}:合著 ${e.w} 篇</title></line>`;});
+  const mc=Math.max(1,...top.map(a=>cnt[a]));
+  order.forEach(a=>{const[x,y]=pos[a];const r=4+9*Math.sqrt(cnt[a]/mc);
+    b+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#7E3FBF" fill-opacity="0.85" stroke="#4A148C" stroke-width="1">`+
+       `<title>${esc(a)}:${cnt[a]} 篇 · 与 ${deg[a]} 位作者合著</title></circle>`;
+    const nm=a.length>14?a.slice(0,14)+"…":a;
+    b+=`<text x="${x.toFixed(1)}" y="${(y-r-4).toFixed(1)}" font-size="9.6" fill="#37414F" text-anchor="middle">${esc(nm)}</text>`;});
+  return `<div class="vizbox"><h4>③ 合作者网络:当前结果里发文最多的 26 位作者</h4>
+    <div class="vnote">点大小 = 发文数;连线粗细 = 合著篇数(仅显示合著 ≥2 篇的边);内圈 = 合作关系最多的 9 人。
+    <b>怎么用:</b>内圈是这个领域的核心圈层 —— 找 K99 mentor / 合作者 / 审稿人回避名单都看这里。
+    <b>局限:</b>作者名按"姓+首字母"匹配,同名会被合并,大团队论文会人为增加连边。</div>
+    ${svgEl(W,H,b)}</div>`;
+}
+
+function renderPapViz(rows){
+  const w=document.getElementById("papVizWrap"); if(!w)return;
+  w.innerHTML=`<div class="vizgrid">${vizTrend(rows)}${vizCooc(rows)}</div>${vizNet(rows)}`;
+}
+
+/* ---------------------------------------------------------------- 事件绑定(只绑一次) */
+function wirePapersOnce(){
+  if(PAP_WIRED)return; PAP_WIRED=true;
+  ["papq","papDir","papSrc","papJournal","papTier","papType","papBand","papWin","papSort",
+   "pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread"].forEach(id=>{
+    const el=document.getElementById(id); if(!el)return;
+    el.addEventListener(el.tagName==="INPUT"&&el.type==="text"?"input":"change",renderPapers);
+  });
+  document.getElementById("papRst").onclick=()=>{
+    ["papq"].forEach(id=>document.getElementById(id).value="");
+    ["papDir","papSrc","papJournal","papTier","papType","papBand","papWin"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("papSort").value="score";
+    ["pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread"].forEach(id=>document.getElementById(id).checked=false);
+    PAP_TAGFILT=""; renderPapers();
+  };
+  const D=new Date().toISOString().slice(0,10);
+  document.getElementById("expBib").onclick=()=>dl(`papers_${D}.bib`,toBib(curPapers()),"application/x-bibtex");
+  document.getElementById("expRis").onclick=()=>dl(`papers_${D}.ris`,toRis(curPapers()),"application/x-research-info-systems");
+  document.getElementById("expEnw").onclick=()=>dl(`papers_${D}.enw`,toEnw(curPapers()),"application/x-endnote-refer");
+  document.getElementById("expApa").onclick=()=>dl(`papers_APA_${D}.md`,toApa(curPapers()),"text/markdown");
+  document.getElementById("expCsv").onclick=()=>dl(`papers_${D}.csv`,toCsv(curPapers()),"text/csv");
+  document.getElementById("expMd").onclick=()=>dl(`digest_${D}.md`,toMd(curPapers()),"text/markdown");
+}
+
 loadData();
 try{checkElig();}catch(e){}
 </script>

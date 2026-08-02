@@ -1,0 +1,292 @@
+{
+ "updated": "2026-08-01 20:41",
+ "log": [
+  {
+   "source": "pubmed",
+   "direction": "tdmd",
+   "n": 31,
+   "seconds": 1.22,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "tdmd",
+   "n": 17,
+   "seconds": 0.95,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "tdmd",
+   "n": 10,
+   "seconds": 0.65,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "tdmd",
+   "n": 0,
+   "seconds": 3.67,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "tdmd",
+   "n": 100,
+   "seconds": 0.32,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "ampk",
+   "n": 90,
+   "seconds": 1.97,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "ampk",
+   "n": 75,
+   "seconds": 1.31,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "ampk",
+   "n": 4,
+   "seconds": 0.72,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "ampk",
+   "n": 0,
+   "seconds": 3.57,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "ampk",
+   "n": 100,
+   "seconds": 0.44,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "biogenesis",
+   "n": 150,
+   "seconds": 2.76,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "biogenesis",
+   "n": 156,
+   "seconds": 3.29,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "biogenesis",
+   "n": 30,
+   "seconds": 1.0,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "biogenesis",
+   "n": 0,
+   "seconds": 3.58,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "biogenesis",
+   "n": 100,
+   "seconds": 0.26,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "tut",
+   "n": 31,
+   "seconds": 1.13,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "tut",
+   "n": 24,
+   "seconds": 0.89,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "tut",
+   "n": 7,
+   "seconds": 0.55,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "tut",
+   "n": 0,
+   "seconds": 3.56,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "tut",
+   "n": 100,
+   "seconds": 0.27,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "mir29fib",
+   "n": 33,
+   "seconds": 1.57,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "mir29fib",
+   "n": 31,
+   "seconds": 1.17,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "mir29fib",
+   "n": 3,
+   "seconds": 0.58,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "mir29fib",
+   "n": 0,
+   "seconds": 3.57,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "mir29fib",
+   "n": 100,
+   "seconds": 0.37,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "metab",
+   "n": 150,
+   "seconds": 1.77,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "metab",
+   "n": 200,
+   "seconds": 3.6,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "metab",
+   "n": 22,
+   "seconds": 0.82,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "metab",
+   "n": 0,
+   "seconds": 3.55,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "metab",
+   "n": 100,
+   "seconds": 0.31,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "models",
+   "n": 150,
+   "seconds": 2.24,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "models",
+   "n": 23,
+   "seconds": 0.86,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "models",
+   "n": 5,
+   "seconds": 0.53,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "models",
+   "n": 0,
+   "seconds": 3.57,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "models",
+   "n": 100,
+   "seconds": 0.21,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "tools",
+   "n": 42,
+   "seconds": 1.51,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "tools",
+   "n": 27,
+   "seconds": 0.83,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "tools",
+   "n": 1,
+   "seconds": 0.41,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "tools",
+   "n": 1,
+   "seconds": 3.57,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "tools",
+   "n": 100,
+   "seconds": 1.48,
+   "error": null
+  },
+  {
+   "source": "biorxiv",
+   "direction": "scan1800+cut",
+   "n": 496,
+   "seconds": 164.7,
+   "error": null
+  }
+ ]
+}

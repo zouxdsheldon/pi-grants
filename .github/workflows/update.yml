@@ -22,11 +22,21 @@ jobs:
         run: python scripts/fetch_jobs.py || echo "jobs fetch failed, keeping previous data/jobs.json"
       - name: Rebuild calendar feed (.ics)
         run: python scripts/build_ics.py
+      - name: Fetch literature (6 sources) + accumulate citation snapshot
+        env:
+          PAPER_WINDOW_DAYS: '400'
+          PAPER_MAX_PER_SOURCE: '150'
+        run: python scripts/fetch_papers.py || echo "papers fetch failed, keeping previous data/papers.json"
+      - name: Build daily digest page + RSS feed
+        run: python scripts/build_digest.py || echo "digest build skipped"
       - name: Commit if changed
         run: |
           git config user.name  "grants-bot"
           git config user.email "grants-bot@users.noreply.github.com"
-          git add data/grants.json data/grant_deadlines.ics data/jobs.json
+          git add data/grants.json data/grant_deadlines.ics data/jobs.json \
+                  data/papers.json data/citation_snapshots.json \
+                  data/fetch_log_papers.json data/digest.json \
+                  digest.html feed.xml
           if git diff --staged --quiet; then
             echo "No changes."
           else
