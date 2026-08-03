@@ -83,6 +83,30 @@ def clean_abs(a):
     a = re.sub(r'\s+', ' ', a)
     return a.strip()
 
+# 上游元数据脏数据兜底:Crossref 实测返回过 issued=2101-11-15 这类日期。
+# 这种记录会排在「最新」视图首位,并单独构成一个 1 条的年度队列,
+# 把 novelty 的同年队列百分位打穿。统一在 rec() 里夹逼,原始串保留到
+# date_raw 以便审计 —— 不静默丢弃。
+# Crossref 常只给到年或年月(2026-12 / 2027),这些是合法的,必须补全而不是丢弃 ——
+# 一刀切要求 YYYY-MM-DD 会误杀 112/1097 条真实记录(实测)。
+DATE_RE = re.compile(r"^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$")
+
+
+def plausible_date(s, max_ahead_days=400):
+    """规范化为 YYYY-MM-DD;不可信返回 None。缺失的月/日补 01。"""
+    mo = DATE_RE.match((s or "").strip()[:10])
+    if not mo:
+        return None
+    y, mm, dd = mo.group(1), mo.group(2) or "1", mo.group(3) or "1"
+    try:
+        d = datetime.date(int(y), int(mm), int(dd))
+    except ValueError:
+        return None
+    if d.year < 1900 or d > TODAY + datetime.timedelta(days=max_ahead_days):
+        return None
+    return d.isoformat()
+
+
 def rec(**kw):
     """统一记录结构。"""
     d = {"pmid": "", "doi": "", "title": "", "abstract": "", "journal": "", "authors": [],
@@ -90,6 +114,17 @@ def rec(**kw):
          "is_oa": None, "cites": None, "ptype": "article", "mesh": [], "keywords": [],
          "preprint": False, "published_as": "", "category": ""}
     d.update(kw)
+    raw = d.get("date") or ""
+    if raw:
+        ok = plausible_date(raw)
+        if ok is None:
+            d["date_raw"] = raw       # 审计用:保留上游原值
+            d["date"] = ""
+            d["year"] = None
+        else:
+            d["date"] = ok
+            if d.get("year") and str(d["year"]) != ok[:4]:
+                d["year"] = int(ok[:4])
     return d
 
 
