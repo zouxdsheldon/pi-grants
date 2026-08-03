@@ -86,6 +86,9 @@ for (var k=0;k<PAPERS.length;k++){
 try{ renderCiteBanner(); var bh=ELS.citeBanner.innerHTML;
   ck(bh.indexOf("为什么边这么少")>=0, "cite banner missing sparsity explanation");
   ck(bh.indexOf("预期结果")>=0, "cite banner does not state sparsity is expected");
+  /* 抓取失败率必须摊开写:失败 ≠ 该文没有引用关系 */
+  if(CITENET.query_failures) ck(bh.indexOf("不代表它没有引用关系")>=0,
+     "cite banner hides what query failures mean");
 }catch(e){ print("FAIL: renderCiteBanner threw: "+e); fails++; }
 
 print(fails===0 ? ("ALL PASS · records="+PAPERS.length+" base_pass="+base) : ("FAILURES: "+fails));

@@ -3497,7 +3497,9 @@ function renderCiteBanner(){
   const br=(CITENET.bridge_pairs||[]).slice(0,5);
   el.innerHTML=`<b>🕸️ 语料内引用网络</b>(${esc(CITENET.generated||"?")} · Europe PMC)——
     查询了相关性最高的 <b>${CITENET.queried_n||0}</b> 篇(有 PMID 的共 ${CITENET.corpus_with_pmid||0} 篇),
-    建成<b>两端都在语料内</b>的引用边 <b>${CITENET.edges_n||0}</b> 条${CITENET.query_failures?`,查询失败 ${CITENET.query_failures} 篇`:""}。
+    建成<b>两端都在语料内</b>的引用边 <b>${CITENET.edges_n||0}</b> 条${CITENET.query_failures?`,<b style="color:#8A2018">查询失败 ${CITENET.query_failures} 篇(${Math.round(100*CITENET.query_failures/Math.max(1,CITENET.queried_n||1))}%)</b>`:""}。
+    ${CITENET.query_failures?`<br><span style="color:#8A2018">失败率不低</span>——Europe PMC 偶发连接挂起,
+    <b>失败记录的引用邻域显示为空,不代表它没有引用关系</b>;下一轮定时任务会重试。`:""}
     <br><span style="color:#14538F">为什么边这么少:</span>本语料是<b>近期窗口</b>切片(多为近 1–2 年发表),
     彼此之间还没时间互相引用 —— 这是<b>预期结果</b>,不代表这些文章没影响力(整体影响力看每张卡片上的被引数)。
     这张图的用处是找出<b>本领域内部被反复引用的地基文献</b>,以及<b>跨方向的连接点</b>。

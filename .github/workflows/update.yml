@@ -30,8 +30,9 @@ jobs:
       - name: Analyze literature (abstract sections / methods / phrases / novelty)
         run: python scripts/analyze_papers.py || echo "analysis failed, papers.json keeps previous analysis fields"
       - name: Build in-corpus citation network
+        # limit 900 覆盖语料里全部约 670 篇有 PMID 的记录(实测约 185s);
         # 有全局墙钟预算,连接挂起时会写出已抓部分而不是把整轮定时任务拖死
-        run: python scripts/fetch_citenet.py --limit 250 --budget 900 || echo "citenet failed, keeping previous data/citenet.json"
+        run: python scripts/fetch_citenet.py --limit 900 --budget 1500 || echo "citenet failed, keeping previous data/citenet.json"
       - name: Front-end behaviour tests (deep-read panel, all real records)
         run: python tests/run_ui_tests.py || echo "UI tests failed — data still published, check the log"
       - name: Build daily digest page + RSS feed
