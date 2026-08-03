@@ -252,6 +252,37 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 .eligname{font-size:13.2px;font-weight:600}
 .eligwhy{font-size:11.9px;color:var(--muted);line-height:1.6;margin-top:3px}
 .eligwhy code{background:#F5F5F7;border-radius:3px;padding:0 4px}
+
+/* ---------- 深读抽屉(文献详情) ---------- */
+.rdmask{position:fixed;inset:0;background:rgba(20,16,40,.42);z-index:60;display:none}
+.rdmask.on{display:block}
+.rddrawer{position:fixed;top:0;right:0;bottom:0;width:min(760px,96vw);background:#fff;z-index:61;
+  box-shadow:-8px 0 30px rgba(30,20,70,.22);display:none;flex-direction:column}
+.rddrawer.on{display:flex}
+.rdhead{padding:14px 18px 10px;border-bottom:2px solid #EDE7F6;background:#FBF8FF}
+.rdhead h3{margin:0 0 6px;font-size:15.5px;line-height:1.4;color:#2A1B4D}
+.rdbody{overflow-y:auto;padding:14px 18px 40px;flex:1}
+.rdclose{position:absolute;top:10px;right:14px;border:1px solid #D8C7F0;background:#fff;border-radius:6px;
+  cursor:pointer;font-size:13px;padding:3px 9px;color:#4A148C}
+.rdsec{margin:0 0 14px;border:1px solid #E7E1F5;border-radius:8px;overflow:hidden}
+.rdsec>h4{margin:0;padding:7px 11px;font-size:12.8px;background:#F5F0FF;color:#4A148C;
+  border-bottom:1px solid #E7E1F5;font-weight:700}
+.rdsec>div{padding:9px 11px;font-size:12.8px;line-height:1.65;color:#33304A}
+.rdlab{display:inline-block;font-size:11px;padding:1px 6px;border-radius:4px;margin-right:6px;
+  background:#EDE7F6;color:#4A148C;font-weight:700;vertical-align:1px}
+.rdinf{background:#FFF4E0;color:#8A5A00}
+.rdmeth{display:inline-block;font-size:11.5px;padding:2px 7px;margin:0 5px 5px 0;border-radius:11px;
+  background:#E8F5E9;color:#1B5E20;border:1px solid #C6E5C9;cursor:help}
+.rdph{border-left:3px solid #C9B8E8;padding:5px 0 5px 9px;margin:0 0 8px;font-size:12.5px;line-height:1.6}
+.rdph .rdcp{border:1px solid #D8C7F0;background:#fff;border-radius:5px;font-size:10.5px;cursor:pointer;
+  padding:1px 6px;margin-left:6px;color:#4A148C}
+.rdbar{height:8px;background:#EFEAF8;border-radius:5px;overflow:hidden;margin:3px 0 2px}
+.rdbar i{display:block;height:100%;background:linear-gradient(90deg,#7E57C2,#4A148C)}
+.rdnum{font-variant-numeric:tabular-nums}
+.rdnet a{color:#0D47A1;text-decoration:none}
+.rdnet a:hover{text-decoration:underline}
+.rdwarn{background:#FFF6F5;border:1px solid #F3C9C4;color:#8A2018;border-radius:7px;padding:8px 11px;
+  font-size:12.3px;line-height:1.6;margin:0 0 12px}
 </style>
 </head>
 <body>
@@ -496,7 +527,11 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     并标出三类信号 —— <span class="ptag hotspot">🔥 Hotspot</span> 引用速率/新鲜度/预印本转正、
     <span class="ptag gap">🕳️ Gap</span> 摘要里明写"尚不清楚/缺乏证据"的句子、
     <span class="ptag question">❓ Question</span> 作者自己提的 future work。
-    每个分数都可点开看<b>命中了哪些词、TF-IDF 余弦是多少</b>——没有黑箱。<br><span style="color:#7A5A00">当前方向词库是示例(miRNA 降解 / 代谢);换成你自己的课题就编辑 <code>data/interests.json</code>,写法见 <code>data/interests.template.json</code>。</span>
+    每个分数都可点开看<b>命中了哪些词、TF-IDF 余弦是多少</b>——没有黑箱。
+    每张卡片的 <b>🔎 深读拆解</b> 再往下一层:摘要按<b>背景/方法/结果/结论</b>拆开(原文自带小标题的标"原文",推断的标"推断")、
+    列出命中的<b>方法与实验体系</b>并附上命中它的那句原句、抽出<b>可复用句式</b>(原句照搬+一键复制)、
+    摊开<b>新颖度</b>的三个分量与同年队列百分位、以及本文在语料内的<b>引用邻域</b>。
+    <b>全部是离线可核验的计算</b>,不调用任何大模型 —— 不会有"看起来很有道理但查不到出处"的句子。<br><span style="color:#7A5A00">当前方向词库是示例(miRNA 降解 / 代谢);换成你自己的课题就编辑 <code>data/interests.json</code>,写法见 <code>data/interests.template.json</code>。</span>
   </div>
 
   <div class="snapnote" id="snapProgress"></div>
@@ -515,6 +550,13 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <select id="papJournal"></select>
     <select id="papTier"></select>
     <select id="papType"></select>
+    <select id="papNov">
+      <option value="">新颖度(全部)</option>
+      <option value="high">🟣 新颖度高</option>
+      <option value="medium">🔵 新颖度中</option>
+      <option value="low">⚪ 新颖度低</option>
+    </select>
+    <select id="papMeth"></select>
     <select id="papBand">
       <option value="">相关度(全部)</option>
       <option value="high">🟣 高相关</option>
@@ -541,10 +583,25 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <label><input type="checkbox" id="pap_q"> ❓ Question</label>
     <label><input type="checkbox" id="pap_star"> ⭐ 仅收藏</label>
     <label><input type="checkbox" id="pap_unread"> 📬 仅未读</label>
+    <label title="没有任何主题锚点词的记录 —— 检索式的误召回"><input type="checkbox" id="pap_off"> 🚧 仅疑似跑题</label>
+    <label title="摘要里能拆出可复用句式的记录"><input type="checkbox" id="pap_ph"> 🧩 有可复用句式</label>
     <button class="rst" id="papRst">↺ 重置</button>
   </div>
 
-  <div class="calbanner" id="papTagChips" style="margin-bottom:8px"></div>
+    <div class="calbanner" id="citeBanner" style="background:#F0F7FF;border-color:#BAD3F1;margin-bottom:10px;display:none"></div>
+
+  <!-- ===== 深读抽屉:每篇文献的结构化拆解 / 方法证据 / 句式库 / 新颖度审计 / 引用邻域 ===== -->
+  <div class="rdmask" id="rdMask"></div>
+  <div class="rddrawer" id="rdDrawer" role="dialog" aria-label="文献深读">
+    <div class="rdhead">
+      <button class="rdclose" id="rdClose">✕ 关闭</button>
+      <h3 id="rdTitle">—</h3>
+      <div id="rdMeta" style="font-size:12px;color:#6B6485;line-height:1.55"></div>
+    </div>
+    <div class="rdbody" id="rdBody"></div>
+  </div>
+
+<div class="calbanner" id="papTagChips" style="margin-bottom:8px"></div>
   <div class="fbar" style="padding:8px 12px">
     <span style="font-size:12.5px;font-weight:600">⬇️ 导出当前筛选结果:</span>
     <button class="abtn" id="expBib">BibTeX</button>
@@ -2031,7 +2088,7 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch]=await Promise.all([
+    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,cnet]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
@@ -2042,12 +2099,14 @@ async function loadData(){
       fetch("data/config.json?_="+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
       fetch("data/funds.json?_="+Date.now()).then(r=>r.ok?r.json():{funds:[]}).catch(()=>({funds:[]})),
       fetch("data/profile_schema.json?_="+Date.now()).then(r=>r.ok?r.json():{fields:[]}).catch(()=>({fields:[]})),
+      fetch("data/citenet.json?_="+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
     ]);
     LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
     INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
     PAPERS=pp.papers||[]; PAPMETA=pp.meta||{}; INTERESTS=(ints.interests||[]);
     INTMAP={}; INTERESTS.forEach(i=>INTMAP[i.id]=i);
     SITECFG=scfg||{}; FUNDS=(fnd.funds||[]); PSCHEMA=(psch&&psch.fields)?psch:{fields:[],groups:{}};
+    if(cnet)CITENET=cnet;
     applySiteConfig(); paintChip(); try{checkElig();}catch(e){console.warn("elig",e);}
     maybeOnboard();
     document.getElementById("papN").textContent=PAPERS.length;
@@ -3066,6 +3125,12 @@ function ppass(pa,skip){
   if(skip!=="tier"&&tr&&pa.tier!==tr)return false;
   if(skip!=="type"&&ty&&pa.ptype!==ty)return false;
   if(skip!=="band"&&bd&&pa.band!==bd)return false;
+  const nv=document.getElementById("papNov").value;
+  if(skip!=="nov"&&nv&&pa.novelty_band!==nv)return false;
+  const mt=document.getElementById("papMeth").value;
+  if(skip!=="meth"&&mt&&!(pa.methods||[]).some(m=>m.term===mt))return false;
+  if(document.getElementById("pap_off").checked&&!pa.off_topic)return false;
+  if(document.getElementById("pap_ph").checked&&!((pa.phrases||[]).length))return false;
   if(skip!=="win"&&win){
     if(!pa.date)return false;
     const d=(Date.now()-new Date(pa.date+"T00:00:00").getTime())/86400000;
@@ -3125,6 +3190,217 @@ function evBox(pa){
   return out.length?`<div class="pev">${out.join("<br>")}</div>`:"";
 }
 
+/* =========================================================================
+   深读抽屉 —— 把「找到」升级为「读懂」
+   设计底线:屏幕上每一句都能被读者当场核对。
+     · 摘要分段:原文自带 BACKGROUND/METHODS 标签 → 标"原文标注";否则规则推断 → 标"推断"
+     · 方法清单:每个方法词都附上命中它的那句原文
+     · 句式库:直接给可复用的原句 + 一键复制,不改写、不"润色"
+     · 新颖度:三个分量 + 同年队列百分位全部摊开,不给单一黑箱分数
+     · 引用邻域:只画两端都在语料内的边,点得开、查得到
+   ========================================================================= */
+var CITENET = {net:{}, foundational:[], bridge_pairs:[], edges:[], limits:[]};
+var RD_CUR = null;
+
+function rdNet(pa){
+  const pm = pa.pmid; if(!pm) return null;
+  const n = (CITENET.net||{})[pm]; return n||null;
+}
+function pmTitle(pm){
+  const q = PAPERS.find(x=>x.pmid===pm);
+  return q ? q.title : null;
+}
+function rdPmLink(pm){
+  const t = pmTitle(pm);
+  const inCorpus = !!t;
+  const lbl = inCorpus ? esc(t.slice(0,86))+(t.length>86?"…":"") : ("PMID "+esc(pm));
+  return `<a href="https://pubmed.ncbi.nlm.nih.gov/${esc(pm)}/" target="_blank" rel="noopener">${lbl}</a>`+
+         (inCorpus?` <span style="color:#8892A4;font-size:11px">(在本站语料内)</span>`:"");
+}
+
+/* ---- ① 结构化拆解 ---- */
+function rdSections(pa){
+  const ss = pa.sections||[];
+  if(!ss.length) return `<div class="rdsec"><h4>① 结构化拆解</h4><div style="color:#8892A4">
+    这条记录没有摘要正文(部分 Crossref / arXiv 记录只给标题),无法拆解。点上方「原文」直接读。</div></div>`;
+  const labSrc = pa.sections_labeled
+    ? `<span class="rdlab">原文标注</span>该期刊摘要自带 BACKGROUND/METHODS/… 小标题,下面是直接解析结果。`
+    : `<span class="rdlab rdinf">规则推断</span>原文摘要是连续段落(没有小标题),下面的归段是按<b>句位 + 提示词</b>推断的,可能有误 —— 每段都能对照原句核。`;
+  return `<div class="rdsec"><h4>① 结构化拆解</h4><div>
+    <div style="margin-bottom:8px;font-size:12px;color:#6B6485">${labSrc}</div>
+    ${ss.map(x=>`<div style="margin-bottom:9px">
+      <b style="color:#4A148C">${esc(x.zh)}</b>${x.inferred?` <span class="rdlab rdinf">推断</span>`:` <span class="rdlab">原文</span>`}
+      <div style="margin-top:2px">${esc(x.text)}</div></div>`).join("")}
+  </div></div>`;
+}
+
+/* ---- ② 方法与体系(每词附原句) ---- */
+function rdMethods(pa){
+  const ms = pa.methods||[];
+  if(!ms.length) return `<div class="rdsec"><h4>② 方法与实验体系</h4><div style="color:#8892A4">
+    摘要里没有命中方法词表里的任何词条。这不等于文章没方法 —— 很多摘要不写技术细节,需要读全文。
+    方法词表在 <code>scripts/analyze_papers.py</code> 的 <code>METHODS</code> 里,可自行扩充。</div></div>`;
+  const grp = {};
+  ms.forEach(m=>{(grp[m.group]=grp[m.group]||[]).push(m);});
+  return `<div class="rdsec"><h4>② 方法与实验体系 <span style="font-weight:400;color:#6B6485">(共 ${ms.length} 项 · 悬停看命中原句)</span></h4><div>
+    ${Object.keys(grp).map(g=>`<div style="margin-bottom:7px">
+      <span style="font-size:11.5px;color:#6B6485">${esc(g)}:</span><br>
+      ${grp[g].map(m=>`<span class="rdmeth" title="${esc(m.sent)}">${esc(m.term)}</span>`).join("")}
+    </div>`).join("")}
+    <div style="font-size:11.5px;color:#8892A4;margin-top:4px">匹配方式:词边界正则(不会把 SPR 命中在 spread 里),同义写法已归一(rna sequencing → rna-seq)。</div>
+  </div></div>`;
+}
+
+/* ---- ③ 可复用句式(原句 + 复制) ---- */
+function rdPhrases(pa){
+  const ph = pa.phrases||[];
+  if(!ph.length) return "";
+  return `<div class="rdsec"><h4>③ 可复用句式 <span style="font-weight:400;color:#6B6485">(原句照搬,未改写)</span></h4><div>
+    ${ph.map((x,k)=>`<div class="rdph">
+      <b style="color:#4A148C;font-size:11.5px">${esc(x.zh)}</b>
+      <button class="rdcp" data-cp="${k}">复制</button>
+      <div style="margin-top:2px">${esc(x.text)}</div></div>`).join("")}
+    <div class="rdwarn" style="margin:6px 0 0">⚠️ 这些是<b>他人论文的原句</b>。可以学结构、换成自己的内容;<b>不要整句照抄进你的申请书</b> —— 那是抄袭。
+      本站只做"给你看句子怎么搭",不做改写。</div>
+  </div></div>`;
+}
+
+/* ---- ④ 新颖度审计 ---- */
+function rdNovelty(pa){
+  if(pa.novelty==null) return "";
+  const np = pa.novelty_parts||{}, ch = np.cohort||{};
+  const bandLab = {high:"🟣 高",medium:"🔵 中",low:"⚪ 低"}[pa.novelty_band]||pa.novelty_band;
+  const bar = (v)=>`<div class="rdbar"><i style="width:${Math.round(Math.max(0,Math.min(1,v))*100)}%"></i></div>`;
+  const cuts = (PAPMETA.analysis||{}).novelty_cuts||{};
+  return `<div class="rdsec"><h4>④ 新颖度审计 <span style="font-weight:400;color:#6B6485">(分数怎么来的,全摊开)</span></h4><div>
+    <div style="margin-bottom:7px"><b>综合 <span class="rdnum">${pa.novelty.toFixed(3)}</span></b> · 档位 ${bandLab}
+      · 同年队列百分位 <b class="rdnum">${pa.novelty_pct}%</b>
+      ${ch.n?`<span style="color:#8892A4">(${esc(ch.year)} 年 ${ch.n} 篇内比较)</span>`:""}</div>
+    <div style="margin-bottom:6px">
+      <span style="font-size:12px">① 与既有文献的<b>内容距离</b> ${bar(np.dist||0)}
+        <span class="rdnum">${(np.dist||0).toFixed(3)}</span>
+        <span style="color:#8892A4">= 1 − 与前 ${np.compared_with||0} 篇 TF-IDF 余弦的最大值</span></span>
+    </div>
+    <div style="margin-bottom:6px">
+      <span style="font-size:12px">② <b>罕见术语</b>占比 ${bar(np.rare||0)}
+        <span class="rdnum">${(np.rare||0).toFixed(3)}</span>
+        <span style="color:#8892A4">= 本文高 IDF 词的比例</span></span>
+    </div>
+    <div style="margin-bottom:6px">
+      <span style="font-size:12px">③ <b>首现术语</b>新鲜度 ${bar(np.fresh||0)}
+        <span class="rdnum">${(np.fresh||0).toFixed(3)}</span>
+        <span style="color:#8892A4">= 在本文之前语料里没出现过的词占比</span></span>
+    </div>
+    ${(np.new_terms||[]).length?`<div style="font-size:12px;margin:5px 0">本文<b>首次出现</b>的术语:${np.new_terms.map(x=>`<code>${esc(x)}</code>`).join(" ")}</div>`:""}
+    <div style="font-size:11.5px;color:#8892A4;line-height:1.6;margin-top:6px">
+      三个分量都先在<b>同一发表年份的队列内</b>换成百分位再加权(0.5/0.25/0.25),否则老文章天然占"首现术语"的便宜,
+      排序会变成按年份排而不是按新颖度排 —— 这个偏差实测存在(未校正时 2024 年均值 0.754,2026 年 0.546),已修正。
+      档位切点:高 ≥ ${(cuts.q85||0).toFixed(3)}、中 ≥ ${(cuts.q55||0).toFixed(3)}(全语料 85/55 分位)。
+      <b>它衡量的是"用词与既有文献有多不同",不是"科学上有多重要"</b> —— 一篇写法怪异的综述也能拿高分,请自己判断。
+    </div>
+  </div></div>`;
+}
+
+/* ---- ⑤ 引用邻域 ---- */
+function rdCite(pa){
+  const n = rdNet(pa);
+  const foot = `<div style="font-size:11.5px;color:#8892A4;line-height:1.6;margin-top:7px">
+    只统计<b>两端都在本站语料内</b>的引用边 —— 语料外的边无法在站内点开核对,故不画。
+    语料是"近期窗口"切片(多为近 1–2 年),彼此互引本来就少,所以这些数字普遍很小,<b>不代表文章影响力低</b>;
+    整体影响力看上面的被引数。数据来自 Europe PMC,只覆盖有 PMID 的记录。</div>`;
+  if(!pa.pmid) return `<div class="rdsec"><h4>⑤ 引用邻域</h4><div style="color:#8892A4">
+    这条记录没有 PMID(预印本或 Crossref-only),Europe PMC 引用图查不到。${foot}</div></div>`;
+  if(!n) return `<div class="rdsec"><h4>⑤ 引用邻域</h4><div style="color:#8892A4">
+    这篇不在本次引用图抓取范围内(每日只查相关性最高的前 ${(CITENET.queried_n||0)} 篇,以免 Actions 超时),
+    或查询失败。${foot}</div></div>`;
+  const co = n.co||[];
+  return `<div class="rdsec"><h4>⑤ 引用邻域 <span style="font-weight:400;color:#6B6485">(语料内)</span></h4><div class="rdnet">
+    <div>被语料内 <b class="rdnum">${n.cb}</b> 篇引用 · 引用了语料内 <b class="rdnum">${n.rf}</b> 篇</div>
+    ${co.length?`<div style="margin-top:7px"><b>常与本文被一起引用</b>(共被引 ≥2 次):<br>
+      ${co.map(x=>`<div style="margin:3px 0">· ${rdPmLink(x.pmid)} <span style="color:#8892A4">共被引 ${x.n} 次</span></div>`).join("")}</div>`:
+      `<div style="margin-top:6px;color:#8892A4">暂无共被引 ≥2 次的邻居。</div>`}
+    ${foot}
+  </div></div>`;
+}
+
+/* ---- ⑥ 相关性与标记(把卡片上的 tooltip 摊成正文) ---- */
+function rdScore(pa){
+  const rows = Object.keys(pa.dirs||{}).sort((a,b)=>pa.dirs[b].score-pa.dirs[a].score).map(k=>{
+    const d=pa.dirs[k], it=INTMAP[k]||{};
+    return `<tr><td><span class="dirpill" style="background:${it.color||'#666'}">${esc(it.name||k)}</span></td>
+      <td class="rdnum">${d.score.toFixed(3)}</td><td class="rdnum">${d.kw.toFixed(2)}</td><td class="rdnum">${d.cos.toFixed(3)}</td>
+      <td style="font-size:11.5px">${d.core.length?`核心 <b>${esc(d.core.join(" / "))}</b>`:""}${d.core.length&&d.peri.length?"<br>":""}${d.peri.length?`外围 ${esc(d.peri.join(" / "))}`:""}</td></tr>`;
+  }).join("");
+  return `<div class="rdsec"><h4>⑥ 相关性怎么算出来的</h4><div>
+    <div>总分 <b class="rdnum">${pa.score.toFixed(3)}</b> = 最高方向分 + 0.15×(命中方向数−1) − 排除词罚分
+      ${pa.penalized?` · <span style="color:#B71C1C">命中排除词已扣分</span>`:""}</div>
+    ${rows?`<table style="width:100%;margin-top:6px;font-size:12px;border-collapse:collapse">
+      <tr style="background:#F5F0FF"><th style="text-align:left">方向</th><th>分</th><th>关键词</th><th>余弦</th><th style="text-align:left">命中词</th></tr>
+      ${rows}</table>`:`<div style="color:#8892A4;margin-top:5px">没有命中任何方向的关键词。</div>`}
+    ${pa.off_topic?`<div class="rdwarn" style="margin-top:8px">🚧 <b>主题锚点缺失</b>:全文没有出现任何 miRNA / AMPK 类主题词,
+      档位已被封顶在「低相关」(原始档 ${esc(pa.band_raw||"—")})。这条大概率是检索式的误召回。</div>`:""}
+    ${evBox(pa)}
+  </div></div>`;
+}
+
+function openRead(pa){
+  RD_CUR = pa;
+  const st = pstate(pa);
+  document.getElementById("rdTitle").innerHTML =
+    (pa.url?`<a href="${esc(pa.url)}" target="_blank" rel="noopener" style="color:#2A1B4D">${esc(pa.title)}</a>`:esc(pa.title));
+  const links=[];
+  if(pa.url)links.push(`<a href="${esc(pa.url)}" target="_blank" rel="noopener">原文</a>`);
+  if(pa.pdf)links.push(`<a href="${esc(pa.pdf)}" target="_blank" rel="noopener">PDF</a>`);
+  if(pa.doi)links.push(`<a href="https://doi.org/${esc(pa.doi)}" target="_blank" rel="noopener">DOI</a>`);
+  if(pa.pmid)links.push(`<a href="https://pubmed.ncbi.nlm.nih.gov/${esc(pa.pmid)}/" target="_blank" rel="noopener">PubMed</a>`);
+  document.getElementById("rdMeta").innerHTML =
+    `${esc(pa.journal||"—")}${pa.date?" · "+esc(pa.date):""}${pa.cites!=null?` · 被引 <b>${pa.cites}</b>(${pa.cite_rate}/月)`:""}
+     ${pa.tier?` · ${esc(pa.tier)}`:""}${pa.is_oa?" · 🔓 OA":""}${pa.preprint?" · 📄 预印本":""}
+     <br>${esc((pa.authors||[]).join(", ").slice(0,220))}
+     ${links.length?"<br>"+links.join(" · "):""}`;
+  document.getElementById("rdBody").innerHTML =
+    rdSections(pa) + rdMethods(pa) + rdPhrases(pa) + rdNovelty(pa) + rdCite(pa) + rdScore(pa) +
+    `<div class="rdsec"><h4>⑦ 我的标注</h4><div>
+       <button class="abtn ${st.star?"tracked":""}" data-rd="star">${st.star?"★ 已收藏":"☆ 收藏"}</button>
+       <button class="abtn ${st.read?"tracked":""}" data-rd="read">${st.read?"✓ 已读":"○ 标为已读"}</button>
+       <button class="abtn" data-rd="tag">🏷️ 标签</button>
+       <button class="abtn" data-rd="note">📝 笔记</button>
+       ${(st.tags||[]).length?`<div style="margin-top:6px">${(st.tags||[]).map(t=>`<span class="mytag">🏷️ ${esc(t)}</span>`).join("")}</div>`:""}
+       ${st.note?`<div style="margin-top:6px;border-left:3px solid #C9B8E8;padding-left:8px">${esc(st.note)}</div>`:""}
+     </div></div>`;
+  /* 句式复制 */
+  document.querySelectorAll("#rdBody [data-cp]").forEach(b=>b.onclick=()=>{
+    const x=(pa.phrases||[])[parseInt(b.dataset.cp)]; if(!x)return;
+    navigator.clipboard.writeText(x.text).then(()=>{b.textContent="✓ 已复制";setTimeout(()=>b.textContent="复制",1200);},
+      ()=>{b.textContent="复制失败";});
+  });
+  document.querySelectorAll("#rdBody [data-rd]").forEach(b=>b.onclick=()=>{
+    const a=b.dataset.rd, cs=pstate(pa);
+    if(a==="star")setPstate(pa,{star:!cs.star});
+    if(a==="read")setPstate(pa,{read:!cs.read});
+    if(a==="tag"){const v=prompt("标签(逗号分隔):",(cs.tags||[]).join(", "));if(v===null)return;
+      setPstate(pa,{tags:v.split(",").map(x=>x.trim()).filter(Boolean)});}
+    if(a==="note"){const v=prompt("笔记(为什么重要 / 打算怎么用):",cs.note||"");if(v===null)return;setPstate(pa,{note:v.trim()});}
+    openRead(pa); renderPapers();
+  });
+  document.getElementById("rdMask").classList.add("on");
+  document.getElementById("rdDrawer").classList.add("on");
+  document.getElementById("rdBody").scrollTop=0;
+  if(!pstate(pa).read) setPstate(pa,{read:true});   /* 打开即视为已读 */
+}
+function closeRead(){
+  document.getElementById("rdMask").classList.remove("on");
+  document.getElementById("rdDrawer").classList.remove("on");
+  if(RD_CUR){RD_CUR=null; renderPapers();}
+}
+
+function novPill(pa){
+  if(pa.novelty==null)return "";
+  const m={high:["#EDE4FF","#4A148C","🟣 新颖度高"],medium:["#E7F0FC","#14538F","🔵 新颖度中"],low:["#F1F0F5","#6B6485","⚪ 新颖度低"]}[pa.novelty_band];
+  if(!m)return "";
+  return `<span class="ptag" style="background:${m[0]};color:${m[1]}" title="综合 ${pa.novelty.toFixed(3)} · 同年队列 ${pa.novelty_pct}% 分位。点「深读拆解」看三个分量。">${m[2]}</span>`;
+}
+
 function papCard(pa){
   const st=pstate(pa);
   const tags=(pa.tags||[]);
@@ -3148,7 +3424,7 @@ function papCard(pa){
   return `<div class="pcard b-${pa.band}" data-i="${pa.i}">
     <div class="ptitle">${pa.url?`<a href="${esc(pa.url)}" target="_blank" rel="noopener">${esc(pa.title)}</a>`:esc(pa.title)}</div>
     <div class="pmeta">
-      <span class="pscore" title="${esc(scoreTip(pa))}">相关性 ${pa.score.toFixed(2)} ▸</span> ${tagHtml}
+      <span class="pscore" title="${esc(scoreTip(pa))}">相关性 ${pa.score.toFixed(2)} ▸</span> ${novPill(pa)} ${tagHtml}
       ${st.star?'<span class="ptag" style="background:#FFF3D6;color:#8A6100;border:1px solid #F0D38A">⭐ 收藏</span>':""}
       ${st.read?"":'<span class="ptag" style="background:#E7F0FC;color:#14538F;border:1px solid #BAD3F1">📬 未读</span>'}
       <br>${esc(pa.journal||"—")}${pa.date?" · "+esc(pa.date):""}${pa.cites!=null?` · 被引 <b>${pa.cites}</b>(${pa.cite_rate}/月)`:""}
@@ -3165,6 +3441,7 @@ function papCard(pa){
       <button class="abtn ${st.read?"tracked":""}" data-act="read" data-i="${pa.i}">${st.read?"✓ 已读":"○ 标为已读"}</button>
       <button class="abtn" data-act="tag" data-i="${pa.i}">🏷️ 加标签</button>
       <button class="abtn" data-act="note" data-i="${pa.i}">📝 ${st.note?"改笔记":"写笔记"}</button>
+      <button class="abtn" data-act="read2" data-i="${pa.i}" style="border-color:#7E57C2;color:#4A148C;font-weight:600">🔎 深读拆解</button>
       ${myTags}
     </div>
     ${st.note?`<div class="pev" style="border-style:solid;border-color:#C9B8E8"><b>我的笔记:</b>${esc(st.note)}</div>`:""}
@@ -3201,6 +3478,7 @@ function renderPapers(){
   document.getElementById("papbar").innerHTML=
     `📚 文献数据最后更新:<b>${esc(m.updated||"?")}</b> · 抓取窗口 ${esc((m.window||{}).since||"?")} → ${esc((m.window||{}).until||"?")} · `+
     `原始 ${m.n_raw||0} 条 → 去重后 <b>${m.n||0}</b> 篇 · OA ${m.oa_n||0} · 预印本 ${m.preprint_n||0} · 来源 ${(m.sources||[]).map(x=>SRCLAB[x]||x).join(" / ")}`;
+  renderCiteBanner();
   const sd=m.snapshot_days||0;
   document.getElementById("snapProgress").innerHTML=
     sd>=7?`✅ <b>引用快照已积累 ${sd} 天</b> —— Hotspot 的「引用加速度」已是本站实测值,不是估算。`
@@ -3208,6 +3486,28 @@ function renderPapers(){
           `诚实说明:Web of Science/Google Scholar 无免费接口,可用 API 只返回<b>当前</b>被引数、不返回历史曲线,`+
           `所以「引用加速度」无法凭空算出。本站从上线当天开始每日存一份被引快照,满 7 天后自动切换为真实加速度;`+
           `在此之前 Hotspot 只用<b>当日可核验</b>的信号:引用速率(被引数÷发表月数)、新鲜度、预印本是否已被期刊接收。`;
+}
+
+/* 引用网络概览:语料内"地基文献"与方向交叉点。诚实说明稀疏的原因。 */
+function renderCiteBanner(){
+  const el=document.getElementById("citeBanner"); if(!el)return;
+  if(!CITENET.edges_n&&!(CITENET.foundational||[]).length){el.style.display="none";return;}
+  el.style.display="";
+  const fnd=(CITENET.foundational||[]).filter(f=>f.n>=2).slice(0,6);
+  const br=(CITENET.bridge_pairs||[]).slice(0,5);
+  el.innerHTML=`<b>🕸️ 语料内引用网络</b>(${esc(CITENET.generated||"?")} · Europe PMC)——
+    查询了相关性最高的 <b>${CITENET.queried_n||0}</b> 篇(有 PMID 的共 ${CITENET.corpus_with_pmid||0} 篇),
+    建成<b>两端都在语料内</b>的引用边 <b>${CITENET.edges_n||0}</b> 条${CITENET.query_failures?`,查询失败 ${CITENET.query_failures} 篇`:""}。
+    <br><span style="color:#14538F">为什么边这么少:</span>本语料是<b>近期窗口</b>切片(多为近 1–2 年发表),
+    彼此之间还没时间互相引用 —— 这是<b>预期结果</b>,不代表这些文章没影响力(整体影响力看每张卡片上的被引数)。
+    这张图的用处是找出<b>本领域内部被反复引用的地基文献</b>,以及<b>跨方向的连接点</b>。
+    ${fnd.length?`<br><b>语料内被引最多(≥2 次):</b>${fnd.map(f=>
+      `<br>&nbsp;&nbsp;· <a href="https://pubmed.ncbi.nlm.nih.gov/${esc(f.pmid)}/" target="_blank" rel="noopener">${esc(f.title)}</a>
+        <span style="color:#8892A4">(${esc(String(f.year||"?"))} · 语料内被引 ${f.n} 次)</span>`).join("")}`:
+      `<br><span style="color:#8892A4">目前还没有被语料内 ≥2 篇引用的文献。</span>`}
+    ${br.length?`<br><b>跨方向连接:</b>${br.map(b=>
+      `<span class="ptag" style="background:#E7F0FC;color:#14538F">${esc((INTMAP[b.a]||{}).name||b.a)} ↔ ${esc((INTMAP[b.b]||{}).name||b.b)} (${b.n})</span>`).join(" ")}`:""}
+    <br><span style="color:#8892A4;font-size:11.5px">预印本无 PMID,不在图内。每篇的引用邻域在卡片「🔎 深读拆解」里。</span>`;
 }
 
 /* 方向下拉:动态计数 */
@@ -3230,6 +3530,14 @@ function papMultiSel(){
     `<option value="${k}"${k===cur?" selected":""}>${SRCLAB[k]} (${cnt[k]||0})</option>`).join("");
   ss.value=cur;
   facetSel(document.getElementById("papJournal"),"期刊(全部)",PAPERS,x=>x.journal,x=>ppass(x,"jr"));
+  /* 方法是数组字段,手写计数;只列出现 ≥3 次的,否则下拉几百项没法用 */
+  const ms=document.getElementById("papMeth"), mcur=ms.value, mc={};
+  PAPERS.forEach(x=>{if(!ppass(x,"meth"))return;(x.methods||[]).forEach(m=>mc[m.term]=(mc[m.term]||0)+1);});
+  const keep=Object.keys(mc).filter(k=>mc[k]>=3).sort((a,b)=>mc[b]-mc[a]);
+  ms.innerHTML=`<option value="">方法/体系(全部)</option>`+
+    (mcur&&!keep.includes(mcur)?`<option value="${esc(mcur)}" selected>${esc(mcur)} (${mc[mcur]||0})</option>`:"")+
+    keep.map(k=>`<option value="${esc(k)}"${k===mcur?" selected":""}>${esc(k)} (${mc[k]})</option>`).join("");
+  ms.value=mcur;
   const ts=document.getElementById("papTier"), tcur=ts.value, tc={};
   PAPERS.forEach(x=>{if(!ppass(x,"tier"))return;if(x.tier)tc[x.tier]=(tc[x.tier]||0)+1;});
   ts.innerHTML=`<option value="">期刊层级(全部)</option>`+["T1","T2","T3","T4","preprint"].filter(k=>tc[k]!==undefined||PAPERS.some(x=>x.tier===k)).map(k=>
@@ -3259,6 +3567,7 @@ function wirePapCards(){
   document.querySelectorAll("#papWrap [data-act]").forEach(b=>b.onclick=()=>{
     const pa=PAPERS.find(x=>x.i===parseInt(b.dataset.i)); if(!pa)return;
     const st=pstate(pa);
+    if(b.dataset.act==="read2"){openRead(pa);return;}
     if(b.dataset.act==="star")setPstate(pa,{star:!st.star});
     if(b.dataset.act==="read")setPstate(pa,{read:!st.read});
     if(b.dataset.act==="tag"){
@@ -3547,16 +3856,19 @@ function renderPapViz(rows){
 /* ---------------------------------------------------------------- 事件绑定(只绑一次) */
 function wirePapersOnce(){
   if(PAP_WIRED)return; PAP_WIRED=true;
-  ["papq","papDir","papSrc","papJournal","papTier","papType","papBand","papWin","papSort",
-   "pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread"].forEach(id=>{
+  ["papq","papDir","papSrc","papJournal","papTier","papType","papBand","papNov","papMeth","papWin","papSort",
+   "pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread","pap_off","pap_ph"].forEach(id=>{
     const el=document.getElementById(id); if(!el)return;
     el.addEventListener(el.tagName==="INPUT"&&el.type==="text"?"input":"change",renderPapers);
   });
+  document.getElementById("rdClose").onclick=closeRead;
+  document.getElementById("rdMask").onclick=closeRead;
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeRead();});
   document.getElementById("papRst").onclick=()=>{
     ["papq"].forEach(id=>document.getElementById(id).value="");
-    ["papDir","papSrc","papJournal","papTier","papType","papBand","papWin"].forEach(id=>document.getElementById(id).value="");
+    ["papDir","papSrc","papJournal","papTier","papType","papBand","papNov","papMeth","papWin"].forEach(id=>document.getElementById(id).value="");
     document.getElementById("papSort").value="score";
-    ["pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread"].forEach(id=>document.getElementById(id).checked=false);
+    ["pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread","pap_off","pap_ph"].forEach(id=>document.getElementById(id).checked=false);
     PAP_TAGFILT=""; renderPapers();
   };
   const D=new Date().toISOString().slice(0,10);

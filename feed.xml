@@ -4,7 +4,7 @@
   <link>/digest.html</link>
   <description>按 data/interests.json 里配置的研究方向 × 六个数据源,每日自动抓取、去重、透明打分,并标注 Hotspot / Gap / Question。</description>
   <language>zh-cn</language>
-  <lastBuildDate>Sun, 02 Aug 2026 18:01:45 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 03 Aug 2026 17:34:13 +0000</lastBuildDate>
   <generator>scripts/build_digest.py</generator>
   <item>
     <title>[近 7 天新发] Plasma small RNA profiling reveals a three-miRNA signature associated with early beta cell dysfunction across glucose tolerance stages.</title>
@@ -207,14 +207,6 @@
     <description>相关性 0.34 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Comparative biochemistry and physiology. Part A, Molecular &amp; integrative physiology · 2026-08-09 | ❓ 作者提出的问题:“Collectively, our results demonstrate that diel thermal variability elicits distinct responses across multiple levels of biological organization, reiterating the importance of incorporating more natural thermal regimes in future studies.”</description>
   </item>
   <item>
-    <title>[近 7 天新发] Matrine ameliorated myocardial ischemia-reperfusion injury through lipid accumulation reduction by activating JAK2-STAT3-CPT1 signaling pathway.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/42263955/</link>
-    <guid isPermaLink="false">10.1016/j.taap.2026.117907</guid>
-    <pubDate>Wed, 09 Sep 2026 08:00:00 +0000</pubDate>
-    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.34 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Toxicology and applied pharmacology · 2026-09-09</description>
-  </item>
-  <item>
     <title>[近 7 天新发] An allosteric DNAzyme-Based modular system for dynamic computation and sensitive MicroRNA detection</title>
     <link>https://doi.org/10.3389/fbioe.2026.1895332</link>
     <guid isPermaLink="false">10.3389/fbioe.2026.1895332</guid>
@@ -308,7 +300,7 @@
     <guid isPermaLink="false">10.1101/2025.09.16.675546</guid>
     <pubDate>Fri, 05 Jun 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.33 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | bioRxiv · 2026-06-05</description>
+    <description>相关性 0.33 · low · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | bioRxiv · 2026-06-05</description>
   </item>
   <item>
     <title>[🕳️ Gap] MiRNA Stability and Degradation: Dynamic Regulators of Cellular Regulatory Networks.</title>

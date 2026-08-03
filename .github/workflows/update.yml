@@ -27,6 +27,13 @@ jobs:
           PAPER_WINDOW_DAYS: '400'
           PAPER_MAX_PER_SOURCE: '150'
         run: python scripts/fetch_papers.py || echo "papers fetch failed, keeping previous data/papers.json"
+      - name: Analyze literature (abstract sections / methods / phrases / novelty)
+        run: python scripts/analyze_papers.py || echo "analysis failed, papers.json keeps previous analysis fields"
+      - name: Build in-corpus citation network
+        # 有全局墙钟预算,连接挂起时会写出已抓部分而不是把整轮定时任务拖死
+        run: python scripts/fetch_citenet.py --limit 250 --budget 900 || echo "citenet failed, keeping previous data/citenet.json"
+      - name: Front-end behaviour tests (deep-read panel, all real records)
+        run: python tests/run_ui_tests.py || echo "UI tests failed — data still published, check the log"
       - name: Build daily digest page + RSS feed
         run: python scripts/build_digest.py || echo "digest build skipped"
       - name: Commit if changed
@@ -35,6 +42,7 @@ jobs:
           git config user.email "grants-bot@users.noreply.github.com"
           git add data/grants.json data/grant_deadlines.ics data/jobs.json \
                   data/papers.json data/citation_snapshots.json \
+                  data/citenet.json \
                   data/fetch_log_papers.json data/digest.json \
                   digest.html feed.xml
           if git diff --staged --quiet; then

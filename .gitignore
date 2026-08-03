@@ -6,3 +6,5 @@ __pycache__/
 # 本地中间产物，不进仓库（含个人书目/排序草稿）
 handoff/
 scholar_future_directions.md
+tests/_fixture.json
+tests/_bundle.js
