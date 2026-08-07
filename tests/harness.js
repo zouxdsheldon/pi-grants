@@ -1,5 +1,4 @@
 var T = JSON.parse(read('__FIXTURE__'));
-var T = JSON.parse(read('/tmp/rdtest.json'));
 /* ---- 极简 DOM 桩:只提供被测函数真正用到的读写接口 ---- */
 var VALS = {papq:"",papDir:"",papSrc:"",papJournal:"",papTier:"",papType:"",papBand:"",papNov:"",papMeth:"",papWin:"",papSort:"score"};
 var CHK = {pap_oa:false,pap_hot:false,pap_gap:false,pap_q:false,pap_star:false,pap_unread:false,pap_off:false,pap_ph:false};

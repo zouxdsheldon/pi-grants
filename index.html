@@ -26,6 +26,67 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .switch::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}
 .switch.on::after{left:22px}
 
+/* ===== 门户首页 + 全局搜索 ===== */
+.hero{background:linear-gradient(135deg,#4A148C,#2C3E50);border-radius:12px;padding:26px 24px 22px;margin-top:16px;color:#fff}
+.hero h2{font-size:21px;margin-bottom:5px}
+.hero .hsub{opacity:.85;font-size:13px;margin-bottom:16px}
+.gsbox{display:flex;gap:8px;flex-wrap:wrap}
+.gsbox input{flex:1;min-width:240px;font-size:15px;padding:12px 15px;border:none;border-radius:9px;outline:none}
+.gsbox button{padding:12px 22px;font-size:14px;font-weight:700;border:none;border-radius:9px;background:#E6A817;color:#2C3E50;cursor:pointer}
+.gsbox button:hover{background:#f0b52e}
+.gshint{margin-top:9px;font-size:12px;opacity:.8}
+.gshint b{color:#FFD98A}
+.gsres{margin-top:14px}
+.gsgrp{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:10px}
+.gsgrp h4{font-size:13.5px;color:var(--dark);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.gsgrp h4 .cnt{background:var(--bluef);color:var(--blue);border-radius:10px;padding:1px 9px;font-size:11.5px}
+.gsgrp h4 .more{margin-left:auto;font-size:12px;font-weight:700;color:var(--blue);cursor:pointer;text-decoration:underline}
+.gsrow{padding:7px 0;border-top:1px dashed var(--line);font-size:12.8px;cursor:pointer}
+.gsrow:first-of-type{border-top:none}
+.gsrow:hover{background:#F8FAFC}
+.gsrow .t{font-weight:700;color:var(--dark)}
+.gsrow .m{color:var(--muted);font-size:11.8px;margin-top:2px}
+.gsrow mark{background:#FFF1A8;padding:0 1px;border-radius:2px}
+
+.hubgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:13px;margin-top:12px}
+.hubsec{margin-top:22px}
+.hubsec>h3{font-size:15px;color:var(--dark);display:flex;align-items:center;gap:8px;padding-bottom:7px;border-bottom:2px solid var(--line)}
+.hubsec>h3 .st{font-size:12px;font-weight:400;color:var(--muted)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 16px;cursor:pointer;transition:.13s;display:flex;flex-direction:column}
+.tool:hover{border-color:#4A148C;box-shadow:0 4px 14px rgba(74,20,140,.13);transform:translateY(-2px)}
+.tool .ic{font-size:23px;margin-bottom:7px}
+.tool .nm{font-size:14.5px;font-weight:700;color:var(--dark)}
+.tool .ds{font-size:12.3px;color:var(--muted);margin-top:5px;line-height:1.55;flex:1}
+.tool .num{margin-top:10px;font-size:12.5px;font-weight:700;color:#4A148C}
+.tool .num span{font-size:17px}
+.tool.ext .nm::after{content:" ↗";color:var(--muted);font-size:12px}
+
+/* 期刊查选 */
+.jtable{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card)}
+.jtable th{background:#EDE7F6;color:#4A148C;text-align:left;padding:9px 10px;font-size:12px;position:sticky;top:0;cursor:pointer;white-space:nowrap}
+.jtable th:hover{background:#E1D5F0}
+.jtable td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+.jtable tr.jr{cursor:pointer}
+.jtable tr.jr:hover td{background:#FAF7FF}
+.jname{font-weight:700;color:var(--dark)}
+.tierb{display:inline-block;border-radius:9px;padding:1px 8px;font-size:11px;font-weight:700}
+.tT1{background:#4A148C;color:#fff}.tT2{background:#7B3FA8;color:#fff}
+.tT3{background:#D9CBE9;color:#4A148C}.tT4{background:var(--greyf);color:var(--muted)}
+.tpreprint{background:#FCF3CF;color:#8a6d00}
+.thin{color:var(--muted);font-style:italic;font-size:11.5px}
+.fpbar{display:flex;height:7px;border-radius:4px;overflow:hidden;min-width:88px;background:var(--greyf)}
+.jdet{background:#FAF7FF}
+.jdet .in{padding:10px 14px;font-size:12.3px}
+.jdet .pp{padding:5px 0;border-top:1px dashed #DED0EE}
+.jdet .pp:first-child{border-top:none}
+
+/* 平台统一导航 */
+.plat{background:#1A2530;border-bottom:1px solid #33414f}
+.plat .in{max-width:1280px;margin:0 auto;padding:0 18px;display:flex;gap:2px;flex-wrap:wrap}
+.plat a{color:#B8C4D0;text-decoration:none;font-size:12.8px;font-weight:700;padding:9px 13px;border-bottom:3px solid transparent}
+.plat a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.plat a.on{color:#fff;border-bottom-color:#E6A817}
+
 .tabs{display:flex;gap:6px;margin:14px 0 0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .tab{padding:10px 15px;font-size:13.5px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px}
 .tab.active{color:var(--dark);border-bottom-color:var(--red)}
@@ -287,14 +348,20 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </head>
 <body>
 <header><div class="wrap">
-<h1 id="siteTitle">🔎 Grants Finder Pro</h1>
-<div class="sub" id="siteSub">全球 PI 资助 · 学术职位 · 文献追踪(每日自动更新)</div>
-<div class="sub" style="margin-top:6px">
-  🧭 姊妹站 <a href="https://zouxdsheldon.github.io/pi-intel/" target="_blank" rel="noopener"
-     style="color:#fff;text-decoration:underline"><b>PI 情报</b></a>
-  —— 从本站文献语料里抽出的 PI 地图:方向指纹、竞争/互补象限、方向漂移轨迹。
-</div>
+<h1 id="siteTitle">🔬 科研工作台 · Research Workbench</h1>
+<div class="sub" id="siteSub">找钱 · 找人 · 读文献 · 写本子 · 选期刊 —— 每个数字都能自己复算</div>
 </div></header>
+
+<!-- 平台统一导航(两站一致) -->
+<nav class="plat"><div class="in">
+  <a href="#" class="on" data-nav="hub">🏠 工具首页</a>
+  <a href="#" data-nav="live">💰 找资助</a>
+  <a href="#" data-nav="jobs">🎓 找职位</a>
+  <a href="#" data-nav="papers">📚 读文献</a>
+  <a href="#" data-nav="journals">📖 选期刊</a>
+  <a href="#" data-nav="writing">✍️ 写本子</a>
+  <a href="https://zouxdsheldon.github.io/pi-intel/" target="_blank" rel="noopener">🧭 PI 情报 ↗</a>
+</div></nav>
 
 <!-- sticky profile widget -->
 <div class="profile"><div class="in">
@@ -348,8 +415,10 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <div class="wrap">
 <div class="tabs">
-  <button class="tab active" data-p="live">🇺🇸 联邦机会(<span id="liveN">…</span>)</button>
+  <button class="tab active" data-p="hub">🏠 工具首页</button>
+  <button class="tab" data-p="live">🇺🇸 联邦机会(<span id="liveN">…</span>)</button>
   <button class="tab" data-p="curated">🌐 各国 PI 资助(<span id="curN">…</span>)</button>
+  <button class="tab" data-p="journals">📖 期刊查选(<span id="jrnN">…</span>)</button>
   <button class="tab" data-p="calendar">📅 截止日历(<span id="calN">…</span>)</button>
   <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
   <button class="tab" data-p="myapps">🎯 我能申的(<span id="myN">…</span>)</button>
@@ -361,7 +430,22 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <!-- LIVE -->
-<div class="panel active" id="live">
+<!-- ============ 工具门户首页 ============ -->
+<div class="panel active" id="hub">
+  <div class="hero">
+    <h2>🔬 一个人的科研工作台</h2>
+    <div class="hsub">从找钱到投稿的全流程工具,数据每天自动更新。所有评分/排序都可离线复算,不调用大模型。</div>
+    <div class="gsbox">
+      <input id="gsq" placeholder="搜一个词,同时查资助 / 职位 / 文献 / 期刊 —— 试试 ZSWIM8、AMPK、K99、fibrosis…" autocomplete="off">
+      <button id="gsbtn">全站搜索</button>
+    </div>
+    <div class="gshint" id="gshint">…</div>
+  </div>
+  <div class="gsres" id="gsres"></div>
+  <div id="hubTools"></div>
+</div>
+
+<div class="panel" id="live">
   <div class="snapbar" id="snapbar">正在加载数据…</div>
   <div class="honest">ℹ️ <b>关于资格徽章的诚实说明:</b>Grants.gov 的资格数据是<b>机构级</b>的(申请人是大学而非个人),API 不提供"是否要求公民身份"的结构化字段——该条件写在每份 NOFO 正文里。因此联邦卡片的资格徽章基于<b>可获取的真实字段</b>推断(如金额、资助类型、是否career机制),公民身份一栏标注"见 NOFO"并给出链接。<b>⭐精选清单</b>里的项目(K99、海外优青等)资格为<b>人工逐条核实</b>,徽章可信。</div>
   <div class="layout">
@@ -637,6 +721,26 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="status" id="pipeStatus" style="margin:0"></span>
   </div>
   <div id="pipeWrap"></div>
+</div>
+
+<!-- ============ 期刊查选 ============ -->
+<div class="panel" id="journals">
+  <div class="honest">ℹ️ <b>请先读这两条:</b>①下表所有计数都是<b>本站语料范围内</b>的(<span id="jcorpN">…</span> 篇,只覆盖你关注的 8 个方向、近两年)。「Nature 只有 2 篇」意味着<b>本语料里</b>只有 2 篇,不代表 Nature 发文少。②<b>本站不提供影响因子</b> —— JCR IF 是受版权保护的商业数据。T1–T4 只是刊名白名单的粗代理,判定规则写在 README 里,可自行核对。发文量少于 3 篇的刊标注「样本不足」,不给百分比。</div>
+  <div class="fgroup" style="margin-top:12px">
+    <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+      <input id="jq" placeholder="按刊名筛选…" style="flex:1;min-width:190px;font-size:12.8px;padding:8px 11px;border:1px solid var(--line);border-radius:7px">
+      <select id="jdir" style="font-size:12.8px;padding:8px 10px;border:1px solid var(--line);border-radius:7px"></select>
+      <select id="jtier" style="font-size:12.8px;padding:8px 10px;border:1px solid var(--line);border-radius:7px">
+        <option value="">全部层级</option><option value="T1">T1</option><option value="T2">T2</option>
+        <option value="T3">T3</option><option value="T4">T4</option><option value="preprint">预印本</option>
+      </select>
+      <label style="font-size:12.5px;display:flex;align-items:center;gap:5px;cursor:pointer">
+        <input type="checkbox" id="jhide"> 隐藏样本不足的刊
+      </label>
+      <span class="status" id="jstat" style="margin:0"></span>
+    </div>
+  </div>
+  <div style="overflow-x:auto"><table class="jtable" id="jtab"></table></div>
 </div>
 
 <div class="panel" id="howto">
@@ -1011,7 +1115,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
 
   <!-- ===== 下载:ZSWIM8-6 多基金写作模板 ===== -->
-  <div class="hcard" style="border-color:#00897B;background:#F1FBF9">
+  <div class="hcard" id="tplBanner" style="border-color:#00897B;background:#F1FBF9">
     <h3 style="color:#00695C">📥 你的真·写作模板 — ZSWIM8-6「写一次，套所有基金」</h3>
     <p style="font-size:13px;line-height:1.7;color:#333;margin:4px 0 8px">基于你上传的 <code>executive_summary_PI_directions.xlsx</code> 里评分最高、难度中等、转化钩子最硬的 <b>旗舰① ZSWIM8-6（AMPK 驱动的 miRNA 降解代谢记忆）</b>方向构建。<b>第 1 部分</b>把 Aims/Significance/Innovation/Approach/Career 按 NIH 全长写好一次（方括号已用你的真实课题词填好）；<b>第 2 部分</b>给每类基金（K99/R00·F32·R01·海外优青·RGC ECS·NRF）一张「删到几页·加哪节·砍哪节·语气」对照表。所有数据标注 <b>predicted/schematic</b>，有真实预实验时替换即可。</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
@@ -1979,7 +2083,266 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   if(t.dataset.p==="whatsnew")renderChanges();
   if(t.dataset.p==="calendar")renderCalendar();
   if(t.dataset.p==="papers")renderPapers();
+  if(t.dataset.p==="journals")renderJournals();
+  if(t.dataset.p==="hub")renderHub();
+  syncPlatNav(t.dataset.p);
 });
+
+/* ============================================================
+   工具门户 + 全局搜索 + 期刊查选
+   设计原则:门户上的每个数字都从已加载的 JSON 现算,不写死;
+   搜索是纯前端字符串匹配,规则写在 README 里,可自行复算。
+   ============================================================ */
+var JOURNALS=[], JMETA={}, JSORT="n", JSORTDIR=-1, JOPEN={}, J_WIRED=false;
+
+/* 门户 → 面板 的映射。ext 表示跳到姊妹站。 */
+var HUB_SECTIONS=[
+ {h:"① 找钱 · 资助机会", st:"从联邦数据库到各国 PI 项目,含截止日历与申请管线",
+  tools:[
+   {p:"live",     ic:"🇺🇸", nm:"美国联邦资助", ds:"Grants.gov 全量未过期机会,每日刷新,含金额/资格/截止推断", cnt:()=>LIVE.length,      u:"个机会"},
+   {p:"curated",  ic:"🌐", nm:"各国 PI 资助", ds:"人工逐条核实的早期 PI 项目:K99、海外优青、ECS、NRF…", cnt:()=>CURATED.length,   u:"个项目"},
+   {p:"calendar", ic:"📅", nm:"截止日历",     ds:"可订阅的 .ics 日历,截止日自动进你的日程", cnt:()=>(CAL_EV?CAL_EV.filter(e=>e.mine).length:0), u:"条截止"},
+   {p:"myapps",   ic:"🎯", nm:"我能申的",     ds:"按你填的档案自动过滤资格,分 A/B/C 档", cnt:()=>{try{return screenMine().length}catch(e){return 0}}, u:"个符合"},
+   {p:"pipeline", ic:"📋", nm:"申请管线",     ds:"跟踪每份申请的状态:感兴趣 / 起草中 / 已提交 / 结果", cnt:()=>Object.keys(getTracked()).length, u:"份在跟"},
+   {p:"whatsnew", ic:"🔄", nm:"更新动态",     ds:"新增、金额变动、截止临近——只看变化的部分", cnt:()=>CHANGES.length, u:"条变化"},
+  ]},
+ {h:"② 找人 · 同行与去处", st:"谁在做同一件事,以及哪里在招人",
+  tools:[
+   {p:"jobs", ic:"🎓", nm:"学术职位", ds:"教职 / 博后 / 研究员岗位,按地区与层级筛选", cnt:()=>JOBS.length, u:"个岗位"},
+   {ext:"https://zouxdsheldon.github.io/pi-intel/", ic:"🧭", nm:"PI 情报地图",
+    ds:"从本站语料里抽出的 48 位 PI:方向指纹、竞争/互补象限、方向漂移轨迹", cnt:()=>48, u:"位 PI"},
+  ]},
+ {h:"③ 读文献 · 追踪与评估", st:"多源抓取 + 相关性/新颖度/热度打分,全部可离线复算",
+  tools:[
+   {p:"papers", ic:"📚", nm:"文献追踪", ds:"PubMed / bioRxiv / arXiv / Crossref 多源合并,按你的 8 个方向打分", cnt:()=>PAPERS.length, u:"篇在库"},
+   {p:"papers", ic:"🔥", nm:"热点论文", ds:"按引用增速排序的近期高关注论文", act:"hot",
+    cnt:()=>PAPERS.filter(p=>(p.hot_score||0)>0).length, u:"篇有热度"},
+   {p:"papers", ic:"💡", nm:"高新颖度", ds:"与既有语料差异最大的论文,常是新方法或新现象", act:"nov",
+    cnt:()=>PAPERS.filter(p=>(p.novelty_pct||0)>=80).length, u:"篇 ≥80 分位"},
+  ]},
+ {h:"④ 写本子 · 基金写作", st:"六类基金的完整可用初稿,只需替换填空标记",
+  tools:[
+   {p:"writing", ic:"✍️", nm:"写作指导", ds:"逐段写法 + 你自己论文里提炼的语料库", cnt:()=>6, u:"类基金"},
+   {p:"writing", ic:"📄", nm:"基金模板下载", ds:"K99/R00、F32、R01、海外优青、RGC ECS、NRF —— Word/PDF/Markdown", act:"tpl", cnt:()=>6, u:"份初稿"},
+  ]},
+ {h:"⑤ 投稿 · 期刊查选", st:"基于本站语料的选刊参考(不提供影响因子)",
+  tools:[
+   {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
+  ]},
+];
+
+function renderHub(){
+  var h="";
+  HUB_SECTIONS.forEach(function(s){
+    h+='<div class="hubsec"><h3>'+s.h+' <span class="st">'+esc(s.st)+'</span></h3><div class="hubgrid">';
+    s.tools.forEach(function(t){
+      var n=0; try{n=t.cnt();}catch(e){n=0;}
+      var attr=t.ext?('data-ext="'+t.ext+'"'):('data-go="'+t.p+'"'+(t.act?' data-act="'+t.act+'"':''));
+      h+='<div class="tool'+(t.ext?' ext':'')+'" '+attr+'>'
+        +'<div class="ic">'+t.ic+'</div><div class="nm">'+esc(t.nm)+'</div>'
+        +'<div class="ds">'+esc(t.ds)+'</div>'
+        +'<div class="num"><span>'+n+'</span> '+esc(t.u)+'</div></div>';
+    });
+    h+='</div></div>';
+  });
+  document.getElementById("hubTools").innerHTML=h;
+  document.querySelectorAll("#hubTools .tool").forEach(function(el){
+    el.onclick=function(){
+      var ex=el.getAttribute("data-ext");
+      if(ex){window.open(ex,"_blank","noopener");return;}
+      goPanel(el.getAttribute("data-go"), el.getAttribute("data-act"));
+    };
+  });
+  var g=document.getElementById("gshint");
+  if(g)g.innerHTML='一次查 <b>'+LIVE.length+'</b> 条联邦资助 · <b>'+CURATED.length+'</b> 个各国项目 · <b>'
+    +JOBS.length+'</b> 个职位 · <b>'+PAPERS.length+'</b> 篇文献 · <b>'+JOURNALS.length+'</b> 本期刊';
+}
+
+function goPanel(p,act){
+  var btn=document.querySelector('.tab[data-p="'+p+'"]');
+  if(!btn)return;
+  btn.click();
+  if(act==="tpl"){var e=document.getElementById("tplBanner");if(e)e.scrollIntoView({behavior:"smooth"});}
+  if(act==="hot"||act==="nov"){
+    var sel=document.getElementById("papSort");
+    if(sel){sel.value=(act==="hot"?"hot":"novelty");sel.dispatchEvent(new Event("change"));}
+  }
+}
+
+function syncPlatNav(p){
+  var map={hub:"hub",live:"live",curated:"live",myapps:"live",calendar:"live",whatsnew:"live",
+           pipeline:"live",jobs:"jobs",papers:"papers",journals:"journals",writing:"writing",howto:""};
+  var want=map[p]||"";
+  document.querySelectorAll(".plat a[data-nav]").forEach(function(a){
+    a.classList.toggle("on", a.getAttribute("data-nav")===want);
+  });
+}
+
+/* ---------- 全局搜索 ----------
+   规则(README 有同样描述):查询按空白切成多个词,**每个词都要命中**
+   (AND),词序无关,大小写无关,子串匹配。每组只展示前 5 条。 */
+function gsTokens(q){return (q||"").toLowerCase().split(/\s+/).filter(Boolean);}
+function gsHit(txt,toks){
+  var t=(txt||"").toLowerCase();
+  for(var i=0;i<toks.length;i++){if(t.indexOf(toks[i])<0)return false;}
+  return true;
+}
+function gsMark(s,toks){
+  s=esc(s||"");
+  toks.forEach(function(tk){
+    if(!tk)return;
+    var re=new RegExp("("+tk.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig");
+    s=s.replace(re,"<mark>$1</mark>");
+  });
+  return s;
+}
+var GS_GROUPS=[
+ {k:"live",   ic:"🇺🇸", label:"联邦资助", panel:"live",
+  rows:()=>LIVE, txt:g=>[g.title,g.agency,g.number,g.ftype].join(" "),
+  t:g=>g.title, m:g=>[g.agency,g.amount,g.closeDate?("截止 "+g.closeDate):""].filter(Boolean).join(" · ")},
+ {k:"curated",ic:"🌐", label:"各国 PI 资助", panel:"curated",
+  rows:()=>CURATED, txt:c=>[c.name,c.funder,c.region,c.cat,c.elig,c.note].join(" "),
+  t:c=>c.name, m:c=>[c.funder,c.region,c.amount].filter(Boolean).join(" · ")},
+ {k:"jobs",   ic:"🎓", label:"学术职位", panel:"jobs",
+  rows:()=>JOBS, txt:j=>[j.title,j.company,j.location,j.level,j.desc].join(" "),
+  t:j=>j.title, m:j=>[j.company,j.location,j.date].filter(Boolean).join(" · ")},
+ {k:"papers", ic:"📚", label:"文献", panel:"papers",
+  rows:()=>PAPERS, txt:p=>[p.title,p.abstract,p.journal,(p.authors||[]).join(" "),(p.keywords||[]).join(" ")].join(" "),
+  t:p=>p.title, m:p=>[p.journal,p.year,p.cites!=null?(p.cites+" 引"):""].filter(Boolean).join(" · ")},
+ {k:"journals",ic:"📖", label:"期刊", panel:"journals",
+  rows:()=>JOURNALS, txt:j=>j.name,
+  t:j=>j.name, m:j=>[j.tier||"未分层, "+j.n+" 篇", j.thin?"样本不足":(j.recent_pct+"% 近两年")].join(" · ")},
+];
+function runGlobalSearch(q){
+  var box=document.getElementById("gsres");
+  var toks=gsTokens(q);
+  if(!toks.length){box.innerHTML="";return;}
+  var total=0,h="";
+  GS_GROUPS.forEach(function(G){
+    var all=[];
+    var rows=G.rows()||[];
+    for(var i=0;i<rows.length;i++){if(gsHit(G.txt(rows[i]),toks))all.push(rows[i]);}
+    if(!all.length)return;
+    total+=all.length;
+    h+='<div class="gsgrp"><h4>'+G.ic+' '+G.label+'<span class="cnt">'+all.length+'</span>';
+    if(all.length>5)h+='<span class="more" data-gomore="'+G.panel+'">查看全部 '+all.length+' 条 →</span>';
+    h+='</h4>';
+    all.slice(0,5).forEach(function(r){
+      h+='<div class="gsrow" data-gp="'+G.panel+'"><div class="t">'+gsMark(G.t(r),toks)+'</div>'
+        +'<div class="m">'+gsMark(G.m(r),toks)+'</div></div>';
+    });
+    h+='</div>';
+  });
+  if(!total){
+    h='<div class="gsgrp"><h4>🔍 无结果</h4><div style="font-size:12.8px;color:var(--muted)">'
+     +'「'+esc(q)+'」在 5 个库里都没有命中。搜索是<b>子串 AND</b> 匹配:多个词必须<b>全部</b>出现,'
+     +'但词序无关。试试减少关键词,或换更短的词根(如用 “fibro” 而不是 “fibrosis”)。</div></div>';
+  }
+  box.innerHTML=h;
+  box.querySelectorAll("[data-gomore]").forEach(function(el){
+    el.onclick=function(ev){ev.stopPropagation();goPanel(el.getAttribute("data-gomore"));};
+  });
+  box.querySelectorAll(".gsrow").forEach(function(el){
+    el.onclick=function(){goPanel(el.getAttribute("data-gp"));};
+  });
+}
+
+/* ---------- 期刊查选 ---------- */
+function fpBarHTML(fp){
+  if(!fp||!Object.keys(fp).length)return '<span class="thin">—</span>';
+  var ks=Object.keys(fp).sort(function(a,b){return fp[b]-fp[a];}).slice(0,4);
+  var h='<div class="fpbar" title="'+esc(ks.map(function(k){
+    return (JMETA.int_names&&JMETA.int_names[k]||k)+" "+Math.round(fp[k]*100)+"%";}).join(" / "))+'">';
+  ks.forEach(function(k){
+    var c=(JMETA.int_colors&&JMETA.int_colors[k])||"#999";
+    h+='<div style="width:'+(fp[k]*100).toFixed(1)+'%;background:'+c+'"></div>';
+  });
+  return h+'</div>';
+}
+function jSorted(){
+  var q=(document.getElementById("jq").value||"").toLowerCase().trim();
+  var dir=document.getElementById("jdir").value;
+  var tier=document.getElementById("jtier").value;
+  var hide=document.getElementById("jhide").checked;
+  var rows=JOURNALS.filter(function(r){
+    if(q&&r.name.toLowerCase().indexOf(q)<0)return false;
+    if(tier&&r.tier!==tier)return false;
+    if(hide&&r.thin)return false;
+    if(dir&&!(r.fp&&r.fp[dir]))return false;
+    return true;
+  });
+  var key=JSORT, d=JSORTDIR;
+  rows.sort(function(a,b){
+    var av,bv;
+    if(key==="fit"){av=(a.fp&&dir?a.fp[dir]:0)||0;bv=(b.fp&&dir?b.fp[dir]:0)||0;}
+    else if(key==="name"){return a.name.localeCompare(b.name)*(d<0?-1:1);}
+    else {av=a[key]==null?-1:a[key];bv=b[key]==null?-1:b[key];}
+    return (av-bv)*(d<0?-1:1);
+  });
+  return rows;
+}
+function renderJournals(){
+  if(!JOURNALS.length){document.getElementById("jtab").innerHTML=
+    '<tr><td style="padding:16px;color:var(--muted)">期刊库尚未加载。</td></tr>';return;}
+  if(!J_WIRED){
+    var ds=document.getElementById("jdir");
+    ds.innerHTML='<option value="">全部方向</option>'+(JMETA.int_ids||[]).map(function(k){
+      return '<option value="'+k+'">'+esc((JMETA.int_names||{})[k]||k)+'</option>';}).join("");
+    ["jq","jdir","jtier","jhide"].forEach(function(id){
+      var el=document.getElementById(id);
+      el.oninput=el.onchange=function(){
+        if(id==="jdir"&&el.value)JSORT="fit",JSORTDIR=-1;
+        renderJournals();
+      };
+    });
+    document.getElementById("jcorpN").textContent=JMETA.corpus_n||"?";
+    J_WIRED=true;
+  }
+  var rows=jSorted();
+  var dir=document.getElementById("jdir").value;
+  var cols=[["name","期刊"],["n","本语料发文"],["tier","层级"],["fit","方向重合度"],
+            ["oa_pct","OA%"],["recent_pct","近两年占比"],["novelty_med","新颖度中位"]];
+  var h='<thead><tr>'+cols.map(function(c){
+    var ar=(JSORT===c[0])?(JSORTDIR<0?" ▼":" ▲"):"";
+    return '<th data-sk="'+c[0]+'">'+c[1]+ar+'</th>';}).join("")+'</tr></thead><tbody>';
+  rows.slice(0,300).forEach(function(r,i){
+    var thin='<span class="thin">样本不足</span>';
+    h+='<tr class="jr" data-jn="'+esc(r.name)+'">'
+      +'<td><span class="jname">'+esc(r.name)+'</span></td>'
+      +'<td><b>'+r.n+'</b></td>'
+      +'<td>'+(r.tier?'<span class="tierb t'+r.tier+'">'+r.tier+'</span>':'<span class="thin">—</span>')+'</td>'
+      +'<td>'+fpBarHTML(r.fp)+(dir&&r.fp&&r.fp[dir]?'<div style="font-size:11px;color:var(--muted);margin-top:2px">'+Math.round(r.fp[dir]*100)+'%</div>':'')+'</td>'
+      +'<td>'+(r.thin?thin:(r.oa_pct+"%"))+'</td>'
+      +'<td>'+(r.thin?thin:(r.recent_pct+"%"))+'</td>'
+      +'<td>'+(r.novelty_med==null?thin:r.novelty_med)+'</td></tr>';
+    if(JOPEN[r.name]){
+      h+='<tr class="jdet"><td colspan="7"><div class="in"><b>本语料内代表作:</b>'
+        +(r.top||[]).map(function(p){
+          var link=p.pmid?('https://pubmed.ncbi.nlm.nih.gov/'+p.pmid+'/'):(p.url||(p.doi?('https://doi.org/'+p.doi):""));
+          return '<div class="pp">'+(link?'<a href="'+esc(link)+'" target="_blank" rel="noopener">':"")
+            +esc(p.title)+(link?'</a>':"")+' <span style="color:var(--muted)">('+(p.year||"?")+
+            (p.pmid?", PMID "+p.pmid:"")+')</span></div>';}).join("")
+        +'<div style="margin-top:7px;color:var(--muted);font-size:11.8px">年度分布:'
+        +Object.keys(r.year_hist||{}).sort().map(function(y){return y+"×"+r.year_hist[y];}).join(" · ")
+        +'</div></div></td></tr>';
+    }
+  });
+  h+='</tbody>';
+  var tb=document.getElementById("jtab");
+  tb.innerHTML=h;
+  tb.querySelectorAll("th[data-sk]").forEach(function(th){
+    th.onclick=function(){
+      var k=th.getAttribute("data-sk");
+      if(JSORT===k)JSORTDIR=-JSORTDIR;else{JSORT=k;JSORTDIR=(k==="name")?1:-1;}
+      renderJournals();
+    };
+  });
+  tb.querySelectorAll("tr.jr").forEach(function(tr){
+    tr.onclick=function(){var n=tr.getAttribute("data-jn");JOPEN[n]=!JOPEN[n];renderJournals();};
+  });
+  document.getElementById("jstat").textContent="显示 "+Math.min(rows.length,300)+" / "+rows.length+" 本"
+    +(rows.length>300?"(仅前 300)":"");
+}
 
 /* ---------- calendar ---------- */
 const CN_MON={'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'11':11,'12':12};
@@ -2093,7 +2456,7 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,cnet]=await Promise.all([
+    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,cnet,jrn]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
@@ -2105,6 +2468,7 @@ async function loadData(){
       fetch("data/funds.json?_="+Date.now()).then(r=>r.ok?r.json():{funds:[]}).catch(()=>({funds:[]})),
       fetch("data/profile_schema.json?_="+Date.now()).then(r=>r.ok?r.json():{fields:[]}).catch(()=>({fields:[]})),
       fetch("data/citenet.json?_="+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch("data/journals.json?_="+Date.now()).then(r=>r.ok?r.json():{journals:[],meta:{}}).catch(()=>({journals:[],meta:{}})),
     ]);
     LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
     INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
@@ -2123,6 +2487,10 @@ async function loadData(){
     try{renderMyApps();}catch(e){console.warn("myapps",e);}
     try{renderJobs();}catch(e){console.warn("jobs",e);}
     try{renderPapers();}catch(e){console.warn("papers",e);}
+    JOURNALS=(jrn&&jrn.journals)||[]; JMETA=(jrn&&jrn.meta)||{};
+    document.getElementById("jrnN").textContent=JOURNALS.length;
+    try{renderHub();}catch(e){console.warn("hub",e);}
+    try{initGlobalSearch();}catch(e){console.warn("gsearch",e);}
   }catch(e){
     snapbar.innerHTML=`<b style="color:#A03225">数据加载失败:${e.message}</b> — 请通过部署好的网址访问(不要双击本地文件)。`;
   }
@@ -3886,6 +4254,43 @@ function wirePapersOnce(){
   document.getElementById("expCsv").onclick=()=>dl(`papers_${D}.csv`,toCsv(curPapers()),"text/csv");
   document.getElementById("expMd").onclick=()=>dl(`digest_${D}.md`,toMd(curPapers()),"text/markdown");
 }
+
+/* 全局搜索的事件绑定 + URL ?q= 支持(便于分享一条搜索) */
+function initGlobalSearch(){
+  var inp=document.getElementById("gsq"), btn=document.getElementById("gsbtn");
+  if(!inp||!btn)return;
+  var go=function(){
+    var q=inp.value.trim();
+    runGlobalSearch(q);
+    try{
+      var u=new URL(window.location.href);
+      if(q)u.searchParams.set("q",q);else u.searchParams.delete("q");
+      history.replaceState(null,"",u.toString());
+    }catch(e){}
+  };
+  btn.onclick=go;
+  inp.onkeydown=function(e){if(e.key==="Enter")go();};
+  var t=null;
+  inp.oninput=function(){clearTimeout(t);t=setTimeout(function(){
+    if(inp.value.trim().length>=2)runGlobalSearch(inp.value.trim());
+    else document.getElementById("gsres").innerHTML="";
+  },220);};
+  /* ?p=<panel> 深链:姊妹站 pi-intel 的导航条靠它直接落到本站某个面板。
+     只接受确实存在的面板 id,拿不到就不动(不静默跳到首页,免得掩盖拼错的链接)。 */
+  try{
+    var p0=new URL(window.location.href).searchParams.get("p");
+    if(p0&&document.querySelector('.tab[data-p="'+p0+'"]'))goPanel(p0);
+  }catch(e){}
+  try{
+    var q0=new URL(window.location.href).searchParams.get("q");
+    if(q0){inp.value=q0;runGlobalSearch(q0);}
+  }catch(e){}
+}
+
+/* 平台导航条 */
+document.querySelectorAll(".plat a[data-nav]").forEach(function(a){
+  a.onclick=function(e){e.preventDefault();goPanel(a.getAttribute("data-nav"));};
+});
 
 loadData();
 try{checkElig();}catch(e){}

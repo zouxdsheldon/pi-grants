@@ -605,20 +605,91 @@ TIER = {
         "circulation research", "cardiovascular research", "gut", "journal of hepatology",
         "molecular therapy", "nar", "bioinformatics", "genome biology", "genome research"],
 }
+# 精确匹配后白名单显得过窄(T3 只剩 20 篇),按同一层级标准补齐常见刊。
+# 仍是精确匹配:补的是**刊名**,不是放宽匹配规则。
+TIER[1] += ["nature medicine", "nature biotechnology", "cell stem cell"]
+TIER[2] += ["nature methods", "nature immunology", "nature neuroscience",
+            "nature reviews molecular cell biology", "nature reviews genetics",
+            "nature aging", "nature cardiovascular research", "cell systems",
+            "molecular systems biology", "embo molecular medicine", "circulation",
+            "journal of experimental medicine", "gastroenterology", "blood",
+            "the lancet diabetes & endocrinology", "european heart journal"]
+TIER[3] += ["molecular therapy nucleic acids", "wiley interdisciplinary reviews rna",
+            "rna biology", "journal of molecular biology", "nucleic acids research",
+            "cell death & differentiation", "cell death and differentiation",
+            "cell death & disease", "oncogene", "leukemia", "autophagy",
+            "journal of molecular cell biology", "biochimica et biophysica acta",
+            "journal of cell science", "molecular and cellular biology",
+            "journal of translational medicine", "cell reports medicine",
+            "science signaling", "science translational medicine",
+            "american journal of physiology endocrinology and metabolism",
+            "american journal of human genetics", "plos pathogens",
+            "cell & bioscience", "cell communication and signaling",
+            "molecular metabolism", "jci insight", "redox biology",
+            "free radical biology & medicine", "journal of lipid research",
+            "arteriosclerosis thrombosis and vascular biology",
+            "kidney international", "journal of the american society of nephrology",
+            "brain", "annals of neurology", "journal of neuroscience",
+            "clinical cancer research", "cancer research", "cancer letters",
+            "molecular cancer", "british journal of cancer", "cell proliferation",
+            "stem cell reports", "development", "developmental biology",
+            "nature communications biology", "communications biology",
+            "genome medicine", "briefings in bioinformatics", "nucleic acid therapeutics"]
+# 别名 → 白名单里的规范名。刊名在不同来源写法不一,只在这里收敛。
+TIER_ALIAS = {
+    "proc natl acad sci u s a": "pnas",
+    "proceedings of the national academy of sciences": "pnas",
+    "proceedings of the national academy of sciences of the united states of america": "pnas",
+    "nucleic acids res": "nucleic acids research",
+    "j clin invest": "journal of clinical investigation",
+    "the journal of clinical investigation": "journal of clinical investigation",
+    "the embo journal": "embo journal",
+    "genes dev": "genes & development",
+    "genes and development": "genes & development",
+    "the new england journal of medicine": "new england journal",
+    "n engl j med": "new england journal",
+    "the lancet": "lancet",
+    "elife": "elife",
+    "j biol chem": "journal of biological chemistry",
+    "the journal of biological chemistry": "journal of biological chemistry",
+}
+
+def norm_jname(j):
+    """规范化刊名以便**精确**比对:小写、去副标题、去标点、压空白。
+
+    副标题必须去掉,否则 'Cell communication and signaling : CCS' 这类
+    带冒号后缀的刊名永远匹配不上;但去掉后仍是精确比对,不会像子串匹配
+    那样把 'Tissue and Cell' 误判成 Cell。
+    """
+    import re as _re
+    jl = (j or "").lower().strip()
+    if not jl: return ""
+    jl = jl.split(" : ")[0]                      # 去 " : the preprint server..." 类副标题
+    jl = _re.sub(r"\s*\([^)]*\)\s*$", "", jl)    # 去结尾括注,如 "(Weinheim, ...)"
+    jl = _re.sub(r"[.,]", "", jl)
+    jl = _re.sub(r"\s+", " ", jl).strip()
+    return TIER_ALIAS.get(jl, jl)
+
+# 预印本服务器仍用前缀判断——它们的刊名字段本身就带长后缀
+_PREPRINT = ("biorxiv", "medrxiv", "arxiv", "research square", "ssrn", "authorea")
+
+_TIER_EXACT = {}
+for _t in (3, 2, 1):                 # 后写的覆盖先写的:同名以更高层级为准
+    for _n in TIER[_t]:
+        _TIER_EXACT[_n] = f"T{_t}"
+
 def journal_tier(j):
-    jl = (j or "").lower()
+    """期刊层级代理(**非** JCR 影响因子)。
+
+    只做**精确**匹配。早先的实现用子串匹配,导致 'cell'/'science'/'nature'
+    命中了 82 本无关刊物(Tissue and Cell、iScience、Frontiers in ... science
+    都被判成 T1)。层级不在白名单里的一律 T4,宁可保守。
+    """
+    jl = (j or "").lower().strip()
     if not jl: return None
-    # 用子串匹配:真实刊名常带后缀,如 "bioRxiv : the preprint server for biology"
-    if any(k in jl for k in ("biorxiv", "medrxiv", "arxiv", "research square",
-                             "preprint", "ssrn", "authorea")): return "preprint"
-    for t in (1, 2, 3):
-        for name in TIER[t]:
-            if name in jl:
-                # 一级刊名是二级刊名的子串(如 "nature" ⊂ "nature genetics"),故先查更长的
-                if t == 1 and any(n2 in jl for n2 in TIER[2] if len(n2) > len(name)):
-                    return "T2"
-                return f"T{t}"
-    return "T4"
+    if any(jl.startswith(k) or k in jl.split(" : ")[0] for k in _PREPRINT):
+        return "preprint"
+    return _TIER_EXACT.get(norm_jname(j), "T4")
 
 
 # ---------------------------------------------------------------- 引用快照
