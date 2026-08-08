@@ -36,6 +36,25 @@ def _norm_map(papers, journals):
     return out
 
 
+
+def _select_opts(html):
+    """从 index.html 抽出每个 <select id=...> 的静态 option 列表。
+
+    动态填充的下拉框(facetSel 写 innerHTML 的那些)这里会是空列表 ——
+    桩在运行时会用 innerHTML 解析出真实选项覆盖它。
+    """
+    out = {}
+    for m in re.finditer(r'<select id="([A-Za-z_][\w-]*)"[^>]*>(.*?)</select>', html, re.S):
+        sid, body = m.group(1), m.group(2)
+        opts = []
+        for om in re.finditer(r'<option(?:\s+value="([^"]*)")?[^>]*>(.*?)</option>', body, re.S):
+            val = om.group(1)
+            txt = re.sub(r'<[^>]*>', '', om.group(2)).strip()
+            opts.append({"value": val if val is not None else txt, "textContent": txt})
+        out[sid] = opts
+    return out
+
+
 def build(html_path=None, fixture_path=None):
     html_path = html_path or os.path.join(ROOT, "index.html")
     s = open(html_path).read()
@@ -65,6 +84,11 @@ def build(html_path=None, fixture_path=None):
         "panel_ids": sorted(set(re.findall(r'class="panel(?: active)?" id="([a-z]+)"', s))),
         # 平台导航条里的站内目标(data-nav="…");跨站项是 href 外链,不在此列
         "nav_targets": re.findall(r'data-nav="([a-z]+)"', s),
+        # 每个 <select> 静态写死的 option。桩用它来判断"某个值是否真的在选项里",
+        # 否则示例按钮设不上值却看不出来。
+        "opts": _select_opts(s),
+        # 页面里真实存在的 id。桩用它来决定 getElementById 该不该返回 null。
+        "ids": sorted(set(re.findall(r'id="([A-Za-z_][\w-]*)"', s))),
     }
     fx["norm"] = _norm_map(fx["papers"], fx["journals"])
     fp = fixture_path or os.path.join(ROOT, "tests/_fixture_portal.json")
@@ -120,6 +144,34 @@ NEGATIVES = [
     ("goPanel 对未知 id 静默退回首页",
      'if(!btn)return;\n  btn.click();',
      'if(!btn){document.querySelector(\'.tab[data-p="hub"]\').click();return;}\n  btn.click();'),
+    # ---- 内联帮助 / 芯片 / 空结果 / 金额 ----
+    ("示例按钮设了个不存在的控件",
+     '["lcareer","1"]]},',
+     '["lcareerTYPO","1"]]},'),
+    ("示例的命中数改成写死的",
+     'var n=ok?countOf(pid):null;',
+     'var n=42;'),
+    ("芯片栏看不见侧栏那三个筛选",
+     '  var V=VFILT[pid];',
+     '  var V=null;'),
+    ("清空筛选漏掉虚拟筛选(勾选残留)",
+     '  if(V)V.list().forEach(function(v){ V.clear(v.id); });\n  CUR_PID=null; rerender(pid);',
+     '  CUR_PID=null; rerender(pid);'),
+    ("零结果只说\"无结果\",不解释是哪些条件",
+     'function emptyHTML(pid,total){',
+     'function emptyHTML(pid,total){ return \'<div class="nores">没有结果。</div>\';'),
+    ("结果回来后不清空零结果解释框",
+     'else if(NORES_IN[wrapId]){ w.innerHTML=""; NORES_IN[wrapId]=0; }',
+     'else if(false){ w.innerHTML=""; }'),
+    ("金额缺失时把占位符当金额印出去",
+     'function amtTxt(g){ return amtMissing(g&&g.amount)?"未公布 · 见 NOFO":("$"+g.amount); }',
+     'function amtTxt(g){ return "$"+g.amount; }'),
+    ("金额排序键退回非数字",
+     'function amtNum(g){\n  if(!g)return 0;',
+     'function amtNum(g){\n  if(!g)return 0;\n  return g.amount;'),
+    ("可信度筛选失效(未核实条目混进来)",
+     'if(fv&&verifyKey(g)!==fv)return false;',
+     'if(false&&verifyKey(g)!==fv)return false;'),
 ]
 
 

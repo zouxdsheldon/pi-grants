@@ -109,6 +109,65 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .searchbar{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:12px}
 .searchbar input[type=text]{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:8px;font-size:14px}
 .srow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+/* ---------- 内联「怎么用」说明条(每个面板顶部一条,默认折叠) ---------- */
+.hstrip{background:#F8FAFF;border:1px solid #D6E0F5;border-left:3px solid var(--blue);
+  border-radius:9px;margin:10px 0;overflow:hidden}
+.hstrip .hhead{display:flex;align-items:center;gap:9px;padding:9px 13px;cursor:pointer;user-select:none}
+.hstrip .hhead:hover{background:#EFF4FF}
+.hstrip .hwhat{font-size:13px;font-weight:700;color:#123}
+.hstrip .htog{margin-left:auto;font-size:12px;color:var(--blue);font-weight:700;white-space:nowrap}
+.hstrip .hbody{display:none;padding:2px 15px 13px;border-top:1px dashed #D6E0F5}
+.hstrip.open .hbody{display:block}
+.hstrip ol{margin:10px 0 4px 19px;font-size:12.6px;line-height:1.75;color:#243}
+.hstrip ol li{margin-bottom:2px}
+.hstrip .exlab{font-size:12px;font-weight:700;color:var(--muted);margin:11px 0 6px}
+.hstrip .exwrap{display:flex;flex-wrap:wrap;gap:7px}
+.hstrip .exbtn{padding:6px 12px;border:1px solid var(--blue);border-radius:20px;background:#fff;
+  color:var(--blue);cursor:pointer;font-size:12.2px;font-family:inherit;font-weight:600;line-height:1.35}
+.hstrip .exbtn:hover{background:var(--blue);color:#fff}
+.hstrip .exbtn .exn{opacity:.72;font-weight:400;font-size:11.4px}
+.chipbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 10px;min-height:22px}
+.chipbar .fchip{display:inline-flex;align-items:center;gap:5px;background:#EEF3FF;border:1px solid #C8D8F5;
+  border-radius:16px;padding:3px 9px;font-size:11.8px;color:#123}
+.chipbar .fchip b{font-weight:700;color:var(--blue)}
+.chipbar .fchip .x{cursor:pointer;font-weight:700;color:#7386A8;padding:0 1px}
+.chipbar .fchip .x:hover{color:#B00020}
+.chipbar .clrall{border:1px solid var(--line);background:#fff;border-radius:16px;padding:3px 11px;
+  font-size:11.6px;cursor:pointer;color:var(--muted)}
+.chipbar .clrall:hover{border-color:var(--blue);color:var(--blue)}
+.chipbar .cnts{font-size:11.8px;color:var(--muted);margin-left:auto}
+.nores{background:#FFFBEA;border:1px solid #F0DFA8;border-radius:10px;padding:14px 17px;margin:8px 0}
+.nores h4{margin:0 0 8px;font-size:13.4px;color:#7A5C00}
+.nores ul{margin:0 0 2px 19px;font-size:12.4px;line-height:1.7;color:#4A3B00}
+.nores .relax{margin-top:9px;border:1px solid var(--blue);background:#fff;color:var(--blue);
+  border-radius:7px;padding:6px 14px;font-size:12.2px;font-weight:700;cursor:pointer}
+.nores .relax:hover{background:var(--blue);color:#fff}
+.sc .val.na{color:var(--muted);font-style:italic;font-weight:400}
+.hstrip .hcav{margin-top:11px;font-size:11.8px;color:#7A5C00;background:#FFFBEA;
+  border:1px solid #F0E0A8;border-radius:6px;padding:7px 10px;line-height:1.6}
+
+/* ---------- 生效中的筛选芯片 ---------- */
+.chipbar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:8px 0 4px;min-height:0}
+.chipbar .fchip{display:inline-flex;align-items:center;gap:6px;background:#EAF2F8;border:1px solid #B8D4EA;
+  color:#1A5276;border-radius:20px;padding:4px 6px 4px 11px;font-size:12px;font-weight:600}
+.chipbar .fchip b{font-weight:700}
+.chipbar .fchip .x{cursor:pointer;background:#fff;border:1px solid #B8D4EA;border-radius:50%;
+  width:17px;height:17px;line-height:14px;text-align:center;font-size:12px;color:#1A5276}
+.chipbar .fchip .x:hover{background:var(--red);border-color:var(--red);color:#fff}
+.chipbar .clrall{cursor:pointer;font-size:12px;color:var(--red);font-weight:700;
+  border:1px solid #F0C0B8;background:#FFF6F4;border-radius:20px;padding:4px 11px;font-family:inherit}
+.chipbar .clrall:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.chipbar .cnts{font-size:12px;color:var(--muted);margin-left:2px}
+.chipbar .cnts b{color:var(--txt)}
+
+/* ---------- 空结果的解释框 ---------- */
+.nores{background:#FFFBEA;border:1px solid #F0E0A8;border-radius:9px;padding:14px 16px;margin:10px 0}
+.nores h4{font-size:13.5px;color:#7A5C00;margin-bottom:7px}
+.nores ul{margin:6px 0 4px 19px;font-size:12.6px;line-height:1.8;color:#4A3B00}
+.nores .relax{margin-top:9px;padding:6px 13px;border:1px solid #E0A800;border-radius:20px;
+  background:#fff;color:#7A5C00;cursor:pointer;font-size:12.3px;font-family:inherit;font-weight:700}
+.nores .relax:hover{background:#E0A800;color:#fff}
+
 .fbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin:8px 0 10px}
 .fbar input[type=text]{flex:1;min-width:190px;padding:7px 10px;border:1px solid #cbd3e1;border-radius:8px;font-size:13px;font-family:inherit}
 .fbar select{padding:6px 9px;border:1px solid #cbd3e1;border-radius:8px;font-size:12.5px;background:#fff;font-family:inherit}
@@ -432,6 +491,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <!-- LIVE -->
 <!-- ============ 工具门户首页 ============ -->
 <div class="panel active" id="hub">
+  <div class="hstrip" data-help="hub"></div>
+  <div class="chipbar" id="chips_hub"></div>
   <div class="hero">
     <h2>🔬 一个人的科研工作台</h2>
     <div class="hsub">从找钱到投稿的全流程工具,数据每天自动更新。所有评分/排序都可离线复算,不调用大模型。</div>
@@ -446,6 +507,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="live">
+  <div class="hstrip" data-help="live"></div>
+  <div class="chipbar" id="chips_live"></div>
   <div class="snapbar" id="snapbar">正在加载数据…</div>
   <div class="honest">ℹ️ <b>关于资格徽章的诚实说明:</b>Grants.gov 的资格数据是<b>机构级</b>的(申请人是大学而非个人),API 不提供"是否要求公民身份"的结构化字段——该条件写在每份 NOFO 正文里。因此联邦卡片的资格徽章基于<b>可获取的真实字段</b>推断(如金额、资助类型、是否career机制),公民身份一栏标注"见 NOFO"并给出链接。<b>⭐精选清单</b>里的项目(K99、海外优青等)资格为<b>人工逐条核实</b>,徽章可信。</div>
   <div class="layout">
@@ -460,6 +523,11 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
             <option value="amount">排序:金额高→低</option>
           </select>
           <select id="lwho"><option value="">谁能申(全部)</option><option value="博后">博后/早期</option><option value="独立PI">独立PI/教职</option><option value="研究生">研究生/博士生</option></select>
+          <select id="lcareer"><option value="">职业阶段(全部)</option><option value="1">仅职业早期机制</option><option value="0">排除职业早期</option></select>
+          <select id="lcit"><option value="">公民要求(全部)</option><option value="1">NOFO 提到公民/绿卡</option><option value="0">未提到公民要求</option></select>
+          <select id="lstatus"><option value="">状态(全部)</option><option value="posted">已开放申请</option><option value="forecasted">预告(尚未开放)</option></select>
+          <select id="lagency"><option value="">资助机构(全部)</option></select>
+          <button class="rst" id="lRst">↺ 重置</button>
         </div>
       </div>
       <div class="status" id="liveStatus"></div>
@@ -470,6 +538,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <!-- CURATED -->
 <div class="panel" id="curated">
+  <div class="hstrip" data-help="curated"></div>
+  <div class="chipbar" id="chips_curated"></div>
   <div class="headline">
     <h2>★ 各国早期 PI / 独立研究经费(按国家分区,人工核实)</h2>
     <ol>
@@ -488,6 +558,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <select id="csrc"><option value="">来源(全部)</option><option value="pivot">Pivot-RP</option><option value="curated">手工策展</option></select>
       <select id="cwho"><option value="">谁能申(全部)</option><option value="博后">博后/早期</option><option value="独立PI">独立PI/教职</option><option value="研究生">研究生/博士生</option><option value="资深">中期-资深</option></select>
       <select id="cregSel"><option value="">地区(全部)</option></select>
+      <select id="cverify"><option value="">可信度(全部)</option><option value="official">✔ 已核实(官方NOFO)</option><option value="pending">待核实(有官方链接)</option><option value="pivot">来自 Pivot 导出(未核实)</option></select>
       <select id="csort"><option value="fit">排序:契合度优先</option><option value="name">排序:项目名 A→Z</option><option value="funder">排序:资助机构 A→Z</option></select>
       <button class="rst" id="cRst">↺ 重置</button>
     </div>
@@ -498,6 +569,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <!-- WHATS NEW -->
 <div class="panel" id="whatsnew">
+  <div class="hstrip" data-help="whatsnew"></div>
+  <div class="chipbar" id="chips_whatsnew"></div>
   <div class="honest">🔄 每日自动对比昨天的快照:<b>新增</b>的机会、<b>截止日期或金额变动</b>的机会都会列在这里。这替代了"邮件周报"(静态网站无邮件服务器)——把本页加书签,每天扫一眼即可。<br>⚠️ <b>诚实说明:</b>变更列表来自 Grants.gov 全库,<b>大部分与你方向无关</b>。下面的筛选条默认<b>只看与你研究相关</b>——相关度是把变更的项目号回连到联邦机会库取的(约 2/3 能对上,对不上的标「未知」)。</div>
   <div class="fbar">
     <input type="text" id="chgq" placeholder="🔍 搜标题 / 机构…">
@@ -514,6 +587,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <!-- PIPELINE -->
 <div class="panel" id="calendar">
+  <div class="hstrip" data-help="calendar"></div>
+  <div class="chipbar" id="chips_calendar"></div>
   <div class="honest">📅 所有资助按<b>截止月份</b>排布(2026–2027)。<b style="color:var(--green)">绿色高亮 = 按你填的档案判定「现在能投」</b>(档案留空则不做判定)。日历文件默认<b>收录全部未过期截止</b>;想只留早期项目,改 <code>data/config.json</code> 的 <code>ics_filter</code>。顶部提示本月及未来到期。精选项多为「每年约X月」周期受理,日期为近似(±2周),投递前点链接核对官方受理日。</div>
   <div id="calBanner" class="calbanner"></div>
   <div class="actions" style="margin:8px 0 4px">
@@ -536,6 +611,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="myapps">
+  <div class="hstrip" data-help="myapps"></div>
+  <div class="chipbar" id="chips_myapps"></div>
   <div class="honest">🎯 本页<b>自动</b>把「联邦机会」+「各国 PI 资助」两个数据源,按你在<b>档案</b>里填的<b>研究方向关键词</b>和<b>身份资格</b>筛一遍并分档(点右上角「✏️ 填写/修改档案」)。数据每日刷新时,本页<b>同步重算</b>——无需手动维护。判定为启发式,最终以各资助官方 NOFO 为准。</div>
   <div id="myBanner" class="calbanner" style="margin:10px 0"></div>
   <div class="fbar">
@@ -559,6 +636,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="jobs">
+  <div class="hstrip" data-help="jobs"></div>
+  <div class="chipbar" id="chips_jobs"></div>
   <div class="honest">🎓 本页分三层:<b>① 每日自动抓取</b>的职位(4 个源:<b>jobRxiv · jobs.ac.uk · Nature Careers · Science Careers</b>,生命科学教职/PI/博后,按 <code>data/interests.json</code> 里你配置的方向词库打分排序)→ <b>② TOP 院所直投目录</b>(100 家顶尖院所官方招聘页,聚合板<b>抓不到</b>的部分)→ <b>③ 领域招聘板</b>。数据由 GitHub Actions 每日刷新,你无需维护;职位以官方页面为准。任何一条都能点「➕ 关注」进 📋 我的申请管线。</div>
   <div class="calbanner" id="jobBanner"></div>
   <div class="actions" style="margin:10px 0">
@@ -609,6 +688,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="papers">
+  <div class="hstrip" data-help="papers"></div>
+  <div class="chipbar" id="chips_papers"></div>
   <div class="snapbar" id="papbar" style="margin-bottom:10px">📚 文献数据加载中…</div>
 
   <div class="calbanner" style="margin-bottom:10px">
@@ -709,6 +790,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="pipeline">
+  <div class="hstrip" data-help="pipeline"></div>
+  <div class="chipbar" id="chips_pipeline"></div>
   <div class="honest">📋 你点"关注"的项目进入这里管理。状态/笔记存在<b>本设备浏览器</b>。点"导出 CSV"可下载到你的申请追踪表。</div>
   <div class="fbar">
     <input type="text" id="pipeq" placeholder="🔍 搜项目 / 机构 / 笔记…">
@@ -725,6 +808,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
 <!-- ============ 期刊查选 ============ -->
 <div class="panel" id="journals">
+  <div class="hstrip" data-help="journals"></div>
+  <div class="chipbar" id="chips_journals"></div>
   <div class="honest">ℹ️ <b>请先读这两条:</b>①下表所有计数都是<b>本站语料范围内</b>的(<span id="jcorpN">…</span> 篇,只覆盖你关注的 8 个方向、近两年)。「Nature 只有 2 篇」意味着<b>本语料里</b>只有 2 篇,不代表 Nature 发文少。②<b>本站不提供影响因子</b> —— JCR IF 是受版权保护的商业数据。T1–T4 只是刊名白名单的粗代理,判定规则写在 README 里,可自行核对。发文量少于 3 篇的刊标注「样本不足」,不给百分比。</div>
   <div class="fgroup" style="margin-top:12px">
     <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
@@ -741,9 +826,12 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     </div>
   </div>
   <div style="overflow-x:auto"><table class="jtable" id="jtab"></table></div>
+  <div id="jempty"></div>
 </div>
 
 <div class="panel" id="howto">
+  <div class="hstrip" data-help="howto"></div>
+  <div class="chipbar" id="chips_howto"></div>
   <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
   <div class="lang-zh">
   <div class="honest" style="border-left-color:#1B5E20;background:#F1F8F2">
@@ -1067,6 +1155,8 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div>
 
 <div class="panel" id="writing">
+  <div class="hstrip" data-help="writing"></div>
+  <div class="chipbar" id="chips_writing"></div>
   <div class="honest" style="border-left-color:#4A148C;background:#FAF4FF">
     <b>关于本页的示例内容：</b>本页的完整范文、六类基金草稿与语料库，都是围绕
     <b>一个具体研究方向的示例</b>（miRNA 降解 × 能量应激代谢记忆）写出来的
@@ -2058,7 +2148,8 @@ function eligLive(g){
   return {cls,txt,why};
 }
 function passAuto(g){
-  if(!autoFilter.classList.contains("on"))return true;
+  var af=document.getElementById("autoFilter");
+  if(!af||!af.classList.contains("on"))return true;
   const e=eligLive(g);
   return e.cls!=="no"; // hide only clearly-ineligible
 }
@@ -2342,6 +2433,8 @@ function renderJournals(){
   });
   document.getElementById("jstat").textContent="显示 "+Math.min(rows.length,300)+" / "+rows.length+" 本"
     +(rows.length>300?"(仅前 300)":"");
+
+  noteRender("journals",rows.length,JOURNALS.length,"jempty");
 }
 
 /* ---------- calendar ---------- */
@@ -2432,6 +2525,8 @@ function renderCalendar(){
     html+="</div>";
   });
   document.getElementById("calWrap").innerHTML=html||'<div class="honest">没有符合条件的事件。</div>';
+
+  noteRender("calendar",ev.length,CAL_EV.length,"calWrap");
 }
 ["calOnlyMine","calRel","calRegion","calWin","calSrc","calHidePast","calq"].forEach(id=>{
   const el=document.getElementById(id);
@@ -2482,7 +2577,7 @@ async function loadData(){
     liveN.textContent=LIVE.length;
     chgN.textContent=CHANGES.length;
     snapbar.innerHTML=`📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(每日自动刷新 + 金额/资格补全)`;
-    buildSidebar(); renderLive(); renderCurated(); renderChanges();
+    buildSidebar(); renderLive(); renderCurated(); renderChanges(); buildHelp();
     CAL_EV=buildCalEvents(); document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
     try{renderMyApps();}catch(e){console.warn("myapps",e);}
     try{renderJobs();}catch(e){console.warn("jobs",e);}
@@ -2518,15 +2613,26 @@ function buildSidebar(){
 }
 function baseFiltered(ignore){
   const q=document.getElementById("q").value.toLowerCase();
+  const fcar=document.getElementById("lcareer").value;
+  const fcit=document.getElementById("lcit").value;
+  const fst=document.getElementById("lstatus").value;
+  const fag=document.getElementById("lagency");
   return LIVE.filter(g=>{
     if(ignore!=="ftype"&&selFtype.size&&!selFtype.has(g.ftype))return false;
     if(ignore!=="rel"&&selRel.size&&!selRel.has(g.rel))return false;
     if(ignore!=="dl"&&selDeadline){
       const d=g.days;
-      if(selDeadline==="30"&&!(d!=null&&d>=0&&d<=30))return false;
-      if(selDeadline==="60"&&!(d!=null&&d>=0&&d<=60))return false;
-      if(selDeadline==="none"&&d!=null)return false;
+      /* 天数窗口统一处理,加一档只要改上面的 radio 列表,不用再动这里 */
+      if(selDeadline==="none"){ if(d!=null)return false; }
+      else { const lim=parseInt(selDeadline,10);
+             if(isFinite(lim)&&!(d!=null&&d>=0&&d<=lim))return false; }
     }
+    if(fcar==="1"&&!g.career)return false;
+    if(fcar==="0"&&g.career)return false;
+    if(fcit==="1"&&!g.cit_req)return false;
+    if(fcit==="0"&&g.cit_req)return false;
+    if(fst&&g.status!==fst)return false;
+    if(ignore!=="ag"&&fag&&fag.value&&g.agency!==fag.value)return false;
     if(q&&!((g.title||"")+(g.agency||"")+(g.number||"")).toLowerCase().includes(q))return false;
     const lw=document.getElementById("lwho").value;
     if(lw&&!applyOf(g).list.some(t=>t.includes(lw)))return false;
@@ -2543,7 +2649,7 @@ function renderSidebarCounts(){
     const l=document.createElement("label");l.innerHTML=`<input type="checkbox" ${selRel.has(t)?"checked":""}> ${t} <span class="cnt">${n}</span>`;
     l.querySelector("input").onchange=e=>{e.target.checked?selRel.add(t):selRel.delete(t);renderLive();};fr.appendChild(l);});
   const fd=document.getElementById("fDl"); fd.innerHTML="";
-  [["","全部"],["30","🔴 30 天内"],["60","🟠 60 天内"],["none","无截止(常开)"]].forEach(([v,t])=>{
+  [["","全部"],["30","🔴 30 天内"],["60","🟠 60 天内"],["90","🟡 90 天内"],["180","🟢 180 天内"],["none","无截止(常开)"]].forEach(([v,t])=>{
     const l=document.createElement("label");l.innerHTML=`<input type="radio" name="dl" ${selDeadline===v?"checked":""}> ${t}`;
     l.querySelector("input").onchange=()=>{selDeadline=v;renderLive();};fd.appendChild(l);});
 }
@@ -2562,10 +2668,12 @@ function renderLive(){
   const tracked=getTracked();
   let rows=baseFiltered(null);
   if(sort==="deadline")rows.sort((a,b)=>(a.days==null?9999:a.days)-(b.days==null?9999:b.days));
-  else if(sort==="amount")rows.sort((a,b)=>(b.amount_num||0)-(a.amount_num||0));
+  else if(sort==="amount")rows.sort((a,b)=>amtNum(b)-amtNum(a));
   else rows.sort((a,b)=>relrank[a.rel]-relrank[b.rel]||((a.days==null?9999:a.days)-(b.days==null?9999:b.days)));
   renderSidebarCounts();
-  document.getElementById("liveStatus").innerHTML=`显示 <b>${rows.length}</b> / ${LIVE.length} 个联邦机会`+(autoFilter.classList.contains("on")?" · 🔒 已隐藏明显不符资格":"");
+  const agBase=new Set(baseFiltered("ag"));
+  facetSel(document.getElementById("lagency"),"资助机构(全部)",LIVE,g=>g.agency,g=>agBase.has(g));
+  document.getElementById("liveStatus").innerHTML=`显示 <b>${rows.length}</b> / ${LIVE.length} 个联邦机会`+((document.getElementById("autoFilter")||{classList:{contains:function(){return false;}}}).classList.contains("on")?" · 🔒 已隐藏明显不符资格":"");
   const list=document.getElementById("liveList");list.innerHTML="";
   rows.slice(0,120).forEach(g=>{
     const e=eligLive(g);
@@ -2583,7 +2691,7 @@ function renderLive(){
       <div class="scorecard">
         <div class="sc sc-elig-${e.cls}"><span class="lab">资格</span><span class="val">${e.txt}</span></div>
         <div class="sc sc-dl"><span class="lab">截止</span><span class="val ${(g.days!=null&&g.days<=45)?'soon':''}">${dlTxt}</span>${pbar(g.days)}</div>
-        <div class="sc sc-amt"><span class="lab">金额上限</span><span class="val">${g.amount||"见 NOFO"}</span></div>
+        <div class="sc sc-amt"><span class="lab">金额上限</span><span class="val${amtMissing(g.amount)?" na":""}">${amtTxt(g)}</span></div>
       </div>
       <div class="note"><b>为什么:</b>${e.why}</div>
       <div class="actions">
@@ -2595,9 +2703,10 @@ function renderLive(){
     list.appendChild(d);
   });
   if(rows.length>120)list.insertAdjacentHTML("beforeend",`<p style="color:var(--muted);padding:9px;font-size:12px">仅显示前 120 条,用搜索/筛选缩小范围。</p>`);
-  if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配。放宽筛选或关闭"隐藏不符资格"。</p>';
+  noteRender("live",rows.length,LIVE.length,"liveList");
 }
-["q","sort"].forEach(id=>document.getElementById(id).addEventListener("input",renderLive));
+["q","sort","lwho","lcareer","lcit","lstatus","lagency"].forEach(id=>document.getElementById(id).addEventListener("input",renderLive));
+document.getElementById("lRst").onclick=()=>{ clearAllFilters("live"); selFtype.clear(); selRel.clear(); selDeadline=""; renderLive(); };
 document.getElementById("lwho").addEventListener("change",renderLive);
 
 /* ---------- render CURATED ---------- */
@@ -2637,6 +2746,7 @@ function renderCurated(){
   const q=document.getElementById("cq").value.toLowerCase();
   const ff=document.getElementById("cfit").value, fe=document.getElementById("celig").value;
   const fs=document.getElementById("csrc").value;
+  const fv=document.getElementById("cverify").value;
   const fw=document.getElementById("cwho").value;
   const crs=document.getElementById("cregSel");
   const fso=document.getElementById("csort").value;
@@ -2646,6 +2756,7 @@ function renderCurated(){
     if(ff&&g.fit!==ff)return false;
     if(fe&&eligKey(g.elig)!==fe)return false;
     if(fs&&(g.source||"curated")!==fs)return false;
+    if(fv&&verifyKey(g)!==fv)return false;
     if(fw&&!applyOf(g).list.some(t=>t.includes(fw)))return false;
     if(q&&!(g.name+g.funder+g.note+g.cite+g.window+g.amount+g.region).toLowerCase().includes(q))return false;
     return true;};
@@ -2685,11 +2796,13 @@ function renderCurated(){
       list.appendChild(d);});
   });
   if(!rows.length)list.innerHTML='<p style="color:var(--muted);padding:16px">没有匹配项目。</p>';
+
+  noteRender("curated",rows.length,CURATED.length,"curList");
 }
-["cq","cfit","celig","csrc","cwho","cregSel","csort"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
+["cq","cfit","celig","csrc","cwho","cregSel","cverify","csort"].forEach(id=>document.getElementById(id).addEventListener("input",renderCurated));
 document.getElementById("cRst").onclick=()=>{
   document.getElementById("cq").value="";
-  ["cfit","celig","csrc","cwho","cregSel"].forEach(i=>document.getElementById(i).value="");
+  ["cfit","celig","csrc","cwho","cregSel","cverify"].forEach(i=>document.getElementById(i).value="");
   document.getElementById("csort").value="fit";
   CUR_REGION="";
   /* region chips rebuild themselves from CUR_REGION on re-render */
@@ -2751,6 +2864,8 @@ function renderChanges(){
       ${c.kind==="updated"?`<div style="margin-top:4px">${c.detail}</div>`:""}
       <div class="mtags" style="margin-top:5px">${relTag}${carTag}${hitTags}</div>
     </div>`;}).join("");
+
+  noteRender("whatsnew",R.length,CHG_ENR.length,"chgList");
 }
 ["chgq","chgKind","chgRel","chgCareer","chgAgency","chgSort"].forEach(id=>{
   const el=document.getElementById(id);
@@ -2815,6 +2930,8 @@ function renderPipeline(){
   wrap.querySelectorAll(".pstat").forEach(s=>s.onchange=e=>{const o=getTracked();o[e.target.dataset.id].status=e.target.value;setTracked(o);});
   wrap.querySelectorAll(".pnote").forEach(n=>n.onchange=e=>{const o=getTracked();o[e.target.dataset.id].notes=e.target.value;setTracked(o);});
   wrap.querySelectorAll(".premove").forEach(b=>b.onclick=e=>{const o=getTracked();delete o[e.target.dataset.id];setTracked(o);renderPipeline();});
+
+  noteRender("pipeline",keys.length,allKeys.length,"pipeWrap");
 }
 ["pipeStat","pipeType","pipeWin","pipeSort"].forEach(id=>
   document.getElementById(id).addEventListener("change",renderPipeline));
@@ -3088,6 +3205,8 @@ function renderJobs(){
     </div>`;
   });
   wrap.innerHTML=html||'<p style="color:var(--muted);padding:16px">没有匹配。放宽级别/地区筛选或清空搜索。</p>';
+
+  noteRender("jobs",R.length,JOBS.length,"jobWrap");
 }
 document.getElementById("jobq").addEventListener("input",renderJobs);
 ["jobSrc","jobFit","jobDays","jobSort","job_onlytrk"].forEach(id=>
@@ -3321,6 +3440,8 @@ function renderMyApps(){
     });
   });
   document.getElementById("myWrap").innerHTML=html||'<p style="color:var(--muted);padding:16px">没有匹配。放宽筛选(取消勾选/清空搜索),或去「联邦机会 / 各国 PI 资助」用宽 RNA 词搜。</p>';
+
+  noteRender("myapps",R.length,rows.length,"myWrap");
 }
 ["my_onlyopen","my_hidepi","my_onlyhit","my_onlytrk","myTier","myRegion","mySrc","myWin","mySort"]
   .forEach(id=>document.getElementById(id).addEventListener("change",renderMyApps));
@@ -3474,6 +3595,32 @@ function pstate(pa){const st=getPS();return st[pkey(pa)]||{};}
 function setPstate(pa,patch){const st=getPS();const k=pkey(pa);st[k]=Object.assign({},st[k]||{},patch);setPS(st);}
 
 function esc(x){return String(x==null?"":x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+/* Grants.gov 对「无金额上限」既可能给 null,也可能给字符串 "none" 或 "0"。
+   字符串 "none" 在 JS 里是 truthy —— 直接 `g.amount||"见 NOFO"` 会把 none 当金额印出来
+   (全库 1720 条里有 620 条会这样)。所以金额一律走下面两个函数,不要直接读 g.amount。 */
+function amtMissing(v){
+  if(v==null)return true;
+  var t=String(v).trim().toLowerCase().replace(/[$,\s]/g,"");
+  return t===""||t==="none"||t==="null"||t==="0"||t==="na"||t==="nan";
+}
+function amtNum(g){
+  if(!g)return 0;
+  var v=g.amount_num!=null?g.amount_num:g.amount;
+  if(amtMissing(v))return 0;
+  var n=parseFloat(String(v).replace(/[$,\s]/g,""));
+  return isFinite(n)?n:0;
+}
+function amtTxt(g){ return amtMissing(g&&g.amount)?"未公布 · 见 NOFO":("$"+g.amount); }
+
+/* 精选库三档可信度。原始 verify 字段是中文自由文本,这里归一成键值供筛选用。
+   167 条里只有 3 条是逐条核实过的 —— 这个差别必须能筛,否则未核实条目看起来和核实过的一样。 */
+function verifyKey(g){
+  var v=String((g&&g.verify)||"");
+  if(v.indexOf("官方NOFO")>=0)return "official";
+  if((g&&g.source)==="pivot")return "pivot";
+  return "pending";
+}
 const SRCLAB={pubmed:"PubMed",epmc:"Europe PMC",epmc_ppr:"Europe PMC 预印本",biorxiv:"bioRxiv",medrxiv:"medRxiv",arxiv:"arXiv",crossref:"Crossref"};
 const TIERLAB={T1:"顶刊层级",T2:"高影响层级",T3:"专业期刊层级",T4:"其它期刊",preprint:"预印本"};
 
@@ -3859,6 +4006,8 @@ function renderPapers(){
           `诚实说明:Web of Science/Google Scholar 无免费接口,可用 API 只返回<b>当前</b>被引数、不返回历史曲线,`+
           `所以「引用加速度」无法凭空算出。本站从上线当天开始每日存一份被引快照,满 7 天后自动切换为真实加速度;`+
           `在此之前 Hotspot 只用<b>当日可核验</b>的信号:引用速率(被引数÷发表月数)、新鲜度、预印本是否已被期刊接收。`;
+
+  noteRender("papers",rows.length,PAPERS.length,"papWrap");
 }
 
 /* 引用网络概览:语料内"地基文献"与方向交叉点。诚实说明稀疏的原因。 */
@@ -4292,8 +4441,431 @@ document.querySelectorAll(".plat a[data-nav]").forEach(function(a){
   a.onclick=function(e){e.preventDefault();goPanel(a.getAttribute("data-nav"));};
 });
 
+/* ===== 内联帮助 / 筛选芯片 / 空结果解释 ===== */
+
+/* ============================================================================
+   内联帮助 + 生效中筛选芯片 + 空结果解释
+   设计原则(见 README):示例必须是**可点击的、真的会改筛选器**的,不是截图或
+   静态文字。示例按钮上的数字是点下去之后的真实命中数,由 exCount() 现算。
+   ============================================================================ */
+
+/* 每个面板一条:what=解决什么问题 / how=三步 / ex=可点示例 / caveat=先知道的坑 */
+var HELP = {
+ hub:{what:"从这里开始 —— 一个框搜遍全站 5 个库,或按科研环节挑工具。",
+  how:["在上面的框里输一个词(基因名、方法、基金代号都行),回车。",
+       "结果按「资助 / 职位 / 文献 / 期刊」分组,点任一条跳到对应面板。",
+       "搜索词会写进网址栏的 ?q=,可以直接把这条搜索发给合作者。"],
+  ex:[{t:"搜 ZSWIM8",set:[["gsq","ZSWIM8"]],run:"search"},
+      {t:"搜 K99",set:[["gsq","K99"]],run:"search"},
+      {t:"搜 fibrosis",set:[["gsq","fibrosis"]],run:"search"}],
+  caveat:"搜索是**子串 AND**,不是语义检索。搜「肿瘤代谢」不会命中「cancer metabolism」——请用文献里实际出现的词。"},
+
+ live:{what:"Grants.gov 全库每日同步。用来回答:美国联邦这边,现在有什么我能投的。",
+  how:["左边侧栏按资助类型 / 相关度 / 截止状态勾选,计数会实时跟着变。",
+       "上面的下拉补充筛:职业早期机制、公民要求、机构、状态、截止窗口。",
+       "看中的点卡片上「📌 关注」进管线,点「✍️怎么写这个」跳到写作指导。"],
+  ex:[{t:"K/独立转轨奖 + 90 天内截止",set:[["lcareer",""],["ldl","90"],["lftype","转轨奖(K/独立)"]]},
+      {t:"只看 NIH 的职业早期机制",set:[["lagency","National Institutes of Health"],["lcareer","1"]]},
+      {t:"不限公民身份 + 已开放申请",set:[["lcit","0"],["lstatus","posted"]]}],
+  caveat:"资格徽章是**机构级**数据推断出来的。Grants.gov 不提供「是否要求公民身份」的结构化字段,该条件写在每份 NOFO 正文里 —— 投之前必须点开链接自己核。"},
+
+ curated:{what:"各国早期 PI / 独立经费的人工清单。联邦库里没有的海外项目在这。",
+  how:["先用「可信度」筛 —— 这批数据可信度不齐,已核实的只有少数几条。",
+       "按地区 / 契合度 / 谁能申 收窄,卡片上写了资格窗口和大致金额。",
+       "点「📌 关注」进管线;点项目名去官网核对当年的正式通知。"],
+  ex:[{t:"只看已核实的",set:[["cverify","official"]]},
+      {t:"高契合 + 博后可申",set:[["cfit","高"],["cwho","博后"]]},
+      {t:"亚洲路线(中国大陆)",set:[["cregSel","🇨🇳 中国大陆"]]}],
+  caveat:"167 条里 128 条来自 Pivot-RP 导出、**未逐条核实**,只有 3 条标了「已核实(官方NOFO)」。别拿未核实的条目当准。"},
+
+ journals:{what:"按你自己的语料统计选刊 —— 你这个方向的论文实际都发在哪。",
+  how:["按方向筛,表格右边就变成该方向在每本刊里的占比。",
+       "点表头排序;勾「隐藏样本不足」把只有 1–2 篇的刊藏起来。",
+       "点刊名展开,看本语料里这本刊收的具体是哪几篇。"],
+  ex:[{t:"隐藏样本不足的刊",set:[["jhide","1"]]},
+      {t:"只看 T1",set:[["jtier","T1"],["jhide","1"]]},
+      {t:"搜 Nucleic",set:[["jq","Nucleic"]]}],
+  caveat:"所有数字都只是**本站语料范围内**的。「Nature 只有 2 篇」是说本语料里 2 篇,不是 Nature 发文少。本站**不给影响因子**——JCR IF 是版权数据,没有合法免费接口。"},
+
+ calendar:{what:"把所有截止日按月排开,并生成可订阅的 .ics —— 不用手动记日期。",
+  how:["先点「🔔 订阅日历」,之后截止日会自动同步进你的日历 App。",
+       "用时间窗 / 地区 / 来源筛,绿色高亮 = 按你档案判定现在能投。",
+       "精选项多是「每年约X月」,日期是近似值(±2周),投前点链接核对。"],
+  ex:[{t:"未来 90 天",set:[["calWin","90"]]},
+      {t:"只看我能申的",set:[["calOnlyMine","1"]]},
+      {t:"只看确切日期的联邦项",set:[["calSrc","fed"]]}],
+  caveat:"精选项的日期是**近似**的(±2周)。日历只是提醒你去查,不是官方受理日。"},
+
+ whatsnew:{what:"每天和昨天的快照对比:哪些机会是新增的、哪些改了截止日或金额。",
+  how:["默认只显示与你研究相关的 —— 全库变更绝大多数与你无关。",
+       "用类型筛「仅新增 / 仅变更」,用机构筛缩到 NIH / NSF。",
+       "本页加书签,每天扫一眼即可,不需要邮件周报。"],
+  ex:[{t:"只看新增",set:[["chgKind","new"]]},
+      {t:"只看早期机制的变更",set:[["chgCareer","1"],["chgRel",""]]},
+      {t:"放宽到全库",set:[["chgRel",""]]}],
+  caveat:"相关度是把变更的项目号回连到机会库取的,约 1/3 对不上会标「未知」——「未知」不等于无关。"},
+
+ myapps:{what:"按你填的档案,把联邦 + 各国两个库自动筛一遍并分 A/B/C 档。",
+  how:["先点右上角「✏️ 填写/修改档案」填方向词和身份 —— 不填就没法判定。",
+       "A 档 = 现在就能投;B 档 = 有条件契合;C 档 = 值得跟踪。",
+       "数据每日刷新时本页同步重算,不用手动维护。"],
+  ex:[{t:"只看 A 档",set:[["myTier","A"]]},
+      {t:"A+B 档 · 90 天内",set:[["myTier","AB"],["myWin","90"]]},
+      {t:"只看已关注的",set:[["my_onlytrk","1"]]}],
+  caveat:"分档是**启发式**的,靠关键词和身份字段推断,最终以各资助官方 NOFO 为准。"},
+
+ jobs:{what:"4 个招聘源每日抓取的教职/博后,加 100 家顶尖院所的直投目录。",
+  how:["上面的芯片切「教职 / PI」还是「博后」;契合度按你配置的方向词打分。",
+       "聚合板抓不到的院所,用第二层「TOP 院所直投目录」直接进官方招聘页。",
+       "点「➕ 关注」进管线,和资助放在同一张表里追。"],
+  ex:[{t:"高度契合 + 近 30 天",set:[["jobFit","3"],["jobDays","30"]]},
+      {t:"只看 Nature Careers",set:[["jobSrc","Nature Careers"]]},
+      {t:"院所目录:仅已核实链接",set:[["instStatus","verified"]]}],
+  caveat:"契合度只是**关键词打分**,不是对岗位描述的理解。分低不代表不适合,只代表你的词库没命中。"},
+
+ papers:{what:"按你配置的方向每日跨 6 个源抓新文献,打分并标 Hotspot / Gap / 提问。",
+  how:["先用方向 + 时间窗收窄,再用「🕳️ Gap」这类标签找可写的空白点。",
+       "点标题展开摘要;⭐ 收藏和 📬 已读状态存在本机浏览器。",
+       "「新颖度」和「相关度」都是离线可复算的规则分,规则写在 README。"],
+  ex:[{t:"近 30 天 · 高相关",set:[["papWin","30"],["papBand","high"]]},
+      {t:"只看 Gap 句(可写的空白)",set:[["pap_gap","1"]]},
+      {t:"只看开放获取",set:[["pap_oa","1"]]}],
+  caveat:"Gap 标签是**摘要里出现「尚不清楚 / 缺乏证据」这类句式**触发的,是线索不是结论 —— 打开原文自己判断。"},
+
+ pipeline:{what:"你点过「关注」的资助 / 职位 / 院所,都在这里管状态和写笔记。",
+  how:["改状态(感兴趣→起草中→已提交→获奖/被拒),笔记直接在格子里输。",
+       "用倒计时筛出 7 天 / 30 天内要交的,别漏。",
+       "点「导出 CSV」下载,可以并进你自己的追踪表。"],
+  ex:[{t:"30 天内要交的",set:[["pipeWin","30"]]},
+      {t:"只看起草中",set:[["pipeStat","起草中"]]},
+      {t:"只看资助(不看职位)",set:[["pipeType","grant"]]}],
+  caveat:"状态和笔记存在**本设备浏览器**(localStorage)。换电脑或清缓存就没了 —— 重要的请定期导出 CSV。"},
+
+ howto:{what:"整站的维护说明:数据从哪来、多久更新一次、哪些要你手动做。",
+  how:["先看「三分钟把它变成你自己的站」——只有 Pivot 精选那一步需要你动手。",
+       "右上角可以切中/英文。","检索关键词那一节可以直接复制去 Pivot-RP 搜。"],
+  ex:[],
+  caveat:""},
+
+ writing:{what:"从一页 Specific Aims 到六类基金的完整草稿 —— 用的是你自己的 ZSWIM8-6 项目。",
+  how:["先做「个人资格自查」,勾完会亮出你能申哪几类基金。",
+       "选基金类型,下面自动切到该基金的章节结构和字数上限。",
+       "六类基金的完整草稿可直接下载 Word/PDF,你只需要替换〔FILL〕标记。"],
+  ex:[{t:"看 K99/R00 的写法",set:[["fundSel","k99"]]},
+      {t:"看 R01 的写法",set:[["fundSel","r01"]]}],
+  caveat:"草稿里所有图和数字都标了 **predicted / schematic**,不是实测数据。投之前必须换成你的真实预实验结果。"}
+};
+
+/* 面板 → [控件 id 列表],用于芯片、清空、以及「哪些条件把结果筛没了」 */
+var PFILT = {
+ live:[["q","搜索"],["sort",null],["lwho","谁能申"],["lcareer","职业阶段"],
+       ["lcit","公民要求"],["lagency","机构"],["lstatus","状态"]],
+ curated:[["cq","搜索"],["cfit","契合度"],["celig","资格"],["csrc","来源"],["cwho","谁能申"],
+          ["cregSel","地区"],["cverify","可信度"],["csort",null]],
+ whatsnew:[["chgq","搜索"],["chgKind","类型"],["chgRel","相关度"],["chgCareer","资助阶段"],
+           ["chgAgency","机构"],["chgSort",null]],
+ calendar:[["calq","搜索"],["calOnlyMine","只看我能申"],["calRel","相关度"],["calRegion","地区"],
+           ["calWin","时间窗"],["calSrc","来源"],["calHidePast","隐藏已过期"]],
+ myapps:[["myq","搜索"],["myTier","分档"],["myRegion","地区"],["mySrc","来源"],["myWin","截止窗"],
+         ["mySort",null],["my_onlyopen","仅开放"],["my_hidepi","隐藏仅限PI"],
+         ["my_onlyhit","仅命中方向"],["my_onlytrk","仅已关注"]],
+ jobs:[["jobq","搜索"],["jobSrc","来源"],["jobFit","契合度"],["jobDays","发布时间"],
+       ["jobSort",null],["job_onlytrk","仅已关注"]],
+ papers:[["papq","搜索"],["papDir","方向"],["papSrc","来源"],["papJournal","期刊"],["papTier","层级"],
+         ["papType","类型"],["papNov","新颖度"],["papMeth","方法"],["papBand","相关度"],["papWin","时间"],
+         ["papSort",null],["pap_oa","仅OA"],["pap_hot","仅Hotspot"],["pap_gap","仅Gap"],
+         ["pap_q","仅提问"],["pap_star","仅收藏"],["pap_unread","仅未读"],["pap_off","含偏题"],
+         ["pap_ph","含预印本"]],
+ pipeline:[["pipeq","搜索"],["pipeStat","状态"],["pipeType","类型"],["pipeWin","倒计时"],["pipeSort",null]],
+ journals:[["jq","搜索"],["jdir","方向"],["jtier","层级"],["jhide","隐藏样本不足"]]
+};
+
+
+/* 侧栏的「资助类型 / 相关度 / 截止」不是下拉框,是动态生成的复选框,状态存在
+   selFtype / selRel / selDeadline 三个 JS 变量里。芯片栏若只扫 DOM 控件就会漏掉它们
+   —— 用户勾了 3 个类型却看到「未设任何筛选」。所以这里把它们登记成虚拟筛选。 */
+var VFILT = {
+ live:{
+   list:function(){
+     var out=[];
+     if(typeof selFtype!=="undefined"&&selFtype.size)
+       out.push({id:"@ftype",label:"资助类型",show:Array.from(selFtype).join("、")});
+     if(typeof selRel!=="undefined"&&selRel.size)
+       out.push({id:"@rel",label:"相关度",show:Array.from(selRel).join("、")});
+     if(typeof selDeadline!=="undefined"&&selDeadline)
+       out.push({id:"@dl",label:"截止窗口",
+                 show:selDeadline==="none"?"无截止(常开)":(selDeadline+" 天内")});
+     return out;
+   },
+   clear:function(id){
+     if(id==="@ftype"&&typeof selFtype!=="undefined")selFtype.clear();
+     if(id==="@rel"&&typeof selRel!=="undefined")selRel.clear();
+     if(id==="@dl")selDeadline="";
+   },
+   /* 示例按钮要能设侧栏状态。别名 lftype/lrel/ldl 对应三个虚拟筛选。
+      值设不上时返回 false —— 让 applyExample 能报出来。 */
+   set:function(id,v){
+     if(id==="lftype"||id==="@ftype"){
+       if(typeof selFtype==="undefined")return false;
+       selFtype.clear(); if(v)selFtype.add(v);
+       return !v||FTYPES.indexOf(v)>=0;
+     }
+     if(id==="lrel"||id==="@rel"){
+       if(typeof selRel==="undefined")return false;
+       selRel.clear(); if(v)selRel.add(v);
+       return !v||["高","中","低"].indexOf(v)>=0;
+     }
+     if(id==="ldl"||id==="@dl"){ selDeadline=v||""; return true; }
+     return null;                       /* 不是虚拟控件,交回给 ctlSet */
+   }
+ }
+};
+
+/* ctlSet 需要知道当前操作的是哪个面板,才能把 lftype/ldl 这类别名路由到虚拟筛选。 */
+var CUR_PID=null;
+
+/* 读一个控件的当前值(统一处理 checkbox / select / text) */
+function ctlVal(id){
+  var el=document.getElementById(id); if(!el)return null;
+  if(el.type==="checkbox")return el.checked?"1":"";
+  return el.value;
+}
+/* 写一个控件的值。返回 false 表示控件不存在或该值不在选项里 —— 调用方要能看见失败,
+   不能静默吞掉,否则示例按钮坏了没人知道。 */
+function ctlSet(id,v){
+  var V=VFILT[CUR_PID]; 
+  if(V&&V.set){ var r=V.set(id,v); if(r!==null)return r; }
+  var el=document.getElementById(id); if(!el)return false;
+  if(el.type==="checkbox"){el.checked=(v==="1"||v===true);return true;}
+  if(el.tagName==="SELECT"){
+    var ok=false,i;
+    for(i=0;i<el.options.length;i++){if(el.options[i].value===String(v)){ok=true;break;}}
+    if(!ok)return false;
+  }
+  el.value=v; return true;
+}
+/* 控件的"未筛选"默认值。chgRel 例外:它的默认是 mine 而不是空。 */
+function ctlDefault(id){
+  var el=document.getElementById(id); if(!el)return "";
+  if(el.type==="checkbox")return "";
+  if(id==="chgRel")return "mine";
+  if(el.tagName==="SELECT"&&el.options.length)return el.options[0].value;
+  return "";
+}
+function ctlLabelOf(id,v){
+  var el=document.getElementById(id); if(!el)return v;
+  if(el.type==="checkbox")return "开";
+  if(el.tagName==="SELECT"){
+    for(var i=0;i<el.options.length;i++)if(el.options[i].value===String(v))
+      return el.options[i].textContent.replace(/^[^\u4e00-\u9fa5A-Za-z0-9]+/,"").trim()||v;
+  }
+  return v;
+}
+
+/* 直接存函数引用,不存函数名。用 window["renderLive"] 取只在浏览器里成立;
+   任何非浏览器宿主(测试桩)里 window 是普通对象,查不到就静默什么都不渲染 —— 
+   那种"不报错但也没反应"的失败最难查。 */
+var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
+  calendar:renderCalendar,myapps:renderMyApps,jobs:renderJobs,papers:renderPapers,
+  pipeline:renderPipeline,journals:renderJournals};
+function rerender(pid){
+  var fn=RENDER_OF[pid];
+  if(typeof fn==="function"){try{fn();}catch(e){console.warn(pid,e);}}
+}
+
+/* ---- 生效中筛选芯片 ---- */
+function activeFilters(pid){
+  var out=[],defs=PFILT[pid]||[];
+  defs.forEach(function(d){
+    var id=d[0],lab=d[1]; if(lab===null)return;      /* 排序不算筛选 */
+    var v=ctlVal(id); if(v===null)return;
+    if(String(v)===String(ctlDefault(id)))return;
+    out.push({id:id,label:lab,val:v,show:ctlLabelOf(id,v)});
+  });
+  var V=VFILT[pid];
+  if(V)V.list().forEach(function(v){ out.push({id:v.id,label:v.label,val:v.show,show:v.show}); });
+  return out;
+}
+function renderChips(pid,shown,total){
+  var el=document.getElementById("chips_"+pid); if(!el)return;
+  var A=activeFilters(pid),h="";
+  A.forEach(function(a){
+    h+='<span class="fchip"><b>'+a.label+'</b>:'+esc(String(a.show))+
+       ' <span class="x" data-clr="'+pid+'|'+a.id+'" title="撤掉这个条件">×</span></span>';
+  });
+  if(A.length>1)h+='<button class="clrall" data-clrall="'+pid+'">清空全部筛选</button>';
+  if(typeof shown==="number"&&typeof total==="number")
+    h+='<span class="cnts">显示 <b>'+shown+'</b> / 共 '+total+' 条</span>';
+  else if(A.length===0)h+='<span class="cnts">未设任何筛选</span>';
+  el.innerHTML=h;
+}
+function clearOne(pid,id){
+  CUR_PID=pid;
+  if(id.charAt(0)==="@"){ var V=VFILT[pid]; if(V)V.clear(id); }
+  else ctlSet(id,ctlDefault(id));
+  CUR_PID=null; rerender(pid);
+}
+function clearAllFilters(pid){
+  CUR_PID=pid;
+  (PFILT[pid]||[]).forEach(function(d){ if(d[1]!==null)ctlSet(d[0],ctlDefault(d[0])); });
+  var V=VFILT[pid];
+  if(V)V.list().forEach(function(v){ V.clear(v.id); });
+  CUR_PID=null; rerender(pid);
+}
+
+/* ---- 空结果:说清楚是哪几个条件筛没的,并给一键放宽 ---- */
+function emptyHTML(pid,total){
+  var A=activeFilters(pid);
+  if(!A.length)return '<div class="nores"><h4>这里还没有数据</h4>'+
+    '<ul><li>共 '+total+' 条原始记录,但当前视图是空的。</li>'+
+    '<li>可能是数据文件还没生成 —— 等每日任务跑完,或手动触发 Actions。</li></ul></div>';
+  var h='<div class="nores"><h4>没有符合条件的结果 —— 是下面 '+A.length+' 个条件一起筛没的</h4><ul>';
+  A.forEach(function(a){h+='<li><b>'+a.label+'</b> = '+esc(String(a.show))+'</li>';});
+  h+='</ul><p style="font-size:12.4px;color:#4A3B00;margin-top:6px">共 '+total+
+     ' 条记录,逐条按上面全部条件取交集后为 0 条。</p>'+
+     '<button class="relax" data-clrall="'+pid+'">↺ 清空全部筛选,回到 '+total+' 条</button></div>';
+  return h;
+}
+
+/* ---- 面板渲染完后统一调用:更新芯片,并在 0 条时替换成解释框 ---- */
+var LAST_N={};
+/* 哪些容器里当前写着自己生成的空结果解释框 */
+var NORES_IN={};
+function noteRender(pid,shown,total,wrapId){
+  LAST_N[pid]={shown:shown,total:total};
+  renderChips(pid,shown,total);
+  if(!wrapId)return;
+  var w=document.getElementById(wrapId); if(!w)return;
+  if(shown===0){ w.innerHTML=emptyHTML(pid,total); NORES_IN[wrapId]=1; }
+  /* 只清自己写过的解释框:journals 的 #jempty 是独立容器,不会被下一轮渲染覆盖,
+     结果回来时必须显式清掉,否则「没有结果」会和一张有内容的表同时出现。
+     判断依据是自己记的账,不是读 firstElementChild —— 后者在结果区是 <table>
+     或宿主不实现该属性时都取不到,会静默漏清。 */
+  else if(NORES_IN[wrapId]){ w.innerHTML=""; NORES_IN[wrapId]=0; }
+}
+/* 某个筛选状态下的命中数。**走真实渲染路径**再读回它上报的数字,
+   不另写一份筛选逻辑 —— 平行实现迟早和真实结果对不上。
+   面板没调 noteRender 就返回 null(宁可不显示数字,也不显示错数字)。 */
+function countOf(pid){
+  var before=LAST_N[pid];
+  LAST_N[pid]=null;
+  rerender(pid);
+  var got=LAST_N[pid];
+  if(got==null){ LAST_N[pid]=before; return null; }
+  return got.shown;
+}
+
+/* ---- 帮助条:渲染 + 折叠状态记忆 + 示例按钮 ---- */
+function helpOpenKey(pid){return "help_open_"+pid;}
+function buildHelp(){
+  document.querySelectorAll(".hstrip[data-help]").forEach(function(box){
+    var pid=box.getAttribute("data-help"), H=HELP[pid];
+    if(!H){box.style.display="none";return;}
+    var open=localStorage.getItem(helpOpenKey(pid))==="1";
+    var h='<div class="hhead"><span style="font-size:15px">💡</span>'+
+          '<span class="hwhat">'+esc(H.what)+'</span>'+
+          '<span class="htog">'+(open?"收起 ▲":"怎么用 ▼")+'</span></div><div class="hbody"><ol>';
+    H.how.forEach(function(x){h+="<li>"+x+"</li>";});
+    h+="</ol>";
+    if(H.ex&&H.ex.length){
+      h+='<div class="exlab">▸ 点一下就能看到效果的例子(数字 = 点下去的真实命中数):</div><div class="exwrap">';
+      H.ex.forEach(function(e,i){
+        h+='<button class="exbtn" data-ex="'+pid+'|'+i+'">'+esc(e.t)+
+           ' <span class="exn" data-exn="'+pid+'|'+i+'"></span></button>';
+      });
+      h+="</div>";
+    }
+    if(H.caveat)h+='<div class="hcav">⚠️ '+H.caveat+"</div>";
+    h+="</div>";
+    box.innerHTML=h;
+    if(open)box.classList.add("open");
+    box.querySelector(".hhead").onclick=function(){
+      var now=box.classList.toggle("open");
+      localStorage.setItem(helpOpenKey(pid),now?"1":"0");
+      box.querySelector(".htog").textContent=now?"收起 ▲":"怎么用 ▼";
+      if(now)countExamples(pid);
+    };
+    if(open)countExamples(pid);
+  });
+}
+
+/* 示例按钮上的命中数:真的把筛选设过去、数一遍、再原样还原。
+   不预先写死 —— 数据每天变,写死的数字第二天就是假的。 */
+/* 侧栏那三个虚拟筛选存在 JS 变量里,ctlVal 读不到 —— 试算命中数时必须单独存/还原,
+   否则数完一个示例,用户原本勾的资助类型就被抹掉了。 */
+function snapVirtual(pid){
+  if(pid!=="live")return null;
+  return {ft:(typeof selFtype!=="undefined")?Array.from(selFtype):null,
+          rl:(typeof selRel!=="undefined")?Array.from(selRel):null,
+          dl:(typeof selDeadline!=="undefined")?selDeadline:null};
+}
+function restoreVirtual(pid,sv){
+  if(!sv)return;
+  if(sv.ft&&typeof selFtype!=="undefined"){selFtype.clear();sv.ft.forEach(function(x){selFtype.add(x);});}
+  if(sv.rl&&typeof selRel!=="undefined"){selRel.clear();sv.rl.forEach(function(x){selRel.add(x);});}
+  if(sv.dl!==null&&sv.dl!==undefined)selDeadline=sv.dl;
+}
+function exCount(pid,i){
+  var H=HELP[pid]; if(!H||!H.ex||!H.ex[i])return null;
+  var e=H.ex[i]; if(e.run)return null;              /* 搜索类示例不预计数 */
+  var defs=PFILT[pid]||[]; if(!defs.length)return null;
+  CUR_PID=pid;
+  var saved={}, sv=snapVirtual(pid);
+  defs.forEach(function(d){saved[d[0]]=ctlVal(d[0]);});
+  var ok=true;
+  clearAllFiltersQuiet(pid);
+  e.set.forEach(function(kv){ if(!ctlSet(kv[0],kv[1]))ok=false; });
+  var n=ok?countOf(pid):null;
+  Object.keys(saved).forEach(function(k){ if(saved[k]!==null)ctlSet(k,saved[k]); });
+  restoreVirtual(pid,sv);
+  CUR_PID=null;
+  rerender(pid);                                    /* 把界面还原成用户原来的样子 */
+  return n;
+}
+/* 只改状态、不触发渲染的清空 —— 试算时用,避免一次示例计数触发两轮全表渲染 */
+function clearAllFiltersQuiet(pid){
+  CUR_PID=pid;
+  (PFILT[pid]||[]).forEach(function(d){ if(d[1]!==null)ctlSet(d[0],ctlDefault(d[0])); });
+  var V=VFILT[pid]; if(V)V.list().forEach(function(v){ V.clear(v.id); });
+}
+function countExamples(pid){
+  var H=HELP[pid]; if(!H||!H.ex)return;
+  H.ex.forEach(function(e,i){
+    var span=document.querySelector('[data-exn="'+pid+'|'+i+'"]'); if(!span)return;
+    var n=exCount(pid,i);
+    span.textContent=(n===null)?"":("· "+n+" 条");
+  });
+}
+function applyExample(pid,i){
+  var H=HELP[pid],e=H&&H.ex&&H.ex[i]; if(!e)return;
+  if(e.run==="search"){
+    var q=e.set[0][1]; var inp=document.getElementById("gsq");
+    if(inp){inp.value=q; runGlobalSearch(q);} return;
+  }
+  CUR_PID=pid;
+  clearAllFiltersQuiet(pid);
+  var bad=[];
+  e.set.forEach(function(kv){ if(!ctlSet(kv[0],kv[1]))bad.push(kv[0]); });
+  if(bad.length)console.warn("示例设不上的控件:",bad);   /* 静默会让坏掉的示例看起来正常 */
+  CUR_PID=null;
+  rerender(pid);
+}
+
+/* 事件委托:帮助示例 / 芯片 × / 清空全部 */
+document.addEventListener("click",function(ev){
+  var t=ev.target;
+  var ex=t.closest?t.closest("[data-ex]"):null;
+  if(ex){var a=ex.getAttribute("data-ex").split("|");applyExample(a[0],+a[1]);return;}
+  if(t.getAttribute&&t.getAttribute("data-clr")){
+    var b=t.getAttribute("data-clr").split("|");clearOne(b[0],b[1]);return;}
+  var ca=t.closest?t.closest("[data-clrall]"):null;
+  if(ca){clearAllFilters(ca.getAttribute("data-clrall"));return;}
+});
+
+
 loadData();
 try{checkElig();}catch(e){}
+
 </script>
 </body>
 </html>

@@ -318,6 +318,176 @@ goPanel("journals");
 ck(CLICKED[CLICKED.length-1] === "journals",
    "goPanel failed to activate a valid panel");
 
+/* ==================================================================
+   D. 内联帮助 / 筛选芯片 / 空结果解释 / 金额缺失
+   契约:
+   D1 每个工作面板都有内联「怎么用」,不能只存在于独立的说明页
+   D2 每个示例按钮设的控件必须真实存在,且值必须在该控件的选项里
+   D3 示例的命中数是走真实渲染路径量出来的,不是写死的
+   D4 芯片栏必须反映**全部**已生效筛选,含侧栏那三个非 DOM 的
+   D5 清空筛选后,面板必须回到全量
+   D6 零结果时必须解释是哪几个条件叠出来的,不能只显示"无结果"
+   D7 金额缺失必须显示"以公告为准",不能把占位符当金额印出去
+   ================================================================== */
+
+/* D1 */
+var WORK_PANELS = ["live","curated","journals","papers","whatsnew","jobs"];
+WORK_PANELS.forEach(function(pid){
+  ck(HELP[pid] && HELP[pid].what && HELP[pid].ex && HELP[pid].ex.length>0,
+     "panel \"" + pid + "\" has no inline how-to with examples");
+});
+
+/* D2 —— 示例设的每个控件都要存在,值要在选项里。
+   机构 / 地区这类下拉是渲染时按数据现算的(facetSel),所以得先渲染一轮,
+   否则选项是空的,断言会拿空列表去比 —— 那是测试自己的时序问题,不是真缺陷。 */
+WORK_PANELS.forEach(function(pid){ rerender(pid); });
+/* D2 —— 示例设的每个控件都要存在,值要在选项里 */
+Object.keys(HELP).forEach(function(pid){
+  (HELP[pid].ex||[]).forEach(function(e,i){
+    (e.set||[]).forEach(function(kv){
+      var id=kv[0], v=kv[1];
+      var virt = VFILT[pid] && VFILT[pid].set && (function(){
+        CUR_PID=pid; var r=VFILT[pid].set(id,v); CUR_PID=null; return r!==null;
+      })();
+      if(virt){
+        CUR_PID=pid;
+        ck(VFILT[pid].set(id,v)===true,
+           pid+" example #"+i+" sets virtual filter "+id+" to a value that is not a real option: "+v);
+        VFILT[pid].clear("@"+id.replace(/^l/,""));
+        CUR_PID=null;
+        return;
+      }
+      var el=document.getElementById(id);
+      ck(!!el, pid+" example #"+i+" targets a control that does not exist: "+id);
+      if(el && el.options && el.options.length && v!==""){
+        var vals=el.options.map(function(o){return o.value;});
+        ck(vals.indexOf(v)>=0,
+           pid+" example #"+i+" sets "+id+"=\""+v+"\" which is not among its options ["+vals.join("|")+"]");
+      }
+    });
+  });
+});
+
+/* D3 —— 命中数必须真实。做法:量一次,然后手工用同一条件过一遍数据比对。
+   这里不复算筛选逻辑(那会变成两套各自自洽的实现),而是验证
+   "exCount 报的数" == "把示例应用上去之后面板实际渲染的行数"。 */
+Object.keys(HELP).forEach(function(pid){
+  (HELP[pid].ex||[]).forEach(function(e,i){
+    if(e.run)return;                       /* 搜索型示例不预计数 */
+    var n=exCount(pid,i);
+    if(n===null)return;                    /* 提前 return 的面板不报数 —— 允许 */
+    applyExample(pid,i);
+    var shown=LAST_N[pid]&&LAST_N[pid].shown;
+    ck(n===shown,
+       pid+" example #"+i+" advertises "+n+" hits but rendering it shows "+shown);
+    clearAllFilters(pid);
+  });
+});
+
+/* D4 —— 芯片栏要盖住侧栏的虚拟筛选 */
+(function(){
+  clearAllFilters("live");
+  ck(activeFilters("live").length===0, "live shows active filter chips with nothing filtered");
+  CUR_PID="live"; VFILT.live.set("lftype", FTYPES[0]); CUR_PID=null;
+  var af=activeFilters("live");
+  ck(af.length===1 && af[0].id==="@ftype",
+     "checking a sidebar funding-type box produced "+af.length+" chips (expected 1 for @ftype) — "+
+     "a chip bar that only reads DOM controls would tell the user nothing is filtered");
+  clearAllFilters("live");
+  ck(activeFilters("live").length===0, "clearAllFilters left stale chips on live");
+})();
+
+/* D5 —— 清空后回到全量 */
+(function(){
+  var full={};
+  WORK_PANELS.forEach(function(pid){ clearAllFilters(pid); full[pid]=LAST_N[pid]&&LAST_N[pid].shown; });
+  ck(full.live===LIVE.length,
+     "live with no filters shows "+full.live+" of "+LIVE.length+" records");
+  ck(full.curated===CURATED.length,
+     "curated with no filters shows "+full.curated+" of "+CURATED.length+" records");
+  ck(full.journals===JOURNALS.length,
+     "journals with no filters shows "+full.journals+" of "+JOURNALS.length+" rows");
+})();
+
+/* D6 —— 零结果必须解释清楚 */
+(function(){
+  clearAllFilters("live");
+  document.getElementById("q").value="zzz_no_such_grant_qqq";
+  renderLive();
+  ck(LAST_N.live.shown===0, "the impossible query still matched "+LAST_N.live.shown+" grants");
+  /* 空结果解释写在列表容器本身(noteRender 的 wrapId) */
+  var box=document.getElementById("liveList").innerHTML;
+  ck(box.indexOf("zzz_no_such_grant_qqq")>=0,
+     "zero-result state does not echo the conditions that produced it");
+  ck(box.indexOf("清空")>=0 || box.indexOf("重置")>=0,
+     "zero-result state offers no one-click way out");
+  document.getElementById("q").value="";
+  clearAllFilters("live");
+  ck(document.getElementById("liveList").innerHTML.indexOf("nores")<0,
+     "the zero-result explanation is still on screen after results came back");
+})();
+
+/* D6b —— journals 的解释框是**独立容器**(#jempty,因为结果区是 <table>,
+   往里塞 <div> 会被浏览器踢出表外)。独立容器不会被下一轮渲染覆盖,
+   所以必须显式清掉 —— 否则"没有结果"和一张有内容的表会同时出现在屏幕上。
+   这条断言必须查 #jempty 本身;查 liveList 是抓不到的,那边是整块重写。 */
+(function(){
+  clearAllFilters("journals");
+  document.getElementById("jq").value="zzz_no_such_journal_qqq";
+  renderJournals();
+  ck(LAST_N.journals.shown===0, "the impossible journal query still matched rows");
+  ck(document.getElementById("jempty").innerHTML.indexOf("nores")>=0,
+     "journals zero-result state shows no explanation box");
+  document.getElementById("jq").value="";
+  renderJournals();
+  ck(LAST_N.journals.shown>0, "journals did not come back after clearing the query");
+  ck(document.getElementById("jempty").innerHTML==="",
+     "journals still shows the 「no results」 box while the table has "+
+     LAST_N.journals.shown+" rows in it");
+})();
+
+/* D6c —— 可信度筛选必须真的把未核实的挡住。
+   167 条精选里只有个位数是逐条核实过的;这个差别筛不出来,
+   未核实条目在屏幕上就和核实过的长得一模一样。 */
+(function(){
+  clearAllFilters("curated");
+  var all=LAST_N.curated.shown;
+  var keys={}, n=0;
+  CURATED.forEach(function(g){var k=verifyKey(g); keys[k]=(keys[k]||0)+1;});
+  ["official","pending","pivot"].forEach(function(k){
+    if(!keys[k])return;
+    n++;
+    document.getElementById("cverify").value=k;
+    renderCurated();
+    ck(LAST_N.curated.shown===keys[k],
+       "trust filter \""+k+"\" shows "+LAST_N.curated.shown+" entries but "+keys[k]+" carry that level");
+    ck(LAST_N.curated.shown<all,
+       "trust filter \""+k+"\" did not narrow anything — unverified entries still look verified");
+  });
+  ck(n>=2, "the curated fixture has only "+n+" trust levels — cannot exercise this filter");
+  document.getElementById("cverify").value="";
+  clearAllFilters("curated");
+})();
+
+/* D7 —— 金额缺失 */
+(function(){
+  var placeholders=0, printed=0;
+  LIVE.forEach(function(g){
+    if(amtMissing(g.amount)){
+      placeholders++;
+      /* 缺失时必须给出"去哪儿查"的指引,而不是把 None/0 这类占位符当金额印出来 */
+      var t=amtTxt(g);
+      if(t.indexOf("NOFO")<0&&t.indexOf("公告")<0)printed++;
+    }
+  });
+  ck(placeholders>0, "no records with a missing amount — the fixture cannot exercise this");
+  ck(printed===0,
+     printed+" of "+placeholders+" grants with no published amount would print a placeholder as if it were money");
+  /* 排序键必须是数字,否则占位符会参与比较 */
+  var bad=LIVE.filter(function(g){var n=amtNum(g);return typeof n!=="number"||isNaN(n);});
+  ck(bad.length===0, bad.length+" grants yield a non-numeric amount sort key");
+})();
+
 print(fails===0
   ? ("ALL PASS · checks="+checks+" · journals="+JOURNALS.length+" papers="+PAPERS.length
      +" live="+LIVE.length+" curated="+CURATED.length+" jobs="+JOBS.length)
