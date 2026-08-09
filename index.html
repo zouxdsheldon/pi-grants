@@ -403,6 +403,75 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 .rdnet a:hover{text-decoration:underline}
 .rdwarn{background:#FFF6F5;border:1px solid #F3C9C4;color:#8A2018;border-radius:7px;padding:8px 11px;
   font-size:12.3px;line-height:1.6;margin:0 0 12px}
+
+/* ===== 左侧分类栏 + 内容区(工具门户布局) =====
+   .tabs 保留在 DOM 里但隐藏:goPanel()/crosstalk/测试都靠 .tab[data-p] 的 click(),
+   隐藏元素照样能 click,所以旧契约一行都不用改。侧栏只是转发点击。 */
+.tabs{display:none}
+.shell{display:grid;grid-template-columns:216px minmax(0,1fr);gap:22px;align-items:start;margin-top:16px}
+.sidenav{position:sticky;top:52px;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:10px 8px;max-height:calc(100vh - 70px);overflow:auto}
+.sidenav .sgrp{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;
+  padding:11px 9px 5px;text-transform:uppercase}
+.sidenav .sgrp:first-child{padding-top:3px}
+.sidenav a.sitem{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:8px;
+  font-size:13px;color:var(--txt);text-decoration:none;cursor:pointer;line-height:1.35}
+.sidenav a.sitem:hover{background:#F2F5FA}
+.sidenav a.sitem.on{background:#EDE7F6;color:#4A148C;font-weight:700}
+.sidenav a.sitem .sic{width:17px;text-align:center;flex:none}
+.sidenav a.sitem .stx{flex:1;min-width:0}
+.sidenav .sn{font-size:11px;color:var(--muted);background:#F0F3F8;border-radius:9px;padding:1px 6px;flex:none}
+.sidenav a.sitem.on .sn{background:#fff;color:#4A148C}
+.sidenav .snew{font-size:10px;font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:1px 5px;flex:none}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:12px}
+  .sidenav{position:static;max-height:none;display:flex;gap:6px;overflow-x:auto;padding:8px}
+  .sidenav .sgrp{display:none}
+  .sidenav a.sitem{white-space:nowrap}
+}
+
+/* ===== 实验工具面板 ===== */
+.tool-in{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.5;border:1px solid var(--line);border-radius:8px;padding:9px 10px;resize:vertical}
+.tool-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin:10px 0}
+.tool-row label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+.tool-row input[type=number],.tool-row input[type=text],.tool-row select{
+  font-size:12.5px;padding:6px 8px;border:1px solid var(--line);border-radius:7px}
+.tool-row input[type=number]{width:82px}
+.gobtn{background:#4A148C;color:#fff;border:none;border-radius:8px;padding:8px 16px;
+  font-size:13px;font-weight:700;cursor:pointer}
+.gobtn.sec{background:#fff;color:#4A148C;border:1px solid #C6B3E0}
+.gobtn:disabled{opacity:.5;cursor:default}
+.tout{margin-top:12px}
+.tout .terr{background:#FDECEA;border:1px solid #F5C6CB;color:#9B1C1C;border-radius:8px;padding:10px 12px;font-size:12.5px}
+.tout .tok{background:#F1F8F3;border:1px solid #CDE8D5;border-radius:8px;padding:10px 12px;font-size:12.5px}
+.seqout{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;
+  background:#F7F9FC;border:1px solid var(--line);border-radius:8px;padding:10px;
+  white-space:pre-wrap;word-break:break-all;max-height:340px;overflow:auto;line-height:1.6}
+.ttable{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.ttable th{background:#EDE7F6;color:#4A148C;text-align:left;padding:7px 9px;white-space:nowrap}
+.ttable td{border-top:1px solid var(--line);padding:6px 9px;vertical-align:top}
+.ttable td.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.ttable tr.hi td{background:#FFF8E1}
+.gr{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11px;font-weight:800}
+.gr.H{background:#4A148C;color:#fff}.gr.M{background:#EDE7F6;color:#4A148C}
+.gr.L{background:#F0F3F8;color:var(--muted)}
+.ctxm{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.5px}
+.tpre{background:#0F172A;color:#E2E8F0;border-radius:8px;padding:10px 12px;font-size:11.5px;
+  line-height:1.5;overflow-x:auto;white-space:pre;font-family:ui-monospace,Menlo,Consolas,monospace;margin:8px 0}
+.tpre.lkseq{max-height:180px;overflow-y:auto}
+.fr{margin:8px 0}.fr b{font-family:ui-monospace,Menlo,Consolas,monospace;color:#4A148C}
+.bar{display:inline-block;height:9px;background:#4A148C;border-radius:3px;vertical-align:middle}
+.tsvg{width:100%;height:120px;background:#FAFAFD;border:1px solid var(--line);border-radius:8px;margin:8px 0}
+.lkc{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff}
+.lkh{font-size:14px;color:#4A148C}.lkn{color:var(--muted);font-size:12.5px;margin:2px 0 8px}
+.lkacts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+.gobtn.sm{padding:5px 11px;font-size:12px}
+.gobtn.alt{background:#EDE7F6;color:#4A148C;text-decoration:none;display:inline-block}
+.ctxm b{color:#B71C1C}.ctxm i{color:#0D47A1;font-style:normal;font-weight:700}
+.warnbox{background:#FFF8E1;border:1px solid #FFE082;border-left:4px solid #F9A825;
+  border-radius:8px;padding:11px 13px;font-size:12.5px;margin:10px 0;line-height:1.6}
+.brk{font-size:11.5px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace}
 </style>
 </head>
 <body>
@@ -473,16 +542,19 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 </div></div>
 
 <div class="wrap">
+<div class="shell">
+<nav class="sidenav" id="sideNav"></nav>
+<div class="content">
 <div class="tabs">
   <button class="tab active" data-p="hub">🏠 工具首页</button>
-  <button class="tab" data-p="live">🇺🇸 联邦机会(<span id="liveN">…</span>)</button>
-  <button class="tab" data-p="curated">🌐 各国 PI 资助(<span id="curN">…</span>)</button>
-  <button class="tab" data-p="journals">📖 期刊查选(<span id="jrnN">…</span>)</button>
-  <button class="tab" data-p="calendar">📅 截止日历(<span id="calN">…</span>)</button>
-  <button class="tab" data-p="whatsnew">🔄 更新动态(<span id="chgN">…</span>)</button>
-  <button class="tab" data-p="myapps">🎯 我能申的(<span id="myN">…</span>)</button>
-  <button class="tab" data-p="jobs">🎓 学术职位(<span id="jobN">…</span>)</button>
-  <button class="tab" data-p="papers">📚 文献追踪(<span id="papN">…</span>)</button>
+  <button class="tab" data-p="live">🇺🇸 联邦机会</button>
+  <button class="tab" data-p="curated">🌐 各国 PI 资助</button>
+  <button class="tab" data-p="journals">📖 期刊查选</button>
+  <button class="tab" data-p="calendar">📅 截止日历</button>
+  <button class="tab" data-p="whatsnew">🔄 更新动态</button>
+  <button class="tab" data-p="myapps">🎯 我能申的</button>
+  <button class="tab" data-p="jobs">🎓 学术职位</button>
+  <button class="tab" data-p="papers">📚 文献追踪</button>
   <button class="tab" data-p="pipeline">📋 我的申请管线</button>
   <button class="tab" data-p="howto">📖 使用/更新说明</button>
   <button class="tab" data-p="writing">✍️ 写作指导</button>
@@ -827,6 +899,118 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
   <div style="overflow-x:auto"><table class="jtable" id="jtab"></table></div>
   <div id="jempty"></div>
+</div>
+
+<!-- ============ 实验工具:位点扫描 ============ -->
+<div class="panel" id="tsite">
+  <h2>🧬 激酶位点扫描 · AMPK 底物基序 PSSM</h2>
+  <div class="warnbox">
+    <b>这是假设生成工具,不是实验证据。</b>打分只说明某个 S/T 的<b>序列上下文</b>有多像 AMPK 的最优底物基序,
+    不代表该位点在细胞里真被磷酸化。真实位点还取决于亚细胞定位、结构可及性、支架蛋白与竞争激酶。
+    拿它排优先级去做实验,别拿它当结论写进文章。
+  </div>
+  <div class="hstrip" data-help="tsite"></div>
+  <textarea id="siSeq" class="tool-in" rows="6" placeholder="粘贴蛋白序列(单字母,可含 FASTA 头与空白/换行,会自动清洗)"></textarea>
+  <div class="tool-row">
+    <label>背景集<select id="siBg">
+      <option value="self">本序列自身全部 S/T</option>
+      <option value="pool">TDMD 复合体 10 蛋白合集(830 个 S/T)</option>
+    </select></label>
+    <label>只看<select id="siMin">
+      <option value="0">全部位点</option>
+      <option value="3">分值 ≥ 3.0</option>
+      <option value="4">分值 ≥ 4.0</option>
+    </select></label>
+    <label>标注位点<input type="text" id="siMark" placeholder="如 608,609,1202" style="width:150px"></label>
+    <button class="gobtn" id="siRun">扫描</button>
+    <button class="gobtn sec" id="siCsv">导出 CSV</button>
+  </div>
+  <div id="siOut" class="tout"></div>
+  <details style="margin-top:14px">
+    <summary style="cursor:pointer;font-weight:700;font-size:13px">打分矩阵是怎么来的 / 怎么校验的</summary>
+    <div style="font-size:12.5px;line-height:1.7;padding:8px 2px">
+      <p>基于 Hardie 实验室确立的 AMPK 最优底物共识
+      <span class="brk">Φ(−5)-β(−3/−4)-X-X-<b>(S/T)</b>-X-X-X-Φ(+4)</span>,
+      β = 碱性(R/K,弱记 H),Φ = 疏水(L/I/V/M/F/A)。位置权重:</p>
+      <table class="ttable" id="siWtab"></table>
+      <p>Ser 比 Thr 额外 +0.3(AMPK 偏好 Ser)。<b>校验方式:</b>拿 6 个已知 AMPK 底物位点,
+      看它在自身蛋白全部 S/T 里排第几 —— 若矩阵有效,已知位点应当排在很前面。下表是浏览器现算的:</p>
+      <table class="ttable" id="siVtab"></table>
+      <p class="brk">这 6 个位点的平均百分位见表末。矩阵是<b>透明的经验权重</b>,不是机器学习模型 ——
+      好处是每一分都能追到具体哪个残基,坏处是没有大规模训练数据支撑。GPS/NetPhos 那类工具用的是另一套方法,
+      两者不一致时以实验为准。</p>
+    </div>
+  </details>
+</div>
+
+<!-- ============ 实验工具:序列工具箱 ============ -->
+<div class="panel" id="tseq">
+  <h2>🔤 序列工具箱</h2>
+  <div class="hstrip" data-help="tseq"></div>
+  <textarea id="sqSeq" class="tool-in" rows="6" placeholder="粘贴 DNA/RNA 或蛋白序列(可含 FASTA 头)"></textarea>
+  <div class="tool-row">
+    <label>做什么<select id="sqOp">
+      <option value="rc">反向互补</option>
+      <option value="tx">转录 DNA→RNA</option>
+      <option value="tr6">六框翻译</option>
+      <option value="orf">ORF 查找</option>
+      <option value="gc">GC 含量与分布</option>
+      <option value="re">限制酶切位点</option>
+      <option value="pp">蛋白参数(分子量/pI/消光系数)</option>
+    </select></label>
+    <label>ORF 起始<select id="sqStart">
+      <option value="ATG">只认 ATG</option>
+      <option value="any">ATG/GTG/TTG</option>
+    </select></label>
+    <label>ORF 最短(aa)<input type="number" id="sqMin" value="50" min="1"></label>
+    <label>GC 窗口(nt)<input type="number" id="sqWin" value="50" min="5"></label>
+    <button class="gobtn" id="sqRun">运行</button>
+  </div>
+  <div id="sqOut" class="tout"></div>
+</div>
+
+<!-- ============ 实验工具:引物与密码子 ============ -->
+<div class="panel" id="tprimer">
+  <h2>🧪 引物设计与密码子优化</h2>
+  <div class="hstrip" data-help="tprimer"></div>
+  <textarea id="prSeq" class="tool-in" rows="5" placeholder="粘贴模板 DNA(引物设计)或编码序列 CDS(密码子优化,长度需为 3 的倍数)"></textarea>
+  <div class="tool-row">
+    <label>模式<select id="prMode">
+      <option value="pcr">PCR 引物对设计</option>
+      <option value="cai">密码子适应指数 CAI</option>
+      <option value="opt">密码子优化</option>
+    </select></label>
+    <label>目标 Tm(℃)<input type="number" id="prTm" value="60" step="0.5"></label>
+    <label>Tm 容差<input type="number" id="prTol" value="1.5" step="0.5"></label>
+    <label>引物长<input type="text" id="prLen" value="18-27" style="width:78px"></label>
+    <label>物种表<select id="prSp">
+      <option value="human">人 Homo sapiens</option>
+      <option value="mouse">小鼠 Mus musculus</option>
+      <option value="ecoli">大肠杆菌 E. coli K-12</option>
+      <option value="yeast">酿酒酵母 S. cerevisiae</option>
+    </select></label>
+    <label>优化时避开<input type="text" id="prAvoid" placeholder="EcoRI,BamHI" style="width:150px"></label>
+    <button class="gobtn" id="prRun">运行</button>
+  </div>
+  <div id="prOut" class="tout"></div>
+</div>
+
+<!-- ============ 实验工具:蛋白直查 ============ -->
+<div class="panel" id="tlookup">
+  <h2>🔎 蛋白直查 · UniProt / PDB</h2>
+  <div class="hstrip" data-help="tlookup"></div>
+  <div class="tool-row">
+    <label>基因名或登录号<input type="text" id="lkQ" placeholder="ZSWIM8 或 A7E2V4" style="width:210px"></label>
+    <label>物种<select id="lkOrg">
+      <option value="9606">人 9606</option>
+      <option value="10090">小鼠 10090</option>
+      <option value="10116">大鼠 10116</option>
+      <option value="7955">斑马鱼 7955</option>
+      <option value="">不限</option>
+    </select></label>
+    <button class="gobtn" id="lkRun">查询</button>
+  </div>
+  <div id="lkOut" class="tout"></div>
 </div>
 
 <div class="panel" id="howto">
@@ -1896,6 +2080,8 @@ paragraphs + introductions from high-impact papers in my field). Please:
   联邦数据由 GitHub Actions 每日自动从 Grants.gov 抓取 + 详情补全 + 变更对比。<br>
   精选清单人工核实。个人资料、关注、管线笔记均存于本设备 localStorage。
 </footer>
+</div><!-- /.content -->
+</div><!-- /.shell -->
 </div>
 
 <script>
@@ -2177,6 +2363,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   if(t.dataset.p==="journals")renderJournals();
   if(t.dataset.p==="hub")renderHub();
   syncPlatNav(t.dataset.p);
+  syncSideNav(t.dataset.p);
 });
 
 /* ============================================================
@@ -2220,6 +2407,13 @@ var HUB_SECTIONS=[
   tools:[
    {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
   ]},
+ {h:"⑥ 实验台 · 分子生物学工具", st:"全部在你自己的浏览器里算,序列不出本机,断网也能用",
+  tools:[
+   {p:"tsite",   ic:"🧬", nm:"激酶位点扫描", ds:"AMPK 底物基序 PSSM:扫全部 S/T,给分值构成而不是黑箱总分", cnt:()=>1, u:"套已校验矩阵"},
+   {p:"tseq",    ic:"🔤", nm:"序列工具箱",   ds:"反向互补 / 六框翻译 / ORF / GC / 酶切 / 蛋白参数", cnt:()=>7, u:"个工具"},
+   {p:"tprimer", ic:"🧪", nm:"引物与密码子", ds:"最近邻 Tm 引物设计;四物种密码子表算 CAI 与优化", cnt:()=>4, u:"个物种表"},
+   {p:"tlookup", ic:"🔎", nm:"蛋白直查",     ds:"UniProt 拉序列/结构域/已知磷酸化位点,一键送进上面的工具", cnt:()=>2, u:"个数据库"},
+  ]},
 ];
 
 function renderHub(){
@@ -2257,6 +2451,833 @@ function goPanel(p,act){
   if(act==="hot"||act==="nov"){
     var sel=document.getElementById("papSort");
     if(sel){sel.value=(act==="hot"?"hot":"novelty");sel.dispatchEvent(new Event("change"));}
+  }
+}
+
+/* ===== 左侧分类栏 =====
+   分组按科研环节,不按数据来源。侧栏本身不渲染任何面板,
+   只是 forward 到隐藏的 .tab[data-p] —— 所以 goPanel()、卡片墙跳转、
+   写作面板 crosstalk、测试里的 rerender(pid) 全部保持原契约。 */
+var SIDE_NAV=[
+  {g:"", items:[
+    {p:"hub", ic:"🏠", t:"工具首页"}
+  ]},
+  {g:"找资助", items:[
+    {p:"live",     ic:"🇺🇸", t:"联邦机会",   n:"liveN"},
+    {p:"curated",  ic:"🌐", t:"各国 PI 资助", n:"curN"},
+    {p:"myapps",   ic:"🎯", t:"我能申的",   n:"myN"},
+    {p:"calendar", ic:"📅", t:"截止日历",   n:"calN"},
+    {p:"whatsnew", ic:"🔄", t:"更新动态",   n:"chgN"},
+    {p:"pipeline", ic:"📋", t:"申请管线"}
+  ]},
+  {g:"找职位", items:[
+    {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"}
+  ]},
+  {g:"读文献 / 选期刊", items:[
+    {p:"papers",   ic:"📚", t:"文献追踪", n:"papN"},
+    {p:"journals", ic:"📖", t:"期刊查选", n:"jrnN"}
+  ]},
+  {g:"写本子", items:[
+    {p:"writing", ic:"✍️", t:"写作指导"}
+  ]},
+  {g:"实验工具", items:[
+    {p:"tsite",  ic:"🧬", t:"位点扫描",  nw:1},
+    {p:"tseq",   ic:"🔤", t:"序列工具箱", nw:1},
+    {p:"tprimer",ic:"🧪", t:"引物与密码子", nw:1},
+    {p:"tlookup",ic:"🔎", t:"蛋白直查",  nw:1}
+  ]},
+  {g:"", items:[
+    {p:"howto", ic:"📖", t:"使用说明"}
+  ]}
+];
+
+function setN(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+function renderSideNav(){
+  var nav=document.getElementById("sideNav"); if(!nav)return;
+  var h="";
+  SIDE_NAV.forEach(function(sec){
+    if(sec.g) h+='<div class="sgrp">'+sec.g+'</div>';
+    sec.items.forEach(function(it){
+      /* 只渲染页面上真实存在的面板 —— 免得侧栏出现点了没反应的死链 */
+      if(!document.getElementById(it.p)) return;
+      h+='<a class="sitem" data-side="'+it.p+'"><span class="sic">'+it.ic+'</span>'
+        +'<span class="stx">'+it.t+'</span>'
+        +(it.n?'<span class="sn" id="'+it.n+'">…</span>':'')
+        +(it.nw?'<span class="snew">新</span>':'')+'</a>';
+    });
+  });
+  nav.innerHTML=h;
+  nav.querySelectorAll("a.sitem").forEach(function(a){
+    a.onclick=function(){
+      var b=document.querySelector('.tab[data-p="'+a.getAttribute("data-side")+'"]');
+      if(b)b.click();
+    };
+  });
+  syncSideNav(document.querySelector(".tab.active")
+    ? document.querySelector(".tab.active").dataset.p : "hub");
+}
+function syncSideNav(p){
+  document.querySelectorAll("#sideNav a.sitem").forEach(function(a){
+    a.classList.toggle("on", a.getAttribute("data-side")===p);
+  });
+}
+
+/* ===================================================================
+   实验工具组 —— 全部在浏览器里算,序列不出本机,断网可用。
+   =================================================================== */
+
+/* ---------- 序列清洗 ---------- */
+function cleanSeq(t,alpha){
+  if(!t)return "";
+  /* 去 FASTA 头(可能多条,取全部残基拼接)、数字、空白 */
+  var s=t.replace(/^>.*$/gm,"").replace(/[\s\d]/g,"").toUpperCase();
+  var re=new RegExp("[^"+alpha+"]","g");
+  return s.replace(re,"");
+}
+function esc2(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function terr(id,msg){var e=document.getElementById(id);if(e)e.innerHTML='<div class="terr">'+msg+'</div>';}
+
+/* ===================================================================
+   AMPK 底物基序 PSSM
+   —— 逐行移植自本项目里已校验过的 Python 实现,权重、集合、Ser 加成
+      一个数都没动。tests 里对 6 个已知底物做逐位回归,JS 与 Python 必须完全相等。
+   共识:Φ(−5)-β(−3/−4)-X-X-(S/T)0-X-X-X-Φ(+4)
+   =================================================================== */
+var PSSM_BASIC="RK", PSSM_BASIC_W="RKH", PSSM_HYD="LIVMFA";
+var PSSM_W=[[-6,"basic",0.6],[-5,"hyd",0.8],[-4,"basic",1.5],[-3,"basic",2.0],
+            [-2,"hyd",0.3],[1,"hyd",0.2],[4,"hyd",1.0],[2,"hyd",0.2]];
+
+/* 返回 null 表示该位不是 S/T。detail=true 时附带每一分的来源。 */
+function scoreSite(seq,i,detail){
+  var aa=seq.charAt(i);
+  if(aa!=="S"&&aa!=="T")return null;
+  var sc=0, parts=[];
+  for(var k=0;k<PSSM_W.length;k++){
+    var off=PSSM_W[k][0], kind=PSSM_W[k][1], w=PSSM_W[k][2];
+    var j=i+off; if(j<0||j>=seq.length)continue;
+    var r=seq.charAt(j), add=0;
+    if(kind==="basic"){
+      if(PSSM_BASIC.indexOf(r)>=0)add=w;
+      else if(PSSM_BASIC_W.indexOf(r)>=0)add=w*0.4;   /* His 记 40% */
+    }else if(kind==="hyd"&&PSSM_HYD.indexOf(r)>=0)add=w;
+    if(add){sc+=add; if(detail)parts.push({off:off,res:r,kind:kind,add:add});}
+  }
+  if(aa==="S"){sc+=0.3; if(detail)parts.push({off:0,res:"S",kind:"Ser 偏好",add:0.3});}
+  return detail?{score:sc,parts:parts}:sc;
+}
+function scanSites(seq){
+  var out=[];
+  for(var i=0;i<seq.length;i++){
+    var c=seq.charAt(i);
+    if(c==="S"||c==="T")out.push({pos:i+1,aa:c,score:scoreSite(seq,i)});
+  }
+  return out;
+}
+/* 比较前统一量化到 4 位小数。原因不是美观:权重求和的浮点尾差会让
+   数学上相等的两个分值(如三个都恰好 3.8 的位点)一个算成 3.8000000000000003,
+   于是"并列"被当成"更高",百分位凭空差 0.1。量化后并列就是并列。 */
+function pq(x){ return Math.round(x*1e4)/1e4; }
+function pssmPct(score,bg){
+  var k=pq(score), le=0;
+  for(var i=0;i<bg.length;i++)if(pq(bg[i])<=k)le++;
+  return 100*le/bg.length;
+}
+function pssmRank(score,bg){
+  var k=pq(score), gt=0;
+  for(var i=0;i<bg.length;i++)if(pq(bg[i])>k)gt++;
+  return gt+1;
+}
+function pssmGrade(pct){ return pct>=98?"H":(pct>=95?"M":"L"); }
+
+/* 6 个已知 AMPK 底物,用于界面上现算的校验表。
+   序列取自 UniProt;这里只存位点邻域(±12)不存全长 —— 但百分位需要全长背景,
+   所以校验表里报的是"位点分值"与"该分值在本页内置 ZSWIM8 背景里的位置"以外的东西:
+   见 PSSM_VAL.rank/nST,是构建时用全长算好的,来源写在 note 里。 */
+var PSSM_VAL=[
+  {g:"ULK1",  acc:"O75385", site:"S556",  ctx:"GLGCRLHSAPNLSDL", score:3.8,  rank:7,  nST:170, pct:96.5},
+  {g:"ACACA", acc:"Q13085", site:"S80",   ctx:"LHIRSSMSGLHLVKQ", score:4.04, rank:7,  nST:269, pct:97.8},
+  {g:"RPTOR", acc:"Q8N122", site:"S792",  ctx:"DKMRRASSYSSLNSL", score:6.5,  rank:1,  nST:186, pct:100.0},
+  {g:"TSC2",  acc:"P49815", site:"S1387", ctx:"QPLSKSSSSPELQTL", score:4.1,  rank:11, nST:261, pct:96.2},
+  {g:"PFKFB3",acc:"Q16875", site:"S461",  ctx:"NPLMRRNSVTPLASP", score:4.3,  rank:2,  nST:64,  pct:98.4},
+  {g:"HMGCR", acc:"P04035", site:"S872",  ctx:"SHMIHNRSKINLQDL", score:3.34, rank:9,  nST:123, pct:93.5}
+];
+/* TDMD 复合体 10 蛋白(ZSWIM8/CUL3/ELOB/ELOC/RBX1/ARIH1/AGO1-4)全部 S/T 的分值分布,
+   构建时算好并按分值直方图存下来 —— 用作"跨复合体"背景。存直方图而不是 830 个原始分值,
+   是因为分值本身只有有限档(权重是有限组合),直方图无损且体积小。 */
+var PSSM_POOL_HIST={"0.0": 24, "0.2": 31, "0.24": 4, "0.3": 68, "0.4": 7, "0.44": 1, "0.5": 46, "0.54": 1, "0.6": 13, "0.7": 11, "0.74": 5, "0.8": 33, "0.9": 11, "1.0": 37, "1.04": 4, "1.1": 32, "1.2": 30, "1.24": 1, "1.3": 39, "1.4": 21, "1.44": 1, "1.5": 43, "1.54": 1, "1.6": 27, "1.7": 13, "1.74": 5, "1.8": 44, "1.9": 16, "2.0": 25, "2.04": 1, "2.1": 19, "2.14": 1, "2.2": 8, "2.24": 1, "2.3": 38, "2.4": 15, "2.44": 1, "2.5": 8, "2.54": 1, "2.6": 20, "2.7": 11, "2.74": 1, "2.8": 17, "2.9": 11, "2.94": 1, "3.0": 6, "3.1": 12, "3.2": 4, "3.3": 4, "3.4": 3, "3.5": 4, "3.6": 8, "3.7": 9, "3.8": 3, "3.9": 6, "4.0": 2, "4.04": 2, "4.1": 6, "4.2": 1, "4.3": 2, "4.5": 1, "4.6": 1, "4.7": 1, "4.8": 5, "5.0": 1, "5.6": 1};
+function poolBg(){
+  var a=[],k,i;
+  for(k in PSSM_POOL_HIST){ for(i=0;i<PSSM_POOL_HIST[k];i++)a.push(+k); }
+  return a;
+}
+
+/* ---------- 位点扫描面板 ---------- */
+var SI_LAST=null;                 /* 供 CSV 导出 */
+function renderSiteScan(){
+  var raw=(document.getElementById("siSeq")||{}).value||"";
+  var seq=cleanSeq(raw,"A-Z");
+  var out=document.getElementById("siOut"); if(!out)return;
+  SI_LAST=null;
+  if(!seq){ out.innerHTML='<div class="tok">粘贴一段蛋白序列,或点上面的示例先看效果。</div>'; return; }
+  var bad=seq.replace(/[ACDEFGHIKLMNPQRSTVWY]/g,"");
+  if(bad.length){ terr("siOut","序列里有 "+bad.length+" 个非标准氨基酸字符("+esc2(bad.slice(0,12))
+      +"…)。若这是 DNA,请用「序列工具箱」先翻译。"); return; }
+  var sites=scanSites(seq);
+  if(!sites.length){ terr("siOut","这段序列里一个 S/T 都没有,没有可打分的位点。"); return; }
+  var bgMode=(document.getElementById("siBg")||{}).value||"self";
+  var bg = bgMode==="pool" ? poolBg() : sites.map(function(x){return x.score;});
+  var bgName = bgMode==="pool" ? "TDMD 复合体 10 蛋白合集" : "本序列自身";
+  var minv=+((document.getElementById("siMin")||{}).value||0);
+  var markTxt=(document.getElementById("siMark")||{}).value||"";
+  var marks={}; markTxt.split(/[^\d]+/).forEach(function(x){ if(x)marks[+x]=1; });
+
+  var rows=sites.slice().sort(function(a,b){return b.score-a.score||a.pos-b.pos;});
+  var shown=rows.filter(function(r){return r.score>=minv;});
+  SI_LAST={seq:seq,rows:shown,bg:bg,bgName:bgName};
+
+  var h='<div class="tok">共 <b>'+sites.length+'</b> 个 S/T 位点,显示 <b>'+shown.length
+    +'</b> 个;百分位背景 = '+esc2(bgName)+'(N='+bg.length+')。</div>';
+  h+='<table class="ttable"><tr><th>位点</th><th>分值</th><th>百分位</th><th>档</th>'
+    +'<th>±7 上下文</th><th>分值构成(哪几个残基给的分)</th></tr>';
+  shown.slice(0,300).forEach(function(r){
+    var d=scoreSite(seq,r.pos-1,true);
+    var pct=pssmPct(r.score,bg), g=pssmGrade(pct);
+    var lo=Math.max(0,r.pos-8), hi=Math.min(seq.length,r.pos+7);
+    var ctx="";
+    for(var i=lo;i<hi;i++){
+      var ch=seq.charAt(i);
+      if(i===r.pos-1)ctx+="<b>"+ch+"</b>";
+      else if(d.parts.some(function(p){return p.off!==0&&(r.pos-1+p.off)===i;}))ctx+="<i>"+ch+"</i>";
+      else ctx+=ch;
+    }
+    var pr=d.parts.map(function(p){
+      return p.off===0?"Ser +0.3":(("P"+(p.off>0?"+":"")+p.off)+" "+p.res+" +"+p.add.toFixed(1));
+    }).join(" · ")||"(无匹配,0 分)";
+    h+='<tr'+(marks[r.pos]?' class="hi"':'')+'><td class="mono"><b>'+r.aa+r.pos+'</b></td>'
+      +'<td><b>'+r.score.toFixed(2)+'</b></td><td>'+pct.toFixed(1)+'%</td>'
+      +'<td><span class="gr '+g+'">'+g+'</span></td>'
+      +'<td class="ctxm">'+ctx+'</td><td class="brk">'+pr+'</td></tr>';
+  });
+  h+='</table>';
+  if(shown.length>300)h+='<p class="brk">只显示前 300 行,导出 CSV 看全部。</p>';
+  out.innerHTML=h;
+  LAST_N.tsite={shown:shown.length,total:sites.length};
+}
+function siExportCsv(){
+  if(!SI_LAST||!SI_LAST.rows.length){alert("先扫描一段序列。");return;}
+  var L=["pos,residue,score,percentile,grade,context"];
+  SI_LAST.rows.forEach(function(r){
+    var pct=pssmPct(r.score,SI_LAST.bg);
+    var lo=Math.max(0,r.pos-8),hi=Math.min(SI_LAST.seq.length,r.pos+7);
+    L.push([r.pos,r.aa,r.score.toFixed(3),pct.toFixed(1),pssmGrade(pct),
+            SI_LAST.seq.slice(lo,hi)].join(","));
+  });
+  dlText(L.join("\n"),"pssm_sites.csv","text/csv");
+}
+function dlText(txt,name,mime){
+  var b=new Blob([txt],{type:(mime||"text/plain")+";charset=utf-8"});
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(b); a.download=name; a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1500);
+}
+/* 权重表 + 校验表:在面板里现算现渲染,不写死数字 —— 改了权重这两张表会自己跟着变 */
+function renderPssmTables(){
+  var w=document.getElementById("siWtab");
+  if(w){
+    var h='<tr><th>相对位置</th><th>要求</th><th>权重</th></tr>';
+    PSSM_W.slice().sort(function(a,b){return a[0]-b[0];}).forEach(function(x){
+      h+='<tr><td class="mono">P'+(x[0]>0?"+":"")+x[0]+'</td><td>'
+        +(x[1]==="basic"?"碱性 R/K(H 计 40%)":"疏水 L/I/V/M/F/A")
+        +'</td><td>'+x[2].toFixed(1)+'</td></tr>';
+    });
+    w.innerHTML=h;
+  }
+  var v=document.getElementById("siVtab");
+  if(v){
+    var h2='<tr><th>底物</th><th>位点</th><th>±7 上下文</th><th>本页现算分值</th>'
+      +'<th>在自身蛋白全部 S/T 中排名</th><th>百分位</th></tr>', sum=0;
+    PSSM_VAL.forEach(function(r){
+      /* 现算:用存下来的 ±7 上下文重算中心位点分值,必须等于构建时的 score */
+      var live=scoreSite(r.ctx,7);
+      var okm=(Math.abs(live-r.score)<1e-9);
+      sum+=r.pct;
+      h2+='<tr><td><b>'+r.g+'</b><br><span class="brk">'+r.acc+'</span></td><td class="mono">'+r.site+'</td>'
+        +'<td class="ctxm">'+r.ctx.slice(0,7)+'<b>'+r.ctx.charAt(7)+'</b>'+r.ctx.slice(8)+'</td>'
+        +'<td>'+live.toFixed(2)+(okm?'':' <span style="color:#B71C1C">⚠ 与构建值不符</span>')+'</td>'
+        +'<td>第 '+r.rank+' / '+r.nST+'</td><td><b>'+r.pct.toFixed(1)+'%</b></td></tr>';
+    });
+    h2+='<tr><td colspan="5"><b>6 个已知位点的平均百分位</b></td><td><b>'
+      +(sum/PSSM_VAL.length).toFixed(1)+'%</b></td></tr>';
+    v.innerHTML=h2;
+  }
+}
+
+/* ---------- 序列工具箱 ----------
+   全部为确定性字符串/查表运算,浏览器内完成,序列不出本机。 */
+var CODON={
+ TTT:"F",TTC:"F",TTA:"L",TTG:"L",CTT:"L",CTC:"L",CTA:"L",CTG:"L",
+ ATT:"I",ATC:"I",ATA:"I",ATG:"M",GTT:"V",GTC:"V",GTA:"V",GTG:"V",
+ TCT:"S",TCC:"S",TCA:"S",TCG:"S",CCT:"P",CCC:"P",CCA:"P",CCG:"P",
+ ACT:"T",ACC:"T",ACA:"T",ACG:"T",GCT:"A",GCC:"A",GCA:"A",GCG:"A",
+ TAT:"Y",TAC:"Y",TAA:"*",TAG:"*",CAT:"H",CAC:"H",CAA:"Q",CAG:"Q",
+ AAT:"N",AAC:"N",AAA:"K",AAG:"K",GAT:"D",GAC:"D",GAA:"E",GAG:"E",
+ TGT:"C",TGC:"C",TGA:"*",TGG:"W",CGT:"R",CGC:"R",CGA:"R",CGG:"R",
+ AGT:"S",AGC:"S",AGA:"R",AGG:"R",GGT:"G",GGC:"G",GGA:"G",GGG:"G"};
+/* 单字母 → 平均残基质量(Da,已扣除缩合失水;水在末尾统一加回) */
+var AAMASS={A:71.0788,R:156.1875,N:114.1038,D:115.0886,C:103.1388,E:129.1155,Q:128.1307,
+ G:57.0519,H:137.1411,I:113.1594,L:113.1594,K:128.1741,M:131.1926,F:147.1766,P:97.1167,
+ S:87.0782,T:101.1051,W:186.2132,Y:163.1760,V:99.1326};
+/* Kyte-Doolittle 疏水指数 */
+var KD={A:1.8,R:-4.5,N:-3.5,D:-3.5,C:2.5,E:-3.5,Q:-3.5,G:-0.4,H:-3.2,I:4.5,L:3.8,K:-3.9,
+ M:1.9,F:2.8,P:-1.6,S:-0.8,T:-0.7,W:-0.9,Y:-1.3,V:4.2};
+/* 侧链 pKa(Bjellqvist),用于等电点二分法 */
+var PKA={cterm:3.55,nterm:7.5,D:4.05,E:4.45,C:9.0,Y:10.0,H:5.98,K:10.0,R:12.0};
+
+function revComp(d){
+  var m={A:"T",T:"A",G:"C",C:"G",N:"N",U:"A"},o="";
+  for(var i=d.length-1;i>=0;i--)o+=(m[d.charAt(i)]||"N");
+  return o;
+}
+function translate(d,frame){
+  var o="",st=(frame||0);
+  for(var i=st;i+2<d.length;i+=3){var c=CODON[d.substr(i,3)];o+=(c||"X");}
+  return o;
+}
+function gcPct(d){
+  var g=0,n=0;
+  for(var i=0;i<d.length;i++){var c=d.charAt(i);
+    if(c==="G"||c==="C")g++; if("ACGT".indexOf(c)>=0)n++;}
+  return n?100*g/n:0;
+}
+/* Tm:<14 nt 用 Wallace,≥14 nt 用盐校正近似式(明确标注用了哪一个) */
+function tmOf(d){
+  var a=0,t=0,g=0,c=0;
+  for(var i=0;i<d.length;i++){var x=d.charAt(i);
+    if(x==="A")a++;else if(x==="T")t++;else if(x==="G")g++;else if(x==="C")c++;}
+  var n=a+t+g+c; if(!n)return {tm:0,how:"—"};
+  if(n<14) return {tm:2*(a+t)+4*(g+c), how:"Wallace 2(A+T)+4(G+C)"};
+  return {tm:64.9+41*(g+c-16.4)/n, how:"盐校正近似式(0.05 M Na⁺)"};
+}
+function pIof(p){
+  var cnt={D:0,E:0,C:0,Y:0,H:0,K:0,R:0};
+  for(var i=0;i<p.length;i++){var c=p.charAt(i); if(c in cnt)cnt[c]++;}
+  function q(ph){
+    var z=1/(1+Math.pow(10,ph-PKA.nterm)) - 1/(1+Math.pow(10,PKA.cterm-ph));
+    z+= cnt.K/(1+Math.pow(10,ph-PKA.K)) + cnt.R/(1+Math.pow(10,ph-PKA.R))
+      + cnt.H/(1+Math.pow(10,ph-PKA.H));
+    z-= cnt.D/(1+Math.pow(10,PKA.D-ph)) + cnt.E/(1+Math.pow(10,PKA.E-ph))
+      + cnt.C/(1+Math.pow(10,PKA.C-ph)) + cnt.Y/(1+Math.pow(10,PKA.Y-ph));
+    return z;
+  }
+  var lo=0,hi=14,mid;
+  for(var k=0;k<100;k++){ mid=(lo+hi)/2; if(q(mid)>0)lo=mid; else hi=mid; }
+  return mid;
+}
+function mwOf(p){
+  var m=18.01528,unk=0;
+  for(var i=0;i<p.length;i++){var v=AAMASS[p.charAt(i)];
+    if(v===undefined)unk++; else m+=v;}
+  return {mw:m,unk:unk};
+}
+function gravyOf(p){
+  var s=0,n=0;
+  for(var i=0;i<p.length;i++){var v=KD[p.charAt(i)]; if(v!==undefined){s+=v;n++;}}
+  return n?s/n:0;
+}
+/* 常用限制酶(回文识别序列;^ 表示切点) */
+var RENZ=[["EcoRI","G^AATTC"],["BamHI","G^GATCC"],["HindIII","A^AGCTT"],["XhoI","C^TCGAG"],
+ ["SalI","G^TCGAC"],["NotI","GC^GGCCGC"],["XbaI","T^CTAGA"],["SpeI","A^CTAGT"],
+ ["KpnI","GGTAC^C"],["SacI","GAGCT^C"],["PstI","CTGCA^G"],["SmaI","CCC^GGG"],
+ ["NcoI","C^CATGG"],["NdeI","CA^TATG"],["BglII","A^GATCT"],["EcoRV","GAT^ATC"],
+ ["ApaI","GGGCC^C"],["AgeI","A^CCGGT"],["MluI","A^CGCGT"],["NheI","G^CTAGC"]];
+
+function isDNAseq(seq){
+  return seq.length ? (seq.replace(/[ACGTUN]/g,"").length / seq.length) < 0.1 : false;
+}
+function needDNA(id,seq){
+  if(isDNAseq(seq))return true;
+  terr(id,"这个操作需要 DNA/RNA 序列,但粘贴进来的看起来是蛋白序列(非 ACGTUN 字符占比过高)。");
+  return false;
+}
+function needProt(id,seq){
+  if(!isDNAseq(seq))return true;
+  terr(id,"这个操作需要蛋白序列,但粘贴进来的看起来是 DNA。可先用「六框翻译」拿到蛋白序列。");
+  return false;
+}
+function renderSeqTool(){
+  var out=document.getElementById("sqOut"); if(!out)return;
+  var raw=(document.getElementById("sqSeq")||{}).value||"";
+  if(!raw.trim()){ out.innerHTML='<div class="tok">粘贴 DNA/RNA 或蛋白序列(FASTA 头会自动去掉),选一个操作,点运行。</div>'; return; }
+  var seq=cleanSeq(raw,"A-Z");
+  if(!seq){ terr("sqOut","清洗之后没剩下任何序列字符,检查一下粘贴的内容。"); return; }
+  var op=(document.getElementById("sqOp")||{}).value||"rc";
+  var dna=seq.replace(/U/g,"T");
+  var h="";
+  if(op==="rc"){
+    if(!needDNA("sqOut",seq))return;
+    h='<div class="tok">反向互补(5\u2032→3\u2032),'+dna.length+' nt。</div><pre class="tpre">'+fasta60(revComp(dna))+'</pre>';
+  } else if(op==="tx"){
+    if(!needDNA("sqOut",seq))return;
+    h='<div class="tok">转录为 RNA(T→U),'+dna.length+' nt。</div><pre class="tpre">'+fasta60(dna.replace(/T/g,"U"))+'</pre>';
+  } else if(op==="tr6"){
+    if(!needDNA("sqOut",seq))return;
+    h='<div class="tok">六框翻译。* = 终止密码子,X = 含 N 的密码子。</div>';
+    var rc=revComp(dna);
+    [0,1,2].forEach(function(f){ h+='<div class="fr"><b>+'+(f+1)+'</b><pre class="tpre">'+fasta60(translate(dna,f))+'</pre></div>'; });
+    [0,1,2].forEach(function(f){ h+='<div class="fr"><b>−'+(f+1)+'</b><pre class="tpre">'+fasta60(translate(rc,f))+'</pre></div>'; });
+  } else if(op==="orf"){
+    if(!needDNA("sqOut",seq))return;
+    var minaa=+((document.getElementById("sqMin")||{}).value||50);
+    var starts=((document.getElementById("sqStart")||{}).value==="any")?["ATG","GTG","TTG"]:["ATG"];
+    var orfs=findORFs(dna,minaa,starts);
+    if(!orfs.length){ terr("sqOut","6 个阅读框里没有 ≥"+minaa+" aa 的 ORF(起始密码子:"+starts.join("/")+")。把最短长度调小,或改用 ATG/GTG/TTG。"); return; }
+    h='<div class="tok">找到 <b>'+orfs.length+'</b> 个 ≥'+minaa+' aa 的 ORF。坐标按输入正链 1-based。</div>'
+     +'<table class="ttable"><tr><th>框</th><th>起</th><th>止</th><th>长度(aa)</th><th>起始子</th><th>蛋白(前 60 aa)</th></tr>';
+    orfs.slice(0,60).forEach(function(o){
+      h+='<tr><td class="mono">'+o.frame+'</td><td>'+o.start+'</td><td>'+o.end+'</td><td><b>'+o.aa.length
+        +'</b></td><td class="mono">'+o.codon+'</td><td class="ctxm">'+esc2(o.aa.slice(0,60))+(o.aa.length>60?'…':'')+'</td></tr>';
+    });
+    h+='</table>'+(orfs.length>60?'<p class="brk">只显示最长的 60 个。</p>':'');
+  } else if(op==="gc"){
+    if(!needDNA("sqOut",seq))return;
+    h=gcReport(dna, +((document.getElementById("sqWin")||{}).value||50));
+  } else if(op==="re"){
+    if(!needDNA("sqOut",seq))return;
+    h=reReport(dna);
+  } else if(op==="pp"){
+    if(!needProt("sqOut",seq))return;
+    h=protReport(seq);
+  }
+  out.innerHTML=h;
+  LAST_N.tseq={len:seq.length,op:op};
+}
+function fasta60(x){
+  var o=""; for(var i=0;i<x.length;i+=60)o+=x.substr(i,60)+"\n"; return esc2(o);
+}
+function findORFs(d,minaa,starts){
+  var res=[],srcs=[{s:d,dir:1},{s:revComp(d),dir:-1}],L=d.length;
+  srcs.forEach(function(S){
+    for(var f=0;f<3;f++){
+      var i=f;
+      while(i+2<S.s.length){
+        var cod=S.s.substr(i,3);
+        if(starts.indexOf(cod)>=0){
+          var aa="",j=i;
+          while(j+2<S.s.length){
+            var c=CODON[S.s.substr(j,3)]||"X";
+            if(c==="*")break;
+            aa+=(j===i?"M":c); j+=3;      /* 非 ATG 起始在细菌中也装载 fMet */
+          }
+          if(aa.length>=minaa){
+            res.push({frame:(S.dir>0?"+":"−")+(f+1), codon:cod,
+                      start:(S.dir>0? i+1 : L-i),
+                      end:  (S.dir>0? j+3 : L-j-2), aa:aa});
+            i=j+3; continue;
+          }
+        }
+        i+=3;
+      }
+    }
+  });
+  return res.sort(function(a,b){return b.aa.length-a.aa.length;});
+}
+function gcReport(d,w){
+  var tot=gcPct(d), tm=tmOf(d);
+  var h='<table class="ttable"><tr><th>指标</th><th>值</th><th>怎么算的</th></tr>'
+   +'<tr><td>长度</td><td><b>'+d.length+'</b> nt</td><td>清洗后字符数</td></tr>'
+   +'<tr><td>GC%(全长)</td><td><b>'+tot.toFixed(2)+'%</b></td><td>(G+C)/(A+C+G+T)</td></tr>'
+   +'<tr><td>Tm</td><td><b>'+tm.tm.toFixed(1)+' °C</b></td><td>'+tm.how+'</td></tr>'
+   +'<tr><td>ssDNA 分子量</td><td>'+(d.length*325/1000).toFixed(1)+' kDa</td>'
+   +'<td class="brk">按 325 Da/nt 粗估,只用于判断量级</td></tr></table>';
+  if(d.length<w) return h+'<p class="brk">序列比窗口('+w+' nt)还短,不画分布。</p>';
+  var vals=[],i,j;
+  for(i=0;i+w<=d.length;i++){
+    var g=0,n=0;
+    for(j=i;j<i+w;j++){var c=d.charAt(j); if(c==="G"||c==="C")g++; if("ACGT".indexOf(c)>=0)n++;}
+    vals.push({pos:i+1+Math.floor(w/2), v:n?100*g/n:0});
+  }
+  var W=Math.min(760,vals.length), step=Math.max(1,Math.round(vals.length/W)), pts=[];
+  for(i=0;i<vals.length;i+=step) pts.push((i/vals.length*W).toFixed(1)+","+(110-vals[i].v).toFixed(1));
+  var hi=vals.slice().sort(function(a,b){return b.v-a.v;})[0];
+  var lo=vals.slice().sort(function(a,b){return a.v-b.v;})[0];
+  h+='<div class="tok">'+w+' nt 滑窗 GC%。虚线 = 全长均值 '+tot.toFixed(1)+'%;'
+   +'最高 '+hi.v.toFixed(1)+'%(中心 '+hi.pos+'),最低 '+lo.v.toFixed(1)+'%(中心 '+lo.pos+')。</div>'
+   +'<svg class="tsvg" viewBox="0 0 '+W+' 120" preserveAspectRatio="none">'
+   +'<line x1="0" y1="'+(110-tot).toFixed(1)+'" x2="'+W+'" y2="'+(110-tot).toFixed(1)
+   +'" stroke="#CBD5E1" stroke-dasharray="4 3"/>'
+   +'<polyline fill="none" stroke="#4A148C" stroke-width="1.4" points="'+pts.join(" ")+'"/></svg>';
+  return h;
+}
+function reScan(d){
+  var rows=[];
+  RENZ.forEach(function(e){
+    var site=e[1].replace("^",""), cut=e[1].indexOf("^"), hits=[],i=0;
+    while(true){ i=d.indexOf(site,i); if(i<0)break; hits.push(i+1+cut); i++; }
+    rows.push({name:e[0],site:e[1],n:hits.length,pos:hits});
+  });
+  rows.sort(function(a,b){return a.n-b.n||a.name.localeCompare(b.name);});
+  return rows;
+}
+function reReport(d){
+  var rows=reScan(d);
+  var uniq=rows.filter(function(r){return r.n===1;}).length;
+  var h='<div class="tok">扫了 '+RENZ.length+' 个常用酶,其中 <b>'+uniq+'</b> 个在这段序列里是单切点(适合线性化/亚克隆)。'
+   +'只在给定这一条链上按回文识别序列直接匹配,不考虑甲基化敏感性与星号活性。</div>'
+   +'<table class="ttable"><tr><th>酶</th><th>识别序列</th><th>切点数</th><th>位置(切口后第 1 个碱基,1-based)</th></tr>';
+  rows.forEach(function(r){
+    var tag = r.n===0 ? '<span class="gr L">0</span>' : (r.n===1?'<span class="gr H">1 · 单切</span>':'<span class="gr M">'+r.n+'</span>');
+    h+='<tr'+(r.n===1?' class="hi"':'')+'><td><b>'+r.name+'</b></td><td class="ctxm">'+r.site+'</td>'
+      +'<td>'+tag+'</td><td class="brk">'+(r.pos.length?r.pos.slice(0,20).join(", ")+(r.pos.length>20?" …":""):"—")+'</td></tr>';
+  });
+  return h+'</table>';
+}
+function protReport(p){
+  var m=mwOf(p), ext=extCoef(p), n=p.length;
+  var h='<table class="ttable"><tr><th>指标</th><th>值</th><th>怎么算的</th></tr>'
+   +'<tr><td>长度</td><td><b>'+n+'</b> aa</td><td>清洗后字符数</td></tr>'
+   +'<tr><td>分子量</td><td><b>'+(m.mw/1000).toFixed(2)+' kDa</b></td>'
+   +'<td>平均残基质量求和 + 1 个水'
+   +(m.unk?'<br><span style="color:#9B1C1C">'+m.unk+' 个未知字符已跳过</span>':'')+'</td></tr>'
+   +'<tr><td>理论 pI</td><td><b>'+pIof(p).toFixed(2)+'</b></td><td>Bjellqvist pKa,净电荷二分求零点</td></tr>'
+   +'<tr><td>GRAVY</td><td><b>'+gravyOf(p).toFixed(3)+'</b></td><td>Kyte-Doolittle 疏水指数均值</td></tr>'
+   +'<tr><td>消光系数 ε₂₈₀(全氧化)</td><td><b>'+ext.ox+'</b> M⁻¹cm⁻¹</td>'
+   +'<td>Gill &amp; von Hippel:5500·W + 1490·Y + 125·胱氨酸</td></tr>'
+   +'<tr><td>ε₂₈₀(全还原)</td><td>'+ext.red+' M⁻¹cm⁻¹</td><td>不计二硫键</td></tr>'
+   +'<tr><td>A₂₈₀ of 1 mg/mL</td><td><b>'+(m.mw?(ext.ox/m.mw).toFixed(3):"—")+'</b></td>'
+   +'<td>ε/分子量,分光光度计定量时用</td></tr>'
+   +'<tr><td>W / Y / C 计数</td><td class="mono">'+ext.W+' / '+ext.Y+' / '+ext.C+'</td>'
+   +'<td class="brk">'+(ext.W===0?'不含色氨酸 → ε 很小,A₂₈₀ 定量不可靠,建议改用 BCA':'—')+'</td></tr>'
+   +'<tr><td>S/T 位点数</td><td>'+scanSites(p).length+'</td><td>可直接送「AMPK 位点扫描」打分</td></tr>'
+   +'</table>'+compTable(p);
+  return h;
+}
+function extCoef(p){
+  var W=0,Y=0,C=0;
+  for(var i=0;i<p.length;i++){var c=p.charAt(i);
+    if(c==="W")W++;else if(c==="Y")Y++;else if(c==="C")C++;}
+  var red=5500*W+1490*Y;
+  return {W:W,Y:Y,C:C,red:red,ox:red+125*Math.floor(C/2)};
+}
+function compTable(seq){
+  var c={},i;
+  for(i=0;i<seq.length;i++)c[seq.charAt(i)]=(c[seq.charAt(i)]||0)+1;
+  var ks=Object.keys(c).sort(function(a,b){return c[b]-c[a]||a.localeCompare(b);});
+  var h='<table class="ttable"><tr><th>残基</th><th>计数</th><th>占比</th><th></th></tr>';
+  ks.forEach(function(k){
+    var pc=100*c[k]/seq.length;
+    h+='<tr><td class="mono"><b>'+esc2(k)+'</b></td><td>'+c[k]+'</td><td>'+pc.toFixed(2)+'%</td>'
+      +'<td><span class="bar" style="width:'+Math.max(1,Math.round(pc*4))+'px"></span></td></tr>';
+  });
+  return h+'</table>';
+}
+
+/* ---------- 密码子表 ----------
+   不是抄来的数字:由每个物种 20 条高表达基因的真实 CDS(核糖体蛋白 + 糖酵解/翻译因子)
+   现算的相对适应度 w = 该密码子频次 / 同义框内最高频次(Sharp & Li 1987)。
+   来源:人/小鼠/酵母 CDS 取自 Ensembl 规范转录本,大肠杆菌取自 ENA。
+   自检:各物种参考集自身 CAI 0.72–0.82;人的 CDS 用大肠杆菌表打分掉到 0.27。 */
+var CODON_W={"human":{"AAA":0.3695,"AAC":1.0,"AAG":1.0,"AAT":0.633,"ACA":0.3582,"ACC":1.0,"ACG":0.1244,"ACT":0.7214,"AGA":0.4915,"AGC":0.8362,"AGG":0.4576,"AGT":0.4138,"ATA":0.0804,"ATC":1.0,"ATG":1.0,"ATT":0.549,"CAA":0.1743,"CAC":1.0,"CAG":1.0,"CAT":0.6882,"CCA":0.6377,"CCC":1.0,"CCG":0.1159,"CCT":0.8551,"CGA":0.4153,"CGC":1.0,"CGG":0.5847,"CGT":0.7458,"CTA":0.0957,"CTC":0.461,"CTG":1.0,"CTT":0.273,"GAA":0.509,"GAC":1.0,"GAG":1.0,"GAT":0.8259,"GCA":0.3287,"GCC":1.0,"GCG":0.1364,"GCT":0.8986,"GGA":0.4335,"GGC":1.0,"GGG":0.5171,"GGT":0.5513,"GTA":0.1637,"GTC":0.6406,"GTG":1.0,"GTT":0.427,"TAA":1.0,"TAC":1.0,"TAG":1.0,"TAT":0.627,"TCA":0.3017,"TCC":1.0,"TCG":0.1724,"TCT":0.9138,"TGA":1.0,"TGC":1.0,"TGG":1.0,"TGT":0.5694,"TTA":0.0496,"TTC":1.0,"TTG":0.2695,"TTT":0.6213},"mouse":{"AAA":0.3481,"AAC":1.0,"AAG":1.0,"AAT":0.623,"ACA":0.385,"ACC":1.0,"ACG":0.13,"ACT":0.655,"AGA":0.4587,"AGC":0.7787,"AGG":0.633,"AGT":0.4262,"ATA":0.0414,"ATC":1.0,"ATG":1.0,"ATT":0.5724,"CAA":0.1468,"CAC":1.0,"CAG":1.0,"CAT":0.7442,"CCA":0.768,"CCC":0.936,"CCG":0.128,"CCT":1.0,"CGA":0.633,"CGC":1.0,"CGG":0.5321,"CGT":0.7523,"CTA":0.0714,"CTC":0.4123,"CTG":1.0,"CTT":0.2078,"GAA":0.4749,"GAC":1.0,"GAG":1.0,"GAT":0.7308,"GCA":0.4145,"GCC":1.0,"GCG":0.1236,"GCT":0.9164,"GGA":0.4901,"GGC":1.0,"GGG":0.4506,"GGT":0.6364,"GTA":0.1262,"GTC":0.5081,"GTG":1.0,"GTT":0.3883,"TAA":1.0,"TAC":1.0,"TAG":1.0,"TAT":0.5682,"TCA":0.2049,"TCC":1.0,"TCG":0.1066,"TCT":0.9098,"TGA":1.0,"TGC":1.0,"TGG":1.0,"TGT":0.7206,"TTA":0.0422,"TTC":1.0,"TTG":0.2143,"TTT":0.4696},"ecoli":{"AAA":1.0,"AAC":1.0,"AAG":0.1859,"AAT":0.0585,"ACA":0.0344,"ACC":1.0,"ACG":0.0534,"ACT":0.7901,"AGA":0.005,"AGC":0.3224,"AGG":0.005,"AGT":0.0492,"ATA":0.005,"ATC":1.0,"ATG":1.0,"ATT":0.1715,"CAA":0.0898,"CAC":1.0,"CAG":1.0,"CAT":0.2619,"CCA":0.1724,"CCC":0.0086,"CCG":1.0,"CCT":0.125,"CGA":0.0109,"CGC":0.3723,"CGG":0.005,"CGT":1.0,"CTA":0.005,"CTC":0.0482,"CTG":1.0,"CTT":0.0275,"GAA":1.0,"GAC":1.0,"GAG":0.1972,"GAT":0.432,"GCA":0.5687,"GCC":0.1759,"GCG":0.4458,"GCT":1.0,"GGA":0.0087,"GGC":0.6551,"GGG":0.013,"GGT":1.0,"GTA":0.5134,"GTC":0.0709,"GTG":0.2249,"GTT":1.0,"TAA":1.0,"TAC":1.0,"TAG":1.0,"TAT":0.3091,"TCA":0.0492,"TCC":0.7104,"TCG":0.0164,"TCT":1.0,"TGA":1.0,"TGC":1.0,"TGG":1.0,"TGT":0.5,"TTA":0.0172,"TTC":1.0,"TTG":0.0207,"TTT":0.2452},"yeast":{"AAA":0.1317,"AAC":1.0,"AAG":1.0,"AAT":0.0892,"ACA":0.0474,"ACC":1.0,"ACG":0.005,"ACT":0.9138,"AGA":1.0,"AGC":0.0622,"AGG":0.0165,"AGT":0.04,"ATA":0.0127,"ATC":1.0,"ATG":1.0,"ATT":0.9198,"CAA":1.0,"CAC":1.0,"CAG":0.0146,"CAT":0.2439,"CCA":1.0,"CCC":0.0068,"CCG":0.005,"CCT":0.0819,"CGA":0.005,"CGC":0.005,"CGG":0.005,"CGT":0.1452,"CTA":0.0412,"CTC":0.005,"CTG":0.005,"CTT":0.0152,"GAA":1.0,"GAC":1.0,"GAG":0.0466,"GAT":0.6032,"GCA":0.02,"GCC":0.28,"GCG":0.0055,"GCT":1.0,"GGA":0.0067,"GGC":0.0219,"GGG":0.0067,"GGT":1.0,"GTA":0.0089,"GTC":0.8899,"GTG":0.0327,"GTT":1.0,"TAA":1.0,"TAC":1.0,"TAG":1.0,"TAT":0.0444,"TCA":0.0667,"TCC":0.7378,"TCG":0.0133,"TCT":1.0,"TGA":1.0,"TGC":0.069,"TGG":1.0,"TGT":1.0,"TTA":0.128,"TTC":1.0,"TTG":1.0,"TTT":0.1454}};
+var CODON_N={human:"人 Homo sapiens",mouse:"小鼠 Mus musculus",
+             ecoli:"大肠杆菌 E. coli K-12",yeast:"酿酒酵母 S. cerevisiae"};
+var SYN=(function(){var m={},c; for(c in CODON){ (m[CODON[c]]=m[CODON[c]]||[]).push(c); } return m;})();
+
+function caiOf(sq,w){
+  var ls=[],n=0;
+  for(var i=0;i+2<sq.length;i+=3){
+    var c=sq.substr(i,3), a=CODON[c];
+    if(!a||a==="*")continue;
+    if(SYN[a].length<2)continue;          /* Met/Trp 无同义选择,不计入 */
+    ls.push(Math.log(w[c]||0.005)); n++;
+  }
+  if(!n)return 0;
+  var s=0; for(i=0;i<ls.length;i++)s+=ls[i];
+  return Math.exp(s/n);
+}
+function renderPrimerTool(){
+  var out=document.getElementById("prOut"); if(!out)return;
+  var raw=(document.getElementById("prSeq")||{}).value||"";
+  if(!raw.trim()){ out.innerHTML='<div class="tok">粘贴模板 DNA(设计引物)或完整 CDS(算 CAI / 做优化),再点运行。</div>'; return; }
+  var seq=cleanSeq(raw,"A-Z").replace(/U/g,"T");
+  if(!needDNA("prOut",seq))return;
+  var mode=(document.getElementById("prMode")||{}).value||"pcr";
+  if(mode==="pcr")      out.innerHTML=pcrDesign(seq);
+  else if(mode==="cai") out.innerHTML=caiReport(seq);
+  else                  out.innerHTML=codonOpt(seq);
+  LAST_N.tprimer={len:seq.length,mode:mode};
+}
+/* ---- PCR 引物对 ---- */
+function primerQC(p){
+  var gc=gcPct(p), notes=[], ok=true;
+  if(gc<40||gc>60){ notes.push("GC "+gc.toFixed(0)+"% 偏"+(gc<40?"低":"高")); ok=false; }
+  var run=/(A{5,}|T{5,}|G{4,}|C{4,})/.exec(p);
+  if(run){ notes.push("有 "+run[0].length+" 连碱基 "+run[0].charAt(0)); ok=false; }
+  var last5=p.slice(-5), clamp=(last5.match(/[GC]/g)||[]).length;
+  if(clamp===0){ notes.push("3\u2032 端 5 nt 无 G/C,结合弱"); ok=false; }
+  if(clamp>3){ notes.push("3\u2032 端 GC 太多,易错配延伸"); ok=false; }
+  var sd=maxComp(p,revComp(p));
+  if(sd>=5){ notes.push("自身互补 "+sd+" bp,可能发夹"); ok=false; }
+  return {ok:ok,gc:gc,notes:notes,clamp:clamp};
+}
+function maxComp(a,b){
+  var best=0;
+  for(var off=-(b.length-1);off<a.length;off++){
+    var run=0;
+    for(var i=0;i<a.length;i++){
+      var j=i-off; if(j<0||j>=b.length){run=0;continue;}
+      if(pairOK(a.charAt(i),b.charAt(j))){run++; if(run>best)best=run;} else run=0;
+    }
+  }
+  return best;
+}
+function pairOK(x,y){return (x==="A"&&y==="T")||(x==="T"&&y==="A")||(x==="G"&&y==="C")||(x==="C"&&y==="G");}
+/* 计算与呈现分开:pcrCompute 只算、不碰 DOM、不产 HTML,
+   页面和测试用同一条计算路径。测试断言打在 pcrCompute 上,
+   否则只能去抓 HTML 字符串,既脆又测不到数值本身。 */
+function pcrCompute(seq,opt){
+  opt=opt||{};
+  var tgt=opt.tm, tol=opt.tol, lo=opt.lo, hi=opt.hi;
+  if(tgt===undefined)tgt=+((document.getElementById("prTm")||{}).value||60);
+  if(tol===undefined)tol=+((document.getElementById("prTol")||{}).value||1.5);
+  if(lo===undefined||hi===undefined){
+    var lr=((document.getElementById("prLen")||{}).value||"18-27").split("-");
+    if(lo===undefined)lo=+lr[0]||18;
+    if(hi===undefined)hi=+lr[1]||27;
+  }
+  lo=Math.max(15,lo); hi=Math.min(35,hi);
+  if(seq.length<2*hi+30)
+    return {err:"模板只有 "+seq.length+" nt,太短,放不下一对 "+lo+"–"+hi
+      +" nt 的引物和中间的扩增区。至少给 "+(2*hi+30)+" nt。"};
+  var win=Math.min(220,Math.floor(seq.length/3));
+  var F=[],R=[],i,L;
+  for(i=0;i<win;i++)for(L=lo;L<=hi;L++){
+    if(i+L>seq.length)break;
+    var p=seq.substr(i,L), t=tmOf(p).tm;
+    if(Math.abs(t-tgt)<=tol){ F.push({seq:p,pos:i+1,tm:t,qc:primerQC(p)}); }
+  }
+  var rcs=revComp(seq);
+  for(i=0;i<win;i++)for(L=lo;L<=hi;L++){
+    if(i+L>rcs.length)break;
+    var p2=rcs.substr(i,L), t2=tmOf(p2).tm;
+    if(Math.abs(t2-tgt)<=tol){ R.push({seq:p2,pos:seq.length-i,tm:t2,qc:primerQC(p2)}); }
+  }
+  if(!F.length||!R.length)
+    return {err:"在 Tm "+tgt+"±"+tol+" ℃、长度 "+lo+"–"+hi+" nt 的条件下,"
+      +(!F.length?"正向":"反向")+"引物一个都没找到。把 Tm 容差放宽到 ±3,或把长度范围放宽,再试一次。",
+      nF:F.length,nR:R.length,pairs:[]};
+  var pairs=[];
+  F.forEach(function(f){ R.forEach(function(r){
+    var amp=r.pos-f.pos+1; if(amp<80||amp>1200)return;
+    var cross=maxComp(f.seq,r.seq);
+    var pen=Math.abs(f.tm-r.tm)*2 + (f.qc.ok?0:3) + (r.qc.ok?0:3) + Math.max(0,cross-4)*1.5;
+    pairs.push({f:f,r:r,amp:amp,dTm:Math.abs(f.tm-r.tm),cross:cross,pen:pen});
+  });});
+  if(!pairs.length)
+    return {err:"找到了单条引物,但没有一对能凑出 80–1200 bp 的产物。"
+      +"换一段更长的模板,或放宽 Tm 条件让更多位置入选。",nF:F.length,nR:R.length,pairs:[]};
+  pairs.sort(function(a,b){return a.pen-b.pen;});
+  return {nF:F.length,nR:R.length,pairs:pairs,tgt:tgt,tol:tol,how:tmOf(F[0].seq).how};
+}
+function pcrDesign(seq){
+  var d=pcrCompute(seq);
+  if(d.err) return '<div class="terr">'+esc2(d.err)+'</div>';
+  var h='<div class="tok">从 '+d.nF+' 条候选正向 × '+d.nR+' 条反向里,筛出 '+d.pairs.length
+    +' 对合规组合,按综合罚分排序取前 8。Tm 用'+d.how+'。</div>'
+    +'<table class="ttable"><tr><th>#</th><th>引物</th><th>序列 5\u2032→3\u2032</th><th>位置</th>'
+    +'<th>长</th><th>Tm</th><th>GC%</th><th>产物</th><th>提醒</th></tr>';
+  d.pairs.slice(0,8).forEach(function(p,k){
+    [["F",p.f],["R",p.r]].forEach(function(x,ri){
+      var o=x[1];
+      h+='<tr'+(ri===0?' class="hi"':'')+'>'+(ri===0?'<td rowspan="2"><b>'+(k+1)+'</b></td>':'')
+        +'<td><b>'+x[0]+'</b></td><td class="ctxm">'+o.seq+'</td><td>'+o.pos+'</td><td>'+o.seq.length+'</td>'
+        +'<td>'+o.tm.toFixed(1)+'</td><td>'+o.qc.gc.toFixed(0)+'</td>'
+        +(ri===0?'<td rowspan="2"><b>'+p.amp+'</b> bp<br><span class="brk">ΔTm '+p.dTm.toFixed(1)
+          +'<br>互补 '+p.cross+' bp</span></td>':'')
+        +'<td class="brk">'+(o.qc.notes.length?esc2(o.qc.notes.join(";")):"—")+'</td></tr>';
+    });
+  });
+  h+='</table><p class="brk">只做序列层面的筛选:Tm、GC、3\u2032 钳位、连碱基、自身/相互互补。'
+    +'不检查基因组唯一性——上机前请把候选引物拿去 BLAST 比对特异性。</p>';
+  return h;
+}
+/* 计算与呈现分开:optCompute / caiCompute 只算,不碰 DOM、不产 HTML。
+   页面和测试跑同一条计算路径;断言打在返回的数值上,而不是去抓 HTML 字符串。 */
+function optCompute(seq,sp,avoidList){
+  var w=CODON_W[sp];
+  if(!w) return {err:"没有 "+sp+" 的密码子表。"};
+  if(seq.length%3) return {err:"优化要按密码子重写,序列长度 "+seq.length
+    +" nt 不是 3 的倍数。请粘贴完整 CDS。"};
+  var avoid=[];
+  (avoidList||[]).forEach(function(n){
+    n=String(n).trim(); if(!n)return;
+    var e=RENZ.filter(function(x){return x[0].toLowerCase()===n.toLowerCase();})[0];
+    if(e)avoid.push({name:e[0],site:e[1].replace("^","")});
+    else if(/^[ACGT]+$/i.test(n))avoid.push({name:n.toUpperCase(),site:n.toUpperCase()});
+    else avoid.push({name:n,site:null});
+  });
+  var unknown=avoid.filter(function(a){return !a.site;}).map(function(a){return a.name;});
+  var use=avoid.filter(function(a){return a.site;});
+  var outSeq="",i,changed=0;
+  for(i=0;i+2<seq.length;i+=3){
+    var cd=seq.substr(i,3), a=CODON[cd];
+    if(!a){ outSeq+=cd; continue; }
+    var cands=SYN[a].slice().sort(function(x,y){return (w[y]||0)-(w[x]||0);});
+    var pick=cands[0];
+    for(var k=0;k<cands.length;k++){
+      var trial=outSeq.slice(-8)+cands[k];
+      var bad=use.some(function(e){return trial.indexOf(e.site)>=0;});
+      if(!bad){ pick=cands[k]; break; }
+    }
+    if(pick!==cd)changed++;
+    outSeq+=pick;
+  }
+  var still=use.filter(function(e){return outSeq.indexOf(e.site)>=0;}).map(function(e){return e.name;});
+  return {seq:outSeq, sp:sp, changed:changed, nCodon:seq.length/3,
+          before:caiOf(seq,w), after:caiOf(outSeq,w),
+          same:(translate(seq,0)===translate(outSeq,0)),
+          asked:use.map(function(e){return e.name;}), unavoid:still, unknown:unknown};
+}
+function codonOpt(seq){
+  var sp=(document.getElementById("prSp")||{}).value||"human";
+  var avoidTxt=((document.getElementById("prAvoid")||{}).value||"").trim();
+  var d=optCompute(seq,sp,avoidTxt?avoidTxt.split(/[,,;\s]+/):[]);
+  if(d.err) return '<div class="terr">'+esc2(d.err)+'</div>';
+  var h='';
+  if(d.unknown.length)h+='<div class="terr">不认识这些名字:'+esc2(d.unknown.join("、"))
+    +'。请用工具内置的酶名(EcoRI、BamHI 这类)或直接写识别序列(如 GAATTC)。其余条件已照常执行。</div>';
+  h+='<table class="ttable"><tr><th>指标</th><th>优化前</th><th>优化后</th></tr>'
+   +'<tr><td>CAI('+CODON_N[sp]+')</td><td>'+d.before.toFixed(3)+'</td><td><b>'+d.after.toFixed(3)+'</b></td></tr>'
+   +'<tr><td>GC%</td><td>'+gcPct(seq).toFixed(1)+'</td><td>'+gcPct(d.seq).toFixed(1)+'</td></tr>'
+   +'<tr><td>改动密码子</td><td colspan="2">'+d.changed+' / '+d.nCodon
+   +'('+(100*d.changed/d.nCodon).toFixed(0)+'%),蛋白序列不变</td></tr></table>';
+  h+='<div class="'+(d.same?'tok':'terr')+'">蛋白序列一致性自检:'
+    +(d.same?'通过 —— 优化前后翻译产物完全相同。':'未通过 —— 请勿使用此结果并反馈。')+'</div>';
+  if(d.asked.length)h+='<div class="'+(d.unavoid.length?'terr':'tok')+'">避开酶切位点:'
+    +(d.unavoid.length?('仍残留 '+esc2(d.unavoid.join("、"))+'(同义密码子空间里绕不开,需改动蛋白序列或换位点)'):
+      ('已全部避开 '+esc2(d.asked.join("、"))))+'</div>';
+  h+='<div class="tok">优化后序列('+d.seq.length+' nt):</div><pre class="tpre">'+fasta60(d.seq)+'</pre>'
+   +'<p class="brk">策略为「同义框内取最高 w,遇到要避开的位点则退到次优」。'
+   +'不建模 mRNA 二级结构、不做 CpG/剪接位点/polyA 信号筛查——合成前请再过一遍供应商的检查流程。</p>';
+  return h;
+}
+function caiCompute(seq,sp){
+  var w=CODON_W[sp];
+  if(!w) return {err:"没有 "+sp+" 的密码子表。"};
+  if(seq.length%3) return {err:"CAI 要按密码子读,但序列长度 "+seq.length
+    +" nt 不是 3 的倍数(多了 "+(seq.length%3)+" nt)。请粘贴完整 CDS。"};
+  var pr=translate(seq,0), inner=pr.slice(0,-1).indexOf("*");
+  var rows=[],i;
+  for(i=0;i+2<seq.length;i+=3){
+    var cd=seq.substr(i,3), a=CODON[cd];
+    if(!a||a==="*"||SYN[a].length<2)continue;
+    var best=SYN[a].reduce(function(x,y){return (w[y]||0)>(w[x]||0)?y:x;});
+    if((w[cd]||0)<0.5) rows.push({i:i/3+1,cd:cd,a:a,w:w[cd]||0,best:best,bw:w[best]});
+  }
+  rows.sort(function(a,b){return a.w-b.w;});
+  return {cai:caiOf(seq,w), sp:sp, nCodon:seq.length/3, innerStop:inner, low:rows};
+}
+function caiReport(seq){
+  var sp=(document.getElementById("prSp")||{}).value||"human";
+  var d=caiCompute(seq,sp);
+  if(d.err) return '<div class="terr">'+esc2(d.err)+'</div>';
+  var c=d.cai;
+  var warn = d.innerStop>=0 ? '<div class="terr">注意:第 '+(d.innerStop+1)
+    +' 个密码子处出现内部终止子,这段可能不是正确阅读框的 CDS。</div>' : '';
+  var h=warn+'<table class="ttable"><tr><th>指标</th><th>值</th></tr>'
+   +'<tr><td>物种表</td><td>'+CODON_N[sp]+'</td></tr>'
+   +'<tr><td>长度</td><td>'+seq.length+' nt / '+d.nCodon+' 密码子</td></tr>'
+   +'<tr><td><b>CAI</b></td><td><b style="font-size:15px">'+c.toFixed(3)+'</b> '
+   +'<span class="gr '+(c>=0.8?"H":(c>=0.6?"M":"L"))+'">'
+   +(c>=0.8?"高":(c>=0.6?"中":"低"))+'</span></td></tr>'
+   +'<tr><td>参考尺度</td><td class="brk">该物种 20 条高表达基因自身 CAI ≈ 0.72–0.82;'
+   +'&lt;0.3 通常意味着密码子严重不匹配(异源表达常见)</td></tr>'
+   +'<tr><td>低适应度密码子</td><td>'+d.low.length+' 个(w&lt;0.5)</td></tr></table>';
+  if(d.low.length){
+    h+='<table class="ttable"><tr><th>密码子序号</th><th>当前</th><th>编码</th><th>w</th>'
+      +'<th>该物种最优</th><th>最优 w</th></tr>';
+    d.low.slice(0,40).forEach(function(r){
+      h+='<tr><td>'+r.i+'</td><td class="ctxm">'+r.cd+'</td><td class="ctxm">'+r.a+'</td>'
+        +'<td>'+r.w.toFixed(3)+'</td><td class="ctxm"><b>'+r.best+'</b></td><td>'+r.bw.toFixed(3)+'</td></tr>';
+    });
+    h+='</table>';
+    if(d.low.length>40)h+='<p class="brk">只列了最差的 40 个,共 '+d.low.length+' 个。</p>';
+  }
+  h+='<p class="brk">w 值由各物种 20 条高表达基因(核糖体蛋白 + 糖酵解/翻译因子)的真实 CDS 统计得来,'
+   +'不是从文献抄的数字。CAI 只衡量密码子偏好这一个维度,不代表实际表达量。</p>';
+  return h;
+}
+function renderLookup(){
+  var out=document.getElementById("lkOut"); if(!out)return;
+  var q=((document.getElementById("lkQ")||{}).value||"").trim();
+  if(!q){ out.innerHTML='<div class="tok">输入基因名(ZSWIM8)或 UniProt 登录号(A7E2V4),回车或点查询。</div>'; return; }
+  var org=(document.getElementById("lkOrg")||{}).value||"";
+  out.innerHTML='<div class="tok">正在向 UniProt 查询「'+esc2(q)+'」…</div>';
+  var isAcc=/^[OPQ][0-9][A-Z0-9]{3}[0-9]$|^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$/i.test(q);
+  var url;
+  if(isAcc){
+    url="https://rest.uniprot.org/uniprotkb/"+encodeURIComponent(q.toUpperCase())+".json";
+  }else{
+    var f="gene:"+encodeURIComponent(q)+(org?("+AND+organism_id:"+org):"")+"+AND+reviewed:true";
+    url="https://rest.uniprot.org/uniprotkb/search?query="+f+"&format=json&size=5";
+  }
+  fetch(url).then(function(r){
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    return r.json();
+  }).then(function(j){
+    var list = isAcc ? [j] : (j.results||[]);
+    if(!list.length){
+      terr("lkOut","UniProt 里没有匹配「"+esc2(q)+"」的<b>已审阅(Swiss-Prot)</b>条目"
+        +(org?"(限定物种 "+org+")":"")+"。试试:换成官方基因符号、把物种改成「不限」,或直接输入登录号。");
+      return;
+    }
+    out.innerHTML=list.map(lkCard).join("");
+    LAST_N.tlookup={n:list.length,q:q};
+  }).catch(function(e){
+    terr("lkOut","查询没成功:"+esc2(String(e.message||e))
+      +"。这一步需要你的浏览器能连上 rest.uniprot.org —— 页面本身不带任何服务器,"
+      +"所以内网/代理环境下可能被拦。可以直接打开 "
+      +'<a href="https://www.uniprot.org/uniprotkb?query='+encodeURIComponent(q)+'" target="_blank" rel="noopener">UniProt 网站</a> 查。');
+  });
+}
+function lkCard(e){
+  var acc=e.primaryAccession||"—";
+  var nm=((e.proteinDescription||{}).recommendedName||{}).fullName;
+  nm=nm?nm.value:"(无推荐名)";
+  var gene=(e.genes&&e.genes[0]&&e.genes[0].geneName)?e.genes[0].geneName.value:"—";
+  var org=(e.organism||{}).scientificName||"—";
+  var sq=(e.sequence||{});
+  var feats=(e.features||[]);
+  var dom=feats.filter(function(f){return /Domain|Zinc finger|Region/i.test(f.type);});
+  var pho=feats.filter(function(f){return f.type==="Modified residue"&&/Phospho/i.test((f.description||""));});
+  var h='<div class="lkc"><div class="lkh"><b>'+esc2(gene)+'</b> · '+esc2(acc)
+   +' <span class="brk">'+esc2(org)+'</span></div>'
+   +'<div class="lkn">'+esc2(nm)+'</div>'
+   +'<table class="ttable"><tr><th>长度</th><td>'+(sq.length||"—")+' aa</td>'
+   +'<th>分子量</th><td>'+(sq.molWeight?(sq.molWeight/1000).toFixed(1)+" kDa":"—")+'</td></tr>'
+   +'<tr><th>结构域</th><td colspan="3">'+(dom.length?dom.slice(0,8).map(function(f){
+        return esc2((f.description||f.type))+" <span class='mono'>"+f.location.start.value+"–"+f.location.end.value+"</span>";
+      }).join("；"):"—")+'</td></tr>'
+   +'<tr><th>已注册磷酸化位点</th><td colspan="3">'+(pho.length?pho.slice(0,20).map(function(f){
+        return "<span class='mono'>"+f.location.start.value+"</span>";
+      }).join(", ")+(pho.length>20?" …共 "+pho.length+" 个":""):"—")+'</td></tr></table>';
+  if(sq.value){
+    h+='<div class="lkacts"><button class="gobtn sm" onclick="lkSend(\''+acc+'\',\'site\')">→ 送去 AMPK 位点扫描</button>'
+      +'<button class="gobtn sm" onclick="lkSend(\''+acc+'\',\'seq\')">→ 送去序列工具箱</button>'
+      +'<a class="gobtn sm alt" href="https://www.uniprot.org/uniprotkb/'+acc+'" target="_blank" rel="noopener">UniProt 原始条目</a></div>'
+      +'<pre class="tpre lkseq">'+fasta60(sq.value)+'</pre>';
+    LK_SEQ[acc]=sq.value;
+  }
+  return h+'</div>';
+}
+var LK_SEQ={};
+function lkSend(acc,where){
+  var sq=LK_SEQ[acc]; if(!sq){alert("这条没有取到序列。");return;}
+  if(where==="site"){
+    var t=document.getElementById("siSeq"); if(t)t.value=sq;
+    goPanel("tsite"); renderSiteScan();
+  }else{
+    var t2=document.getElementById("sqSeq"); if(t2)t2.value=sq;
+    var op=document.getElementById("sqOp"); if(op)op.value="pp";
+    goPanel("tseq"); renderSeqTool();
   }
 }
 
@@ -2574,8 +3595,8 @@ async function loadData(){
     applySiteConfig(); paintChip(); try{checkElig();}catch(e){console.warn("elig",e);}
     maybeOnboard();
     document.getElementById("papN").textContent=PAPERS.length;
-    liveN.textContent=LIVE.length;
-    chgN.textContent=CHANGES.length;
+    setN("liveN",LIVE.length);
+    setN("chgN",CHANGES.length);
     snapbar.innerHTML=`📅 联邦数据最后更新:<b>${g.updated||"?"}</b> · 共 <b>${LIVE.length}</b> 个未过期机会 · 来源 Grants.gov(每日自动刷新 + 金额/资格补全)`;
     buildSidebar(); renderLive(); renderCurated(); renderChanges(); buildHelp();
     CAL_EV=buildCalEvents(); document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
@@ -4451,6 +5472,42 @@ document.querySelectorAll(".plat a[data-nav]").forEach(function(a){
 
 /* 每个面板一条:what=解决什么问题 / how=三步 / ex=可点示例 / caveat=先知道的坑 */
 var HELP = {
+ tsite:{what:"把蛋白序列里每个 S/T 按 AMPK 最优底物基序打分,给出优先做实验的排序。",
+  how:["粘贴蛋白序列(FASTA 头、空格、换行都会自动清掉)。",
+       "选背景集:比\"本序列自身\"是问「在这个蛋白里它排第几」;比\"TDMD 复合体合集\"是问「在这一族蛋白里它排第几」。",
+       "看百分位和分档,再看最后一列「分值构成」——它把分从哪几个残基来的拆开给你。"],
+  ex:[{t:"ZSWIM8 S608 附近 101 aa",set:[["siSeq","AEGGDKALHKMGPGGGKAKALGGAGSGSKGSAGGGSKRRLSSEDSSLEPDLAEMSLDDSSLALGAEASTFGGFPESPPPCPLHGGSRGPSTFLPEPPDTYE"],["siBg","self"],["siMin","0"]]},
+      {t:"同一段,换复合体背景",set:[["siSeq","AEGGDKALHKMGPGGGKAKALGGAGSGSKGSAGGGSKRRLSSEDSSLEPDLAEMSLDDSSLALGAEASTFGGFPESPPPCPLHGGSRGPSTFLPEPPDTYE"],["siBg","pool"],["siMin","0"]]},
+      {t:"只看分值 ≥3 的位点",set:[["siSeq","AEGGDKALHKMGPGGGKAKALGGAGSGSKGSAGGGSKRRLSSEDSSLEPDLAEMSLDDSSLALGAEASTFGGFPESPPPCPLHGGSRGPSTFLPEPPDTYE"],["siBg","self"],["siMin","3"]]}],
+  caveat:"打分只看**一级序列上下文**。它不知道位点埋在结构里、不知道激酶在不在同一区室、也不知道有没有支架蛋白把两者拉到一起。高分 = 值得做实验,不等于真被磷酸化。"},
+
+ tseq:{what:"序列的日常操作:反向互补、转录、六框翻译、ORF、GC 分布、酶切位点、蛋白参数。",
+  how:["粘贴 DNA 或蛋白序列,工具会自己判断是哪一种(判错时会明确告诉你,而不是给个错结果)。",
+       "在「做什么」里选操作,点运行。",
+       "全部在你的浏览器里算,序列不上传到任何服务器。"],
+  ex:[{t:"GAPDH CDS 的 GC 分布",set:[["sqSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["sqOp","gc"],["sqWin","50"]]},
+      {t:"同一段找单切酶位点",set:[["sqSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["sqOp","re"]]},
+      {t:"ZSWIM8 片段的蛋白参数",set:[["sqSeq","AEGGDKALHKMGPGGGKAKALGGAGSGSKGSAGGGSKRRLSSEDSSLEPDLAEMSLDDSSLALGAEASTFGGFPESPPPCPLHGGSRGPSTFLPEPPDTYE"],["sqOp","pp"]]}],
+  caveat:"分子量/pI/消光系数都是**理论值**:不计翻译后修饰、不计信号肽切除、不计二硫键以外的构象因素。跑胶位置和实测 pI 与理论值有出入是正常的。"},
+
+ tprimer:{what:"PCR 引物对设计、密码子适应指数 CAI、密码子优化。",
+  how:["设计引物:粘贴模板 DNA,设目标 Tm 和长度范围,点运行,拿前 8 对候选。",
+       "算 CAI:粘贴完整 CDS(长度必须是 3 的倍数),选物种表。",
+       "做优化:同上,还可以在「避开」里填酶名(EcoRI)或识别序列(GAATTC)。"],
+  ex:[{t:"GAPDH 前 600 nt 设计引物",set:[["prSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGC"],["prMode","pcr"],["prTm","60"],["prTol","1.5"],["prLen","18-27"]]},
+      {t:"GAPDH 全 CDS 的人源 CAI",set:[["prSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["prMode","cai"],["prSp","human"]]},
+      {t:"同一段按大肠杆菌优化",set:[["prSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["prMode","opt"],["prSp","ecoli"],["prAvoid","EcoRI,BamHI"]]}],
+  caveat:"引物只做**序列层面**筛选(Tm/GC/3′ 钳位/连碱基/互补),**不查基因组唯一性**——上机前务必 BLAST。密码子优化不建模 mRNA 二级结构,也不筛 CpG / 隐性剪接位点 / polyA 信号。"},
+
+ tlookup:{what:"按基因名或登录号查 UniProt:长度、分子量、结构域、已注册磷酸化位点、完整序列。",
+  how:["输基因名(ZSWIM8)或登录号(A7E2V4),选物种,点查询。",
+       "结果卡片上可以一键把序列送到位点扫描或序列工具箱,不用手动复制。",
+       "只返回已审阅(Swiss-Prot)条目,避免自动注释条目的噪音。"],
+  ex:[{t:"查 ZSWIM8(人)",set:[["lkQ","ZSWIM8"],["lkOrg","9606"]]},
+      {t:"查 AGO2(人)",set:[["lkQ","AGO2"],["lkOrg","9606"]]},
+      {t:"按登录号查 A7E2V4",set:[["lkQ","A7E2V4"],["lkOrg",""]]}],
+  caveat:"这一步需要你的浏览器能直连 rest.uniprot.org。页面本身没有服务器端,查询是从你的机器直接发出去的——内网或代理环境下可能被拦,届时会明确报错并给出网页版链接。"},
+
  hub:{what:"从这里开始 —— 一个框搜遍全站 5 个库,或按科研环节挑工具。",
   how:["在上面的框里输一个词(基因名、方法、基金代号都行),回车。",
        "结果按「资助 / 职位 / 文献 / 期刊」分组,点任一条跳到对应面板。",
@@ -4667,7 +5724,8 @@ function ctlLabelOf(id,v){
    那种"不报错但也没反应"的失败最难查。 */
 var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
   calendar:renderCalendar,myapps:renderMyApps,jobs:renderJobs,papers:renderPapers,
-  pipeline:renderPipeline,journals:renderJournals};
+  pipeline:renderPipeline,journals:renderJournals,
+  tsite:renderSiteScan,tseq:renderSeqTool,tprimer:renderPrimerTool,tlookup:renderLookup};
 function rerender(pid){
   var fn=RENDER_OF[pid];
   if(typeof fn==="function"){try{fn();}catch(e){console.warn(pid,e);}}
@@ -4739,7 +5797,7 @@ function noteRender(pid,shown,total,wrapId){
   if(shown===0){ w.innerHTML=emptyHTML(pid,total); NORES_IN[wrapId]=1; }
   /* 只清自己写过的解释框:journals 的 #jempty 是独立容器,不会被下一轮渲染覆盖,
      结果回来时必须显式清掉,否则「没有结果」会和一张有内容的表同时出现。
-     判断依据是自己记的账,不是读 firstElementChild —— 后者在结果区是 <table>
+     判断依据是自己记的账,不是读 firstElementChild —— 后者在结果区是表格元素
      或宿主不实现该属性时都取不到,会静默漏清。 */
   else if(NORES_IN[wrapId]){ w.innerHTML=""; NORES_IN[wrapId]=0; }
 }
@@ -4863,7 +5921,27 @@ document.addEventListener("click",function(ev){
 });
 
 
+/* ---------- 实验工具:事件绑定 ----------
+   工具面板不进 PFILT:它们没有"命中数"可数,示例按钮上不显示数字,
+   而不是显示一个编出来的数字。 */
+(function(){
+  function on(id,ev,fn){var e=document.getElementById(id); if(e)e.addEventListener(ev,fn);}
+  function enterRuns(id,fn){ on(id,"keydown",function(e){ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();fn();} }); }
+  on("siRun","click",renderSiteScan);
+  on("siBg","change",renderSiteScan);
+  on("siMin","change",renderSiteScan);
+  on("siCsv","click",siExportCsv);
+  on("sqRun","click",renderSeqTool);
+  on("sqOp","change",renderSeqTool);
+  on("prRun","click",renderPrimerTool);
+  on("prMode","change",function(){ var o=document.getElementById("prOut"); if(o)o.innerHTML=""; });
+  on("lkRun","click",renderLookup);
+  enterRuns("lkQ",renderLookup);
+  renderPssmTables();
+})();
+
 loadData();
+renderSideNav();
 try{checkElig();}catch(e){}
 
 </script>

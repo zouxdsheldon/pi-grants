@@ -488,6 +488,137 @@ Object.keys(HELP).forEach(function(pid){
   ck(bad.length===0, bad.length+" grants yield a non-numeric amount sort key");
 })();
 
+/* ================= 实验工具:算得对不对 =================
+   期望值全部在 Python 侧独立算好写进 fixture(tool_expected.json),
+   与页面代码没有共同来源。若两边都错才会同时通过 —— 这正是独立实现的意义。 */
+(function(){
+  var X = T.tool;
+  if(!X){ ck(false, "tool_expected.json 缺失,工具断言无法执行"); return; }
+
+  /* ---- 序列基元 ---- */
+  ck(revComp(X.cds.slice(0,100))===X.rc_gapdh100, "revComp 与独立实现不一致");
+  ck(translate(X.cds,0).slice(0,30)===X.tr_gapdh_first30aa, "translate 六框翻译首 30 aa 不一致");
+  var pr=translate(X.cds,0).replace(/\*+$/,"");
+  ck(pr.length===X.gapdh_prot_len, "GAPDH 翻译长度 "+pr.length+" ≠ "+X.gapdh_prot_len);
+  ck(Math.abs(gcPct(X.cds)-X.gapdh_gc)<0.01, "GC% 偏差过大");
+  /* 分母只能数 ACGT。含 N 的序列若把 N 也算进分母,GC% 会被系统性低估 */
+  ck(Math.abs(gcPct("GGAANN")-50)<1e-9, "GC% 把非 ACGT 字符算进了分母(GGAANN 应为 50%,得到 "+gcPct("GGAANN").toFixed(1)+"%)");
+  /* 重叠位点必须各算一次:NotI 位点前后各两位相同,GCGGCCGCGGCCGC 上有两个重叠位点 */
+  var novl=reScan("GCGGCCGCGGCCGC").filter(function(e){return e.name==="NotI";})[0];
+  ck(novl && novl.n===2 && novl.pos.length===2,
+     "重叠的酶切位点被漏数了(GCGGCCGCGGCCGC 上 NotI 应有 2 个位点,得到 "+(novl?novl.n:"无")+")");
+
+  /* ---- 蛋白参数:MW 已对 UniProt 报告质量验证过 ---- */
+  ck(Math.abs(mwOf(X.prot).mw-X.prot_mw)<0.05, "分子量 "+mwOf(X.prot).mw.toFixed(2)+" ≠ "+X.prot_mw);
+  ck(mwOf(X.prot).unk===0, "示例序列里出现了未知氨基酸 —— 期望值失去意义");
+  ck(Math.abs(pIof(X.prot)-X.prot_pI)<0.01, "理论 pI 偏差过大");
+  ck(Math.abs(gravyOf(X.prot)-X.prot_gravy)<0.001, "GRAVY 偏差过大");
+  ck(extCoef(X.prot).red===X.prot_ext_red, "消光系数(还原态)不一致");
+
+  /* ---- 酶切:单切酶名单必须完全一致(顺序无关) ---- */
+  var uniq=reScan(X.cds).filter(function(e){return e.n===1;}).map(function(e){return e.name;}).sort();
+  ck(uniq.join(",")===X.re_unique.join(","),
+     "单切酶名单 ["+uniq.join(",")+"] ≠ ["+X.re_unique.join(",")+"]");
+
+  /* ---- PSSM:分数、位点数、最高位 ---- */
+  var sc=scanSites(X.prot);
+  ck(sc.length===X.pssm_nsites, "S/T 位点数 "+sc.length+" ≠ "+X.pssm_nsites);
+  ck(Math.abs(scoreSite(X.prot,X.pssm_S608_local_pos-1)-X.pssm_S608_score)<1e-9,
+     "S608 打分 "+scoreSite(X.prot,X.pssm_S608_local_pos-1)+" ≠ 归档值 "+X.pssm_S608_score);
+  var best=sc.slice().sort(function(p,q){return q.score-p.score||p.pos-q.pos;})[0];
+  ck(best.pos===X.pssm_top_pos && Math.abs(best.score-X.pssm_top_score)<1e-9,
+     "最高分位点 S"+best.pos+"="+best.score+" ≠ S"+X.pssm_top_pos+"="+X.pssm_top_score);
+  /* 六个已知底物必须复现归档分值 —— 这是打分器的验收标准 */
+  /* ctx 是以位点为中心的 15-mer,位点在 index 7;窗口 −6..+4 完全落在段内 */
+  var vbad=PSSM_VAL.filter(function(v){return Math.abs(scoreSite(v.ctx,7)-v.score)>1e-9;});
+  ck(vbad.length===0, vbad.length+" 个已知 AMPK 底物的重算分值与归档不符:"
+     +vbad.map(function(v){return v.g+" "+scoreSite(v.ctx,7)+"≠"+v.score;}).join(","));
+  ck(PSSM_VAL.every(function(v){return v.ctx.charAt(7)==="S"||v.ctx.charAt(7)==="T";}),
+     "验证集里有 ctx 的中心不是 S/T —— 上下文对齐错了");
+
+  /* ---- CAI:同一条序列在本物种表上高、在异源表上低 ---- */
+  var ch=caiCompute(X.cds,"human").cai, ce=caiCompute(X.cds,"ecoli").cai;
+  ck(Math.abs(ch-X.gapdh_cai_human)<0.001, "人源 CAI "+ch.toFixed(4)+" ≠ "+X.gapdh_cai_human);
+  ck(Math.abs(ce-X.gapdh_cai_ecoli)<0.001, "大肠杆菌表 CAI "+ce.toFixed(4)+" ≠ "+X.gapdh_cai_ecoli);
+  ck(ch-ce>0.3, "CAI 未能区分同源/异源密码子表(差值仅 "+(ch-ce).toFixed(3)+")");
+
+  /* ---- 密码子优化:必须不改蛋白,且确实提高 CAI ---- */
+  var op=optCompute(X.cds,"ecoli",[]);
+  ck(op.same && translate(op.seq,0)===translate(X.cds,0), "密码子优化改变了翻译产物 —— 这是致命错误");
+  ck(op.after>op.before, "优化后 CAI 未提高("+op.before.toFixed(3)+"→"+op.after.toFixed(3)+")");
+  ck(op.after>0.8, "优化后 CAI 仅 "+op.after.toFixed(3)+",最优密码子选择疑似未生效");
+  /* 避开酶切位点:要么真的消掉,要么明说消不掉 */
+  var op2=optCompute(X.cds,"human",["EcoRI"]);
+  var left=(op2.seq.match(/GAATTC/g)||[]).length;
+  ck(left===0 || (op2.unavoid&&op2.unavoid.length>0),
+     "声称避开 EcoRI 但序列里仍有 "+left+" 个位点,且未报告为不可避免");
+
+  /* ---- 引物:每条都要满足自己声明的 Tm 窗口 ---- */
+  var pd=pcrCompute(X.cds.slice(0,600),{tm:60,tol:1.5,lo:18,hi:27});
+  ck(!pd.err && pd.pairs.length>0, "600 nt 模板上设计不出任何引物对:"+(pd.err||""));
+  var offtm=pd.pairs.filter(function(p){
+    return Math.abs(p.f.tm-60)>1.5+0.01 || Math.abs(p.r.tm-60)>1.5+0.01;});
+  ck(offtm.length===0, offtm.length+" 对引物的 Tm 超出了自己声明的 ±1.5℃ 窗口");
+  var badseq=pd.pairs.filter(function(p){
+    return X.cds.indexOf(p.f.seq)<0 || X.cds.indexOf(revComp(p.r.seq))<0;});
+  ck(badseq.length===0, badseq.length+" 对引物在模板上找不到 —— 取序列或反向互补有错");
+
+  /* ---- 输入校验:错类型必须给可执行的提示,不能静默出错误结果 ---- */
+  ck(isDNAseq(X.cds)===true, "isDNAseq 没把 CDS 认成核酸");
+  ck(isDNAseq(X.prot)===false, "isDNAseq 把蛋白序列误认成核酸 —— 会给出无意义的翻译结果");
+  var e1=optCompute(X.cds.slice(0,100),"human",[]);
+  ck(!!e1.err && e1.err.indexOf("3 的倍数")>=0, "长度非 3 倍数时没有给出可执行的提示");
+  var e2=pcrCompute(X.cds.slice(0,50),{tm:60,tol:1.5,lo:18,hi:27});
+  ck(!!e2.err && /\d+ nt/.test(e2.err), "模板过短时没有说明至少需要多少 nt");
+  var e3=optCompute(X.cds,"human",["NotAnEnzyme"]);
+  ck(e3.unknown.length===1 && e3.seq && e3.seq.length===X.cds.length,
+     "避开列表里有不认识的名字时,应当单独报告它而不是整个请求失败");
+})();
+
+/* ---- 示例按钮 → 面板渲染:端到端 ----
+   前面的断言测的是计算函数;这里测的是"点了示例按钮,面板真的出东西"。
+   两者会一起失败才说明是算错;只有这一条失败说明是接线错。 */
+(function(){
+  var panels=["tsite","tseq","tprimer","tlookup"];
+  panels.forEach(function(pid){
+    var h=HELP[pid];
+    ck(!!h, pid+" 没有帮助条目 —— 用户打开面板看不到怎么用");
+    if(!h)return;
+    ck(h.ex && h.ex.length>0, pid+" 没有可点的示例");
+    ck(!!h.caveat && h.caveat.length>20, pid+" 没有写明局限 —— 工具会被当成结论用");
+    /* 局限说明必须真的说"做不到什么",不能是一段夸自己的话 */
+    ck(!!h.caveat && /[不没无未仅]/.test(h.caveat),
+       pid+" 的局限说明里没有任何否定性表述 —— 这不是局限,是宣传");
+    (h.ex||[]).forEach(function(e,k){
+      e.set.forEach(function(kv){
+        var el=document.getElementById(kv[0]);
+        ck(!!el, pid+" 示例"+(k+1)+" 指向不存在的控件 id: "+kv[0]);
+        if(el)el.value=kv[1];
+      });
+    });
+  });
+  /* 逐个跑渲染:输出必须非空,且不能是错误框(lookup 依赖网络,单独放行) */
+  [["tsite",renderSiteScan,"siOut"],["tseq",renderSeqTool,"sqOut"],["tprimer",renderPrimerTool,"prOut"]]
+  .forEach(function(t){
+    var ex=HELP[t[0]].ex;
+    ex.forEach(function(e,k){
+      e.set.forEach(function(kv){var el=document.getElementById(kv[0]); if(el)el.value=kv[1];});
+      var out=document.getElementById(t[2]);
+      out.innerHTML="";
+      var threw=null; try{ t[1](); }catch(err){ threw=String(err); }
+      ck(!threw, t[0]+" 示例"+(k+1)+" 渲染时抛异常:"+threw);
+      var html=out.innerHTML||"";
+      ck(html.length>50, t[0]+" 示例"+(k+1)+" 渲染出空结果(长度 "+html.length+")");
+      ck(html.indexOf('class="terr"')<0,
+         t[0]+" 示例"+(k+1)+" 渲染成了错误框 —— 内置示例必须是能跑通的");
+    });
+  });
+  /* 面板重渲染表必须覆盖四个工具面板,否则切换面板时内容不刷新 */
+  ["tsite","tseq","tprimer","tlookup"].forEach(function(pid){
+    ck(typeof RENDER_OF[pid]==="function", pid+" 不在面板重渲染表里");
+  });
+})();
+
 print(fails===0
   ? ("ALL PASS · checks="+checks+" · journals="+JOURNALS.length+" papers="+PAPERS.length
      +" live="+LIVE.length+" curated="+CURATED.length+" jobs="+JOBS.length)

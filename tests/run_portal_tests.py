@@ -55,6 +55,14 @@ def _select_opts(html):
     return out
 
 
+def _sidenav_ids(s):
+    """从 index.html 的 SIDE_NAV 字面量里取侧栏计数 id(运行时才进 DOM)。"""
+    m = re.search(r"var SIDE_NAV\s*=\s*\[(.*?)\n\];", s, re.S)
+    if not m:
+        return set()
+    return set(re.findall(r'\bn:\s*"(\w+)"', m.group(1)))
+
+
 def build(html_path=None, fixture_path=None):
     html_path = html_path or os.path.join(ROOT, "index.html")
     s = open(html_path).read()
@@ -88,9 +96,17 @@ def build(html_path=None, fixture_path=None):
         # 否则示例按钮设不上值却看不出来。
         "opts": _select_opts(s),
         # 页面里真实存在的 id。桩用它来决定 getElementById 该不该返回 null。
-        "ids": sorted(set(re.findall(r'id="([A-Za-z_][\w-]*)"', s))),
+        # 页面里真实存在的 id + 侧栏在运行时按 SIDE_NAV 生成的计数 id。
+        # 后者不写死白名单:直接从 SIDE_NAV 字面量里读 n:"xxx",
+        # 这样侧栏改了名字而没同步用处,测试会立刻发现。
+        "ids": sorted(set(re.findall(r'id="([A-Za-z_][\w-]*)"', s)) | _sidenav_ids(s)),
     }
     fx["norm"] = _norm_map(fx["papers"], fx["journals"])
+    # 工具面板的期望值:在 Python 侧独立算出来的真值(见 handoff/tool_expected.json),
+    # 不是把 JS 跑出来的结果记下来当"期望" —— 那样只能测到"代码没变",测不到"算得对"。
+    tx = os.path.join(ROOT, "tests/tool_expected.json")
+    if os.path.exists(tx):
+        fx["tool"] = json.load(open(tx))
     fp = fixture_path or os.path.join(ROOT, "tests/_fixture_portal.json")
     json.dump(fx, open(fp, "w"), ensure_ascii=False)
 
@@ -172,6 +188,70 @@ NEGATIVES = [
     ("可信度筛选失效(未核实条目混进来)",
      'if(fv&&verifyKey(g)!==fv)return false;',
      'if(false&&verifyKey(g)!==fv)return false;'),
+    # ---- 实验工具组 ----
+    ("PSSM 权重被改动",
+     '[-3,"basic",2.0]',
+     '[-3,"basic",1.0]'),
+    ("PSSM 少算一个位置",
+     'var j=i+off; if(j<0||j>=seq.length)continue;',
+     'var j=i+off; if(j<0||j>=seq.length||off===-4)continue;'),
+    ("Ser 偏好加成丢失",
+     'if(aa==="S"){sc+=0.3;',
+     'if(false){sc+=0.3;'),
+    ("反向互补漏掉一个碱基对",
+     'var m={A:"T",T:"A",G:"C",C:"G",N:"N",U:"A"},o="";',
+     'var m={A:"T",T:"A",G:"C",C:"C",N:"N",U:"A"},o="";'),
+    ("分子量漏掉水的质量",
+     'var m=18.01528,unk=0;',
+     'var m=0,unk=0;'),
+    ("GC% 把非 ACGT 也算进分母",
+     'if(c==="G"||c==="C")g++; if("ACGT".indexOf(c)>=0)n++;',
+     'if(c==="G"||c==="C")g++; n++;'),
+    ("酶切位点计数漏掉重叠位点",
+     'while(true){ i=d.indexOf(site,i); if(i<0)break; hits.push(i+1+cut); i++; }',
+     'while(true){ i=d.indexOf(site,i); if(i<0)break; hits.push(i+1+cut); i+=site.length; }'),
+    ("CAI 把无同义选择的密码子也计入",
+     'if(SYN[a].length<2)continue;          /* Met/Trp 无同义选择,不计入 */',
+     'if(false)continue;'),
+    ("密码子优化取了最差的同义密码子",
+     'var cands=SYN[a].slice().sort(function(x,y){return (w[y]||0)-(w[x]||0);});',
+     'var cands=SYN[a].slice().sort(function(x,y){return (w[x]||0)-(w[y]||0);});'),
+    ("优化改变了蛋白但自检谎报通过",
+     'var cands=SYN[a].slice().sort(function(x,y){return (w[y]||0)-(w[x]||0);});',
+     'var cands=Object.keys(w).sort(function(x,y){return (w[y]||0)-(w[x]||0);});'),
+    # 注:"把 same 写死为 true" 曾作为负控,但在正确实现下真值也是 true,
+    # 注入前后行为完全一致 —— 这种改动外部不可观测,留着只会变成一条永远 MISSED 的假控。
+    # 实际风险(优化真的改了蛋白)由上一条负控覆盖,对应断言自己重算翻译,不信任 same 标志。
+    ("引物 Tm 窗口形同虚设",
+     'if(Math.abs(t-tgt)<=tol){ F.push({seq:p,pos:i+1,tm:t,qc:primerQC(p)}); }',
+     'F.push({seq:p,pos:i+1,tm:t,qc:primerQC(p)});'),
+    ("反向引物没取反向互补",
+     'var rcs=revComp(seq);',
+     'var rcs=seq;'),
+    ("长度非 3 倍数时静默按 3 截断",
+     'if(seq.length%3) return {err:"优化要按密码子重写,序列长度 "+seq.length',
+     'if(false) return {err:"优化要按密码子重写,序列长度 "+seq.length'),
+    ("模板过短的报错不说明需要多长",
+     'return {err:"模板只有 "+seq.length+" nt,太短,放不下一对 "+lo+"–"+hi',
+     'return {err:"模板太短。"+(0*seq.length)+(0*lo)+(0*hi)+"" || "模板太短。"; return {err2:"x"+lo+hi'),
+    ("不认识的酶名让整个请求失败",
+     'else avoid.push({name:n,site:null});',
+     'else { avoid.push({name:n,site:null}); throw new Error("unknown enzyme"); }'),
+    ("蛋白序列被当成核酸",
+     'return seq.length ? (seq.replace(/[ACGTUN]/g,"").length / seq.length) < 0.1 : false;',
+     'return true;'),
+    ("示例按钮指向错的控件 id",
+     '{t:"ZSWIM8 S608 附近 101 aa",set:[["siSeq"',
+     '{t:"ZSWIM8 S608 附近 101 aa",set:[["siSeqTYPO"'),
+    ("工具面板没登记进重渲染表",
+     'tsite:renderSiteScan,tseq:renderSeqTool',
+     'tseq:renderSeqTool'),
+    ("内置示例本身跑不通(CDS 长度非 3 倍数)",
+     'GGCCTCCAAGGAGTAA"],["prMode","cai"]',
+     'GGCCTCCAAGGAGTAAA"],["prMode","cai"]'),
+    ("局限说明被换成一段自夸(没有任何否定性表述)",
+     'caveat:"打分只看**一级序列上下文**。它不知道位点埋在结构里、不知道激酶在不在同一区室、也不知道有没有支架蛋白把两者拉到一起。高分 = 值得做实验,不等于真被磷酸化。',
+     'caveat:"基于经验权重矩阵对底物位点给出量化评分,综合考虑碱性残基分布与疏水环境,结果可直接用于实验优先级排序。'),
 ]
 
 
