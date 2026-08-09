@@ -3247,6 +3247,15 @@ function lkCard(e){
   var sq=(e.sequence||{});
   var feats=(e.features||[]);
   var dom=feats.filter(function(f){return /Domain|Zinc finger|Region/i.test(f.type);});
+  var xr=(e.uniProtKBCrossReferences||[]);
+  var pdbs=xr.filter(function(x){return x.database==="PDB";}).map(function(x){
+    var pr={}; (x.properties||[]).forEach(function(p){pr[p.key]=p.value;});
+    var res=parseFloat(pr.Resolution);          /* NMR 条目没有分辨率 */
+    return {id:x.id, method:pr.Method||"—",
+            res:(isFinite(res)?res:null), resTxt:(pr.Resolution||"—"),
+            chains:pr.Chains||""};
+  });
+  var af=xr.filter(function(x){return x.database==="AlphaFoldDB";})[0];
   var pho=feats.filter(function(f){return f.type==="Modified residue"&&/Phospho/i.test((f.description||""));});
   var h='<div class="lkc"><div class="lkh"><b>'+esc2(gene)+'</b> · '+esc2(acc)
    +' <span class="brk">'+esc2(org)+'</span></div>'
@@ -3258,7 +3267,8 @@ function lkCard(e){
       }).join("；"):"—")+'</td></tr>'
    +'<tr><th>已注册磷酸化位点</th><td colspan="3">'+(pho.length?pho.slice(0,20).map(function(f){
         return "<span class='mono'>"+f.location.start.value+"</span>";
-      }).join(", ")+(pho.length>20?" …共 "+pho.length+" 个":""):"—")+'</td></tr></table>';
+      }).join(", ")+(pho.length>20?" …共 "+pho.length+" 个":""):"—")+'</td></tr>'
+   +'<tr><th>实验结构</th><td colspan="3">'+lkStruct(pdbs,af,acc)+'</td></tr></table>';
   if(sq.value){
     h+='<div class="lkacts"><button class="gobtn sm" onclick="lkSend(\''+acc+'\',\'site\')">→ 送去 AMPK 位点扫描</button>'
       +'<button class="gobtn sm" onclick="lkSend(\''+acc+'\',\'seq\')">→ 送去序列工具箱</button>'
@@ -3267,6 +3277,38 @@ function lkCard(e){
     LK_SEQ[acc]=sq.value;
   }
   return h+'</div>';
+}
+/* 结构一栏:PDB 条目按分辨率升序(越小越好),NMR/无分辨率排在后面。
+   没有实验结构时不留空白,而是明确说「没有」并给 AlphaFold 预测模型 —— 
+   预测模型必须标成预测,不能和实验结构混为一谈。 */
+function lkStruct(pdbs,af,acc){
+  var h="";
+  if(pdbs.length){
+    var sorted=pdbs.slice().sort(function(a,b){
+      if(a.res===null&&b.res===null)return 0;
+      if(a.res===null)return 1;
+      if(b.res===null)return -1;
+      return a.res-b.res;
+    });
+    h+='<span class="brk">共 '+pdbs.length+' 个 PDB 条目,按分辨率排序:</span> '
+      +sorted.slice(0,8).map(function(p){
+        return '<a class="mono" href="https://www.rcsb.org/structure/'+p.id
+          +'" target="_blank" rel="noopener">'+p.id+'</a>'
+          +'<span class="brk">('+esc2(p.method)+(p.res!==null?" "+p.resTxt:"")
+          +(p.chains?" · "+esc2(p.chains):"")+')</span>';
+      }).join("；");
+    if(pdbs.length>8)h+=' <span class="brk">…还有 '+(pdbs.length-8)+' 个,见 UniProt 原始条目</span>';
+  }else{
+    h+='<span class="brk">UniProt 里<b>没有</b>这个蛋白的实验结构条目。</span>';
+  }
+  if(af){
+    h+='<div class="tok" style="margin-top:4px">AlphaFold 预测模型:'
+      +'<a class="mono" href="https://alphafold.ebi.ac.uk/entry/'+esc2(af.id)
+      +'" target="_blank" rel="noopener">'+esc2(af.id)+'</a> —— '
+      +'<b>这是计算预测,不是实验测定的结构</b>,无序区(比如 ZSWIM8 的 S608 所在区段)'
+      +'的 pLDDT 通常很低,不要当作真实构象来解读位点是否暴露。</div>';
+  }
+  return h;
 }
 var LK_SEQ={};
 function lkSend(acc,where){
@@ -5502,11 +5544,12 @@ var HELP = {
  tlookup:{what:"按基因名或登录号查 UniProt:长度、分子量、结构域、已注册磷酸化位点、完整序列。",
   how:["输基因名(ZSWIM8)或登录号(A7E2V4),选物种,点查询。",
        "结果卡片上可以一键把序列送到位点扫描或序列工具箱,不用手动复制。",
-       "只返回已审阅(Swiss-Prot)条目,避免自动注释条目的噪音。"],
+       "只返回已审阅(Swiss-Prot)条目,避免自动注释条目的噪音。",
+       "结果里的「实验结构」一栏列出该蛋白的 PDB 条目(按分辨率排序)和 AlphaFold 预测模型。"],
   ex:[{t:"查 ZSWIM8(人)",set:[["lkQ","ZSWIM8"],["lkOrg","9606"]]},
       {t:"查 AGO2(人)",set:[["lkQ","AGO2"],["lkOrg","9606"]]},
       {t:"按登录号查 A7E2V4",set:[["lkQ","A7E2V4"],["lkOrg",""]]}],
-  caveat:"这一步需要你的浏览器能直连 rest.uniprot.org。页面本身没有服务器端,查询是从你的机器直接发出去的——内网或代理环境下可能被拦,届时会明确报错并给出网页版链接。"},
+  caveat:"AlphaFold 模型是**计算预测**,不是实验结构 —— 无序区的 pLDDT 通常很低,不能拿来判断位点是否暴露。PDB 条目常常只覆盖蛋白的一段(见括号里的链/残基范围),不是全长。这一步需要你的浏览器能直连 rest.uniprot.org。页面本身没有服务器端,查询是从你的机器直接发出去的——内网或代理环境下可能被拦,届时会明确报错并给出网页版链接。"},
 
  hub:{what:"从这里开始 —— 一个框搜遍全站 5 个库,或按科研环节挑工具。",
   how:["在上面的框里输一个词(基因名、方法、基金代号都行),回车。",

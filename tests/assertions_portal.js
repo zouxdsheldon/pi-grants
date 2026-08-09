@@ -573,6 +573,53 @@ Object.keys(HELP).forEach(function(pid){
   var e3=optCompute(X.cds,"human",["NotAnEnzyme"]);
   ck(e3.unknown.length===1 && e3.seq && e3.seq.length===X.cds.length,
      "避开列表里有不认识的名字时,应当单独报告它而不是整个请求失败");
+
+/* ---- 结构一栏(PDB / AlphaFold)----
+   期望值在 Python 里从 UniProt 真实条目独立算出,存进 tool_expected.json;
+   这里离线喂给 lkStruct,不发网络请求。 */
+(function(){
+  var S=X.struct;
+  function xr(list){return list.map(function(x){return {database:x.database,id:x.id,properties:x.properties};});}
+  function build(list){
+    var pdbs=xr(list).filter(function(x){return x.database==="PDB";}).map(function(x){
+      var pr={}; (x.properties||[]).forEach(function(p){pr[p.key]=p.value;});
+      var r=parseFloat(pr.Resolution);
+      return {id:x.id,method:pr.Method||"—",res:(isFinite(r)?r:null),
+              resTxt:(pr.Resolution||"—"),chains:pr.Chains||""};
+    });
+    var af=xr(list).filter(function(x){return x.database==="AlphaFoldDB";})[0];
+    return lkStruct(pdbs,af,"TEST");
+  }
+  var hA=build(S._ago2_xr);
+  ck(hA.indexOf("共 "+S.ago2_pdb_n+" 个 PDB 条目")>=0,
+     "AGO2 的 PDB 条目数没对上(应为 "+S.ago2_pdb_n+")");
+  /* 排序:把渲染出来的 PDB id 按出现顺序取出,查它们的分辨率必须单调不降。
+     这样即使缺陷只是把展示区内两条对调(不影响哪些条目入选),也会被抓到。 */
+  var RES={}; S._ago2_xr.forEach(function(x){
+    if(x.database!=="PDB")return;
+    var pr={}; (x.properties||[]).forEach(function(p){pr[p.key]=p.value;});
+    var r=parseFloat(pr.Resolution); RES[x.id]=isFinite(r)?r:null;
+  });
+  var shown=(hA.match(/>([0-9][A-Z0-9]{3})</g)||[]).map(function(m){return m.slice(1,-1);});
+  ck(shown.length>=3, "PDB 条目一个都没渲染出来");
+  var bad=null;
+  for(var i=1;i<shown.length;i++){
+    var p=RES[shown[i-1]], q=RES[shown[i]];
+    if(p!==null&&q!==null&&p>q+1e-9){ bad=shown[i-1]+"("+p+") 排在 "+shown[i]+"("+q+") 前面"; break; }
+  }
+  ck(!bad, "PDB 条目没有按分辨率升序排列:"+bad);
+  ck(shown[0]===S.ago2_best3[0][0],
+     "分辨率最好的条目(" + S.ago2_best3[0][0] + " @ " + S.ago2_best3[0][1] + " Å)没有排在第一,实际是 "+shown[0]);
+  ck(hA.indexOf("alphafold.ebi.ac.uk/entry/"+S.ago2_af)>=0, "AGO2 的 AlphaFold 链接不对");
+  ck(/计算预测|不是实验/.test(hA), "AlphaFold 模型没有标明是预测而非实验结构");
+
+  /* ZSWIM8 没有实验结构 —— 必须明说「没有」,不能留空 */
+  var hZ=build(S._zswim8_xr);
+  ck(/没有/.test(hZ), "ZSWIM8 无实验结构时应明确说明,不能留空白");
+  ck(hZ.indexOf("个 PDB 条目")<0, "ZSWIM8 没有 PDB 条目却渲染出了条目列表");
+  ck(hZ.indexOf("alphafold.ebi.ac.uk/entry/"+S.zswim8_af)>=0, "ZSWIM8 的 AlphaFold 链接不对");
+})();
+
 })();
 
 /* ---- 示例按钮 → 面板渲染:端到端 ----
@@ -618,6 +665,7 @@ Object.keys(HELP).forEach(function(pid){
     ck(typeof RENDER_OF[pid]==="function", pid+" 不在面板重渲染表里");
   });
 })();
+
 
 print(fails===0
   ? ("ALL PASS · checks="+checks+" · journals="+JOURNALS.length+" papers="+PAPERS.length
