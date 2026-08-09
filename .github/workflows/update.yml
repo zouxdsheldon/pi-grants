@@ -45,9 +45,11 @@ jobs:
         run: |
           git config user.name  "grants-bot"
           git config user.email "grants-bot@users.noreply.github.com"
+          # journals.json 必须一起提交:它是从 papers.json 重算的,漏掉它
+          # 会让期刊面板长期停留在旧计数(2026-08 发现的真实 bug)。
           git add data/grants.json data/grant_deadlines.ics data/jobs.json \
                   data/papers.json data/citation_snapshots.json \
-                  data/citenet.json \
+                  data/citenet.json data/journals.json \
                   data/fetch_log_papers.json data/digest.json \
                   digest.html feed.xml
           if git diff --staged --quiet; then
