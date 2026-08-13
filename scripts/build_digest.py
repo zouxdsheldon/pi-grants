@@ -36,7 +36,7 @@ def _site_url(cfg):
 
 CFG = _cfg()
 SITE = _site_url(CFG)
-SITE_TITLE = CFG.get("site_title", "Grants Finder Pro").strip()
+SITE_TITLE = CFG.get("site_title", "科研罗盘 · Lab Compass").strip()
 FEED_TITLE = (CFG.get("owner_display") or SITE_TITLE) + " · 文献追踪"
 TODAY = datetime.date.today()
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grants Finder Pro</title>
+<title>科研罗盘 · Lab Compass</title>
 <style>
 :root{--dark:#2C3E50;--red:#C0392B;--green:#27AE60;--yel:#E6A817;--blue:#2980B9;
 --greenf:#D5F5E3;--yelf:#FCF3CF;--redf:#FADBD2;--greyf:#EAECEE;--bluef:#EAF2F8;
@@ -472,12 +472,25 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 .warnbox{background:#FFF8E1;border:1px solid #FFE082;border-left:4px solid #F9A825;
   border-radius:8px;padding:11px 13px;font-size:12.5px;margin:10px 0;line-height:1.6}
 .brk{font-size:11.5px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace}
+.doctab{width:100%;border-collapse:collapse;margin:8px 0 10px}
+.doctab th{width:88px;text-align:left;vertical-align:top;padding:5px 8px 5px 0;color:#4A148C;font-weight:700;font-size:12.5px;white-space:nowrap}
+.doctab td{padding:5px 0;font-size:12.8px;line-height:1.55;color:#333;border-bottom:1px solid #F0EAF7}
+.tfbox{margin:10px 0 4px;position:relative}
+.tfbox input{width:100%;padding:11px 13px;border:2px solid #4A148C;border-radius:9px;font-size:14.5px;box-sizing:border-box}
+.tfres{margin-top:7px;display:none}
+.tfres.on{display:block}
+.tfrow{display:flex;align-items:baseline;gap:9px;padding:8px 10px;border:1px solid #E4D7F2;border-radius:7px;margin-bottom:5px;cursor:pointer;background:#FCFAFF}
+.tfrow:hover{background:#F3EAFB;border-color:#4A148C}
+.tfnm{font-weight:700;color:#4A148C;font-size:13.5px;white-space:nowrap}
+.tfen{color:#888;font-size:11.5px;white-space:nowrap}
+.tfkw{color:#444;font-size:12.3px}
+.tfnone{padding:9px;color:#666;font-size:12.5px}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-<h1 id="siteTitle">🔬 科研工作台 · Research Workbench</h1>
-<div class="sub" id="siteSub">找钱 · 找人 · 读文献 · 写本子 · 选期刊 —— 每个数字都能自己复算</div>
+<h1 id="siteTitle">🧭 科研罗盘 · Lab Compass</h1>
+<div class="sub" id="siteSub">早期 PI 的基金检索与写作工作台:找钱 · 找人 · 读文献 · 写本子 · 选期刊 —— 每个数字都能自己复算</div>
 </div></header>
 
 <!-- 平台统一导航(两站一致) -->
@@ -561,7 +574,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <!-- 实验工具的四个 tab:侧栏和 goPanel() 都是 forward 到 .tab[data-p],
        少了这四个按钮,侧栏点击会静默什么都不做(2026-08 的真实故障)。
        这一排 tab 本身用 CSS 隐藏,靠左侧栏导航。 -->
-  <button class="tab" data-p="tsite">🧬 位点扫描</button>
+  <button class="tab" data-p="tfind">🔍 找工具</button><button class="tab" data-p="tsite">🧬 位点扫描</button>
   <button class="tab" data-p="tseq">🔤 序列工具箱</button>
   <button class="tab" data-p="tprimer">🧪 引物与密码子</button>
   <button class="tab" data-p="tlookup">🔎 蛋白直查</button>
@@ -583,7 +596,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="hstrip" data-help="hub"></div>
   <div class="chipbar" id="chips_hub"></div>
   <div class="hero">
-    <h2>🔬 一个人的科研工作台</h2>
+    <h2>🔬 一个人的科研罗盘</h2>
     <div class="hsub">从找钱到投稿的全流程工具,数据每天自动更新。所有评分/排序都可离线复算,不调用大模型。</div>
     <div class="gsbox">
       <input id="gsq" placeholder="搜一个词,同时查资助 / 职位 / 文献 / 期刊 —— 试试 ZSWIM8、AMPK、K99、fibrosis…" autocomplete="off">
@@ -916,6 +929,16 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
   <div style="overflow-x:auto"><table class="jtable" id="jtab"></table></div>
   <div id="jempty"></div>
+</div>
+
+<!-- ============ 工具搜索(所有工具面板共用,插在每个工具面板顶部由 JS 注入) ============ -->
+<div class="panel" id="tfind">
+  <h2>🔍 找工具</h2>
+  <div class="honest">中文、英文、别名都能搜。不知道该用哪个工具时,直接描述你想干什么(如「算样本量」「查专利」「设引物」)。</div>
+  <div class="tfbox">
+    <input id="tfQ" placeholder="搜工具:样本量 / patent / 引物 / cover letter / ΔΔCt …" autocomplete="off">
+  </div>
+  <div class="tfres on" id="tfOut"></div>
 </div>
 
 <!-- ============ 实验工具:位点扫描 ============ -->
@@ -2717,7 +2740,8 @@ function goPanel(p,act){
    写作面板 crosstalk、测试里的 rerender(pid) 全部保持原契约。 */
 var SIDE_NAV=[
   {g:"", items:[
-    {p:"hub", ic:"🏠", t:"工具首页"}
+    {p:"hub",   ic:"🏠", t:"工具首页"},
+    {p:"tfind", ic:"🔍", t:"找工具"}
   ]},
   {g:"找资助", items:[
     {p:"live",     ic:"🇺🇸", t:"联邦机会",   n:"liveN"},
@@ -5788,6 +5812,84 @@ document.querySelectorAll(".plat a[data-nav]").forEach(function(a){
    ============================================================================ */
 
 /* 每个面板一条:what=解决什么问题 / how=三步 / ex=可点示例 / caveat=先知道的坑 */
+/* ===================== TOOLDOC:每个工具的「详解卡」+ 搜索索引 =====================
+   HELP 里已有 what/how/ex/caveat。TOOLDOC 补三样 buildHelp 会额外渲染的:
+     inp 输入什么 / out 输出什么 / src 数据来源(注明是否实时 API、CORS 是否已实测)
+   并提供 alias(中英别名)与 kw(用途关键词)给顶部工具搜索用。
+   数据来源一栏写的是「实测」还是「离线内置」—— 这个区别决定了断网时它还能不能用。 */
+var TOOLDOC = {
+ tsite:{nm:"激酶位点扫描",en:"Kinase site PSSM",alias:["磷酸化","AMPK","位点","PSSM","phosphosite","kinase"],
+   kw:"给蛋白序列排 S/T 位点优先级",
+   inp:"蛋白序列(单字母,FASTA 头会自动去掉)",
+   out:"每个 S/T 的分值、百分位、分档、分值构成拆解",
+   src:"离线内置 —— PSSM 权重写在页面里,断网可用。权重来自本项目自建的透明打分器(6 个已知 AMPK 底物平均落在 97.1 百分位)"},
+ tseq:{nm:"序列工具箱",en:"Sequence toolbox",alias:["反向互补","翻译","ORF","GC","酶切","revcomp","translate"],
+   kw:"DNA/蛋白序列日常操作",
+   inp:"DNA 或蛋白序列(自动判类型)",
+   out:"反向互补/转录/六框翻译/ORF 列表/GC 分布/酶切位点/蛋白理化参数",
+   src:"离线内置 —— 全在浏览器里算,序列不上传任何服务器"},
+ tprimer:{nm:"引物设计与密码子优化",en:"Primer & codon",alias:["引物","primer","Tm","密码子","codon","qPCR"],
+   kw:"设引物、算 Tm、优化密码子",
+   inp:"模板 DNA 序列;或待优化的 CDS",
+   out:"引物对(含 Tm/GC/自二聚体检查)、密码子优化序列与 CAI 变化",
+   src:"离线内置 —— Tm 用最近邻热力学参数,密码子表写在页面里"},
+ tlookup:{nm:"蛋白直查",en:"UniProt / PDB lookup",alias:["UniProt","PDB","结构","accession","蛋白信息"],
+   kw:"查蛋白基本信息与结构条目",
+   inp:"基因名或 UniProt accession(如 ZSWIM8 或 A7E2V4)",
+   out:"长度、结构域、已知修饰位点、PDB 条目、物种同源",
+   src:"实时 API:UniProt REST + RCSB PDB(CORS 已实测可用)"},
+ tlit:{nm:"文献检索与导出",en:"Literature search",alias:["PubMed","文献","检索","Europe PMC","RIS","BibTeX","paper"],
+   kw:"检索文献并导出到文献管理软件",
+   inp:"检索词(支持 AND/OR、字段限定如 TITLE_ABS)、年份区间、来源库",
+   out:"命中列表(标题/作者/期刊/年/PMID/DOI)+ RIS 与 BibTeX 导出",
+   src:"实时 API:Europe PMC REST + NCBI E-utilities(CORS 已实测可用)"},
+ tbib:{nm:"文献计量分析",en:"Bibliometric analysis",alias:["计量","文献大数据","趋势","期刊分布","作者","bibliometric"],
+   kw:"看一个题目的年度趋势与主要期刊/作者",
+   inp:"检索词 + 统计年份跨度",
+   out:"年度发文量曲线、期刊 Top 榜、高产作者榜、国家/机构粗分布",
+   src:"实时 API:Europe PMC(逐年 hitCount 聚合)"},
+ tcite:{nm:"引文追踪",en:"Citation tracking",alias:["被引","参考文献","引用","citation","reference"],
+   kw:"查一篇文章引了谁、被谁引",
+   inp:"PMID 或 DOI",
+   out:"参考文献列表、被引列表、双向计数",
+   src:"实时 API:Europe PMC citations/references 端点"},
+ tgene:{nm:"基因·疾病多维分析",en:"Gene / disease meta",alias:["基因","疾病","gene meta","disease","表达","通路"],
+   kw:"一个基因或疾病的多维背景速览",
+   inp:"基因名或疾病名",
+   out:"文献量趋势、共现的疾病/通路词、相关基因、组织表达线索",
+   src:"实时 API:Europe PMC 文本挖掘词 + Human Protein Atlas(CORS 已实测)"},
+ ttrial:{nm:"临床试验·预印本·化合物",en:"Trials / preprints / compounds",alias:["临床试验","clinicaltrials","预印本","bioRxiv","medRxiv","化合物","PubChem","药物"],
+   kw:"查在做的试验、最新预印本、化合物性质",
+   inp:"疾病或干预名;或预印本关键词;或化合物名",
+   out:"试验列表(NCT号/分期/状态)、预印本列表(含 DOI)、化合物基本性质",
+   src:"实时 API:ClinicalTrials.gov v2 + bioRxiv/medRxiv + PubChem PUG REST(均 CORS 已实测)"},
+ tstat:{nm:"统计与样本量",en:"Statistics & power",alias:["统计","t检验","样本量","power","ANOVA","多重校正","BH","FDR","Mann-Whitney"],
+   kw:"做检验、算样本量、算功效",
+   inp:"两组或多组数值(逗号/空格/换行分隔);或效应量+α+power",
+   out:"t/Welch/Mann-Whitney/ANOVA 结果、效应量与置信区间、每组所需 n、实际 power、多重校正后 q 值",
+   src:"离线内置 —— 35 项数值已对标 scipy/statsmodels,并有 5/5 负对照(见仓库 tests/)"},
+ tde:{nm:"差异分析与可视化",en:"Differential expression",alias:["差异表达","log2FC","火山图","volcano","DE","RNA-seq","q值"],
+   kw:"小规模表达矩阵筛差异基因",
+   inp:"基因×样本矩阵(可粘贴 CSV/TSV)+ 分组 + |log2FC| 与 q 阈值",
+   out:"逐基因 log2FC / p / BH q、上下调计数、可导出 CSV",
+   src:"离线内置 —— 方向统一为 B 相对 A;统计核心与 tstat 同一引擎"},
+ tclone:{nm:"克隆策略 · CRISPR",en:"Cloning & CRISPR",alias:["克隆","酶切","Gibson","sgRNA","CRISPR","PAM","载体"],
+   kw:"选酶切位点、设 Gibson 引物、找 sgRNA",
+   inp:"目标 DNA 序列 + 拓扑(线性/环状)+ 模式",
+   out:"44 种酶的唯一/多切/不切分类与切点位置、Gibson 同源臂引物、sgRNA 候选(含 PAM 与 GC)",
+   src:"离线内置 —— 酶识别序列表写在页面里"},
+ tbench:{nm:"实验台计算器",en:"Bench calculator",alias:["稀释","RCF","离心","ΔΔCt","qPCR","摩尔","缓冲液","计算"],
+   kw:"台面上天天要算的那几个数",
+   inp:"按模式填(浓度/体积、转速/半径、Ct 值等)",
+   out:"结果 + 所用公式 + 该换算最常见的错误提示",
+   src:"离线内置 —— 纯公式,断网可用"},
+ texternal:{nm:"需外部服务的工具",en:"External tools",alias:["外链","做不了","替代","external"],
+   kw:"本站做不了的功能:为什么、去哪做",
+   inp:"无",
+   out:"逐条列出功能、本站做不了的原因、真实替代入口",
+   src:"离线内置 —— 人工整理的链接与理由"}
+};
+
 var HELP = {
  tsite:{what:"把蛋白序列里每个 S/T 按 AMPK 最优底物基序打分,给出优先做实验的排序。",
   how:["粘贴蛋白序列(FASTA 头、空格、换行都会自动清掉)。",
@@ -6135,7 +6237,7 @@ var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
   pipeline:renderPipeline,journals:renderJournals,
   tsite:renderSiteScan,tseq:renderSeqTool,tprimer:renderPrimerTool,tlookup:renderLookup,
   tlit:renderLit,tbib:renderBib,tcite:renderCite,tgene:renderGene,ttrial:renderTrial,
-  tstat:renderStat,tde:renderDE,tclone:renderClone,tbench:renderBench,texternal:renderExt};
+  tstat:renderStat,tde:renderDE,tclone:renderClone,tbench:renderBench,texternal:renderExt,tfind:renderToolFind};
 function rerender(pid){
   var fn=RENDER_OF[pid];
   if(typeof fn==="function"){try{fn();}catch(e){console.warn(pid,e);}}
@@ -6232,7 +6334,18 @@ function buildHelp(){
     var open=localStorage.getItem(helpOpenKey(pid))==="1";
     var h='<div class="hhead"><span style="font-size:15px">💡</span>'+
           '<span class="hwhat">'+esc(H.what)+'</span>'+
-          '<span class="htog">'+(open?"收起 ▲":"怎么用 ▼")+'</span></div><div class="hbody"><ol>';
+          '<span class="htog">'+(open?"收起 ▲":"怎么用 ▼")+'</span></div><div class="hbody">';
+    /* 详解卡:输入/输出/数据来源三栏。数据来源一栏必须让人看出是实时 API 还是离线内置 ——
+       断网时能不能用、结果隔天会不会变,全看这一栏。 */
+    var D=TOOLDOC[pid];
+    if(D){
+      h+='<table class="doctab"><tbody>'+
+         '<tr><th>输入什么</th><td>'+esc(D.inp)+'</td></tr>'+
+         '<tr><th>输出什么</th><td>'+esc(D.out)+'</td></tr>'+
+         '<tr><th>数据来源</th><td>'+esc(D.src)+'</td></tr>'+
+         '</tbody></table>';
+    }
+    h+='<div class="exlab">▸ 操作步骤:</div><ol>';
     H.how.forEach(function(x){h+="<li>"+x+"</li>";});
     h+="</ol>";
     if(H.ex&&H.ex.length){
@@ -7922,6 +8035,83 @@ function trGo(){ try{trModeUI();}catch(e){} trialRun(); }
 function stGo(){ try{renderStat();}catch(e){} statRun(); }
 function benchGo(){ try{benchLabels();}catch(e){} benchRun(); }
 
+/* ===================== 找工具:全站工具搜索 =====================
+   为什么不用现成的模糊搜索库:这是纯静态页,再引一个 CDN 就多一个断网失效点。
+   打分规则写死在下面,可自行核对 —— 名称命中 > 别名/英文 > 用途 > 输入输出/来源。
+   非工具面板(找资助、读文献等)也进索引,因为用户常输"找基金"这类词。 */
+var TFEXTRA = {
+  live:    {nm:"联邦机会",   en:"US federal grants", alias:["Grants.gov","NIH","NSF","联邦","美国基金"], kw:"检索美国联邦资助机会"},
+  curated: {nm:"各国 PI 资助", en:"Curated PI funds", alias:["海外优青","ECS","NRF","优青","香港","新加坡"], kw:"人工整理的各国早期 PI 资助"},
+  myapps:  {nm:"我能申的",   en:"Eligibility match", alias:["资格","能不能申","匹配"], kw:"按你的档案筛出可申请项目"},
+  calendar:{nm:"截止日历",   en:"Deadline calendar", alias:["deadline","截止","日历","ics"], kw:"按截止日期排的机会与日历订阅"},
+  whatsnew:{nm:"更新动态",   en:"What's new", alias:["新增","变化","diff"], kw:"上次抓取以来新增/变化的机会"},
+  pipeline:{nm:"申请管线",   en:"Application pipeline", alias:["进度","管线","tracker"], kw:"跟踪自己每份申请的进度"},
+  jobs:    {nm:"学术职位",   en:"Faculty jobs", alias:["tenure","faculty","招聘","职位","岗位"], kw:"检索独立 PI / faculty 职位"},
+  papers:  {nm:"文献追踪",   en:"Paper tracking", alias:["追踪","本站语料","方向"], kw:"追踪你关注方向的最新论文"},
+  journals:{nm:"期刊查选",   en:"Journal picker", alias:["投哪","选刊","期刊","IF","影响因子"], kw:"按本站语料选投稿期刊"},
+  writing: {nm:"写作指导",   en:"Grant writing", alias:["写本子","模板","Specific Aims","proposal"], kw:"基金写作模板与逐段指导"}
+};
+function tfIndex(){
+  var ix=[], k;
+  for(k in TOOLDOC) if(TOOLDOC.hasOwnProperty(k)) ix.push([k,TOOLDOC[k],1]);
+  for(k in TFEXTRA) if(TFEXTRA.hasOwnProperty(k)) ix.push([k,TFEXTRA[k],0]);
+  return ix;
+}
+function tfScore(d,q){
+  var nm=(d.nm||"").toLowerCase(), en=(d.en||"").toLowerCase(),
+      al=(d.alias||[]).join(" ").toLowerCase(), kw=(d.kw||"").toLowerCase(),
+      io=((d.inp||"")+" "+(d.out||"")+" "+(d.src||"")).toLowerCase();
+  if(nm.indexOf(q)>=0) return 100-nm.indexOf(q);
+  if(en.indexOf(q)>=0) return 80;
+  if(al.indexOf(q)>=0) return 70;
+  if(kw.indexOf(q)>=0) return 50;
+  if(io.indexOf(q)>=0) return 20;
+  return 0;
+}
+function renderToolFind(){
+  var box=document.getElementById("tfOut"); if(!box)return;
+  var q=(document.getElementById("tfQ")||{}).value||"";
+  q=q.trim().toLowerCase();
+  var ix=tfIndex(), hits=[];
+  if(!q){
+    /* 空查询就把全部工具按分组列出来,而不是留白 —— 留白等于逼人去猜。 */
+    hits=ix.map(function(r){return [r[0],r[1],r[2],0];});
+  }else{
+    ix.forEach(function(r){var sc=tfScore(r[1],q); if(sc>0)hits.push([r[0],r[1],r[2],sc]);});
+    hits.sort(function(a,b){return b[3]-a[3];});
+  }
+  if(!hits.length){
+    box.innerHTML='<div class="tfnone">没有匹配「'+esc(q)+'」的工具。试试:样本量、引物、专利、文献、期刊、克隆、ΔΔCt、cover letter。'+
+      '<br>如果本站确实没有,去 <a href="#" data-tfgo="texternal">🔌 需外部服务</a> 看替代方案。</div>';
+    bindTfRows(box); return;
+  }
+  var h="", lastTool=-1;
+  hits.forEach(function(r){
+    if(!q && r[2]!==lastTool){
+      h+='<div class="exlab" style="margin-top:10px">'+(r[2]?"▸ 实验/文献/统计工具":"▸ 资助 · 职位 · 文献 · 写作")+'</div>';
+      lastTool=r[2];
+    }
+    h+='<div class="tfrow" data-tfgo="'+r[0]+'">'+
+       '<span class="tfnm">'+esc(r[1].nm)+'</span>'+
+       '<span class="tfen">'+esc(r[1].en||"")+'</span>'+
+       '<span class="tfkw">'+esc(r[1].kw||"")+'</span></div>';
+  });
+  box.innerHTML=h;
+  bindTfRows(box);
+}
+function bindTfRows(box){
+  var rows=box.querySelectorAll("[data-tfgo]");
+  for(var i=0;i<rows.length;i++){
+    rows[i].addEventListener("click",function(ev){
+      ev.preventDefault();
+      var p=this.getAttribute("data-tfgo");
+      goPanel(p);
+      /* 跳过去顺手把详解卡展开,省一次点击 */
+      try{ var hk=document.querySelector('#'+p+' .hhead'); if(hk && !document.querySelector('#'+p+' .hbody.on')) hk.click(); }catch(e){}
+    });
+  }
+}
+
 /* ---------- 实验工具:事件绑定 ----------
    工具面板不进 PFILT:它们没有"命中数"可数,示例按钮上不显示数字,
    而不是显示一个编出来的数字。 */
@@ -7938,6 +8128,9 @@ function benchGo(){ try{benchLabels();}catch(e){} benchRun(); }
   on("prMode","change",function(){ var o=document.getElementById("prOut"); if(o)o.innerHTML=""; });
   on("lkRun","click",renderLookup);
   enterRuns("lkQ",renderLookup);
+  /* 找工具:边打边搜,不需要按钮 */
+  on("tfQ","input",renderToolFind);
+  renderToolFind();
 
   /* --- 新增九个工具面板 --- */
   on("ltRun","click",renderLit);      enterRuns("ltQ",renderLit);

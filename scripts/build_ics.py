@@ -119,10 +119,10 @@ def build():
     now_stamp = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
     y0, y1 = TODAY.year, TODAY.year + 1
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0",
-             "PRODID:-//Grants Finder Pro//Grant Deadlines//CN", "CALSCALE:GREGORIAN",
-             "METHOD:PUBLISH", f"X-WR-CALNAME:{_CFG.get('site_title','Grants Finder Pro')} · 资助截止 {y0}-{y1}",
+             "PRODID:-//科研罗盘 · Lab Compass//Grant Deadlines//CN", "CALSCALE:GREGORIAN",
+             "METHOD:PUBLISH", f"X-WR-CALNAME:{_CFG.get('site_title','科研罗盘 · Lab Compass')} · 资助截止 {y0}-{y1}",
              "X-WR-TIMEZONE:America/New_York",
-             "X-WR-CALDESC:资助申请截止日历 · 每日自动刷新 · 由 Grants Finder Pro 生成"]
+             "X-WR-CALDESC:资助申请截止日历 · 每日自动刷新 · 由 科研罗盘 · Lab Compass 生成"]
     relmark = {"高": "🟢", "中": "🟡", "低": "⚪"}
     for i, e in enumerate(events):
         d = e["dt"]
