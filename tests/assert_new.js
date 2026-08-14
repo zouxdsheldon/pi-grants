@@ -45,6 +45,13 @@ setTimeout(async ()=>{
     ck(JSON.stringify(w.SIDE_NAV||[]).indexOf('"'+pid+'"')>=0, pid+": absent from SIDE_NAV");
     ck(JSON.stringify((w.HUB_SECTIONS||[]).map(x=>x.tools||[])).indexOf('"'+pid+'"')>=0,
        pid+": absent from HUB_SECTIONS");
+    /* A panel with no top-tab button is only reachable via side nav / hub; the
+       HTML validator caught all eight missing here while every JS-level check
+       passed, because goPanel() works fine when called directly. */
+    ck(!!d.querySelector('.tab[data-p="'+pid+'"]'), pid+": no .tab button (unreachable from the tab bar)");
+    try{ w.goPanel(pid); ck(d.getElementById(pid).classList.contains("active"),
+         pid+": goPanel did not activate the panel"); }
+    catch(e){ fails.push(pid+": goPanel threw: "+e.message); }
     if(w.HELP&&w.HELP[pid]){
       ck((w.HELP[pid].ex||[]).length>0, pid+": HELP entry has no examples");
       ck(!!w.HELP[pid].caveat, pid+": HELP entry has no caveat");
