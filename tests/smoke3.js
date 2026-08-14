@@ -39,7 +39,7 @@ setTimeout(async ()=>{
   // 2) walk each tool panel: open help, click every example, record output length
   const PIDS=["tlit","tbib","tcite","tgene","ttrial","tstat","tde","tclone","tbench","texternal",
               "tsite","tseq","tprimer","tlookup",
-              "tpat","tzh","tjr","tletter","tguide","tdict","tgap","tprev"];
+              "tpat","tzh","tjr","tletter","tguide","tdict","tgap","tprev","tsearch"];
   try{ w.buildHelp(); }catch(e){ report.errs.push("buildHelp: "+e.message); }
   for(const pid of PIDS){
     const panel=d.getElementById(pid);

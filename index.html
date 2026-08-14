@@ -90,6 +90,30 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .tabs{display:flex;gap:6px;margin:14px 0 0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .tab{padding:10px 15px;font-size:13.5px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px}
 .tab.active{color:var(--dark);border-bottom-color:var(--red)}
+/* ---- 检索中心:子标签 ---- */
+.subbar{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px;border-bottom:2px solid #E1BEE7;padding-bottom:0}
+.subtab{background:#F7F3FA;border:1px solid #E1BEE7;border-bottom:none;border-radius:8px 8px 0 0;
+  padding:8px 14px;font-size:13.5px;font-weight:600;color:#5E35B1;cursor:pointer;position:relative;top:2px}
+.subtab:hover{background:#EDE7F6}
+.subtab.active{background:#fff;color:#4A148C;border-color:#E1BEE7;border-bottom:2px solid #fff;box-shadow:0 -2px 6px rgba(74,20,140,.06)}
+.spanel{display:none;padding-top:12px}
+.spanel.active{display:block}
+.uxbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#FAF4FF;border:1px solid #E1BEE7;
+  border-radius:10px;padding:12px 14px;margin-top:12px}
+.uxhint{font-size:12.5px;color:#6A1B9A}
+/* ---- 外站直达 ---- */
+.sitegrp{margin:18px 0 6px;font-weight:700;font-size:14px;color:#4A148C;border-left:4px solid #7E57C2;padding-left:8px}
+.sitegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.sitecard{border:1px solid #E0E0E0;border-radius:9px;padding:10px 12px;background:#fff}
+.sitecard a{font-weight:700;color:#0D47A1;text-decoration:none;font-size:13.5px}
+.sitecard a:hover{text-decoration:underline}
+.sitecard .sdesc{font-size:12.3px;color:#555;line-height:1.5;margin-top:4px}
+.sitecard .sq{display:inline-block;margin-top:6px;font-size:12px;color:#4A148C;background:#F3E5F5;
+  border:1px solid #E1BEE7;border-radius:6px;padding:2px 7px;cursor:pointer}
+.sitecard .sq:hover{background:#E1BEE7}
+.spay{display:inline-block;font-size:11px;background:#FFF3E0;color:#E65100;border:1px solid #FFCC80;
+  border-radius:5px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+
 .panel{display:none}.panel.active{display:block}
 
 /* layout: sidebar + results */
@@ -578,20 +602,14 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="tseq">🔤 序列工具箱</button>
   <button class="tab" data-p="tprimer">🧪 引物与密码子</button>
   <button class="tab" data-p="tlookup">🔎 蛋白直查</button>
-  <button class="tab" data-p="tlit">📗 文献检索</button>
-  <button class="tab" data-p="tbib">📊 文献计量</button>
-  <button class="tab" data-p="tcite">🔗 引文追踪</button>
+  <button class="tab" data-p="tsearch">📚 文献检索中心</button>
   <button class="tab" data-p="tgene">🧫 基因疾病</button>
   <button class="tab" data-p="ttrial">🏥 临床试验</button>
   <button class="tab" data-p="tstat">📐 统计样本量</button>
   <button class="tab" data-p="tde">📈 差异可视化</button>
   <button class="tab" data-p="tclone">✂️ 克隆 CRISPR</button>
   <button class="tab" data-p="tbench">🧮 台面计算器</button>
-  <button class="tab" data-p="tpat">⚙️ 专利检索</button>
-  <button class="tab" data-p="tzh">🀄 中文文献</button>
   <button class="tab" data-p="tjr">📕 期刊预警</button>
-  <button class="tab" data-p="tdict">📔 主题词典</button>
-  <button class="tab" data-p="tgap">🕳️ 空白扫描</button>
   <button class="tab" data-p="tletter">✉️ 投稿信函</button>
   <button class="tab" data-p="tguide">📋 报告规范</button>
   <button class="tab" data-p="tprev">🔎 投前自检</button>
@@ -949,27 +967,74 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="tfres on" id="tfOut"></div>
 </div>
 
-<!-- ============ 专利检索 ============ -->
-<div class="panel" id="tpat">
-  <h2>📜 专利检索 · Europe PMC 专利库</h2>
-  <div class="hstrip" data-help="tpat"></div>
-  <div class="honest">Europe PMC 收录 EPO 专利全文(<code>SRC:PAT</code>)。<b>它不是完整专利数据库</b> —— 中国专利(CNIPA)、美国 USPTO 的很多条目不在里面。做真正的专利性检索(FTO / novelty search)必须用官方库,页底给了入口。这里的用途是:<b>看你的方向有没有人已经申了专利、被谁申了</b>。</div>
-  <div class="tool-row">
-    <label>检索词<input type="text" id="ptQ" placeholder='miRNA degradation OR "target-directed"' style="width:320px"></label>
-    <label>条数<select id="ptN"><option>25</option><option selected>50</option><option>100</option></select></label>
-    <label>起始年<input type="number" id="ptY0" placeholder="不限" style="width:78px"></label>
-    <label>截止年<input type="number" id="ptY1" placeholder="不限" style="width:78px"></label>
-    <button class="gobtn" id="ptRun">检索专利</button>
-    <button class="gobtn sec" id="ptCmp">专利 vs 论文对比</button>
-    <button class="gobtn sec" id="ptCsv">导出 CSV</button>
+<!-- ============ 文献检索中心(七个工具合一页) ============ -->
+<div class="panel" id="tsearch">
+  <h2>📚 文献检索中心</h2>
+  <div class="honest">这一页把原来分散的七个检索工具放在一起,<b>功能一个没少</b>,只是换成上面的小标签切换。检索词填一次,可以直接送到任一工具、或直接甩到 PubMed / bioRxiv 等外站(页底「外站直达」)。所有数据都是你的浏览器直连官方 API 实时取的,本站没有服务端、不缓存、不改数。</div>
+  <div class="hstrip" data-help="tsearch"></div>
+  <div class="uxbar">
+    <label style="font-weight:700">检索词<input type="text" id="uxQ" placeholder='ZSWIM8 AND "target-directed miRNA degradation"' style="width:400px"></label>
+    <button class="gobtn" id="uxGo">填入当前工具并检索</button>
+    <button class="gobtn sec" id="uxExt">跳到外站直达 ↓</button>
+    <span class="uxhint" id="uxHint"></span>
   </div>
-  <div id="ptOut" class="tout"></div>
+<div class="subbar"><button class="subtab active" data-sub="tlit">📗 文献检索 · 导出</button><button class="subtab" data-sub="tdict">📔 词典 → 检索式</button><button class="subtab" data-sub="tcite">🔗 引文追踪</button><button class="subtab" data-sub="tbib">📊 文献计量</button><button class="subtab" data-sub="tzh">🀄 中文文献</button><button class="subtab" data-sub="tpat">📜 专利</button><button class="subtab" data-sub="tgap">🧭 交叉空白扫描</button></div>
+<div class="spanel" id="tlit">
+    <div class="hstrip" data-help="tlit"></div>
+  <div class="tool-row">
+    <label>检索式<input type="text" id="ltQ" placeholder='ZSWIM8 AND target-directed miRNA degradation' style="width:340px"></label>
+    <label>数据源<select id="ltSrc">
+      <option value="pubmed">PubMed</option>
+      <option value="epmc">Europe PMC</option>
+    </select></label>
+    <label>条数<select id="ltN"><option>25</option><option selected>50</option><option>100</option></select></label>
+    <label>起始年<input type="number" id="ltY0" placeholder="不限" style="width:78px"></label>
+    <label>截止年<input type="number" id="ltY1" placeholder="不限" style="width:78px"></label>
+    <button class="gobtn" id="ltRun">检索</button>
+    <button class="gobtn sec" id="ltRis">导出 RIS</button>
+    <button class="gobtn sec" id="ltBib">导出 BibTeX</button>
+  </div>
+  <div id="ltOut" class="tout"></div>
 </div>
-
-<!-- ============ 中文文献与跨库对比 ============ -->
-<div class="panel" id="tzh">
-  <h2>🀄 中文文献 · 跨库命中对比</h2>
-  <div class="hstrip" data-help="tzh"></div>
+<div class="spanel" id="tdict">
+    <div class="hstrip" data-help="tdict"></div>
+  <div class="honest">词条来自 <b>NCBI MeSH 库实时查询</b>。MeSH 是 PubMed 的受控词表 —— 用对 MeSH 主题词能显著提高查全率,这也是很多人检索漏文献的主因。这里同时把词条、同义词(entry terms)、树号一并给出,并<b>组装成可直接粘进 PubMed 的检索式</b>。</div>
+  <div class="tool-row">
+    <label>查词<input type="text" id="dcQ" placeholder="microRNA / 磷酸化 / diabetes" style="width:250px"></label>
+    <label>条数<select id="dcN"><option selected>10</option><option>25</option></select></label>
+    <button class="gobtn" id="dcRun">查询</button>
+  </div>
+  <div class="tool-row">
+    <label>已选主题词组装<select id="dcOp"><option value="AND">AND(交集,收窄)</option><option value="OR">OR(并集,扩大)</option></select></label>
+    <button class="gobtn sec" id="dcBuild">生成检索式</button>
+    <button class="gobtn sec" id="dcClr">清空已选</button>
+    <button class="gobtn sec" id="dcSend">送到文献检索</button>
+  </div>
+  <div id="dcOut" class="tout"></div>
+</div>
+<div class="spanel" id="tcite">
+    <div class="hstrip" data-help="tcite"></div>
+  <div class="tool-row">
+    <label>DOI 或 PMID<input type="text" id="ciQ" placeholder="10.1126/science.abc9546 或 33184234" style="width:300px"></label>
+    <label>方向<select id="ciDir">
+      <option value="ref">它引了谁(参考文献)</option>
+      <option value="cit">谁引了它(被引)</option>
+    </select></label>
+    <button class="gobtn" id="ciRun">查询</button>
+  </div>
+  <div id="ciOut" class="tout"></div>
+</div>
+<div class="spanel" id="tbib">
+    <div class="hstrip" data-help="tbib"></div>
+  <div class="tool-row">
+    <label>检索式<input type="text" id="bbQ" placeholder='ZSWIM8 AND target-directed miRNA degradation' style="width:340px"></label>
+    <label>样本量<select id="bbN"><option>100</option><option>200</option></select></label>
+    <button class="gobtn" id="bbRun">分析</button>
+  </div>
+  <div id="bbOut" class="tout"></div>
+</div>
+<div class="spanel" id="tzh">
+    <div class="hstrip" data-help="tzh"></div>
   <div class="honest">中文条目来自 Europe PMC 的 <code>LANG:chi</code> 过滤(主要是有英文题录的中文期刊)。<b>本站查不到 CNKI / 万方 / 维普</b> —— 它们没有公开 API 且需订阅,页底给了入口。跨库对比一栏是各库<b>命中数</b>的横向比较,用来判断"这题目在哪类库里有积累",不是查全率评估。</div>
   <div class="tool-row">
     <label>检索词<input type="text" id="zhQ" placeholder="microRNA 降解" style="width:300px"></label>
@@ -983,6 +1048,37 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
   <div id="zhOut" class="tout"></div>
 </div>
+<div class="spanel" id="tpat">
+    <div class="hstrip" data-help="tpat"></div>
+  <div class="honest">Europe PMC 收录 EPO 专利全文(<code>SRC:PAT</code>)。<b>它不是完整专利数据库</b> —— 中国专利(CNIPA)、美国 USPTO 的很多条目不在里面。做真正的专利性检索(FTO / novelty search)必须用官方库,页底给了入口。这里的用途是:<b>看你的方向有没有人已经申了专利、被谁申了</b>。</div>
+  <div class="tool-row">
+    <label>检索词<input type="text" id="ptQ" placeholder='miRNA degradation OR "target-directed"' style="width:320px"></label>
+    <label>条数<select id="ptN"><option>25</option><option selected>50</option><option>100</option></select></label>
+    <label>起始年<input type="number" id="ptY0" placeholder="不限" style="width:78px"></label>
+    <label>截止年<input type="number" id="ptY1" placeholder="不限" style="width:78px"></label>
+    <button class="gobtn" id="ptRun">检索专利</button>
+    <button class="gobtn sec" id="ptCmp">专利 vs 论文对比</button>
+    <button class="gobtn sec" id="ptCsv">导出 CSV</button>
+  </div>
+  <div id="ptOut" class="tout"></div>
+</div>
+<div class="spanel" id="tgap">
+    <div class="hstrip" data-help="tgap"></div>
+  <div class="honest"><b>先读这条,否则会被误导。</b>矩阵里的每个格子是 Europe PMC 的<b>命中数</b>。计数少可能是真空白,<b>也可能是这个组合根本没意义、或者术语用词不对</b> —— 后两种远比前一种常见。所以本工具只把格子标成"待查",不标"创新点";每格都给了直接点开看那 N 篇的链接,请你自己判断是哪一种。这是<b>本项目此前 42 方向排序时用的同一套逻辑</b>,当时也是人工复核后才敢用。</div>
+  <div class="tool-row">
+    <label>行(如分子)<input type="text" id="gpA" placeholder="ZSWIM8, TUT4, AGO2, DROSHA" style="width:250px"></label>
+    <label>列(如情境)<input type="text" id="gpB" placeholder="lactate, AMPK, fibrosis, organoid" style="width:250px"></label>
+    <label>年份起<input type="number" id="gpY0" placeholder="不限" style="width:78px"></label>
+    <button class="gobtn" id="gpRun">算矩阵</button>
+    <button class="gobtn sec" id="gpCsv">导出 CSV</button>
+  </div>
+  <div id="gpOut" class="tout"></div>
+</div>
+  <div id="uxSites"></div>
+</div>
+
+
+
 
 <!-- ============ 期刊查询与预警 ============ -->
 <div class="panel" id="tjr">
@@ -1042,39 +1138,9 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div id="guOut" class="tout"></div>
 </div>
 
-<!-- ============ 生物医学词典与检索式 ============ -->
-<div class="panel" id="tdict">
-  <h2>📚 生物医学词典 · MeSH 与检索式组装</h2>
-  <div class="hstrip" data-help="tdict"></div>
-  <div class="honest">词条来自 <b>NCBI MeSH 库实时查询</b>。MeSH 是 PubMed 的受控词表 —— 用对 MeSH 主题词能显著提高查全率,这也是很多人检索漏文献的主因。这里同时把词条、同义词(entry terms)、树号一并给出,并<b>组装成可直接粘进 PubMed 的检索式</b>。</div>
-  <div class="tool-row">
-    <label>查词<input type="text" id="dcQ" placeholder="microRNA / 磷酸化 / diabetes" style="width:250px"></label>
-    <label>条数<select id="dcN"><option selected>10</option><option>25</option></select></label>
-    <button class="gobtn" id="dcRun">查询</button>
-  </div>
-  <div class="tool-row">
-    <label>已选主题词组装<select id="dcOp"><option value="AND">AND(交集,收窄)</option><option value="OR">OR(并集,扩大)</option></select></label>
-    <button class="gobtn sec" id="dcBuild">生成检索式</button>
-    <button class="gobtn sec" id="dcClr">清空已选</button>
-    <button class="gobtn sec" id="dcSend">送到文献检索</button>
-  </div>
-  <div id="dcOut" class="tout"></div>
-</div>
 
-<!-- ============ 选题空白点与技术路线 ============ -->
-<div class="panel" id="tgap">
-  <h2>🕳️ 选题空白点 · 交叉计数矩阵</h2>
-  <div class="hstrip" data-help="tgap"></div>
-  <div class="honest"><b>先读这条,否则会被误导。</b>矩阵里的每个格子是 Europe PMC 的<b>命中数</b>。计数少可能是真空白,<b>也可能是这个组合根本没意义、或者术语用词不对</b> —— 后两种远比前一种常见。所以本工具只把格子标成"待查",不标"创新点";每格都给了直接点开看那 N 篇的链接,请你自己判断是哪一种。这是<b>本项目此前 42 方向排序时用的同一套逻辑</b>,当时也是人工复核后才敢用。</div>
-  <div class="tool-row">
-    <label>行(如分子)<input type="text" id="gpA" placeholder="ZSWIM8, TUT4, AGO2, DROSHA" style="width:250px"></label>
-    <label>列(如情境)<input type="text" id="gpB" placeholder="lactate, AMPK, fibrosis, organoid" style="width:250px"></label>
-    <label>年份起<input type="number" id="gpY0" placeholder="不限" style="width:78px"></label>
-    <button class="gobtn" id="gpRun">算矩阵</button>
-    <button class="gobtn sec" id="gpCsv">导出 CSV</button>
-  </div>
-  <div id="gpOut" class="tout"></div>
-</div>
+
+
 
 <!-- ============ 基金预审与假说脚手架 ============ -->
 <div class="panel" id="tprev">
@@ -1213,52 +1279,11 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div id="lkOut" class="tout"></div>
 </div>
 
-<!-- ============ 实验工具:文献检索与导出 ============ -->
-<div class="panel" id="tlit">
-  <h2>📗 文献检索与导出 · PubMed / Europe PMC</h2>
-  <div class="hstrip" data-help="tlit"></div>
-  <div class="tool-row">
-    <label>检索式<input type="text" id="ltQ" placeholder='ZSWIM8 AND target-directed miRNA degradation' style="width:340px"></label>
-    <label>数据源<select id="ltSrc">
-      <option value="pubmed">PubMed</option>
-      <option value="epmc">Europe PMC</option>
-    </select></label>
-    <label>条数<select id="ltN"><option>25</option><option selected>50</option><option>100</option></select></label>
-    <label>起始年<input type="number" id="ltY0" placeholder="不限" style="width:78px"></label>
-    <label>截止年<input type="number" id="ltY1" placeholder="不限" style="width:78px"></label>
-    <button class="gobtn" id="ltRun">检索</button>
-    <button class="gobtn sec" id="ltRis">导出 RIS</button>
-    <button class="gobtn sec" id="ltBib">导出 BibTeX</button>
-  </div>
-  <div id="ltOut" class="tout"></div>
-</div>
 
-<!-- ============ 实验工具:文献计量分析 ============ -->
-<div class="panel" id="tbib">
-  <h2>📊 文献计量分析</h2>
-  <div class="hstrip" data-help="tbib"></div>
-  <div class="tool-row">
-    <label>检索式<input type="text" id="bbQ" placeholder='ZSWIM8 AND target-directed miRNA degradation' style="width:340px"></label>
-    <label>样本量<select id="bbN"><option>100</option><option>200</option></select></label>
-    <button class="gobtn" id="bbRun">分析</button>
-  </div>
-  <div id="bbOut" class="tout"></div>
-</div>
 
-<!-- ============ 实验工具:引文追踪 ============ -->
-<div class="panel" id="tcite">
-  <h2>🔗 引文追踪 · 参考文献 / 被引</h2>
-  <div class="hstrip" data-help="tcite"></div>
-  <div class="tool-row">
-    <label>DOI 或 PMID<input type="text" id="ciQ" placeholder="10.1126/science.abc9546 或 33184234" style="width:300px"></label>
-    <label>方向<select id="ciDir">
-      <option value="ref">它引了谁(参考文献)</option>
-      <option value="cit">谁引了它(被引)</option>
-    </select></label>
-    <button class="gobtn" id="ciRun">查询</button>
-  </div>
-  <div id="ciOut" class="tout"></div>
-</div>
+
+
+
 
 <!-- ============ 实验工具:基因·疾病多维分析 ============ -->
 <div class="panel" id="tgene">
@@ -2847,6 +2872,7 @@ var HUB_SECTIONS=[
   ]},
  {h:"⑦ 文献 · 数据库检索", st:"实时调公开 API,数字都是现算的命中数,不是缓存快照",
   tools:[
+   {p:"tsearch", ic:"📚", nm:"文献检索中心", ds:"七个检索工具合成一页:文献 / 词典 / 引文 / 计量 / 中文 / 专利 / 空白扫描 + 外站直达目录", cnt:()=>SITES.reduce((a,g)=>a+g.it.length,0), u:"个外站入口"},
    {p:"tlit",   ic:"📗", nm:"文献检索与导出", ds:"PubMed + Europe PMC 双源检索,一键导出 RIS / BibTeX", cnt:()=>2, u:"个数据源"},
    {p:"tbib",   ic:"📊", nm:"文献计量分析",   ds:"年份趋势、期刊/作者分布、MeSH 主题词与共现 —— 现算并作图", cnt:()=>5, u:"类统计"},
    {p:"tcite",  ic:"🔗", nm:"引文追踪",       ds:"DOI 取参考文献(Crossref);PMID 取被引(Europe PMC)", cnt:()=>2, u:"个方向"},
@@ -2896,6 +2922,15 @@ function renderHub(){
 }
 
 function goPanel(p,act){
+  /* 七个检索工具已合并进 tsearch 的子标签,它们没有自己的顶部标签了。
+     老的 goPanel("tlit") 调用点(卡片跳转、示例按钮、tests)照旧能用:
+     先切到检索中心,再切子标签。 */
+  if(SUB_OF[p]){
+    var host=document.querySelector('.tab[data-p="'+SUB_OF[p]+'"]');
+    if(host)host.click();
+    subGo(p);
+    return;
+  }
   var btn=document.querySelector('.tab[data-p="'+p+'"]');
   if(!btn)return;
   btn.click();
@@ -2944,15 +2979,9 @@ var SIDE_NAV=[
     {p:"tlookup",ic:"🔎", t:"蛋白直查",  nw:1}
   ]},
   {g:"文献与数据库", items:[
-    {p:"tlit",   ic:"📗", t:"文献检索导出", nw:1},
-    {p:"tzh",    ic:"🇨🇳", t:"中文文献",   nw:1},
-    {p:"tpat",   ic:"📜", t:"专利检索",   nw:1},
-    {p:"tbib",   ic:"📊", t:"文献计量",   nw:1},
-    {p:"tcite",  ic:"🔗", t:"引文追踪",   nw:1},
-    {p:"tdict",  ic:"📔", t:"生物医学词典", nw:1},
-    {p:"tgap",   ic:"🧭", t:"交叉空白扫描", nw:1},
-    {p:"tgene",  ic:"🧫", t:"基因疾病注释", nw:1},
-    {p:"ttrial", ic:"🏥", t:"临床试验",   nw:1}
+    {p:"tsearch", ic:"📚", t:"文献检索中心", nw:1},
+    {p:"tgene",   ic:"🧫", t:"基因疾病注释", nw:1},
+    {p:"ttrial",  ic:"🏥", t:"临床试验",   nw:1}
   ]},
   {g:"统计与作图", items:[
     {p:"tstat",  ic:"📐", t:"统计与样本量", nw:1},
@@ -2988,8 +3017,7 @@ function renderSideNav(){
   nav.innerHTML=h;
   nav.querySelectorAll("a.sitem").forEach(function(a){
     a.onclick=function(){
-      var b=document.querySelector('.tab[data-p="'+a.getAttribute("data-side")+'"]');
-      if(b)b.click();
+      goPanel(a.getAttribute("data-side"));
     };
   });
   syncSideNav(document.querySelector(".tab.active")
@@ -6018,6 +6046,11 @@ var TOOLDOC = {
    inp:"基因名或 UniProt accession(如 ZSWIM8 或 A7E2V4)",
    out:"长度、结构域、已知修饰位点、PDB 条目、物种同源",
    src:"实时 API:UniProt REST + RCSB PDB(CORS 已实测可用)"},
+ tsearch:{nm:"文献检索中心",en:"Literature search hub",alias:["文献","检索","查文献","找论文","paper","search","pubmed","biorxiv","预印本","数据库","外站","知网","专利","引文"],
+   kw:"七个检索工具合一页 + 外站直达",
+   inp:"一个检索词(各子工具的字段语法照旧)",
+   out:"七个工具各自的结果,以及 40 余个外站的带词直达链接",
+   src:"PubMed / Europe PMC / Crossref / NCBI MeSH 实时 API;外站链接指向各自官网,本站不代查、不镜像"},
  tlit:{nm:"文献检索与导出",en:"Literature search",alias:["PubMed","文献","检索","Europe PMC","RIS","BibTeX","paper"],
    kw:"检索文献并导出到文献管理软件",
    inp:"检索词(支持 AND/OR、字段限定如 TITLE_ABS)、年份区间、来源库",
@@ -6137,6 +6170,14 @@ var HELP = {
       {t:"GAPDH 全 CDS 的人源 CAI",set:[["prSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["prMode","cai"],["prSp","human"]]},
       {t:"同一段按大肠杆菌优化",set:[["prSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["prMode","opt"],["prSp","ecoli"],["prAvoid","EcoRI,BamHI"]]}],
   caveat:"引物只做**序列层面**筛选(Tm/GC/3′ 钳位/连碱基/互补),**不查基因组唯一性**——上机前务必 BLAST。密码子优化不建模 mRNA 二级结构,也不筛 CpG / 隐性剪接位点 / polyA 信号。"},
+
+ tsearch:{what:"把原来分散的七个检索工具(文献 / 词典 / 引文 / 计量 / 中文 / 专利 / 空白扫描)放进同一页,再附一份常用外站的带词直达目录。",
+  how:["顶部填一次检索词,点「填入当前工具并检索」——词会填进当前子标签的检索框并跑一次。",
+       "上面的小标签切换七个工具,控件和结果区跟原来完全一样,没有任何功能被删。",
+       "页底「外站直达」按用途分组列了 40 余个站点;填了检索词后,每张卡片的「带词打开」会把词拼进那个站自己的检索链接。"],
+  ex:[{t:"ZSWIM8 全部文献",set:[["uxQ","ZSWIM8"],["ltQ","ZSWIM8"],["ltSrc","epmc"],["ltN","100"]],go:"renderLit"},
+      {t:"AMPK × TDMD 交叉空白",set:[["uxQ","AMPK"],["gpA","AMPK"],["gpB","target-directed miRNA degradation"]],go:"renderSearch"}],
+  caveat:"合到一页只是少点几下,检索质量不会因此变好。各库语法不同(PubMed 用 ZSWIM8[tiab],Europe PMC 用 TITLE_ABS:\"ZSWIM8\"),顶部检索词**只搬运不改写**,免得把你写对的字段式改坏。外站一律只给官方入口:本站不代查、不镜像、不绕付费墙,标「需订阅」的要你自己的机构权限。"},
 
  tlit:{what:"一次检索 PubMed / Europe PMC,当场给出年份趋势与期刊分布,并导出 RIS / BibTeX 直接进文献管理器。",
   how:["输检索式(支持 AND / OR / 引号短语),选库与年份区间,点检索。",
@@ -6532,7 +6573,7 @@ var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
   tsite:renderSiteScan,tseq:renderSeqTool,tprimer:renderPrimerTool,tlookup:renderLookup,
   tlit:renderLit,tbib:renderBib,tcite:renderCite,tgene:renderGene,ttrial:renderTrial,
   tstat:renderStat,tde:renderDE,tclone:renderClone,tbench:renderBench,texternal:renderExt,tfind:renderToolFind,
-  tpat:renderPat,tzh:renderZh,tjr:renderJr,tletter:renderLetter,tguide:renderGuide,
+  tsearch:renderSearch,tpat:renderPat,tzh:renderZh,tjr:renderJr,tletter:renderLetter,tguide:renderGuide,
   tdict:renderDict,tgap:renderGap,tprev:renderPrev};
 function rerender(pid){
   var fn=RENDER_OF[pid];
@@ -8408,6 +8449,175 @@ function bindTfRows(box){
   }
 }
 
+/* ===================== 文献检索中心 tsearch =====================
+   七个检索工具合成一页。做法:把原来七个 .panel 改成 .spanel,外面套一个
+   真 .panel。所有控件 id、引擎函数(renderLit/renderZh/renderPat/renderBib/
+   renderCite/renderDict/renderGap)一个字没改 —— 合并只动容器,不动逻辑,
+   这样 tests 里针对各引擎的断言、写作面板 crosstalk、示例按钮全部照旧生效。
+   ================================================================== */
+var SUB_OF={tlit:"tsearch",tdict:"tsearch",tcite:"tsearch",tbib:"tsearch",
+            tzh:"tsearch",tpat:"tsearch",tgap:"tsearch"};
+/* 每个子工具的主检索框 —— 顶部那个统一检索词往哪儿填 */
+var SUB_Q={tlit:"ltQ",tdict:"dcQ",tcite:"ciQ",tbib:"bbQ",tzh:"zhQ",tpat:"ptQ",tgap:"gpA"};
+var SUB_RUN={tlit:"ltRun",tdict:"dcRun",tcite:"ciRun",tbib:"bbRun",tzh:"zhRun",tpat:"ptRun",tgap:"gpRun"};
+
+/* ===================== 外站直达目录 =====================
+   本站做不到的、或官方站本来就更好用的,直接给入口,并把顶部检索词
+   拼进各站的检索 URL —— 一次输入,处处可查。
+   u:  站点首页;  q: 检索 URL 模板({q} 处替换为 encodeURIComponent(检索词));
+   pay:1 表示需订阅/机构权限才能看全。链接与检索参数格式按各站公开的检索页写。
+   ======================================================== */
+var SITES=[
+ {g:"综合文献库(免费)", it:[
+  {n:"PubMed", u:"https://pubmed.ncbi.nlm.nih.gov/", q:"https://pubmed.ncbi.nlm.nih.gov/?term={q}",
+   d:"生物医学首选。支持 MeSH 主题词与字段标签([tiab]/[au]/[dp]),本站的「文献检索」「词典」两个工具就是打它的 API。"},
+  {n:"Europe PMC", u:"https://europepmc.org/", q:"https://europepmc.org/search?query={q}",
+   d:"覆盖 PubMed 之外还含预印本、专利、学位论文;字段语法 TITLE_ABS:/SRC:/LANG:。本站中文文献与专利检索都走它。"},
+  {n:"PMC 全文库", u:"https://www.ncbi.nlm.nih.gov/pmc/", q:"https://www.ncbi.nlm.nih.gov/pmc/?term={q}",
+   d:"NIH 免费全文仓库。查方法学细节、找补充材料时比只看摘要有用得多。"},
+  {n:"Google Scholar", u:"https://scholar.google.com/", q:"https://scholar.google.com/scholar?q={q}",
+   d:"查全率最高、也最杂。适合找灰色文献、学位论文、被引线索;不适合做可复现的系统检索。"},
+  {n:"Semantic Scholar", u:"https://www.semanticscholar.org/", q:"https://www.semanticscholar.org/search?q={q}",
+   d:"语义检索 + 引文语境(这篇是被支持还是被反驳)。找综述与\u201c必读前作\u201d比较快。"},
+  {n:"OpenAlex", u:"https://openalex.org/", q:"https://openalex.org/works?search={q}",
+   d:"开放学术图谱,机构/作者/期刊全量元数据。做计量分析用它比 Scholar 靠谱。"},
+  {n:"Lens.org", u:"https://www.lens.org/", q:"https://www.lens.org/lens/search/scholar/list?q={q}",
+   d:"论文与专利同库检索,能看到\u201c这篇论文被哪些专利引用\u201d—— 转化线索常从这里冒出来。"},
+  {n:"Dimensions", u:"https://app.dimensions.ai/", q:"https://app.dimensions.ai/discover/publication?search_text={q}",
+   d:"论文 + 基金 + 专利 + 临床试验联查,免费版够用。查\u201c这个方向谁拿了钱\u201d很好使。"}
+ ]},
+ {g:"预印本(抢时效)", it:[
+  {n:"bioRxiv", u:"https://www.biorxiv.org/", q:"https://www.biorxiv.org/search/{q}",
+   d:"生物学预印本主场。你的 TDMD/miRNA 方向,新结果常比正式发表早 6–12 个月出现在这。"},
+  {n:"medRxiv", u:"https://www.medrxiv.org/", q:"https://www.medrxiv.org/search/{q}",
+   d:"临床与流行病学预印本。写临床相关背景段时先扫一遍,免得被审稿人说没跟上。"},
+  {n:"Research Square", u:"https://www.researchsquare.com/", q:"https://www.researchsquare.com/search?q={q}",
+   d:"Nature 系投稿常挂的预印本平台,能看到在审稿件。"},
+  {n:"arXiv q-bio", u:"https://arxiv.org/list/q-bio/recent", q:"https://arxiv.org/abs/{q}",
+   d:"定量生物学/计算方法。做建模、序列算法时看这里(检索框只认 arXiv 号,关键词请用站内搜索)。"},
+  {n:"ChemRxiv", u:"https://chemrxiv.org/", q:"https://chemrxiv.org/engage/chemrxiv/search-dashboard?text={q}",
+   d:"化学与化学生物学预印本,小分子/探针相关时用。"}
+ ]},
+ {g:"引文与开放获取", it:[
+  {n:"Unpaywall", u:"https://unpaywall.org/", q:"https://api.unpaywall.org/v2/{q}",
+   d:"给 DOI 查合法免费全文。浏览器插件版最好用,不要去用盗版站。"},
+  {n:"OpenCitations", u:"https://opencitations.net/", q:"https://opencitations.net/index/search?text={q}",
+   d:"开放引文数据。本站引文追踪的备用来源。"},
+  {n:"Connected Papers", u:"https://www.connectedpapers.com/", q:"https://www.connectedpapers.com/search?q={q}",
+   d:"由一篇种子文献长出相似度图谱。快速摸清一个陌生子领域的地形。"},
+  {n:"Litmaps", u:"https://www.litmaps.com/", q:"https://www.litmaps.com/",
+   d:"引文地图 + 新文献监视。适合长期盯一个方向(免费额度有限)。"},
+  {n:"Scite", u:"https://scite.ai/", q:"https://scite.ai/search?q={q}", pay:1,
+   d:"标注引用是支持还是反驳。查一个有争议的结论时值得看。"},
+  {n:"Web of Science", u:"https://www.webofscience.com/", q:"https://www.webofscience.com/wos/woscc/basic-search", pay:1,
+   d:"Clarivate,需机构订阅。JCR 影响因子、分区的唯一权威口径 —— 本站不显示 IF 就是因为它是专有数据。"},
+  {n:"Scopus", u:"https://www.scopus.com/", q:"https://www.scopus.com/search/form.uri", pay:1,
+   d:"Elsevier,需订阅。CiteScore、作者 h 指数以它为准的场合不少。"}
+ ]},
+ {g:"中文库(本站查不到)", it:[
+  {n:"中国知网 CNKI", u:"https://www.cnki.net/", q:"https://kns.cnki.net/kns8s/defaultresult/index?kw={q}", pay:1,
+   d:"中文文献主库,无公开 API 且需订阅,所以本站不做代查。写中文基金背景段、查国内同行时必用。"},
+  {n:"万方数据", u:"https://www.wanfangdata.com.cn/", q:"https://s.wanfangdata.com.cn/paper?q={q}", pay:1,
+   d:"期刊 + 学位论文 + 会议。查国内学位论文常比知网全。"},
+  {n:"维普 VIP", u:"http://www.cqvip.com/", q:"http://www.cqvip.com/", pay:1, d:"中文期刊库,机构订阅为主。"},
+  {n:"国家科技图书文献中心 NSTL", u:"https://www.nstl.gov.cn/", q:"https://www.nstl.gov.cn/search.html?q={q}",
+   d:"国家级文献传递服务,个人可注册,拿不到全文时的正规途径。"},
+  {n:"中国生物医学文献 SinoMed", u:"https://www.sinomed.ac.cn/", q:"https://www.sinomed.ac.cn/",
+   d:"中国医学科学院建设,中文生物医学专库,有中文 MeSH 主题词。"}
+ ]},
+ {g:"专利(真做 FTO 用这些)", it:[
+  {n:"Espacenet(EPO)", u:"https://worldwide.espacenet.com/", q:"https://worldwide.espacenet.com/patent/search?q={q}",
+   d:"欧洲专利局全球库,免费。看同族、法律状态、权利要求书 —— 本站的专利检索只有摘要,做不了这些。"},
+  {n:"Google Patents", u:"https://patents.google.com/", q:"https://patents.google.com/?q={q}",
+   d:"全文检索最顺手,含中美欧日;有机器翻译。初筛用它最快。"},
+  {n:"USPTO Patent Public Search", u:"https://ppubs.uspto.gov/pubwebapp/", q:"https://ppubs.uspto.gov/pubwebapp/",
+   d:"美国官方库,审查历史(file wrapper)只有这里全。"},
+  {n:"CNIPA 中国专利公布公告", u:"http://epub.cnipa.gov.cn/", q:"http://epub.cnipa.gov.cn/",
+   d:"中国国家知识产权局官方检索,中国专利以它为准。"},
+  {n:"PatentsView", u:"https://patentsview.org/", q:"https://search.patentsview.org/",
+   d:"USPTO 数据的结构化 API/批量下载,做专利计量时用。"}
+ ]},
+ {g:"期刊与投稿选刊", it:[
+  {n:"DOAJ", u:"https://doaj.org/", q:"https://doaj.org/search/articles?ref=homepage&source={q}",
+   d:"开放获取期刊白名单。一本 OA 刊在不在 DOAJ,是判断它是否掠夺性的第一道筛子。"},
+  {n:"JournalGuide", u:"https://www.journalguide.com/", q:"https://www.journalguide.com/journals/search?type=journal-search&q={q}",
+   d:"按摘要匹配候选期刊,给审稿周期与 OA 费用。"},
+  {n:"Journal/Author Name Estimator (JANE)", u:"https://jane.biosemantics.org/", q:"https://jane.biosemantics.org/",
+   d:"粘贴摘要,推荐期刊与潜在审稿人 —— 找 suggested reviewers 时省事。"},
+  {n:"Sherpa Romeo", u:"https://v2.sherpa.ac.uk/romeo/", q:"https://v2.sherpa.ac.uk/cgi/search/publication?title={q}",
+   d:"查各刊的自存档政策(能不能挂预印本、哪个版本可以)。NIH/基金委的开放获取要求靠它核。"},
+  {n:"Crossref", u:"https://www.crossref.org/", q:"https://search.crossref.org/?q={q}",
+   d:"DOI 注册机构。查刊物元数据、DOI 前缀、发文量 —— 本站期刊面板打的就是它。"},
+  {n:"Retraction Watch Database", u:"http://retractiondatabase.org/", q:"http://retractiondatabase.org/RetractionSearch.aspx",
+   d:"撤稿数据库。引用前查一下,尤其是那种\u201c结论太漂亮\u201d的老文献。"}
+ ]},
+ {g:"数据 · 方法 · 试剂", it:[
+  {n:"GEO", u:"https://www.ncbi.nlm.nih.gov/geo/", q:"https://www.ncbi.nlm.nih.gov/gds/?term={q}",
+   d:"基因表达数据集。写标书前先看有没有现成数据能做预实验分析。"},
+  {n:"SRA", u:"https://www.ncbi.nlm.nih.gov/sra", q:"https://www.ncbi.nlm.nih.gov/sra/?term={q}",
+   d:"原始测序数据。small RNA-seq 找公开数据重分析非常划算。"},
+  {n:"protocols.io", u:"https://www.protocols.io/", q:"https://www.protocols.io/search?q={q}",
+   d:"可引用的实验方案,带 DOI。方法学部分写不细时看别人怎么写。"},
+  {n:"Addgene", u:"https://www.addgene.org/", q:"https://www.addgene.org/search/catalog/plasmids/?q={q}",
+   d:"质粒共享库。做点突变(如 S608A/S608D)前先看骨架有没有现成的。"},
+  {n:"Antibodypedia", u:"https://www.antibodypedia.com/", q:"https://www.antibodypedia.com/explore/{q}",
+   d:"抗体验证数据聚合。选抗体前看有没有敲除验证过。"},
+  {n:"ClinicalTrials.gov", u:"https://clinicaltrials.gov/", q:"https://clinicaltrials.gov/search?term={q}",
+   d:"临床试验注册库。写转化意义那段要有它撑,本站临床试验面板打的是它的 API。"}
+ ]}
+];
+
+function renderSearch(){
+  var box=document.getElementById("uxSites"); if(!box)return;
+  var q=((document.getElementById("uxQ")||{}).value||"").trim();
+  var h='<h3 style="margin-top:26px">🔗 外站直达 · 常用文献检索站点</h3>'
+      +'<div class="honest">下面是做文献工作真正会用到的站点。<b>填了上面的检索词后,卡片里的「带词打开」会把词直接拼进该站检索链接</b>;没填就只是打开首页。'
+      +'标 <span class="spay">需订阅</span> 的要机构权限 —— 本站不代查、也不绕过付费墙。链接指向各站官方地址,本站不做镜像。</div>';
+  SITES.forEach(function(g){
+    h+='<div class="sitegrp">'+esc2(g.g)+'</div><div class="sitegrid">';
+    g.it.forEach(function(x){
+      var url=x.q&&q ? x.q.replace("{q}", encodeURIComponent(q)) : x.u;
+      h+='<div class="sitecard"><a href="'+x.u+'" target="_blank" rel="noopener">'+esc2(x.n)+'</a>'
+        +(x.pay?'<span class="spay">需订阅</span>':'')
+        +'<div class="sdesc">'+esc2(x.d)+'</div>'
+        +(x.q?'<a class="sq" href="'+url+'" target="_blank" rel="noopener">'+(q?"带词打开 ↗":"打开检索页 ↗")+'</a>':'')
+        +'</div>';
+    });
+    h+='</div>';
+  });
+  box.innerHTML=h;
+}
+
+function subGo(pid){
+  var host=document.getElementById("tsearch"); if(!host)return;
+  host.querySelectorAll(".subtab").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-sub")===pid); });
+  host.querySelectorAll(".spanel").forEach(function(p){ p.classList.toggle("active", p.id===pid); });
+  try{ localStorage.setItem("sub.tsearch", pid); }catch(e){}
+  rerender(pid);
+  var hint=document.getElementById("uxHint");
+  if(hint){
+    var t={tlit:"关键词/字段式检索,出题录并导 RIS·BibTeX",
+           tdict:"先查 MeSH 主题词,再组装成规范检索式 —— 漏文献多半漏在这一步",
+           tcite:"给 DOI/PMID,看它引了谁、谁引了它",
+           tbib:"对一个检索式做年份/期刊/作者分布",
+           tzh:"中文期刊条目 + 各库命中量横向对比",
+           tpat:"看这个方向有没有人已经申了专利",
+           tgap:"A×B 交叉命中矩阵,找待查的组合"}[pid]||"";
+    hint.textContent=t;
+  }
+}
+/* 统一检索词 → 填进当前子工具并跑一次。
+   跨工具语法不同(PubMed 字段标签 vs Europe PMC TITLE_ABS),所以只搬词不改写,
+   改写会把用户自己写对的字段式弄坏。 */
+function uxRun(){
+  var q=((document.getElementById("uxQ")||{}).value||"").trim();
+  var cur=(document.querySelector("#tsearch .subtab.active")||{}).getAttribute
+        ? document.querySelector("#tsearch .subtab.active").getAttribute("data-sub") : "tlit";
+  if(!q){ var hint=document.getElementById("uxHint"); if(hint)hint.textContent="先填检索词。"; return; }
+  var box=document.getElementById(SUB_Q[cur]); if(box){ box.value=q; }
+  var btn=document.getElementById(SUB_RUN[cur]); if(btn)btn.click();
+}
+
 /* ===================== 专利检索 tpat =====================
    Europe PMC 的 SRC:PAT 收的是 EPO 全文专利。故意不叫"专利数据库检索":
    CNIPA/USPTO 大量条目不在里面,用它做 FTO 会漏 —— 面板顶部已写明,
@@ -9539,6 +9749,19 @@ function pvDemoRun(){
   on("pvMode","change",function(){ var o=document.getElementById("pvOut"); if(o)o.innerHTML=""; renderPrev(); });
   on("pvFund","change",function(){ var o=document.getElementById("pvOut"); if(o&&o.innerHTML) prevRun(); });
   on("pvDl","click",prevDl);
+  /* 检索中心:子标签 + 统一检索词 */
+  document.querySelectorAll("#tsearch .subtab").forEach(function(b){
+    b.onclick=function(){ subGo(b.getAttribute("data-sub")); };
+  });
+  on("uxGo","click",uxRun);   enterRuns("uxQ",uxRun);
+  /* 检索词一变就重画外站卡片,好让「带词打开」始终带的是当前的词 */
+  on("uxQ","input",function(){ try{ renderSearch(); }catch(e){} });
+  on("uxExt","click",function(){ var e=document.getElementById("uxSites"); if(e)e.scrollIntoView({behavior:"smooth"}); });
+  try{
+    var last=localStorage.getItem("sub.tsearch");
+    subGo(SUB_Q[last]?last:"tlit");
+  }catch(e){ subGo("tlit"); }
+  try{ renderSearch(); }catch(e){}
   try{ leRenderFields(); }catch(e){}
   try{ renderGuide(); }catch(e){}
 

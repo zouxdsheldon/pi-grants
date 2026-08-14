@@ -35,6 +35,35 @@ function set(id,v){ const e=d.getElementById(id); if(!e){fails.push("missing con
 setTimeout(async ()=>{
   try{ w.buildHelp(); }catch(e){ fails.push("buildHelp threw: "+e.message); }
 
+  /* ---- tsearch: merged search page + external-site directory ----
+     The seven merged tools are only useful if the host page itself renders.
+     Nothing else in this file touches renderSearch, so a broken registration
+     or an emptied SITES list would pass every other assertion. */
+  ck(!!(w.RENDER_OF&&w.RENDER_OF.tsearch), "tsearch: not in RENDER_OF (external sites never draw)");
+  ck(!!d.getElementById("tsearch"), "tsearch: host panel missing");
+  ck((w.SITES||[]).length>=5, "tsearch: SITES has fewer than 5 groups");
+  const nSites=(w.SITES||[]).reduce((a,g)=>a+(g.it||[]).length,0);
+  ck(nSites>=30, "tsearch: only "+nSites+" external sites listed (expected >=30)");
+  ck((w.SITES||[]).every(g=>(g.it||[]).every(x=>x.n&&x.u&&x.d)),
+     "tsearch: a site entry is missing name/url/description");
+  ck((w.SITES||[]).some(g=>(g.it||[]).some(x=>x.pay)),
+     "tsearch: no site flagged as subscription-only (the paywall disclosure is part of the product)");
+  /* Query threading: typing once must reach each site's own search URL. */
+  set("uxQ","ZSWIM8 TDMD");
+  try{ w.renderSearch(); }catch(e){ fails.push("renderSearch threw: "+e.message); }
+  const sitesHtml=(d.getElementById("uxSites")||{}).innerHTML||"";
+  ck(sitesHtml.indexOf("pubmed.ncbi.nlm.nih.gov")>=0, "tsearch: PubMed link absent from site directory");
+  ck(sitesHtml.indexOf("biorxiv.org")>=0, "tsearch: bioRxiv link absent from site directory");
+  ck(sitesHtml.indexOf("ZSWIM8%20TDMD")>=0 || sitesHtml.indexOf("ZSWIM8+TDMD")>=0,
+     "tsearch: query not threaded into external search URLs");
+  ck(sitesHtml.indexOf("\u9700\u8ba2\u9605")>=0,
+     "tsearch: paywall disclosure missing from rendered directory");
+  /* Unified box must fill the active sub-tool's own query field. */
+  w.goPanel("tzh"); set("uxQ","microRNA degradation");
+  try{ w.uxRun(); }catch(e){ fails.push("uxRun threw: "+e.message); }
+  ck(((d.getElementById("zhQ")||{}).value||"")==="microRNA degradation",
+     "tsearch: unified query did not reach the active sub-tool");
+
   /* ---- every new panel must be registered, navigable, documented ---- */
   const NEW=["tpat","tzh","tjr","tletter","tguide","tdict","tgap","tprev"];
   for(const pid of NEW){
@@ -42,13 +71,24 @@ setTimeout(async ()=>{
     ck(!!(w.HELP&&w.HELP[pid]), pid+": no HELP entry (help strip stays hidden)");
     ck(!!(w.TOOLDOC&&w.TOOLDOC[pid]), pid+": no TOOLDOC entry (absent from tool search)");
     ck(!!(w.RENDER_OF&&w.RENDER_OF[pid]), pid+": not in RENDER_OF (panel never re-renders)");
-    ck(JSON.stringify(w.SIDE_NAV||[]).indexOf('"'+pid+'"')>=0, pid+": absent from SIDE_NAV");
+    /* Merged panels live as sub-tabs of tsearch, so the side nav lists the
+       host page, not each tool. Either form counts as registered. */
+    const navHost = (w.SUB_OF&&w.SUB_OF[pid]) ? w.SUB_OF[pid] : pid;
+    ck(JSON.stringify(w.SIDE_NAV||[]).indexOf('"'+navHost+'"')>=0, pid+": absent from SIDE_NAV (host "+navHost+")");
     ck(JSON.stringify((w.HUB_SECTIONS||[]).map(x=>x.tools||[])).indexOf('"'+pid+'"')>=0,
        pid+": absent from HUB_SECTIONS");
     /* A panel with no top-tab button is only reachable via side nav / hub; the
        HTML validator caught all eight missing here while every JS-level check
        passed, because goPanel() works fine when called directly. */
-    ck(!!d.querySelector('.tab[data-p="'+pid+'"]'), pid+": no .tab button (unreachable from the tab bar)");
+    /* Reachability, not tab-button existence, is the real contract. A merged
+       tool is reached through its host page's tab plus its sub-tab button;
+       an unmerged one needs its own tab. Assert whichever applies. */
+    if(w.SUB_OF&&w.SUB_OF[pid]){
+      ck(!!d.querySelector('.tab[data-p="'+w.SUB_OF[pid]+'"]'), pid+": host page "+w.SUB_OF[pid]+" has no .tab button");
+      ck(!!d.querySelector('#'+w.SUB_OF[pid]+' .subtab[data-sub="'+pid+'"]'), pid+": no sub-tab button");
+    }else{
+      ck(!!d.querySelector('.tab[data-p="'+pid+'"]'), pid+": no .tab button (unreachable from the tab bar)");
+    }
     try{ w.goPanel(pid); ck(d.getElementById(pid).classList.contains("active"),
          pid+": goPanel did not activate the panel"); }
     catch(e){ fails.push(pid+": goPanel threw: "+e.message); }
