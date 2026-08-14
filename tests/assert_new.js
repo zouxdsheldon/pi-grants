@@ -180,6 +180,25 @@ setTimeout(async ()=>{
   try{ w.renderExt(); }catch(e){ fails.push("renderExt threw: "+e.message); }
   ck(txt("exOut").indexOf("影响因子")>=0, "external: no impact-factor disclosure");
 
+  /* ---- every panel must carry a help strip AND a HELP entry ----
+     Two panels shipped without one (tsearch, tfind); nothing caught it.
+     A panel a user can reach with no 详解卡 is a product defect, not cosmetics. */
+  {
+    const panels=[...d.querySelectorAll('div.panel[id]')].map(e=>e.id);
+    ck(panels.length>=25, "help-audit: only "+panels.length+" panels found — selector drifted");
+    const noStrip=panels.filter(id=>!d.querySelector('[data-help="'+id+'"]'));
+    ck(noStrip.length===0, "help-audit: panels with no 详解卡 strip: "+noStrip.join(","));
+    const noEntry=panels.filter(id=>!(w.HELP&&w.HELP[id]));
+    ck(noEntry.length===0, "help-audit: panels with no HELP entry: "+noEntry.join(","));
+    /* the strip must actually render text, not just exist */
+    try{ w.buildHelp(); }catch(e){ fails.push("buildHelp threw: "+e.message); }
+    const blank=panels.filter(function(id){
+      const el=d.querySelector('[data-help="'+id+'"]');
+      return el && (el.textContent||"").trim().length<10;
+    });
+    ck(blank.length===0, "help-audit: strips render empty for: "+blank.join(","));
+  }
+
   ck(errs.length===0, "console errors: "+errs.slice(0,3).join(" | "));
   fs.writeFileSync("/tmp/assert_new.json",
     JSON.stringify({nFail:fails.length, fails, errs:errs.slice(0,10)},null,1));

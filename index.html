@@ -960,6 +960,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <!-- ============ 工具搜索(所有工具面板共用,插在每个工具面板顶部由 JS 注入) ============ -->
 <div class="panel" id="tfind">
   <h2>🔍 找工具</h2>
+  <div class="hstrip" data-help="tfind"></div>
   <div class="honest">中文、英文、别名都能搜。不知道该用哪个工具时,直接描述你想干什么(如「算样本量」「查专利」「设引物」)。</div>
   <div class="tfbox">
     <input id="tfQ" placeholder="搜工具:样本量 / patent / 引物 / cover letter / ΔΔCt …" autocomplete="off">
@@ -6046,6 +6047,11 @@ var TOOLDOC = {
    inp:"基因名或 UniProt accession(如 ZSWIM8 或 A7E2V4)",
    out:"长度、结构域、已知修饰位点、PDB 条目、物种同源",
    src:"实时 API:UniProt REST + RCSB PDB(CORS 已实测可用)"},
+ tfind:{nm:"工具搜索",en:"Tool finder",alias:["搜索","找工具","tool","search tool","导航"],
+   kw:"按中英文别名找到站内工具",
+   inp:"关键词",
+   out:"匹配的工具卡片与跳转",
+   src:"离线内置 —— 索引写在页面里,断网可用"},
  tsearch:{nm:"文献检索中心",en:"Literature search hub",alias:["文献","检索","查文献","找论文","paper","search","pubmed","biorxiv","预印本","数据库","外站","知网","专利","引文"],
    kw:"七个检索工具合一页 + 外站直达",
    inp:"一个检索词(各子工具的字段语法照旧)",
@@ -6171,6 +6177,13 @@ var HELP = {
       {t:"同一段按大肠杆菌优化",set:[["prSeq","ATGGGGAAGGTGAAGGTCGGAGTCAACGGATTTGGTCGTATTGGGCGCCTGGTCACCAGGGCTGCTTTTAACTCTGGTAAAGTGGATATTGTTGCCATCAATGACCCCTTCATTGACCTCAACTACATGGTTTACATGTTCCAATATGATTCCACCCATGGCAAATTCCATGGCACCGTCAAGGCTGAGAACGGGAAGCTTGTCATCAATGGAAATCCCATCACCATCTTCCAGGAGCGAGATCCCTCCAAAATCAAGTGGGGCGATGCTGGCGCTGAGTACGTCGTGGAGTCCACTGGCGTCTTCACCACCATGGAGAAGGCTGGGGCTCATTTGCAGGGGGGAGCCAAAAGGGTCATCATCTCTGCCCCCTCTGCTGATGCCCCCATGTTCGTCATGGGTGTGAACCATGAGAAGTATGACAACAGCCTCAAGATCATCAGCAATGCCTCCTGCACCACCAACTGCTTAGCACCCCTGGCCAAGGTCATCCATGACAACTTTGGTATCGTGGAAGGACTCATGACCACAGTCCATGCCATCACTGCCACCCAGAAGACTGTGGATGGCCCCTCCGGGAAACTGTGGCGTGATGGCCGCGGGGCTCTCCAGAACATCATCCCTGCCTCTACTGGCGCTGCCAAGGCTGTGGGCAAGGTCATCCCTGAGCTGAACGGGAAGCTCACTGGCATGGCCTTCCGTGTCCCCACTGCCAACGTGTCAGTGGTGGACCTGACCTGCCGTCTAGAAAAACCTGCCAAATATGATGACATCAAGAAGGTGGTGAAGCAGGCGTCGGAGGGCCCCCTCAAGGGCATCCTGGGCTACACTGAGCACCAGGTGGTCTCCTCTGACTTCAACAGCGACACCCACTCCTCCACCTTTGACGCTGGGGCTGGCATTGCCCTCAACGACCACTTTGTCAAGCTCATTTCCTGGTATGACAACGAATTTGGCTACAGCAACAGGGTGGTGGACCTCATGGCCCACATGGCCTCCAAGGAGTAA"],["prMode","opt"],["prSp","ecoli"],["prAvoid","EcoRI,BamHI"]]}],
   caveat:"引物只做**序列层面**筛选(Tm/GC/3′ 钳位/连碱基/互补),**不查基因组唯一性**——上机前务必 BLAST。密码子优化不建模 mRNA 二级结构,也不筛 CpG / 隐性剪接位点 / polyA 信号。"},
 
+ tfind:{what:"全站工具搜索:输中文、英文或别名,即时列出匹配的工具并一键跳过去。",
+  how:["输入关键词(如「专利」「patent」「投稿信」「cover letter」「样本量」),下方即时出结果。",
+       "每条给工具名、一句话用途、输入/输出、数据来源,点卡片直接跳到那个工具。",
+       "记不清工具叫什么时用这里,不用在侧栏一个个翻。"],
+  ex:[{t:"找专利相关工具",set:[["tfQ","专利"]],go:"renderToolFind"},
+      {t:"找写作类工具",set:[["tfQ","cover letter"]],go:"renderToolFind"}],
+  caveat:"只搜本站已有的工具,不搜文献 —— 查文献请去「📚 文献检索中心」。"},
  tsearch:{what:"把原来分散的七个检索工具(文献 / 词典 / 引文 / 计量 / 中文 / 专利 / 空白扫描)放进同一页,再附一份常用外站的带词直达目录。",
   how:["顶部填一次检索词,点「填入当前工具并检索」——词会填进当前子标签的检索框并跑一次。",
        "上面的小标签切换七个工具,控件和结果区跟原来完全一样,没有任何功能被删。",
