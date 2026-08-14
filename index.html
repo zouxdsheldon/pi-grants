@@ -941,6 +941,158 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="tfres on" id="tfOut"></div>
 </div>
 
+<!-- ============ 专利检索 ============ -->
+<div class="panel" id="tpat">
+  <h2>📜 专利检索 · Europe PMC 专利库</h2>
+  <div class="hstrip" data-help="tpat"></div>
+  <div class="honest">Europe PMC 收录 EPO 专利全文(<code>SRC:PAT</code>)。<b>它不是完整专利数据库</b> —— 中国专利(CNIPA)、美国 USPTO 的很多条目不在里面。做真正的专利性检索(FTO / novelty search)必须用官方库,页底给了入口。这里的用途是:<b>看你的方向有没有人已经申了专利、被谁申了</b>。</div>
+  <div class="tool-row">
+    <label>检索词<input type="text" id="ptQ" placeholder='miRNA degradation OR "target-directed"' style="width:320px"></label>
+    <label>条数<select id="ptN"><option>25</option><option selected>50</option><option>100</option></select></label>
+    <label>起始年<input type="number" id="ptY0" placeholder="不限" style="width:78px"></label>
+    <label>截止年<input type="number" id="ptY1" placeholder="不限" style="width:78px"></label>
+    <button class="gobtn" id="ptRun">检索专利</button>
+    <button class="gobtn sec" id="ptCmp">专利 vs 论文对比</button>
+    <button class="gobtn sec" id="ptCsv">导出 CSV</button>
+  </div>
+  <div id="ptOut" class="tout"></div>
+</div>
+
+<!-- ============ 中文文献与跨库对比 ============ -->
+<div class="panel" id="tzh">
+  <h2>🀄 中文文献 · 跨库命中对比</h2>
+  <div class="hstrip" data-help="tzh"></div>
+  <div class="honest">中文条目来自 Europe PMC 的 <code>LANG:chi</code> 过滤(主要是有英文题录的中文期刊)。<b>本站查不到 CNKI / 万方 / 维普</b> —— 它们没有公开 API 且需订阅,页底给了入口。跨库对比一栏是各库<b>命中数</b>的横向比较,用来判断"这题目在哪类库里有积累",不是查全率评估。</div>
+  <div class="tool-row">
+    <label>检索词<input type="text" id="zhQ" placeholder="microRNA 降解" style="width:300px"></label>
+    <label>模式<select id="zhMode">
+      <option value="cn">只看中文文献</option>
+      <option value="cmp">跨库命中对比</option>
+    </select></label>
+    <label>条数<select id="zhN"><option>25</option><option selected>50</option></select></label>
+    <button class="gobtn" id="zhRun">查询</button>
+    <button class="gobtn sec" id="zhCsv">导出 CSV</button>
+  </div>
+  <div id="zhOut" class="tout"></div>
+</div>
+
+<!-- ============ 期刊查询与预警 ============ -->
+<div class="panel" id="tjr">
+  <h2>📕 期刊查询 · 可疑刊预警</h2>
+  <div class="hstrip" data-help="tjr"></div>
+  <div class="honest"><b>本站不提供影响因子</b> —— JCR IF 是受版权保护的商业数据,没有免费 API。替代指标:该刊在 Crossref 的<b>年度发文量</b>、是否被 <b>PubMed/NLM 收录</b>、DOI 注册是否规范。<br><b>「可疑刊」判定是启发式的,不是黑名单</b>:Beall's list 已停更且无 API。下面每条预警都写清依据,请你自己复核 —— 命中预警不等于该刊有问题,没命中也不等于安全。</div>
+  <div class="tool-row">
+    <label>刊名或 ISSN<input type="text" id="jrQ" placeholder="Nucleic Acids Research 或 0305-1048" style="width:290px"></label>
+    <button class="gobtn" id="jrRun">查询</button>
+    <button class="gobtn sec" id="jrFlag">只看预警项</button>
+  </div>
+  <div id="jrOut" class="tout"></div>
+</div>
+
+<!-- ============ 投稿信函生成器 ============ -->
+<div class="panel" id="tletter">
+  <h2>✉️ 投稿信函生成器 · 模板拼装</h2>
+  <div class="hstrip" data-help="tletter"></div>
+  <div class="honest"><b>这是模板拼装,不是 AI 写作。</b>本页无后端、无模型,不会替你生成学术论述 —— 它把你填的事实按各类信函的<b>标准结构与措辞惯例</b>组装好,骨架、语气、必备要素齐全,学术内容需要你自己填。生成结果可直接复制或下载。</div>
+  <div class="tool-row">
+    <label>信函类型<select id="leType">
+      <option value="cover">投稿信 Cover Letter</option>
+      <option value="revise">修回回复 Point-by-point</option>
+      <option value="appeal">申诉信 Appeal</option>
+      <option value="presub">预咨询 Presubmission Inquiry</option>
+      <option value="status">催稿/状态询问</option>
+      <option value="withdraw">撤稿申请 Withdrawal</option>
+    </select></label>
+    <label>语言<select id="leLang"><option value="en">English</option><option value="zh">中文</option></select></label>
+    <button class="gobtn" id="leRun">生成</button>
+    <button class="gobtn sec" id="leCopy">复制</button>
+    <button class="gobtn sec" id="leDl">下载 .txt</button>
+  </div>
+  <div class="tool-row" id="leFields"></div>
+  <div id="leOut" class="tout"></div>
+</div>
+
+<!-- ============ 报告规范核查 ============ -->
+<div class="panel" id="tguide">
+  <h2>✅ 报告规范核查 · ARRIVE / CONSORT / PRISMA / NIH Rigor</h2>
+  <div class="hstrip" data-help="tguide"></div>
+  <div class="honest">清单条目<b>离线内置</b>,断网可用,依据各规范的官方公开条目改写为可勾选的中文条目。<b>勾完不等于合规</b> —— 期刊与评审看的是正文里写没写清,这里只帮你不漏项。每条给了"写在哪一节"的建议。</div>
+  <div class="tool-row">
+    <label>规范<select id="guSet">
+      <option value="arrive">ARRIVE 2.0(动物实验)</option>
+      <option value="nih">NIH Rigor(基金四要素)</option>
+      <option value="consort">CONSORT(随机对照试验)</option>
+      <option value="prisma">PRISMA(系统综述/meta)</option>
+      <option value="strobe">STROBE(观察性研究)</option>
+      <option value="mdar">MDAR(材料·设计·分析·报告)</option>
+    </select></label>
+    <button class="gobtn" id="guRun">载入清单</button>
+    <button class="gobtn sec" id="guAll">全选</button>
+    <button class="gobtn sec" id="guClr">清空</button>
+    <button class="gobtn sec" id="guDl">导出勾选结果</button>
+  </div>
+  <div id="guOut" class="tout"></div>
+</div>
+
+<!-- ============ 生物医学词典与检索式 ============ -->
+<div class="panel" id="tdict">
+  <h2>📚 生物医学词典 · MeSH 与检索式组装</h2>
+  <div class="hstrip" data-help="tdict"></div>
+  <div class="honest">词条来自 <b>NCBI MeSH 库实时查询</b>。MeSH 是 PubMed 的受控词表 —— 用对 MeSH 主题词能显著提高查全率,这也是很多人检索漏文献的主因。这里同时把词条、同义词(entry terms)、树号一并给出,并<b>组装成可直接粘进 PubMed 的检索式</b>。</div>
+  <div class="tool-row">
+    <label>查词<input type="text" id="dcQ" placeholder="microRNA / 磷酸化 / diabetes" style="width:250px"></label>
+    <label>条数<select id="dcN"><option selected>10</option><option>25</option></select></label>
+    <button class="gobtn" id="dcRun">查询</button>
+  </div>
+  <div class="tool-row">
+    <label>已选主题词组装<select id="dcOp"><option value="AND">AND(交集,收窄)</option><option value="OR">OR(并集,扩大)</option></select></label>
+    <button class="gobtn sec" id="dcBuild">生成检索式</button>
+    <button class="gobtn sec" id="dcClr">清空已选</button>
+    <button class="gobtn sec" id="dcSend">送到文献检索</button>
+  </div>
+  <div id="dcOut" class="tout"></div>
+</div>
+
+<!-- ============ 选题空白点与技术路线 ============ -->
+<div class="panel" id="tgap">
+  <h2>🕳️ 选题空白点 · 交叉计数矩阵</h2>
+  <div class="hstrip" data-help="tgap"></div>
+  <div class="honest"><b>先读这条,否则会被误导。</b>矩阵里的每个格子是 Europe PMC 的<b>命中数</b>。计数少可能是真空白,<b>也可能是这个组合根本没意义、或者术语用词不对</b> —— 后两种远比前一种常见。所以本工具只把格子标成"待查",不标"创新点";每格都给了直接点开看那 N 篇的链接,请你自己判断是哪一种。这是<b>本项目此前 42 方向排序时用的同一套逻辑</b>,当时也是人工复核后才敢用。</div>
+  <div class="tool-row">
+    <label>行(如分子)<input type="text" id="gpA" placeholder="ZSWIM8, TUT4, AGO2, DROSHA" style="width:250px"></label>
+    <label>列(如情境)<input type="text" id="gpB" placeholder="lactate, AMPK, fibrosis, organoid" style="width:250px"></label>
+    <label>年份起<input type="number" id="gpY0" placeholder="不限" style="width:78px"></label>
+    <button class="gobtn" id="gpRun">算矩阵</button>
+    <button class="gobtn sec" id="gpCsv">导出 CSV</button>
+  </div>
+  <div id="gpOut" class="tout"></div>
+</div>
+
+<!-- ============ 基金预审与假说脚手架 ============ -->
+<div class="panel" id="tprev">
+  <h2>🧾 基金预审 · 假说脚手架</h2>
+  <div class="hstrip" data-help="tprev"></div>
+  <div class="honest"><b>这是结构自查,不是评分预测。</b>没有任何模型能替真人评审打分,本工具做的是:检查你的正文里<b>该有的要素在不在</b>(假说是否可证伪、有没有 pitfalls/alternatives、有没有 rigor 四要素、篇幅是否超限)。命中率高只说明"没漏项",不代表科学质量。规则离线内置,可自行核对。</div>
+  <div class="tool-row">
+    <label>模式<select id="pvMode">
+      <option value="check">正文结构自查</option>
+      <option value="scaffold">假说脚手架生成</option>
+    </select></label>
+    <label>基金类型<select id="pvFund">
+      <option value="k99">NIH K99/R00</option>
+      <option value="r01">NIH R01</option>
+      <option value="f32">NIH F32</option>
+      <option value="yq">海外优青</option>
+      <option value="ecs">RGC ECS</option>
+      <option value="nrf">NRF</option>
+    </select></label>
+    <button class="gobtn" id="pvRun">运行</button>
+    <button class="gobtn sec" id="pvDl">导出报告</button>
+  </div>
+  <div class="tool-row" id="pvIn"></div>
+  <div id="pvOut" class="tout"></div>
+</div>
+
 <!-- ============ 实验工具:位点扫描 ============ -->
 <div class="panel" id="tsite">
   <h2>🧬 激酶位点扫描 · AMPK 底物基序 PSSM</h2>
@@ -2636,6 +2788,10 @@ var JOURNALS=[], JMETA={}, JSORT="n", JSORTDIR=-1, JOPEN={}, J_WIRED=false;
 
 /* 门户 → 面板 的映射。ext 表示跳到姊妹站。 */
 var HUB_SECTIONS=[
+ {h:"⓿ 先从这里开始", st:"不确定该用哪个工具时,搜一下——按中英文名、别名和用途关键词匹配",
+  tools:[
+   {p:"tfind", ic:"🔎", nm:"工具搜索", ds:"输入你想干的事(如「查影响因子」「算样本量」「回复审稿人」),直接跳到对应工具", cnt:()=>Object.keys(TOOLDOC).length, u:"个工具已收录"},
+  ]},
  {h:"① 找钱 · 资助机会", st:"从联邦数据库到各国 PI 项目,含截止日历与申请管线",
   tools:[
    {p:"live",     ic:"🇺🇸", nm:"美国联邦资助", ds:"Grants.gov 全量未过期机会,每日刷新,含金额/资格/截止推断", cnt:()=>LIVE.length,      u:"个机会"},
@@ -2663,10 +2819,14 @@ var HUB_SECTIONS=[
   tools:[
    {p:"writing", ic:"✍️", nm:"写作指导", ds:"逐段写法 + 你自己论文里提炼的语料库", cnt:()=>6, u:"类基金"},
    {p:"writing", ic:"📄", nm:"基金模板下载", ds:"K99/R00、F32、R01、海外优青、RGC ECS、NRF —— Word/PDF/Markdown", act:"tpl", cnt:()=>6, u:"份初稿"},
+   {p:"tprev",   ic:"✅", nm:"投前预检",     ds:"估页数、核对分节是否齐、查硬性要点与残留占位符;也能直接输出分节骨架", cnt:()=>6, u:"类基金规格"},
+   {p:"tguide",  ic:"📋", nm:"报告规范核查", ds:"ARRIVE / NIH Rigor / CONSORT / PRISMA / STROBE / MDAR,每条标明该写在哪一节", cnt:()=>6, u:"套清单"},
   ]},
  {h:"⑤ 投稿 · 期刊查选", st:"基于本站语料的选刊参考(不提供影响因子)",
   tools:[
    {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
+   {p:"tjr",     ic:"🔍", nm:"期刊查询与预警", ds:"出版商、PubMed 是否收录、是否 OA、被引体量 + 预警信号(无影响因子,见说明)", cnt:()=>3, u:"个数据源"},
+   {p:"tletter", ic:"✉️", nm:"投稿信函生成",   ds:"cover letter / 回复审稿人 / 申诉 / 预咨询 / 催稿 / 撤稿,中英双语", cnt:()=>6, u:"类信函"},
   ]},
  {h:"⑥ 实验台 · 分子生物学工具", st:"全部在你自己的浏览器里算,序列不出本机,断网也能用",
   tools:[
@@ -2684,6 +2844,10 @@ var HUB_SECTIONS=[
    {p:"tcite",  ic:"🔗", nm:"引文追踪",       ds:"DOI 取参考文献(Crossref);PMID 取被引(Europe PMC)", cnt:()=>2, u:"个方向"},
    {p:"tgene",  ic:"🧫", nm:"基因/靶点注释", ds:"MyGene + Ensembl + Open Targets:注释、转录本、基因–疾病证据", cnt:()=>3, u:"个数据库"},
    {p:"ttrial", ic:"🏥", nm:"临床试验检索",   ds:"ClinicalTrials.gov API v2:按适应症/干预/期别查在研项目", cnt:()=>1, u:"个官方库"},
+   {p:"tdict",  ic:"📖", nm:"生物医学词典",   ds:"MeSH 主题词:释义、全部同义词、副主题词、树号,并组装成检索式", cnt:()=>2, u:"种检索式"},
+   {p:"tgap",   ic:"🕳️", nm:"交叉空白扫描",   ds:"先算独立期望再看实测——分母太小时直接拒绝下结论", cnt:()=>1, u:"个命中数源"},
+   {p:"tzh",    ic:"🇨🇳", nm:"中文文献检索",   ds:"检索被国际库收录的中文期刊,并与英文发文量对比(不覆盖 CNKI/万方)", cnt:()=>2, u:"种模式"},
+   {p:"tpat",   ic:"⚖️", nm:"专利检索",       ds:"生物医学关联专利的逐年趋势,并与论文数并排看转化热度", cnt:()=>1, u:"个专利子库"},
   ]},
  {h:"⑧ 统计 · 数据可视化", st:"JS 实现已逐项对齐 scipy/statsmodels,数据不出本机",
   tools:[
@@ -2758,8 +2922,12 @@ var SIDE_NAV=[
     {p:"papers",   ic:"📚", t:"文献追踪", n:"papN"},
     {p:"journals", ic:"📖", t:"期刊查选", n:"jrnN"}
   ]},
-  {g:"写本子", items:[
-    {p:"writing", ic:"✍️", t:"写作指导"}
+  {g:"写本子 / 投稿", items:[
+    {p:"writing", ic:"✍️", t:"写作指导"},
+    {p:"tprev",   ic:"🩺", t:"投前预检",   nw:1},
+    {p:"tguide",  ic:"📋", t:"报告规范核查", nw:1},
+    {p:"tletter", ic:"✉️", t:"投稿信函",   nw:1},
+    {p:"tjr",     ic:"⚠️", t:"期刊查询预警", nw:1}
   ]},
   {g:"实验工具", items:[
     {p:"tsite",  ic:"🧬", t:"位点扫描",  nw:1},
@@ -2769,8 +2937,12 @@ var SIDE_NAV=[
   ]},
   {g:"文献与数据库", items:[
     {p:"tlit",   ic:"📗", t:"文献检索导出", nw:1},
+    {p:"tzh",    ic:"🇨🇳", t:"中文文献",   nw:1},
+    {p:"tpat",   ic:"📜", t:"专利检索",   nw:1},
     {p:"tbib",   ic:"📊", t:"文献计量",   nw:1},
     {p:"tcite",  ic:"🔗", t:"引文追踪",   nw:1},
+    {p:"tdict",  ic:"📔", t:"生物医学词典", nw:1},
+    {p:"tgap",   ic:"🧭", t:"交叉空白扫描", nw:1},
     {p:"tgene",  ic:"🧫", t:"基因疾病注释", nw:1},
     {p:"ttrial", ic:"🏥", t:"临床试验",   nw:1}
   ]},
@@ -5883,6 +6055,46 @@ var TOOLDOC = {
    inp:"按模式填(浓度/体积、转速/半径、Ct 值等)",
    out:"结果 + 所用公式 + 该换算最常见的错误提示",
    src:"离线内置 —— 纯公式,断网可用"},
+ tpat:{nm:"专利检索",en:"Patent search",alias:["专利","patent","知识产权","专利族","IP","freedom to operate"],
+   kw:"查一个技术方向有没有被专利占住",
+   inp:"检索词(建议英文,专利文本几乎都是英文)+ 年份区间",
+   out:"专利列表(标题/年/专利号/申请人)、逐年趋势;可与论文数并排比较",
+   src:"实时 API:Europe PMC 的 SRC:PAT 专利库(实测 844 篇 ZSWIM8 相关)。注意这不是专利局全库 —— 只覆盖 EPO 收录并与生物医学文献关联的部分,不能作为侵权判断依据,真正的 FTO 检索要走 Espacenet/Google Patents 或专利律师"},
+ tzh:{nm:"中文文献检索",en:"Chinese literature",alias:["中文","中文文献","国内文献","汉语","Chinese","CNKI"],
+   kw:"检索中文发表的相关文献",
+   inp:"中文或英文检索词",
+   out:"中文文献列表 + 年度分布;可与英文文献量对比",
+   src:"实时 API:Europe PMC 的 LANG:chi 过滤(实测 716 篇)。诚实说明:这<b>不是</b> CNKI/万方 —— 那两家没有开放 API,只覆盖被 PubMed/EPMC 收录的中文期刊,中文核心期刊(北大核心)大部分不在其中。要查全需另开 CNKI"},
+ tjr:{nm:"期刊查询与预警",en:"Journal lookup & warnings",alias:["期刊","投稿","影响因子","预警","掠夺性","OA","journal","impact factor","predatory"],
+   kw:"投稿前查这个刊靠不靠谱",
+   inp:"期刊名或 ISSN",
+   out:"出版商、ISSN、是否 PubMed 收录、是否 OA、近年被引量、预警标记",
+   src:"实时 API:Crossref journals + NCBI nlmcatalog(取收录状态)。<b>没有影响因子</b> —— IF 是 Clarivate 商业数据,无免费 API。这里用「被引量 + PubMed 收录 + 是否 OA」作替代,偏差要知道:被引量随刊龄累积,新刊天然吃亏"},
+ tletter:{nm:"投稿信函生成",en:"Submission letters",alias:["cover letter","投稿信","回复审稿人","申诉","催稿","撤稿","presubmission","letter"],
+   kw:"生成六类投稿信函的框架",
+   inp:"信函类型 + 语言 + 期刊/稿号/作者等字段(按类型自动换)",
+   out:"完整信函文本,程序性套话已写好,学术论述留 〔…〕",
+   src:"离线内置 —— 纯模板。<b>只写编辑部真正在看的程序性要素</b>(原创性声明、利益冲突、逐条回复格式);科学论述一律留占位符,本站不代写"},
+ tguide:{nm:"报告规范核查",en:"Reporting guidelines",alias:["ARRIVE","CONSORT","PRISMA","STROBE","MDAR","NIH rigor","严谨性","规范","checklist","清单"],
+   kw:"逐条核对论文/标书有没有漏报必需项",
+   inp:"选规范(ARRIVE 2.0 / NIH Rigor / CONSORT / PRISMA / STROBE / MDAR)",
+   out:"可勾选清单,每条附「建议写在哪一节」;可导出带勾选状态的 txt",
+   src:"离线内置 —— 条目按各规范官方版整理。勾齐只说明没漏项,不代表写清楚了"},
+ tdict:{nm:"生物医学词典",en:"MeSH dictionary",alias:["MeSH","主题词","词典","同义词","术语","检索式","subject heading","thesaurus"],
+   kw:"查术语的正式主题词与同义词,并组装检索式",
+   inp:"一个概念(中英文皆可,英文命中率高)",
+   out:"正式主题词、释义、全部同义词、树号、可用副主题词;勾选后生成 PubMed / Europe PMC 检索式",
+   src:"实时 API:NCBI E-utilities db=mesh。会明确告诉你哪些新概念 MeSH 还没收词(如乳酸化实测 0 条),并给自由词写法"},
+ tgap:{nm:"交叉空白扫描",en:"Cross-topic gap scan",alias:["空白","white space","交叉","冷门","选题","niche","gap"],
+   kw:"判断两个主题的交叉是不是真空白",
+   inp:"两组检索式(A 与 B)+ 起始年份",
+   out:"各自命中、交集实测、<b>独立假设下的期望篇数 E</b>、实测/期望比、Jaccard、逐年趋势与占比",
+   src:"实时 API:Europe PMC hitCount。<b>核心是 E:E&lt;5 时交集数没有信息量,面板会拒绝下结论</b> —— 本项目此前正因忽略分母把 3 vs 41 误读成白区"},
+ tprev:{nm:"投前预检",en:"Pre-submission check",alias:["预检","自检","页数","篇幅","SABV","RRID","骨架","scaffold","checklist"],
+   kw:"投基金前查结构齐不齐、篇幅超没超",
+   inp:"基金类型(K99/F32/R01/海外优青/ECS/NRF)+ 正文全文;或只要骨架则不必粘正文",
+   out:"估算页数 vs 上限、各节是否齐、该基金硬性要点是否写到、模糊表述统计、残留占位符数;或分节骨架与页数预算",
+   src:"离线内置 —— 结构与关键词检查。<b>判断不了科学质量</b>:全绿的稿子照样可能因为想法平庸被拒;关键词也会误判(写了「随机分配」而没写 randomization),以正文为准"},
  texternal:{nm:"需外部服务的工具",en:"External tools",alias:["外链","做不了","替代","external"],
    kw:"本站做不了的功能:为什么、去哪做",
    inp:"无",
@@ -6001,6 +6213,80 @@ var HELP = {
       {t:"3000 rpm 是多少 ×g(r=8 cm)",set:[["bcMode","rcf"],["bcA","3000"],["bcB","8"]],go:"benchGo"},
       {t:"ΔΔCt 算倍数变化",set:[["bcMode","ddct"],["bcA","22.4"],["bcB","18.1"],["bcC","24.9"],["bcD","18.3"]],go:"benchGo"}],
   caveat:"ΔΔCt 假定**扩增效率 ≈ 2**;效率偏离时请用 Pfaffl 法。缓冲液按 Henderson–Hasselbalch 算,离 pKa 超过 ±1 时缓冲能力很差,算得出不等于配得好。"},
+
+ tpat:{what:"查一个技术方向在专利里被占到什么程度,并和论文数并排看。",
+  how:["用英文关键词——专利文本几乎都是英文,中文词会漏掉绝大多数。",
+       "先看逐年趋势:专利数近年陡升说明产业已进场,写标书时的\"转化潜力\"论证要跟着调整。",
+       "点「与论文对比」把同一个词的论文数和专利数并排:论文多专利少 = 机制清楚但没人做转化;反过来 = 产业先行、学术论证不足。"],
+  ex:[{t:"ZSWIM8 相关专利",set:[["ptQ","ZSWIM8"],["ptN","25"]],go:"renderPat"},
+      {t:"TDMD / miRNA 降解",set:[["ptQ","target-directed miRNA degradation"],["ptN","25"]],go:"renderPat"},
+      {t:"AMPK 激动剂(产业密集区)",set:[["ptQ","AMPK activator"],["ptN","25"]],go:"renderPat"}],
+  caveat:"这是 Europe PMC 的专利子库,只覆盖与生物医学文献关联的部分,**不是专利局全库**。它能告诉你\"这条路热不热\",不能作为侵权或自由实施(FTO)判断——那必须走 Espacenet / Google Patents 或专利律师。"},
+
+ tzh:{what:"检索中文发表的相关文献,并与英文文献量对比。",
+  how:["中英文检索词都可以;中文词命中的是中文标题/摘要。",
+       "换「对比模式」可以看同一主题的中文 vs 英文发文量比例——写海外优青时,这个比例说明国内该方向的活跃度。",
+       "命中太少先别下结论,看下面的覆盖率说明。"],
+  ex:[{t:"microRNA(中文文献)",set:[["zhQ","microRNA"],["zhN","25"]],go:"renderZh"},
+      {t:"2 型糖尿病",set:[["zhQ","2型糖尿病"],["zhN","25"]],go:"renderZh"},
+      {t:"中英文发文量对比",set:[["zhQ","microRNA"],["zhMode","cmp"]],go:"renderZh"}],
+  caveat:"**这不是 CNKI/万方。** 那两家没有开放 API。这里只覆盖被 PubMed / Europe PMC 收录的中文期刊,北大核心里很大一部分不在其中。中文命中少≠国内没人做,只说明该刊未被国际库收录。"},
+
+ tjr:{what:"投稿前查一个期刊的基本盘:出版商、是否被 PubMed 收录、是否 OA、被引体量,以及预警信号。",
+  how:["输入期刊全名或 ISSN(全名更稳,简称容易匹配错)。",
+       "重点看「PubMed 收录」——不被收录的刊,你的论文在同行的常规检索里基本看不到。",
+       "看预警标记:出版商可疑、收录状态缺失、被引量与刊龄严重不符,都会标出来。"],
+  ex:[{t:"Nucleic Acids Research",set:[["jrQ","Nucleic Acids Research"]],go:"renderJr"},
+      {t:"Molecular Cell",set:[["jrQ","Molecular Cell"]],go:"renderJr"},
+      {t:"按 ISSN 查",set:[["jrQ","0305-1048"]],go:"renderJr"}],
+  caveat:"**没有影响因子。** IF 是 Clarivate 的商业数据,没有免费 API,任何声称给你免费 IF 的站点都是抄来的旧数据。这里用「被引量 + PubMed 收录 + 是否 OA」替代,偏差要知道:被引量随刊龄累积,新刊天然吃亏;预警标记是启发式的,不是权威名单。"},
+
+ tletter:{what:"生成六类投稿信函:cover letter、回复审稿人、申诉、预咨询、催稿、撤稿。",
+  how:["先选类型——输入框会跟着换,不会显示与当前类型无关的字段。",
+       "填期刊/稿号/作者等程序性字段,点生成。程序性套话已经写好。",
+       "输出里剩下的 〔…〕 是学术论述,必须你自己填。生成后通读一遍:信函最忌讳模板痕迹。"],
+  ex:[{t:"Cover letter(英文)",set:[["leType","cover"],["leLang","en"]],go:"leFillExample"},
+      {t:"逐条回复审稿人(6 条)",set:[["leType","revise"],["leLang","en"]],go:"leFillExample"},
+      {t:"投稿前预咨询(中文)",set:[["leType","presub"],["leLang","zh"]],go:"leFillExample"}],
+  caveat:"本站**只写程序性内容**(原创性声明、利益冲突、逐条回复的格式骨架)。核心发现、意义论证、对审稿意见的实质回应一律留 〔…〕——代写这部分等于替你署名,不做。申诉信尤其要慎用:只在有事实性误解时申诉,不要因为不同意审稿人的学术判断而申诉。"},
+
+ tguide:{what:"逐条核对论文或标书有没有漏报必需项,每条告诉你该写在哪一节。",
+  how:["选规范:动物实验用 ARRIVE 2.0,NIH 基金用 Rigor 四要素,RCT 用 CONSORT,系统综述用 PRISMA,观察性研究用 STROBE,一般期刊用 MDAR。",
+       "对着正文逐条核实再勾——凭印象勾等于没查。",
+       "第三列「建议写在」是关键:漏项多数不是不知道要写,而是写在了别处、被审稿人认为没写。"],
+  ex:[{t:"ARRIVE 2.0(动物实验)",set:[["guSet","arrive"]],go:"renderGuide"},
+      {t:"NIH Rigor 四要素",set:[["guSet","nih"]],go:"renderGuide"},
+      {t:"MDAR(多刊通用)",set:[["guSet","mdar"]],go:"renderGuide"}],
+  caveat:"勾齐**只说明没漏项**,不代表写清楚了。CONSORT/PRISMA 这里是核心条目节选,正式投稿要下载官方完整清单逐项填页码。"},
+
+ tdict:{what:"查一个概念的正式主题词(MeSH)、释义、全部同义词、树号与副主题词,并直接组装成检索式。",
+  how:["输入概念,英文命中率明显高于中文。",
+       "看「同义词」——写自由词检索式时,这一栏就是你的 OR 列表。",
+       "勾选要用的词条,点「组装检索式」,拿到 PubMed 与 Europe PMC 两种写法;也可以直接送到文献检索面板去跑。"],
+  ex:[{t:"2 型糖尿病",set:[["dcQ","type 2 diabetes"],["dcN","10"]],go:"dcSearch"},
+      {t:"microRNA",set:[["dcQ","microRNA"],["dcN","10"]],go:"dcSearch"},
+      {t:"乳酸化(MeSH 尚无此词)",set:[["dcQ","lactylation"],["dcN","10"]],go:"dcSearch"}],
+  caveat:"MeSH 每年才更新一次,**新概念普遍缺词**——乳酸化实测 0 条。而且 MeSH 只覆盖已完成标引的文献,最近几个月的新文章还没标,纯主题词检索会漏掉最新进展。稳妥写法是 (MeSH 式) OR (自由词式)。"},
+
+ tgap:{what:"判断两个主题的交叉是不是真的空白——先算独立假设下该有多少篇,再看实测。",
+  how:["A、B 各填一组检索式,建议加 TITLE_ABS: 限定,否则检的是全文,数字虚高。",
+       "先看「独立期望 E」这一行:E<5 时交集数没有信息量,面板会直接拒绝下结论。",
+       "E 够大时看「实测/期望」比:<0.5 才算交叉偏少,值得进一步人工读前 20 篇。",
+       "填起始年份可以看逐年趋势;「占 A 比例」比绝对篇数更可靠——领域整体扩张时绝对数会自然上升。"],
+  ex:[{t:"ZSWIM8 × AMPK(小分母示例)",set:[["gpA","TITLE_ABS:\"ZSWIM8\""],["gpB","TITLE_ABS:\"AMPK\""],["gpY0","2020"]],go:"gapRun"},
+      {t:"TDMD × 代谢(放宽上位词)",set:[["gpA","TITLE_ABS:\"TDMD\" OR TITLE_ABS:\"target-directed miRNA degradation\""],["gpB","TITLE_ABS:\"metabolism\" OR TITLE_ABS:\"metabolic\""],["gpY0","2018"]],go:"gapRun"},
+      {t:"miR-29 × 纤维化(热门组合对照)",set:[["gpA","TITLE_ABS:\"miR-29\""],["gpB","TITLE_ABS:\"fibrosis\""],["gpY0","2015"]],go:"gapRun"}],
+  caveat:"**交集少不等于空白。** 两个常见误读:(1) 分母太小时 0 篇毫无信息量——本项目此前正因忽略这一点,把 3 vs 41 当成过\"白区\",后来撤回;(2) 很多\"空白\"其实是术语不同,同一件事换个词早有人写。E 达标后必须人工读前 20 篇再判断。"},
+
+ tprev:{what:"投基金前自检:估算页数是否超限、该基金各节是否齐、硬性要点有没有写到。也能直接输出分节骨架。",
+  how:["选基金类型(K99/R00、F32、R01、海外优青、RGC ECS、NRF)。",
+       "模式选「输出骨架」= 不用粘正文,直接给节序与页数预算;选「自检」= 把正文全文粘进框里。",
+       "重点看三处:估算页数 vs 上限、❌ 的硬性要点、残留 〔…〕 占位符数量。",
+       "模糊表述统计不是要清零——讨论机制时 may 是诚实的;但出现在 Aim 的目标句里,评审读到的是作者自己也不确定要做什么。"],
+  ex:[{t:"K99/R00 分节骨架",set:[["pvMode","scaffold"],["pvFund","k99"]],go:"prevRun"},
+      {t:"R01 分节骨架",set:[["pvMode","scaffold"],["pvFund","r01"]],go:"prevRun"},
+      {t:"用示例正文跑一次自检",set:[["pvFund","k99"]],go:"pvDemoRun"}],
+  caveat:"**只是结构与关键词检查,判断不了科学质量**——全绿的稿子照样可能因为想法平庸被拒。关键词也会误判:你写了\"随机分配\"而没写 randomization,就会被标成缺项。**以你的正文为准,不要为了让指标变绿而硬塞关键词。** 页数是按字符数估的,图表会占额外篇幅,最终必须用官方模板排版确认。"},
 
  texternal:{what:"这一栏是**本站做不到的功能**,连同为什么做不到、以及该去哪儿做,一条条写清楚。",
   how:["按类别浏览;每条写了「为什么本站不做」和一个真实入口。",
@@ -6237,7 +6523,9 @@ var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
   pipeline:renderPipeline,journals:renderJournals,
   tsite:renderSiteScan,tseq:renderSeqTool,tprimer:renderPrimerTool,tlookup:renderLookup,
   tlit:renderLit,tbib:renderBib,tcite:renderCite,tgene:renderGene,ttrial:renderTrial,
-  tstat:renderStat,tde:renderDE,tclone:renderClone,tbench:renderBench,texternal:renderExt,tfind:renderToolFind};
+  tstat:renderStat,tde:renderDE,tclone:renderClone,tbench:renderBench,texternal:renderExt,tfind:renderToolFind,
+  tpat:renderPat,tzh:renderZh,tjr:renderJr,tletter:renderLetter,tguide:renderGuide,
+  tdict:renderDict,tgap:renderGap,tprev:renderPrev};
 function rerender(pid){
   var fn=RENDER_OF[pid];
   if(typeof fn==="function"){try{fn();}catch(e){console.warn(pid,e);}}
@@ -8112,6 +8400,1072 @@ function bindTfRows(box){
   }
 }
 
+/* ===================== 专利检索 tpat =====================
+   Europe PMC 的 SRC:PAT 收的是 EPO 全文专利。故意不叫"专利数据库检索":
+   CNIPA/USPTO 大量条目不在里面,用它做 FTO 会漏 —— 面板顶部已写明,
+   这里只给"这方向有没有人申过"的信号。 */
+var PAT_LAST=null;
+function patQuery(){
+  var q=((document.getElementById("ptQ")||{}).value||"").trim();
+  var y0=parseInt((document.getElementById("ptY0")||{}).value,10);
+  var y1=parseInt((document.getElementById("ptY1")||{}).value,10);
+  var qq="(SRC:PAT) AND ("+q+")";
+  if(y0||y1) qq+=" AND (FIRST_PDATE:["+(y0||1800)+"-01-01 TO "+(y1||2100)+"-12-31])";
+  return {q:q, qq:qq};
+}
+function renderPat(){
+  var out=document.getElementById("ptOut"); if(!out)return;
+  var g=patQuery();
+  if(!g.q){ out.innerHTML='<div class="tok">输入检索词。可用布尔式,例如 <code>miRNA AND degradation</code> 或 <code>"target-directed"</code>。</div>'; return; }
+  var n=parseInt((document.getElementById("ptN")||{}).value,10)||50;
+  tbusy("ptOut","正在检索专利…");
+  var u="https://www.ebi.ac.uk/europepmc/webservices/rest/search?query="+encodeURIComponent(g.qq)
+    +"&format=json&pageSize="+Math.min(n,100)+"&resultType=core";
+  tfetch(u).then(function(j){
+    var rs=(j.resultList&&j.resultList.result)||[];
+    if(!rs.length){ terr("ptOut","0 命中(总命中 "+(j.hitCount||0)+")。专利文本用词和论文差别很大 —— 试更通用的词(如把 target-directed miRNA degradation 换成 miRNA degradation)。"); return; }
+    var recs=rs.map(function(e){
+      return {id:e.id||"", title:e.title||"", src:e.source||"", year:e.pubYear||"",
+              date:e.firstPublicationDate||"", authors:String(e.authorString||""),
+              jtitle:e.journalTitle||"", doi:e.doi||""};
+    });
+    PAT_LAST={recs:recs,q:g.q,total:j.hitCount};
+    var h='<div class="tok">命中 <b>'+j.hitCount+'</b> 件专利文献,显示前 '+recs.length+' 件。检索式:<code>'+esc2(g.qq)+'</code></div>';
+    /* 申请人/年份分布比标题列表更能说明"这块地有没有被圈" */
+    var byYear={}, byOwner={};
+    recs.forEach(function(r){
+      if(r.year) byYear[r.year]=(byYear[r.year]||0)+1;
+      var o=(r.authors||"").split(/[,;]/)[0].trim(); if(o) byOwner[o]=(byOwner[o]||0)+1;
+    });
+    var ys=Object.keys(byYear).sort();
+    if(ys.length){
+      h+='<div class="exlab">▸ 年份分布(本页样本)</div><table class="jtable"><tr><th>年</th><th>件数</th></tr>';
+      ys.forEach(function(y){ h+='<tr><td>'+esc2(y)+'</td><td>'+byYear[y]+'</td></tr>'; });
+      h+='</table>';
+    }
+    var os=Object.keys(byOwner).sort(function(a,b){return byOwner[b]-byOwner[a];}).slice(0,8);
+    if(os.length){
+      h+='<div class="exlab">▸ 主要申请人/发明人(本页样本,取首位署名)</div><table class="jtable"><tr><th>申请人</th><th>件数</th></tr>';
+      os.forEach(function(o){ h+='<tr><td>'+esc2(o)+'</td><td>'+byOwner[o]+'</td></tr>'; });
+      h+='</table>';
+    }
+    h+='<div class="exlab">▸ 专利列表</div><table class="jtable"><tr><th>年</th><th>标题</th><th>申请人</th><th>链接</th></tr>';
+    recs.forEach(function(r){
+      h+='<tr><td>'+esc2(r.year)+'</td><td>'+esc2(r.title)+'</td><td style="font-size:11.5px">'+esc2(r.authors.slice(0,90))+'</td>'
+       +'<td><a href="https://europepmc.org/article/PAT/'+encodeURIComponent(r.id)+'" target="_blank" rel="noopener">全文</a></td></tr>';
+    });
+    h+='</table>';
+    h+='<div class="honest" style="margin-top:10px">要做正式专利性检索,请用官方库:'
+      +'<a href="https://worldwide.espacenet.com/" target="_blank" rel="noopener">Espacenet(EPO)</a> · '
+      +'<a href="https://ppubs.uspto.gov/pubwebapp/" target="_blank" rel="noopener">USPTO Patent Public Search</a> · '
+      +'<a href="https://pss-system.cponline.cnipa.gov.cn/" target="_blank" rel="noopener">CNIPA 专利检索</a> · '
+      +'<a href="https://patents.google.com/?q='+encodeURIComponent(g.q)+'" target="_blank" rel="noopener">Google Patents(本词直达)</a></div>';
+    out.innerHTML=h;
+  }).catch(function(e){ tnetErr("ptOut",e,"https://europepmc.org/search?query="+encodeURIComponent(g.qq),"Europe PMC 专利检索"); });
+}
+function renderPatCmp(){
+  var out=document.getElementById("ptOut"); if(!out)return;
+  var g=patQuery();
+  if(!g.q){ out.innerHTML='<div class="tok">先输入检索词。</div>'; return; }
+  tbusy("ptOut","正在对比专利与论文命中…");
+  var base="https://www.ebi.ac.uk/europepmc/webservices/rest/search?format=json&pageSize=1&query=";
+  var qs=[["专利(SRC:PAT)","(SRC:PAT) AND ("+g.q+")"],
+          ["期刊论文(SRC:MED)","(SRC:MED) AND ("+g.q+")"],
+          ["预印本(SRC:PPR)","(SRC:PPR) AND ("+g.q+")"],
+          ["全部来源","("+g.q+")"]];
+  Promise.all(qs.map(function(p){ return tfetch(base+encodeURIComponent(p[1])).then(function(j){return [p[0],j.hitCount||0,p[1]];}).catch(function(){return [p[0],null,p[1]];}); }))
+  .then(function(rows){
+    var pat=rows[0][1], med=rows[1][1];
+    var h='<div class="tok">检索词 <code>'+esc2(g.q)+'</code> 在各来源的命中数</div>'
+      +'<table class="jtable"><tr><th>来源</th><th>命中数</th><th>打开</th></tr>';
+    rows.forEach(function(r){
+      h+='<tr><td>'+esc2(r[0])+'</td><td>'+(r[1]===null?'<span class="tfnone">取数失败</span>':'<b>'+r[1]+'</b>')+'</td>'
+       +'<td><a href="https://europepmc.org/search?query='+encodeURIComponent(r[2])+'" target="_blank" rel="noopener">看这批</a></td></tr>';
+    });
+    h+='</table>';
+    if(pat!==null&&med!==null){
+      var ratio = med>0 ? (pat/med) : null;
+      h+='<div class="honest" style="margin-top:9px">专利/论文比 = '
+        +(ratio===null?"论文数为 0,无法算":tfx(ratio,3))
+        +'。<b>怎么读:</b>比值高说明这方向已被产业界圈地,你要留意 FTO;比值极低说明还停在基础研究阶段,离转化远 —— '
+        +'这两种情况在基金申请里的写法完全不同(前者强调 translational path,后者强调 mechanistic novelty)。'
+        +'比值本身不是质量指标,且两个库的收录口径不同,只能横向比同一检索词。</div>';
+    }
+    out.innerHTML=h;
+  }).catch(function(e){ tnetErr("ptOut",e,null,null); });
+}
+function patExport(){
+  if(!PAT_LAST||!PAT_LAST.recs.length){ terr("ptOut","先检索,再导出。"); return; }
+  var rows=[["id","year","title","applicants","source"]];
+  PAT_LAST.recs.forEach(function(r){ rows.push([r.id,r.year,r.title,r.authors,r.src]); });
+  var csv=rows.map(function(r){ return r.map(function(c){ return '"'+String(c==null?"":c).replace(/"/g,'""')+'"'; }).join(","); }).join("\n");
+  tdl("patents_"+(PAT_LAST.q||"query").replace(/\W+/g,"_").slice(0,40)+".csv","\ufeff"+csv,"text/csv;charset=utf-8");
+}
+
+/* ===================== 中文文献 tzh =====================
+   LANG:chi 只覆盖"有英文题录的中文期刊",不等于中文文献全集。
+   CNKI/万方/维普无公开 API 且需订阅 —— 不假装能查,给直达入口。 */
+var ZH_LAST=null;
+function renderZh(){
+  var out=document.getElementById("zhOut"); if(!out)return;
+  var q=((document.getElementById("zhQ")||{}).value||"").trim();
+  if(!q){ out.innerHTML='<div class="tok">输入检索词。中文词直接输(如 <code>微小RNA 降解</code>),英文词也可以 —— 很多中文期刊的题录是英文的。</div>'; return; }
+  var mode=(document.getElementById("zhMode")||{}).value||"cn";
+  var n=parseInt((document.getElementById("zhN")||{}).value,10)||50;
+  var ext='<div class="honest" style="margin-top:10px">中文库直达(需自行登录/订阅):'
+    +'<a href="https://kns.cnki.net/kns8s/search?q='+encodeURIComponent(q)+'" target="_blank" rel="noopener">CNKI 知网</a> · '
+    +'<a href="https://s.wanfangdata.com.cn/paper?q='+encodeURIComponent(q)+'" target="_blank" rel="noopener">万方</a> · '
+    +'<a href="http://www.cqvip.com/" target="_blank" rel="noopener">维普</a> · '
+    +'<a href="https://xueshu.baidu.com/s?wd='+encodeURIComponent(q)+'" target="_blank" rel="noopener">百度学术</a> · '
+    +'<a href="https://scholar.google.com/scholar?q='+encodeURIComponent(q)+'" target="_blank" rel="noopener">Google Scholar</a></div>';
+  if(mode==="cmp"){
+    tbusy("zhOut","正在跨库计数…");
+    var base="https://www.ebi.ac.uk/europepmc/webservices/rest/search?format=json&pageSize=1&query=";
+    var qs=[["中文文献 LANG:chi","(LANG:chi) AND ("+q+")"],
+            ["英文文献 LANG:eng","(LANG:eng) AND ("+q+")"],
+            ["期刊论文 SRC:MED","(SRC:MED) AND ("+q+")"],
+            ["预印本 SRC:PPR","(SRC:PPR) AND ("+q+")"],
+            ["专利 SRC:PAT","(SRC:PAT) AND ("+q+")"],
+            ["全部","("+q+")"]];
+    Promise.all(qs.map(function(p){ return tfetch(base+encodeURIComponent(p[1])).then(function(j){return [p[0],j.hitCount||0,p[1]];}).catch(function(){return [p[0],null,p[1]];}); }))
+    .then(function(rows){
+      var h='<div class="tok">检索词 <code>'+esc2(q)+'</code> 的跨库命中数。<b>这是命中数对比,不是查全率</b> —— 各库收录口径不同。</div>'
+        +'<table class="jtable"><tr><th>库/过滤</th><th>命中</th><th>占全部</th><th>打开</th></tr>';
+      var all=null; rows.forEach(function(r){ if(r[0]==="全部") all=r[1]; });
+      rows.forEach(function(r){
+        var pct=(all&&r[1]!==null)?tfx(100*r[1]/all,1)+"%":"—";
+        h+='<tr><td>'+esc2(r[0])+'</td><td>'+(r[1]===null?'<span class="tfnone">失败</span>':'<b>'+r[1]+'</b>')+'</td><td>'+pct+'</td>'
+         +'<td><a href="https://europepmc.org/search?query='+encodeURIComponent(r[2])+'" target="_blank" rel="noopener">看这批</a></td></tr>';
+      });
+      h+='</table>';
+      h+='<div class="honest" style="margin-top:9px"><b>怎么用这张表:</b>中文占比高 → 这题目在国内有积累,写国内基金(优青/面上)时可引中文工作显示本土需求;'
+        +'英文压倒性 → 国际竞争已经很激烈,要靠差异化角度切入;预印本占比高 → 领域推进快,投稿前务必再查一遍新预印本。</div>'+ext;
+      out.innerHTML=h;
+    }).catch(function(e){ tnetErr("zhOut",e,null,null); });
+    return;
+  }
+  tbusy("zhOut","正在检索中文文献…");
+  var qq="(LANG:chi) AND ("+q+")";
+  var u="https://www.ebi.ac.uk/europepmc/webservices/rest/search?query="+encodeURIComponent(qq)
+    +"&format=json&pageSize="+Math.min(n,100)+"&resultType=core";
+  tfetch(u).then(function(j){
+    var rs=(j.resultList&&j.resultList.result)||[];
+    if(!rs.length){ out.innerHTML='<div class="tok">Europe PMC 的中文过滤下 0 命中(总命中 '+(j.hitCount||0)+')。<b>这很常见</b> —— 该库只收有英文题录的中文期刊,大部分中文文献要去下面的库查。</div>'+ext; return; }
+    var recs=rs.map(function(e){
+      return {pmid:e.pmid||"", title:e.title||"", journal:e.journalTitle||"", year:e.pubYear||"",
+              authors:String(e.authorString||""), doi:e.doi||"", cited:e.citedByCount};
+    });
+    ZH_LAST={recs:recs,q:q};
+    var h='<div class="tok">中文文献命中 <b>'+j.hitCount+'</b> 篇,显示前 '+recs.length+' 篇。检索式:<code>'+esc2(qq)+'</code></div>'
+      +'<table class="jtable"><tr><th>年</th><th>标题</th><th>期刊</th><th>被引</th><th>链接</th></tr>';
+    recs.forEach(function(r){
+      h+='<tr><td>'+esc2(r.year)+'</td><td>'+esc2(r.title)+'</td><td style="font-size:11.5px">'+esc2(r.journal)+'</td>'
+       +'<td>'+(r.cited==null?"—":r.cited)+'</td><td>'
+       +(r.pmid?'<a href="https://pubmed.ncbi.nlm.nih.gov/'+esc2(r.pmid)+'/" target="_blank" rel="noopener">PubMed</a>':(r.doi?'<a href="https://doi.org/'+esc2(r.doi)+'" target="_blank" rel="noopener">DOI</a>':"—"))
+       +'</td></tr>';
+    });
+    h+='</table>'+ext;
+    out.innerHTML=h;
+  }).catch(function(e){ tnetErr("zhOut",e,"https://europepmc.org/search?query="+encodeURIComponent(qq),"Europe PMC"); });
+}
+function zhExport(){
+  if(!ZH_LAST||!ZH_LAST.recs.length){ terr("zhOut","先检索(中文文献模式),再导出。"); return; }
+  var rows=[["pmid","year","title","journal","authors","doi","cited"]];
+  ZH_LAST.recs.forEach(function(r){ rows.push([r.pmid,r.year,r.title,r.journal,r.authors,r.doi,r.cited]); });
+  var csv=rows.map(function(r){ return r.map(function(c){ return '"'+String(c==null?"":c).replace(/"/g,'""')+'"'; }).join(","); }).join("\n");
+  tdl("cn_papers_"+(ZH_LAST.q||"q").replace(/\W+/g,"_").slice(0,40)+".csv","\ufeff"+csv,"text/csv;charset=utf-8");
+}
+
+/* ===================== 期刊查询与预警 tjr =====================
+   不提供 IF:JCR 是版权数据。替代指标全部来自 Crossref 元数据质量 + NLM 收录状态。
+   预警是启发式的:Beall's list 已停更且无 API,任何"黑名单"都不可实时核验 ——
+   所以每条预警都打印判定依据和阈值,让用户自己复核,而不是给一个"可信/不可信"的裁决。
+   NLM 目录一个刊名常有多条(正刊/增刊/会议集),必须按 ISSN 匹配再挑,
+   否则会把正刊的收录状态误读成增刊的 N。 */
+var JR_LAST=null;
+function jrFlags(it, nlm){
+  var f=it.flags||{}, c=it.counts||{}, out=[];
+  var total=c["total-dois"]||0, cur=c["current-dois"]||0;
+  if(!nlm.indexed) out.push(["未见于 NLM 目录的现刊收录","PubMed/MEDLINE 的现行收录状态不是 Y。可能是新刊、非生物医学刊,也可能确实不被收录 —— 这条最需要你自己核。","high"]);
+  if(total<200) out.push(["DOI 注册总量偏少("+total+")","正常运行多年的期刊通常远超此数。新刊会天然偏少,不必然是问题。","mid"]);
+  if(f["deposits-references-current"]===false) out.push(["不向 Crossref 提交参考文献","规范出版社通常会提交,便于引文追踪。不提交会影响你论文被追踪到。","mid"]);
+  if(f["deposits-abstracts-current"]===false) out.push(["不提交摘要元数据","影响检索可见度。","low"]);
+  if(f["deposits-licenses-current"]===false) out.push(["不提交许可信息","版权/OA 条款不透明,投稿前请看清版权协议。","low"]);
+  if(f["deposits-similarity-checking-current"]===false) out.push(["未参与 Similarity Check(查重)","说明该刊未接入 Crossref 的查重服务 —— 同行评审严谨度的一个弱信号。","mid"]);
+  if(f["deposits-orcids-current"]===false) out.push(["不提交 ORCID","元数据完整度偏低。","low"]);
+  /* 发文量突增是掠夺性刊的经典信号,但正常刊扩容也会突增 —— 所以只报事实和倍数 */
+  var by=(it.breakdowns||{})["dois-by-issued-year"]||[];
+  if(by.length>3){
+    var m={}; by.forEach(function(p){ m[p[0]]=p[1]; });
+    var yrs=Object.keys(m).map(Number).sort(function(a,b){return a-b;});
+    var last=yrs[yrs.length-1], prev=last-1, pprev=last-2;
+    if(m[prev]&&m[pprev]){
+      var r1=m[prev]/Math.max(m[pprev],1);
+      if(r1>=3) out.push([prev+" 年发文量为 "+pprev+" 年的 "+tfx(r1,1)+" 倍","发文量在一年内翻数倍,是掠夺性刊的典型特征之一;但正常刊扩容或并刊也会如此。请看该刊是否同期扩了编委和刊期。","high"]);
+    }
+  }
+  return out;
+}
+function renderJr(onlyFlag){
+  var out=document.getElementById("jrOut"); if(!out)return;
+  var q=((document.getElementById("jrQ")||{}).value||"").trim();
+  if(!q){ out.innerHTML='<div class="tok">输入刊名或 ISSN。ISSN 更准 —— 刊名常有同名的增刊/会议集。</div>'; return; }
+  tbusy("jrOut","正在查询 Crossref 与 NLM 目录…");
+  var isIssn=/^\d{4}-\d{3}[\dxX]$/.test(q);
+  var cu = isIssn ? "https://api.crossref.org/journals/"+encodeURIComponent(q)
+                  : "https://api.crossref.org/journals?query="+encodeURIComponent(q)+"&rows=5";
+  tfetch(cu).then(function(j){
+    var items = isIssn ? [j.message] : ((j.message&&j.message.items)||[]);
+    if(!items.length){ terr("jrOut","Crossref 里查不到这个刊名/ISSN。换个写法,或用 ISSN 查。"); return null; }
+    var it=items[0];
+    var issns=it.ISSN||[];
+    /* NLM 目录:按 ISSN 找,拿不到 ISSN 就按刊名 */
+    var nterm = issns.length ? ('"'+issns[0]+'"[ISSN]') : ('"'+(it.title||q)+'"[Title]');
+    var eu="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
+    return tfetch(eu+"esearch.fcgi?db=nlmcatalog&retmode=json&retmax=10&term="+encodeURIComponent(nterm))
+      .then(function(es){
+        var ids=(es.esearchresult&&es.esearchresult.idlist)||[];
+        if(!ids.length) return {it:it,items:items,nlm:{indexed:false,note:"NLM 目录无此 ISSN 条目",cands:[]}};
+        return tfetch(eu+"esummary.fcgi?db=nlmcatalog&retmode=json&id="+ids.join(",")).then(function(su){
+          var cands=ids.map(function(u){
+            var e=su.result[u]||{};
+            return {uid:u, ta:e.medlineta||"", idx:e.currentindexingstatus||"",
+                    issns:(e.issnlist||[]).map(function(x){return x.issn;}).filter(Boolean),
+                    start:e.startyear||"", end:e.endyear||""};
+          });
+          /* 先按 ISSN 精确匹配,再退到 idx=Y,再退到第一条 —— 否则会读到增刊 */
+          var pick=null;
+          if(issns.length) pick=cands.filter(function(c){ return c.issns.some(function(x){ return issns.indexOf(x)>=0; }); })[0];
+          if(!pick) pick=cands.filter(function(c){ return c.idx==="Y"; })[0];
+          if(!pick) pick=cands[0];
+          return {it:it,items:items,nlm:{indexed:pick.idx==="Y",pick:pick,cands:cands,note:""}};
+        });
+      }).catch(function(){ return {it:it,items:items,nlm:{indexed:false,note:"NLM 查询失败(网络)",cands:[]}}; });
+  }).then(function(r){
+    if(!r)return;
+    var it=r.it, nlm=r.nlm, c=it.counts||{}, f=it.flags||{};
+    var flags=jrFlags(it,nlm);
+    JR_LAST={it:it,nlm:nlm,flags:flags};
+    var h="";
+    if(!onlyFlag){
+      h+='<div class="tok">Crossref 条目:<b>'+esc2(it.title||"")+'</b></div>';
+      h+='<table class="jtable"><tr><th>字段</th><th>值</th></tr>'
+       +'<tr><td>出版社</td><td>'+esc2(it.publisher||"—")+'</td></tr>'
+       +'<tr><td>ISSN</td><td>'+esc2((it.ISSN||[]).join(", ")||"—")+'</td></tr>'
+       +'<tr><td>DOI 总量 / 近期</td><td>'+(c["total-dois"]||0)+' / '+(c["current-dois"]||0)+'</td></tr>'
+       +'<tr><td>PubMed(NLM)现行收录</td><td>'+(nlm.indexed?'<b style="color:#1B5E20">是(currentindexingstatus=Y)</b>':'<b style="color:#B71C1C">否</b>'+(nlm.note?" — "+esc2(nlm.note):""))+'</td></tr>'
+       +'<tr><td>提交参考文献</td><td>'+(f["deposits-references-current"]?"是":"否")+'</td></tr>'
+       +'<tr><td>参与查重 Similarity Check</td><td>'+(f["deposits-similarity-checking-current"]?"是":"否")+'</td></tr>'
+       +'<tr><td>提交摘要 / ORCID / 许可</td><td>'+(f["deposits-abstracts-current"]?"是":"否")+' / '+(f["deposits-orcids-current"]?"是":"否")+' / '+(f["deposits-licenses-current"]?"是":"否")+'</td></tr>'
+       +'</table>';
+      var by=(it.breakdowns||{})["dois-by-issued-year"]||[];
+      if(by.length){
+        var rows=by.slice().sort(function(a,b){return b[0]-a[0];}).slice(0,8);
+        h+='<div class="exlab">▸ 近年发文量(Crossref DOI 数,可作规模与扩张速度的代理)</div><table class="jtable"><tr><th>年</th><th>DOI 数</th></tr>';
+        rows.forEach(function(p){ h+='<tr><td>'+p[0]+'</td><td>'+p[1]+'</td></tr>'; });
+        h+='</table>';
+      }
+      if(nlm.cands&&nlm.cands.length>1){
+        h+='<div class="exlab">▸ NLM 目录里的同名条目(已按 ISSN 挑出正刊,其余通常是增刊/会议集)</div><table class="jtable"><tr><th>缩写刊名</th><th>收录</th><th>ISSN</th><th>起止</th></tr>';
+        nlm.cands.forEach(function(cd){
+          h+='<tr><td>'+esc2(cd.ta)+(nlm.pick&&cd.uid===nlm.pick.uid?' <b>← 采用</b>':'')+'</td><td>'+esc2(cd.idx||"—")+'</td><td>'+esc2(cd.issns.join(", ")||"—")+'</td><td>'+esc2(cd.start+"–"+(cd.end||"现"))+'</td></tr>';
+        });
+        h+='</table>';
+      }
+    }
+    h+='<div class="exlab">▸ 预警核查('+flags.length+' 条命中,每条都写了依据,请自行复核)</div>';
+    if(!flags.length){
+      h+='<div class="tok">本次启发式规则<b>没有命中任何预警项</b>。<b>这不等于该刊没问题</b> —— 规则只覆盖元数据规范性与收录状态,不评价同行评审质量。</div>';
+    }else{
+      h+='<table class="jtable"><tr><th>严重度</th><th>预警</th><th>判定依据</th></tr>';
+      flags.forEach(function(fl){
+        var col=fl[2]==="high"?"#B71C1C":(fl[2]==="mid"?"#E65100":"#666");
+        var lab=fl[2]==="high"?"高":(fl[2]==="mid"?"中":"低");
+        h+='<tr><td style="color:'+col+';font-weight:700">'+lab+'</td><td>'+esc2(fl[0])+'</td><td style="font-size:12px">'+esc2(fl[1])+'</td></tr>';
+      });
+      h+='</table>';
+    }
+    h+='<div class="honest" style="margin-top:10px">进一步核实请用:'
+      +'<a href="https://doaj.org/search/journals?ref=homepage&source=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22'+encodeURIComponent(q)+'%22%7D%7D%7D" target="_blank" rel="noopener">DOAJ(OA 白名单)</a> · '
+      +'<a href="https://www.ncbi.nlm.nih.gov/nlmcatalog/?term='+encodeURIComponent(q)+'" target="_blank" rel="noopener">NLM Catalog</a> · '
+      +'<a href="https://mjl.clarivate.com/search-results?issn='+encodeURIComponent(q)+'" target="_blank" rel="noopener">Web of Science 刊源表</a> · '
+      +'<a href="https://thinkchecksubmit.org/" target="_blank" rel="noopener">Think·Check·Submit 自查流程</a>。'
+      +'<b>IF 请查你机构订阅的 JCR</b> —— 本站不复制该数据。</div>';
+    out.innerHTML=h;
+  }).catch(function(e){ tnetErr("jrOut",e,"https://search.crossref.org/?q="+encodeURIComponent(q),"Crossref"); });
+}
+
+/* ===================== 投稿信函 tletter =====================
+   纯模板拼装。措辞取各类信函的通行结构(编辑部真正在看的要素),
+   学术内容留 〔…〕 让作者填 —— 不编造科学论述,这是本站的底线。
+   字段按信函类型动态换,不显示与当前类型无关的输入框。 */
+var LE_FIELDS={
+  cover:[["leJ","期刊名","Nucleic Acids Research"],["leT","论文标题",""],["leA","通讯作者姓名",""],
+         ["leFind","一句话核心发现",""],["leWhy","为什么适合该刊",""],["leSug","建议审稿人(姓名+机构+邮箱,选填)",""]],
+  revise:[["leJ","期刊名",""],["leMs","稿件编号","NAR-2026-01234"],["leEd","编辑姓名",""],
+          ["leN","审稿意见条数","6"],["leMain","本轮主要改动(一句话)",""]],
+  appeal:[["leJ","期刊名",""],["leMs","稿件编号",""],["leEd","编辑姓名",""],
+          ["leGround","申诉理由(事实性误解/审稿人越界/数据被误读)",""]],
+  presub:[["leJ","期刊名",""],["leEd","编辑姓名(不知道就留空)",""],["leT","拟投稿标题",""],
+          ["leFind","一句话核心发现",""],["leWhy","为什么适合该刊",""]],
+  status:[["leJ","期刊名",""],["leMs","稿件编号",""],["leDate","投稿/上次回复日期","2026-05-01"]],
+  withdraw:[["leJ","期刊名",""],["leMs","稿件编号",""],["leReason","撤稿原因",""]]
+};
+function leRenderFields(){
+  var box=document.getElementById("leFields"); if(!box)return;
+  var t=(document.getElementById("leType")||{}).value||"cover";
+  var fs=LE_FIELDS[t]||[];
+  var h="";
+  fs.forEach(function(f){
+    h+='<label>'+esc2(f[1])+'<input type="text" id="'+f[0]+'" placeholder="'+esc2(f[2])+'" style="width:200px"></label>';
+  });
+  box.innerHTML=h;
+}
+function lev(id,dflt){ var e=document.getElementById(id); var v=e?String(e.value||"").trim():""; return v||(dflt||""); }
+function LEB(x){ return "〔"+x+"〕"; }
+function leBuild(){
+  var t=(document.getElementById("leType")||{}).value||"cover";
+  var lang=(document.getElementById("leLang")||{}).value||"en";
+  var J=lev("leJ",LEB("Journal name")), T=lev("leT",LEB("Full title of manuscript")),
+      A=lev("leA",LEB("Corresponding author")), MS=lev("leMs",LEB("Manuscript ID")),
+      ED=lev("leEd",""), FIND=lev("leFind",LEB("one-sentence key finding")),
+      WHY=lev("leWhy",LEB("fit to the journal's scope and readership")),
+      SUG=lev("leSug",""), N=parseInt(lev("leN","6"),10)||6,
+      MAIN=lev("leMain",LEB("the main change in this revision")),
+      GR=lev("leGround",LEB("the factual error or misreading you are appealing")),
+      DT=lev("leDate",LEB("submission date")), RS=lev("leReason",LEB("reason for withdrawal"));
+  var edEN = ED? ("Dear Dr. "+ED+",") : "Dear Editor,";
+  var edZH = ED? ("尊敬的 "+ED+" 编辑:") : "尊敬的编辑:";
+  var out="";
+  if(t==="cover"){
+    out = lang==="en" ?
+"To the Editors, "+J+"\n\n"+edEN+"\n\n"+
+"We wish to submit an original research article entitled \""+T+"\" for consideration by "+J+".\n\n"+
+"We confirm that this work is original and has not been published elsewhere, nor is it currently under consideration by another journal.\n\n"+
+"In this paper we report that "+FIND+". This is significant because "+LEB("state the gap this closes and who it matters to")+".\n\n"+
+"We believe this manuscript is appropriate for "+J+" because "+WHY+".\n\n"+
+"All authors have approved the manuscript and agree with its submission. The authors have no competing interests to declare"+LEB("or list them")+".\n"+
+(SUG?("\nWe suggest the following reviewers, who have no conflict of interest with our group:\n"+SUG+"\n"):"")+
+"\nThank you for your consideration of this manuscript.\n\nSincerely,\n"+A+"\n"+LEB("Affiliation, address, email")
+    :
+"致 "+J+" 编辑部\n\n"+edZH+"\n\n"+
+"我们希望向 "+J+" 投稿原创研究论文《"+T+"》,请予审议。\n\n"+
+"我们确认本工作为原创,未在其他刊物发表,亦未同时投往其他期刊。\n\n"+
+"本文报道:"+FIND+"。其意义在于"+LEB("说明填补了什么空白、对谁重要")+"。\n\n"+
+"我们认为本文适合 "+J+",理由是"+WHY+"。\n\n"+
+"全体作者均已审阅并同意投稿。作者声明无利益冲突"+LEB("或在此列出")+"。\n"+
+(SUG?("\n推荐审稿人(与本课题组无利益冲突):\n"+SUG+"\n"):"")+
+"\n感谢您的审阅。\n\n"+A+" 谨上\n"+LEB("单位、地址、邮箱");
+  }
+  else if(t==="revise"){
+    var body="";
+    for(var i=1;i<=N;i++){
+      body += lang==="en" ?
+("\n--- Reviewer "+LEB("#")+", Comment "+i+" ---\nComment: "+LEB("paste the reviewer's comment verbatim")+
+ "\nResponse: We thank the reviewer for this point. "+LEB("state what you did, not just that you agree")+
+ "\nChange made: "+LEB("page/line or figure changed; write \"no change\" plus your reason if you did not change it")+"\n")
+: ("\n--- 审稿人"+LEB("编号")+" 意见 "+i+" ---\n意见原文:"+LEB("原样粘贴审稿人意见")+
+ "\n回复:感谢审稿人指出这一点。"+LEB("写你做了什么,而不只是表示同意")+
+ "\n修改位置:"+LEB("页/行或图号;若未修改,写\"未修改\"并给出理由")+"\n");
+    }
+    out = lang==="en" ?
+(edEN+"\n\nRe: Manuscript "+MS+", \""+T+"\"\n\n"+
+"We thank you and the reviewers for the constructive assessment of our manuscript. We have revised the paper accordingly; the main change is "+MAIN+".\n\n"+
+"Below we respond to each comment point by point. Reviewer comments are in plain text and our responses follow each one. All changes are marked in the revised manuscript.\n"+
+body+
+"\nWe hope the revised manuscript is now suitable for publication in "+J+" and look forward to your decision.\n\nSincerely,\n"+A)
+: (edZH+"\n\n关于:稿件 "+MS+"《"+T+"》\n\n"+
+"感谢您与各位审稿人的建设性意见。我们已据此修改,本轮主要改动为"+MAIN+"。\n\n"+
+"以下逐条回复。审稿意见为原文,回复紧随其后;所有改动已在修改稿中标记。\n"+
+body+
+"\n希望修改稿已达到 "+J+" 的发表要求,静候您的决定。\n\n"+A+" 谨上");
+  }
+  else if(t==="appeal"){
+    out = lang==="en" ?
+(edEN+"\n\nRe: Appeal against the decision on manuscript "+MS+", \""+T+"\"\n\n"+
+"We respectfully request reconsideration of the decision on the above manuscript. We do not appeal on the grounds of disagreement with the reviewers' opinions, but on a specific factual point: "+GR+".\n\n"+
+"Specifically:\n1. "+LEB("quote the reviewer statement you believe is factually incorrect")+"\n"+
+"2. "+LEB("give the evidence in your manuscript, or new data, that contradicts it — cite figure/page")+"\n"+
+"3. "+LEB("state what you request: re-review, a third reviewer, or reconsideration as a revision")+"\n\n"+
+"We recognise that the editor's decision is final and we are grateful for the time already spent on our manuscript.\n\nSincerely,\n"+A)
+: (edZH+"\n\n关于:对稿件 "+MS+"《"+T+"》处理决定的申诉\n\n"+
+"我们谨请重新考虑上述稿件的处理决定。我们并非因不同意审稿人的学术判断而申诉,而是基于一个具体的事实问题:"+GR+"。\n\n"+
+"具体如下:\n1. "+LEB("引用你认为存在事实性错误的审稿意见原文")+"\n"+
+"2. "+LEB("给出稿件中(或新增的)与之矛盾的证据,注明图号/页码")+"\n"+
+"3. "+LEB("明确诉求:重新送审、增加第三位审稿人,或按修回处理")+"\n\n"+
+"我们理解编辑的决定为最终决定,并感谢编辑部已投入的时间。\n\n"+A+" 谨上");
+  }
+  else if(t==="presub"){
+    out = lang==="en" ?
+(edEN+"\n\nI am writing to enquire whether the following work would be of interest to "+J+" before we prepare a full submission.\n\n"+
+"Working title: "+T+"\n\nKey finding: "+FIND+"\n\nWhy we think it fits "+J+": "+WHY+"\n\n"+
+"Brief summary "+LEB("about 200 words: question, approach, main result, why it matters")+"\n\n"+
+"If you feel this falls outside the journal's scope, we would be grateful for a brief indication so that we can consider a more suitable venue.\n\nSincerely,\n"+A)
+: (edZH+"\n\n在正式投稿前,谨向您咨询以下工作是否属于 "+J+" 的兴趣范围。\n\n"+
+"暂定标题:"+T+"\n\n核心发现:"+FIND+"\n\n适合 "+J+" 的理由:"+WHY+"\n\n"+
+"内容摘要"+LEB("约 200 字:问题、方法、主要结果、意义")+"\n\n"+
+"若您认为本工作不在该刊范围内,烦请简要示知,以便我们另择合适刊物。\n\n"+A+" 谨上");
+  }
+  else if(t==="status"){
+    out = lang==="en" ?
+(edEN+"\n\nRe: Manuscript "+MS+", \""+T+"\"\n\n"+
+"Our manuscript was submitted to "+J+" on "+DT+". As we have not yet received a decision, I am writing to ask whether you could kindly let us know its current status.\n\n"+
+"We appreciate that peer review takes time and we do not wish to hurry the reviewers; any indication of the expected timeline would be very helpful for our planning.\n\n"+
+"Thank you for your assistance.\n\nSincerely,\n"+A)
+: (edZH+"\n\n关于:稿件 "+MS+"《"+T+"》\n\n"+
+"我们的稿件于 "+DT+" 投至 "+J+",目前尚未收到处理意见,谨咨询当前状态。\n\n"+
+"我们理解同行评审需要时间,无意催促审稿人;若能大致告知预计时间,将对我们的安排很有帮助。\n\n"+
+"感谢您的协助。\n\n"+A+" 谨上");
+  }
+  else if(t==="withdraw"){
+    out = lang==="en" ?
+(edEN+"\n\nRe: Request to withdraw manuscript "+MS+", \""+T+"\"\n\n"+
+"We request the withdrawal of the above manuscript from consideration by "+J+". The reason is "+RS+".\n\n"+
+"We are grateful to you and the reviewers for the time invested in our manuscript, and we apologise for any inconvenience this causes.\n\n"+
+"Please confirm that the manuscript has been withdrawn from the editorial system.\n\nSincerely,\n"+A)
+: (edZH+"\n\n关于:撤回稿件 "+MS+"《"+T+"》的申请\n\n"+
+"我们申请从 "+J+" 撤回上述稿件,原因为"+RS+"。\n\n"+
+"感谢编辑与审稿人为本稿投入的时间,并对由此造成的不便致歉。\n\n"+
+"烦请确认该稿已从投稿系统中撤回。\n\n"+A+" 谨上");
+  }
+  return out;
+}
+function renderLetter(){
+  var out=document.getElementById("leOut"); if(!out)return;
+  var txt=leBuild();
+  var nfill=(txt.match(/〔/g)||[]).length;
+  out.innerHTML='<div class="tok">已生成。<b>还有 '+nfill+' 处 〔…〕 需要你填</b> —— 这些是学术内容,本站不代写。填完请通读一遍,信函最忌讳模板痕迹。</div>'
+    +'<pre id="lePre" style="white-space:pre-wrap">'+esc2(txt)+'</pre>';
+}
+function letterCopy(){
+  var t=leBuild();
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t); }
+  var o=document.getElementById("leOut");
+  if(o){ var d=document.createElement("div"); d.className="tok"; d.textContent="已复制到剪贴板(若浏览器拦截,请手动选中 下方文本复制)。"; o.insertBefore(d,o.firstChild); }
+}
+function letterDl(){
+  var t=(document.getElementById("leType")||{}).value||"letter";
+  tdl(t+"_letter.txt", leBuild(), "text/plain;charset=utf-8");
+}
+
+/* ===================== 报告规范核查 tguide =====================
+   条目离线内置。每条给"写在哪一节",因为漏项通常不是不知道要写,
+   而是不知道该写在哪、结果散落各处被审稿人认为没写。 */
+var GUIDE={
+ arrive:{nm:"ARRIVE 2.0(动物实验报告)",note:"ARRIVE 2.0 分 Essential 10 与 Recommended Set。下表为 Essential 10,期刊多数强制要求。",
+  items:[
+  ["研究设计:每组实验单元数、对照组设置、实验单元定义","Methods 开头"],
+  ["样本量:每组数量 + 如何确定(有无 power analysis)","Methods 统计段"],
+  ["纳入排除标准:排除了哪些动物/数据,为什么;有无预设标准","Methods + Results"],
+  ["随机化:如何分组、如何决定处理顺序;没做要说明","Methods"],
+  ["盲法:谁在哪一步不知道分组(给药/测量/分析)","Methods"],
+  ["结局指标:主要与次要指标分别是什么","Methods"],
+  ["统计方法:每个比较用什么检验、如何处理多重比较、实验单元是什么","Methods 统计段"],
+  ["实验动物:种、品系、性别、年龄/体重、来源、遗传背景","Methods 动物段"],
+  ["实验步骤:每组做了什么、何时、何地、如何做(可复现程度)","Methods"],
+  ["结果:每组的汇总统计 + 效应量与精度(置信区间)","Results + 图注"]]},
+ nih:{nm:"NIH Rigor 四要素(基金必备)",note:"NIH 自 2016 起要求正文明确写出四要素。评审表上有对应打分项,漏写直接扣分 —— 这不是可选项。",
+  items:[
+  ["支撑本项目的科学前提:已发表证据的优势与弱点分别是什么","Significance 末段"],
+  ["严谨的实验设计:随机化、盲法、生物学重复 vs 技术重复的界定","Approach 每个 Aim 内"],
+  ["统计计划:每个关键比较的检验方法 + 样本量依据(power 计算)","Approach 或独立小节"],
+  ["生物变量:性别作为生物学变量(SABV)如何纳入;若只用单一性别,给出科学理由","Approach 独立小节"],
+  ["关键生物试剂认证:抗体、细胞系(STR 鉴定)、质粒、动物模型的验证方式","Approach 或 Authentication 附件"],
+  ["细胞系来源与支原体检测","Authentication 附件"],
+  ["试剂唯一标识(RRID)已标注","全文首次出现处"],
+  ["预期结果与替代方案:每个 Aim 都写了 pitfalls 与 alternative approaches","Approach 每个 Aim 末"],
+  ["数据与资源共享计划(DMS Plan,2023 起强制)","独立附件"]]},
+ consort:{nm:"CONSORT(随机对照试验)",note:"下表为核心条目节选。完整 25 条见 consort-spirit.org。",
+  items:[
+  ["标题/摘要写明是随机试验","Title / Abstract"],
+  ["试验设计:平行、交叉、整群等;分配比例","Methods"],
+  ["受试者资格标准与招募地点","Methods"],
+  ["干预细节:足以复现的剂量、频次、时程","Methods"],
+  ["主要与次要结局:定义、测量时点、有无中途更改","Methods"],
+  ["样本量如何确定;有无中期分析与停止规则","Methods"],
+  ["随机序列生成方法","Methods"],
+  ["分配隐藏机制(如中心随机、密封信封)","Methods"],
+  ["盲法:谁被盲、如何盲","Methods"],
+  ["受试者流程图(筛选→随机→随访→分析)","Figure 1"],
+  ["每组失访与排除人数及原因","Results"],
+  ["每个主要结局的效应量 + 95% CI","Results"],
+  ["所有不良事件报告","Results"],
+  ["试验注册号与方案可获取途径","末尾声明"]]},
+ prisma:{nm:"PRISMA 2020(系统综述/meta 分析)",note:"下表为核心条目节选。完整 27 条见 prisma-statement.org。",
+  items:[
+  ["标题标明是系统综述","Title"],
+  ["注册信息(PROSPERO 号)与方案可获取途径","Methods 开头"],
+  ["纳入排除标准(PICO 框架)","Methods"],
+  ["检索的数据库、平台、最后检索日期","Methods"],
+  ["完整检索式(至少一个库的原始式子)","Methods 或附录"],
+  ["筛选流程:几人独立筛、如何解决分歧","Methods"],
+  ["数据提取方式与提取项清单","Methods"],
+  ["偏倚风险评估工具(如 RoB 2、ROBINS-I)与评估者","Methods"],
+  ["合并方法:模型(固定/随机)、异质性指标(I²)","Methods"],
+  ["PRISMA 流程图(检出→去重→筛除→纳入)","Figure 1"],
+  ["每个研究的特征表","Table 1"],
+  ["森林图 + 异质性统计量","Results"],
+  ["发表偏倚评估(漏斗图/Egger)","Results"],
+  ["证据确定性评价(GRADE)","Results / Discussion"]]},
+ strobe:{nm:"STROBE(观察性研究)",note:"适用于队列、病例对照、横断面研究。下表为核心条目节选。",
+  items:[
+  ["标题/摘要中写明研究设计类型","Title / Abstract"],
+  ["研究背景与明确的研究目标/假设","Introduction 末"],
+  ["研究设计要素与时间框架(招募起止、随访时长)","Methods"],
+  ["研究场所与地点","Methods"],
+  ["参与者资格标准与选择方法;队列研究说明随访方式","Methods"],
+  ["所有变量定义:结局、暴露、预测因子、混杂、效应修饰","Methods"],
+  ["数据来源与测量方法(每个变量)","Methods"],
+  ["偏倚来源与应对措施","Methods"],
+  ["样本量如何确定","Methods"],
+  ["定量变量如何处理(是否分组、如何分)","Methods"],
+  ["统计方法:如何控制混杂、亚组与交互如何分析、缺失值如何处理","Methods"],
+  ["参与者流程(各阶段人数与失访原因)","Results"],
+  ["未调整与调整后的效应估计 + 置信区间,并说明调整了哪些变量","Results"],
+  ["敏感性分析","Results"]]},
+ mdar:{nm:"MDAR(材料·设计·分析·报告框架)",note:"多家期刊(Cell Press、EMBO、PLOS 等)采用的最小报告标准。",
+  items:[
+  ["抗体:来源、货号、批号、稀释度、验证方式","Methods / Key Resources Table"],
+  ["细胞系:来源、STR 鉴定、支原体检测、传代数","Methods / KRT"],
+  ["实验动物:种系、性别、年龄、饲养条件、伦理批号","Methods"],
+  ["人类受试者:伦理批号、知情同意、数据脱敏","Methods + 声明"],
+  ["质粒/病毒/引物序列可获取","Methods / 附表"],
+  ["样本量与重复:生物学重复 n 的定义写清楚","图注 每张图"],
+  ["随机化与盲法:做了或未做,都要写","Methods"],
+  ["统计:检验名称、单双尾、多重比较校正方法","图注 + Methods"],
+  ["数据可用性:原始数据存放位置与访问编号","Data Availability"],
+  ["代码可用性:分析脚本仓库地址与版本","Code Availability"],
+  ["图像处理声明:是否调整对比度、是否拼接泳道","图注"]]}
+};
+function renderGuide(){
+  var out=document.getElementById("guOut"); if(!out)return;
+  var k=(document.getElementById("guSet")||{}).value||"arrive";
+  var G=GUIDE[k]; if(!G){ out.innerHTML=""; return; }
+  var h='<div class="tok"><b>'+esc2(G.nm)+'</b> — '+esc2(G.note)
+   +'<br><span style="color:#C62828">勾齐只说明没漏项,<b>不代表写得清楚</b>。</span>清单查的是\"有没有写\",查不出\"写得能不能复现\"。</div>'
+   +'<table class="jtable"><tr><th style="width:36px">✓</th><th>条目</th><th>建议写在</th></tr>';
+  G.items.forEach(function(it,i){
+    h+='<tr><td><input type="checkbox" class="guchk" data-i="'+i+'"></td><td>'+esc2(it[0])+'</td><td style="font-size:11.8px;color:#4A148C">'+esc2(it[1])+'</td></tr>';
+  });
+  h+='</table><div id="guScore" class="tok"></div>';
+  out.innerHTML=h;
+  var chks=out.querySelectorAll(".guchk");
+  for(var i=0;i<chks.length;i++) chks[i].addEventListener("change",guScore);
+  guScore();
+}
+function guScore(){
+  var out=document.getElementById("guOut"); if(!out)return;
+  var chks=out.querySelectorAll(".guchk"), done=0;
+  for(var i=0;i<chks.length;i++) if(chks[i].checked) done++;
+  var box=document.getElementById("guScore");
+  if(box) box.innerHTML='已勾 <b>'+done+' / '+chks.length+'</b>。'
+    +(done===chks.length?'全部勾齐 —— <b>但这只说明没漏项</b>,不代表写得清楚。建议找一位不做你方向的同事读 Methods,看能不能照着复现。'
+      :'还有 '+(chks.length-done)+' 条没勾。逐条对着正文核,不要凭印象。');
+}
+function guideAll(v){
+  var out=document.getElementById("guOut"); if(!out)return;
+  var chks=out.querySelectorAll(".guchk");
+  for(var i=0;i<chks.length;i++) chks[i].checked=v;
+  guScore();
+}
+function guideDl(){
+  var k=(document.getElementById("guSet")||{}).value||"arrive";
+  var G=GUIDE[k]; if(!G)return;
+  var out=document.getElementById("guOut");
+  var chks=out?out.querySelectorAll(".guchk"):[];
+  var lines=[G.nm,"生成于 "+new Date().toISOString().slice(0,10),""];
+  G.items.forEach(function(it,i){
+    var ck=chks[i]&&chks[i].checked;
+    lines.push((ck?"[x] ":"[ ] ")+it[0]+"    (写在:"+it[1]+")");
+  });
+  lines.push("", "注:勾选完成不等于合规 —— 期刊与评审看的是正文里是否写清。");
+  tdl("checklist_"+k+".txt", lines.join("\n"), "text/plain;charset=utf-8");
+}
+
+/* ===================== 生物医学词典 tdict =====================
+   NCBI E-utilities db=mesh。做两件事:查词义 + 把选中的词条装成真能用的
+   PubMed 检索式。MeSH 主题词检索比自由词准,但有滞后 —— 新概念(如
+   乳酸化)还没有 MeSH 词,这时必须用自由词,面板会明确提示。 */
+var DC_SEL=[];
+function dcSearch(){
+  var q=(document.getElementById("dcQ")||{}).value||"";
+  var out=document.getElementById("dcOut");
+  q=q.trim(); if(!q){ if(out)out.innerHTML='<div class="tok">先输入一个概念,例如 <code>type 2 diabetes</code> 或 <code>microRNA</code>。</div>'; return; }
+  var n=Math.max(1,Math.min(20,parseInt((document.getElementById("dcN")||{}).value||"8",10)||8));
+  tbusy("dcOut","正在查 MeSH 词库…");
+  var base="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
+  tfetch(base+"esearch.fcgi?db=mesh&retmode=json&retmax="+n+"&term="+encodeURIComponent(q))
+  .then(function(j){
+    var ids=((j.esearchresult||{}).idlist)||[], cnt=parseInt((j.esearchresult||{}).count||"0",10);
+    if(!ids.length){
+      out.innerHTML='<div class="tok"><b>MeSH 里没有这个词</b>('+esc2(q)+')。'
+       +'这通常不是拼错 —— MeSH 每年才更新一次,新概念普遍缺词。'
+       +'例如 <code>lactylation</code>(乳酸化)实测 0 条,而 PubMed 自由词能检出大量文献。'
+       +'<br>对策:改用自由词并加同义词,例如 <code>(lactylation OR "lactyl-lysine" OR Kla)</code>,'
+       +'到「文献检索」面板去检。也可以试更上位的词(把 <code>ZSWIM8</code> 换成 <code>Ubiquitin-Protein Ligases</code>)。</div>';
+      return;
+    }
+    return tfetch(base+"esummary.fcgi?db=mesh&retmode=json&id="+ids.join(","))
+      .then(function(k){ dcPaint(k,ids,cnt,q); });
+  }).catch(function(e){ tnetErr("dcOut",e,"NCBI E-utilities"); });
+}
+function dcPaint(k,ids,cnt,q){
+  var out=document.getElementById("dcOut"); if(!out)return;
+  var res=(k||{}).result||{};
+  var h='<div class="tok">MeSH 命中 <b>'+cnt+'</b> 条,显示 '+ids.length+' 条。勾选要用的词 → 点「组装检索式」。'
+      +'<br><span style="color:#7B1FA2">descriptor</span> = 正式主题词(可用 [MeSH]);'
+      +'<span style="color:#7B1FA2">supplemental-record</span> = 补充记录(化学品/罕见病,通常不能用 [MeSH],要用自由词)。</div>';
+  ids.forEach(function(id){
+    var d=res[id]; if(!d)return;
+    var terms=d.ds_meshterms||[], pref=terms[0]||"(无名)", ent=terms.slice(1);
+    var isDesc=(d.ds_recordtype==="descriptor");
+    var trees=(d.ds_idxlinks||[]).map(function(x){return x.treenum;}).filter(function(x){return x&&x.charAt(0)!=="@";});
+    var qual=d.ds_subheading||[];
+    h+='<div class="doctab" style="margin-bottom:10px">'
+     +'<div style="display:flex;align-items:flex-start;gap:8px">'
+     +'<input type="checkbox" class="dcchk" data-t="'+esc2(pref)+'" data-d="'+(isDesc?1:0)+'" style="margin-top:4px">'
+     +'<div style="flex:1"><b style="font-size:14px">'+esc2(pref)+'</b> '
+     +'<span class="pill" style="background:'+(isDesc?"#EDE7F6":"#FFF3E0")+'">'+esc2(d.ds_recordtype||"")+'</span> '
+     +'<span class="pill">'+esc2(d.ds_meshui||"")+'</span>'
+     +(d.ds_yearintroduced?' <span class="pill">引入 '+esc2(d.ds_yearintroduced)+'</span>':'')
+     +'</div></div>';
+    if(d.ds_scopenote) h+='<div style="margin:6px 0;font-size:12.6px;line-height:1.55">'+esc2(d.ds_scopenote)+'</div>';
+    if(ent.length) h+='<div style="font-size:12px;margin:4px 0"><b>同义词(入口词,写自由词时用得上):</b> '+ent.slice(0,18).map(esc2).join(" · ")+(ent.length>18?" …":"")+'</div>';
+    if(trees.length) h+='<div style="font-size:12px;margin:4px 0"><b>树号:</b> '+trees.map(esc2).join(" , ")+' <span style="color:#666">(同号前缀 = 同一分支,可用 [MeSH] 自动含下位词)</span></div>';
+    if(qual.length) h+='<div style="font-size:12px;margin:4px 0"><b>可用副主题词:</b> '+qual.slice(0,26).map(function(x){return '<span class="pill" style="cursor:pointer" onclick="dcQual(this)" data-t="'+esc2(pref)+'" data-q="'+esc2(x)+'">'+esc2(x)+'</span>';}).join(" ")+(qual.length>26?" …":"")+'</div>';
+    if((d.ds_previousindexing||[]).length) h+='<div style="font-size:12px;color:#666">旧索引:'+(d.ds_previousindexing||[]).map(esc2).join("; ")+' — 检 '+esc2((d.ds_previousindexing[0]||"").replace(/\s*\(.*$/,""))+' 之前年份的文献要用旧词</div>';
+    h+='</div>';
+  });
+  h+='<div id="dcSelBox" class="tok"></div><div id="dcStr"></div>';
+  out.innerHTML=h;
+  var cs=out.querySelectorAll(".dcchk");
+  for(var i=0;i<cs.length;i++) cs[i].addEventListener("change",dcSelUpd);
+  dcSelUpd();
+}
+function dcQual(el){
+  var t=el.getAttribute("data-t"), qd=el.getAttribute("data-q");
+  DC_SEL.push({t:t+"/"+qd, d:1, q:1});
+  dcSelUpd(true);
+}
+function dcSelUpd(keep){
+  var out=document.getElementById("dcOut"); if(!out)return;
+  if(!keep){
+    var picked=[];
+    var cs=out.querySelectorAll(".dcchk");
+    for(var i=0;i<cs.length;i++) if(cs[i].checked) picked.push({t:cs[i].getAttribute("data-t"), d:cs[i].getAttribute("data-d")==="1"});
+    DC_SEL=DC_SEL.filter(function(x){return x.q;}).concat(picked);
+  }
+  var box=document.getElementById("dcSelBox");
+  if(box) box.innerHTML= DC_SEL.length
+    ? '已选 <b>'+DC_SEL.length+'</b> 项:'+DC_SEL.map(function(x,i){return '<span class="pill">'+esc2(x.t)+' <span style="cursor:pointer;color:#C62828" onclick="dcDrop('+i+')">×</span></span>';}).join(" ")
+    : '还没选词。勾选上方词条,或点副主题词把「主题词/副主题词」组合加进来。';
+}
+function dcDrop(i){ DC_SEL.splice(i,1); dcSelUpd(true); }
+function dcBuildStr(){
+  var box=document.getElementById("dcStr");
+  if(!DC_SEL.length){ if(box)box.innerHTML='<div class="tok">先选词。</div>'; return; }
+  var op=(document.getElementById("dcOp")||{}).value||"AND";
+  var parts=DC_SEL.map(function(x){
+    if(x.q) return '"'+x.t+'"[MeSH Terms]';   /* 主题词/副主题词 组合式,PubMed 合法写法 */
+    return x.d ? '"'+x.t+'"[MeSH Terms]' : '"'+x.t+'"[All Fields]';
+  });
+  var pm=parts.join(" "+op+" ");
+  var epmc=DC_SEL.map(function(x){ return 'MESH:"'+x.t.split("/")[0]+'"'; }).join(" "+op+" ");
+  var warnSupp=DC_SEL.some(function(x){return !x.d && !x.q;});
+  var h='<div class="doctab"><b>PubMed 检索式</b>'
+   +'<pre style="white-space:pre-wrap">'+esc2(pm)+'</pre>'
+   +'<b>Europe PMC 检索式</b>'
+   +'<pre style="white-space:pre-wrap">'+esc2(epmc)+'</pre>'
+   +'<div style="font-size:12px;line-height:1.6">'
+   +'<b>用之前先知道三件事:</b><br>'
+   +'1. <code>[MeSH Terms]</code> 默认<b>包含所有下位词</b>(检 Diabetes Mellitus 会带出 Type 2 等)。只要本词请用 <code>[MeSH:noexp]</code>。<br>'
+   +'2. MeSH 只覆盖<b>已完成标引</b>的文献 —— 最近几个月的新文章还没标,纯 MeSH 检索会漏掉最新进展。稳妥做法是 <code>(MeSH 式) OR (自由词式)</code>。<br>'
+   +'3. 副主题词组合会<b>大幅收窄</b>结果,首轮检索建议先不加。'
+   +(warnSupp?'<br>4. ⚠️ 你选了补充记录(非正式主题词),已按 <code>[All Fields]</code> 处理 —— 这是自由词匹配,不享受主题词的同义词归并。':'')
+   +'</div></div>';
+  if(box) box.innerHTML=h;
+}
+function dcSend(){
+  if(!DC_SEL.length){ dcBuildStr(); return; }
+  var op=(document.getElementById("dcOp")||{}).value||"AND";
+  var epmc=DC_SEL.map(function(x){ return 'MESH:"'+x.t.split("/")[0]+'"'; }).join(" "+op+" ");
+  var f=document.getElementById("ltQ"), sv=document.getElementById("ltSrc");
+  if(sv) sv.value="epmc";                 /* MESH:"…" 是 Europe PMC 语法,必须同时切数据源 */
+  if(f){ f.value=epmc; goPanel("tlit"); if(typeof renderLit==="function") renderLit(); }
+}
+function dcClear(){ DC_SEL=[]; dcSelUpd(true); var b=document.getElementById("dcStr"); if(b)b.innerHTML=""; }
+function renderDict(){
+  var out=document.getElementById("dcOut");
+  if(out && !out.innerHTML) out.innerHTML='<div class="tok">输入一个概念查 MeSH 词条:看它的<b>正式主题词</b>、<b>同义词</b>、<b>树号</b>、<b>可用副主题词</b>,再勾选组装成检索式。<br>新概念(乳酸化、TDMD 等)MeSH 常常还没有词 —— 面板会直接告诉你,并给自由词写法。</div>';
+}
+
+/* ===================== 交叉空白扫描 tgap =====================
+   Europe PMC hitCount。核心不是"交集少 = 空白",而是先算
+   独立假设下的期望篇数:E = NA×NB/N总。E<5 时交集数几乎没有信息量
+   —— 这一点本项目此前踩过坑(把 3 vs 41 当成白区),这里写死在输出里。 */
+var GAP_LAST=null;
+function gapQ(q){
+  return tfetch("https://www.ebi.ac.uk/europepmc/webservices/rest/search?format=json&pageSize=1&resultType=idlist&query="+encodeURIComponent(q))
+    .then(function(j){ return parseInt(j.hitCount,10)||0; });
+}
+function gapYr(q,y){ return gapQ("("+q+") AND (FIRST_PDATE:["+y+"-01-01 TO "+y+"-12-31])"); }
+function gapPool(tasks,limit,onTick){
+  var res=new Array(tasks.length), i=0, done=0;
+  return new Promise(function(resolve,reject){
+    function next(){
+      if(i>=tasks.length){ if(done===tasks.length) resolve(res); return; }
+      var k=i++;
+      tasks[k]().then(function(v){ res[k]=v; done++; if(onTick)onTick(done,tasks.length); next();
+        if(done===tasks.length) resolve(res); }).catch(reject);
+    }
+    for(var c=0;c<Math.min(limit,tasks.length);c++) next();
+  });
+}
+function gapRun(){
+  var out=document.getElementById("gpOut"); if(!out)return;
+  var a=((document.getElementById("gpA")||{}).value||"").trim();
+  var b=((document.getElementById("gpB")||{}).value||"").trim();
+  if(!a||!b){ out.innerHTML='<div class="tok">两侧都要填。例如 A=<code>TITLE_ABS:"ZSWIM8"</code>,B=<code>TITLE_ABS:"AMPK"</code>。也可以写不带字段的自由词,但会检到全文,数字偏大。</div>'; return; }
+  var y0=parseInt((document.getElementById("gpY0")||{}).value||"0",10)||0;
+  var nowY=new Date().getFullYear();
+  var years=[];
+  if(y0 && y0>=1950 && y0<=nowY){
+    var span=nowY-y0+1;
+    if(span>12){ y0=nowY-11; span=12; }
+    for(var y=y0;y<=nowY;y++) years.push(y);
+  }
+  var AB="("+a+") AND ("+b+")";
+  var tasks=[function(){return gapQ(a);},function(){return gapQ(b);},function(){return gapQ(AB);},function(){return gapQ("*");}];
+  years.forEach(function(y){ tasks.push(function(){return gapYr(AB,y);}); });
+  years.forEach(function(y){ tasks.push(function(){return gapYr(a,y);}); });
+  tbusy("gpOut","正在查 Europe PMC…共 "+tasks.length+" 次请求");
+  gapPool(tasks,4,function(d,n){ tbusy("gpOut","正在查 Europe PMC… "+d+" / "+n); })
+   .then(function(r){
+     var NA=r[0],NB=r[1],NAB=r[2],NT=r[3];
+     var yAB=years.map(function(_,i){return r[4+i];});
+     var yA =years.map(function(_,i){return r[4+years.length+i];});
+     GAP_LAST={a:a,b:b,NA:NA,NB:NB,NAB:NAB,NT:NT,years:years,yAB:yAB,yA:yA};
+     gapPaint();
+   }).catch(function(e){ tnetErr("gpOut",e,"Europe PMC"); });
+}
+function gapPaint(){
+  var G=GAP_LAST, out=document.getElementById("gpOut"); if(!G||!out)return;
+  var E = G.NT ? (G.NA*G.NB/G.NT) : 0;
+  var ratio = E>0 ? (G.NAB/E) : 0;
+  var informative = E>=5;
+  var jac = (G.NA+G.NB-G.NAB)>0 ? G.NAB/(G.NA+G.NB-G.NAB) : 0;
+  var verdict, vcol;
+  if(!informative){
+    verdict="无法判断"; vcol="#F57C00";
+  } else if(ratio<0.5){ verdict="交叉显著偏少(值得看)"; vcol="#2E7D32"; }
+  else if(ratio>2){ verdict="交叉偏多 —— 已是热门组合"; vcol="#C62828"; }
+  else { verdict="与随机共现相当"; vcol="#455A64"; }
+  var h='<table class="jtable">'
+   +'<tr><th>指标</th><th>数值</th><th>含义</th></tr>'
+   +'<tr><td>A 命中</td><td><b>'+G.NA.toLocaleString()+'</b></td><td>'+esc2(G.a)+'</td></tr>'
+   +'<tr><td>B 命中</td><td><b>'+G.NB.toLocaleString()+'</b></td><td>'+esc2(G.b)+'</td></tr>'
+   +'<tr><td>A∩B 实测</td><td><b>'+G.NAB.toLocaleString()+'</b></td><td>两侧同时命中</td></tr>'
+   +'<tr><td>语料总量 N</td><td>'+G.NT.toLocaleString()+'</td><td>Europe PMC 全库(含预印本、专利、书籍)</td></tr>'
+   +'<tr><td>独立期望 E = NA×NB/N</td><td><b>'+E.toFixed(2)+'</b></td><td>若两主题完全无关,应有多少篇</td></tr>'
+   +'<tr><td>实测/期望</td><td><b>'+(E>0?ratio.toFixed(2):"—")+'</b></td><td>&lt;1 偏少,&gt;1 偏多</td></tr>'
+   +'<tr><td>Jaccard</td><td>'+(jac*1e4).toFixed(2)+' ×10⁻⁴</td><td>重叠占并集比例,跨组合可比</td></tr>'
+   +'<tr><td>判断</td><td colspan="2" style="color:'+vcol+';font-weight:700">'+verdict+'</td></tr>'
+   +'</table>';
+  h+= informative
+   ? '<div class="tok"><b>怎么读:</b>期望 E='+E.toFixed(1)+' ≥5,交集数才有统计意义。实测/期望 = '+ratio.toFixed(2)+
+     (ratio<0.5?' —— 明显低于随机共现,这类组合<b>可能</b>是真空白。但仍要人工看前 20 篇:很多"空白"其实是术语不同(同一件事换个词在写)。'
+      :(ratio>2?' —— 高于随机共现,说明这条已经拥挤,新意要靠更细的切口。'
+             :' —— 与随机共现相当,谈不上空白也谈不上热门。'))
+     +'</div>'
+   : '<div class="tok" style="border-left:4px solid #F57C00"><b>⚠️ 这个结果不能用来说"是空白"。</b>'
+     +'独立期望 E='+E.toFixed(2)+' &lt;5 —— 即使两个主题完全相关,按体量本来也就该有 '+E.toFixed(2)+' 篇。'
+     +'实测 '+G.NAB+' 篇与期望无法区分,<b>0 篇既不能证明空白,也不能证明不可行</b>。'
+     +'<br>本项目此前正是在这里出过错(把小分母下的 3 vs 41 读成"白区"),所以这里不给结论。'
+     +'<br>对策:把体量小的那一侧<b>放宽到上位概念</b>(如 <code>TITLE_ABS:"ZSWIM8"</code> → <code>TITLE_ABS:"target-directed miRNA degradation" OR TITLE_ABS:"TDMD"</code>),'
+     +'让 E 升到 5 以上再判断;或者干脆承认这是"文献太少无法判断",在标书里按机制论证而不是按文献计数论证。</div>';
+  if(G.years.length){
+    var mx=Math.max.apply(null,G.yAB.concat([1]));
+    h+='<table class="jtable"><tr><th>年份</th><th>A∩B</th><th>A 全部</th><th>占 A 比例</th><th style="width:190px">A∩B 趋势</th></tr>';
+    G.years.forEach(function(y,i){
+      var v=G.yAB[i], av=G.yA[i], pc= av? (100*v/av):0;
+      h+='<tr><td>'+y+'</td><td><b>'+v+'</b></td><td>'+av+'</td><td>'+pc.toFixed(1)+'%</td>'
+       +'<td><span style="display:inline-block;height:11px;width:'+Math.round(170*v/mx)+'px;background:#7B1FA2;vertical-align:middle"></span></td></tr>';
+    });
+    h+='</table><div class="tok">「占 A 比例」比绝对篇数更有用:整个领域在扩张时,交集数上升可能只是水涨船高。看比例是否真的在升。</div>';
+  }
+  h+='<div class="tok" style="font-size:12px">数据源:Europe PMC REST <code>hitCount</code>(实时)。'
+   +'注意 Europe PMC 含预印本/专利/书籍,分母比 PubMed 大;字段限定用 <code>TITLE_ABS:</code> 才是题录检索,'
+   +'不加字段会检全文,数字虚高。</div>';
+  out.innerHTML=h;
+}
+function gapCsv(){
+  var G=GAP_LAST;
+  if(!G){ var o=document.getElementById("gpOut"); if(o)o.innerHTML='<div class="tok">先运行一次扫描。</div>'; return; }
+  var E=G.NT?(G.NA*G.NB/G.NT):0;
+  var L=["metric,value,note",
+    'A_query,"'+G.a.replace(/"/g,'""')+'",',
+    'B_query,"'+G.b.replace(/"/g,'""')+'",',
+    "N_A,"+G.NA+",", "N_B,"+G.NB+",", "N_AB_observed,"+G.NAB+",",
+    "N_corpus,"+G.NT+",EuropePMC total",
+    "N_AB_expected,"+E.toFixed(4)+",NA*NB/N under independence",
+    "obs_over_exp,"+(E>0?(G.NAB/E).toFixed(4):"")+",",
+    "informative,"+(E>=5?"yes":"no")+",E>=5 required",
+    "", "year,AB,A,AB_share_of_A"];
+  G.years.forEach(function(y,i){
+    var av=G.yA[i]; L.push(y+","+G.yAB[i]+","+av+","+(av?(G.yAB[i]/av).toFixed(5):""));
+  });
+  tdl("gap_scan.csv", L.join("\n"), "text/csv;charset=utf-8");
+}
+function renderGap(){
+  var out=document.getElementById("gpOut");
+  if(out && !out.innerHTML) out.innerHTML='<div class="tok">填两组检索式,算<b>交叉密度</b>而不是只数篇数。<br>会给出:各自命中、交集实测、<b>独立假设下的期望篇数</b>、实测/期望比,以及逐年趋势。<br>关键判据:期望 E&lt;5 时交集数没有信息量 —— 面板会拒绝给结论,而不是让你误读成"空白"。</div>';
+}
+
+/* ===================== 投前预检 tprev =====================
+   两个模式:①把正文粘进来做结构与合规自检 ②输出该基金的分节骨架+页数预算。
+   全部离线。必须说清能力边界:这是结构与关键词检查,
+   判断不了科学质量 —— 一份全绿的稿子照样可能因为想法平庸被拒。 */
+var FUNDSPEC={
+ k99:{nm:"NIH K99/R00",pg:12,lang:"en",
+  /* NIH 的页数是「分池」的:Specific Aims、候选人/训练类章节、Research Strategy
+     各有自己的上限,不是共用一个总额。此前把三池加总去比 12 页,才出现「合计 13 页
+     却写上限 12 页」的自相矛盾。pool 标注每节属于哪个池;lims 给各池上限。 */
+  pools:[["aims","Specific Aims",1],["cand","候选人与训练类章节(合并计)",6],["rs","Research Strategy",12]],
+  secs:[["Specific Aims",1,["long-term goal","hypothesi","Aim 1","Aim 2","Aim 3"],"aims"],
+        ["Candidate Background",2,["training","publication","first-author"],"cand"],
+        ["Career Development / Training Plan",4,["mentor","training activit","timeline","independence"],"cand"],
+        ["Research Strategy: Significance",3,["significan","gap","impact"],"rs"],
+        ["Research Strategy: Innovation",1,["innovat","first to","new tool"],"rs"],
+        ["Research Strategy: Approach",8,["Aim 1","Aim 2","Aim 3","pitfall","alternative"],"rs"]],
+  must:[["K99 阶段与 R00 阶段的 Aim 分工写清了吗","K99 phase","R00 phase"],
+        ["有导师团队与各自分工","mentor"],
+        ["有独立性论证(为什么这个课题能带走)","independen"],
+        ["有 5 年时间线","timeline","Year 1","Yr 1"]]},
+ f32:{nm:"NIH NRSA F32",pg:6,lang:"en",
+  pools:[["aims","Specific Aims",1],["rs","Research Strategy",6],["train","训练类章节(目标+训练活动,合并计)",6]],
+  secs:[["Specific Aims",1,["Aim 1","Aim 2","hypothesi"],"aims"],
+        ["Significance",1.5,["significan","gap"],"rs"],
+        ["Innovation",0.5,["innovat"],"rs"],
+        ["Approach",4,["Aim 1","Aim 2","pitfall","alternative"],"rs"],
+        ["Training Plan / Goals",6,["training","mentor","learn","skill"],"train"]],
+  must:[["训练成分是否明显重于产出(F32 的评审重点)","training","mentor"],
+        ["写了要新学的具体技术","learn","new technique","acquire"],
+        ["⚠️ 资格:F32 多要求美籍/绿卡 —— 核对该 NOFO 条款","citizen","permanent resident"]]},
+ r01:{nm:"NIH R01",pg:12,lang:"en",
+  pools:[["aims","Specific Aims",1],["rs","Research Strategy",12]],
+  secs:[["Specific Aims",1,["Aim 1","Aim 2","Aim 3","hypothesi"],"aims"],
+        ["Significance",3,["significan","gap","importan"],"rs"],
+        ["Innovation",1,["innovat"],"rs"],
+        ["Approach: Preliminary Data",2,["preliminar","our data","we have shown","Fig"],"rs"],
+        ["Approach: Aim 1",2.5,["Aim 1","pitfall","alternative","expected"],"rs"],
+        ["Approach: Aim 2",2,["Aim 2"],"rs"],
+        ["Approach: Aim 3",1.5,["Aim 3"],"rs"]],
+  must:[["有预实验数据(R01 几乎不可省)","preliminar","we have shown","our unpublished"],
+        ["每个 Aim 都有 expected results / pitfalls / alternatives","pitfall","alternative"],
+        ["有统计与样本量依据","power","sample size","n =","statistic"],
+        ["写了性别作为生物学变量(SABV)","sex as a biological variable","both sexes","SABV"],
+        ["关键试剂认证 / RRID","RRID","authenticat","STR"]]},
+ yq:{nm:"国家自然科学基金 海外优青",pg:0,lang:"zh",
+  secs:[["科学问题与研究意义",0,["科学问题","意义","瓶颈","空白"]],
+        ["研究基础(代表性成果)",0,["一作","第一作者","代表","已发表","前期"]],
+        ["研究方案与技术路线",0,["方案","技术路线","课题一","课题二"]],
+        ["预期成果与考核指标",0,["预期","指标","论文","专利"]],
+        ["回国工作设想与依托单位",0,["依托","回国","团队","平台","经费"]]],
+  must:[["有代表作证据链(每篇说清你的贡献)","一作","第一作者","通讯"],
+        ["回应国家需求 / 学科布局","国家","需求","战略","卡脖子","布局"],
+        ["有依托单位契合度与团队组建计划","依托","团队","引进"],
+        ["⚠️ 年龄与在外年限:动笔前核对当年指南原文","年龄","博士学位"]]},
+ ecs:{nm:"香港 RGC ECS",pg:0,lang:"en",
+  secs:[["Objectives",0,["objective"]],
+        ["Background of Research",0,["background","previous","literature"]],
+        ["Research Plan & Methodology",0,["methodolog","method","design","workplan"]],
+        ["Expected Impact & Significance",0,["impact","significan","benefit"]],
+        ["Research Team & Facilities",0,["team","facilit","equipment","collaborat"]]],
+  must:[["Objectives 是编号短句(ECS 评审按条对照)","1.","2."],
+        ["有清晰 workplan / 时间表","workplan","timeline","month","Year"],
+        ["写了对香港本地的意义","Hong Kong","local"],
+        ["⚠️ ECS 只限首次申请的助理教授 —— 需已获聘","assistant professor"]]},
+ nrf:{nm:"新加坡 NRF Fellowship",pg:0,lang:"en",
+  secs:[["Vision & Long-term Goal",0,["vision","long-term","decade","ambition"]],
+        ["Track Record & Independence",0,["first author","independ","led","published"]],
+        ["Research Plan",0,["aim","plan","approach","method"]],
+        ["Budget & Host Institution",0,["budget","host","institution","S$","salary"]]],
+  must:[["愿景有 10 年尺度的雄心(NRF 明确要 bold)","vision","10-year","decade","transform"],
+        ["Track record 量化且突出独立性","first author","independ"],
+        ["有 5 年预算与依托机构契合","budget","host institution"]]}
+};
+var HEDGE=["may","might","could","possibly","perhaps","potentially","it is believed","we hope","try to","attempt to",
+           "或许","可能","希望","尝试","试图","有望","大概"];
+function pvChars(t){
+  var cjk=(t.match(/[\u4e00-\u9fff]/g)||[]).length;
+  return {all:t.length, cjk:cjk, latinWords:(t.replace(/[\u4e00-\u9fff]/g," ").match(/[A-Za-z][A-Za-z'-]*/g)||[]).length};
+}
+function pvPages(t,lang){
+  var c=pvChars(t);
+  if(lang==="zh"||c.cjk>c.latinWords) return {p:c.cjk/1700, basis:"按中文约 1,700 字/页(A4,小四,单倍行距)"};
+  return {p:c.all/4800, basis:"按英文约 4,800 字符/页(NIH 常见 Arial 11pt 单倍行距,含空格)"};
+}
+function pvHas(t,kws){ var lt=t.toLowerCase(); for(var i=0;i<kws.length;i++){ if(kws[i]&&lt.indexOf(String(kws[i]).toLowerCase())>=0) return kws[i]; } return null; }
+function prevRun(){
+  var out=document.getElementById("pvOut"); if(!out)return;
+  var mode=(document.getElementById("pvMode")||{}).value||"check";
+  var fk=(document.getElementById("pvFund")||{}).value||"k99";
+  var F=FUNDSPEC[fk]; if(!F){ out.innerHTML=""; return; }
+  if(mode==="scaffold"){ pvScaffold(F,fk); return; }
+  var t=((document.getElementById("pvIn")||{}).value||"");
+  if(t.trim().length<200){
+    out.innerHTML='<div class="tok">把你的正文粘进上面的框(至少 200 字)再点检查。<br>要页数骨架而不是检查?把模式切成「输出骨架」。</div>';
+    return;
+  }
+  var pg=pvPages(t,F.lang), c=pvChars(t);
+  var h='<div class="tok"><b>'+esc2(F.nm)+' 预检</b> — 这是<b>结构与关键词检查</b>,'
+   +'查得出"漏了什么"、查不出"写得好不好"。全绿也可能因为想法平庸被拒。</div>';
+  h+='<table class="jtable"><tr><th>项</th><th>值</th><th>说明</th></tr>'
+   +'<tr><td>字符数</td><td>'+c.all.toLocaleString()+'</td><td>中文字 '+c.cjk.toLocaleString()+' · 英文词 '+c.latinWords.toLocaleString()+'</td></tr>'
+   +'<tr><td>估算页数</td><td><b>'+pg.p.toFixed(1)+'</b></td><td>'+esc2(pg.basis)+'。仅为估算,图表会占额外篇幅</td></tr>';
+  if(F.pools){
+    /* 粘进来的是一整份正文,无法可靠地把每段归到哪个页数池,所以只跟「各池上限之和」
+       比较,并把这一点说明白 —— 不总超不等于每一池都不超。 */
+    var tl=F.pools.reduce(function(a,p){return a+p[2];},0);
+    var ov=pg.p-tl;
+    h+='<tr><td>页数上限(各池之和)</td><td>'+tl+'</td><td style="color:'+(ov>0?"#C62828":"#2E7D32")+';font-weight:700">'
+     +(ov>0?("估计超出 "+ov.toFixed(1)+" 页"):("总量还剩约 "+(-ov).toFixed(1)+" 页"))
+     +'</td></tr><tr><td></td><td style="font-size:12px;color:#555">分池</td><td style="font-size:12px;color:#555">'
+     +F.pools.map(function(p){return esc2(p[1])+" ≤"+p[2]+" 页";}).join(" · ")
+     +'。本工具无法判断你每一段属于哪一池,<b>总量不超不等于每池都不超</b> —— 要按池核对请用「输出骨架」模式。</td></tr>';
+  } else if(F.pg>0){
+    var over=pg.p-F.pg;
+    h+='<tr><td>页数上限</td><td>'+F.pg+'</td><td style="color:'+(over>0?"#C62828":"#2E7D32")+';font-weight:700">'
+     +(over>0?("估计超出 "+over.toFixed(1)+" 页 —— 需要删"):("还剩约 "+(-over).toFixed(1)+" 页余量"))+'</td></tr>';
+  } else {
+    h+='<tr><td>页数上限</td><td>按当年指南</td><td>该基金篇幅逐年变动,以官方申请书模板为准</td></tr>';
+  }
+  var nfill=(t.match(/〔/g)||[]).length + (t.match(/\[FILL/gi)||[]).length;
+  h+='<tr><td>未填占位符</td><td style="color:'+(nfill?"#C62828":"#2E7D32")+';font-weight:700">'+nfill+'</td><td>'
+   +(nfill?'还有 '+nfill+' 处 〔…〕/[FILL] 没替换 —— 交上去会被直接看到':'没有残留占位符')+'</td></tr></table>';
+  h+='<table class="jtable"><tr><th style="width:34px"></th><th>应有章节</th><th>建议篇幅</th><th>命中的关键词</th></tr>';
+  var missSec=0;
+  F.secs.forEach(function(sc){
+    var hit=pvHas(t,sc[2]);
+    if(!hit) missSec++;
+    h+='<tr><td style="font-size:15px">'+(hit?"✅":"⚠️")+'</td><td>'+esc2(sc[0])+'</td><td>'
+     +(sc[1]>0?(sc[1]+" 页"):"—")+'</td><td style="font-size:12px;color:#555">'+(hit?("找到 “"+esc2(hit)+"”"):"没找到该节的任何特征词")+'</td></tr>';
+  });
+  h+='</table>';
+  h+='<table class="jtable"><tr><th style="width:34px"></th><th>该基金的硬性要点</th><th style="font-size:12px">依据关键词</th></tr>';
+  var missMust=0;
+  F.must.forEach(function(m){
+    if(typeof m!=="object"||!m.length||!m[0]||m[0]===" ") return;
+    var hit=pvHas(t,m.slice(1));
+    if(!hit) missMust++;
+    h+='<tr><td style="font-size:15px">'+(hit?"✅":"❌")+'</td><td>'+esc2(m[0])+'</td><td style="font-size:12px;color:#555">'+(hit?esc2(hit):esc2(m.slice(1).filter(function(x){return x&&x!==" ";}).join(" / ")))+'</td></tr>';
+  });
+  h+='</table>';
+  var hedges=[];
+  var lt=t.toLowerCase();
+  HEDGE.forEach(function(w){
+    var n=0,i=0; var wl=w.toLowerCase();
+    while((i=lt.indexOf(wl,i))>=0){ n++; i+=wl.length; }
+    if(n) hedges.push([w,n]);
+  });
+  hedges.sort(function(x,y){return y[1]-x[1];});
+  var hedgeTot=hedges.reduce(function(a,x){return a+x[1];},0);
+  var per1k = c.all? (1000*hedgeTot/c.all) : 0;
+  h+='<div class="tok"><b>模糊表述</b>:共 '+hedgeTot+' 处(每千字符 '+per1k.toFixed(1)+' 处)。'
+   +(hedges.length? '最多的是 '+hedges.slice(0,6).map(function(x){return '<code>'+esc2(x[0])+'</code>×'+x[1];}).join("、")+'。':'')
+   +'<br>不是要清零 —— 讨论机制时 <i>may</i> 是诚实的。但在 <b>Aim 的目标句和预期结果</b>里出现,评审读到的是"作者自己也不确定要做什么"。把那几句改成可证伪的断言。</div>';
+  var score = F.secs.length+F.must.filter(function(m){return typeof m==="object"&&m.length&&m[0]&&m[0]!==" ";}).length;
+  var bad = missSec+missMust;
+  h+='<div class="tok" style="border-left:4px solid '+(bad?"#F57C00":"#2E7D32")+'"><b>汇总:'+(score-bad)+' / '+score+' 项通过</b>'
+   +(bad? '。⚠️ 上表里的 ⚠️/❌ 逐条对照正文核实 —— 关键词检查会误判:你可能用了别的说法表达同一件事(比如写了"随机分配"而没写 randomization)。<b>误判要以你的正文为准,不要为了让指标变绿而硬塞关键词。</b>'
+        : '。结构上没有明显漏项。接下来请找一位不做你方向的人读 Specific Aims,看能否在 3 分钟内说出你要做什么。')
+   +'</div>';
+  out.innerHTML=h;
+}
+function pvScaffold(F,fk){
+  var out=document.getElementById("pvOut");
+  var h='<div class="tok"><b>'+esc2(F.nm)+' 分节骨架</b>';
+  if(F.pools){
+    h+=' — 页数<b>分池计算</b>:下面每一池各有自己的上限,<b>不是共用一个总额</b>。';
+  } else if(F.pg>0){
+    h+=' — 正文上限 '+F.pg+' 页。';
+  } else {
+    h+=' — 篇幅按当年官方模板,下表只给节序。';
+  }
+  h+='正文语言:'+(F.lang==="zh"?"可中文":"英文")+'</div>';
+  if(F.pools){
+    var sums={};
+    F.secs.forEach(function(sc){ var k=sc[3]||"_"; sums[k]=(sums[k]||0)+sc[1]; });
+    h+='<table class="jtable"><tr><th>页数池</th><th>上限</th><th>本骨架已分配</th><th>余量</th></tr>';
+    F.pools.forEach(function(p){
+      var used=sums[p[0]]||0, left=p[2]-used;
+      h+='<tr><td><b>'+esc2(p[1])+'</b></td><td>'+p[2]+' 页</td><td>'+used+' 页</td>'
+       +'<td style="color:'+(left<0?"#C62828":"#2E7D32")+';font-weight:700">'+(left<0?("超 "+(-left)):(left+" 页"))+'</td></tr>';
+    });
+    h+='</table>';
+  }
+  h+='<table class="jtable"><tr><th>#</th><th>章节</th>'+(F.pools?'<th>属于哪一池</th>':'')
+   +'<th>建议篇幅</th><th>这一节必须出现的东西</th></tr>';
+  var PN={}; if(F.pools) F.pools.forEach(function(p){PN[p[0]]=p[1];});
+  F.secs.forEach(function(sc,i){
+    h+='<tr><td>'+(i+1)+'</td><td><b>'+esc2(sc[0])+'</b></td>'
+     +(F.pools?('<td style="font-size:12px;color:#555">'+esc2(PN[sc[3]]||"—")+'</td>'):'')
+     +'<td>'+(sc[1]>0?(sc[1]+" 页"):"—")+'</td>'
+     +'<td style="font-size:12px">'+sc[2].map(function(k){return '<code>'+esc2(k)+'</code>';}).join(" · ")+'</td></tr>';
+  });
+  h+='</table>';
+  h+='<div class="honest">⚠️ <b>页数上限务必以你要投的那份 NOFO / 申请指南原文为准。</b>NIH 各研究所对 K 类的候选人章节页数有自己的规定,且逐年调整;本表给的是常见配置,用于分配写作篇幅,不能替代官方模板核对。</div>';
+  h+='<div class="tok">已经有一份按这个结构<b>写满内容</b>的 ZSWIM8-6 完整草稿(六类基金各一份,只需替换 〔…〕)。'
+   +'到「✍️ 写作指导」面板顶部的下载区取 Word/PDF/Markdown。这里的骨架用于核对你自己写的稿子有没有缺节。</div>';
+  out.innerHTML=h;
+}
+
+function prevDl(){
+  var fk=(document.getElementById("pvFund")||{}).value||"k99";
+  var F=FUNDSPEC[fk]; if(!F)return;
+  var L=[F.nm+" — 分节骨架与自检清单","生成于 "+new Date().toISOString().slice(0,10),
+    (F.pg>0?("正文上限:"+F.pg+" 页"):"正文篇幅:按当年官方模板"),
+    "正文语言:"+(F.lang==="zh"?"可中文":"英文"),"","== 章节 =="];
+  F.secs.forEach(function(sc,i){ L.push("["+(i+1)+"] "+sc[0]+"    "+(sc[1]>0?(sc[1]+" 页"):"")+"\n      需出现:"+sc[2].join(" / ")); });
+  L.push("","== 硬性要点 ==");
+  F.must.forEach(function(m){ if(typeof m==="object"&&m.length&&m[0]&&m[0]!==" ") L.push("[ ] "+m[0]); });
+  L.push("","注:这是结构核对表,不能替代对科学内容的判断。");
+  tdl("scaffold_"+fk+".txt", L.join("\n"), "text/plain;charset=utf-8");
+}
+function renderPrev(){
+  var out=document.getElementById("pvOut");
+  if(out && !out.innerHTML) out.innerHTML='<div class="tok">两种用法:<br><b>① 自检</b> —— 选基金类型,把正文粘进框里,给出估算页数是否超限、该基金各节是否齐、硬性要点(SABV/RRID/预实验/训练成分等)有没有写、模糊表述有多少。<br><b>② 输出骨架</b> —— 不粘正文,直接给该基金的节序与页数预算。<br>诚实边界:全是结构与关键词检查,判断不了科学质量。</div>';
+}
+
+/* 示例按钮的两个辅助:信函面板换类型会重建输入框(ctlSet 只改值、不触发 change),
+   所以示例必须先重建字段再填值,否则填进去的值会被随后的重建抹掉。 */
+var LE_EX={
+ cover:{leJ:"Nucleic Acids Research",leT:"AMPK phosphorylates ZSWIM8 to accelerate target-directed degradation of metabolic miRNAs",
+        leA:"Xiaodong Zou",leFind:"energy stress licenses ZSWIM8-dependent decay of miR-29, converting a transient metabolic insult into a durable change in miRNA set point",
+        leWhy:"the journal publishes mechanistic work on small-RNA turnover and has published the founding ZSWIM8/TDMD literature",leSug:""},
+ revise:{leJ:"Nucleic Acids Research",leMs:"NAR-2026-01234",leEd:"",leN:"6",leMain:"added the S608A knock-in rescue experiment requested by Reviewer 2"},
+ appeal:{leJ:"Nucleic Acids Research",leMs:"NAR-2026-01234",leEd:"",leGround:"Reviewer 1 states that we did not include a kinase-dead control, but this control is shown in Figure 3c"},
+ presub:{leJ:"Molecular Cell",leEd:"",leT:"Energy-stress-driven metabolic memory via ZSWIM8-dependent miRNA decay",
+         leFind:"AMPK links nutrient state to the lifetime of individual miRNAs",leWhy:"the journal's scope covers post-transcriptional control of metabolism"},
+ status:{leJ:"Nucleic Acids Research",leMs:"NAR-2026-01234",leDate:"2026-05-01"},
+ withdraw:{leJ:"Nucleic Acids Research",leMs:"NAR-2026-01234",leReason:"the manuscript has been accepted elsewhere following a prior submission we had assumed rejected"}
+};
+function leFillExample(){
+  leRenderFields();
+  var t=(document.getElementById("leType")||{}).value||"cover";
+  var v=LE_EX[t]||{};
+  Object.keys(v).forEach(function(k){ var e=document.getElementById(k); if(e)e.value=v[k]; });
+  renderLetter();
+}
+/* 预检示例:用本项目真实的 Specific Aims 片段,而不是造一段假文本 —— 
+   造假文本会让"页数估算"和"模糊表述统计"这两个输出失去意义。 */
+var PV_DEMO="Specific Aims. Metabolic tissues remember prior nutrient stress: a transient period of energy deficit changes gene expression for weeks after the stress resolves. How that memory is written and erased is unresolved. Target-directed miRNA degradation (TDMD), executed by the ZSWIM8 ubiquitin ligase, sets the lifetime of individual miRNAs. We hypothesise that AMPK, the central energy-stress kinase, phosphorylates ZSWIM8 at S608 and thereby accelerates TDMD of metabolic miRNAs, converting a transient energy deficit into a durable, reversible shift in miRNA set point. Aim 1. Establish AMPK-dependent phosphorylation of ZSWIM8 S608. We will test direct phosphorylation in vitro with recombinant AMPK and a kinase-dead control, and in cells under pharmacological and genetic AMPK activation. Expected results: S608 phosphorylation tracks AMPK activity. Pitfalls and alternatives: if S608 is not the acceptor site, our own PSSM ranking places S609 higher, and we will test both sites by knock-in. Aim 2. Determine whether phosphorylation accelerates TDMD of keystone metabolic miRNAs. Using S608A and S608D knock-in cells we will measure decay of miR-29 by metabolic labelling. Expected ordering: S608D > wild type > S608A > ZSWIM8 knock-out. Aim 3. Test whether this axis writes metabolic memory in vivo. In a type 2 diabetes pig model and in matched intestinal organoids we will ask whether the miRNA shift outlasts the stress and whether it requires S608. Statistics: n = 6 animals per group gives 80% power to detect a 1.6-fold change at alpha 0.05; sex is included as a biological variable with both sexes in every group; all antibodies and cell lines are listed with RRIDs and STR authentication.";
+function pvDemoRun(){
+  var t=document.getElementById("pvIn"); if(t)t.value=PV_DEMO;
+  var m=document.getElementById("pvMode"); if(m)m.value="check";
+  prevRun();
+}
+
 /* ---------- 实验工具:事件绑定 ----------
    工具面板不进 PFILT:它们没有"命中数"可数,示例按钮上不显示数字,
    而不是显示一个编出来的数字。 */
@@ -8147,6 +9501,38 @@ function bindTfRows(box){
   on("clRun","click",cloneRun);
   on("bcRun","click",benchRun);       on("bcMode","change",benchLabels);
   ["bcA","bcB","bcC","bcD"].forEach(function(id){ enterRuns(id,benchRun); });
+
+  /* --- 第二批八个面板 --- */
+  on("ptRun","click",renderPat);       enterRuns("ptQ",renderPat);
+  on("ptCmp","click",renderPatCmp);
+  on("ptCsv","click",patExport);
+  on("zhRun","click",renderZh);        enterRuns("zhQ",renderZh);
+  on("zhMode","change",renderZh);
+  on("zhCsv","click",zhExport);
+  on("jrRun","click",renderJr);        enterRuns("jrQ",renderJr);
+  on("leType","change",function(){ leRenderFields(); var o=document.getElementById("leOut"); if(o)o.innerHTML=""; });
+  on("leLang","change",function(){ var o=document.getElementById("leOut"); if(o&&o.innerHTML) renderLetter(); });
+  on("leRun","click",renderLetter);
+  on("leCopy","click",letterCopy);
+  on("leDl","click",letterDl);
+  on("guSet","change",renderGuide);
+  on("guRun","click",renderGuide);
+  on("guAll","click",function(){ guideAll(true); });
+  on("guClr","click",function(){ guideAll(false); });
+  on("guDl","click",guideDl);
+  on("dcRun","click",dcSearch);        enterRuns("dcQ",dcSearch);
+  on("dcBuild","click",dcBuildStr);
+  on("dcClr","click",dcClear);
+  on("dcSend","click",dcSend);
+  on("gpRun","click",gapRun);
+  ["gpA","gpB"].forEach(function(id){ enterRuns(id,gapRun); });
+  on("gpCsv","click",gapCsv);
+  on("pvRun","click",prevRun);
+  on("pvMode","change",function(){ var o=document.getElementById("pvOut"); if(o)o.innerHTML=""; renderPrev(); });
+  on("pvFund","change",function(){ var o=document.getElementById("pvOut"); if(o&&o.innerHTML) prevRun(); });
+  on("pvDl","click",prevDl);
+  try{ leRenderFields(); }catch(e){}
+  try{ renderGuide(); }catch(e){}
 
   renderPssmTables();
   try{ benchLabels(); }catch(e){}
