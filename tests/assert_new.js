@@ -260,6 +260,43 @@ setTimeout(async ()=>{
     if (dup.length) fails.push("左栏图标重复: " + dup.join("; "));
   })();
 
+
+  /* ---- 数值面板的诚实性断言(v2 校验新增) ----
+     这些不是"能跑就行",而是"跑出来的话不能误导人"。 */
+  {
+    // 1) BY 校正不得与 BH 完全相同(曾经的真实缺陷:adjustP 没有 by 分支,静默落回 BH)
+    try{
+      var bh = w.adjustP([0.001,0.008,0.012,0.03,0.04,0.2,0.5,0.7],"bh");
+      var by = w.adjustP([0.001,0.008,0.012,0.03,0.04,0.2,0.5,0.7],"by");
+      var same = bh.every(function(v,i){ return v===by[i]; });
+      if(same) fails.push("adjustP: BY 与 BH 结果完全相同 —— BY 分支很可能又丢了");
+      if(!(by[0] > bh[0])) fails.push("adjustP: BY 应比 BH 保守(q 更大)");
+    }catch(e){ fails.push("adjustP BY 断言抛错: "+e.message); }
+
+    // 2) 未知校正方法必须抛错,不得静默回退
+    var threw=false;
+    try{ w.adjustP([0.01,0.02],"bonferroni_typo"); }catch(e){ threw=true; }
+    if(!threw) fails.push("adjustP: 未知方法名没有抛错(会静默给出别的方法的结果)");
+
+    // 3) 长序列不得给出寡核苷酸 Tm 数值
+    try{
+      var longSeq = "ATGC".repeat(80);            // 320 nt
+      var rep = w.gcReport(longSeq, 50);
+      if(/Tm[^]{0,80}\d\d\.\d\s*°C/.test(rep))
+        fails.push("gcReport: 320 nt 序列仍给出了 Tm 数值(寡核苷酸公式不适用)");
+      if(rep.indexOf("没有物理意义")<0)
+        fails.push("gcReport: 长序列缺少 Tm 不适用的说明");
+    }catch(e){ fails.push("gcReport 长序列断言抛错: "+e.message); }
+
+    // 4) 短序列必须给出 Tm,并且必须带近似式告诫
+    try{
+      var rep2 = w.gcReport("ATGCGGCCGCTTAAGGCATCGATCCGGATC", 10);
+      if(!/\d\d\.\d\s*°C/.test(rep2)) fails.push("gcReport: 30 nt 序列没有给出 Tm");
+      if(rep2.indexOf("不要")<0 || rep2.indexOf("退火温度")<0)
+        fails.push("gcReport: 缺少「不要用它定退火温度」的告诫");
+    }catch(e){ fails.push("gcReport 短序列断言抛错: "+e.message); }
+  }
+
 fs.writeFileSync("/tmp/assert_new.json",
     JSON.stringify({nFail:fails.length, fails, errs:errs.slice(0,10)},null,1));
 console.log(fails.length? ("FAIL "+fails.length) : "PASS");
