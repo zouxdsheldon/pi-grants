@@ -200,7 +200,67 @@ setTimeout(async ()=>{
   }
 
   ck(errs.length===0, "console errors: "+errs.slice(0,3).join(" | "));
-  fs.writeFileSync("/tmp/assert_new.json",
+  
+  /* ---- 导航瘦身后的可达性 ----
+     顶栏从 29 个压到 8 个,其余标签是 display:none 而非删除。
+     隐藏标签在 DOM 里仍能被 querySelector 找到、也能 click(),
+     所以"标签存在"这条断言对可见性一无所知 —— 一个页面完全可能
+     既没有可见标签、也不在左栏,用户永远点不到,而测试全绿。
+     这里按用户真能点到的路径判定:可见顶栏标签 或 左栏条目。 */
+  (function () {
+    const visible = new Set();
+    d.querySelectorAll(".tab").forEach(b => {
+      if (!b.classList.contains("tab2")) visible.add(b.dataset.p);
+    });
+    const inNav = new Set();
+    (w.SIDE_NAV || []).forEach(g => (g.items || []).forEach(it => inNav.add(it.p)));
+    const subOf = w.SUB_OF || {};
+    const unreachable = [];
+    d.querySelectorAll(".panel").forEach(pn => {
+      const p = pn.id;
+      if (!p) return;
+      if (visible.has(p) || inNav.has(p)) return;
+      if (subOf[p] && (visible.has(subOf[p]) || inNav.has(subOf[p]))) return;
+      unreachable.push(p);
+    });
+    if (unreachable.length) fails.push("页面点不到(既无可见标签也不在左栏): " + unreachable.join(", "));
+    if (visible.size > 10) fails.push("顶栏可见标签 " + visible.size + " 个 — 瘦身没生效");
+    /* 上面那条只看 class,CSS 规则若被改坏,class 还在、标签却全部露出来,
+       断言照样绿。所以这里查实际计算样式,而不是查类名。 */
+    const hid = d.querySelector(".tab.tab2");
+    if (hid) {
+      const disp = w.getComputedStyle(hid).display;
+      if (disp !== "none")
+        fails.push("次级标签未被隐藏(display=" + disp + ") — 顶栏仍会挤成数行");
+    }
+    if (visible.size < 4) fails.push("顶栏可见标签只剩 " + visible.size + " 个 — 砍过头");
+    /* 面包屑:进隐藏页时必须显示当前位置,否则用户失去方位 */
+    const crumb = d.getElementById("crumb");
+    if (!crumb) fails.push("面包屑元素缺失");
+    else {
+      const hidden = [...d.querySelectorAll(".tab.tab2")].map(b => b.dataset.p)
+        .filter(p => inNav.has(p));
+      if (hidden.length) {
+        w.goPanel(hidden[0]);
+        if (!crumb.classList.contains("on"))
+          fails.push("切到隐藏页 " + hidden[0] + " 后面包屑未显示");
+        else if (!(crumb.textContent || "").trim())
+          fails.push("面包屑显示了但没有文字");
+        w.goPanel("hub");
+        if (crumb.classList.contains("on"))
+          fails.push("回到主入口页后面包屑仍显示");
+      }
+    }
+    /* 图标撞车:两个不同页面用同一个 emoji,用户扫一眼分不清 */
+    const seen = {}, dup = [];
+    (w.SIDE_NAV || []).forEach(g => (g.items || []).forEach(it => {
+      if (seen[it.ic] && seen[it.ic] !== it.p) dup.push(it.ic + " = " + seen[it.ic] + " / " + it.p);
+      seen[it.ic] = it.p;
+    }));
+    if (dup.length) fails.push("左栏图标重复: " + dup.join("; "));
+  })();
+
+fs.writeFileSync("/tmp/assert_new.json",
     JSON.stringify({nFail:fails.length, fails, errs:errs.slice(0,10)},null,1));
-  console.log(fails.length? ("FAIL "+fails.length) : "PASS");
+console.log(fails.length? ("FAIL "+fails.length) : "PASS");
 }, 1800);
