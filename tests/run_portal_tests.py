@@ -90,6 +90,10 @@ def build(html_path=None, fixture_path=None):
         "journals":  jrn_blob["journals"],
         "jmeta":     jrn_blob["meta"],
         "panel_ids": sorted(set(re.findall(r'class="panel(?: active)?" id="([a-z]+)"', s))),
+        # 七个检索工具合并进 tsearch 后是 .spanel(子面板),不是顶层 .panel。
+        # 之前 panel_ids 只认 .panel,于是 hub 上指向它们的卡片被误判为"死链",
+        # 14 条基线 FAIL 全出自这里 —— 是断言的盲区,不是页面的缺陷。
+        "sub_ids": sorted(set(re.findall(r'class="spanel" id="([a-z]+)"', s))),
         # 平台导航条里的站内目标(data-nav="…");跨站项是 href 外链,不在此列
         "nav_targets": re.findall(r'data-nav="([a-z]+)"', s),
         # 每个 <select> 静态写死的 option。桩用它来判断"某个值是否真的在选项里",

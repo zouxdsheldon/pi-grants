@@ -52,6 +52,7 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .hubsec{margin-top:22px}
 .hubsec>h3{font-size:15px;color:var(--dark);display:flex;align-items:center;gap:8px;padding-bottom:7px;border-bottom:2px solid var(--line)}
 .hubsec>h3 .st{font-size:12px;font-weight:400;color:var(--muted)}
+.hubsub{grid-column:1/-1;font-size:12.5px;font-weight:600;color:var(--muted);margin:6px 0 -4px;padding-left:2px}
 .tool{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 16px;cursor:pointer;transition:.13s;display:flex;flex-direction:column}
 .tool:hover{border-color:#4A148C;box-shadow:0 4px 14px rgba(74,20,140,.13);transform:translateY(-2px)}
 .tool .ic{font-size:23px;margin-bottom:7px}
@@ -2871,28 +2872,28 @@ var HUB_SECTIONS=[
    {ext:"https://zouxdsheldon.github.io/pi-intel/", ic:"🧭", nm:"PI 情报地图",
     ds:"从本站语料里抽出的 48 位 PI:方向指纹、竞争/互补象限、方向漂移轨迹", cnt:()=>48, u:"位 PI"},
   ]},
- {h:"③ 读文献 · 追踪与评估", st:"多源抓取 + 相关性/新颖度/热度打分,全部可离线复算",
+ {h:"③ 读文献 · 查数据库", st:"左半边是「盯住你自己方向」的持续追踪,右半边是「临时要查一个东西」的实时检索",
   tools:[
+   {sp:"A · 持续追踪自己的方向 —— 本地已抓好的语料,打分可离线复算"},
    {p:"papers", ic:"📚", nm:"文献追踪", ds:"PubMed / bioRxiv / arXiv / Crossref 多源合并,按你的 8 个方向打分", cnt:()=>PAPERS.length, u:"篇在库"},
    {p:"papers", ic:"🔥", nm:"热点论文", ds:"按引用增速排序的近期高关注论文", act:"hot",
     cnt:()=>PAPERS.filter(p=>(p.hot_score||0)>0).length, u:"篇有热度"},
    {p:"papers", ic:"💡", nm:"高新颖度", ds:"与既有语料差异最大的论文,常是新方法或新现象", act:"nov",
     cnt:()=>PAPERS.filter(p=>(p.novelty_pct||0)>=80).length, u:"篇 ≥80 分位"},
+   {sp:"B · 现查一个具体问题 —— 实时调公开 API,数字是现算的命中数,不是缓存快照"},
+   {p:"tsearch", ic:"📚", nm:"文献检索中心", ds:"下面七个检索工具合成一页,另附外站直达目录", cnt:()=>SITES.reduce((a,g)=>a+g.it.length,0), u:"个外站入口"},
+   {p:"tlit",   ic:"📗", nm:"文献检索与导出", ds:"PubMed + Europe PMC 双源检索,一键导出 RIS / BibTeX", cnt:()=>2, u:"个数据源"},
+   {p:"tdict",  ic:"📖", nm:"生物医学词典",   ds:"MeSH 主题词:释义、全部同义词、副主题词、树号,并组装成检索式", cnt:()=>2, u:"种检索式"},
+   {p:"tbib",   ic:"📊", nm:"文献计量分析",   ds:"年份趋势、期刊/作者分布、MeSH 主题词与共现 —— 现算并作图", cnt:()=>5, u:"类统计"},
+   {p:"tcite",  ic:"🔗", nm:"引文追踪",       ds:"DOI 取参考文献(Crossref);PMID 取被引(Europe PMC)", cnt:()=>2, u:"个方向"},
+   {p:"tgap",   ic:"🕳️", nm:"交叉空白扫描",   ds:"先算独立期望再看实测——分母太小时直接拒绝下结论", cnt:()=>1, u:"个命中数源"},
+   {p:"tzh",    ic:"🇨🇳", nm:"中文文献检索",   ds:"检索被国际库收录的中文期刊,并与英文发文量对比(不覆盖 CNKI/万方)", cnt:()=>2, u:"种模式"},
+   {p:"tpat",   ic:"⚖️", nm:"专利检索",       ds:"生物医学关联专利的逐年趋势,并与论文数并排看转化热度", cnt:()=>1, u:"个专利子库"},
+   {sp:"C · 查一个基因 / 一个适应症在临床走到哪一步"},
+   {p:"tgene",  ic:"🧫", nm:"基因/靶点注释", ds:"MyGene + Ensembl + Open Targets:注释、转录本、基因–疾病证据", cnt:()=>3, u:"个数据库"},
+   {p:"ttrial", ic:"🏥", nm:"临床试验检索",   ds:"ClinicalTrials.gov API v2:按适应症/干预/期别查在研项目", cnt:()=>1, u:"个官方库"},
   ]},
- {h:"④ 写本子 · 基金写作", st:"六类基金的完整可用初稿,只需替换填空标记",
-  tools:[
-   {p:"writing", ic:"✍️", nm:"写作指导", ds:"逐段写法 + 你自己论文里提炼的语料库", cnt:()=>6, u:"类基金"},
-   {p:"writing", ic:"📄", nm:"基金模板下载", ds:"K99/R00、F32、R01、海外优青、RGC ECS、NRF —— Word/PDF/Markdown", act:"tpl", cnt:()=>6, u:"份初稿"},
-   {p:"tprev",   ic:"✅", nm:"投前预检",     ds:"估页数、核对分节是否齐、查硬性要点与残留占位符;也能直接输出分节骨架", cnt:()=>6, u:"类基金规格"},
-   {p:"tguide",  ic:"📋", nm:"报告规范核查", ds:"ARRIVE / NIH Rigor / CONSORT / PRISMA / STROBE / MDAR,每条标明该写在哪一节", cnt:()=>6, u:"套清单"},
-  ]},
- {h:"⑤ 投稿 · 期刊查选", st:"基于本站语料的选刊参考(不提供影响因子)",
-  tools:[
-   {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
-   {p:"tjr",     ic:"🔍", nm:"期刊查询与预警", ds:"出版商、PubMed 是否收录、是否 OA、被引体量 + 预警信号(无影响因子,见说明)", cnt:()=>3, u:"个数据源"},
-   {p:"tletter", ic:"✉️", nm:"投稿信函生成",   ds:"cover letter / 回复审稿人 / 申诉 / 预咨询 / 催稿 / 撤稿,中英双语", cnt:()=>6, u:"类信函"},
-  ]},
- {h:"⑥ 实验台 · 分子生物学工具", st:"全部在你自己的浏览器里算,序列不出本机,断网也能用",
+ {h:"④ 做实验 · 分子操作", st:"全部在你自己的浏览器里算,序列不出本机,断网也能用",
   tools:[
    {p:"tsite",   ic:"🧬", nm:"激酶位点扫描", ds:"AMPK 底物基序 PSSM:扫全部 S/T,给分值构成而不是黑箱总分", cnt:()=>1, u:"套已校验矩阵"},
    {p:"tseq",    ic:"🔤", nm:"序列工具箱",   ds:"反向互补 / 六框翻译 / ORF / GC / 酶切 / 蛋白参数", cnt:()=>7, u:"个工具"},
@@ -2901,25 +2902,25 @@ var HUB_SECTIONS=[
    {p:"tclone",  ic:"✂️", nm:"克隆与酶切",   ds:"限制酶全扫 + 模拟电泳 + Gibson 同源臂 + sgRNA/PAM 候选", cnt:()=>ENZ.length, u:"种限制酶"},
    {p:"tbench",  ic:"🧮", nm:"实验台计算器", ds:"稀释 / mol↔g / 缓冲液 / RPM↔RCF / ΔΔCt / Beer-Lambert / A260", cnt:()=>7, u:"个算式"},
   ]},
- {h:"⑦ 文献 · 数据库检索", st:"实时调公开 API,数字都是现算的命中数,不是缓存快照",
-  tools:[
-   {p:"tsearch", ic:"📚", nm:"文献检索中心", ds:"七个检索工具合成一页:文献 / 词典 / 引文 / 计量 / 中文 / 专利 / 空白扫描 + 外站直达目录", cnt:()=>SITES.reduce((a,g)=>a+g.it.length,0), u:"个外站入口"},
-   {p:"tlit",   ic:"📗", nm:"文献检索与导出", ds:"PubMed + Europe PMC 双源检索,一键导出 RIS / BibTeX", cnt:()=>2, u:"个数据源"},
-   {p:"tbib",   ic:"📊", nm:"文献计量分析",   ds:"年份趋势、期刊/作者分布、MeSH 主题词与共现 —— 现算并作图", cnt:()=>5, u:"类统计"},
-   {p:"tcite",  ic:"🔗", nm:"引文追踪",       ds:"DOI 取参考文献(Crossref);PMID 取被引(Europe PMC)", cnt:()=>2, u:"个方向"},
-   {p:"tgene",  ic:"🧫", nm:"基因/靶点注释", ds:"MyGene + Ensembl + Open Targets:注释、转录本、基因–疾病证据", cnt:()=>3, u:"个数据库"},
-   {p:"ttrial", ic:"🏥", nm:"临床试验检索",   ds:"ClinicalTrials.gov API v2:按适应症/干预/期别查在研项目", cnt:()=>1, u:"个官方库"},
-   {p:"tdict",  ic:"📖", nm:"生物医学词典",   ds:"MeSH 主题词:释义、全部同义词、副主题词、树号,并组装成检索式", cnt:()=>2, u:"种检索式"},
-   {p:"tgap",   ic:"🕳️", nm:"交叉空白扫描",   ds:"先算独立期望再看实测——分母太小时直接拒绝下结论", cnt:()=>1, u:"个命中数源"},
-   {p:"tzh",    ic:"🇨🇳", nm:"中文文献检索",   ds:"检索被国际库收录的中文期刊,并与英文发文量对比(不覆盖 CNKI/万方)", cnt:()=>2, u:"种模式"},
-   {p:"tpat",   ic:"⚖️", nm:"专利检索",       ds:"生物医学关联专利的逐年趋势,并与论文数并排看转化热度", cnt:()=>1, u:"个专利子库"},
-  ]},
- {h:"⑧ 统计 · 数据可视化", st:"JS 实现已逐项对齐 scipy/statsmodels,数据不出本机",
+ {h:"⑤ 分析数据", st:"JS 实现已逐项对齐 scipy/statsmodels,数据不出本机",
   tools:[
    {p:"tstat", ic:"📐", nm:"统计与样本量", ds:"功效/样本量、t 检验、ANOVA、多重校正、相关与回归", cnt:()=>5, u:"个模块"},
    {p:"tde",   ic:"📈", nm:"差异表达与作图", ds:"log2FC + Welch p + BH q,火山图 / 相关热图 / PCA", cnt:()=>3, u:"类图"},
   ]},
- {h:"⑨ 本站做不到的", st:"需要商业授权数据或服务器端算力 —— 直接给你能用的入口",
+ {h:"⑥ 写本子 · 基金写作", st:"六类基金的完整可用初稿,只需替换填空标记",
+  tools:[
+   {p:"writing", ic:"✍️", nm:"写作指导", ds:"逐段写法 + 你自己论文里提炼的语料库", cnt:()=>6, u:"类基金"},
+   {p:"writing", ic:"📄", nm:"基金模板下载", ds:"K99/R00、F32、R01、海外优青、RGC ECS、NRF —— Word/PDF/Markdown", act:"tpl", cnt:()=>6, u:"份初稿"},
+   {p:"tprev",   ic:"✅", nm:"投前预检",     ds:"估页数、核对分节是否齐、查硬性要点与残留占位符;也能直接输出分节骨架", cnt:()=>6, u:"类基金规格"},
+   {p:"tguide",  ic:"📋", nm:"报告规范核查", ds:"ARRIVE / NIH Rigor / CONSORT / PRISMA / STROBE / MDAR,每条标明该写在哪一节", cnt:()=>6, u:"套清单"},
+  ]},
+ {h:"⑦ 投稿 · 期刊查选", st:"基于本站语料的选刊参考(不提供影响因子)",
+  tools:[
+   {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
+   {p:"tjr",     ic:"🔍", nm:"期刊查询与预警", ds:"出版商、PubMed 是否收录、是否 OA、被引体量 + 预警信号(无影响因子,见说明)", cnt:()=>3, u:"个数据源"},
+   {p:"tletter", ic:"✉️", nm:"投稿信函生成",   ds:"cover letter / 回复审稿人 / 申诉 / 预咨询 / 催稿 / 撤稿,中英双语", cnt:()=>6, u:"类信函"},
+  ]},
+ {h:"⑧ 本站做不到的", st:"需要商业授权数据或服务器端算力 —— 直接给你能用的入口",
   tools:[
    {p:"texternal", ic:"🔌", nm:"需外部服务的工具", ds:"影响因子、润色降重、专利全库、BLAST/富集 —— 写清为什么做不了并给替代", cnt:()=>10, u:"条替代方案"},
   ]},
@@ -2930,6 +2931,10 @@ function renderHub(){
   HUB_SECTIONS.forEach(function(s){
     h+='<div class="hubsec"><h3>'+s.h+' <span class="st">'+esc(s.st)+'</span></h3><div class="hubgrid">';
     s.tools.forEach(function(t){
+      /* 分区内的小标题:③ 里 13 张卡片混在一起用户扫不动,
+         用整行的分隔标签把「持续追踪」「现查一个问题」「查基因/试验」分开。
+         它不是卡片,没有 p/cnt,渲染和点击都要跳过。 */
+      if(t.sp){ h+='<div class="hubsub">'+esc(t.sp)+'</div>'; return; }
       var n=0; try{n=t.cnt();}catch(e){n=0;}
       var attr=t.ext?('data-ext="'+t.ext+'"'):('data-go="'+t.p+'"'+(t.act?' data-act="'+t.act+'"':''));
       h+='<div class="tool'+(t.ext?' ext':'')+'" '+attr+'>'
@@ -2981,7 +2986,7 @@ var SIDE_NAV=[
     {p:"hub",   ic:"🏠", t:"工具首页"},
     {p:"tfind", ic:"🔍", t:"找工具"}
   ]},
-  {g:"找资助", items:[
+  {g:"① 找资助", items:[
     {p:"live",     ic:"🇺🇸", t:"联邦机会",   n:"liveN"},
     {p:"curated",  ic:"🌐", t:"各国 PI 资助", n:"curN"},
     {p:"myapps",   ic:"🎯", t:"我能申的",   n:"myN"},
@@ -2989,38 +2994,36 @@ var SIDE_NAV=[
     {p:"whatsnew", ic:"🔄", t:"更新动态",   n:"chgN"},
     {p:"pipeline", ic:"📋", t:"申请管线"}
   ]},
-  {g:"找职位", items:[
+  {g:"② 找职位", items:[
     {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"}
   ]},
-  {g:"读文献 / 选期刊", items:[
-    {p:"papers",   ic:"🔔", t:"文献追踪", n:"papN"},
-    {p:"journals", ic:"📖", t:"期刊查选", n:"jrnN"}
-  ]},
-  {g:"写本子 / 投稿", items:[
-    {p:"writing", ic:"✍️", t:"写作指导"},
-    {p:"tprev",   ic:"🩺", t:"投前预检",   nw:1},
-    {p:"tguide",  ic:"🧾", t:"报告规范核查", nw:1},
-    {p:"tletter", ic:"✉️", t:"投稿信函",   nw:1},
-    {p:"tjr",     ic:"⚠️", t:"期刊查询预警", nw:1}
-  ]},
-  {g:"实验工具", items:[
-    {p:"tsite",  ic:"🧬", t:"位点扫描",  nw:1},
-    {p:"tseq",   ic:"🔤", t:"序列工具箱", nw:1},
-    {p:"tprimer",ic:"🧪", t:"引物与密码子", nw:1},
-    {p:"tlookup",ic:"🔎", t:"蛋白直查",  nw:1}
-  ]},
-  {g:"文献与数据库", items:[
+  {g:"③ 读文献 · 查数据库", items:[
+    {p:"papers",  ic:"🔔", t:"文献追踪",   n:"papN"},
     {p:"tsearch", ic:"📚", t:"文献检索中心", nw:1},
     {p:"tgene",   ic:"🧫", t:"基因疾病注释", nw:1},
     {p:"ttrial",  ic:"🏥", t:"临床试验",   nw:1}
   ]},
-  {g:"统计与作图", items:[
+  {g:"④ 做实验 · 分子操作", items:[
+    {p:"tsite",  ic:"🧬", t:"位点扫描",   nw:1},
+    {p:"tseq",   ic:"🔤", t:"序列工具箱",  nw:1},
+    {p:"tprimer",ic:"🧪", t:"引物与密码子", nw:1},
+    {p:"tlookup",ic:"🔎", t:"蛋白直查",   nw:1},
+    {p:"tclone", ic:"✂️", t:"克隆与酶切",  nw:1},
+    {p:"tbench", ic:"🧮", t:"实验台计算器", nw:1}
+  ]},
+  {g:"⑤ 分析数据", items:[
     {p:"tstat",  ic:"📐", t:"统计与样本量", nw:1},
     {p:"tde",    ic:"📈", t:"差异表达可视化", nw:1}
   ]},
-  {g:"分子操作", items:[
-    {p:"tclone", ic:"✂️", t:"克隆与酶切",  nw:1},
-    {p:"tbench", ic:"🧮", t:"实验台计算器", nw:1}
+  {g:"⑥ 写本子", items:[
+    {p:"writing", ic:"✍️", t:"写作指导"},
+    {p:"tprev",   ic:"🩺", t:"投前预检",   nw:1},
+    {p:"tguide",  ic:"🧾", t:"报告规范核查", nw:1}
+  ]},
+  {g:"⑦ 投稿 · 选刊", items:[
+    {p:"journals", ic:"📖", t:"期刊查选",   n:"jrnN"},
+    {p:"tjr",      ic:"⚠️", t:"期刊查询预警", nw:1},
+    {p:"tletter",  ic:"✉️", t:"投稿信函",   nw:1}
   ]},
   {g:"", items:[
     {p:"texternal", ic:"🔌", t:"需外部服务"}

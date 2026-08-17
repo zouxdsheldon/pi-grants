@@ -62,12 +62,23 @@ HUB_SECTIONS.forEach(function(s){
 
 /* A4. 没有死卡片:每张内部卡片的目标面板必须是真实存在的面板 id */
 var PANEL_IDS = T.panel_ids;
+var SUB_IDS = T.sub_ids || [];
+/* 目标合法的两种情形:它自己是顶层面板;或它是某个顶层面板的子面板
+   (合并进 tsearch 的七个检索工具),此时宿主页必须存在。 */
+function hubTargetOK(p){
+  if(PANEL_IDS.indexOf(p) >= 0) return true;
+  var host = (typeof SUB_OF !== "undefined") ? SUB_OF[p] : null;
+  return !!host && SUB_IDS.indexOf(p) >= 0 && PANEL_IDS.indexOf(host) >= 0;
+}
 HUB_SECTIONS.forEach(function(s){
   s.tools.forEach(function(t){
     if(t.ext){ ck(/^https?:\/\//.test(t.ext), "external tool 「"+t.nm+"」 has a bad URL"); return; }
-    ck(PANEL_IDS.indexOf(t.p) >= 0, "hub tool 「"+t.nm+"」 points at non-existent panel: "+t.p);
+    if(t.sp) return;
+    ck(hubTargetOK(t.p), "hub tool 「"+t.nm+"」 points at non-existent panel: "+t.p);
   });
 });
+/* 反向:一个既不是面板、也不是任何宿主页子面板的 id 必须被判死 */
+ck(!hubTargetOK("no_such_tool_xyz"), "hubTargetOK 对不存在的 id 也返回了 true");
 
 /* A5. goPanel 真的会去点那个 tab */
 CLICKED = [];
@@ -302,10 +313,50 @@ ck(T.nav_targets.length >= 5,
 HUB_SECTIONS.forEach(function(sec){
   sec.tools.forEach(function(t){
     if (t.ext) return;              // 外链不查
-    ck(PANELS[t.p] === 1,
-       "hub tool card \"" + t.t + "\" jumps to a non-existent panel: " + t.p);
+    if (t.sp) return;               // 分区内小标题,不是卡片
+    var hostp = (typeof SUB_OF !== "undefined" && SUB_OF[t.p]) ? SUB_OF[t.p] : t.p;
+    ck(PANELS[hostp] === 1,
+       "hub tool card \"" + t.nm + "\" jumps to a non-existent panel: " + t.p);
   });
 });
+
+/* 分隔标签必须真是分隔标签:不能有 p/cnt(否则会被当卡片渲染出一张空卡),
+   而且必须真的渲染进 HTML —— 只写进数据结构但渲染器不认,用户就看不到分组。 */
+HUB_SECTIONS.forEach(function(sec){
+  sec.tools.forEach(function(t){
+    if (!t.sp) return;
+    ck(!t.p && !t.cnt && !t.ext, "hub 分隔标签「" + t.sp + "」不该带 p/cnt/ext");
+    ck(hub.indexOf(esc(t.sp)) >= 0 || hub.indexOf(t.sp) >= 0,
+       "hub 分隔标签未出现在渲染结果里: " + t.sp);
+  });
+});
+
+/* 重组后的契约:hub 上每一张内部卡片,用户都必须能从左栏找到它
+   —— 要么它自己在左栏,要么它的宿主页在左栏(合并进子标签的工具)。
+   卡片墙和左栏若分头维护,迟早出现「hub 有、左栏没有」的孤儿工具。 */
+(function(){
+  var inNav = {};
+  SIDE_NAV.forEach(function(g){ (g.items||[]).forEach(function(it){ inNav[it.p] = 1; }); });
+  var orphan = [];
+  HUB_SECTIONS.forEach(function(sec){
+    sec.tools.forEach(function(t){
+      if (t.ext || t.sp) return;
+      var hostp = (typeof SUB_OF !== "undefined" && SUB_OF[t.p]) ? SUB_OF[t.p] : t.p;
+      if (!inNav[hostp]) orphan.push(t.nm + "(" + t.p + ")");
+    });
+  });
+  ck(orphan.length === 0, "hub 有但左栏进不去的工具: " + orphan.join(", "));
+})();
+
+/* 分组语义:文献追踪与实时检索已合并进同一分区,不应再各自成组。
+   若日后有人把它们拆回两组,这条会失败并提醒重新考虑。 */
+(function(){
+  var groups = SIDE_NAV.map(function(g){ return g.g; }).filter(Boolean);
+  var litGroups = groups.filter(function(g){ return /文献|数据库/.test(g); });
+  ck(litGroups.length === 1,
+     "左栏里与文献/数据库相关的分组有 " + litGroups.length + " 个(应合并为 1): " + litGroups.join(" / "));
+  ck(groups.length <= 8, "左栏分组 " + groups.length + " 个 —— 超过 8 组就失去归类意义");
+})();
 
 /* goPanel 对未知面板必须什么都不做 —— 不能静默退回首页,那会把拼错的链接藏起来 */
 var nClickBefore = CLICKED.length;

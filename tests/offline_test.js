@@ -53,6 +53,26 @@ setTimeout(() => {
   if (R.snapbar.indexOf("数据加载失败") >= 0) fails.push("snapbar reports load failure: " + R.snapbar);
   if (!R.offlineFlag) fails.push("offline shim did not install");
   if (R.inlineKeys < 15) fails.push("inline data only " + R.inlineKeys + " files");
+  /* 离线版是用户真正双击打开的那一份 —— 线上改好的分组若没同步进来,
+     他看到的仍是旧导航。所以分组契约要在这一份上单独验一次。 */
+  (function () {
+    const nav = w.SIDE_NAV || [];
+    const groups = nav.map(g => g.g).filter(Boolean);
+    const lit = groups.filter(g => /文献|数据库/.test(g));
+    if (lit.length !== 1)
+      fails.push("离线版左栏文献/数据库分组 " + lit.length + " 个(应为 1): " + lit.join(" / "));
+    if (groups.length > 8) fails.push("离线版左栏分组 " + groups.length + " 个 — 过多");
+    const inNav = new Set();
+    nav.forEach(g => (g.items || []).forEach(it => inNav.add(it.p)));
+    const subOf = w.SUB_OF || {};
+    const orphan = [];
+    (w.HUB_SECTIONS || []).forEach(sec => (sec.tools || []).forEach(t => {
+      if (t.ext || t.sp) return;
+      const hostp = subOf[t.p] || t.p;
+      if (!inNav.has(hostp)) orphan.push(t.nm);
+    }));
+    if (orphan.length) fails.push("离线版 hub 有但左栏进不去: " + orphan.join(", "));
+  })();
   if (!R.tsearch) fails.push("merged search page missing");
   if (R.subtabs !== 7) fails.push("subtabs " + R.subtabs + " (want 7)");
   if (typeof R.sites !== "number" || R.sites < 40) fails.push("SITES " + R.sites);
