@@ -82,3 +82,18 @@ fit 默认值改成"高" / 短缩写改成子串匹配 / CSV 退化成 split(","
 `clickcheck.js` 补的是另一类漏:markup、引擎、断言全在,唯独少了
 `<button class="tab" data-p="tpivot">` —— 侧栏点击静默失败。这次真发生了,
 被 `validate_html.py` 的可达性检查抓到。
+
+### inbox_link.js — Pivot 收件箱链接 + 面板绑定
+    NODE_PATH=<jsdom路径> node tests/inbox_link.js ../index.html
+
+断言两件事:
+1. **链接指向正确的 owner/repo**。三个按钮(上传 / 打开目录 / 立刻运行)的地址是从
+   本页 URL 现推的(`owner.github.io/repo` → `github.com/owner/repo`),不是常量。
+   推导写错时按钮照样渲染、照样能点,只是把人送到别人的仓库 —— 静默且难发现。
+   测 5 种 host:gh-pages、带文件名、被 fork、`file://` 离线版、自定义域名。
+2. **面板开箱即绑**。断言的是"打开页面后 `#pvDrop` 已 `dataset.wired`",
+   不是"函数存在"。这条来自一个真实 bug:`renderPivot()` 当初只挂在 `RENDER_OF` 上,
+   而 `RENDER_OF` 只被筛选芯片和子标签调用 —— 开面板不触发,拖文件进去毫无反应。
+
+负控(6 个,全部被捕获):链接写死成别人的仓库、收件箱路径拼错、离线回落常量指错仓库、
+`renderPivot()` 不在启动时调用、手动运行链接指向错 workflow、删掉上传按钮。

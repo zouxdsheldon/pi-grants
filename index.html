@@ -1439,6 +1439,29 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="panel" id="tpivot">
   <h2>📥 Pivot 表格导入</h2>
   <div class="hstrip" data-help="tpivot"></div>
+  <!-- 路线 B:直接丢进仓库收件箱,定时任务自动入库。链接由本页 URL 推导,
+       换仓库名/fork 也不会失效;离线版 file:// 推导不出,回落到常量。 -->
+  <div id="pvGh" class="okbox" style="background:#F3E5F5;border-color:#CE93D8;margin:10px 0">
+    <b>🤖 route B:全自动(不用下载、不用替换文件)</b>
+    <div class="muted" style="font-size:12.5px;margin:6px 0 10px">
+      把 CSV 传进仓库的收件箱目录,定时任务会自动并入 curated.json 并删掉已处理的文件。
+      收件箱在 <b>GitHub 仓库里</b>,不在你电脑上 —— 用下面的按钮直接打开。
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="gobtn" id="pvGhUp" target="_blank" rel="noopener"
+         style="text-decoration:none;background:#2E7D32">⬆️ 上传 CSV 到收件箱</a>
+      <a class="gobtn" id="pvGhDir" target="_blank" rel="noopener"
+         style="text-decoration:none;background:#4A148C">📂 打开收件箱目录</a>
+      <a class="gobtn" id="pvGhRun" target="_blank" rel="noopener"
+         style="text-decoration:none;background:#0D47A1">▶️ 立刻跑一次(不等定时)</a>
+    </div>
+    <div class="muted" style="font-size:12px;margin-top:9px">
+      定时任务每天 <b>11:00 UTC</b>(北京 19:00 / 美东 07:00)自动跑一次。
+      跑完收件箱会被清空 —— 那是<b>已入库</b>的意思,不是没生效。
+      目录里的 <code>.gitkeep</code> 是占位说明文件,别删。
+    </div>
+  </div>
+
   <div class="tool-row" style="flex-direction:column;align-items:stretch;gap:8px">
     <label>把 Pivot-RP 导出的 CSV 拖进来(可多个,也可点击选择)</label>
     <div id="pvDrop" style="border:2px dashed #B39DDB;border-radius:10px;padding:22px;text-align:center;background:#FAF7FF;cursor:pointer">
@@ -6188,7 +6211,7 @@ var TOOLDOC = {
  tpivot:{nm:"Pivot 表格导入",en:"Pivot CSV import",alias:["Pivot","导入","CSV","精选","curated","更新资助"],
    kw:"把 Pivot-RP 导出的 CSV 并进各国 PI 资助库",
    inp:"Pivot-RP 导出的一个或多个 CSV(拖放即可)",
-   out:"去重后的新增条目预览 + 自动归国统计 + 可下载的 curated.json / 新增条目 CSV",
+   out:"去重后的新增条目预览 + 自动归国统计 + 可下载的 curated.json / 新增条目 CSV;也可用面板顶部的按钮直接把 CSV 传进 GitHub 收件箱(data/pivot_inbox/),由每日定时任务自动入库",
    src:"离线内置 —— 解析全在浏览器里做,文件不上传。归国与列名规则读 data/pivot_rules.json,与 scripts/import_pivot.py 同一份"},
  tclone:{nm:"克隆策略 · CRISPR",en:"Cloning & CRISPR",alias:["克隆","酶切","Gibson","sgRNA","CRISPR","PAM","载体"],
    kw:"选酶切位点、设 Gibson 引物、找 sgRNA",
@@ -6837,10 +6860,31 @@ function pvReadFiles(list){
   });
 }
 
+/* 收件箱链接:从本页 URL 推导 owner/repo(zouxdsheldon.github.io/pi-grants/ →
+   github.com/zouxdsheldon/pi-grants),这样换名字或被 fork 都不会指错地方。
+   离线版是 file:// 协议,推导不出来,回落到常量。 */
+function pvRepoBase(){
+  try{
+    var h=location.hostname, seg=location.pathname.split("/").filter(Boolean);
+    var m=h.match(/^([\w-]+)\.github\.io$/);
+    if(m && seg.length) return "https://github.com/"+m[1]+"/"+seg[0];
+  }catch(e){}
+  return "https://github.com/zouxdsheldon/pi-grants";   // 离线版 / 自定义域名回落
+}
+function pvWireGithub(){
+  var base=pvRepoBase(), set=function(id,href){
+    var a=document.getElementById(id); if(a){ a.href=href; a.title=href; } };
+  set("pvGhUp",  base+"/upload/main/data/pivot_inbox");
+  set("pvGhDir", base+"/tree/main/data/pivot_inbox");
+  set("pvGhRun", base+"/actions/workflows/update.yml");
+}
 function renderPivot(){
   var drop=document.getElementById("pvDrop"), inp=document.getElementById("pvFile");
-  if(!drop||drop.dataset.wired) return;
+  /* dataset 也要判:测试用的无 DOM 引擎会返回不带 dataset 的桩对象,
+     直接读 .wired 会抛,把整个启动绑定块打断(后面的工具就都不绑了)。 */
+  if(!drop||!drop.dataset||drop.dataset.wired||!inp) return;
   drop.dataset.wired="1";
+  pvWireGithub();
   drop.onclick=function(){ inp.click(); };
   inp.onchange=function(){ if(inp.files.length) pvReadFiles(inp.files); };
   ["dragenter","dragover"].forEach(function(ev){ drop.addEventListener(ev,function(e){
@@ -10014,6 +10058,11 @@ function pvDemoRun(){
   /* 找工具:边打边搜,不需要按钮 */
   on("tfQ","input",renderToolFind);
   renderToolFind();
+  /* Pivot 导入面板:拖放区 / 文件选择 / 收件箱链接都在 renderPivot 里绑。
+     它此前只挂在 RENDER_OF 上,而 RENDER_OF 只被筛选芯片和子标签调用 ——
+     开面板不会触发,所以拖进去的文件毫无反应。在这里直接绑一次;
+     renderPivot 自带 dataset.wired 幂等保护,重复调用无害。 */
+  renderPivot();
 
   /* --- 新增九个工具面板 --- */
   on("ltRun","click",renderLit);      enterRuns("ltQ",renderLit);
