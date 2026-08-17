@@ -1,0 +1,251 @@
+{
+ "_comment": "单一数据源:import_pivot.py 与网页导入面板共用。改这里,两边同时生效。",
+ "colmap": {
+  "name": [
+   "title",
+   "opportunityname",
+   "name",
+   "grantname",
+   "fundingopportunity"
+  ],
+  "funder": [
+   "sponsor",
+   "funder",
+   "sponsorname",
+   "agency",
+   "organization"
+  ],
+  "deadline": [
+   "deadline",
+   "duedate",
+   "closedate",
+   "applicationdeadline",
+   "nextdeadline"
+  ],
+  "amount": [
+   "amount",
+   "award",
+   "funding",
+   "awardamount",
+   "fundingamount"
+  ],
+  "url": [
+   "url",
+   "link",
+   "sponsorurl",
+   "moreinfo",
+   "weblink",
+   "opportunityurl"
+  ],
+  "cat": [
+   "category",
+   "type",
+   "fundingtype",
+   "keywords",
+   "discipline"
+  ]
+ },
+ "fallback_region": "📥 我的 Pivot 精选",
+ "region_rules": [
+  [
+   "🇺🇸 美国",
+   [
+    "nih",
+    "national institutes of health",
+    "nci",
+    "nsf",
+    "national science foundation",
+    "niaid",
+    "nhlbi",
+    "ninds",
+    "niddk",
+    "doe",
+    "department of energy",
+    "darpa",
+    "cdc",
+    "fda",
+    "damon runyon",
+    "american cancer",
+    "aacr",
+    "howard hughes",
+    "hhmi",
+    "burroughs wellcome",
+    "pew charitable",
+    "searle",
+    "keck",
+    "sloan",
+    "simons foundation",
+    "leukemia",
+    "lymphoma society",
+    "muscular dystrophy association",
+    "jdrf",
+    "american heart",
+    "american diabetes",
+    "department of defense",
+    "cdmrp"
+   ]
+  ],
+  [
+   "🇪🇺 欧洲(欧盟)",
+   [
+    "european research council",
+    "erc",
+    "horizon europe",
+    "marie sklodowska",
+    "marie curie",
+    "msca",
+    "embo",
+    "european molecular biology",
+    "european commission",
+    "european union",
+    "eu funding",
+    "volkswagen foundation",
+    "boehringer ingelheim fonds",
+    "max planck",
+    "helmholtz",
+    "dfg",
+    "deutsche forschungs",
+    "german research",
+    "france",
+    "anr",
+    "agence nationale",
+    "swiss national",
+    "snsf",
+    "netherlands",
+    "nwo",
+    "fwo",
+    "austrian science",
+    "fwf",
+    "novo nordisk foundation"
+   ]
+  ],
+  [
+   "🇬🇧 英国",
+   [
+    "wellcome",
+    "ukri",
+    "uk research and innovation",
+    "mrc",
+    "medical research council",
+    "bbsrc",
+    "royal society",
+    "cancer research uk",
+    "cruk",
+    "british heart",
+    "leverhulme",
+    "wolfson",
+    "academy of medical sciences",
+    "united kingdom"
+   ]
+  ],
+  [
+   "🇨🇳 中国大陆",
+   [
+    "nsfc",
+    "national natural science foundation of china",
+    "china",
+    "chinese academy",
+    "ministry of science and technology",
+    "most",
+    "优青",
+    "杰青",
+    "china postdoctoral",
+    "国家自然科学"
+   ]
+  ],
+  [
+   "🇭🇰 香港",
+   [
+    "hong kong",
+    "rgc",
+    "research grants council",
+    "hkust",
+    "cuhk",
+    "university of hong kong",
+    "croucher"
+   ]
+  ],
+  [
+   "🇸🇬 新加坡",
+   [
+    "singapore",
+    "nrf singapore",
+    "national research foundation",
+    "a*star",
+    "astar",
+    "nmrc",
+    "national medical research",
+    "nus",
+    "nanyang"
+   ]
+  ],
+  [
+   "🇯🇵 日本",
+   [
+    "japan",
+    "jsps",
+    "japan society for the promotion",
+    "jst",
+    "amed",
+    "riken",
+    "kakenhi",
+    "takeda science",
+    "uehara",
+    "naito foundation",
+    "hfsp japan"
+   ]
+  ],
+  [
+   "🇰🇷 韩国",
+   [
+    "korea",
+    "nrf korea",
+    "national research foundation of korea",
+    "kaist",
+    "ibs",
+    "samsung science"
+   ]
+  ],
+  [
+   "🇦🇺 澳大利亚",
+   [
+    "australia",
+    "nhmrc",
+    "national health and medical research",
+    "arc",
+    "australian research council",
+    "cass foundation"
+   ]
+  ],
+  [
+   "🇨🇦 加拿大",
+   [
+    "canada",
+    "cihr",
+    "canadian institutes",
+    "nserc",
+    "banting",
+    "genome canada"
+   ]
+  ],
+  [
+   "🌍 国际/跨国",
+   [
+    "human frontier",
+    "hfsp",
+    "world health",
+    "who",
+    "international",
+    "global",
+    "unesco",
+    "chan zuckerberg",
+    "czi",
+    "bill & melinda gates",
+    "gates foundation",
+    "wellcome mahidol",
+    "aids"
+   ]
+  ]
+ ],
+ "_match_spec": "短缩写(norm 后 ≤5 字符)按整词匹配;若缩写含标点(如 a*star),再用非字母数字包围的原串匹配。长短语(≥6)用去符号子串匹配。中文关键词直接在原始小写串里找。"
+}

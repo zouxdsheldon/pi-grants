@@ -20,6 +20,10 @@ jobs:
         run: python scripts/fetch_grants.py
       - name: Fetch academic jobs
         run: python scripts/fetch_jobs.py || echo "jobs fetch failed, keeping previous data/jobs.json"
+      - name: Import Pivot CSV drops (data/pivot_inbox/*.csv)
+        # 你把 Pivot 导出的 CSV 提交进 data/pivot_inbox/,这一步自动并入
+        # curated.json 并删掉已消费的文件。空目录时它什么也不做。
+        run: python scripts/import_pivot.py data/pivot_inbox --consume
       - name: Rebuild calendar feed (.ics)
         run: python scripts/build_ics.py
       - name: Fetch literature (6 sources) + accumulate citation snapshot
@@ -48,6 +52,7 @@ jobs:
           # journals.json 必须一起提交:它是从 papers.json 重算的,漏掉它
           # 会让期刊面板长期停留在旧计数(2026-08 发现的真实 bug)。
           git add data/grants.json data/grant_deadlines.ics data/jobs.json \
+                  data/curated.json data/pivot_inbox \
                   data/papers.json data/citation_snapshots.json \
                   data/citenet.json data/journals.json \
                   data/fetch_log_papers.json data/digest.json \

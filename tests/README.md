@@ -62,3 +62,23 @@ smoke3.js 每个示例只记 110 字符预览。第一次跑负对照时,5 个�
 - `pvScaffold` 曾被一次**索引反向的切片**(空字符串)整段复制到 `<!DOCTYPE`
   之前,后定义覆盖前定义,修改看起来"不生效"。判断依据是内核里的字符串
   不再以 HTML 开头。改完顺带修了拼接处的重复句号。
+
+## Pivot 导入面板(tpivot)
+
+    python3 run_pivot_parity.py            # 网页端 vs scripts/import_pivot.py 一致性
+    node    clickcheck.js ../index.html    # 从侧栏真点一下,面板必须真的打开
+
+**为什么要做一致性测试:** 网页面板给的是「导入后会变成什么样」的预览,
+真正跑在 GitHub Actions 里的却是 Python 脚本。两边各写一份归国/去重/列名规则,
+漂移的表现是「网页说这条归英国、脚本归兜底」—— 页面不报错,数据悄悄不一致。
+所以两边共读 `data/pivot_rules.json`,并由 `run_pivot_parity.py` 逐条比对
+47 个归国探针、CSV 解析(基准是 Python 标准库 csv)、列名映射,
+以及**端到端**:同一份 CSV 走完两条流水线,逐字段比对最终写进 curated.json 的条目。
+
+负对照(全部能报错):网页端不去重 / verify 标记写成"已核实" / 漏填 src_pivot /
+fit 默认值改成"高" / 短缩写改成子串匹配 / CSV 退化成 split(",") /
+列名改成完全相等匹配 / 归国永远走兜底。
+
+`clickcheck.js` 补的是另一类漏:markup、引擎、断言全在,唯独少了
+`<button class="tab" data-p="tpivot">` —— 侧栏点击静默失败。这次真发生了,
+被 `validate_html.py` 的可达性检查抓到。

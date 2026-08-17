@@ -628,6 +628,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab tab2" data-p="tguide">🧾 报告规范</button>
   <button class="tab tab2" data-p="tprev">🔎 投前自检</button>
   <button class="tab tab2" data-p="texternal">🔌 外部服务</button>
+  <button class="tab tab2" data-p="tpivot">📥 Pivot 导入</button>
 </div>
 <div id="crumb"><span id="crumbT"></span><button class="cx" id="crumbBack">← 回工具首页</button></div>
 
@@ -1432,6 +1433,28 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <textarea id="deM" rows="8" style="width:100%;font-family:ui-monospace,Menlo,monospace;font-size:12px" placeholder="gene,Ctrl1,Ctrl2,Ctrl3,Trt1,Trt2,Trt3&#10;ZSWIM8,120,131,118,240,255,233&#10;PRKAA1,88,92,85,90,87,91"></textarea>
   </div>
   <div id="deOut" class="tout"></div>
+</div>
+
+<!-- ============ 找资助:Pivot 表格导入 ============ -->
+<div class="panel" id="tpivot">
+  <h2>📥 Pivot 表格导入</h2>
+  <div class="hstrip" data-help="tpivot"></div>
+  <div class="tool-row" style="flex-direction:column;align-items:stretch;gap:8px">
+    <label>把 Pivot-RP 导出的 CSV 拖进来(可多个,也可点击选择)</label>
+    <div id="pvDrop" style="border:2px dashed #B39DDB;border-radius:10px;padding:22px;text-align:center;background:#FAF7FF;cursor:pointer">
+      <div style="font-size:26px">📄</div>
+      <div style="font-weight:600;color:#4A148C">拖放 CSV 到这里 / 点击选择文件</div>
+      <div class="muted" style="font-size:12px;margin-top:4px">文件不会上传到任何服务器 —— 全部在你自己的浏览器里解析</div>
+      <input type="file" id="pvFile" accept=".csv,text/csv" multiple style="display:none">
+    </div>
+  </div>
+  <div class="tool-row">
+    <label title="勾上则只看会新增哪些,不生成下载文件">仅预览<input type="checkbox" id="pvDry" checked></label>
+    <button class="gobtn" id="pvRun">解析并比对</button>
+    <button class="gobtn" id="pvDl" style="display:none;background:#2E7D32">⬇️ 下载合并后的 curated.json</button>
+    <button class="gobtn" id="pvDlNew" style="display:none;background:#0D47A1">⬇️ 只下载新增条目 CSV</button>
+  </div>
+  <div id="pvOut" class="tout"></div>
 </div>
 
 <!-- ============ 实验工具:克隆与 CRISPR ============ -->
@@ -2863,6 +2886,7 @@ var HUB_SECTIONS=[
    {p:"curated",  ic:"🌐", nm:"各国 PI 资助", ds:"人工逐条核实的早期 PI 项目:K99、海外优青、ECS、NRF…", cnt:()=>CURATED.length,   u:"个项目"},
    {p:"calendar", ic:"📅", nm:"截止日历",     ds:"可订阅的 .ics 日历,截止日自动进你的日程", cnt:()=>(CAL_EV?CAL_EV.filter(e=>e.mine).length:0), u:"条截止"},
    {p:"myapps",   ic:"🎯", nm:"我能申的",     ds:"按你填的档案自动过滤资格,分 A/B/C 档", cnt:()=>{try{return screenMine().length}catch(e){return 0}}, u:"个符合"},
+   {p:"tpivot",   ic:"📥", nm:"Pivot 表格导入", ds:"把 Pivot-RP 导出的 CSV 拖进来,自动去重、自动归国、生成可直接替换的 curated.json", cnt:()=>(CURATED||[]).filter(g=>g.cat==="Pivot 导入").length, u:"条已从 Pivot 导入"},
    {p:"pipeline", ic:"📋", nm:"申请管线",     ds:"跟踪每份申请的状态:感兴趣 / 起草中 / 已提交 / 结果", cnt:()=>Object.keys(getTracked()).length, u:"份在跟"},
    {p:"whatsnew", ic:"🔄", nm:"更新动态",     ds:"新增、金额变动、截止临近——只看变化的部分", cnt:()=>CHANGES.length, u:"条变化"},
   ]},
@@ -2992,7 +3016,8 @@ var SIDE_NAV=[
     {p:"myapps",   ic:"🎯", t:"我能申的",   n:"myN"},
     {p:"calendar", ic:"📅", t:"截止日历",   n:"calN"},
     {p:"whatsnew", ic:"🔄", t:"更新动态",   n:"chgN"},
-    {p:"pipeline", ic:"📋", t:"申请管线"}
+    {p:"pipeline", ic:"📋", t:"申请管线"},
+    {p:"tpivot",   ic:"📥", t:"Pivot 表格导入"}
   ]},
   {g:"② 找职位", items:[
     {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"}
@@ -4188,7 +4213,7 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,cnet,jrn]=await Promise.all([
+    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,pvr,cnet,jrn]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
@@ -4199,6 +4224,7 @@ async function loadData(){
       fetch("data/config.json?_="+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({})),
       fetch("data/funds.json?_="+Date.now()).then(r=>r.ok?r.json():{funds:[]}).catch(()=>({funds:[]})),
       fetch("data/profile_schema.json?_="+Date.now()).then(r=>r.ok?r.json():{fields:[]}).catch(()=>({fields:[]})),
+      fetch("data/pivot_rules.json?_="+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
       fetch("data/citenet.json?_="+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
       fetch("data/journals.json?_="+Date.now()).then(r=>r.ok?r.json():{journals:[],meta:{}}).catch(()=>({journals:[],meta:{}})),
     ]);
@@ -4208,6 +4234,7 @@ async function loadData(){
     INTMAP={}; INTERESTS.forEach(i=>INTMAP[i.id]=i);
     SITECFG=scfg||{}; FUNDS=(fnd.funds||[]); PSCHEMA=(psch&&psch.fields)?psch:{fields:[],groups:{}};
     if(cnet)CITENET=cnet;
+    PVRULES=pvr;
     applySiteConfig(); paintChip(); try{checkElig();}catch(e){console.warn("elig",e);}
     maybeOnboard();
     document.getElementById("papN").textContent=PAPERS.length;
@@ -6158,6 +6185,11 @@ var TOOLDOC = {
    inp:"基因×样本矩阵(可粘贴 CSV/TSV)+ 分组 + |log2FC| 与 q 阈值",
    out:"逐基因 log2FC / p / BH q、上下调计数、可导出 CSV",
    src:"离线内置 —— 方向统一为 B 相对 A;统计核心与 tstat 同一引擎"},
+ tpivot:{nm:"Pivot 表格导入",en:"Pivot CSV import",alias:["Pivot","导入","CSV","精选","curated","更新资助"],
+   kw:"把 Pivot-RP 导出的 CSV 并进各国 PI 资助库",
+   inp:"Pivot-RP 导出的一个或多个 CSV(拖放即可)",
+   out:"去重后的新增条目预览 + 自动归国统计 + 可下载的 curated.json / 新增条目 CSV",
+   src:"离线内置 —— 解析全在浏览器里做,文件不上传。归国与列名规则读 data/pivot_rules.json,与 scripts/import_pivot.py 同一份"},
  tclone:{nm:"克隆策略 · CRISPR",en:"Cloning & CRISPR",alias:["克隆","酶切","Gibson","sgRNA","CRISPR","PAM","载体"],
    kw:"选酶切位点、设 Gibson 引物、找 sgRNA",
    inp:"目标 DNA 序列 + 拓扑(线性/环状)+ 模式",
@@ -6323,6 +6355,14 @@ var HELP = {
       {t:"同一张表,阈值放宽",set:[["deM","gene,Ctrl1,Ctrl2,Ctrl3,Trt1,Trt2,Trt3\nZSWIM8,120,131,118,251,244,266\nPRKAA1,88,92,85,90,87,91\nMIR29A,410,388,401,142,155,131\nCOL1A1,64,70,58,190,204,177\nACTB,2010,1988,2044,2001,2033,1975\nHMGCR,150,144,158,151,149,162\nSLC16A1,220,208,231,402,388,415\nTUT4,75,80,72,78,74,81"],["deA","Ctrl1,Ctrl2,Ctrl3"],["deB","Trt1,Trt2,Trt3"],["deF","0.5"],["deQ","0.2"]],go:"deRun"}],
   caveat:"只有几个基因时 BH 校正**几乎等于不校正**,q 值参考意义有限(结果里会提醒)。这不是 DESeq2 / limma 的替代品 —— 没有离散度估计、没有收缩,正式组学分析请用 R 包;这里是给你在会上、在写标书时快速看一眼趋势。"},
 
+ tpivot:{what:"把你从 Pivot-RP 导出的 CSV 并进「各国 PI 资助」库:自动认列名、自动去重、按资助方自动归国,给出可直接替换的 curated.json。",
+  how:["在 Pivot-RP 里检索 → 勾选机会 → Export → CSV(可以导好几个文件)。",
+       "把 CSV 拖进本页的虚线框(或点框选文件),可一次拖多个。",
+       "先看「解析结果」:列映射对不对、新增几条、重复几条、有没有落进兜底地区。",
+       "确认无误后取消勾选「仅预览」→ 点「下载合并后的 curated.json」→ 替换仓库里的 data/curated.json → push。",
+       "更省事的做法:把 CSV 直接提交到仓库的 data/pivot_inbox/ 目录,每天的定时任务会自动并入并删掉已消费的文件,你什么都不用点。"],
+  ex:[],
+  caveat:"只并入事实字段(项目名/资助方/截止/金额/官方链接),不复制 Pivot 的编辑或 AI 描述原文——那是 Clarivate 的版权内容。每条导入都标「待核实」,资格与公民身份要求一律以官方页为准。落进「📥 我的 Pivot 精选」兜底地区的,说明资助方名没被规则认出来,可在 data/pivot_rules.json 里补关键词。"},
  tclone:{what:"一条 DNA 进,四样东西出:限制酶切点扫描、模拟电泳片段、Gibson 同源臂引物、sgRNA 候选 + 金门加尾寡核苷酸。",
   how:["把骨架/目标序列贴进第一个框(质粒记得勾「环状」,跨起点的切点才算得对)。",
        "想看模拟电泳就在「用哪些酶」里写酶名(逗号分隔);唯一切点的酶会在扫描表里绿底标出。",
@@ -6646,6 +6686,189 @@ function ctlLabelOf(id,v){
 /* 直接存函数引用,不存函数名。用 window["renderLive"] 取只在浏览器里成立;
    任何非浏览器宿主(测试桩)里 window 是普通对象,查不到就静默什么都不渲染 —— 
    那种"不报错但也没反应"的失败最难查。 */
+/* ---- Pivot CSV 导入(浏览器端) --------------------------------------
+   归国/列名规则从 data/pivot_rules.json 读 —— 与 scripts/import_pivot.py
+   同一份来源。绝不在这里另写一份规则副本:两份规则必然漂移,而漂移的表现
+   是「网页说归英国、脚本归兜底」,没人会发现。                        */
+var PVRULES=null, PVPARSED=null;
+
+function pvNorm(x){ return String(x||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
+
+function pvGuessRegion(funder,name){
+  if(!PVRULES) return "📥 我的 Pivot 精选";
+  var raw=((funder||"")+" "+(name||"")).toLowerCase();
+  var tokens={}; (raw.match(/[a-z0-9]+/g)||[]).forEach(function(t){tokens[t]=1;});
+  var hay=pvNorm(funder)+" "+pvNorm(name);
+  for(var i=0;i<PVRULES.region_rules.length;i++){
+    var region=PVRULES.region_rules[i][0], kws=PVRULES.region_rules[i][1];
+    for(var j=0;j<kws.length;j++){
+      var kw=kws[j], k=pvNorm(kw);
+      if(!k){ if(raw.indexOf(kw)>=0) return region; continue; }
+      if(k.length<=5){
+        if(tokens[k]) return region;
+        // 含标点的缩写(a*star)切不出 token,按非字母数字边界再匹配一次
+        if(!/^[a-z0-9]+$/.test(kw.toLowerCase())){
+          var esc=kw.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+          if(new RegExp("(?:^|[^a-z0-9])"+esc+"(?:[^a-z0-9]|$)").test(raw)) return region;
+        }
+      }else if(hay.indexOf(k)>=0) return region;
+    }
+  }
+  return PVRULES.fallback_region;
+}
+
+/* RFC4180 CSV:引号内的逗号/换行/双写引号都要正确处理。
+   Pivot 的项目名里带逗号和引号是常态,split(",") 会把表撕碎。 */
+function pvParseCSV(text){
+  text=text.replace(/^\uFEFF/,"");
+  var rows=[],row=[],cell="",q=false,i=0;
+  while(i<text.length){
+    var ch=text[i];
+    if(q){
+      if(ch==='"'){ if(text[i+1]==='"'){cell+='"';i+=2;continue;} q=false;i++;continue; }
+      cell+=ch;i++;continue;
+    }
+    if(ch==='"'){q=true;i++;continue;}
+    if(ch===","){row.push(cell);cell="";i++;continue;}
+    if(ch==="\r"){i++;continue;}
+    if(ch==="\n"){row.push(cell);rows.push(row);row=[];cell="";i++;continue;}
+    cell+=ch;i++;
+  }
+  if(cell.length||row.length){row.push(cell);rows.push(row);}
+  return rows.filter(function(r){return r.some(function(c){return String(c).trim()!=="";});});
+}
+
+function pvBuildIndex(headers){
+  var idx={},nh={};
+  headers.forEach(function(h){ nh[pvNorm(h)]=h; });
+  Object.keys(PVRULES.colmap).forEach(function(tgt){
+    var hit=null, cands=PVRULES.colmap[tgt];
+    for(var i=0;i<cands.length&&!hit;i++){
+      for(var k in nh){ if(k===cands[i]||k.indexOf(cands[i])>=0){ hit=nh[k]; break; } }
+    }
+    idx[tgt]=hit;
+  });
+  return idx;
+}
+
+function pvEntry(rec,idx,fname){
+  var g=function(t){ return idx[t]?String(rec[idx[t]]||"").trim():""; };
+  var name=g("name"), funder=g("funder");
+  return {name:name, funder:funder||"—", region:pvGuessRegion(funder,name),
+    cat:"Pivot 导入", deadline:g("deadline"), amount:g("amount"), url:g("url"),
+    window:"", cite_req:"见官方页(Pivot 结构化数据不含公民要求)",
+    elig:"⚠️", fit:"中", verify:"待核实(来自我的 Pivot 导出)",
+    cite:"来自我在 Pivot-RP 的检索/追踪清单;详情以官方页为准。",
+    note:"", src_pivot:fname};
+}
+
+function pvProcess(files){
+  var out=document.getElementById("pvOut");
+  if(!PVRULES){ out.innerHTML='<div class="warn">导入规则还没加载好(data/pivot_rules.json),刷新页面重试。</div>'; return; }
+  var have={}, added=[], dupIn=0, dupFile=0, noName=0, reports=[];
+  (CURATED||[]).forEach(function(c){ have[pvNorm(c.name)+"|"+pvNorm(c.funder)]=1; });
+
+  files.forEach(function(f){
+    var rows=pvParseCSV(f.text);
+    if(!rows.length){ reports.push({f:f.name,err:"空文件"}); return; }
+    var headers=rows[0], idx=pvBuildIndex(headers);
+    if(!idx.name){ reports.push({f:f.name,err:"找不到『项目名』列(表头:"+headers.join(" / ")+")"}); return; }
+    var n=0;
+    for(var r=1;r<rows.length;r++){
+      var rec={}; headers.forEach(function(h,ci){ rec[h]=rows[r][ci]; });
+      var e=pvEntry(rec,idx,f.name);
+      if(!e.name){ noName++; continue; }
+      var key=pvNorm(e.name)+"|"+pvNorm(e.funder);
+      if(have[key]){ if(added.some(function(a){return pvNorm(a.name)+"|"+pvNorm(a.funder)===key;})) dupFile++; else dupIn++; continue; }
+      have[key]=1; added.push(e); n++;
+    }
+    reports.push({f:f.name, rows:rows.length-1, idx:idx, added:n});
+  });
+
+  PVPARSED=added;
+  var tally={}; added.forEach(function(a){ tally[a.region]=(tally[a.region]||0)+1; });
+  var h='<h3>解析结果</h3>';
+  reports.forEach(function(rp){
+    if(rp.err){ h+='<div class="warn">❌ <b>'+esc(rp.f)+'</b>:'+esc(rp.err)+'</div>'; return; }
+    h+='<div style="margin:8px 0"><b>'+esc(rp.f)+'</b> — '+rp.rows+' 行,新增 '+rp.added+' 条<br>';
+    h+='<span class="muted" style="font-size:12px">列映射:'+Object.keys(rp.idx).map(function(k){
+        return k+" ← "+(rp.idx[k]?esc(rp.idx[k]):"⚠️未匹配"); }).join(" · ")+'</span></div>';
+  });
+  h+='<div class="okbox">共 <b>'+added.length+'</b> 条新增 · 与站内已有重复 <b>'+dupIn+'</b> 条 · 文件间重复 <b>'+dupFile+'</b> 条'
+   +(noName?' · 无项目名跳过 <b>'+noName+'</b> 条':'')+'</div>';
+  if(Object.keys(tally).length){
+    h+='<h3>自动归国</h3><table><tr><th>地区</th><th>条数</th></tr>';
+    Object.keys(tally).sort(function(a,b){return tally[b]-tally[a];}).forEach(function(k){
+      h+='<tr><td>'+esc(k)+(k===PVRULES.fallback_region?' <span class="muted">(未识别资助方 → 兜底)</span>':'')+'</td><td>'+tally[k]+'</td></tr>';
+    });
+    h+='</table>';
+  }
+  if(added.length){
+    h+='<h3>新增条目预览(前 30 条)</h3><table><tr><th>项目名</th><th>资助方</th><th>地区</th><th>截止</th><th>金额</th></tr>';
+    added.slice(0,30).forEach(function(a){
+      h+='<tr><td>'+(a.url?'<a href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.name)+'</a>':esc(a.name))
+       +'</td><td>'+esc(a.funder)+'</td><td>'+esc(a.region)+'</td><td>'+esc(a.deadline||"—")+'</td><td>'+esc(a.amount||"—")+'</td></tr>';
+    });
+    h+='</table>';
+    h+='<div class="note" style="margin-top:10px">⚖️ 只并入<b>事实字段</b>(项目名/资助方/截止/金额/官方链接),'
+     +'不复制 Pivot 的编辑或 AI 描述原文。每条都标了「待核实」,资格与公民要求以官方页为准。</div>';
+  }
+  out.innerHTML=h;
+  document.getElementById("pvDl").style.display=(added.length&&!document.getElementById("pvDry").checked)?"":"none";
+  document.getElementById("pvDlNew").style.display=added.length?"":"none";
+}
+
+function pvDownload(name,text,mime){
+  var b=new Blob([text],{type:mime||"application/json;charset=utf-8"});
+  var u=URL.createObjectURL(b), a=document.createElement("a");
+  a.href=u; a.download=name; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(u);},1500);
+}
+
+function pvReadFiles(list){
+  var files=[].slice.call(list).filter(function(f){return /\.csv$/i.test(f.name);});
+  if(!files.length){ document.getElementById("pvOut").innerHTML='<div class="warn">请选 .csv 文件(Pivot 导出时选 CSV,不要选 Excel)。</div>'; return; }
+  var read=[], done=0;
+  files.forEach(function(f,i){
+    var fr=new FileReader();
+    fr.onload=function(){ read[i]={name:f.name,text:fr.result}; if(++done===files.length) pvProcess(read); };
+    fr.onerror=function(){ read[i]={name:f.name,text:""}; if(++done===files.length) pvProcess(read); };
+    fr.readAsText(f,"utf-8");
+  });
+}
+
+function renderPivot(){
+  var drop=document.getElementById("pvDrop"), inp=document.getElementById("pvFile");
+  if(!drop||drop.dataset.wired) return;
+  drop.dataset.wired="1";
+  drop.onclick=function(){ inp.click(); };
+  inp.onchange=function(){ if(inp.files.length) pvReadFiles(inp.files); };
+  ["dragenter","dragover"].forEach(function(ev){ drop.addEventListener(ev,function(e){
+    e.preventDefault(); drop.style.background="#EDE7F6"; }); });
+  ["dragleave","drop"].forEach(function(ev){ drop.addEventListener(ev,function(e){
+    e.preventDefault(); drop.style.background="#FAF7FF"; }); });
+  drop.addEventListener("drop",function(e){ if(e.dataTransfer&&e.dataTransfer.files.length) pvReadFiles(e.dataTransfer.files); });
+  document.getElementById("pvRun").onclick=function(){ if(inp.files.length) pvReadFiles(inp.files);
+    else document.getElementById("pvOut").innerHTML='<div class="warn">先拖入或选择 CSV。</div>'; };
+  document.getElementById("pvDry").onchange=function(){
+    document.getElementById("pvDl").style.display=(PVPARSED&&PVPARSED.length&&!this.checked)?"":"none"; };
+  document.getElementById("pvDl").onclick=function(){
+    if(!PVPARSED||!PVPARSED.length) return;
+    var merged=(CURATED||[]).concat(PVPARSED);
+    pvDownload("curated.json", JSON.stringify(
+      {updated:new Date().toISOString().slice(0,16).replace("T"," ")+" (浏览器导入)",
+       count:merged.length, source:"curated + Pivot 导入", grants:merged}, null, 1));
+  };
+  document.getElementById("pvDlNew").onclick=function(){
+    if(!PVPARSED||!PVPARSED.length) return;
+    var cols=["name","funder","region","deadline","amount","url"];
+    var q=function(v){ return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'; };
+    pvDownload("pivot_new_entries.csv",
+      "\uFEFF"+cols.join(",")+"\n"+PVPARSED.map(function(r){return cols.map(function(c){return q(r[c]);}).join(",");}).join("\n"),
+      "text/csv;charset=utf-8");
+  };
+}
+
 var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
   calendar:renderCalendar,myapps:renderMyApps,jobs:renderJobs,papers:renderPapers,
   pipeline:renderPipeline,journals:renderJournals,
@@ -6653,7 +6876,7 @@ var RENDER_OF={live:renderLive,curated:renderCurated,whatsnew:renderChanges,
   tlit:renderLit,tbib:renderBib,tcite:renderCite,tgene:renderGene,ttrial:renderTrial,
   tstat:renderStat,tde:renderDE,tclone:renderClone,tbench:renderBench,texternal:renderExt,tfind:renderToolFind,
   tsearch:renderSearch,tpat:renderPat,tzh:renderZh,tjr:renderJr,tletter:renderLetter,tguide:renderGuide,
-  tdict:renderDict,tgap:renderGap,tprev:renderPrev};
+  tdict:renderDict,tgap:renderGap,tprev:renderPrev,tpivot:renderPivot};
 function rerender(pid){
   var fn=RENDER_OF[pid];
   if(typeof fn==="function"){try{fn();}catch(e){console.warn(pid,e);}}
