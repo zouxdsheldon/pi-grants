@@ -1,5 +1,5 @@
 {
- "_doc": "示例档案。站点首页「载入示例档案」按钮读取本文件。Fork 后可替换成你自己的，或直接删掉。",
+ "_doc": "示例档案。站点首页「载入示例档案」按钮读取本文件。Fork 后可替换成你自己的，或直接删掉。 年数字段用「起始年份」表示，这样示例明年打开也不会过期。",
  "label_zh": "示例：RNA 生物学方向的非美籍博后",
  "label_en": "Example: non-US postdoc in RNA biology",
  "profile": {
@@ -7,7 +7,9 @@
   "institution": "（示例单位）",
   "citizenship": "other",
   "career_stage": "postdoc",
+  "postdoc_start_year": 2022,
   "postdoc_years": 4,
+  "phd_year": 2022,
   "years_since_phd": 4,
   "age": 34,
   "first_author_papers": 7,

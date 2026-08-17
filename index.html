@@ -386,6 +386,38 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 .fmulti span.on{background:#4A148C;color:#fff;border-color:#4A148C}
 .kwbox{width:100%;min-height:120px;border:1px solid var(--line);border-radius:8px;padding:9px;
   font:12.3px ui-monospace,Menlo,monospace;line-height:1.55}
+/* 档案弹层：字段影响提示 / 自动推算 / 实时判定条 */
+.fimpact{flex-basis:100%;margin-left:220px;font-size:11.4px;color:#4A148C;line-height:1.7;margin-top:3px}
+.fimpact.muted{color:var(--muted)}
+.fchip{display:inline-block;background:#F3E9FB;border:1px solid #D9C2EC;border-radius:11px;
+  padding:1px 8px;margin:0 4px 3px 0;font-size:11px;color:#4A148C}
+.fchip.click{cursor:pointer}
+.fchip.click:hover{background:#4A148C;color:#fff}
+.fchip.used{background:#E8F5E9;border-color:#B8DCBB;color:#1B5E20}
+.fauto{flex-basis:100%;margin-left:220px;font-size:11.4px;color:#1B5E20;line-height:1.6;margin-top:3px}
+.frow.hl{background:#FFFDE7;outline:2px solid #E6C200;outline-offset:3px;border-radius:6px}
+.plive{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:9px 18px;
+  border-top:1px solid var(--line);background:#FAF7FF;font-size:12px}
+.plive .pl{border-radius:11px;padding:2px 9px;border:1px solid var(--line);background:#fff}
+.plive .pl.yes{background:#F4FBF5;border-color:#B8DCBB;color:#1B5E20}
+.plive .pl.near{background:#FFF6E8;border-color:#EBD3A8;color:#8A5A00}
+.plive .pl.unk{background:#FFFCF3;border-color:#E4D6B8;color:#6D5A2A}
+.plive .pl.no{background:#FDF6F6;border-color:#EBC9C9;color:#8A2A2A}
+.plnext{color:#4A148C}
+.plnext.ok{color:#1B5E20}
+/* 窗口倒计时徽标 */
+.wbadge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-left:6px;
+  background:#EDE7F6;color:#4A148C;border:1px solid #D9C2EC;font-weight:700}
+.wbadge.last{background:#FFF3E0;color:#8A5A00;border-color:#EBD3A8}
+.wbadge.over{background:#FDECEC;color:#8A2A2A;border-color:#EBC9C9}
+/* 档案完成度 */
+.pfmeter{display:flex;align-items:center;gap:8px;font-size:11.8px;color:var(--muted)}
+.pfbar{width:120px;height:7px;border-radius:4px;background:#EDE7F6;overflow:hidden}
+.pfbar>i{display:block;height:100%;background:#4A148C}
+.gaprow{display:flex;gap:8px;align-items:flex-start;padding:7px 10px;border:1px solid #E4D6B8;
+  background:#FFFCF3;border-radius:8px;margin-bottom:6px;font-size:12.2px}
+.gaprow .gwhy{color:var(--muted);font-size:11.5px;line-height:1.6;margin-top:2px}
+.eligrow.near{border-color:#EBD3A8;background:#FFFBF4}
 /* 资格结果卡 */
 .eligrow{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);
   border-radius:9px;margin-bottom:8px;background:#fff}
@@ -547,6 +579,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <span id="pfChip" class="pfchip">👤 <b>未设置档案</b> — 资格判定与匹配度都依赖它</span>
   <button class="pfbtn" id="pfEdit">✏️ 编辑我的档案</button>
   <button class="pfbtn ghost" id="pfDemo">📄 载入示例档案</button>
+  <span class="pfmeter" id="pfMeter" title="点开「我能申的」看逐条依据"></span>
   <span class="toggle">🔒 隐藏不符合资格
     <span class="switch" id="autoFilter"></span></span>
   <span style="flex:1"></span>
@@ -569,6 +602,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="mstep" data-st="3">③ 研究方向</span>
   </div>
   <div class="mbody" id="pfForm"></div>
+  <div class="plive" id="pfLive"></div>
   <div class="mfoot">
     <span class="status" id="pfStat" style="margin:0"></span>
     <span style="flex:1"></span>
@@ -1977,7 +2011,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <button class="pfbtn" onclick="openPf(1)">✏️ 填 / 改我的档案</button>
       <button class="pfbtn ghost" onclick="loadExample()">📄 载入示例档案看效果</button>
       <label style="font-size:12.5px;display:flex;align-items:center;gap:5px">
-        <input type="checkbox" id="eligOnlyYes" onchange="checkElig()"> 只看「现在能投」</label>
+        <input type="checkbox" id="eligOnlyYes" onchange="checkElig()"> 只看「现在能投」+「差一步」</label>
     </div>
     <div id="eligResult"></div>
   </div>
@@ -2683,7 +2717,9 @@ function getProfile(){try{return JSON.parse(localStorage.getItem(PKEY)||"{}")}ca
 function setProfile(o){localStorage.setItem(PKEY,JSON.stringify(o));}
 function profileIsSet(){
   const p=getProfile();
-  return !!(p.career_stage||p.citizenship||(p.has_position||[]).length);
+  if(p.career_stage||p.citizenship||(p.has_position||[]).length)return true;
+  /* 年份字段也算「填过了」——否则填了博后起始年份仍被判为未设置档案 */
+  return !!(p.postdoc_start_year||p.phd_year||(p.willing_relocate||[]).length);
 }
 function saveProfile(){ /* 兼容旧调用点：档案由弹层保存，这里只持久化开关 */
   const p=getProfile(); p.auto=document.getElementById("autoFilter").classList.contains("on");
@@ -2696,10 +2732,12 @@ function loadProfile(){
 }
 function paintChip(){
   const c=document.getElementById("pfChip"); if(!c)return;
-  const p=getProfile();
+  const p=getProfileEff();
+  const meter=document.getElementById("pfMeter");
   if(!profileIsSet()){
     c.className="pfchip";
     c.innerHTML="👤 <b>未设置档案</b> — 资格判定与匹配度都依赖它";
+    if(meter)meter.innerHTML="";
     return;
   }
   const lbl=k=>{
@@ -2716,6 +2754,20 @@ function paintChip(){
   c.className="pfchip set";
   c.innerHTML="👤 <b>"+esc(bits.slice(0,4).join(" · ")||"已设置")+"</b>";
   c.title=bits.join(" · ");
+  /* 顶部条不止显示「你是谁」，还显示「所以你现在能投几个」+ 档案完整度 */
+  if(meter){
+    if(!FUNDS.length){meter.innerHTML="";return;}
+    const v=profileVerdictCounts(), comp=profileCompleteness(), gaps=profileGaps();
+    const tip=gaps.length?("还缺："+gaps.slice(0,3).map(g=>g.label).join("、")):"判定字段已填完";
+    meter.innerHTML=
+      `<span class="pl yes" style="border-radius:11px;padding:2px 8px;border:1px solid #B8DCBB;background:#F4FBF5;color:#1B5E20">✅ ${v.yes}</span>`+
+      (v.near?`<span class="pl near" style="border-radius:11px;padding:2px 8px;border:1px solid #EBD3A8;background:#FFF6E8;color:#8A5A00">⚡ ${v.near}</span>`:"")+
+      `<span class="pfbar" title="${esc(tip)}"><i style="width:${comp.pct}%"></i></span>`+
+      `<span title="${esc(tip)}">档案 ${comp.filled}/${comp.total}</span>`;
+    meter.onclick=()=>goPanel("myapps");
+    meter.style.cursor="pointer";
+    meter.title=tip;
+  }
 }
 
 /* ---------- 声明式资格求值：规则写在 data/funds.json，这里只负责执行 ---------- */
@@ -2754,6 +2806,112 @@ function evalFund(f,p){
   return {status,reasons};
 }
 
+/* =========================================================================
+   档案「智能层」—— 三条设计原则，改动前请先读：
+   1) 不硬编码任何基金知识。下面每一个数字（影响面、缺什么、窗口还剩几年）
+      都是从 data/funds.json 的 rules + profile_schema.json 反推出来的，
+      往 funds.json 里加一个基金，这里全部自动跟着变。
+   2) 不替用户回答。留空 → 「信息不足」，绝不给一个假的「能申」。
+   3) 存年份而不是存年数。年数明年就过期了，年份不会 —— 年数每次读取时按
+      当前年份重算（deriveProfile）。
+   ========================================================================= */
+function nowYear(){return new Date().getFullYear();}
+
+/* 年份 → 年数：schema 里带 derived_from 的字段自动推算 */
+function deriveProfile(p){
+  const q=Object.assign({},p||{});
+  ((PSCHEMA&&PSCHEMA.fields)||[]).forEach(f=>{
+    if(!f.derived_from)return;
+    const y=Number(q[f.derived_from]);
+    if(y>1900&&y<=nowYear()+1)q[f.key]=Math.max(0,nowYear()-y);
+  });
+  return q;
+}
+function getProfileEff(){return deriveProfile(getProfile());}
+function isBlank(v){return v===undefined||v===null||v===""||(Array.isArray(v)&&!v.length);}
+
+/* 字段 → 用到它的基金列表（从 rules 反推） */
+function fieldImpact(){
+  const m={};
+  (FUNDS||[]).forEach(f=>(f.rules||[]).forEach(r=>{(m[r.field]=m[r.field]||[]).push(f);}));
+  return m;
+}
+/* 还缺哪些字段，按「能解锁多少个判定」排序 */
+function profileGaps(){
+  const p=getProfileEff(), im=fieldImpact(), out=[];
+  Object.keys(im).forEach(k=>{
+    if(!isBlank(p[k]))return;
+    out.push({key:k,label:fieldLabel(k),funds:im[k].slice(),n:im[k].length});
+  });
+  out.sort((a,b)=>b.n-a.n);
+  return out;
+}
+function profileCompleteness(){
+  const p=getProfileEff(), im=fieldImpact(), keys=Object.keys(im);
+  const filled=keys.filter(k=>!isBlank(p[k])).length;
+  return {filled:filled,total:keys.length,pct:keys.length?Math.round(filled*100/keys.length):0};
+}
+
+/* 「差一步」：唯一挡住你的是可以改变的事（愿不愿意去、有没有落地单位），
+   而不是国籍/阶段这类当下改不了的硬门槛。分开显示，因为对策完全不同。 */
+const SOFT_FIELDS=["willing_relocate","has_position","institution"];
+function evalFund2(f,p){
+  const r=evalFund(f,p);
+  r.soft=[];
+  if(r.status==="no"){
+    const rules=f.rules||[];
+    const bad=[];
+    rules.forEach((x,i)=>{if(r.reasons[i]&&r.reasons[i].ok===false)bad.push(x);});
+    if(bad.length&&bad.every(x=>SOFT_FIELDS.indexOf(x.field)>=0)){r.status="near";r.soft=bad;}
+  }
+  r.window=windowLeft(f,p);
+  return r;
+}
+/* 年限窗口倒计时：只对「数值 ≤ 上限」型规则成立，取最紧的那一条 */
+function windowLeft(f,p){
+  let best=null;
+  (f.rules||[]).forEach(r=>{
+    if(r.op!=="lte")return;
+    const sch=((PSCHEMA&&PSCHEMA.fields)||[]).find(x=>x.key===r.field);
+    if(!sch||sch.type!=="number")return;
+    const v=Number(p[r.field]);
+    if(!isFinite(v)||isBlank(p[r.field]))return;
+    const left=Number(r.value)-v;
+    if(best===null||left<best.left)best={left:left,field:r.field,limit:Number(r.value),cur:v,label:fieldLabel(r.field)};
+  });
+  return best;
+}
+function windowBadge(w){
+  if(!w)return "";
+  if(w.left<0) return '<span class="wbadge over">⏳ 已超窗 '+(-w.left)+' 年</span>';
+  if(w.left===0)return '<span class="wbadge last">⏳ 今年是最后一个窗口年</span>';
+  if(w.left<=1) return '<span class="wbadge last">⏳ 窗口只剩 '+w.left+' 年（约到 '+(nowYear()+w.left)+' 年）</span>';
+  return '<span class="wbadge">⏳ 窗口还剩 '+w.left+' 年（约到 '+(nowYear()+w.left)+' 年）</span>';
+}
+
+/* 打开档案弹层并定位到某个字段所在的那一步，顺便高亮它 */
+function openPfField(key){
+  const f=((PSCHEMA&&PSCHEMA.fields)||[]).find(x=>x.key===key);
+  const grp=f?(f.group||"basic"):"basic";
+  openPf(grp==="basic"?1:2);
+  setTimeout(function(){
+    const el=document.getElementById("pff_"+key);
+    if(!el)return;
+    const row=el.closest(".frow")||el;
+    row.classList.add("hl");
+    row.scrollIntoView({block:"center"});
+    if(el.focus)try{el.focus()}catch(e){}
+    setTimeout(()=>row.classList.remove("hl"),2200);
+  },60);
+}
+
+/* 一句话总结当前档案能得到什么结论 —— 顶部条和弹层都用它 */
+function profileVerdictCounts(){
+  const p=getProfileEff(), c={yes:0,near:0,unknown:0,no:0};
+  (FUNDS||[]).forEach(f=>{c[evalFund2(f,p).status]++;});
+  return c;
+}
+
 /* ---------- 档案表单（三步引导） ---------- */
 let PFSTEP=1, PFDRAFT={};
 function fieldHTML(f,val){
@@ -2763,17 +2921,62 @@ function fieldHTML(f,val){
   else if(f.type==="number")
     ctl=`<input type="number" id="${id}" value="${val===undefined||val===null?"":esc(String(val))}" min="${f.min!=null?f.min:0}" max="${f.max!=null?f.max:999}" placeholder="留空 = 不填">`;
   else if(f.type==="select"){
+    /* 已存的值若不在选项表里（例如换了词表、或从别处导入的档案），必须原样保留成一个
+       可见的选项。之前直接丢掉 → 下拉显示「未选择」，用户一按保存就把答案抹了，
+       属于静默丢数据；这里显式标注「已存值」，让他自己决定改不改。 */
+    const opts=(f.options||[]);
+    const known=opts.some(o=>o.v===val);
     ctl=`<select id="${id}"><option value="">— 未选择 —</option>`+
-        (f.options||[]).map(o=>`<option value="${esc(o.v)}"${o.v===val?" selected":""}>${esc(o.zh||o.v)}</option>`).join("")+
+        (!known&&val!==undefined&&val!==null&&val!==""
+          ? `<option value="${esc(String(val))}" selected>${esc(String(val))}（已存值，不在当前选项表中）</option>`:"")+
+        opts.map(o=>`<option value="${esc(o.v)}"${o.v===val?" selected":""}>${esc(o.zh||o.v)}</option>`).join("")+
         `</select>`;
   } else if(f.type==="multi"){
     const cur=Array.isArray(val)?val:[];
+    const opts=(f.options||[]);
+    const extra=cur.filter(v=>!opts.some(o=>o.v===v));   /* 同上：不在词表里的已存值不丢 */
     ctl=`<div class="fmulti" id="${id}">`+
-        (f.options||[]).map(o=>`<span data-v="${esc(o.v)}" class="${cur.indexOf(o.v)>=0?"on":""}">${esc(o.zh||o.v)}</span>`).join("")+
+        opts.map(o=>`<span data-v="${esc(o.v)}" class="${cur.indexOf(o.v)>=0?"on":""}">${esc(o.zh||o.v)}</span>`).join("")+
+        extra.map(v=>`<span data-v="${esc(String(v))}" class="on" title="已存值，不在当前选项表中">${esc(String(v))}*</span>`).join("")+
         `</div>`;
   }
-  return `<div class="frow"><label for="${id}">${esc(f.label_zh||f.key)}</label>${ctl}`+
-         (f.help_zh?`<div class="fhelp">${f.help_zh}</div>`:"")+`</div>`;
+  /* 这个字段会影响哪些基金的判定 —— 从 funds.json 的 rules 反推，不是写死的 */
+  const im=fieldImpact()[f.key]||[];
+  const impact = im.length
+    ? `<div class="fimpact">🎯 影响 <b>${im.length}</b> 个资助的判定：`+
+      im.slice(0,6).map(x=>`<span class="fchip">${esc((x.flag||"")+" "+(x.name||"").split(" (")[0])}</span>`).join("")+
+      (im.length>6?` 等`:"")+`</div>`
+    : `<div class="fimpact muted">ℹ️ 不参与资格判定，只用于显示。</div>`;
+  const auto = f.derived_from
+    ? `<div class="fauto" id="fauto_${f.key}"></div>` : "";
+  return `<div class="frow" data-fkey="${esc(f.key)}"><label for="${id}">${esc(f.label_zh||f.key)}</label>${ctl}${auto}`+
+         (f.help_zh?`<div class="fhelp">${f.help_zh}</div>`:"")+impact+`</div>`;
+}
+/* 年份 → 年数：在表单里实时联动，让用户当场看到算出来的结果 */
+function wireDerived(box){
+  ((PSCHEMA&&PSCHEMA.fields)||[]).filter(f=>f.derived_from).forEach(f=>{
+    const src=box.querySelector("#pff_"+f.derived_from), dst=box.querySelector("#pff_"+f.key);
+    const note=box.querySelector("#fauto_"+f.key);
+    if(!src||!dst)return;
+    const sync=function(){
+      const y=Number(src.value);
+      if(y>1900&&y<=nowYear()+1){
+        const n=Math.max(0,nowYear()-y);
+        dst.value=n;
+        if(note)note.innerHTML="🔄 按 "+y+" 年自动算出 <b>"+n+"</b> 年（"+nowYear()+" 年时）。明年再打开会自动 +1，不用回来改。";
+      }else if(note)note.textContent="";
+    };
+    src.oninput=sync;
+    /* 反向：如果用户直接手改「年数」，就清掉上面的年份 —— 否则 deriveProfile
+       会在下次读取时用年份把他手填的数字盖掉，属于静默丢数据。 */
+    dst.oninput=function(){
+      if(!src.value)return;
+      src.value="";
+      PFDRAFT[f.derived_from]=undefined;
+      if(note)note.innerHTML="✏️ 你手填了年数，上面的年份已清空（避免两个数字互相盖）。想要自动跟年份走，重新填年份即可。";
+    };
+    if(src.value)sync();
+  });
 }
 function renderPfForm(){
   const box=document.getElementById("pfForm");
@@ -2786,18 +2989,66 @@ function renderPfForm(){
     const grp=PFSTEP===1?"basic":"eligibility";
     box.innerHTML=PSCHEMA.fields.filter(f=>(f.group||"basic")===grp)
                     .map(f=>fieldHTML(f,PFDRAFT[f.key])).join("");
-    box.querySelectorAll(".fmulti span").forEach(sp=>sp.onclick=()=>sp.classList.toggle("on"));
+    box.querySelectorAll(".fmulti span").forEach(sp=>sp.onclick=()=>{sp.classList.toggle("on");pfLive();});
+    wireDerived(box);
+    /* 任何一处改动都立刻重算判定 —— 用户当场看到「填这个解锁了什么」 */
+    box.querySelectorAll("input,select").forEach(el=>{
+      el.addEventListener("input",pfLive); el.addEventListener("change",pfLive);
+    });
   } else {
     const kws=(PFDRAFT.keywords||[]).join("\n");
     box.innerHTML=
       `<div class="mnote" style="margin:0 0 12px">这一步决定「📚 文献追踪」和「🎯 我能申的」怎么给你打分。
        每行一个关键词或短语，越具体越准。<b>只影响本浏览器里的高亮与排序</b>；
        要让服务器端每日抓取也换成你的方向，需 fork 仓库并改 <code>data/interests.json</code>（见「📖 使用说明」）。</div>
+       <div class="fimpact" style="margin:0 0 8px">💡 从当前站点词库里挑（点一下加到下面）：<span id="kwSug"></span></div>
        <textarea class="kwbox" id="pff_keywords" placeholder="例如：\nmicroRNA decay\nAMPK signaling\nintestinal fibrosis">${esc(kws)}</textarea>`;
+    renderKwSuggest();
   }
   document.getElementById("pfPrev").disabled=(PFSTEP===1);
   document.getElementById("pfNext").style.display=(PFSTEP===3?"none":"");
   document.getElementById("pfSave").style.display=(PFSTEP===3?"":"none");
+  pfLive();
+}
+/* 关键词建议：直接从 data/interests.json 的核心词表里取，不另造一套词 */
+function renderKwSuggest(){
+  const box=document.getElementById("kwSug"); if(!box)return;
+  const seen={}, out=[];
+  (INTERESTS||[]).forEach(i=>{
+    (i.core||[]).slice(0,4).forEach(w=>{
+      const k=String(w).toLowerCase();
+      if(seen[k])return; seen[k]=1; out.push(w);
+    });
+  });
+  if(!out.length){box.innerHTML='<span class="muted">（词库未载入）</span>';return;}
+  box.innerHTML=out.slice(0,18).map(w=>`<span class="fchip click" data-kw="${esc(w)}">${esc(w)}</span>`).join("");
+  box.querySelectorAll(".fchip.click").forEach(sp=>sp.onclick=()=>{
+    const t=document.getElementById("pff_keywords"); if(!t)return;
+    const cur=t.value.split("\n").map(x=>x.trim()).filter(Boolean);
+    const w=sp.dataset.kw;
+    if(cur.map(x=>x.toLowerCase()).indexOf(w.toLowerCase())<0){cur.push(w);t.value=cur.join("\n");}
+    sp.classList.add("used");
+  });
+}
+/* 弹层底部的实时判定条：填一个字段，立刻显示解锁了几个「能投」、还差什么 */
+function pfLive(){
+  const bar=document.getElementById("pfLive"); if(!bar)return;
+  collectStep();                                   /* 先把当前这一步的输入吸进草稿 */
+  const p=deriveProfile(PFDRAFT);
+  if(!FUNDS.length){bar.innerHTML='<span class="muted">资助目录未载入，无法实时判定。</span>';return;}
+  const c={yes:0,near:0,unknown:0,no:0};
+  (FUNDS||[]).forEach(f=>{c[evalFund2(f,p).status]++;});
+  const im=fieldImpact(), gaps=[];
+  Object.keys(im).forEach(k=>{ if(isBlank(p[k]))gaps.push({key:k,label:fieldLabel(k),n:im[k].length}); });
+  gaps.sort((a,b)=>b.n-a.n);
+  const next = gaps.length
+    ? `<span class="plnext">下一个最值钱的字段：<b>${esc(gaps[0].label)}</b>（能解锁 ${gaps[0].n} 个判定）</span>`
+    : `<span class="plnext ok">✅ 判定所需字段已全部填完</span>`;
+  bar.innerHTML=
+    `<span class="pl yes">✅ 能投 ${c.yes}</span>`+
+    `<span class="pl near">⚡ 差一步 ${c.near}</span>`+
+    `<span class="pl unk">❓ 信息不足 ${c.unknown}</span>`+
+    `<span class="pl no">⛔ 不符 ${c.no}</span>`+next;
 }
 function collectStep(){
   if(PFSTEP===3){
@@ -2816,7 +3067,7 @@ function collectStep(){
   });
 }
 function openPf(step){
-  PFDRAFT=Object.assign({},getProfile());
+  PFDRAFT=Object.assign({},getProfileEff());
   PFSTEP=step||1; renderPfForm();
   document.getElementById("pfModal").classList.add("open");
 }
@@ -2841,7 +3092,7 @@ function importAll(txt){
    所以这里只用「数据里真有的字段 + 用户档案里真填了的项」做粗判，并永远给出 NOFO 链接。
    用户没填的项一律返回 unknown，不用默认值代答。 */
 function eligLive(g){
-  const p=getProfile();
+  const p=getProfileEff();
   if(!g.career){
     return {cls:"na",txt:"机构级 · 见 NOFO",why:"此类为机构/研究项目类，个人资格以 NOFO 为准"};
   }
@@ -5144,7 +5395,7 @@ document.getElementById("myRst").onclick=()=>{
 function checkElig(){
   const box=document.getElementById("eligResult"); if(!box)return;
   if(!FUNDS.length){box.innerHTML='<p style="color:var(--muted);font-size:12.5px">资助目录 data/funds.json 未能载入。</p>';return;}
-  const p=getProfile();
+  const p=getProfileEff();
   const noProf=!profileIsSet();
   const hint = noProf ? '<div class="eligrow unk"><span class="eligicon">👤</span><div class="eligmain">'+
       '<div class="eligname">还没有档案 — 下面 '+FUNDS.length+' 个资助全部显示「信息不足」</div>'+
@@ -5152,26 +5403,68 @@ function checkElig(){
       '本站不猜你没填的信息：留空的字段一律判为信息不足，不会给你一个假的「能申」。</div>'+
       '</div></div>' : "";
   const onlyYes=(document.getElementById("eligOnlyYes")||{}).checked;
-  const ICON={yes:"✅",no:"⛔",unknown:"❓"};
-  const HEAD={yes:"现在能投",no:"暂不满足",unknown:"信息不足"};
-  const rows=FUNDS.map(f=>{
-    const r=evalFund(f,p);
-    if(onlyYes&&r.status!=="yes")return "";
+  const ICON={yes:"✅",no:"⛔",unknown:"❓",near:"⚡"};
+  const HEAD={yes:"现在能投",no:"暂不满足",unknown:"信息不足",near:"差一步就能投"};
+  /* 排序：能投 → 差一步 → 信息不足 → 不符；同档内窗口紧的排前面 */
+  const ORD={yes:0,near:1,unknown:2,no:3};
+  const evald=FUNDS.map(f=>({f:f,r:evalFund2(f,p)}));
+  evald.sort((a,b)=>{
+    const d=ORD[a.r.status]-ORD[b.r.status]; if(d)return d;
+    const aw=a.r.window?a.r.window.left:99, bw=b.r.window?b.r.window.left:99;
+    return aw-bw;
+  });
+  const rows=evald.map(o=>{
+    const f=o.f, r=o.r;
+    if(onlyYes&&r.status!=="yes"&&r.status!=="near")return "";
     const why=r.reasons.map(x=>
       `<div>${x.ok===true?"✔":x.ok===false?"✘":"·"} ${esc(x.text)}</div>`).join("");
     const note=f.note_zh?`<div style="margin-top:4px">${f.note_zh}</div>`:"";
     const wbtn=f.write_key?`<button class="pfbtn ghost" style="font-size:11px;padding:3px 9px;margin-left:8px" onclick="goWrite('${f.write_key}')">✍️ 看怎么写</button>`:"";
+    /* 「差一步」：明确告诉他差的是什么、以及那件事是他能改的 */
+    let act="";
+    if(r.status==="near"&&r.soft.length){
+      const names=r.soft.map(x=>fieldLabel(x.field));
+      act=`<div class="gaprow" style="margin-top:6px"><span>⚡</span><div><b>只差：${esc(names.join(" + "))}</b>`+
+          `<div class="gwhy">这不是硬门槛（不像国籍/年龄那样当下改不了）——只要在档案里补上或改掉这一项，这个资助就变成「能投」。</div>`+
+          r.soft.map(x=>`<button class="pfbtn ghost" style="font-size:11px;padding:3px 9px;margin-top:5px;margin-right:5px" onclick="openPfField('${x.field}')">✏️ 去填「${esc(fieldLabel(x.field))}」</button>`).join("")+
+          `</div></div>`;
+    }
+    /* 「信息不足」：列出到底缺哪个字段，每个都能一键跳过去填 */
+    if(r.status==="unknown"){
+      const miss=(f.rules||[]).filter(x=>isBlank(p[x.field]));
+      if(miss.length)act=`<div style="margin-top:5px">`+
+        miss.map(x=>`<button class="pfbtn ghost" style="font-size:11px;padding:3px 9px;margin-right:5px" onclick="openPfField('${x.field}')">✏️ 补填「${esc(fieldLabel(x.field))}」</button>`).join("")+
+        `</div>`;
+    }
     return `<div class="eligrow ${r.status==="unknown"?"unk":r.status}">
       <span class="eligicon">${ICON[r.status]}</span>
       <div class="eligmain">
         <div class="eligname">${esc(f.flag||"")} ${esc(f.name)}
           <span style="font-weight:400;color:var(--muted);font-size:11.5px"> · ${esc(f.agency||"")} · ${esc(f.region||"")}</span>
-          ${wbtn}</div>
+          ${windowBadge(r.window)}${wbtn}</div>
         <div class="eligwhy"><b>${HEAD[r.status]}</b> — ${esc(f.summary_zh||"")}${why}${note}
           ${f.url?` <a href="${esc(f.url)}" target="_blank" rel="noopener">官方页面 ↗</a>`:""}</div>
+        ${act}
       </div></div>`;
   }).filter(Boolean).join("");
-  box.innerHTML = hint + (rows || '<p style="color:var(--muted);font-size:12.5px">按当前档案，没有「现在能投」的项目 —— 取消勾选可看全部及缺什么。</p>');
+  /* 顶部小结 + 「先补哪个字段最值钱」 */
+  let summary="";
+  if(!noProf){
+    const v=profileVerdictCounts(), gaps=profileGaps(), comp=profileCompleteness();
+    const glist=gaps.slice(0,3).map(g=>
+      `<div class="gaprow"><span>❓</span><div><b>${esc(g.label)}</b> — 填了它能解锁 <b>${g.n}</b> 个资助的判定`+
+      `<div class="gwhy">${g.funds.slice(0,4).map(x=>esc((x.flag||"")+" "+(x.name||"").split(" (")[0])).join("、")}${g.funds.length>4?" 等":""}</div>`+
+      `<button class="pfbtn ghost" style="font-size:11px;padding:3px 9px;margin-top:5px" onclick="openPfField('${g.key}')">✏️ 现在补填</button>`+
+      `</div></div>`).join("");
+    summary=`<div class="hcard" style="margin:0 0 10px;border-color:#D9C2EC;background:#FBF8FF">
+      <div style="font-size:13px;font-weight:700;color:#4A148C">📊 按你现在的档案：`+
+      `✅ 能投 ${v.yes} 个 · ⚡ 差一步 ${v.near} 个 · ❓ 信息不足 ${v.unknown} 个 · ⛔ 不符 ${v.no} 个`+
+      `<span class="pfmeter" style="margin-left:10px;display:inline-flex"><span class="pfbar"><i style="width:${comp.pct}%"></i></span>判定字段 ${comp.filled}/${comp.total}</span></div>`+
+      (glist?`<div style="font-size:12px;color:#444;margin:7px 0 5px">下面这几个字段回报最高（按能解锁的判定数排序）：</div>${glist}`:
+              `<div style="font-size:12px;color:#1B5E20;margin-top:6px">✅ 判定所需字段已全部填完 —— 上面每一条结论都有完整依据。</div>`)+
+      `</div>`;
+  }
+  box.innerHTML = summary + hint + (rows || '<p style="color:var(--muted);font-size:12.5px">按当前档案，没有「现在能投」的项目 —— 取消勾选可看全部及缺什么。</p>');
 }
 
 

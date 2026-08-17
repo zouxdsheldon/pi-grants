@@ -23,9 +23,14 @@
    "group": "basic",
    "options": [
     {
+     "v": "cn",
+     "zh": "中国大陆",
+     "en": "China (mainland)"
+    },
+    {
      "v": "other",
-     "zh": "非美籍、无绿卡",
-     "en": "Non-US, no green card"
+     "zh": "其他 / 非美籍无绿卡",
+     "en": "Other (non-US, no green card)"
     },
     {
      "v": "us_pr",
@@ -79,6 +84,17 @@
    ]
   },
   {
+   "key": "postdoc_start_year",
+   "type": "number",
+   "label_zh": "开始做博后的年份",
+   "label_en": "Year postdoc started",
+   "group": "eligibility",
+   "min": 1980,
+   "max": 2027,
+   "help_zh": "填年份比填「年数」好：年份不会过期，下面的「已做博后年数」会按当前年份自动算，明年打开还是对的。",
+   "derives": "postdoc_years"
+  },
+  {
    "key": "postdoc_years",
    "type": "number",
    "label_zh": "已做博后年数",
@@ -86,7 +102,19 @@
    "group": "eligibility",
    "min": 0,
    "max": 15,
-   "help_zh": "多数转轨奖（K99 等）按此卡窗口。未开始填 0。"
+   "help_zh": "多数转轨奖（K99 等）按此卡窗口。填了上面的年份这里会自动算；也可以直接改。",
+   "derived_from": "postdoc_start_year"
+  },
+  {
+   "key": "phd_year",
+   "type": "number",
+   "label_zh": "博士毕业年份",
+   "label_en": "PhD award year",
+   "group": "eligibility",
+   "min": 1970,
+   "max": 2027,
+   "help_zh": "ERC / MSCA / HFSP 的窗口按博士毕业起算。填了年份，下面的「博士毕业至今年数」自动算。",
+   "derives": "years_since_phd"
   },
   {
    "key": "years_since_phd",
@@ -96,7 +124,8 @@
    "group": "eligibility",
    "min": 0,
    "max": 25,
-   "help_zh": "ERC / MSCA / HFSP 按此卡窗口，而不是按年龄。"
+   "help_zh": "ERC / MSCA / HFSP 按此卡窗口，而不是按年龄。填了上面的年份这里会自动算；也可以直接改。",
+   "derived_from": "phd_year"
   },
   {
    "key": "age",
