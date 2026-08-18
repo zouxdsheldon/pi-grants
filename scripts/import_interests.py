@@ -115,9 +115,20 @@ def validate(doc, src="(input)"):
     return errs
 
 
-def normalize(doc):
-    """补全缺省字段、生成 id 与检索式。不改动手调过的 q_*。"""
+def normalize(doc, prior=None):
+    """补全缺省字段、生成 id 与检索式。不改动手调过的 q_*。
+
+    prior = 现有的 data/interests.json。网页面板只导出它认识的那几个键
+    (interests/bands/exclude/owner),所以**其余顶层键必须从旧文件继承** ——
+    否则 score_weights / sources 这类抓取脚本要读的配置会被一次导入抹掉,
+    而且是静默的:下一轮抓取直接少了数据源。这里做通用继承而不是逐个键
+    白名单,免得以后加了新配置又忘了加进来。
+    """
     out = dict(doc)
+    if prior:
+        for k in prior:
+            if k not in out and k != "interests":
+                out[k] = prior[k]
     out.setdefault("score_weights", DEFAULT_WEIGHTS)
     out.setdefault("bands", DEFAULT_BANDS)
     out.setdefault("sources", DEFAULT_SOURCES)
@@ -192,13 +203,15 @@ def main():
             print("   -", e)
         return 1
 
-    new = normalize(doc)
+    old = None
     if os.path.exists(TARGET):
         shutil.copy2(TARGET, BACKUP)
         old = json.load(open(TARGET, encoding="utf-8"))
         old_n = len(old.get("interests", []))
     else:
         old_n = 0
+    new = normalize(doc, prior=old)
+    carried = sorted(k for k in (old or {}) if k not in doc and k != "interests")
     json.dump(new, open(TARGET, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     print(f"✓ 已换上新的方向表:{old_n} 个方向 → {len(new['interests'])} 个")
@@ -206,6 +219,9 @@ def main():
         print(f"   · {it['id']:<14} {it['name']}  "
               f"(核心 {len(it['core'])} 词 / 外围 {len(it['peri'])} 词,权重 {it['w']})")
     print(f"   原文件已备份到 {os.path.relpath(BACKUP, ROOT)}")
+    if carried:
+        # 说出来而不是默默继承:哪些配置是从旧文件带过来的,用户有权知道
+        print(f"   以下配置沿用旧文件(面板不导出这些):{', '.join(carried)}")
     print("   注意:下一轮抓取会按新方向**重建整个语料库**,"
           "不再匹配的旧文献会从列表里消失(你的 ⭐/已读标记按 DOI/PMID 存在浏览器里,不会丢)。")
 

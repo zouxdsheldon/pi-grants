@@ -122,10 +122,51 @@ def run_validate_parity():
     return 1 if fails else 0
 
 
+def run_carry_forward():
+    """面板只导出 interests/bands/exclude/owner。其余顶层配置
+    (score_weights / sources 等,抓取脚本真的会读)必须从旧文件继承。
+    丢了不会报错 —— 只会让第二天的抓取静默少几个数据源,最难查的那种 bug。"""
+    from import_interests import normalize
+
+    prior = {"interests": [{"name": "旧", "core": ["x"], "w": 1.0}],
+             "score_weights": {"core_hit": 0.5}, "sources": ["pubmed", "epmc", "crossref"],
+             "note": "一些说明", "owner": "someone"}
+    panel_doc = {"interests": [{"name": "新", "core": ["ampk"], "w": 1.0, "want_arxiv": False}],
+                 "bands": {"high": 0.55, "medium": 0.28}, "exclude": []}
+    out = normalize(panel_doc, prior=prior)
+    fails = 0
+    for k in ("score_weights", "sources", "note"):
+        if k not in out:
+            print("  FAIL carry-forward — 顶层配置 %r 被导入抹掉了" % k)
+            fails += 1
+    if out.get("sources") != prior["sources"]:
+        print("  FAIL carry-forward — sources 内容变了: %r" % (out.get("sources"),))
+        fails += 1
+    # 方向本身必须是新的,不能把旧方向也继承过来
+    if [i["name"] for i in out["interests"]] != ["新"]:
+        print("  FAIL carry-forward — 方向表应被整份替换,实际: %r"
+              % [i["name"] for i in out["interests"]])
+        fails += 1
+    # 内部标记不得写进数据文件
+    if "_carried" in out:
+        print("  FAIL carry-forward — 内部标记 _carried 泄漏进数据文件")
+        fails += 1
+    # 面板显式给的值优先于旧文件
+    out2 = normalize({"interests": panel_doc["interests"], "bands": {"high": 0.9, "medium": 0.1}},
+                     prior=dict(prior, bands={"high": 0.55, "medium": 0.28}))
+    if out2["bands"]["high"] != 0.9:
+        print("  FAIL carry-forward — 面板给的 bands 应覆盖旧值,实际 %r" % (out2["bands"],))
+        fails += 1
+    if not fails:
+        print("  ok   carry-forward — 抓取用的配置沿用旧文件,方向表整份替换,面板值优先")
+    return 1 if fails else 0
+
+
 def main():
     print("== 我的研究方向:检索式一致性 + 校验口径 ==")
     node = shutil.which("node")
     rc = run_validate_parity()
+    rc |= run_carry_forward()
     if not node:
         print("  SKIP parity + 浏览器行为 — 环境里没有 node(不是通过,是跳过)")
         return rc
