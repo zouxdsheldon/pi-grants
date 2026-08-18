@@ -27,7 +27,7 @@
 | 改什么 | 文件 | 作用 |
 |---|---|---|
 | 站名 / 副标题 / 仓库链接 | `data/config.json` | 页头页脚显示。`site_url`、`repo_url` 留空时,脚本与页面会从 GitHub Pages 地址自动推导 |
-| **研究方向与关键词** | `data/interests.json` | 最重要的一个。决定文献抓取用什么检索式、相关性怎么算、资助怎么排序。字段写法见 `data/interests.template.json` |
+| **研究方向与关键词** | 网页「🎯 我的研究方向」面板 | 最重要的一个。决定文献抓取用什么检索式、相关性怎么算、资助怎么排序。**不用手写 JSON** —— 面板填表 → 下载 → 拖进 `data/interests_inbox/`。想直接改文件也行:`data/interests.json`,字段见 `data/interests.template.json` |
 | 资助清单与资格规则 | `data/funds.json` | 「资格自查」那一栏。增删基金、改判定规则都在这里,不用碰代码 |
 | 档案表单问哪些字段 | `data/profile_schema.json` | 引导弹层的字段定义 |
 | 示例档案 | `data/profile.example.json` | 「载入示例档案」按钮读它 |
@@ -334,7 +334,27 @@ macOS 用系统自带的 `jsc`;Linux/CI 上自动回退到 `node`。
 
 ### 调整方向和词库
 
-编辑 `data/interests.json`:每个方向有 `core`(高权重词)、`peri`(低权重词)、`exclude`(降权词),以及各源的检索式 `q_pubmed` / `q_epmc` / `q_arxiv` / `q_crossref`。改完推上去,第二天自动生效;想立刻生效就在 Actions 里手动触发 `workflow_dispatch`。
+**推荐路径(不写代码):** 网页 →「🎯 我的研究方向」→ 填方向名 + 关键词(打字后回车成词,× 删词)
+→ 点「🔍 联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → 「⬇️ 下载方向表」
+→ 「📂 打开收件箱」把文件拖进 `data/interests_inbox/` → Commit。第二天自动生效;
+想立刻生效就在 Actions 里手动触发 `workflow_dispatch`。
+
+检索式(`q_pubmed` / `q_epmc` / `q_arxiv` / `q_crossref`)**由脚本从核心词自动生成**,你不用写
+`[tiab]` 那套语法。生成规则在 `scripts/import_interests.py` 的 `build_queries()`,
+网页端 `buildQueries()` 是同一规则的镜像,`tests/run_interests_tests.py` 有字符级一致性断言 ——
+所以面板给你看的预览,就是明早真正跑的那一份。
+
+**直接改文件也行:** 编辑 `data/interests.json`,每个方向有 `core`(高权重词)、`peri`(低权重词),
+外加全局 `exclude`(降权词)和 `bands`(高/中相关阈值)。
+
+**三点必须知道的后果:**
+
+1. **换方向会重建整个语料库。**抓取脚本每轮从零重抓、重打分,所以不再匹配新方向的旧文献
+   **会从列表里消失**。这是换库的应有结果,不是 bug。
+2. **⭐ 收藏和已读标记不会丢。**它们按 DOI/PMID 存在你自己的浏览器 localStorage 里,
+   与方向词库无关;那篇文献以后又被抓回来时,标记还在。
+3. **校验不过就整份拒绝。**`import_interests.py` 校验失败时非零退出且**不改动**
+   `data/interests.json`,坏文件留在收件箱里等你修 —— 不会出现"半份生效"的状态。
 
 ---
 

@@ -26,6 +26,13 @@ jobs:
         run: python scripts/import_pivot.py data/pivot_inbox --consume
       - name: Rebuild calendar feed (.ics)
         run: python scripts/build_ics.py
+      - name: Import research-direction drops (data/interests_inbox/*.json)
+        # 网页「我的研究方向」面板导出的 interests.json 放进 data/interests_inbox/,
+        # 这一步把它并入 data/interests.json 并删掉已消费的文件。空目录时什么也不做。
+        # 必须排在文献抓取**之前** —— 否则新方向要等到第二天才生效。
+        # 校验不通过时脚本非零退出、不改任何文件;这里不加 `|| true`,
+        # 因为静默跳过会让用户以为换库成功了,而实际上还在按旧方向抓。
+        run: python scripts/import_interests.py data/interests_inbox --consume
       - name: Fetch literature (6 sources) + accumulate citation snapshot
         env:
           PAPER_WINDOW_DAYS: '400'
@@ -53,6 +60,7 @@ jobs:
           # 会让期刊面板长期停留在旧计数(2026-08 发现的真实 bug)。
           git add data/grants.json data/grant_deadlines.ics data/jobs.json \
                   data/curated.json data/pivot_inbox \
+                  data/interests.json data/interests_inbox \
                   data/papers.json data/citation_snapshots.json \
                   data/citenet.json data/journals.json \
                   data/fetch_log_papers.json data/digest.json \

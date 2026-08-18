@@ -1,15 +1,17 @@
 {
- "_doc": "空白词库模板。把本文件改好后另存为 data/interests.json 覆盖示例词库，即可换成你自己的研究方向。",
+ "_doc": "不用手写这个文件。打开网页 →「🎯 我的研究方向」面板,填方向名和关键词,点「下载方向表」,再把下载到的 interests.json 拖进 GitHub 的 data/interests_inbox/ 目录,明早的定时任务会自动换库。本文件只是字段参考,给愿意直接改文件的人看。",
  "_how": {
   "w": "方向权重，1.0 为基准；调低表示该方向的命中不那么重要。",
   "core": "核心词：命中一次得满分权重（score_weights.core_hit）。写小写，匹配时不区分大小写。",
   "peri": "外围词：命中得部分分（score_weights.peri_hit）。用于捕捉相邻但不核心的工作。",
-  "q_pubmed": "PubMed E-utilities 语法，字段标签如 [tiab]（题目+摘要）。例：(GENE[tiab] OR \"phrase here\"[tiab])",
-  "q_epmc": "Europe PMC 语法，字段前缀如 TITLE_ABS:。例：(TITLE_ABS:\"GENE\" OR TITLE_ABS:\"phrase\")",
-  "q_arxiv": "arXiv 语法，字段前缀 all: / ti: / abs:。生物类命中通常很少，可留空字符串。",
-  "q_crossref": "Crossref query.bibliographic 是宽松相关性匹配，写一句简短精确的自然语言短语最有效，不要写布尔式。",
+  "q_pubmed": "【不用自己写】由面板从核心词自动生成(scripts/import_interests.py 的 build_queries)。PubMed E-utilities 语法，字段标签如 [tiab]（题目+摘要）。例：(GENE[tiab] OR \"phrase here\"[tiab])",
+  "q_epmc": "【不用自己写】由面板从核心词自动生成(scripts/import_interests.py 的 build_queries)。Europe PMC 语法，字段前缀如 TITLE_ABS:。例：(TITLE_ABS:\"GENE\" OR TITLE_ABS:\"phrase\")",
+  "q_arxiv": "【不用自己写】由面板从核心词自动生成(scripts/import_interests.py 的 build_queries)。arXiv 语法，字段前缀 all: / ti: / abs:。生物类命中通常很少，可留空字符串。",
+  "q_crossref": "【不用自己写】由面板从核心词自动生成(scripts/import_interests.py 的 build_queries)。Crossref query.bibliographic 是宽松相关性匹配，写一句简短精确的自然语言短语最有效，不要写布尔式。",
   "exclude": "全局排除词：命中则扣分（score_weights.exclude_penalty），用来挡开同名但不相关的领域。",
-  "bands": "分档阈值：分数 ≥ high 记为高相关，≥ medium 记为中相关，其余为低。"
+  "bands": "分档阈值：分数 ≥ high 记为高相关，≥ medium 记为中相关，其余为低。",
+  "_面板路径": "网页 →「🎯 我的研究方向」→ 填表 → 下载 → 拖进 data/interests_inbox/ → Commit。",
+  "_换方向的后果": "抓取脚本每轮从零重抓重打分,所以换方向会**重建整个语料库**,不再匹配的旧文献会从列表消失;你的 ⭐/已读标记按 DOI/PMID 存在浏览器本地,不会丢。"
  },
  "updated": "",
  "owner": "",

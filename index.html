@@ -300,6 +300,35 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 /* 面板原来是「两屏说明 + 18 个并排控件 + 852 张卡」。工作台把它变成一个队列:
    进来先看「该读什么」,而不是先读一段介绍。三张卡都是可点的筛选预设。 */
 .wbench{display:flex;gap:9px;flex-wrap:wrap;margin:2px 0 11px}
+/* ==== 我的研究方向:给不写代码的人用的方向编辑器 ====================
+   目标是「填表 + 三个按钮」,不是「教会他 JSON」。所以:
+   - 每个方向一张卡,词用 chip 增删,没有裸文本框里的逗号规则要记
+   - 检索式**只读展示**(可展开),由核心词自动生成,他永远不用写 [tiab]
+   - 面板不能假装能改服务器上的文件:它产出一份 .json,给两条交付路径 */
+.dircard{border:1px solid #E3D9F2;border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff}
+.dircard.bad{border-color:#E5A0A0;background:#FFF7F7}
+.dirhd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.dirhd input.dnm{flex:1;min-width:200px;font-size:14px;font-weight:600;padding:7px 9px;
+  border:1px solid #D6C9EC;border-radius:7px}
+.dirrow{display:flex;gap:8px;align-items:flex-start;margin:7px 0}
+.dirrow>label{width:104px;flex:0 0 104px;font-size:12.5px;color:#5B4B7A;padding-top:8px;font-weight:600}
+.chipbox{flex:1;display:flex;flex-wrap:wrap;gap:5px;min-height:36px;padding:5px;
+  border:1px solid #E0D6F0;border-radius:7px;background:#FCFAFF}
+.chip{display:inline-flex;align-items:center;gap:4px;background:#EDE7F6;color:#4A148C;
+  border-radius:12px;padding:3px 6px 3px 9px;font-size:12.5px}
+.chip.peri{background:#E8F1FB;color:#0D47A1}
+.chip button{border:0;background:transparent;cursor:pointer;color:#7A6A96;font-size:14px;line-height:1;padding:0 2px}
+.chip button:hover{color:#B71C1C}
+.chipbox input{border:0;outline:0;background:transparent;min-width:130px;flex:1;font-size:13px;padding:5px}
+.dirmeta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:#5B4B7A;margin-top:8px}
+.qprev{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:#4A4A55;
+  background:#F7F4FC;border:1px dashed #D6C9EC;border-radius:6px;padding:7px 9px;
+  word-break:break-all;margin-top:6px}
+.dirwarn{font-size:12.5px;border-radius:7px;padding:7px 10px;margin-top:7px;line-height:1.55}
+.dirwarn.wide{background:#FFF8E1;color:#7A5B00;border:1px solid #F0DFA8}
+.dirwarn.err{background:#FDECEC;color:#8A1C1C;border:1px solid #F0C0C0}
+.dirwarn.good{background:#E8F5E9;color:#1B5E20;border:1px solid #B5DDB8}
+.dirbtns{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
 .wbench .qc{flex:1;min-width:168px;background:#fff;border:1px solid var(--line);
   border-left:5px solid #7E57C2;border-radius:9px;padding:10px 13px;cursor:pointer;
   transition:.14s;text-align:left;font-family:inherit}
@@ -699,6 +728,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="myapps">🎯 我能申的</button>
   <button class="tab" data-p="jobs">🎓 学术职位</button>
   <button class="tab tab2" data-p="papers">🔔 文献追踪</button>
+  <button class="tab tab2" data-p="mydirs">🎯 我的研究方向</button>
   <button class="tab tab2" data-p="pipeline">📋 我的申请管线</button>
   <button class="tab tab2" data-p="howto">📘 使用/更新说明</button>
   <button class="tab" data-p="writing">✍️ 写作指导</button>
@@ -944,7 +974,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <span class="ptag question">❓ Question</span> 作者自己提的 future work。
       <br><b>可核验:</b>点分数看命中了哪些词、TF-IDF 余弦是多少;点卡片「🔎 深读拆解」看摘要分段(原文自带小标题标"原文"、推断标"推断")、命中的方法体系及其原句、可复用句式、新颖度三个分量与同年百分位、语料内引用邻域。
       <b>全部离线计算,不调大模型</b> —— 不会有"看起来有道理但查不到出处"的句子。
-      <br><span style="color:#7A5A00">当前方向词库是示例(miRNA 降解 / 代谢);换成你自己的课题就编辑 <code>data/interests.json</code>,写法见 <code>data/interests.template.json</code>。</span>
+      <br><span style="color:#7A5A00">要换成你自己的课题?<b>不用碰任何文件</b> —— 去 <a href="#" onclick="goPanel('mydirs');return false;"><b>🎯 我的研究方向</b></a> 填表,面板替你生成检索式、试算命中量,再一键下载放进收件箱即可。</span>
       <div class="snapnote" id="snapProgress" style="margin-top:8px"></div>
       <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #D6E0F5">
         <b>📰 每日推送:</b>
@@ -1046,6 +1076,67 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 
   <span class="status" id="papStat"></span>
   <div id="papWrap"></div>
+</div>
+
+<div class="panel" id="mydirs">
+  <div class="hstrip" data-help="mydirs"></div>
+
+  <!-- 交付路径有两条,都不需要他碰 JSON:
+       A) 下载 .json → 拖进 GitHub 收件箱(有按钮直达,和 Pivot 收件箱同一套机制)
+       B) 只想先看看效果 → 「试算」只在浏览器里跑,不改任何文件
+       面板绝不声称自己能直接改服务器上的 interests.json —— 静态页没有服务端。 -->
+  <div class="calbanner" style="background:#F5F0FF;border-color:#D6C9EC">
+    <b>这一页替你写 <code>data/interests.json</code>,你不用打开那个文件。</b><br>
+    填方向名 + 几个关键词 → 下面会<b>实时</b>告诉你「现有 852 篇里命中多少」和「PubMed 全库有多大」→
+    满意了点「下载方向表」→ 再点「打开收件箱」把文件拖进去。明早的定时任务自动换库。
+    <span class="note">检索式(<code>[tiab]</code> 那种)由核心词自动生成,你永远不用写。</span>
+  </div>
+
+  <div class="dirbtns">
+    <button class="abtn" id="dirAdd">＋ 加一个方向</button>
+    <button class="abtn" id="dirLoad" style="background:#546E7A">↺ 读回当前线上方向</button>
+    <button class="abtn" id="dirProbe" style="background:#00695C">🔍 联网试算全库命中量</button>
+    <span style="flex:1"></span>
+    <button class="abtn" id="dirDl" style="background:#2E7D32">⬇️ 下载方向表 (.json)</button>
+    <a class="abtn" id="dirInbox" target="_blank" rel="noopener"
+       style="text-decoration:none;background:#4A148C">📂 打开收件箱(把文件拖进去)</a>
+  </div>
+  <span class="status" id="dirStat"></span>
+
+  <div id="dirWrap"></div>
+
+  <div id="dirGlobal"></div>
+
+  <details style="margin-top:14px">
+    <summary style="cursor:pointer;font-weight:600;color:#4A148C">🔧 高级:阈值、排除词、生成的检索式(不动也能用)</summary>
+    <div style="padding:10px 4px">
+      <div class="dirrow"><label>排除词</label>
+        <div class="chipbox" id="dirExcl"></div></div>
+      <div class="dirmeta">
+        <span>高相关阈值 <input type="number" id="dirBHigh" step="0.01" min="0.05" max="1"
+              style="width:74px;padding:4px 6px;border:1px solid #D6C9EC;border-radius:6px"></span>
+        <span>中相关阈值 <input type="number" id="dirBMed" step="0.01" min="0.02" max="1"
+              style="width:74px;padding:4px 6px;border:1px solid #D6C9EC;border-radius:6px"></span>
+        <span class="note">高的必须大于中的,否则导入会被拒绝并告诉你哪里不对。</span>
+      </div>
+      <div id="dirQAll"></div>
+    </div>
+  </details>
+
+  <details style="margin-top:10px" id="dirConseq">
+    <summary style="cursor:pointer;font-weight:600;color:#4A148C">📘 换方向之后会发生什么(重要,点开看一眼)</summary>
+    <div style="padding:10px 4px;font-size:13px;line-height:1.75;color:#333" id="dirConseqBody">
+      <b>1. 整个语料库会按新方向重建。</b>抓取脚本每轮都是从零重抓、重新打分,
+      所以不再匹配新方向的旧文献<b>会从列表里消失</b>。这不是 bug,是换库的应有结果。<br>
+      <b>2. 你的 ⭐ 收藏和已读标记不会丢。</b>它们按 DOI/PMID 存在你自己的浏览器里,
+      和方向词库无关;那篇文献要是以后又被抓回来,标记还在。<br>
+      <b>3. 生效时间是明早。</b>换库靠每日定时任务,不是点一下就变。
+      想立刻看效果就用上面的「试算」——它只在浏览器里算,不动任何文件。<br>
+      <b>4. 试算给的是命中量,不是分数。</b>面板算不出线上那个 0–1 分:
+      真实分数里含 TF–IDF,要用<b>过滤前</b>的全量语料才能算准,而网页只拿得到发布后的 852 篇。
+      硬要在这里显示一个"预测分"就是编数字,所以这里只给<b>关键词命中篇数</b>——这个是精确可复算的。
+    </div>
+  </details>
 </div>
 
 <div class="panel" id="pipeline">
@@ -1672,8 +1763,9 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       Source 选 <code>GitHub Actions</code> → Actions 页点一次 <b>Run workflow</b>。十分钟后你的
       <code>https://&lt;你的用户名&gt;.github.io/&lt;仓库名&gt;/</code> 就活了。</li>
       <li><b>改成你自己的研究方向</b>（决定文献抓什么、资助怎么排序）：编辑
-      <code>data/interests.json</code>。字段写法见同目录的
-      <code>data/interests.template.json</code>（每个字段都有注释）。</li>
+      <b>去「🎯 我的研究方向」面板填表</b>——填方向名 + 关键词,面板替你生成检索式、
+      试算 PubMed 全库命中量,再一键下载并拖进 <code>data/interests_inbox/</code>,
+      明早定时任务自动换库。你不需要打开 <code>data/interests.json</code>,也不用学 <code>[tiab]</code> 语法。</li>
     </ol>
 
     <table class="htab" style="margin-top:10px">
@@ -2728,6 +2820,7 @@ let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
 let JOBS=[], JOBMETA={}, JOB_LVL="all", JOB_REGION="";
 let INSTS=[], BOARDS=[], INST_REGION="", INST_FIT="";
 let PAPERS=[], PAPMETA={}, INTERESTS=[], INTMAP={}, PAP_TAGFILT="", PAP_WIRED=false;
+let INTCFG={};
 function setLang(l){
   document.querySelectorAll('.lang-zh').forEach(function(e){e.style.display=(l==='en'?'none':'');});
   document.querySelectorAll('.lang-en').forEach(function(e){e.style.display=(l==='en'?'':'none');});
@@ -3216,6 +3309,9 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   if(t.dataset.p==="whatsnew")renderChanges();
   if(t.dataset.p==="calendar")renderCalendar();
   if(t.dataset.p==="papers")renderPapers();
+  if(t.dataset.p==="mydirs"){ wireMyDirsOnce();
+    /* 首次进来直接读回线上方向 —— 空白表单会让人以为方向丢了 */
+    if(!MYDIRS.length) dirFromLive(); else renderMyDirs(); }
   if(t.dataset.p==="journals")renderJournals();
   if(t.dataset.p==="hub")renderHub();
   syncPlatNav(t.dataset.p);
@@ -3255,6 +3351,7 @@ var HUB_SECTIONS=[
   tools:[
    {sp:"A · 持续追踪自己的方向 —— 本地已抓好的语料,打分可离线复算"},
    {p:"papers", ic:"📚", nm:"文献追踪", ds:"PubMed / bioRxiv / arXiv / Crossref 多源合并,按你的 8 个方向打分", cnt:()=>PAPERS.length, u:"篇在库"},
+   {p:"mydirs", ic:"🎯", nm:"我的研究方向", ds:"换课题就改这里:填关键词,面板替你生成检索式并试算命中量", cnt:()=>INTERESTS.length, u:"个方向"},
    {p:"papers", ic:"🔥", nm:"热点论文", ds:"按引用增速排序的近期高关注论文", act:"hot",
     cnt:()=>PAPERS.filter(p=>(p.hot_score||0)>0).length, u:"篇有热度"},
    {p:"papers", ic:"💡", nm:"高新颖度", ds:"与既有语料差异最大的论文,常是新方法或新现象", act:"nov",
@@ -3379,6 +3476,7 @@ var SIDE_NAV=[
   ]},
   {g:"③ 读文献 · 查数据库", items:[
     {p:"papers",  ic:"🔔", t:"文献追踪",   n:"papN"},
+    {p:"mydirs",  ic:"🎯", t:"我的研究方向", nw:1},
     {p:"tsearch", ic:"📚", t:"文献检索中心", nw:1},
     {p:"tgene",   ic:"🧫", t:"基因疾病注释", nw:1},
     {p:"ttrial",  ic:"🏥", t:"临床试验",   nw:1}
@@ -4586,6 +4684,7 @@ async function loadData(){
     LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
     INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
     PAPERS=pp.papers||[]; PAPMETA=pp.meta||{}; INTERESTS=(ints.interests||[]);
+    INTCFG=ints||{};   /* 方向编辑器要读 exclude / bands,不只是 interests */
     INTMAP={}; INTERESTS.forEach(i=>INTMAP[i.id]=i);
     SITECFG=scfg||{}; FUNDS=(fnd.funds||[]); PSCHEMA=(psch&&psch.fields)?psch:{fields:[],groups:{}};
     if(cnet)CITENET=cnet;
@@ -5651,6 +5750,283 @@ loadProfile();
 const PAPKEY="pi_papers_state";
 const getPS=()=>{try{return JSON.parse(localStorage.getItem(PAPKEY)||"{}")}catch(e){return{}}};
 const setPS=o=>{try{localStorage.setItem(PAPKEY,JSON.stringify(o))}catch(e){}};
+/* =======================================================================
+   我的研究方向:面板 = 表单 → data/interests.json,用户不碰 JSON,不写检索式。
+
+   两条硬约束(改这段前先读):
+
+   1) buildQueries() 必须与 scripts/import_interests.py 的 build_queries()
+      **逐字一致**。它们是同一条规则的两份实现(网页要即时预览,导入要落库)。
+      tests/run_interests_tests.py 有 parity 断言:两边对同一批词的输出
+      必须字符级相同,改一边不改另一边会红。
+
+   2) 面板**不显示预测分数**。线上那个 0–1 分含 TF–IDF,而 TF–IDF 的 IDF 是在
+      **过滤前**的全量语料上算的;网页只拿得到发布后的 852 篇,重算会偏
+      (实测 165/852 篇偏差 >0.02,最大 0.31)。所以这里只给
+      「关键词命中篇数」—— 纯子串匹配,与线上逐条一致(实测 2419/2419 相同)。
+      要显示分数就得编,宁可少给一个数字。
+   ======================================================================= */
+let MYDIRS=[], MYEXCL=[], MYBANDS={high:0.55,medium:0.28};
+
+/* 与 import_interests.py 的 _q() 一致 */
+function dq(t){ t=String(t||"").trim().replace(/"/g,"");
+  return (t.indexOf(" ")>=0||t.indexOf("-")>=0)?('"'+t+'"'):t; }
+
+/* 与 import_interests.py 的 build_queries() 一致 —— 改这里就要改那里 */
+function buildQueries(core,wantArxiv){
+  const terms=(core||[]).map(t=>String(t||"").trim()).filter(Boolean);
+  if(!terms.length) return {q_pubmed:"",q_epmc:"",q_arxiv:"",q_crossref:""};
+  return {
+    q_pubmed:"("+terms.map(t=>dq(t)+"[tiab]").join(" OR ")+")",
+    q_epmc:"("+terms.map(t=>"TITLE_ABS:"+dq(t)).join(" OR ")+")",
+    q_arxiv:wantArxiv?terms.map(t=>"all:"+dq(t)).join(" OR "):"",
+    q_crossref:terms.slice(0,4).join(" ")
+  };
+}
+
+/* 语料内命中:纯子串,和线上打分器的 core_hits 口径相同 */
+function dirHitCount(core){
+  const ts=(core||[]).map(t=>String(t).toLowerCase().trim()).filter(Boolean);
+  if(!ts.length) return {n:0,per:{}};
+  const per={}; ts.forEach(t=>per[t]=0);
+  let n=0;
+  PAPERS.forEach(p=>{
+    const bl=((p.title||"")+" "+(p.abstract||"")+" "+
+              ((p.mesh||[]).join(" "))+" "+((p.keywords||[]).join(" "))).toLowerCase();
+    let hit=false;
+    ts.forEach(t=>{ if(bl.indexOf(t)>=0){ per[t]++; hit=true; } });
+    if(hit) n++;
+  });
+  return {n:n,per:per};
+}
+
+function newDir(){ return {name:"",core:[],peri:[],w:1.0,want_arxiv:false,probe:null}; }
+
+function dirFromLive(){
+  MYDIRS=(INTERESTS||[]).map(it=>({
+    name:it.name||"", core:(it.core||[]).slice(), peri:(it.peri||[]).slice(),
+    w:(typeof it.w==="number"?it.w:1.0), want_arxiv:!!(it.q_arxiv), probe:null,
+    id:it.id
+  }));
+  MYEXCL=((window.INTCFG&&INTCFG.exclude)||[]).slice();
+  MYBANDS=Object.assign({high:0.55,medium:0.28},(window.INTCFG&&INTCFG.bands)||{});
+  renderMyDirs();
+  dstat("已读回线上的 "+MYDIRS.length+" 个方向。改完记得下载并放进收件箱 —— 直接改这里不会动到线上。");
+}
+
+function dstat(msg){ const e=document.getElementById("dirStat"); if(e)e.textContent=msg||""; }
+
+/* chip 编辑器:回车/逗号加词,× 删词。不给用户留「怎么分隔」的疑问。 */
+function chipsHTML(arr,cls,di,fld){
+  return (arr||[]).map((t,i)=>
+    '<span class="chip '+cls+'"><b>'+esc(t)+'</b>'+
+    '<button data-dc="'+di+'" data-df="'+fld+'" data-di="'+i+'" title="删掉这个词">×</button></span>').join("")
+   +'<input data-dadd="'+di+'" data-df="'+fld+'" placeholder="打字后按回车或逗号加词…">';
+}
+
+function renderMyDirs(){
+  const wrap=document.getElementById("dirWrap"); if(!wrap)return;
+  if(!MYDIRS.length) MYDIRS=[newDir()];
+  wrap.innerHTML=MYDIRS.map((d,i)=>{
+    const q=buildQueries(d.core,d.want_arxiv);
+    const hc=dirHitCount(d.core);
+    const bad=(!d.name.trim())||(!d.core.length);
+    /* 命中量的三种情形分别说清楚:0 命中不等于方向写错(可能语料还没抓过) */
+    let note="";
+    if(!d.core.length){
+      note='<div class="dirwarn err">还没有核心词。核心词是打分的地基 —— 空着这个方向永远抓不到东西。'
+          +'先填 2–5 个最特异的词(基因名、专有名词、你论文标题里的那种词)。</div>';
+    }else if(hc.n===0){
+      note='<div class="dirwarn wide">现有 '+PAPERS.length+' 篇语料里<b>一篇也没命中</b>。'
+          +'这不一定说明方向写错了 —— 现在这批语料是按<b>旧方向</b>抓的,可能根本没抓过你这个领域。'
+          +'点上面「联网试算全库命中量」看 PubMed 全库有多少,那个才说明词写得对不对。</div>';
+    }else{
+      const top=Object.entries(hc.per).filter(e=>e[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,6);
+      note='<div class="dirwarn good">现有语料命中 <b>'+hc.n+'</b> / '+PAPERS.length+' 篇。'
+          +'逐词:'+top.map(e=>esc(e[0])+" <b>"+e[1]+"</b>").join(" · ")
+          +(Object.values(hc.per).some(v=>v===0)
+             ? ' <span style="color:#7A5B00">未命中的词:'
+               +Object.entries(hc.per).filter(e=>!e[1]).map(e=>esc(e[0])).join("、")+'</span>':"")
+          +'</div>';
+    }
+    let probe="";
+    if(d.probe){
+      if(d.probe.err) probe='<div class="dirwarn err">全库试算没成功:'+esc(d.probe.err)+'</div>';
+      else{
+        const n=d.probe.pubmed;
+        const verdict = n===0 ? '<b>PubMed 全库 0 篇</b> —— 词大概拼错了,或者太窄。'
+          : (n>50000 ? '<b>PubMed 全库 '+n+' 篇</b> —— 太宽了。这样抓回来的多半不是你的领域,'
+                      +'建议把过宽的词(像 lactate、cancer 这种)从<b>核心词</b>挪到<b>外围词</b>。'
+          : (n<40 ? '<b>PubMed 全库仅 '+n+' 篇</b> —— 偏窄,能抓到但每天基本没新东西,可以再加一两个同义写法。'
+                  : '<b>PubMed 全库 '+n+' 篇</b> —— 这个宽度合适。'));
+        probe='<div class="dirwarn '+(n===0||n>50000?"wide":"good")+'">'+verdict+'</div>';
+      }
+    }
+    return '<div class="dircard'+(bad?" bad":"")+'">'
+      +'<div class="dirhd"><input class="dnm" data-dnm="'+i+'" value="'+esc(d.name)+'" '
+      +'placeholder="方向名,例如:AMPK 与代谢记忆（写给你自己看的，随便写）">'
+      +'<button class="abtn" data-drm="'+i+'" style="background:#B71C1C">删掉这个方向</button></div>'
+      +'<div class="dirrow"><label title="命中一次得满分。写最特异的词">核心词</label>'
+      +'<div class="chipbox">'+chipsHTML(d.core,"",i,"core")+'</div></div>'
+      +'<div class="dirrow"><label title="命中得部分分。写相邻但不特异的词">外围词</label>'
+      +'<div class="chipbox">'+chipsHTML(d.peri,"peri",i,"peri")+'</div></div>'
+      +note+probe
+      +'<div class="dirmeta">'
+      +'<span>方向权重 <input type="number" data-dw="'+i+'" value="'+d.w+'" step="0.1" min="0.1" max="5" '
+      +'style="width:70px;padding:3px 6px;border:1px solid #D6C9EC;border-radius:6px"> '
+      +'<span class="note">1.0 是基准;调低表示这个方向的命中不那么重要</span></span>'
+      +'<label><input type="checkbox" data-dax="'+i+'"'+(d.want_arxiv?" checked":"")+'> 也搜 arXiv'
+      +' <span class="note">(生物类通常没什么命中)</span></label></div>'
+      +'<details style="margin-top:7px"><summary style="cursor:pointer;font-size:12.5px;color:#6A5B8A">'
+      +'看看自动生成的检索式(你不用改)</summary>'
+      +'<div class="qprev"><b>PubMed</b><br>'+esc(q.q_pubmed||"(空)")+'</div>'
+      +'<div class="qprev"><b>Europe PMC</b><br>'+esc(q.q_epmc||"(空)")+'</div>'
+      +'<div class="qprev"><b>Crossref</b><br>'+esc(q.q_crossref||"(空)")+'</div>'
+      +(q.q_arxiv?'<div class="qprev"><b>arXiv</b><br>'+esc(q.q_arxiv)+'</div>':"")
+      +'</details></div>';
+  }).join("");
+  wireDirs();
+  renderDirGlobal();
+}
+
+function renderDirGlobal(){
+  const g=document.getElementById("dirGlobal"); if(!g)return;
+  const errs=dirValidate();
+  g.innerHTML = errs.length
+    ? '<div class="dirwarn err"><b>还不能下载 —— 有 '+errs.length+' 处要先补:</b><br>'
+      +errs.map(e=>"· "+esc(e)).join("<br>")+'</div>'
+    : '<div class="dirwarn good">✓ '+MYDIRS.length+' 个方向都填好了,可以点「下载方向表」。</div>';
+  const eb=document.getElementById("dirExcl");
+  if(eb) eb.innerHTML=chipsHTML(MYEXCL,"peri",-1,"excl");
+  const bh=document.getElementById("dirBHigh"), bm=document.getElementById("dirBMed");
+  if(bh&&document.activeElement!==bh) bh.value=MYBANDS.high;
+  if(bm&&document.activeElement!==bm) bm.value=MYBANDS.medium;
+  const dl=document.getElementById("dirDl");
+  if(dl) dl.disabled=errs.length>0;
+  wireDirs();
+}
+
+/* 校验规则与 import_interests.py 的 validate() 同口径 —— 面板先拦一次,
+   免得他下载完、传上去、第二天才发现被拒。 */
+function dirValidate(){
+  const errs=[];
+  MYDIRS.forEach((d,i)=>{
+    const nm=(d.name||"").trim();
+    if(!nm) errs.push("第 "+(i+1)+" 个方向没写名字");
+    if(!(d.core||[]).length) errs.push("方向“"+(nm||"第"+(i+1)+"个")+"”没有核心词");
+    const w=parseFloat(d.w);
+    if(!(w>0&&w<=5)) errs.push("方向“"+(nm||"第"+(i+1)+"个")+"”的权重要在 0–5 之间");
+  });
+  if(!MYDIRS.length) errs.push("至少要留一个方向");
+  if(!(parseFloat(MYBANDS.high)>parseFloat(MYBANDS.medium)))
+    errs.push("高相关阈值必须大于中相关阈值");
+  return errs;
+}
+
+function wireDirs(){
+  document.querySelectorAll("[data-dnm]").forEach(el=>{
+    el.oninput=()=>{ MYDIRS[+el.dataset.dnm].name=el.value; renderDirGlobal(); };
+  });
+  document.querySelectorAll("[data-dw]").forEach(el=>{
+    el.onchange=()=>{ MYDIRS[+el.dataset.dw].w=parseFloat(el.value)||1.0; renderMyDirs(); };
+  });
+  document.querySelectorAll("[data-dax]").forEach(el=>{
+    el.onchange=()=>{ MYDIRS[+el.dataset.dax].want_arxiv=el.checked; renderMyDirs(); };
+  });
+  document.querySelectorAll("[data-drm]").forEach(el=>{
+    el.onclick=()=>{ const i=+el.dataset.drm;
+      if(MYDIRS.length<=1){ dstat("至少得留一个方向 —— 一个都不留的话抓取脚本没东西可搜。"); return; }
+      MYDIRS.splice(i,1); renderMyDirs(); dstat("删了一个方向。"); };
+  });
+  document.querySelectorAll("[data-dc]").forEach(el=>{
+    el.onclick=()=>{ const di=+el.dataset.dc, f=el.dataset.df, i=+el.dataset.di;
+      if(f==="excl") MYEXCL.splice(i,1); else MYDIRS[di][f].splice(i,1);
+      renderMyDirs(); };
+  });
+  document.querySelectorAll("[data-dadd]").forEach(el=>{
+    el.onkeydown=(ev)=>{
+      const commit=(ev.key==="Enter"||ev.key===","||ev.key==="，");
+      if(!commit) return;
+      ev.preventDefault();
+      const v=el.value.trim().toLowerCase();
+      if(!v) return;
+      const di=+el.dataset.dadd, f=el.dataset.df;
+      const arr = f==="excl" ? MYEXCL : MYDIRS[di][f];
+      if(arr.indexOf(v)<0) arr.push(v);
+      el.value="";
+      renderMyDirs();
+      /* 加完词焦点要留在同一个输入框,否则连着加几个词就得反复点 */
+      const back=document.querySelector('[data-dadd="'+di+'"][data-df="'+f+'"]');
+      if(back) back.focus();
+    };
+  });
+  const bh=document.getElementById("dirBHigh"), bm=document.getElementById("dirBMed");
+  if(bh) bh.onchange=()=>{ MYBANDS.high=parseFloat(bh.value)||0.55; renderDirGlobal(); };
+  if(bm) bm.onchange=()=>{ MYBANDS.medium=parseFloat(bm.value)||0.28; renderDirGlobal(); };
+}
+
+/* 导出的结构必须是 import_interests.py 认的那一份 */
+function dirDoc(){
+  return {
+    _doc:"由网页「我的研究方向」面板生成。放进 data/interests_inbox/ 即可由定时任务入库。",
+    updated:new Date().toISOString().slice(0,10),
+    owner:(window.SITECFG&&SITECFG.owner)||"",
+    bands:{high:parseFloat(MYBANDS.high),medium:parseFloat(MYBANDS.medium)},
+    exclude:MYEXCL.slice(),
+    interests:MYDIRS.map(d=>({
+      name:d.name.trim(), w:parseFloat(d.w)||1.0,
+      core:d.core.slice(), peri:d.peri.slice(),
+      want_arxiv:!!d.want_arxiv
+    }))
+  };
+}
+
+function wireMyDirsOnce(){
+  const add=document.getElementById("dirAdd");
+  if(add) add.onclick=()=>{ MYDIRS.push(newDir()); renderMyDirs();
+    dstat("加了一个空方向 —— 填上名字和至少一个核心词。"); };
+  const ld=document.getElementById("dirLoad");
+  if(ld) ld.onclick=dirFromLive;
+  const dl=document.getElementById("dirDl");
+  if(dl) dl.onclick=()=>{
+    const errs=dirValidate();
+    if(errs.length){ dstat("还有 "+errs.length+" 处没填好,先看下面红框。"); return; }
+    const blob=new Blob([JSON.stringify(dirDoc(),null,1)],{type:"application/json"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob); a.download="interests.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    dstat("已下载 interests.json。下一步:点右边「打开收件箱」,把这个文件拖进去 → Commit changes。明早的定时任务会自动换库。");
+  };
+  /* 收件箱链接按本页 URL 推导 owner/repo,和 Pivot 收件箱同一套(别写死常量) */
+  const ib=document.getElementById("dirInbox");
+  if(ib){
+    const h=location.hostname||"", parts=location.pathname.split("/").filter(Boolean);
+    const owner=h.endsWith(".github.io")?h.replace(".github.io",""):"";
+    const repo=parts.length?parts[0]:"";
+    ib.href = (owner&&repo)
+      ? "https://github.com/"+owner+"/"+repo+"/upload/main/data/interests_inbox"
+      : "https://github.com/";
+  }
+  const pb=document.getElementById("dirProbe");
+  if(pb) pb.onclick=dirProbe;
+}
+
+/* 联网试算:只问「PubMed 全库有多少篇」。这是判断词写得对不对的唯一可靠信号 ——
+   本地语料是按旧方向抓的,本地 0 命中什么也说明不了。 */
+function dirProbe(){
+  const errs=MYDIRS.map((d,i)=>d.core.length?null:i).filter(x=>x!==null);
+  if(errs.length){ dstat("先给每个方向填上核心词,再试算。"); return; }
+  dstat("正在问 PubMed…(需要你的浏览器能直连 NCBI)");
+  const eu="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=0&term=";
+  Promise.all(MYDIRS.map(d=>{
+    const q=buildQueries(d.core,d.want_arxiv).q_pubmed;
+    return tfetch(eu+encodeURIComponent(q))
+      .then(j=>{ d.probe={pubmed:parseInt((j.esearchresult||{}).count||"0",10)}; })
+      .catch(e=>{ d.probe={err:String(e&&e.message||e)}; });
+  })).then(()=>{ renderMyDirs();
+    dstat("试算完成。这些是 PubMed 全库的篇数,不是每天新增量 —— 抓取只取最近 400 天窗口。"); });
+}
+
 function pkey(pa){return pa.doi||pa.pmid||("t:"+(pa.title||"").slice(0,60));}
 function pstate(pa){const st=getPS();return st[pkey(pa)]||{};}
 function setPstate(pa,patch){const st=getPS();const k=pkey(pa);st[k]=Object.assign({},st[k]||{},patch);setPS(st);}
@@ -7076,6 +7452,12 @@ var HELP = {
       {t:"院所目录:仅已核实链接",set:[["instStatus","verified"]]}],
   caveat:"契合度只是**关键词打分**,不是对岗位描述的理解。分低不代表不适合,只代表你的词库没命中。"},
 
+ mydirs:{what:"换课题就来这一页:填方向名 + 几个关键词,面板替你写 data/interests.json,并生成 PubMed / Europe PMC / Crossref 的检索式。你不用打开任何文件,也不用学 [tiab] 那套语法。",
+  how:["**四步换方向:**① 点「读回当前线上方向」把现在的 8 个方向调出来 → ② 改名字、加减关键词(打字后按回车或逗号成词,点 × 删词) → ③ 点「联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → ④ 点「下载方向表」再点「打开收件箱」把文件拖进去、Commit。明早定时任务自动换库。",
+       "**核心词 vs 外围词:**核心词命中得满分,写最特异的词(基因名、专有名词、你论文标题里那种词);外围词命中得部分分,写相邻但不独占的词。宽词(lactate、cancer)放外围,别放核心。",
+       "**试算读法:**PubMed 全库 0 篇 = 词大概拼错了;>5 万篇 = 太宽,抓回来多半不是你的领域;40–5 万之间比较合适。",
+       "红框会在下载前拦住你:没名字、没核心词、权重越界、阈值高低颠倒 —— 和导入脚本同一套规则,所以面板放你过了,入库就不会被拒。"],
+  caveat:"三点诚实边界:① **换方向会重建整个语料库** —— 抓取脚本每轮从零重抓重打分,不再匹配新方向的旧文献会从列表消失,这是换库的应有结果,不是 bug。你的 ⭐ 和已读标记按 DOI/PMID 存在本地浏览器里,不会丢。② **这一页改不了线上文件** —— 静态页没有服务端,所以它只能产出一份 .json 交给你放进收件箱;生效时间是明早的定时任务,不是点一下就变。③ **这里只给「关键词命中篇数」,不给预测分数** —— 线上那个 0–1 分含 TF–IDF,而 IDF 要用过滤前的全量语料才算得准,网页只拿得到发布后的 852 篇,重算会偏(实测 165 篇偏差超 0.02,最大 0.31)。宁可少给一个数字,也不编一个看着精确的假分。"},
  papers:{what:"按你配置的方向每日跨 6 个源抓新文献,打分并标 Hotspot / Gap / 提问。顶部「今日工作台」把 800+ 条变成一个可清空的队列。",
   how:["**每天三步:**① 点「新入库」看上次之后多了什么 → ② 读完的点 📬 标已读、有用的点 ⭐ → ③ 走之前按「✓ 标记为已看过」划一条线。下次进来「新入库」就只显示这条线之后的。",
        "**写标书找切口:**点「值得挖」—— 高相关 × 摘要里明写了空白/问题 × 你还没读,三个条件的交集。",
