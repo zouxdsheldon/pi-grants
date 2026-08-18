@@ -132,3 +132,25 @@ fit 默认值改成"高" / 短缩写改成子串匹配 / CSV 退化成 split(","
 而重开会从 localStorage 重新灌草稿，把丢值补了回去——掩盖了缺陷。
 改成走真实的「下一步」按钮后才抓到。教训：往返测试必须走用户的点击路径，
 不能走任何会重新读存储的捷径。
+
+### 文献追踪面板改版时踩到的两个坑（写下来,别再踩）
+
+1. **样式别写在 HTML 内联,再靠 JS 运行时拆掉。**
+   `#citeBanner` 原来带一串 inline style,`renderCiteBanner()` 里用
+   `el.removeAttribute("style")` 抹掉。run_ui_tests.py 的 DOM 桩没有
+   `removeAttribute` → 整个断言块抛错。**修法不是给桩打补丁**:样式移进
+   `.cnet` CSS 类,markup 从一开始就带类名,渲染函数只留它真正该管的
+   `display` 开关。桩缺方法是症状,内联样式才是病。
+
+2. **断言别钉死文案的原字。**
+   有条断言 grep `"预期结果"` 四个字;改版把同一句话写成
+   「(是预期,不是 bug)」——语义没丢,断言却红了。契约是
+   **「必须说明稀疏是预期而非缺陷」这件事**,不是那四个字。
+   已放宽到只钉语义词「预期」,并用三个注入(删说明 / 删「预期」/
+   隐藏抓取失败含义)验证放宽后**仍然会红**。
+   放宽断言之后必须立刻做反向注入,否则等于把断言删了。
+
+3. **跑测试前先 `ls tests/`。** 本次一度去 `node tests/click_test.js`
+   —— 这文件不存在,报的 MODULE_NOT_FOUND 被误读成回归。另外
+   `tests/syntax_check.js` 是 **jsc** 脚本、吃已抽好的 JS
+   (`jsc tests/syntax_check.js -- /tmp/index.html.js`),不是 node 入口。

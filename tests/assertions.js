@@ -85,7 +85,8 @@ for (var k=0;k<PAPERS.length;k++){
 /* 9) 引用网络概览必须解释稀疏原因,而不是只报一个小数字 */
 try{ renderCiteBanner(); var bh=ELS.citeBanner.innerHTML;
   ck(bh.indexOf("为什么边这么少")>=0, "cite banner missing sparsity explanation");
-  ck(bh.indexOf("预期结果")>=0, "cite banner does not state sparsity is expected");
+  /* 措辞可改,但「稀疏是预期而非缺陷」这句必须在 —— 只钉住语义词「预期」 */
+  ck(bh.indexOf("预期")>=0, "cite banner does not state sparsity is expected");
   /* 抓取失败率必须摊开写:失败 ≠ 该文没有引用关系 */
   if(CITENET.query_failures) ck(bh.indexOf("不代表它没有引用关系")>=0,
      "cite banner hides what query failures mean");

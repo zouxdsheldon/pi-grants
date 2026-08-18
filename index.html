@@ -296,6 +296,65 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .pscore{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:12px;background:#EDE7F6;color:#4A148C;border:1px solid #C9B8E8;cursor:help}
 .pev{background:#FBF9FE;border:1px dashed #D6C9EC;border-radius:7px;padding:8px 11px;margin:7px 0;font-size:12.2px;line-height:1.6;color:#3B3350}
 .pev b{color:#4A148C}
+/* ---------- 文献追踪:今日工作台 + 分组筛选 ---------- */
+/* 面板原来是「两屏说明 + 18 个并排控件 + 852 张卡」。工作台把它变成一个队列:
+   进来先看「该读什么」,而不是先读一段介绍。三张卡都是可点的筛选预设。 */
+.wbench{display:flex;gap:9px;flex-wrap:wrap;margin:2px 0 11px}
+.wbench .qc{flex:1;min-width:168px;background:#fff;border:1px solid var(--line);
+  border-left:5px solid #7E57C2;border-radius:9px;padding:10px 13px;cursor:pointer;
+  transition:.14s;text-align:left;font-family:inherit}
+.wbench .qc:hover{background:#FAF6FF;border-color:#7E57C2;transform:translateY(-1px);
+  box-shadow:0 2px 7px rgba(74,20,140,.13)}
+.wbench .qc.on{background:#F3E9FF;border-color:#4A148C;box-shadow:inset 0 0 0 1px #7E57C2}
+.wbench .qc b{display:block;font-size:23px;line-height:1.15;color:#4A148C;font-weight:800}
+.wbench .qc .ql{font-size:12.4px;font-weight:700;color:#243;margin-top:1px}
+.wbench .qc .qs{font-size:11.3px;color:#7B7490;line-height:1.45;margin-top:3px}
+.wbench .qc.q_new{border-left-color:#00897B}.wbench .qc.q_new b{color:#00695C}
+.wbench .qc.q_gap{border-left-color:#E67E22}.wbench .qc.q_gap b{color:#B35309}
+.wbench .qc.q_star{border-left-color:#F0B400}.wbench .qc.q_star b{color:#8A6100}
+.wbench .qc.zero{opacity:.55;cursor:default}
+.wbench .qc.zero:hover{transform:none;box-shadow:none;background:#fff;border-color:var(--line)}
+.seenrow{display:flex;gap:9px;flex-wrap:wrap;align-items:center;font-size:12.1px;
+  color:#6B6485;background:#F7F5FC;border:1px solid #E2DAF2;border-radius:8px;
+  padding:7px 12px;margin:0 0 11px}
+.seenrow .sbtn{padding:5px 12px;border:1px solid #7E57C2;border-radius:7px;background:#fff;
+  color:#4A148C;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit}
+.seenrow .sbtn:hover{background:#7E57C2;color:#fff}
+.fgrp{background:var(--card);border:1px solid var(--line);border-radius:9px;margin:8px 0 10px}
+.fgrp .frow2{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 12px}
+.fgrp .frow2+.frow2{border-top:1px dashed #E3E8F2}
+.fgrp .flab{font-size:11.5px;font-weight:800;color:#7B7490;letter-spacing:.03em;
+  min-width:52px;flex:0 0 auto}
+.fgrp input[type=text]{flex:1;min-width:200px;padding:7px 10px;border:1px solid #cbd3e1;
+  border-radius:8px;font-size:13px;font-family:inherit}
+.fgrp select{padding:6px 9px;border:1px solid #cbd3e1;border-radius:8px;font-size:12.5px;
+  background:#fff;font-family:inherit}
+.fgrp label{font-size:12.3px;font-weight:600;cursor:pointer;white-space:nowrap}
+.fgrp .rst{padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;
+  cursor:pointer;font-size:12.5px;font-family:inherit}
+.fgrp .rst:hover{background:#F3E5F5;border-color:#4A148C}
+.fgrp .more{cursor:pointer;user-select:none;font-size:12.2px;font-weight:700;color:var(--blue);
+  padding:8px 12px;border-top:1px dashed #E3E8F2;display:block}
+.fgrp .more:hover{background:#F5F8FF}
+.fgrp .adv{display:none}
+.fgrp.openadv .adv{display:block}
+.fgrp.openadv .more{background:#F5F8FF}
+/* 引用网络:原来是一串 <br> + 内联链接,标题和「年份·被引」挤在一行互相压字。
+   改成块级行,每篇一行,序号 / 标题 / 计数三列对齐。 */
+.cnet{background:#F0F7FF;border:1px solid #BAD3F1;border-radius:9px;padding:11px 14px;
+  margin-bottom:10px;font-size:12.4px;line-height:1.62;color:#243}
+.cnet h4{margin:0 0 6px;font-size:13px;color:#14538F}
+.cnet .cwhy{color:#4A5568;font-size:11.9px;line-height:1.6;margin:6px 0 0}
+.cnet ol.fnd{margin:8px 0 2px;padding:0;list-style:none;counter-reset:f}
+.cnet ol.fnd li{counter-increment:f;display:flex;gap:9px;align-items:baseline;
+  padding:5px 0;border-top:1px dotted #C7DBF2}
+.cnet ol.fnd li:before{content:counter(f);flex:0 0 19px;text-align:right;font-weight:800;
+  color:#8FA9C7;font-size:11.5px}
+.cnet ol.fnd .ft{flex:1;min-width:0}
+.cnet ol.fnd .fn{flex:0 0 auto;font-size:11.4px;color:#5C6B7F;white-space:nowrap;font-weight:700}
+.cnet .brg{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.cnet .note{color:#7C8798;font-size:11.2px;margin-top:7px;display:block}
+.cnet .warn{color:#8A2018}
 .pbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
 .pnote{width:100%;box-sizing:border-box;margin-top:7px;padding:6px 9px;border:1px solid #cbd3e1;border-radius:7px;font-size:12.3px;font-family:inherit;resize:vertical;min-height:34px}
 .mytag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:11px;background:#FFF0F5;color:#A02060;border:1px solid #F0C0D5;margin-right:4px;cursor:pointer}
@@ -870,73 +929,95 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <div class="chipbar" id="chips_papers"></div>
   <div class="snapbar" id="papbar" style="margin-bottom:10px">📚 文献数据加载中…</div>
 
-  <div class="calbanner" style="margin-bottom:10px">
-    <b>这个面板做什么:</b>把 <code>data/interests.json</code> 里配置的研究方向变成每日自动检索式,跨 6 个来源抓取新文献,去重后按<b>透明可核验的规则</b>打相关性分,
-    并标出三类信号 —— <span class="ptag hotspot">🔥 Hotspot</span> 引用速率/新鲜度/预印本转正、
-    <span class="ptag gap">🕳️ Gap</span> 摘要里明写"尚不清楚/缺乏证据"的句子、
-    <span class="ptag question">❓ Question</span> 作者自己提的 future work。
-    每个分数都可点开看<b>命中了哪些词、TF-IDF 余弦是多少</b>——没有黑箱。
-    每张卡片的 <b>🔎 深读拆解</b> 再往下一层:摘要按<b>背景/方法/结果/结论</b>拆开(原文自带小标题的标"原文",推断的标"推断")、
-    列出命中的<b>方法与实验体系</b>并附上命中它的那句原句、抽出<b>可复用句式</b>(原句照搬+一键复制)、
-    摊开<b>新颖度</b>的三个分量与同年队列百分位、以及本文在语料内的<b>引用邻域</b>。
-    <b>全部是离线可核验的计算</b>,不调用任何大模型 —— 不会有"看起来很有道理但查不到出处"的句子。<br><span style="color:#7A5A00">当前方向词库是示例(miRNA 降解 / 代谢);换成你自己的课题就编辑 <code>data/interests.json</code>,写法见 <code>data/interests.template.json</code>。</span>
+  <!-- 今日工作台:进面板先看「该读什么」,而不是先读一段介绍。三张卡都是筛选预设。 -->
+  <div class="wbench" id="papBench"></div>
+  <div class="seenrow" id="papSeen"></div>
+
+  <details class="calbanner" style="display:block;background:#F8FAFF;border:1px solid #D6E0F5;border-radius:9px;padding:0;margin-bottom:10px">
+    <summary style="cursor:pointer;padding:9px 13px;font-size:12.6px;font-weight:700;color:#123">
+      📖 这个面板怎么打分、三类标记是什么意思(点开)</summary>
+    <div style="padding:2px 14px 12px;font-size:12.4px;line-height:1.72;color:#243;border-top:1px dashed #D6E0F5">
+      <b>数据来源:</b><code>data/interests.json</code> 里配置的研究方向 → 每日自动检索式 → 跨 6 个来源抓取 → 去重 → 按<b>透明可核验的规则</b>打相关性分。
+      <br><b>三类标记:</b>
+      <span class="ptag hotspot">🔥 Hotspot</span> 引用速率 / 新鲜度 / 预印本转正 ·
+      <span class="ptag gap">🕳️ Gap</span> 摘要里明写"尚不清楚 / 缺乏证据"的句子 ·
+      <span class="ptag question">❓ Question</span> 作者自己提的 future work。
+      <br><b>可核验:</b>点分数看命中了哪些词、TF-IDF 余弦是多少;点卡片「🔎 深读拆解」看摘要分段(原文自带小标题标"原文"、推断标"推断")、命中的方法体系及其原句、可复用句式、新颖度三个分量与同年百分位、语料内引用邻域。
+      <b>全部离线计算,不调大模型</b> —— 不会有"看起来有道理但查不到出处"的句子。
+      <br><span style="color:#7A5A00">当前方向词库是示例(miRNA 降解 / 代谢);换成你自己的课题就编辑 <code>data/interests.json</code>,写法见 <code>data/interests.template.json</code>。</span>
+      <div class="snapnote" id="snapProgress" style="margin-top:8px"></div>
+      <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #D6E0F5">
+        <b>📰 每日推送:</b>
+        <a href="digest.html" target="_blank" rel="noopener"><b>今日摘要页</b></a>(近 7 天 + 三类标记,可打印/转发)
+        · <a href="feed.xml" target="_blank" rel="noopener"><b>RSS</b></a>(加进 Feedly / Inoreader / NetNewsWire 即每日推送)
+        <br><span style="color:#7A5A00">不做邮件推送:发信需要 SMTP 账号密码,放进公开仓库不安全;RSS 效果相同且零凭据。</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- 筛选分三层:第一行搜索+排序(天天用),第二行三个主维度,其余 13 个收进「更多筛选」。
+       原来 18 个控件并排一屏,没有分组也没有标签,视觉上分不清哪个是干什么的。 -->
+  <div class="fgrp" id="papFgrp">
+    <div class="frow2">
+      <input type="text" id="papq" placeholder="搜索标题/摘要/作者/期刊/单位…">
+      <select id="papSort">
+        <option value="score">按相关性↓</option>
+        <option value="date">按日期↓</option>
+        <option value="cites">按被引↓</option>
+        <option value="rate">按引用速率↓</option>
+        <option value="hot">按 Hotspot↓</option>
+      </select>
+      <button class="rst" id="papRst">↺ 重置</button>
+    </div>
+    <div class="frow2">
+      <span class="flab">常用</span>
+      <select id="papDir"></select>
+      <select id="papWin">
+        <option value="">时间(全部)</option>
+        <option value="30">近 30 天</option>
+        <option value="90">近 90 天</option>
+        <option value="180">近 180 天</option>
+        <option value="365">近 1 年</option>
+      </select>
+      <select id="papBand">
+        <option value="">相关度(全部)</option>
+        <option value="high">🟣 高相关</option>
+        <option value="medium">🔵 中相关</option>
+        <option value="low">⚪ 低相关</option>
+      </select>
+      <label title="入库台账里第一次出现日期在你上次查看之后"><input type="checkbox" id="pap_new"> 🆕 新入库</label>
+      <label><input type="checkbox" id="pap_unread"> 📬 仅未读</label>
+      <label><input type="checkbox" id="pap_star"> ⭐ 仅收藏</label>
+    </div>
+    <span class="more" id="papMore">⚙️ 更多筛选(期刊层级 / 来源 / 类型 / 方法体系 / 新颖度 / 标记)</span>
+    <div class="adv">
+      <div class="frow2">
+        <span class="flab">来源</span>
+        <select id="papSrc"></select>
+        <select id="papJournal"></select>
+        <select id="papTier"></select>
+        <select id="papType"></select>
+        <label><input type="checkbox" id="pap_oa"> 仅开放获取</label>
+      </div>
+      <div class="frow2">
+        <span class="flab">内容</span>
+        <select id="papMeth"></select>
+        <select id="papNov">
+          <option value="">新颖度(全部)</option>
+          <option value="high">🟣 新颖度高</option>
+          <option value="medium">🔵 新颖度中</option>
+          <option value="low">⚪ 新颖度低</option>
+        </select>
+        <label><input type="checkbox" id="pap_hot"> 🔥 Hotspot</label>
+        <label><input type="checkbox" id="pap_gap"> 🕳️ Gap</label>
+        <label><input type="checkbox" id="pap_q"> ❓ Question</label>
+        <label title="摘要里能拆出可复用句式的记录"><input type="checkbox" id="pap_ph"> 🧩 有可复用句式</label>
+        <label title="没有任何主题锚点词的记录 —— 检索式的误召回"><input type="checkbox" id="pap_off"> 🚧 仅疑似跑题</label>
+      </div>
+    </div>
   </div>
 
-  <div class="snapnote" id="snapProgress"></div>
-
-  <div class="calbanner" style="background:#F5F0FF;border-color:#D8C7F0;margin-bottom:10px">
-    <b>📰 每日摘要 &amp; 订阅:</b>
-    <a href="digest.html" target="_blank" rel="noopener"><b>打开今日摘要页</b></a>(近 7 天新发 + 三类标记,可直接打印/转发)
-    · <a href="feed.xml" target="_blank" rel="noopener"><b>RSS 订阅</b></a>(把这个链接加进 Feedly / Inoreader / NetNewsWire 等阅读器即可每日推送)
-    <br><span style="color:#7A5A00">不做邮件推送的原因:发信需要 SMTP 账号密码,放进公开仓库不安全;RSS 效果相同且零凭据。</span>
-  </div>
-
-  <div class="fbar">
-    <input type="text" id="papq" placeholder="搜索标题/摘要/作者/期刊/单位…">
-    <select id="papDir"></select>
-    <select id="papSrc"></select>
-    <select id="papJournal"></select>
-    <select id="papTier"></select>
-    <select id="papType"></select>
-    <select id="papNov">
-      <option value="">新颖度(全部)</option>
-      <option value="high">🟣 新颖度高</option>
-      <option value="medium">🔵 新颖度中</option>
-      <option value="low">⚪ 新颖度低</option>
-    </select>
-    <select id="papMeth"></select>
-    <select id="papBand">
-      <option value="">相关度(全部)</option>
-      <option value="high">🟣 高相关</option>
-      <option value="medium">🔵 中相关</option>
-      <option value="low">⚪ 低相关</option>
-    </select>
-    <select id="papWin">
-      <option value="">时间(全部)</option>
-      <option value="30">近 30 天</option>
-      <option value="90">近 90 天</option>
-      <option value="180">近 180 天</option>
-      <option value="365">近 1 年</option>
-    </select>
-    <select id="papSort">
-      <option value="score">按相关性↓</option>
-      <option value="date">按日期↓</option>
-      <option value="cites">按被引↓</option>
-      <option value="rate">按引用速率↓</option>
-      <option value="hot">按 Hotspot↓</option>
-    </select>
-    <label><input type="checkbox" id="pap_oa"> 仅开放获取</label>
-    <label><input type="checkbox" id="pap_hot"> 🔥 Hotspot</label>
-    <label><input type="checkbox" id="pap_gap"> 🕳️ Gap</label>
-    <label><input type="checkbox" id="pap_q"> ❓ Question</label>
-    <label><input type="checkbox" id="pap_star"> ⭐ 仅收藏</label>
-    <label><input type="checkbox" id="pap_unread"> 📬 仅未读</label>
-    <label title="没有任何主题锚点词的记录 —— 检索式的误召回"><input type="checkbox" id="pap_off"> 🚧 仅疑似跑题</label>
-    <label title="摘要里能拆出可复用句式的记录"><input type="checkbox" id="pap_ph"> 🧩 有可复用句式</label>
-    <button class="rst" id="papRst">↺ 重置</button>
-  </div>
-
-    <div class="calbanner" id="citeBanner" style="background:#F0F7FF;border-color:#BAD3F1;margin-bottom:10px;display:none"></div>
+    <div class="cnet" id="citeBanner" style="display:none"></div>
 
   <!-- ===== 深读抽屉:每篇文献的结构化拆解 / 方法证据 / 句式库 / 新颖度审计 / 引用邻域 ===== -->
   <div class="rdmask" id="rdMask"></div>
@@ -3074,7 +3155,7 @@ function openPf(step){
 function closePf(){document.getElementById("pfModal").classList.remove("open");}
 
 /* ---------- 导入 / 导出全部本地数据 ---------- */
-const LS_KEYS=["pi_profile","pi_tracked","pi_papers_state"];
+const LS_KEYS=["pi_profile","pi_tracked","pi_papers_state","pi_papers_lastseen"];
 function exportAll(){
   const o={_app:"grants-finder-pro",_exported:new Date().toISOString()};
   LS_KEYS.forEach(k=>{try{o[k]=JSON.parse(localStorage.getItem(k)||"null")}catch(e){o[k]=null}});
@@ -5574,6 +5655,102 @@ function pkey(pa){return pa.doi||pa.pmid||("t:"+(pa.title||"").slice(0,60));}
 function pstate(pa){const st=getPS();return st[pkey(pa)]||{};}
 function setPstate(pa,patch){const st=getPS();const k=pkey(pa);st[k]=Object.assign({},st[k]||{},patch);setPS(st);}
 
+/* -------------------------------------------------------------------------
+   分流引擎:把「852 条按相关性排好的列表」变成「今天该读什么」
+
+   设计约束(与档案层同一套):
+   1. 不编时间。「新入库」用 data/paper_first_seen.json 台账的 first_seen 字段,
+      不用发表日期 —— 一篇 2025 年的论文可能今天才被检索式捞到,拿发表日期算
+      「新增」会漏掉它。台账建立日之前的存量文献 first_seen 统一是台账建立日,
+      面板会照实说明这条线以前不可考。
+   2. 「上次查看」是本机 localStorage 里的时间戳,只在你按「标记为已看过」时前移。
+      不自动前移 —— 否则你随手点开面板一次,真正的新增就永远看不到了。
+   3. 无 DOI/PMID 的记录 first_seen 为空,不算新也不算旧,不进分流计数。
+   ------------------------------------------------------------------------- */
+const PAPSEEN_KEY="pi_papers_lastseen";
+/* 必须存成 JSON 字符串:备份/恢复(exportAll/importAll)对每个键做 JSON.parse /
+   JSON.stringify —— 存裸字符串会在导出时 parse 失败被丢掉,导入时又被套一层引号,
+   于是 "\"2026-08-18\"" > "2026-08-17" 的比较结果不可预期。 */
+function getLastSeen(){
+  try{
+    const raw=localStorage.getItem(PAPSEEN_KEY);
+    if(!raw)return "";
+    try{const v=JSON.parse(raw); return typeof v==="string"?v:"";}
+    catch(e){return raw;}   /* 兼容早期裸字符串写法 */
+  }catch(e){return "";}
+}
+function setLastSeen(iso){try{localStorage.setItem(PAPSEEN_KEY,JSON.stringify(iso))}catch(e){}}
+function isNewSince(pa,cut){
+  const fs=pa&&pa.first_seen;
+  if(!fs||!cut)return false;
+  return String(fs).slice(0,10)>String(cut).slice(0,10);
+}
+/* 从没标记过 → 全部当「新入库」是对的:你第一次用这个面板,确实一篇都没看过。
+   但要在界面上说清楚,不要让人以为今天真的进了 851 篇。 */
+function papNewList(){
+  const cut=getLastSeen();
+  if(!cut)return PAPERS.filter(p=>p.first_seen);
+  return PAPERS.filter(p=>isNewSince(p,cut));
+}
+function papQueue(){
+  const st=getPS();
+  const unread=PAPERS.filter(p=>{const k=pkey(p);return !(st[k]&&st[k].read);});
+  const news=papNewList();
+  /* 「值得挖」= 高相关 × 有 Gap/Question 标记 × 还没读。这是三个已有字段的交集,
+     不是新打的分 —— 面板不该发明它自己的权威。 */
+  const dig=unread.filter(p=>(p.band==="high")&&((p.tags||[]).includes("gap")||(p.tags||[]).includes("question")));
+  const star=PAPERS.filter(p=>{const k=pkey(p);return st[k]&&st[k].star;});
+  return {news:news,unread:unread,dig:dig,star:star};
+}
+function renderPapBench(){
+  const el=document.getElementById("papBench"); if(!el)return;
+  const q=papQueue();
+  const cut=getLastSeen();
+  const firstTime=!cut;
+  const cards=[
+    {k:"new", cls:"q_new",  n:q.news.length, lab:firstTime?"待过一遍(全部)":"新入库",
+     sub:firstTime?"你还没标记过任何一次查看 —— 先把感兴趣的读掉,再按右边按钮划一条线":"上次「标记为已看过」之后进语料的"},
+    {k:"dig", cls:"q_gap",  n:q.dig.length,  lab:"值得挖",
+     sub:"高相关 且 摘要里明写了空白/问题 且 未读 —— 写标书找切口就看这批"},
+    {k:"star",cls:"q_star", n:q.star.length, lab:"我的收藏",
+     sub:"⭐ 过的文献;导出 BibTeX/RIS 时也是这一批"}
+  ];
+  el.innerHTML=cards.map(c=>
+    `<button class="qc ${c.cls}${c.n?"":" zero"}${PAPQ===c.k?" on":""}" data-q="${c.k}"`+
+    ` ${c.n?"":"disabled"} title="${esc(c.sub)}">`+
+    `<b>${c.n}</b><div class="ql">${esc(c.lab)}${PAPQ===c.k?" ·  已筛选":""}</div>`+
+    `<div class="qs">${esc(c.sub)}</div></button>`).join("");
+  el.querySelectorAll("button[data-q]").forEach(b=>{
+    b.onclick=()=>{PAPQ=(PAPQ===b.dataset.q)?"":b.dataset.q; renderPapers(); renderPapBench();};
+  });
+  const sr=document.getElementById("papSeen");
+  if(sr){
+    const since=(PAPMETA&&PAPMETA.first_seen_since)||"";
+    sr.innerHTML=
+      `<span>上次标记查看:<b>${cut?esc(cut.slice(0,10)):"从未"}</b></span>`+
+      `<button class="sbtn" id="papMarkSeen">✓ 标记为已看过(把「新入库」归零)</button>`+
+      `<span>未读 <b>${q.unread.length}</b> / 共 <b>${PAPERS.length}</b></span>`+
+      (since?`<span style="color:#8A7B5B">入库台账自 ${esc(since)} 起记录;此前的存量文献统一记为该日,不假装知道它们当初何时入库。</span>`:"");
+    const mb=document.getElementById("papMarkSeen");
+    if(mb)mb.onclick=()=>{
+      setLastSeen(new Date().toISOString());
+      if(PAPQ==="new")PAPQ="";
+      renderPapBench(); renderPapers();
+    };
+  }
+}
+/* 工作台预设与下面的筛选器正交:预设决定「候选池」,筛选器在池内继续收窄。
+   两者叠加而不是互相覆盖,否则点了预设再动筛选会出现莫名其妙的结果。 */
+let PAPQ="";
+function papQueuePass(pa){
+  if(!PAPQ)return true;
+  const st=pstate(pa);
+  if(PAPQ==="new") return isNewSince(pa,getLastSeen())||(!getLastSeen()&&!!pa.first_seen);
+  if(PAPQ==="star")return !!st.star;
+  if(PAPQ==="dig") return !st.read&&pa.band==="high"&&((pa.tags||[]).includes("gap")||(pa.tags||[]).includes("question"));
+  return true;
+}
+
 function esc(x){return String(x==null?"":x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 
 /* Grants.gov 对「无金额上限」既可能给 null,也可能给字符串 "none" 或 "0"。
@@ -5643,6 +5820,10 @@ function ppass(pa,skip){
   if(document.getElementById("pap_star").checked&&!st.star)return false;
   if(document.getElementById("pap_unread").checked&&st.read)return false;
   if(skip!=="mytag"&&PAP_TAGFILT&&!((st.tags||[]).includes(PAP_TAGFILT)))return false;
+  const nwEl=document.getElementById("pap_new");
+  if(nwEl&&nwEl.checked&&!(isNewSince(pa,getLastSeen())||(!getLastSeen()&&!!pa.first_seen)))return false;
+  /* 工作台预设最后叠加:它决定候选池,上面的筛选器在池内继续收窄 */
+  if(!papQueuePass(pa))return false;
   return true;
 }
 
@@ -5907,6 +6088,8 @@ function papCard(pa){
   const tagHtml=(tags.includes("hotspot")?`<span class="ptag hotspot">🔥 Hotspot</span>`:"")+
                 (tags.includes("gap")?`<span class="ptag gap">🕳️ Gap</span>`:"")+
                 (tags.includes("question")?`<span class="ptag question">❓ Question</span>`:"")+
+                (isNewSince(pa,getLastSeen())||(!getLastSeen()&&pa.first_seen)
+                   ?`<span class="ptag" style="background:#E0F2F1;color:#00695C" title="入库台账里第一次出现的日期 ${esc(String(pa.first_seen||""))},在你上次标记查看之后">🆕 新入库</span>`:"")+
                 (pa.is_oa?`<span class="ptag oa">🔓 OA</span>`:"")+
                 (pa.preprint?`<span class="ptag pre">📄 预印本</span>`:"")+
                 (pa.tier&&pa.tier!=="preprint"?`<span class="ptag ${pa.tier.toLowerCase()}" title="期刊层级代理(非 JCR 影响因子)">${pa.tier} ${TIERLAB[pa.tier]||""}</span>`:"");
@@ -5951,6 +6134,9 @@ function papCard(pa){
 function renderPapers(){
   if(!document.getElementById("papWrap"))return;
   wirePapersOnce();
+  /* 进阶筛选是折叠的。如果里面有条件已生效却看不见,用户会以为结果错了 ——
+     所以只要进阶区里有任何非默认值,就自动展开并说明,绝不静默过滤。 */
+  syncAdvOpen();
   const rows=PAPERS.filter(x=>ppass(x,null));
   /* 动态计数(每次渲染按其它已生效条件重算) */
   papDirSel();
@@ -5987,7 +6173,22 @@ function renderPapers(){
           `所以「引用加速度」无法凭空算出。本站从上线当天开始每日存一份被引快照,满 7 天后自动切换为真实加速度;`+
           `在此之前 Hotspot 只用<b>当日可核验</b>的信号:引用速率(被引数÷发表月数)、新鲜度、预印本是否已被期刊接收。`;
 
+  renderPapBench();
   noteRender("papers",rows.length,PAPERS.length,"papWrap");
+}
+
+/* 折叠区里有生效条件时强制展开 —— 隐藏的筛选器是「结果不对」类投诉的第一来源 */
+function syncAdvOpen(){
+  const fg=document.getElementById("papFgrp"); if(!fg)return;
+  const sels=["papSrc","papJournal","papTier","papType","papMeth","papNov"];
+  const boxes=["pap_oa","pap_hot","pap_gap","pap_q","pap_off","pap_ph"];
+  const active=sels.some(id=>{const e=document.getElementById(id);return e&&e.value;})||
+               boxes.some(id=>{const e=document.getElementById(id);return e&&e.checked;});
+  const mo=document.getElementById("papMore");
+  if(active&&!fg.classList.contains("openadv")){
+    fg.classList.add("openadv");
+    if(mo)mo.textContent="⚙️ 收起进阶筛选(有条件已生效,已自动展开)";
+  }
 }
 
 /* 引用网络概览:语料内"地基文献"与方向交叉点。诚实说明稀疏的原因。 */
@@ -5997,21 +6198,28 @@ function renderCiteBanner(){
   el.style.display="";
   const fnd=(CITENET.foundational||[]).filter(f=>f.n>=2).slice(0,6);
   const br=(CITENET.bridge_pairs||[]).slice(0,5);
-  el.innerHTML=`<b>🕸️ 语料内引用网络</b>(${esc(CITENET.generated||"?")} · Europe PMC)——
-    查询了相关性最高的 <b>${CITENET.queried_n||0}</b> 篇(有 PMID 的共 ${CITENET.corpus_with_pmid||0} 篇),
-    建成<b>两端都在语料内</b>的引用边 <b>${CITENET.edges_n||0}</b> 条${CITENET.query_failures?`,<b style="color:#8A2018">查询失败 ${CITENET.query_failures} 篇(${Math.round(100*CITENET.query_failures/Math.max(1,CITENET.queried_n||1))}%)</b>`:""}。
-    ${CITENET.query_failures?`<br><span style="color:#8A2018">失败率不低</span>——Europe PMC 偶发连接挂起,
-    <b>失败记录的引用邻域显示为空,不代表它没有引用关系</b>;下一轮定时任务会重试。`:""}
-    <br><span style="color:#14538F">为什么边这么少:</span>本语料是<b>近期窗口</b>切片(多为近 1–2 年发表),
-    彼此之间还没时间互相引用 —— 这是<b>预期结果</b>,不代表这些文章没影响力(整体影响力看每张卡片上的被引数)。
-    这张图的用处是找出<b>本领域内部被反复引用的地基文献</b>,以及<b>跨方向的连接点</b>。
-    ${fnd.length?`<br><b>语料内被引最多(≥2 次):</b>${fnd.map(f=>
-      `<br>&nbsp;&nbsp;· <a href="https://pubmed.ncbi.nlm.nih.gov/${esc(f.pmid)}/" target="_blank" rel="noopener">${esc(f.title)}</a>
-        <span style="color:#8892A4">(${esc(String(f.year||"?"))} · 语料内被引 ${f.n} 次)</span>`).join("")}`:
-      `<br><span style="color:#8892A4">目前还没有被语料内 ≥2 篇引用的文献。</span>`}
-    ${br.length?`<br><b>跨方向连接:</b>${br.map(b=>
-      `<span class="ptag" style="background:#E7F0FC;color:#14538F">${esc((INTMAP[b.a]||{}).name||b.a)} ↔ ${esc((INTMAP[b.b]||{}).name||b.b)} (${b.n})</span>`).join(" ")}`:""}
-    <br><span style="color:#8892A4;font-size:11.5px">预印本无 PMID,不在图内。每篇的引用邻域在卡片「🔎 深读拆解」里。</span>`;
+  const fail=CITENET.query_failures||0;
+  const failPct=Math.round(100*fail/Math.max(1,CITENET.queried_n||1));
+  /* 原来这里是一串 <br> + &nbsp; 拼出来的伪列表:标题和「年份·被引」挤同一行,
+     长标题换行后会压到后面的计数上 —— 截图里读不动就是这个原因。
+     改成 <li> 块级三列(序号 / 标题 / 计数),标题再长也不会撞计数。 */
+  el.innerHTML=
+    `<h4>🕸️ 语料内引用网络 —— 找本领域的「地基文献」</h4>`+
+    `<div>查询相关性最高的 <b>${CITENET.queried_n||0}</b> 篇(语料中有 PMID 的共 ${CITENET.corpus_with_pmid||0} 篇),`+
+    `建成<b>两端都在语料内</b>的引用边 <b>${CITENET.edges_n||0}</b> 条`+
+    (fail?`,<b class="warn">查询失败 ${fail} 篇(${failPct}%)</b>`:"")+
+    `<span class="note">${esc(CITENET.generated||"?")} · 数据源 Europe PMC</span></div>`+
+    (fail?`<div class="cwhy warn">失败率不低:Europe PMC 偶发连接挂起。<b>失败记录的引用邻域显示为空,不代表它没有引用关系</b>;下一轮定时任务会重试。</div>`:"")+
+    (fnd.length
+      ? `<ol class="fnd">`+fnd.map(f=>
+          `<li><span class="ft"><a href="https://pubmed.ncbi.nlm.nih.gov/${esc(f.pmid)}/" target="_blank" rel="noopener">${esc(f.title)}</a></span>`+
+          `<span class="fn">${esc(String(f.year||"?"))} · 语料内被引 ${f.n}</span></li>`).join("")+`</ol>`
+      : `<div class="cwhy">目前还没有被语料内 ≥2 篇引用的文献 —— 原因见下。</div>`)+
+    (br.length?`<div style="margin-top:8px"><b>跨方向连接点:</b><div class="brg">`+br.map(b=>
+        `<span class="ptag" style="background:#E7F0FC;color:#14538F">${esc((INTMAP[b.a]||{}).name||b.a)} ↔ ${esc((INTMAP[b.b]||{}).name||b.b)} (${b.n})</span>`).join("")+`</div></div>`:"")+
+    `<div class="cwhy"><b>为什么边这么少(是预期,不是 bug):</b>本语料是<b>近期窗口</b>切片(多为近 1–2 年发表),彼此还没时间互相引用。`+
+    `这不代表这些文章没影响力 —— 整体影响力看每张卡片上的被引数。这张图只回答一件事:<b>哪几篇是本领域内部被反复引用的地基文献</b>。`+
+    `<span class="note">预印本无 PMID,不在图内。单篇引用邻域在卡片「🔎 深读拆解」里。</span></div>`;
 }
 
 /* 方向下拉:动态计数 */
@@ -6361,7 +6569,7 @@ function renderPapViz(rows){
 function wirePapersOnce(){
   if(PAP_WIRED)return; PAP_WIRED=true;
   ["papq","papDir","papSrc","papJournal","papTier","papType","papBand","papNov","papMeth","papWin","papSort",
-   "pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread","pap_off","pap_ph"].forEach(id=>{
+   "pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread","pap_off","pap_ph","pap_new"].forEach(id=>{
     const el=document.getElementById(id); if(!el)return;
     el.addEventListener(el.tagName==="INPUT"&&el.type==="text"?"input":"change",renderPapers);
   });
@@ -6372,8 +6580,16 @@ function wirePapersOnce(){
     ["papq"].forEach(id=>document.getElementById(id).value="");
     ["papDir","papSrc","papJournal","papTier","papType","papBand","papNov","papMeth","papWin"].forEach(id=>document.getElementById(id).value="");
     document.getElementById("papSort").value="score";
-    ["pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread","pap_off","pap_ph"].forEach(id=>document.getElementById(id).checked=false);
-    PAP_TAGFILT=""; renderPapers();
+    ["pap_oa","pap_hot","pap_gap","pap_q","pap_star","pap_unread","pap_off","pap_ph","pap_new"].forEach(id=>{
+      const e=document.getElementById(id); if(e)e.checked=false;});
+    PAP_TAGFILT=""; PAPQ=""; renderPapers(); renderPapBench();
+  };
+  const mo=document.getElementById("papMore"), fg=document.getElementById("papFgrp");
+  if(mo&&fg)mo.onclick=()=>{
+    fg.classList.toggle("openadv");
+    mo.textContent=fg.classList.contains("openadv")
+      ? "⚙️ 收起进阶筛选"
+      : "⚙️ 更多筛选(期刊层级 / 来源 / 类型 / 方法体系 / 新颖度 / 标记)";
   };
   const D=new Date().toISOString().slice(0,10);
   document.getElementById("expBib").onclick=()=>dl(`papers_${D}.bib`,toBib(curPapers()),"application/x-bibtex");
@@ -6860,14 +7076,16 @@ var HELP = {
       {t:"院所目录:仅已核实链接",set:[["instStatus","verified"]]}],
   caveat:"契合度只是**关键词打分**,不是对岗位描述的理解。分低不代表不适合,只代表你的词库没命中。"},
 
- papers:{what:"按你配置的方向每日跨 6 个源抓新文献,打分并标 Hotspot / Gap / 提问。",
-  how:["先用方向 + 时间窗收窄,再用「🕳️ Gap」这类标签找可写的空白点。",
-       "点标题展开摘要;⭐ 收藏和 📬 已读状态存在本机浏览器。",
-       "「新颖度」和「相关度」都是离线可复算的规则分,规则写在 README。"],
-  ex:[{t:"近 30 天 · 高相关",set:[["papWin","30"],["papBand","high"]]},
+ papers:{what:"按你配置的方向每日跨 6 个源抓新文献,打分并标 Hotspot / Gap / 提问。顶部「今日工作台」把 800+ 条变成一个可清空的队列。",
+  how:["**每天三步:**① 点「新入库」看上次之后多了什么 → ② 读完的点 📬 标已读、有用的点 ⭐ → ③ 走之前按「✓ 标记为已看过」划一条线。下次进来「新入库」就只显示这条线之后的。",
+       "**写标书找切口:**点「值得挖」—— 高相关 × 摘要里明写了空白/问题 × 你还没读,三个条件的交集。",
+       "筛选器分两层:常用的六个在外面,期刊层级/来源/方法体系等 13 个收在「⚙️ 更多筛选」里。折叠区里若有条件生效,会自动展开提示你,不会静默过滤。",
+       "「新颖度」和「相关度」都是离线可复算的规则分,规则写在 README;点分数能看到命中了哪些词。"],
+  ex:[{t:"新入库(上次之后)",set:[["pap_new","1"]]},
+      {t:"近 30 天 · 高相关",set:[["papWin","30"],["papBand","high"]]},
       {t:"只看 Gap 句(可写的空白)",set:[["pap_gap","1"]]},
       {t:"只看开放获取",set:[["pap_oa","1"]]}],
-  caveat:"Gap 标签是**摘要里出现「尚不清楚 / 缺乏证据」这类句式**触发的,是线索不是结论 —— 打开原文自己判断。"},
+  caveat:"两点诚实边界:① Gap 标签是**摘要里出现「尚不清楚 / 缺乏证据」这类句式**触发的,是线索不是结论 —— 打开原文自己判断。② 「新入库」用的是**入库台账**(第一次出现在本站语料的日期),不是发表日期 —— 一篇 2025 年的老论文今天才被检索式捞到,也算新入库,这是刻意的。台账建立日之前的存量文献统一记为该日。"},
 
  pipeline:{what:"你点过「关注」的资助 / 职位 / 院所,都在这里管状态和写笔记。",
   how:["改状态(感兴趣→起草中→已提交→获奖/被拒),笔记直接在格子里输。",

@@ -692,6 +692,48 @@ def journal_tier(j):
     return _TIER_EXACT.get(norm_jname(j), "T4")
 
 
+# ---------------------------------------------------------------- 入库台账
+# 「发表日期」和「进本站语料的日期」是两件事:一篇 2025 年发的论文可能今天才被
+# 检索式捞到(检索词改了、Europe PMC 补了索引、预印本转正换了 DOI)。面板要回答
+# 「我上次看之后多了什么」,靠发表日期是答不准的 —— 会漏掉今天才入库的旧文。
+# 所以单独记一份台账:每个 key 第一次出现在语料里的日期,只增不改。
+# 诚实边界:台账从第一次运行本函数那天起才有数据,之前的存量文献统一记为
+# 「台账建立日」,不假装知道它们当初什么时候入库 —— meta.first_seen_since 就是给
+# 前端用来说明这条线以前的数据不可考。
+def load_first_seen():
+    fp = os.path.join(DATA, "paper_first_seen.json")
+    if os.path.exists(fp):
+        try:
+            d = json.load(open(fp))
+            if isinstance(d, dict) and "seen" in d:
+                return d
+        except Exception:
+            pass
+    return {"since": TODAY.isoformat(), "seen": {}}
+
+
+def stamp_first_seen(ledger, papers):
+    day = TODAY.isoformat()
+    seen = ledger["seen"]
+    added = 0
+    for p in papers:
+        k = p.get("doi") or p.get("pmid")
+        if not k:
+            # 无 DOI/PMID(部分预印本)无法稳定成键,不记台账也不撒谎:字段留空
+            p["first_seen"] = None
+            continue
+        if k not in seen:
+            seen[k] = day
+            added += 1
+        p["first_seen"] = seen[k]
+    # 台账只增不删。语料是滑动窗口,今天掉出窗口的文献明天可能因为被引更新又回来,
+    # 删掉它的入库日期会让它第二次被当成「新增」——那是假新增。
+    ledger["n"] = len(seen)
+    json.dump(ledger, open(os.path.join(DATA, "paper_first_seen.json"), "w"),
+              ensure_ascii=False, separators=(",", ":"))
+    return added
+
+
 # ---------------------------------------------------------------- 引用快照
 def load_snapshots():
     fp = os.path.join(DATA, "citation_snapshots.json")
@@ -759,6 +801,9 @@ def main():
     for i, p in enumerate(papers): p["i"] = i
 
     snap = save_snapshots(snap, papers)
+    fs_ledger = load_first_seen()
+    n_new = stamp_first_seen(fs_ledger, papers)
+    print(f"first_seen: +{n_new} new to corpus (ledger {fs_ledger['n']} keys since {fs_ledger['since']})", flush=True)
     meta = {
         "updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "window": {"since": SINCE.isoformat(), "until": TODAY.isoformat(), "days": WINDOW_DAYS},
@@ -771,6 +816,8 @@ def main():
         "preprint_n": sum(1 for p in papers if p["preprint"]),
         "snapshot_days": snap.get("days_accumulated", 0),
         "snapshot_first": snap.get("first_date"),
+        "first_seen_since": fs_ledger["since"],
+        "first_seen_new_today": n_new,
         "sources": ["pubmed", "epmc", "epmc_ppr", "biorxiv", "arxiv", "crossref"],
         "biorxiv_scan": dict(BIORXIV_STAT),
         "excluded_sources": {"web_of_science": "需付费订阅",
