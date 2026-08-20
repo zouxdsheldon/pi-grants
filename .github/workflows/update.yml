@@ -4,6 +4,17 @@ on:
   schedule:
     - cron: '0 11 * * *'      # daily at 11:00 UTC (~07:00 US Eastern)
   workflow_dispatch: {}        # allow manual "Run workflow" button
+  push:
+    branches: [main]
+    paths:
+      # 换研究方向后立刻重抓,不必等第二天的定时任务。改方向的人想马上看到
+      # 新方向下的文献,隔一夜才生效等于这个面板不能用。
+      - 'data/interests_inbox/**'
+      - 'data/interests.json'
+      # 循环安全性:本工作流自己的提交用默认 GITHUB_TOKEN 推送,而 GitHub 明确规定
+      # 用 GITHUB_TOKEN 推的提交**不会**再触发 on:push 工作流 —— 所以
+      # "抓取 → 提交 interests.json → 再次触发抓取" 这个环不会形成。
+      # (若哪天把提交步骤换成 PAT 或 deploy key,这里必须同时改,否则会自激。)
 
 permissions:
   contents: write
@@ -58,13 +69,21 @@ jobs:
           git config user.email "grants-bot@users.noreply.github.com"
           # journals.json 必须一起提交:它是从 papers.json 重算的,漏掉它
           # 会让期刊面板长期停留在旧计数(2026-08 发现的真实 bug)。
-          git add data/grants.json data/grant_deadlines.ics data/jobs.json \
-                  data/curated.json data/pivot_inbox \
-                  data/interests.json data/interests_inbox \
-                  data/papers.json data/citation_snapshots.json \
-                  data/citenet.json data/journals.json \
-                  data/fetch_log_papers.json data/digest.json \
-                  digest.html feed.xml
+          # 逐个 add,跳过不存在的路径。
+          # 为什么不写成一条 `git add a b c`:git 对**任何**一个不存在的 pathspec
+          # 都会 fatal 并中止整条命令 —— 于是当天抓好的数据一并被丢弃。
+          # 2026-08-18/19 就是这么连丢两天的:收件箱目录是空的,git 不跟踪空目录,
+          # 目录不在仓库里 → `git add data/interests_inbox` fatal → 提交步骤失败。
+          # 现在两个收件箱都有 .gitkeep 保底,这里再加一层:缺了就跳过,不再拖垮提交。
+          for p in data/grants.json data/grant_deadlines.ics data/jobs.json \
+                   data/curated.json data/pivot_inbox \
+                   data/interests.json data/interests_inbox \
+                   data/papers.json data/citation_snapshots.json \
+                   data/citenet.json data/journals.json \
+                   data/fetch_log_papers.json data/digest.json \
+                   digest.html feed.xml; do
+            if [ -e "$p" ]; then git add "$p"; else echo "跳过(不存在): $p"; fi
+          done
           if git diff --staged --quiet; then
             echo "No changes."
           else

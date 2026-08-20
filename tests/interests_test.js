@@ -251,6 +251,62 @@ setTimeout(() => {
     ok(H.mydirs.how.join(" ").indexOf("核心词") >= 0, "how 应解释核心词/外围词区别");
   });
 
-  console.log("\n" + pass + " passed, " + fail + " failed");
-  process.exit(fail ? 1 : 0);
+  // ---- I15~I18 抓取状态查询 ----
+  // 这个功能存在的理由:8/18-8/19 抓取连续两天失败,页面上完全看不出来,
+  // 用户只会觉得"文献怎么不更新了"。所以失败态必须明说"数据没有更新"。
+  // dirRunCheck 是异步的 —— 同步断言会在 DOM 更新前就跑完,等于没测。
+  function runBox(runs){
+    const real = win.fetch;
+    win.fetch = (u) => {
+      if (String(u).indexOf("api.github.com") >= 0)
+        return Promise.resolve({ ok:true, status:200,
+          json:()=>Promise.resolve({workflow_runs:runs}), text:()=>Promise.resolve("{}") });
+      return real(u);
+    };
+    P("dirRunCheck()");
+    return new Promise(res=>setTimeout(()=>{
+      win.fetch = real;
+      res(doc.getElementById("dirRunBox").textContent);
+    }, 60));
+  }
+  const AT = async (name, fn) => {
+    try { await fn(); console.log("  ok   " + name); pass++; }
+    catch (e) { console.log("  FAIL " + name + " — " + (e && e.message || e)); fail++; }
+  };
+  const iso = m => new Date(Date.now() - m*60000).toISOString();
+
+  T("I15 状态按钮存在且面板有承载容器", () => {
+    ok(doc.getElementById("dirRunChk"), "缺少「抓取跑完了吗」按钮");
+    ok(doc.getElementById("dirRunBox"), "缺少 #dirRunBox");
+  });
+
+  (async () => {
+    await AT("I16 抓取失败必须明说数据没更新,不能只显示一个红叉", async () => {
+      const txt = await runBox([{status:"completed", conclusion:"failure", event:"schedule",
+                                 created_at: iso(6), html_url:"https://x/run/1"}]);
+      ok(/失败/.test(txt), "失败态没说「失败」:" + txt.slice(0,80));
+      ok(/没有更新|没更新/.test(txt),
+         "失败态必须点明当天数据没有更新 —— 否则用户只会以为是没有新文献。got=" + txt.slice(0,120));
+    });
+
+    await AT("I17 运行中不谎报成功,并给出等待量级", async () => {
+      const txt = await runBox([{status:"in_progress", conclusion:null, event:"push",
+                                 created_at: iso(3), html_url:"https://x/run/2"}]);
+      ok(/正在跑|进行中/.test(txt), "运行中态措辞不对:" + txt.slice(0,80));
+      ok(!/成功/.test(txt.replace(/最近三次[\s\S]*/,"")), "运行中不得出现「成功」字样");
+      ok(/分钟/.test(txt), "应给出等待时间量级");
+    });
+
+    await AT("I18 成功不等于页面已更新 —— 必须提示部署延迟与强制刷新", async () => {
+      const txt = await runBox([{status:"completed", conclusion:"success", event:"push",
+                                 created_at: iso(4), html_url:"https://x/run/3"}]);
+      ok(/成功/.test(txt), "成功态没说成功");
+      ok(/刷新/.test(txt),
+         "Actions 成功 ≠ 网页已变新(还要等 Pages 部署 + 浏览器缓存),必须提示强制刷新。got=" + txt.slice(0,120));
+    });
+
+    console.log("\n" + pass + " passed, " + fail + " failed");
+    process.exit(fail ? 1 : 0);
+  })();
+  return;
 }, 900);

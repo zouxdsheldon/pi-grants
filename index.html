@@ -1086,10 +1086,13 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
        B) 只想先看看效果 → 「试算」只在浏览器里跑,不改任何文件
        面板绝不声称自己能直接改服务器上的 interests.json —— 静态页没有服务端。 -->
   <div class="calbanner" style="background:#F5F0FF;border-color:#D6C9EC">
-    <b>这一页替你写 <code>data/interests.json</code>,你不用打开那个文件。</b><br>
-    填方向名 + 几个关键词 → 下面会<b>实时</b>告诉你「现有 852 篇里命中多少」和「PubMed 全库有多大」→
-    满意了点「下载方向表」→ 再点「打开收件箱」把文件拖进去。明早的定时任务自动换库。
+    <b>第 1 步:先在这里定方向。定完了,「🔔 文献追踪」才是你每天要看的那一页。</b><br>
+    填方向名 + 几个关键词 → 下面会<b>实时</b>告诉你「现有语料里命中多少」和「PubMed 全库有多大」→
+    满意了点「下载方向表」→ 再点「打开收件箱」把文件拖进去 Commit。
+    <b>提交完抓取就会自动开跑</b>,不用等第二天,也不用去 Actions 手动点。
     <span class="note">检索式(<code>[tiab]</code> 那种)由核心词自动生成,你永远不用写。</span>
+    <span class="note"><b>要等多久:</b>抓取要跨 6 个源、几百篇拉摘要,通常 <b>5–15 分钟</b>。
+    期间「文献追踪」还是旧的;跑完刷新页面才会变 —— 页面不会自己弹出来告诉你好了。</span>
   </div>
 
   <div class="dirbtns">
@@ -1100,8 +1103,10 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <button class="abtn" id="dirDl" style="background:#2E7D32">⬇️ 下载方向表 (.json)</button>
     <a class="abtn" id="dirInbox" target="_blank" rel="noopener"
        style="text-decoration:none;background:#4A148C">📂 打开收件箱(把文件拖进去)</a>
+    <button class="abtn" id="dirRunChk" style="background:#37474F">🔄 抓取跑完了吗</button>
   </div>
   <span class="status" id="dirStat"></span>
+  <div id="dirRunBox" style="display:none;margin-top:8px"></div>
 
   <div id="dirWrap"></div>
 
@@ -1762,10 +1767,11 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       <li><b>想要属于自己的一份（含每日自动抓取）？</b> Fork 本仓库 → 仓库 Settings → Pages →
       Source 选 <code>GitHub Actions</code> → Actions 页点一次 <b>Run workflow</b>。十分钟后你的
       <code>https://&lt;你的用户名&gt;.github.io/&lt;仓库名&gt;/</code> 就活了。</li>
-      <li><b>改成你自己的研究方向</b>（决定文献抓什么、资助怎么排序）：编辑
-      <b>去「🎯 我的研究方向」面板填表</b>——填方向名 + 关键词,面板替你生成检索式、
-      试算 PubMed 全库命中量,再一键下载并拖进 <code>data/interests_inbox/</code>,
-      明早定时任务自动换库。你不需要打开 <code>data/interests.json</code>,也不用学 <code>[tiab]</code> 语法。</li>
+      <li><b>改成你自己的研究方向</b>（决定文献抓什么、资助怎么排序）：
+      去「🎯 我的研究方向」面板填表——填方向名 + 关键词,面板替你生成检索式、
+      试算 PubMed 全库命中量,再一键下载并拖进 <code>data/interests_inbox/</code> 并 Commit。
+      <b>提交后抓取自动开跑（约 5–15 分钟），跑完刷新「🔔 文献追踪」即可</b>。
+      你不需要打开 <code>data/interests.json</code>,也不用学 <code>[tiab]</code> 语法。</li>
     </ol>
 
     <table class="htab" style="margin-top:10px">
@@ -3349,9 +3355,9 @@ var HUB_SECTIONS=[
   ]},
  {h:"③ 读文献 · 查数据库", st:"左半边是「盯住你自己方向」的持续追踪,右半边是「临时要查一个东西」的实时检索",
   tools:[
-   {sp:"A · 持续追踪自己的方向 —— 本地已抓好的语料,打分可离线复算"},
-   {p:"papers", ic:"📚", nm:"文献追踪", ds:"PubMed / bioRxiv / arXiv / Crossref 多源合并,按你的 8 个方向打分", cnt:()=>PAPERS.length, u:"篇在库"},
-   {p:"mydirs", ic:"🎯", nm:"我的研究方向", ds:"换课题就改这里:填关键词,面板替你生成检索式并试算命中量", cnt:()=>INTERESTS.length, u:"个方向"},
+   {sp:"A · 持续追踪自己的方向 —— 先定方向(第 1 步),再每天看追踪结果(第 2 步)"},
+   {p:"mydirs", ic:"🎯", nm:"① 我的研究方向", ds:"先在这里定方向:填关键词,面板替你生成检索式并试算命中量。改完提交,抓取立刻重跑", cnt:()=>INTERESTS.length, u:"个方向"},
+   {p:"papers", ic:"📚", nm:"② 文献追踪", ds:"按上面的方向每天跨 6 个源抓取并打分,这是你每天真正要看的那一页", cnt:()=>PAPERS.length, u:"篇在库"},
    {p:"papers", ic:"🔥", nm:"热点论文", ds:"按引用增速排序的近期高关注论文", act:"hot",
     cnt:()=>PAPERS.filter(p=>(p.hot_score||0)>0).length, u:"篇有热度"},
    {p:"papers", ic:"💡", nm:"高新颖度", ds:"与既有语料差异最大的论文,常是新方法或新现象", act:"nov",
@@ -3475,8 +3481,8 @@ var SIDE_NAV=[
     {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"}
   ]},
   {g:"③ 读文献 · 查数据库", items:[
-    {p:"papers",  ic:"🔔", t:"文献追踪",   n:"papN"},
     {p:"mydirs",  ic:"🎯", t:"我的研究方向", nw:1},
+    {p:"papers",  ic:"🔔", t:"文献追踪",   n:"papN"},
     {p:"tsearch", ic:"📚", t:"文献检索中心", nw:1},
     {p:"tgene",   ic:"🧫", t:"基因疾病注释", nw:1},
     {p:"ttrial",  ic:"🏥", t:"临床试验",   nw:1}
@@ -6009,6 +6015,70 @@ function wireMyDirsOnce(){
   }
   const pb=document.getElementById("dirProbe");
   if(pb) pb.onclick=dirProbe;
+  const rc=document.getElementById("dirRunChk");
+  if(rc) rc.onclick=dirRunCheck;
+}
+
+/* 抓取状态查询:提交完方向表后,用户唯一想知道的是「跑完了没、能刷新了吗」。
+   在此之前他只能盲等或自己去 Actions 页翻 —— 那正是这个面板想省掉的一步。
+   免认证的公开 Actions API 就能读到(已验证匿名可用),所以不需要任何 token。
+
+   诚实边界(必须写进 UI,不能只写在注释里):
+   - Actions 显示 success ≠ 网页已经变新。抓取提交后,Pages 还要再跑一次部署,
+     通常再等 1–3 分钟;而且你本地可能命中浏览器缓存。所以文案说「再等几分钟并强制刷新」。
+   - 只看 update.yml 这一条工作流,不看 Pages 部署 —— 后者是另一个工作流,
+     混在一起报会让「成功」变得含义不明。 */
+function dirRunCheck(){
+  const box=document.getElementById("dirRunBox"); if(!box) return;
+  const h=location.hostname||"", parts=location.pathname.split("/").filter(Boolean);
+  const owner=h.endsWith(".github.io")?h.replace(".github.io",""):"";
+  const repo=parts.length?parts[0]:"";
+  if(!owner||!repo){
+    box.style.display="block";
+    box.innerHTML='<div class="honest">这个按钮只在已部署的 GitHub Pages 上有用 '+
+      '(本地打开时看不出仓库是谁的)。请到线上那份页面点。</div>';
+    return;
+  }
+  box.style.display="block";
+  box.innerHTML='<span class="note">正在问 GitHub…</span>';
+  const api="https://api.github.com/repos/"+owner+"/"+repo+
+            "/actions/workflows/update.yml/runs?per_page=3";
+  tfetch(api).then(j=>{
+    const rs=(j.workflow_runs||[]);
+    if(!rs.length){ box.innerHTML='<div class="honest">还没有任何抓取记录。</div>'; return; }
+    const r=rs[0];
+    const started=new Date(r.created_at), mins=Math.round((Date.now()-started)/60000);
+    const when=mins<60?(mins+" 分钟前"):(Math.round(mins/60)+" 小时前");
+    let head, cls;
+    if(r.status!=="completed"){
+      cls="calbanner";
+      head="⏳ <b>正在跑</b>("+when+"开始)。跨 6 个源抓几百篇摘要,通常 5–15 分钟。"+
+           "跑完后再等 1–3 分钟让页面重新部署,然后<b>强制刷新</b>(Cmd/Ctrl+Shift+R)。";
+    }else if(r.conclusion==="success"){
+      cls="calbanner";
+      head="✅ <b>最近一次抓取成功</b>("+when+")。如果页面上的文献还是旧的,"+
+           "多半是页面部署还没完或浏览器缓存 —— 等 1–3 分钟再<b>强制刷新</b>(Cmd/Ctrl+Shift+R)。";
+    }else{
+      cls="honest";
+      head="❌ <b>最近一次抓取失败</b>("+when+",结论:"+esc(r.conclusion||"?")+")。"+
+           "<b>这意味着当天的数据没有更新</b>,页面上显示的还是上一次成功时的语料。"+
+           "点下面的链接看日志里哪一步红了。";
+    }
+    const hist=rs.map(x=>{
+      const d=new Date(x.created_at).toISOString().slice(0,10);
+      const ic=x.status!=="completed"?"⏳":(x.conclusion==="success"?"✅":"❌");
+      return ic+" "+d+" · "+esc(x.event||"");
+    }).join(" &nbsp; ");
+    box.innerHTML='<div class="'+cls+'">'+head+
+      '<div class="note" style="margin-top:6px">最近三次:'+hist+'</div>'+
+      '<div class="note" style="margin-top:4px">'+
+      '<a href="'+esc(r.html_url)+'" target="_blank" rel="noopener">在 GitHub 上看这次运行 →</a></div>'+
+      '</div>';
+  }).catch(e=>{
+    box.innerHTML='<div class="honest">问不到 GitHub:'+esc(String(e&&e.message||e))+
+      '。可能是网络受限或 API 限流(未登录时每小时 60 次)。'+
+      '可以直接去仓库的 Actions 页看。</div>';
+  });
 }
 
 /* 联网试算:只问「PubMed 全库有多少篇」。这是判断词写得对不对的唯一可靠信号 ——
@@ -7453,11 +7523,11 @@ var HELP = {
   caveat:"契合度只是**关键词打分**,不是对岗位描述的理解。分低不代表不适合,只代表你的词库没命中。"},
 
  mydirs:{what:"换课题就来这一页:填方向名 + 几个关键词,面板替你写 data/interests.json,并生成 PubMed / Europe PMC / Crossref 的检索式。你不用打开任何文件,也不用学 [tiab] 那套语法。",
-  how:["**四步换方向:**① 点「读回当前线上方向」把现在的 8 个方向调出来 → ② 改名字、加减关键词(打字后按回车或逗号成词,点 × 删词) → ③ 点「联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → ④ 点「下载方向表」再点「打开收件箱」把文件拖进去、Commit。明早定时任务自动换库。",
+  how:["**四步换方向:**① 点「读回当前线上方向」把现在的 8 个方向调出来 → ② 改名字、加减关键词(打字后按回车或逗号成词,点 × 删词) → ③ 点「联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → ④ 点「下载方向表」再点「打开收件箱」把文件拖进去、Commit —— **Commit 完抓取立刻自动开跑**(约 5–15 分钟跑完),不用等第二天,也不用去 Actions 手动点。跑完刷新「🔔 文献追踪」就是新方向的结果;页面不会自己提示你好了,自己刷一下。",
        "**核心词 vs 外围词:**核心词命中得满分,写最特异的词(基因名、专有名词、你论文标题里那种词);外围词命中得部分分,写相邻但不独占的词。宽词(lactate、cancer)放外围,别放核心。",
        "**试算读法:**PubMed 全库 0 篇 = 词大概拼错了;>5 万篇 = 太宽,抓回来多半不是你的领域;40–5 万之间比较合适。",
        "红框会在下载前拦住你:没名字、没核心词、权重越界、阈值高低颠倒 —— 和导入脚本同一套规则,所以面板放你过了,入库就不会被拒。"],
-  caveat:"三点诚实边界:① **换方向会重建整个语料库** —— 抓取脚本每轮从零重抓重打分,不再匹配新方向的旧文献会从列表消失,这是换库的应有结果,不是 bug。你的 ⭐ 和已读标记按 DOI/PMID 存在本地浏览器里,不会丢。② **这一页改不了线上文件** —— 静态页没有服务端,所以它只能产出一份 .json 交给你放进收件箱;生效时间是明早的定时任务,不是点一下就变。③ **这里只给「关键词命中篇数」,不给预测分数** —— 线上那个 0–1 分含 TF–IDF,而 IDF 要用过滤前的全量语料才算得准,网页只拿得到发布后的 852 篇,重算会偏(实测 165 篇偏差超 0.02,最大 0.31)。宁可少给一个数字,也不编一个看着精确的假分。"},
+  caveat:"三点诚实边界:① **换方向会重建整个语料库** —— 抓取脚本每轮从零重抓重打分,不再匹配新方向的旧文献会从列表消失,这是换库的应有结果,不是 bug。你的 ⭐ 和已读标记按 DOI/PMID 存在本地浏览器里,不会丢。② **这一页改不了线上文件** —— 静态页没有服务端,所以它只能产出一份 .json 交给你放进收件箱;真正换库的是 GitHub 上的定时任务。Commit 会立刻触发它,但**不是点一下就变**:抓取要跨 6 个源拉几百篇摘要,通常 5–15 分钟,期间「文献追踪」显示的还是旧语料。③ **这里只给「关键词命中篇数」,不给预测分数** —— 线上那个 0–1 分含 TF–IDF,而 IDF 要用过滤前的全量语料才算得准,网页只拿得到发布后的 852 篇,重算会偏(实测 165 篇偏差超 0.02,最大 0.31)。宁可少给一个数字,也不编一个看着精确的假分。"},
  papers:{what:"按你配置的方向每日跨 6 个源抓新文献,打分并标 Hotspot / Gap / 提问。顶部「今日工作台」把 800+ 条变成一个可清空的队列。",
   how:["**每天三步:**① 点「新入库」看上次之后多了什么 → ② 读完的点 📬 标已读、有用的点 ⭐ → ③ 走之前按「✓ 标记为已看过」划一条线。下次进来「新入库」就只显示这条线之后的。",
        "**写标书找切口:**点「值得挖」—— 高相关 × 摘要里明写了空白/问题 × 你还没读,三个条件的交集。",
