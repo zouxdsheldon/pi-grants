@@ -112,6 +112,38 @@ setTimeout(()=>{
 
   // 声明必须还在(诚实边界不能被改没)
   const hon=d.querySelector("#tdb .honest").textContent;
+  // ── 层筛选(149 条规模下的核心可用性)
+  const chips=[...d.querySelectorAll("#dbGrp .gbtn")];
+  ck("D26 层 chip 数 = 层数+1(含「全部层」)", chips.length===CAT.length+1, chips.length+" vs "+(CAT.length+1));
+  const allChip=chips[0];
+  ck("D27 「全部层」计数 = 总条目", parseInt(allChip.querySelector("b").textContent,10)===items.length,
+     allChip.textContent.trim());
+  const chipSum=chips.slice(1).reduce((a,e)=>a+parseInt(e.querySelector("b").textContent,10),0);
+  ck("D28 各层 chip 计数之和 = 总条目", chipSum===items.length, chipSum+" vs "+items.length);
+  // 点某层必须真收窄,且只剩该层的区块
+  const L=CAT[3].g.charAt(0);
+  w.DB_GRP=L; w.renderDB();
+  const nG=box.querySelectorAll(".dbcard").length, expG=CAT[3].it.length;
+  ck("D29 选中层后只显示该层条目", nG===expG&&nG<items.length, nG+" vs "+expG);
+  ck("D30 选中层后只剩一个区块", box.querySelectorAll(".sitegrp").length===1,
+     box.querySelectorAll(".sitegrp").length+" 个区块");
+  // 关键:选中一层后,其它层 chip 计数不能变 0(否则无法切换层)
+  const chips2=[...d.querySelectorAll("#dbGrp .gbtn")].slice(1);
+  const zeros=chips2.filter(e=>parseInt(e.querySelector("b").textContent,10)===0);
+  ck("D31 选中层后其它层计数仍非零(可切换)", zeros.length===0, zeros.length+" 层显示 0");
+  ck("D32 选中层的 chip 高亮", chips2.some(e=>e.getAttribute("data-g")===L&&e.className.indexOf("on")>=0));
+  // 层 × 类型 必须能叠加
+  w.DB_KIND="T"; w.renderDB();
+  const nGT=box.querySelectorAll(".dbcard").length, expGT=CAT[3].it.filter(x=>x.k==="T").length;
+  ck("D33 层与类型筛选可叠加", nGT===expGT, nGT+" vs "+expGT);
+  w.DB_KIND=""; w.DB_GRP=""; w.renderDB();
+  ck("D34 清空层筛选后恢复全部", box.querySelectorAll(".dbcard").length===items.length);
+  // 规模与覆盖:11 层、每层不少于 4 条,否则分层没意义
+  ck("D35 层数 ≥11", CAT.length>=11, CAT.length+" 层");
+  const thin=CAT.filter(x=>x.it.length<4);
+  ck("D36 每层 ≥4 条", thin.length===0, thin.map(x=>x.g+"("+x.it.length+")").join(","));
+  ck("D37 条目数 ≥140", items.length>=140, items.length+" 条");
+
   ck("D24 保留不代理/不缓存声明", /不代理.*不缓存.*不镜像/.test(hon));
   ck("D25 保留出处核对说明", /Europe PMC/.test(hon));
 
