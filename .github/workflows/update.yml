@@ -78,7 +78,8 @@ jobs:
           for p in data/grants.json data/grant_deadlines.ics data/jobs.json \
                    data/curated.json data/pivot_inbox \
                    data/interests.json data/interests_inbox \
-                   data/papers.json data/citation_snapshots.json \
+                   data/papers.json data/paper_first_seen.json \
+                   data/citation_snapshots.json \
                    data/citenet.json data/journals.json \
                    data/fetch_log_papers.json data/digest.json \
                    digest.html feed.xml; do

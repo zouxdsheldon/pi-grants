@@ -3617,6 +3617,10 @@ function cleanSeq(t,alpha){
 }
 function esc2(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function terr(id,msg){var e=document.getElementById(id);if(e)e.innerHTML='<div class="terr">'+msg+'</div>';}
+/* terr 会清空容器;结果已经画好时要用这个:把警告插到结果上方,不抹掉结果。 */
+function twarn(id,msg){var e=document.getElementById(id); if(!e)return;
+  var d=document.createElement("div"); d.className="terr"; d.style.marginBottom="8px"; d.textContent=msg;
+  e.insertBefore(d, e.firstChild);}
 
 /* ===================================================================
    AMPK 底物基序 PSSM
@@ -8523,8 +8527,13 @@ function renderLit(){
                   doi:doi, authors:(e.authors||[]).map(function(a){return a.name;}),
                   vol:e.volume||"", issue:e.issue||"", pages:e.pages||""};
         });
-        LIT_LAST={recs:recs,q:q,src:"PubMed"};
+        /* 分批取元数据时若某批失败/被限速,recs 条数照样等于 id 数,只是标题期刊全空。
+           那样用户看到的是一屏空白行,却以为检索成功 —— 必须点破,不能默默显示。 */
+        var blank=recs.filter(function(x){ return !x.title; }).length;
+        LIT_LAST={recs:recs,q:q,src:"PubMed",blank:blank};
         litPaint(recs,r.total,"PubMed");
+        if(blank) twarn("ltOut","注意:"+blank+"/"+recs.length+" 条只拿到 PMID,没取回标题期刊"
+          +"(某批 esummary 失败或被限速)。把条数调小些重试,或直接去 PubMed 查。");
       }).catch(function(e){ tnetErr("ltOut",e,"https://pubmed.ncbi.nlm.nih.gov/?term="+encodeURIComponent(q),"PubMed"); });
   }else{
     var u="https://www.ebi.ac.uk/europepmc/webservices/rest/search?query="+encodeURIComponent(qq)

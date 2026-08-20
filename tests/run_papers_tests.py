@@ -71,7 +71,10 @@ def data_selfcheck():
     # first_seen 不能晚于今天,也不能早于台账建立日 —— 两者都说明台账被写坏了
     since = meta.get("first_seen_since") or ""
     import datetime
-    today = datetime.date.today().isoformat()
+    # 必须用 UTC:抓取跑在 GitHub runner(UTC)上,本地时区落后时会把今早刚入库的
+    # 记录误判成"未来日期"。多给一天容差,跨时区/跨日切换时不误报。
+    today = (datetime.datetime.now(datetime.timezone.utc).date()
+             + datetime.timedelta(days=1)).isoformat()
     bad_future = [p for p in keyed if (p.get("first_seen") or "") > today]
     if bad_future:
         errs.append(f"{len(bad_future)} 条 first_seen 晚于今天 —— 未来日期会让它永远算「新」")
@@ -86,9 +89,26 @@ def data_selfcheck():
     if os.path.exists(lj):
         led = json.load(open(lj, encoding="utf-8"))
         seen = led.get("seen") or {}
-        if len(seen) < len(keyed):
-            errs.append(f"台账只有 {len(seen)} 个键,少于语料里 {len(keyed)} 条有标识的记录 "
-                        "—— 台账被截断过?掉出去的文献下次会假装成新入库")
+        # 不能拿数量比数量:语料是 400 天滑动窗口、台账是只增账,两者没有大小关系。
+        # (曾经写成 len(seen) < len(keyed) 而误报:抓取提交失败导致台账滞后三天,
+        #  语料已更新、台账未落库,数量比较就报"台账被截断",实际台账完好。)
+        # 真正要防的是"台账被截断/清空",判据是:早先已经记过的键突然消失。
+        # 逐键核对时必须与抓取脚本同口径 —— stamp_first_seen 用的是 doi or pmid,
+        # 优先级反了会把所有有 DOI 的记录误判成缺失。
+        key = lambda p: (p.get("doi") or p.get("pmid") or "")
+        stamped = [p for p in keyed if p.get("first_seen")]
+        # 记录自称有入库日期,台账里却查无此键 = 台账掉过数据
+        # 台账文件与 papers.json 可能不在同一次提交里落库,今天刚入库的记录允许暂缺;
+        # 真正的截断表现为"更早日期的记录"从台账里消失。
+        ledger_max = max(seen.values()) if seen else ""
+        orphan = [p for p in stamped
+                  if key(p) not in seen and (p.get("first_seen") or "") <= ledger_max]
+        if orphan:
+            errs.append(f"{len(orphan)}/{len(stamped)} 条记录带 first_seen,台账里却没有对应键 "
+                        f"(例:{key(orphan[0])}) —— 台账被截断过,这些文献下次会假装成新入库")
+        # 台账明显缩水也要报(允许滞后,不允许倒退)
+        if led.get("n") is not None and len(seen) < int(led.get("n") or 0):
+            errs.append(f"台账 n={led.get('n')} 但实际只有 {len(seen)} 个键 —— 台账被写坏了")
     else:
         errs.append("data/paper_first_seen.json 不存在 —— 下次抓取会把全部文献当成新入库")
     return errs

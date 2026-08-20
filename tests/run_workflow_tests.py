@@ -74,7 +74,30 @@ def main():
                 "提交步骤引用了仓库里不存在的路径 %r —— git add 会 fatal 并中止整步,"
                 "当天抓到的数据会被静默丢弃。空目录请放 .gitkeep。" % p)
 
-    # 5) 两个收件箱目录必须带 .gitkeep 留在仓库里
+    # 5) 脚本写进 data/ 的文件必须全部出现在提交清单里。
+    #    2026-08-20 发现:data/paper_first_seen.json(文献入库台账)每天被 fetch_papers.py
+    #    重写,却从来没进过 git add 清单 —— 于是台账在 runner 上写完就丢,第二天所有
+    #    文献又被盖上当天日期,面板的「上次之后新入库 N 篇」长期失真。
+    #    抓取绿、提交绿、页面有数据,只有这一个数字是错的,靠肉眼永远发现不了。
+    written = set()
+    for fn in os.listdir(os.path.join(ROOT, "scripts")):
+        if not fn.endswith(".py"):
+            continue
+        s2 = open(os.path.join(ROOT, "scripts", fn), encoding="utf-8").read()
+        # 只认"写"不认"读":路径出现在 open(...,"w") 里才算脚本会写它。
+        # (第一版只匹配路径,把只读的 config.json 和本地备份 interests.backup.json
+        #  也报成遗漏 —— 天天喊狼来了的断言会被忽略,等于没有断言。)
+        for m in re.finditer(
+                r'open\(\s*os\.path\.join\(\s*DATA\s*,\s*["\']([\w.\-]+\.(?:json|ics|xml|html))["\']\s*\)\s*,\s*["\']w',
+                s2):
+            written.add("data/" + m.group(1))
+    for p in sorted(written):
+        if p not in commit_blk:
+            fails.append(
+                "脚本会写 %s,但提交步骤没 git add 它 —— 每次运行都白写,"
+                "依赖它的面板数字会静默失真。" % p)
+
+    # 6) 两个收件箱目录必须带 .gitkeep 留在仓库里
     for d in ("data/interests_inbox", "data/pivot_inbox"):
         if not os.path.exists(os.path.join(ROOT, d, ".gitkeep")):
             fails.append(f"{d}/.gitkeep 不在 —— 目录会从仓库消失,重演 08-18 的丢数据故障")

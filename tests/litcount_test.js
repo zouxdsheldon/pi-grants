@@ -13,7 +13,15 @@ let pass=0,fail=0;
 const ok=(c,m)=>{ if(!c) throw new Error(m||"assert"); };
 const dom=new JSDOM(html,{runScripts:"dangerously",url:"https://example.github.io/pi-grants/",
   beforeParse(win){
-    const realFetch=globalThis.fetch;   // Node 18+ 自带
+    /* 沙箱内没有直连 DNS,出网只走 HTTP 代理;Node 内置 fetch 不读 HTTP_PROXY,
+ * 必须显式挂 ProxyAgent,否则全部 ENOTFOUND —— 那是环境问题不是被测代码的问题,
+ * 但"环境问题"不能当通过,所以这里把代理配好让断言真的打到线上 API。 */
+(function(){
+  const px=process.env.HTTPS_PROXY||process.env.https_proxy||process.env.HTTP_PROXY||process.env.http_proxy;
+  if(px){ try{ const {setGlobalDispatcher,ProxyAgent}=require("undici");
+    setGlobalDispatcher(new ProxyAgent(px)); }catch(e){ console.log("  (未挂上代理:"+e.message+")"); } }
+})();
+const realFetch=globalThis.fetch;   // Node 18+ 自带
     win.fetch=(u,o)=>{
       const name=String(u).split("/").pop().split("?")[0];
       if(DATA[name]) return Promise.resolve({ok:true,status:200,
@@ -36,7 +44,7 @@ function run(q,src,n){
     const iv=setInterval(()=>{
       const L=win.eval("typeof LIT_LAST!=='undefined'?LIT_LAST:null");
       const txt=doc.getElementById("ltOut").textContent||"";
-      if(L&&L.recs&&L.q===q&&L.recs.length&&!/正在/.test(txt)){clearInterval(iv);res({n:L.recs.length,txt});}
+      if(L&&L.recs&&L.q===q&&L.recs.length&&!/正在/.test(txt)){clearInterval(iv);res({n:L.recs.length,txt,blank:(L.blank||0),recs:L.recs});}
       else if(Date.now()-t0>120000){clearInterval(iv);rej(new Error("timeout: "+txt.slice(0,120)));}
     },300);
   });
@@ -51,6 +59,11 @@ setTimeout(async()=>{
     const r=await run("hiapp","pubmed",500);
     ok(r.n===500,"应取回 500 条(总命中>500),实得 "+r.n+
        " —— 只回 200 说明分批链断了;0/报错多半是 414 或 429");
+    /* 光数条数抓不到丢批次:recs 是拿 esearch 的 id 列表建的,某批 esummary 掉了
+       条数照样 500,只是标题期刊全空。必须查实际内容。 */
+    ok(r.blank===0,"有 "+r.blank+"/"+r.n+" 条只有 PMID、没有标题 —— 某批 esummary 没取回来");
+    const withJ=r.recs.filter(x=>x.journal).length;
+    ok(withJ>r.n*0.9,"只有 "+withJ+"/"+r.n+" 条拿到期刊名,元数据合并可能漏批");
   });
   await T("L3 Europe PMC 取 500 条",async()=>{
     const r=await run("hiapp","epmc",500);
