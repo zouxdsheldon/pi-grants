@@ -119,6 +119,26 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .dbfilter{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0}
 .dbfilter input{padding:7px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;width:260px}
 .dbcnt{font-size:12px;color:var(--muted);margin-left:4px}
+.dbkind{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 10px}
+.kbtn{padding:5px 12px;border:1px solid #CFD8DC;background:#fff;color:#37474F;border-radius:20px;
+  font-size:12.5px;cursor:pointer}
+.kbtn:hover{background:#ECEFF1}
+.kbtn.on{background:#4A148C;color:#fff;border-color:#4A148C;font-weight:600}
+.dbnavbar{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px;padding:9px 10px;background:#FAF7FD;
+  border:1px solid #E1D5F0;border-radius:9px}
+a.dbnav{font-size:12.2px;color:#4A148C;text-decoration:none;padding:3px 9px;border-radius:14px;
+  background:#fff;border:1px solid #E1D5F0;cursor:pointer}
+a.dbnav:hover{background:#4A148C;color:#fff}
+a.dbnav b{font-weight:700}
+.grpsub{display:block;font-size:11.8px;color:#7E57C2;font-weight:400;margin-top:2px}
+.kbadge{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:10px;margin-left:6px;
+  vertical-align:middle;font-weight:600}
+.kbadge.kD{background:#E3F2FD;color:#0D47A1;border:1px solid #90CAF9}
+.kbadge.kT{background:#FFF3E0;color:#E65100;border:1px solid #FFCC80}
+.kbadge.kR{background:#F3E5F5;color:#6A1B9A;border:1px solid #CE93D8}
+.dbcite{font-size:11.5px;color:#666;margin-top:6px;padding-top:5px;border-top:1px dashed #E0E0E0}
+.dbcite a{color:#0D47A1;text-decoration:none}
+.dbcite a:hover{text-decoration:underline}
 .dbcard{border:1px solid #E0E0E0;border-radius:9px;padding:10px 12px;background:#fff}
 .dbcard a.dbn{font-weight:700;color:#0D47A1;text-decoration:none;font-size:13.5px}
 .dbcard a.dbn:hover{text-decoration:underline}
@@ -761,7 +781,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab" data-p="tsearch">📚 文献检索中心</button>
   <button class="tab tab2" data-p="tgene">🧫 基因疾病</button>
   <button class="tab tab2" data-p="ttrial">🏥 临床试验</button>
-  <button class="tab tab2" data-p="tdb">🗄️ 数据库与工具</button>
+  <button class="tab tab2" data-p="tdb">🗃️ 科研数据集</button>
   <button class="tab tab2" data-p="tstat">📐 统计样本量</button>
   <button class="tab tab2" data-p="tde">📈 差异可视化</button>
   <button class="tab tab2" data-p="tclone">✂️ 克隆 CRISPR</button>
@@ -1585,18 +1605,26 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <!-- ============ 实验工具:统计与样本量 ============ -->
 
 <div class="panel" id="tdb">
-  <h2>🗄️ 数据库与工具导航</h2>
-  <div class="honest">这一页是<b>去哪儿查</b>的清单,不是又一个检索工具 —— 每条给出<b>官方链接 + 这个库是什么 + 针对你 miRNA/TDMD/代谢方向该怎么用</b>。
-  点卡片标题去官网;填了检索词的话「带词打开」会把词拼进该站检索链接。
-  标 <span class="dbver">已实测可达</span> 的是本站构建时用脚本实际访问过、确认能打开的;<b>其余是我按经验收录、未逐一实测</b>,链接失效请告诉我。
-  本站不代理、不缓存、不镜像任何一个库,点开就是各库官方站点。</div>
+  <h2>🗃️ 科研数据集</h2>
+  <div class="honest">这一页是<b>去哪儿拿数据、用哪个工具</b>的分层清单 —— 按<b>研究层级</b>(RNA→基因组→表达→蛋白→通路→疾病→药物→原始数据→实验设计)组织,
+  每条给出<b>官方链接 + 这是什么 + 出处论文 + 针对你 miRNA/TDMD/代谢方向该怎么用</b>。
+  <br><b>关于「出处论文」:</b>绝大多数数据库本身就是一篇论文的产物,用它的数据/工具就该引这篇。本页每条的 PMID 都是逐条检索 Europe PMC 核对过的,
+  点 PMID 直达原文 —— <b>写 Methods 时直接照抄引用,不用再去找</b>。
+  <br>标 <span class="dbver">已实测可达</span> 的是构建时脚本实际访问过、确认能打开的;其余按经验收录、未逐一实测。本站不代理、不缓存、不镜像任何一个库,点开即各库官方站点。</div>
   <div class="hstrip" data-help="tdb"></div>
   <div class="dbfilter">
     <input type="text" id="dbQ" placeholder="检索词(可选),如 ZSWIM8 / miR-29 / metformin">
-    <button class="gobtn" id="dbGo">带词打开时用这个词</button>
-    <input type="text" id="dbF" placeholder="筛选库名或用途,如 磷酸化 / 单细胞 / gRNA">
+    <button class="gobtn" id="dbGo">用这个词打开支持检索的库</button>
+    <input type="text" id="dbF" placeholder="筛选:库名 / 用途 / 关键词,如 磷酸化、单细胞、gRNA、无序区">
     <span class="dbcnt" id="dbCnt"></span>
   </div>
+  <div class="dbkind" id="dbKind">
+    <button class="kbtn on" data-k="">全部</button>
+    <button class="kbtn" data-k="D">📊 数据集</button>
+    <button class="kbtn" data-k="T">🛠️ 分析工具</button>
+    <button class="kbtn" data-k="R">📦 原始数据仓库</button>
+  </div>
+  <div class="dbnavbar" id="dbNav"></div>
   <div id="dbList"></div>
 </div>
 <div class="panel" id="tstat">
@@ -3521,7 +3549,7 @@ var SIDE_NAV=[
     {p:"tsearch", ic:"📚", t:"文献检索中心", nw:1},
     {p:"tgene",   ic:"🧫", t:"基因疾病注释", nw:1},
     {p:"ttrial",  ic:"🏥", t:"临床试验",   nw:1},
-    {p:"tdb",     ic:"🗄️", t:"数据库与工具", nw:1}
+    {p:"tdb",     ic:"🗃️", t:"科研数据集", nw:1}
   ]},
   {g:"④ 做实验 · 分子操作", items:[
     {p:"tsite",  ic:"🧬", t:"位点扫描",   nw:1},
@@ -7193,7 +7221,7 @@ var TOOLDOC = {
    inp:"疾病或干预名;或预印本关键词;或化合物名",
    out:"试验列表(NCT号/分期/状态)、预印本列表(含 DOI)、化合物基本性质",
    src:"实时 API:ClinicalTrials.gov v2 + bioRxiv/medRxiv + PubChem PUG REST(均 CORS 已实测)"},
- tdb:{nm:"数据库与工具导航",en:"Database & tool directory",alias:["数据库","database","工具","tool","miRBase","TargetScan","ENCORI","starBase","UniProt","PhosphoSitePlus","AlphaFold","GTEx","STRING","KEGG","Reactome","gnomAD","DepMap","ClinVar","Addgene","CHOPCHOP","CRISPOR","gRNA","富集","单细胞","代谢组","去哪查"],
+ tdb:{nm:"科研数据集",en:"Research datasets",alias:["数据集","dataset","数据库","database","工具","tool","出处","引用","citation","PMID","miRBase","TargetScan","ENCORI","starBase","UniProt","PhosphoSitePlus","AlphaFold","GTEx","STRING","KEGG","Reactome","gnomAD","DepMap","ClinVar","Addgene","CHOPCHOP","CRISPOR","gRNA","富集","单细胞","代谢组","去哪查"],
    kw:"我该去哪个库查这件事",
    inp:"(可选)检索词 + 用途关键词筛选",
    out:"45 个库,分 7 类,每条给官方链接 + 是什么 + 针对你方向怎么用",
@@ -7359,15 +7387,17 @@ var HELP = {
       {t:"查 AICAR(AMPK 激动剂)",set:[["trMode","pc"],["trQ","AICAR"]],go:"trGo"}],
   caveat:"预印本走的是 Europe PMC 的预印本来源,**不是 bioRxiv 官方检索**(官方 API 只能按日期列出、不支持关键词) —— 结果里也写明了这一点。预印本未经同行评审,引用时必须标注。"},
 
- tdb:{what:"一份「去哪儿查」的清单 —— 不是检索工具,是导航。45 个库分 7 类,每条写清楚这个库是什么、以及针对你 miRNA/TDMD/代谢方向具体该怎么用。",
-  how:["上面第二个框是筛选:输入用途词(如「磷酸化」「gRNA」「单细胞」)会实时过滤,不用自己翻。",
-       "第一个框填检索词后,卡片底部按钮变成「带词打开」,直接把词拼进该库的检索链接。",
-       "绿色「怎么用」那一行是重点 —— 写的是结合你 ZSWIM8/AMPK/代谢记忆方向的具体用法,不是泛泛介绍。",
-       "标「已实测可达」的是构建时脚本实际访问确认过的;其余按经验收录,未逐一实测。"],
+ tdb:{what:"按研究层级组织的科研数据集与工具清单 —— 73 条分 9 层(RNA→基因组→表达→蛋白→通路→疾病→药物→原始数据→实验设计)。每条都标了这是数据集、分析工具还是原始数据仓库,并附出处论文 PMID。",
+  how:["顶部紫色导航条按层级跳转,点哪一层直接滚到那一段 —— 不用手动翻。",
+       "圆形按钮按类型筛:📊数据集(拿现成数据)/🛠️工具(算东西)/📦仓库(下原始数据)。想下别人数据做预实验就点「仓库」。",
+       "筛选框输用途词(磷酸化 / 单细胞 / gRNA / 无序区 / 保守性)实时过滤,库名和用途说明一起匹配。",
+       "检索词框填 ZSWIM8 之类的词后,支持检索的库按钮变「带词打开」;不支持带词的库老实显示「打开」,不会骗你。",
+       "每张卡片底部的「📄 出处」是这个库自己的论文 —— 用了它的数据就该引这篇,写 Methods 时直接照抄 PMID。"],
   ex:[{t:"查磷酸化相关的库",set:[["dbF","磷酸化"]],go:"dbGo"},
       {t:"用 ZSWIM8 带词打开",set:[["dbQ","ZSWIM8"]],go:"dbGo"},
       {t:"找基因编辑工具",set:[["dbF","gRNA"]],go:"dbGo"}],
-  caveat:"这一页<b>不发任何网络请求</b>,只是链接清单 —— 所以它不会\"查不到\",但也不代表链接永远有效。各库改版换域名是常事(ENCORI 就从 starbase.sysu 搬过家),发现失效直接告诉我。标\"已实测可达\"只说明本站构建当天能打开,不是持续监测。"},
+  caveat:"这一页<b>不发任何网络请求</b>,只是链接清单 —— 所以它不会\"查不到\",但也不代表链接永远有效。各库改版换域名是常事(ENCORI 就从 starbase.sysu 搬过家),发现失效直接告诉我。标\"已实测可达\"只说明本站构建当天能打开,不是持续监测。<br><b>出处论文</b>逐条检索 Europe PMC 核对过库名与标题;但数据库常有多个版本论文(如 miRBase 有 2006/2010/2019 多篇),这里给的是较新的主引文献 —— 若某期刊指定引用特定版本,以期刊要求为准。"},
+
  tstat:{what:"标书里最常被审稿人挑的两块:样本量/功效,和两组比较该用哪个检验。全部本地算,已逐值对齐 scipy。",
   how:["「算什么」选模式,下面的输入框会跟着换 —— 无关的字段自动隐藏。",
        "样本量:填效应量 d(或比例 p1/p2、ANOVA 的 f)+ α + 目标 power,得每组 n;反过来填 n 得实际 power。",
@@ -9868,41 +9898,68 @@ var SUB_RUN={tlit:"ltRun",tdict:"dcRun",tcite:"ciRun",tbib:"bbRun",tzh:"zhRun",t
    u:  站点首页;  q: 检索 URL 模板({q} 处替换为 encodeURIComponent(检索词));
    pay:1 表示需订阅/机构权限才能看全。链接与检索参数格式按各站公开的检索页写。
    ======================================================== */
-var DBCAT=[{"g":"① miRNA / ncRNA 专库(你的主战场)","it":[{"n":"miRBase","u":"https://www.mirbase.org/","q":"https://www.mirbase.org/results/?query={q}","d":"miRNA 命名与序列的权威库,所有 miR 名称、成熟体/前体序列以它为准。","h":"查 miR-29 家族的成熟体序列 → 拿去设计 Northern 探针或 qPCR 引物;写本子时 miRNA 名称拼写必须跟它一致(miR-29a-3p 而不是 miR-29a)。"},{"n":"TargetScan","u":"https://www.targetscan.org/","q":"https://www.targetscan.org/cgi-bin/targetscan/vert_80/targetscan.cgi?species=Human&gid={q}","d":"基于种子序列保守性的靶标预测,miRNA 领域引用最多的预测工具。","h":"输入基因名(如 ZSWIM8)看哪些 miRNA 靶它;或反查 miR-29 的靶标清单。做 TDMD 要找「广泛配对」位点时,先用它筛种子区,再手工核 3′ 补充配对。","v":1},{"n":"ENCORI (原 starBase)","u":"https://rnasysu.com/encori/","q":"https://rnasysu.com/encori/","d":"汇总 CLIP-seq 实测的 AGO 结合位点 —— 是实验证据,不是预测。已从旧域名 starbase.sysu 迁到此地址。","h":"这是 TDMD 方向最该先看的库:查你的候选靶 RNA 上有没有真实 AGO2 CLIP 峰。有峰=有结合证据,写 Significance 时比纯预测硬得多。","v":1},{"n":"miRTarBase","u":"https://mirtarbase.cuhk.edu.cn/","q":"https://mirtarbase.cuhk.edu.cn/","d":"人工审读文献整理的 miRNA–靶标关系,标注了验证方法(报告基因/WB/qPCR)。","h":"写\"miR-29 调控纤维化\"这类句子要引文献时,在这里按 miRNA 查已验证靶标,直接拿到 PMID,省去自己翻文献。"},{"n":"RNAcentral","u":"https://rnacentral.org/","q":"https://rnacentral.org/search?q={q}","d":"EBI 的非编码 RNA 总库,整合 miRBase/Rfam/GENCODE 等 40+ 来源。","h":"查一条 lncRNA(如 CYRANO)在各库里的对应关系和序列 —— 做 TDMD trigger 时要确认转录本版本,这里最全。"},{"n":"DIANA-TarBase","u":"https://dianalab.e-ce.uth.gr/tarbasev9","q":"https://dianalab.e-ce.uth.gr/tarbasev9","d":"另一个实验验证的 miRNA–靶标库,与 miRTarBase 互补,收录了更多高通量数据。","h":"与 miRTarBase 交叉验证:两库都收的靶标可信度高,只在一个库里的要回原文看验证强度。"}]},{"g":"② 表达谱 · 单细胞(找组织特异性与预实验数据)","it":[{"n":"GTEx","u":"https://gtexportal.org/home/","q":"https://gtexportal.org/home/gene/{q}","d":"人体 54 种正常组织的表达谱 + eQTL,样本量大、质控严。","h":"写\"ZSWIM8 在肌肉/胰岛高表达\"这类论断前,先在这里截一张组织表达图 —— 审稿人认这个数据源。也能查 eQTL 支持遗传关联。","v":1},{"n":"Human Protein Atlas","u":"https://www.proteinatlas.org/","q":"https://www.proteinatlas.org/search/{q}","d":"蛋白层面的组织/细胞/亚细胞定位,含免疫组化图片和单细胞分区。","h":"GTEx 给 mRNA,HPA 给蛋白和定位。两个一起用能回答\"这个蛋白在我的靶器官里到底在哪个细胞\"——申请书 Significance 里放一张最直观。","v":1},{"n":"EBI Expression Atlas","u":"https://www.ebi.ac.uk/gxa/home","q":"https://www.ebi.ac.uk/gxa/search?geneQuery={q}","d":"跨物种、跨条件的差异表达汇总,已把大量 GEO 数据重新统一处理过。","h":"想知道\"高糖/饥饿/AMPK 激活条件下这个基因变不变\",直接按条件查,比自己下 GEO 原始数据快得多。","v":1},{"n":"Single Cell Expression Atlas","u":"https://www.ebi.ac.uk/gxa/sc/home","q":"https://www.ebi.ac.uk/gxa/sc/search?q={q}","d":"上面那个库的单细胞版本,已统一处理并给出细胞类型注释。","h":"做类器官/组织异质性时,先查目标基因落在哪群细胞,避免整块组织匀浆掩盖了细胞特异效应。","v":1},{"n":"CELLxGENE","u":"https://cellxgene.cziscience.com/","q":"https://cellxgene.cziscience.com/","d":"CZI 的单细胞数据门户,可在线交互探索大型图谱,不用下数据。","h":"浏览器里直接看基因在人体细胞图谱中的分布,截图能直接进标书;也可下载 h5ad 自己分析。"},{"n":"GEO / SRA","u":"https://www.ncbi.nlm.nih.gov/geo/","q":"https://www.ncbi.nlm.nih.gov/gds/?term={q}","d":"NCBI 的表达数据集与原始测序数据仓库(本站\"外站直达\"里也有)。","h":"没有预实验数据时的救命稻草:搜 small RNA-seq + 你的模型,把公开数据重分析成图,标书里就有了\"初步结果\"。","v":1}]},{"g":"③ 蛋白 · 结构 · 翻译后修饰(做位点必备)","it":[{"n":"UniProt","u":"https://www.uniprot.org/","q":"https://www.uniprot.org/uniprotkb?query={q}","d":"蛋白序列与注释的权威库,含结构域、修饰位点、亚细胞定位、变异。","h":"位点编号必须以它为准 —— 本站\"位点扫描\"用的 ZSWIM8 S608/S609/S1202 和 SWIM 域 172–208 都来自 A7E2V4。写本子引位点时附上 accession 号。","v":1},{"n":"PhosphoSitePlus","u":"https://www.phosphosite.org/","q":"https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr={q}","d":"翻译后修饰的最大实测库,汇总质谱与低通量文献证据,标注每个位点被多少独立研究观察到。","h":"做 AMPK–ZSWIM8 磷酸化必查:看 S608/S609 有没有已发表的质谱证据、在什么条件下被检出。有实测支持,你的预测位点立刻可信一个量级。"},{"n":"The Kinase Library","u":"https://kinase-library.phosphosite.org/","q":"https://kinase-library.phosphosite.org/","d":"Cantley 实验室的激酶底物基序图谱(2023 Nature),可对任意磷酸肽打分排出最可能的上游激酶。","h":"把 ZSWIM8 S608 前后 ±7 位肽段贴进去,看 AMPK(PRKAA1/2)排第几 —— 这是对你自建 PSSM 的独立第三方验证,写进 Approach 的\"严谨性\"段最有力。"},{"n":"AlphaFold DB","u":"https://alphafold.ebi.ac.uk/","q":"https://alphafold.ebi.ac.uk/search/text/{q}","d":"全蛋白组预测结构,每个残基带置信度 pLDDT。","h":"看 S608 所在区段的 pLDDT:低分=无序区=激酶易接近。你申请书里\"位点位于无序区、机制上有利\"这句话,可以直接用它的 pLDDT 曲线佐证。","v":1},{"n":"RCSB PDB","u":"https://www.rcsb.org/","q":"https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22type%22%3A%22terminal%22%2C%22service%22%3A%22full_text%22%2C%22parameters%22%3A%7B%22value%22%3A%22{q}%22%7D%7D%2C%22return_type%22%3A%22entry%22%7D","d":"实验解析的三维结构库(晶体/冷冻电镜/NMR)。","h":"查 AGO2–miRNA 复合物、ZSWIM8 相关冷冻电镜结构。做突变设计前先看该残基在结构上朝内还是朝外。","v":1},{"n":"InterPro","u":"https://www.ebi.ac.uk/interpro/","q":"https://www.ebi.ac.uk/interpro/search/text/{q}/","d":"整合 13 个数据库的蛋白结构域/家族注释。","h":"确认 SWIM 锌指域边界、找同家族蛋白。设计截短体(ΔSWIM)时用它定边界比凭感觉画准。","v":1},{"n":"STRING","u":"https://string-db.org/","q":"https://string-db.org/cgi/network?identifiers={q}","d":"蛋白互作网络,区分实验证据、共表达、文本挖掘等不同来源。","h":"画\"ZSWIM8–CUL3–EloB/C\"这类复合物示意图前先在这里核实互作证据等级;别把文本挖掘来的连线当实验证据写。","v":1},{"n":"BioGRID","u":"https://thebiogrid.org/","q":"https://thebiogrid.org/search.php?search={q}","d":"人工审读的物理/遗传互作库,每条互作可溯源到具体文献与方法。","h":"STRING 给你网络图,BioGRID 给你每条边的原始文献。写\"已知与 X 互作\"时引它更稳。"}]},{"g":"④ 通路 · 富集分析(做完组学第一步)","it":[{"n":"KEGG","u":"https://www.genome.jp/kegg/","q":"https://www.genome.jp/dbget-bin/www_bfind_sub?mode=bfind&max_hit=100&dbkey=kegg&keywords={q}","d":"经典通路图谱库(AMPK 通路、胰岛素信号等均在内)。学术使用网页版免费。","h":"AMPK 信号通路图可直接引用作背景图。做富集分析时 KEGG term 是最常见的报告口径。"},{"n":"Reactome","u":"https://reactome.org/","q":"https://reactome.org/content/query?q={q}","d":"人工审读的通路库,层级更细、完全开放,可直接下载做富集。","h":"比 KEGG 粒度细,适合把\"miRNA 代谢过程\"拆到具体反应步骤。它的通路图配色适合直接放进 Figure 1。","v":1},{"n":"g:Profiler","u":"https://biit.cs.ut.ee/gprofiler/gost","q":"https://biit.cs.ut.ee/gprofiler/gost","d":"富集分析工具,统计方法透明(g:SCS 多重检验校正),支持多物种和自定义背景。","h":"贴一列差异基因进去就出 GO/KEGG/Reactome 富集。**记得设正确的背景基因集** —— 用全基因组当背景是富集分析最常见的错误。"},{"n":"Enrichr","u":"https://maayanlab.cloud/Enrichr/","q":"https://maayanlab.cloud/Enrichr/","d":"一次跑 200+ 个基因集库(含 TF 靶标、药物扰动、疾病特征)。","h":"探索阶段最快的工具:一次看清你的基因列表跟哪些扰动特征像。但它默认背景固定,正式分析要用 g:Profiler 复核。"},{"n":"MSigDB / GSEA","u":"https://www.gsea-msigdb.org/gsea/msigdb/","q":"https://www.gsea-msigdb.org/gsea/msigdb/","d":"标准基因集合集(Hallmark/KEGG/GO/miRNA 靶标等)与 GSEA 软件。","h":"做 GSEA 时用 Hallmark 50 个集合作首选,结果最好解释。里面还有现成的 miRNA 靶标集,适合做\"miR-29 靶标整体上调\"这类分析。"}]},{"g":"⑤ 变异 · 疾病 · 模型(转化意义那段要用)","it":[{"n":"Open Targets","u":"https://platform.opentargets.org/","q":"https://platform.opentargets.org/search?q={q}","d":"整合遗传学、通路、药物、文献的靶点–疾病关联证据平台,每条关联可拆开看来源。","h":"写\"这个基因与 T2D/纤维化相关\"必查:它给出量化关联分数和证据链。基金评审最爱看这种可溯源的靶点验证。"},{"n":"gnomAD","u":"https://gnomad.broadinstitute.org/","q":"https://gnomad.broadinstitute.org/gene/{q}","d":"80 万人群的变异频率库,给出基因的功能丧失不耐受指标(pLI / LOEUF)。","h":"查 ZSWIM8 的 LOEUF —— 高度不耐受说明该基因在人群中受强选择压力,是\"这个基因很重要\"的硬证据,写 Significance 一句话就够分量。(URL 用基因名或 ENSG 号都行)","v":1},{"n":"ClinVar","u":"https://www.ncbi.nlm.nih.gov/clinvar/","q":"https://www.ncbi.nlm.nih.gov/clinvar/?term={q}","d":"临床变异–表型关联的官方库,带解读等级(致病/良性/意义不明)。","h":"查有没有患者携带你研究位点附近的致病变异。有的话,\"人类遗传学支持\"这一条就成立了。","v":1},{"n":"DepMap","u":"https://depmap.org/portal/","q":"https://depmap.org/portal/gene/{q}","d":"上千株细胞系的全基因组 CRISPR 敲除依赖性数据。","h":"查你的基因在哪些细胞系里是必需的 —— 既能挑实验用细胞系,也能论证\"这个基因对某类肿瘤是依赖性靶点\"。"},{"n":"MGI(小鼠基因组信息学)","u":"https://www.informatics.jax.org/","q":"https://www.informatics.jax.org/quicksearch/summary?query={q}","d":"小鼠基因、等位基因、表型与现成品系的权威库。","h":"做敲除鼠前先查有没有现成品系和已报道表型 —— 能省一年时间,也避免\"重复别人做过的表型\"。"},{"n":"IMPC","u":"https://www.mousephenotype.org/","q":"https://www.mousephenotype.org/data/search?term={q}","d":"国际小鼠表型联盟的系统化敲除表型数据(含代谢表型:体重、糖耐量、体成分)。","h":"直接查敲除鼠有没有代谢异常 —— 你做代谢记忆方向,这是零成本的\"预实验证据\"。"},{"n":"GWAS Catalog","u":"https://www.ebi.ac.uk/gwas/","q":"https://www.ebi.ac.uk/gwas/search?query={q}","d":"已发表 GWAS 关联的官方汇总。","h":"查该基因位点有没有跟糖尿病/血脂等性状的人群关联信号,给你的机制假说加一层人群遗传学支撑。","v":1}]},{"g":"⑥ 药物 · 代谢物(转化与代谢方向)","it":[{"n":"ChEMBL","u":"https://www.ebi.ac.uk/chembl/","q":"https://www.ebi.ac.uk/chembl/g/#search_results/all/query={q}","d":"生物活性小分子数据库,含活性值与靶点关系,完全开放。","h":"查 AMPK 激动剂(AICAR、A-769662、二甲双胍)的已报道活性与靶点谱,给药理干预方案选工具化合物。","v":1},{"n":"PubChem","u":"https://pubchem.ncbi.nlm.nih.gov/","q":"https://pubchem.ncbi.nlm.nih.gov/#query={q}","d":"NIH 的化合物库,含理化性质、生物活性、供应商与文献。","h":"查化合物溶解性/溶剂建议(配药前必看)、CAS 号,以及有没有商业化来源。","v":1},{"n":"DrugBank","u":"https://go.drugbank.com/","q":"https://go.drugbank.com/unearth/q?query={q}","d":"已上市与在研药物的靶点、药代、相互作用信息(学术用途需注册)。","h":"写\"本通路已有临床可及药物\"时用它取证 —— 有现成药能显著提升转化说服力。"},{"n":"HMDB","u":"https://hmdb.ca/","q":"https://hmdb.ca/unearth/q?query={q}","d":"人类代谢组数据库,收录代谢物的浓度、组织分布、相关疾病。","h":"查乳酸、AMP/ATP、胆固醇中间体的正常生理浓度范围 —— 设计体外实验加药浓度时不至于用非生理剂量被审稿人挑刺。"},{"n":"MetaboAnalyst","u":"https://www.metaboanalyst.ca/","q":"https://www.metaboanalyst.ca/","d":"代谢组学统计分析在线平台(归一化、通路富集、多变量分析)。","h":"做完代谢组只有一张浓度表时,直接上传跑通路富集和 PLS-DA,不用自己写代码。"}]},{"g":"⑦ 实验设计 · 基因编辑(动手前先在这查)","it":[{"n":"UCSC Genome Browser","u":"https://genome.ucsc.edu/","q":"https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position={q}","d":"基因组浏览器,可叠加保守性、ChIP-seq、CLIP、可及性等任意轨道。","h":"看你的 TDMD 位点在物种间保不保守(phyloP 轨道)、附近有没有 AGO CLIP 峰。保守=有功能压力,写本子很有说服力。"},{"n":"Ensembl","u":"https://www.ensembl.org/","q":"https://www.ensembl.org/Human/Search/Results?q={q};site=ensembl","d":"另一个基因组浏览器,转录本注释与比较基因组学做得更细,有完整 REST API。","h":"确认转录本版本与外显子结构(设计引物/gRNA 前必须做);查直系同源基因做跨物种保守性论证。","v":1},{"n":"Primer-BLAST","u":"https://www.ncbi.nlm.nih.gov/tools/primer-blast/","q":"https://www.ncbi.nlm.nih.gov/tools/primer-blast/","d":"NCBI 官方引物设计,设计的同时做全基因组特异性比对。","h":"设计 qPCR 引物首选 —— 它会直接告诉你引物会不会扩到旁系同源基因。记得勾选跨外显子以避免基因组 DNA 污染。","v":1},{"n":"CHOPCHOP","u":"https://chopchop.cbu.uib.no/","q":"https://chopchop.cbu.uib.no/","d":"gRNA 设计工具,支持 CRISPR 敲除/敲入/碱基编辑,给出脱靶与效率评分。","h":"做 ZSWIM8 S608A/S608D 敲入鼠或细胞系时用它选 gRNA;界面直观、能一起出验证引物。"},{"n":"CRISPOR","u":"http://crispor.gi.ucsc.edu/","q":"http://crispor.gi.ucsc.edu/","d":"gRNA 设计与脱靶评估,脱靶预测算法有独立文献验证,输出可直接进方法学。","h":"与 CHOPCHOP 交叉验证:两个工具都排前列的 gRNA 才用。它还能生成脱靶位点清单供后续测序验证。"},{"n":"BE-Hive / 碱基编辑预测","u":"https://www.crisprbehive.design/","q":"https://www.crisprbehive.design/","d":"碱基编辑结果预测(编辑窗口内各碱基的转换效率与旁观者编辑)。","h":"你做碱基编辑方向,建位点突变前先预测旁观者编辑风险 —— 避免做出来才发现邻近碱基一起被改了。"},{"n":"Addgene","u":"https://www.addgene.org/","q":"https://www.addgene.org/search/catalog/plasmids/?q={q}","d":"非营利质粒共享库,含载体图谱与已发表用法。","h":"做点突变前先搜有没有现成的野生型表达质粒骨架;也能找到 AMPK 组成型激活/失活突变体等常用工具质粒。"},{"n":"protocols.io","u":"https://www.protocols.io/","q":"https://www.protocols.io/search?q={q}","d":"可引用的实验方案平台,方案带 DOI。","h":"找 small RNA-seq 建库、AGO2 RIP、体外激酶反应的详细方案 —— 比论文方法部分细得多,能直接照做。"}]}];
+var DBCAT=[{"g":"A · RNA / miRNA 层","ic":"🧬","sub":"你的主战场:序列、靶标、结合证据、二级结构","it":[{"n":"miRBase","u":"https://www.mirbase.org/","q":"https://www.mirbase.org/results/?query={q}","k":"D","d":"miRNA 命名与序列的权威登记库,成熟体/前体序列以它为准。","p":"30423142","pj":"Nucleic Acids Res 2019","h":"查 miR-29 家族成熟体序列 → 设计 Northern 探针/qPCR 引物。本子里 miRNA 名称拼写必须跟它一致(miR-29a-3p,不是 miR-29a)。","v":1},{"n":"TargetScan","u":"https://www.targetscan.org/","q":"https://www.targetscan.org/cgi-bin/targetscan/vert_80/targetscan.cgi?species=Human&gid={q}","k":"T","d":"基于种子保守性的靶标预测,miRNA 领域引用最多。","p":"26267216","pj":"eLife 2015","h":"输入基因名看哪些 miRNA 靶它,或反查 miR-29 靶标清单。找 TDMD「广泛配对」位点时先用它筛种子区,再手工核 3′ 补充配对。","v":1},{"n":"ENCORI / starBase","u":"https://rnasysu.com/encori/","k":"D","d":"汇总 CLIP-seq 实测的 AGO 结合位点 —— 实验证据,不是预测。已从旧域名 starbase.sysu 迁出。","p":"24297251","pj":"Nucleic Acids Res 2014","h":"TDMD 方向最该先看的库:查候选靶 RNA 上有没有真实 AGO2 CLIP 峰。有峰=有结合证据,写 Significance 比纯预测硬得多。","v":1},{"n":"miRTarBase","u":"https://mirtarbase.cuhk.edu.cn/","k":"D","d":"人工审读文献整理的 miRNA–靶标关系,标注验证方法(报告基因/WB/qPCR)。","p":"34850920","pj":"Nucleic Acids Res 2022","h":"写「miR-29 调控纤维化」这类句子要引文献时,按 miRNA 查已验证靶标,直接拿到 PMID,省去翻文献。"},{"n":"RNAcentral","u":"https://rnacentral.org/","q":"https://rnacentral.org/search?q={q}","k":"D","d":"EBI 的非编码 RNA 总库,整合 miRBase/Rfam/GENCODE 等 40+ 来源。","p":"33106848","pj":"Nucleic Acids Res 2021","h":"一个 ncRNA 在各库里 ID 对不上时,用它做交叉映射。"},{"n":"Rfam","u":"https://rfam.org/","q":"https://rfam.org/search?q={q}","k":"D","d":"以协变模型定义的 RNA 家族库,含二级结构比对。","p":"33211869","pj":"Nucleic Acids Res 2021","h":"判断你的候选 lncRNA/触发 RNA 是否属于已知结构家族;写创新性时可用来说明「无已知家族」。"},{"n":"ViennaRNA / RNAfold","u":"http://rna.tbi.univie.ac.at/cgi-bin/RNAWebSuite/RNAfold.cgi","k":"T","d":"RNA 二级结构折叠预测的标准工具包。","p":"22115189","pj":"Algorithms Mol Biol 2011","h":"预测 TDMD 触发位点周围的局部结构 —— 位点若被茎环埋住,配对可及性差,是设计报告基因前该先查的。"},{"n":"IntaRNA","u":"http://rna.informatik.uni-freiburg.de/IntaRNA/","k":"T","d":"RNA–RNA 相互作用预测,同时考虑杂交能与可及性。","p":"28472523","pj":"Nucleic Acids Res 2017","h":"算 miR-29 与候选触发 RNA 的配对自由能,给「广泛配对」一个量化数字放进 Aim 1。"}]},{"g":"B · 基因组 · 注释层","ic":"🗺️","sub":"坐标、转录本、调控元件 —— 做敲入/敲除设计的地基","it":[{"n":"Ensembl","u":"https://ensembl.org/","q":"https://ensembl.org/Multi/Search/Results?q={q};site=ensembl","k":"D","d":"基因组注释与比较基因组学总门户,含 REST API。","p":"37953337","pj":"Nucleic Acids Res 2024","h":"查 ZSWIM8 转录本结构、外显子边界、跨物种同源 —— 设计 sgRNA 和 knock-in 打靶臂前必须先在这确认坐标。","v":1},{"n":"UCSC Genome Browser","u":"https://genome.ucsc.edu/","q":"https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position={q}","k":"T","d":"多轨道基因组浏览器,可叠加保守性、CLIP、ChIP 等公共轨。","p":"37953330","pj":"Nucleic Acids Res 2024","h":"把 phyloP 保守性轨与 AGO CLIP 轨叠一起看你的候选位点 —— 截图可直接做 Aim 1 的配图。","v":1},{"n":"GENCODE","u":"https://www.gencodegenes.org/","k":"D","d":"人/鼠参考转录本注释集,Ensembl 与 UCSC 共用的注释来源。","p":"36420896","pj":"Nucleic Acids Res 2023","h":"RNA-seq 定量选注释版本时以它为准;方法学部分要写清用的是哪个 release。"},{"n":"RefSeq","u":"https://www.ncbi.nlm.nih.gov/refseq/","q":"https://www.ncbi.nlm.nih.gov/nuccore/?term={q}","k":"D","d":"NCBI 人工审读的非冗余参考序列集(NM_/NP_ 编号)。","p":"26553804","pj":"Nucleic Acids Res 2016","h":"引物、克隆、载体图谱里的序列编号用 NM_ 号写,审稿人一眼可复现。"},{"n":"ENCODE","u":"https://www.encodeproject.org/","q":"https://www.encodeproject.org/search/?searchTerm={q}","k":"R","d":"人/鼠功能元件百科:ChIP-seq、DNase、RNA-seq 等统一处理的原始与加工数据。","p":"31713622","pj":"Nucleic Acids Res 2020","h":"想知道 ZSWIM8 启动子在哪个组织开放/有哪些 TF 结合,直接调它的现成 track,不必自己做实验。"},{"n":"Roadmap Epigenomics","u":"https://egg2.wustl.edu/roadmap/web_portal/","k":"D","d":"111 个人类参考表观基因组的整合分析数据。","p":"25693563","pj":"Nature 2015","h":"要论证「该基因在肌肉/胰岛特异激活」时,拿它的染色质状态图做旁证。"}]},{"g":"C · 表达谱 · 单细胞层","ic":"🔬","sub":"找组织特异性、拿免费预实验数据","it":[{"n":"GTEx","u":"https://gtexportal.org/","q":"https://gtexportal.org/home/gene/{q}","k":"D","d":"54 个人体正常组织的表达谱与 eQTL。","p":"32913098","pj":"Science 2020","h":"写 Significance 时用它一句话说明「ZSWIM8 在骨骼肌/胰岛高表达」——比引二手综述有力。","v":1},{"n":"Human Protein Atlas","u":"https://www.proteinatlas.org/","q":"https://www.proteinatlas.org/search/{q}","k":"D","d":"蛋白层面的组织/细胞/病理表达图谱,含免疫组化实拍图。","p":"25613900","pj":"Science 2015","h":"要蛋白级别的组织定位证据、或挑抗体时先看它的 IHC 图和抗体验证等级。","v":1},{"n":"NCBI GEO","u":"https://www.ncbi.nlm.nih.gov/geo/","q":"https://www.ncbi.nlm.nih.gov/gds/?term={q}","k":"R","d":"最大的公共表达数据仓库,含 GEO2R 在线差异分析。","p":"37933855","pj":"Nucleic Acids Res 2024","h":"没有预实验数据时,在这找别人的 AMPK 激活/糖尿病模型数据集重分析 —— 生成的图可作为本子里的 preliminary(注明来源即可)。","v":1},{"n":"CZ CELLxGENE Discover","u":"https://cellxgene.cziscience.com/","k":"R","d":"标准化的单细胞数据浏览平台,可在线画基因表达 UMAP。","p":"39607691","pj":"Nucleic Acids Res 2025","h":"查 ZSWIM8 在胰岛哪类细胞、肌肉哪类细胞里表达 —— 不写代码,10 分钟出一张图。","v":1},{"n":"Human Cell Atlas","u":"https://data.humancellatlas.org/","k":"R","d":"人类细胞图谱计划的数据门户。","p":"29206104","pj":"eLife 2017","h":"要跨器官比较同一细胞类型时的原始数据来源。"},{"n":"Tabula Sapiens","u":"https://tabula-sapiens.sf.czbiohub.org/","k":"D","d":"单一供体多器官的人类单细胞转录组图谱(细胞类型注释质量高)。","p":"35549404","pj":"Science 2022","h":"需要「同一个人不同器官」的对照时用它,避免供体间差异混淆。"},{"n":"PanglaoDB","u":"https://panglaodb.se/","k":"D","d":"单细胞标志基因数据库。","p":"30951143","pj":"Database (Oxford) 2019","h":"给自己的 scRNA 聚类命名时查标志基因组合。"},{"n":"CellMarker 2.0","u":"http://117.50.127.228/CellMarker/","k":"D","d":"人工审读的人/鼠细胞标志物库。","p":"36300619","pj":"Nucleic Acids Res 2023","h":"与 PanglaoDB 交叉验证细胞类型注释,两个都支持才敢写进本子。"},{"n":"GEPIA2","u":"http://gepia2.cancer-pku.cn/","k":"T","d":"基于 TCGA+GTEx 的在线表达/生存分析。","p":"31114875","pj":"Nucleic Acids Res 2019","h":"要一句「该基因高表达与胃癌预后相关」时,几分钟出 KM 曲线(注意:这是关联,不是因果,措辞别过头)。"}]},{"g":"D · 蛋白 · 结构 · 修饰层","ic":"🧪","sub":"做磷酸化位点、结构域、互作必备","it":[{"n":"UniProt","u":"https://www.uniprot.org/","q":"https://www.uniprot.org/uniprotkb?query={q}","k":"D","d":"蛋白序列与功能注释的权威库(结构域、修饰位点、亚细胞定位)。","p":"39552041","pj":"Nucleic Acids Res 2025","h":"你 ZSWIM8 的 SWIM 结构域 172–208、S608/S609 位置就是以它为准 —— 写位点前必须在这核对编号。","v":1},{"n":"RCSB PDB","u":"https://www.rcsb.org/","q":"https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22type%22%3A%22terminal%22%2C%22service%22%3A%22full_text%22%2C%22parameters%22%3A%7B%22value%22%3A%22{q}%22%7D%7D%2C%22return_type%22%3A%22entry%22%7D","k":"D","d":"实验解析的生物大分子三维结构总库。","p":"42517697","pj":"Protein Sci 2026","h":"查 ZSWIM8–AGO2 冷冻电镜结构;做位点突变前先看该残基是否埋在界面里。","v":1},{"n":"AlphaFold DB","u":"https://alphafold.ebi.ac.uk/","q":"https://alphafold.ebi.ac.uk/search/text/{q}","k":"D","d":"AlphaFold 预测结构库,覆盖 2 亿+ 蛋白。","p":"37933859","pj":"Nucleic Acids Res 2024","h":"没有实验结构时看预测模型的 pLDDT —— 低 pLDDT 区常就是无序区,正好支持你「S608 位于无序区、易被激酶接近」的论证。","v":1},{"n":"InterPro","u":"https://www.ebi.ac.uk/interpro/","q":"https://www.ebi.ac.uk/interpro/search/text/{q}/","k":"D","d":"整合 13 个签名库的蛋白家族/结构域注释。","p":"39565202","pj":"Nucleic Acids Res 2025","h":"跨物种确认 SWIM 域边界是否保守,给保守性论证加一层独立证据。"},{"n":"PhosphoSitePlus","u":"https://www.phosphosite.org/","q":"https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr={q}","k":"D","d":"实测翻译后修饰位点库(质谱证据数、上下游激酶)。","p":"25514926","pj":"Nucleic Acids Res 2015","h":"查 S608/S609 有没有质谱实测记录、被几篇报道过 —— 有记录=位点真实存在,是 Aim 1 最直接的可行性证据。","v":1},{"n":"GPS 6.0","u":"https://gps.biocuckoo.cn/","k":"T","d":"激酶特异性磷酸化位点预测。","p":"37158278","pj":"Nucleic Acids Res 2023","h":"与你自建的透明 AMPK PSSM 互为独立验证 —— 两法都指向同一位点时说服力翻倍。"},{"n":"IUPred3","u":"https://iupred3.elte.hu/","k":"T","d":"蛋白内在无序区预测。","p":"34048569","pj":"Nucleic Acids Res 2021","h":"出一张 ZSWIM8 全长无序度曲线,把 S608 标在无序峰上 —— 现成的 Aim 1 配图。"},{"n":"ELM","u":"http://elm.eu.org/","k":"D","d":"真核短线性基序资源(降解子、结合基序等)。","p":"37962385","pj":"Nucleic Acids Res 2024","h":"查 S608 周边是否落在已知激酶识别基序或 14-3-3 结合基序里 —— 后者能给「磷酸化后招募」的机制假设。"},{"n":"STRING","u":"https://string-db.org/","q":"https://string-db.org/cgi/network?identifiers={q}&species=9606","k":"D","d":"蛋白–蛋白关联网络(整合实验、共表达、文本挖掘,分值分层)。","p":"36370105","pj":"Nucleic Acids Res 2023","h":"画 ZSWIM8–CUL3–EloB/C 复合体网络图放进本子。注意区分实验证据边与文本挖掘边,别把后者当实证。","v":1},{"n":"BioGRID","u":"https://thebiogrid.org/","q":"https://thebiogrid.org/search.php?search={q}","k":"D","d":"人工审读的蛋白/遗传相互作用库,标注检测方法。","p":"33070389","pj":"Protein Sci 2021","h":"要「这条互作是用什么方法测的」时查它 —— 比 STRING 的综合打分更可追溯。"},{"n":"SIGNOR 3.0","u":"https://signor.uniroma2.it/","k":"D","d":"带方向和效应(激活/抑制)的因果信号通路关系库。","p":"36243968","pj":"Nucleic Acids Res 2023","h":"要画「AMPK →(磷酸化)→ 底物」这类有方向的通路图时用它,普通互作库给不了方向。"},{"n":"AlphaFold(推理)","u":"https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/AlphaFold.ipynb","k":"T","d":"结构预测方法本身(ColabFold 笔记本可跑自定义序列)。","p":"34265844","pj":"Nature 2021","h":"预测 ZSWIM8 磷酸化位点区域的构象,或做复合体建模支撑机制假设。"}]},{"g":"E · 通路 · 富集层","ic":"🕸️","sub":"拿到组学结果后的第一步","it":[{"n":"Reactome","u":"https://reactome.org/","q":"https://reactome.org/content/query?q={q}","k":"D","d":"人工审读、带反应细节的通路库,可做通路富集。","p":"37941124","pj":"Nucleic Acids Res 2024","h":"查 AMPK 信号通路的完整反应链,写 Approach 时按它的层级组织叙述。","v":1},{"n":"KEGG","u":"https://www.genome.jp/kegg/","q":"https://www.genome.jp/dbget-bin/www_bfind_sub?mode=bfind&keywords={q}&dbkey=kegg","k":"D","d":"经典通路图谱库(代谢通路尤其完整)。","p":"33125081","pj":"Nucleic Acids Res 2021","h":"代谢方向的图直接引它的通路号(如 hsa04152 AMPK signaling),审稿人熟悉。","v":1},{"n":"Gene Ontology","u":"https://geneontology.org/","k":"D","d":"基因功能的标准化本体(BP/MF/CC 三支)。","p":"36866529","pj":"Genetics 2023","h":"富集分析的词表来源;报告 GO 结果时注明本体版本与背景基因集,属于报告规范要求。"},{"n":"MSigDB","u":"https://www.gsea-msigdb.org/gsea/msigdb/","k":"D","d":"GSEA 用的基因集合集(Hallmark 50 套最常用)。","p":"26771021","pj":"Cell Syst 2015","h":"做 GSEA 时优先用 Hallmark —— 冗余低、结果好解释,适合本子里放一张干净的富集图。"},{"n":"DAVID","u":"https://david.ncifcrf.gov/","k":"T","d":"经典的功能富集与注释在线工具。","p":"35325185","pj":"Nucleic Acids Res 2022","h":"快速看一批差异基因富集在哪 —— 但背景基因集要显式设定,默认全基因组常导致假阳性。"},{"n":"Metascape","u":"https://metascape.org/","k":"T","d":"一站式富集分析,自动整合多库并输出出版级图。","p":"30944313","pj":"Nat Commun 2019","h":"贴一列基因进去,直接出可放进本子的富集条形图和网络图。"},{"n":"g:Profiler","u":"https://biit.cs.ut.ee/gprofiler/","k":"T","d":"富集分析 + 跨库 ID 转换。","p":"31066453","pj":"Nucleic Acids Res 2019","h":"跨物种 ID 转换(人↔鼠↔猪)最顺手 —— 你的猪模型数据要映射到人时用它。"},{"n":"WikiPathways","u":"https://www.wikipathways.org/","k":"D","d":"社区共建、可编辑的通路库。","p":"37941138","pj":"Nucleic Acids Res 2024","h":"KEGG/Reactome 没收录的小众通路常在这有,也可自己画通路图导出。"}]},{"g":"F · 变异 · 疾病 · 模型层","ic":"🏥","sub":"写「转化意义」那一段的证据来源","it":[{"n":"gnomAD","u":"https://gnomad.broadinstitute.org/","q":"https://gnomad.broadinstitute.org/gene/{q}?dataset=gnomad_r4","k":"D","d":"人群变异频率与基因约束度(pLI/LOEUF)。","p":"32461654","pj":"Nature 2020","h":"用 LOEUF/pLI 论证「ZSWIM8 高度不耐受功能缺失 → 生理必需」,这是 Significance 里很有分量的一句。","v":1},{"n":"ClinVar","u":"https://www.ncbi.nlm.nih.gov/clinvar/","q":"https://www.ncbi.nlm.nih.gov/clinvar/?term={q}","k":"D","d":"基因变异与临床意义的关联档案。","p":"31777943","pj":"Nucleic Acids Res 2020","h":"查你的基因有没有致病变异报道 —— 有,就能把机制研究直接接到人类疾病上。"},{"n":"OMIM","u":"https://www.omim.org/","q":"https://www.omim.org/search?search={q}","k":"D","d":"人类孟德尔遗传病与基因的权威目录。","p":"25428349","pj":"Nucleic Acids Res 2015","h":"确认某基因是否已有明确的人类疾病表型,避免把已知的写成新发现。"},{"n":"Open Targets Platform","u":"https://platform.opentargets.org/","q":"https://platform.opentargets.org/search?q={q}","k":"D","d":"整合遗传学、组学、文献、药物证据的靶点–疾病关联平台。","p":"39657122","pj":"Nucleic Acids Res 2025","h":"一页看完「这个靶点与 T2D/纤维化的证据强度和来源」,写转化段落时最省时间。","v":1},{"n":"DisGeNET","u":"https://disgenet.com/","k":"D","d":"基因–疾病关联的整合库,带证据分级。","p":"31680165","pj":"Nucleic Acids Res 2020","h":"要给「该基因与代谢病相关」一个可引的量化分值时用。"},{"n":"COSMIC","u":"https://cancer.sanger.ac.uk/cosmic","k":"D","d":"癌症体细胞突变目录。","p":"30371878","pj":"Nucleic Acids Res 2019","h":"胃癌/MSI 方向查你的基因在肿瘤里的突变谱与频率。"},{"n":"cBioPortal","u":"https://www.cbioportal.org/","q":"https://www.cbioportal.org/results?gene_list={q}","k":"T","d":"癌症基因组数据的可视化探索平台(TCGA 等)。","p":"22588877","pj":"Cancer Discov 2012","h":"不写代码就能出 OncoPrint、共表达、生存曲线 —— 胃癌方向的预实验图可以从这来。","v":1},{"n":"DepMap","u":"https://depmap.org/portal/","k":"D","d":"上千癌细胞系的全基因组 CRISPR 依赖性筛选数据。","p":"28753430","pj":"Cell 2017","h":"查 ZSWIM8 在哪些细胞系是必需基因 —— 帮你选敲除实验用哪株细胞,少走弯路。"},{"n":"TCGA","u":"https://portal.gdc.cancer.gov/","k":"R","d":"癌症基因组图谱的原始与加工数据门户。","p":"24071849","pj":"Nat Genet 2013","h":"要自己重分析(而不是用 cBioPortal 的现成图)时从这下载。"},{"n":"MGI","u":"https://www.informatics.jax.org/","q":"https://www.informatics.jax.org/quicksearch/summary?queryType=exactPhrase&query={q}","k":"D","d":"小鼠基因组数据库:基因、等位基因、KO 表型。","p":"33231642","pj":"Nucleic Acids Res 2021","h":"做小鼠模型前先查该基因已有哪些 KO 品系和表型 —— 可能已有现成小鼠可要。","v":1},{"n":"IMPC","u":"https://www.mousephenotype.org/","k":"D","d":"国际小鼠表型联盟的系统性 KO 表型数据。","p":"28650483","pj":"Nat Genet 2017","h":"查全身 KO 的代谢表型(体重、血糖、体成分)—— 常常正好是你要的预实验。"},{"n":"ZFIN","u":"https://zfin.org/","k":"D","d":"斑马鱼模式生物数据库。","p":"26097180","pj":"Genesis 2015","h":"ZSWIM8/Cyrano 的开创性工作在斑马鱼做的,查同源基因与已有突变体。"}]},{"g":"G · 药物 · 代谢物层","ic":"💊","sub":"代谢方向与转化落点","it":[{"n":"DrugBank","u":"https://go.drugbank.com/","q":"https://go.drugbank.com/unearth/q?query={q}&searcher=drugs","k":"D","d":"药物与靶点的综合知识库。","p":"37953279","pj":"Nucleic Acids Res 2024","h":"查二甲双胍/AICAR 的靶点与药代 —— 写「已有临床可用的 AMPK 激活剂」这句要有出处。","v":1},{"n":"ChEMBL","u":"https://www.ebi.ac.uk/chembl/","k":"D","d":"生物活性分子与量化活性数据(IC50/Ki)。","p":"37933841","pj":"Nucleic Acids Res 2024","h":"挑通路抑制剂时比较活性和选择性,别只看厂商说明书。"},{"n":"PubChem","u":"https://pubchem.ncbi.nlm.nih.gov/","q":"https://pubchem.ncbi.nlm.nih.gov/#query={q}","k":"D","d":"化合物结构、性质与生物活性总库。","p":"39558165","pj":"Nucleic Acids Res 2025","h":"查化合物溶解性/储存条件,写 Methods 的试剂配制段落。"},{"n":"HMDB","u":"https://hmdb.ca/","q":"https://hmdb.ca/unearth/q?query={q}&searcher=metabolites","k":"D","d":"人类代谢组数据库(浓度范围、组织分布、相关疾病)。","p":"34986597","pj":"Nucleic Acids Res 2022","h":"乳酸、AMP/ATP 等代谢物的生理浓度范围从这查 —— 设计体外处理浓度时要落在生理区间才可信。","v":1},{"n":"BRENDA","u":"https://www.brenda-enzymes.org/","k":"D","d":"酶功能与动力学参数库(Km/kcat)。","p":"14681450","pj":"Nucleic Acids Res 2004","h":"体外激酶反应设计 ATP 浓度和反应时间时,查 AMPK 的动力学参数。"},{"n":"MetaboLights","u":"https://www.ebi.ac.uk/metabolights/","k":"R","d":"代谢组学原始数据仓库。","p":"37971328","pj":"Nucleic Acids Res 2024","h":"找已发表的糖尿病/肌肉代谢组数据集做二次分析。"}]},{"g":"H · 原始数据仓库","ic":"📦","sub":"下载别人的数据 = 免费预实验","it":[{"n":"SRA","u":"https://www.ncbi.nlm.nih.gov/sra","q":"https://www.ncbi.nlm.nih.gov/sra/?term={q}","k":"R","d":"高通量测序原始 reads 归档。","p":"21062823","pj":"Nucleic Acids Res 2011","h":"找小 RNA-seq 原始数据自己重跑 —— TDMD 需要看 3′ 末端修饰,加工过的表达矩阵丢掉了这个信息,必须回到 raw reads。","v":1},{"n":"BioStudies / ArrayExpress","u":"https://www.ebi.ac.uk/biostudies/","k":"R","d":"EBI 的研究数据总入口(ArrayExpress 已并入)。","p":"42167442","pj":"J Mol Biol 2026","h":"GEO 没有的欧洲来源数据集在这找。"},{"n":"PRIDE","u":"https://www.ebi.ac.uk/pride/","k":"R","d":"蛋白质组学与磷酸化蛋白组质谱数据仓库。","p":"39494541","pj":"Nucleic Acids Res 2025","h":"找 AMPK 激活后的磷酸化蛋白组数据,搜自己的位点有没有出现过 —— 若有,就是现成的可行性证据。","v":1},{"n":"dbGaP","u":"https://www.ncbi.nlm.nih.gov/gap/","k":"R","d":"受控访问的人类基因型–表型数据。","p":"17898773","pj":"Nat Genet 2007","h":"需要人群水平的人类数据时申请;注意要走 DAC 审批,提前排期。"}]},{"g":"I · 实验设计工具","ic":"🛠️","sub":"动手之前先在这里算清楚","it":[{"n":"CRISPOR","u":"http://crispor.tefor.net/","k":"T","d":"sgRNA 设计与脱靶评估(整合多种打分算法)。","p":"27380939","pj":"Genome Biol 2016","h":"设计 S608A/S608D 敲入的 sgRNA,同时拿到脱靶清单 —— 本子的 Rigor 段落要写你如何评估脱靶。","v":1},{"n":"CHOPCHOP v3","u":"https://chopchop.cbu.uib.no/","k":"T","d":"CRISPR/TALEN 靶点设计网页工具。","p":"31106371","pj":"Nucleic Acids Res 2019","h":"与 CRISPOR 交叉验证 sgRNA 选择;支持敲除/敲入/激活多种模式。"},{"n":"PrimeDesign","u":"https://drugthatgene.pinellolab.partners.org/","k":"T","d":"先导编辑(prime editing)pegRNA 设计。","p":"33589617","pj":"Nat Commun 2021","h":"你的先导编辑经验正好用在这:精确引入 S608A/S608D 点突变而不留 indel。","v":1},{"n":"BE-Hive","u":"https://www.crisprbehive.design/","k":"T","d":"碱基编辑结果预测(编辑效率与旁观者突变)。","p":"32533916","pj":"Cell 2020","h":"选碱基编辑器时先预测旁观者编辑 —— 避免把邻近的 S609 一起改掉,这对你区分 S608/S609 至关重要。","v":1},{"n":"Primer3","u":"https://primer3.ut.ee/","k":"T","d":"引物设计的事实标准算法。","p":"22730293","pj":"Nucleic Acids Res 2012","h":"qPCR/克隆引物设计;跨外显子设计可避免 gDNA 扩增。"},{"n":"NCBI BLAST","u":"https://blast.ncbi.nlm.nih.gov/","k":"T","d":"序列相似性搜索。","p":"20003500","pj":"BMC Bioinformatics 2009","h":"引物特异性核查、确认克隆测序结果、找跨物种同源序列。","v":1},{"n":"Clustal Omega","u":"https://www.ebi.ac.uk/jdispatcher/msa/clustalo","k":"T","d":"多序列比对(大规模比对快且准)。","p":"21988835","pj":"Mol Syst Biol 2011","h":"做 S608 跨物种保守性比对图 —— 你本子里那张保守性图就该用它生成。","v":1},{"n":"Addgene","u":"https://www.addgene.org/","q":"https://www.addgene.org/search/catalog/plasmids/?q={q}","k":"R","d":"非营利质粒共享库,附完整图谱与文献出处。","p":"25392412","pj":"Nucleic Acids Res 2015","h":"ZSWIM8、AGO2、AMPK 相关质粒先在这查有没有现成的 —— 能省几个月构建时间,本子的 Resources 部分也可直接写明来源。","v":1}]}];
 
-/* 数据库导航:纯静态清单 + 前端筛选。不发任何请求 —— 点开即各库官网。 */
+/* 科研数据集 —— 分层渲染
+ * 三重筛选:层级(锚点跳转) × 类型 D/T/R × 关键词。
+ * 出处论文:x.p 是 PMID,已逐条核对 Europe PMC;没有 p 的条目不显示引用行(而不是编一个)。 */
 function renderDB(){
   var box=document.getElementById("dbList"); if(!box) return;
   var q=((document.getElementById("dbQ")||{}).value||"").trim();
   var f=((document.getElementById("dbF")||{}).value||"").trim().toLowerCase();
-  var h="", shown=0, total=0;
-  DBCAT.forEach(function(g){
+  var kf=DB_KIND||"";
+  var h="", shown=0, total=0, navh="";
+  var KN={D:"数据集",T:"工具",R:"仓库"};
+  DBCAT.forEach(function(g, gi){
     var hit=g.it.filter(function(x){
       total++;
+      if(kf && x.k!==kf) return false;
       if(!f) return true;
-      return (x.n+" "+x.d+" "+x.h+" "+g.g).toLowerCase().indexOf(f)>=0;
+      return (x.n+" "+x.d+" "+x.h+" "+g.g+" "+(g.sub||"")).toLowerCase().indexOf(f)>=0;
     });
     if(!hit.length) return;
-    h+='<div class="sitegrp">'+esc2(g.g)+'</div><div class="sitegrid">';
+    var aid="dbg_"+gi;   /* 按索引生成:组名首字符可能重复,会撞 id 导致导航跳错位置 */
+    navh+='<a class="dbnav" href="#'+aid+'" data-anchor="'+aid+'">'+g.ic+' '+esc2(g.g)+' <b>'+hit.length+'</b></a>';
+    h+='<div class="sitegrp" id="'+aid+'">'+g.ic+' '+esc2(g.g)
+      +'<span class="grpsub">'+esc2(g.sub||"")+'</span></div><div class="sitegrid">';
     hit.forEach(function(x){
       shown++;
-      var tpl = (x.q && x.q.indexOf("{q}")>=0);   /* 只有真含占位符才算能带词 */
+      var tpl = (x.q && x.q.indexOf("{q}")>=0);
       var url = (tpl && q) ? x.q.replace("{q}", encodeURIComponent(q)) : (x.q || x.u);
       h+='<div class="dbcard"><a class="dbn" href="'+x.u+'" target="_blank" rel="noopener">'+esc2(x.n)+'</a>'
+        +'<span class="kbadge k'+x.k+'">'+KN[x.k]+'</span>'
         +(x.v?'<span class="dbver">已实测可达</span>':'')
         +'<div class="sdesc">'+esc2(x.d)+'</div>'
         +'<div class="dbuse"><b>怎么用 · </b>'+esc2(x.h)+'</div>'
+        +(x.p?'<div class="dbcite">📄 出处 · '+esc2(x.pj||"")
+             +' · <a href="https://pubmed.ncbi.nlm.nih.gov/'+x.p+'/" target="_blank" rel="noopener">PMID '+x.p+'</a></div>':'')
         +(x.q?'<a class="sq" href="'+url+'" target="_blank" rel="noopener">'
              +((tpl&&q)?"带词打开 ↗":"打开 ↗")+'</a>':'')
         +'</div>';
     });
     h+='</div>';
   });
-  if(!shown) h='<div class="honest">没有匹配「'+esc2(f)+'」的条目。换个词试试,或清空筛选框看全部 '+total+' 个库。</div>';
+  var nb=document.getElementById("dbNav"); if(nb) nb.innerHTML=navh;
+  if(!shown){
+    h='<div class="honest">没有匹配的条目。'
+      +(f?'关键词「'+esc2(f)+'」':'')+(kf?' + 类型「'+KN[kf]+'」':'')
+      +' 筛掉了全部 '+total+' 条。<br>试试:清空筛选框、或点上面的「全部」看所有层级。'
+      +'常用词:磷酸化 / 单细胞 / 结构 / 通路 / 变异 / 代谢物 / gRNA / 引物 / 保守性。</div>';
+  }
   box.innerHTML=h;
   var c=document.getElementById("dbCnt");
-  if(c) c.textContent = f ? ("筛出 "+shown+" / "+total+" 个") : ("共 "+total+" 个库 · 7 类");
+  var cited=0; DBCAT.forEach(function(g){g.it.forEach(function(x){if(x.p)cited++;});});
+  c && (c.textContent = (f||kf) ? ("筛出 "+shown+" / "+total+" 条")
+        : ("共 "+total+" 条 · "+DBCAT.length+" 层 · "+cited+" 条附出处论文"));
+  document.querySelectorAll("#dbNav a.dbnav").forEach(function(a){
+    a.onclick=function(e){
+      e.preventDefault();
+      var t=document.getElementById(a.getAttribute("data-anchor"));
+      if(t) t.scrollIntoView({behavior:"smooth",block:"start"});
+    };
+  });
 }
+var DB_KIND="";
 
 var SITES=[
  {g:"综合文献库(免费)", it:[
@@ -11199,6 +11256,16 @@ function pvDemoRun(){
   on("dbGo","click",renderDB); enterRuns("dbQ",renderDB);
   var _dbf=document.getElementById("dbF");
   if(_dbf) _dbf.addEventListener("input", renderDB);
+  /* 类型按钮:数据集 / 工具 / 仓库 —— 单选,再点同一个不取消(取消用「全部」) */
+  document.querySelectorAll("#dbKind .kbtn").forEach(function(b){
+    b.addEventListener("click", function(){
+      DB_KIND = b.getAttribute("data-k") || "";
+      document.querySelectorAll("#dbKind .kbtn").forEach(function(o){
+        o.classList.toggle("on", o===b);
+      });
+      renderDB();
+    });
+  });
   /* 检索词一变就重画外站卡片,好让「带词打开」始终带的是当前的词 */
   on("uxQ","input",function(){ try{ renderSearch(); }catch(e){} });
   on("uxExt","click",function(){ var e=document.getElementById("uxSites"); if(e)e.scrollIntoView({behavior:"smooth"}); });
