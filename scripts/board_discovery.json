@@ -1,0 +1,858 @@
+{
+ "verified": [
+  {
+   "co": "Altos Labs",
+   "cat": "aging",
+   "ats": "gh",
+   "tok": "altoslabs",
+   "n": 22,
+   "why": "E1 板面主干名相等：'Altos Labs'"
+  },
+  {
+   "co": "NewLimit",
+   "cat": "aging",
+   "ats": "gh",
+   "tok": "newlimit",
+   "n": 15,
+   "why": "E1 板面主干名相等：'NewLimit'"
+  },
+  {
+   "co": "Retro Biosciences",
+   "cat": "aging",
+   "ats": "lv",
+   "tok": "retro",
+   "n": 11,
+   "why": "E2 行业词 6 个：cell culture, cell therapy, cmc, gmp, in vivo, regulatory affairs"
+  },
+  {
+   "co": "A-Alpha Bio",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "aalphabio",
+   "n": 2,
+   "why": "E1 板面主干名相等：'A-Alpha Bio'"
+  },
+  {
+   "co": "Cellarity",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "cellarity",
+   "n": 2,
+   "why": "E1 板面主干名相等：'Cellarity'"
+  },
+  {
+   "co": "Chai Discovery",
+   "cat": "ai",
+   "ats": "ab",
+   "tok": "chaidiscovery",
+   "n": 14,
+   "why": "E2 行业词 3 个：antibody, biologics, molecular biology（token 'chaidiscovery' 与公司全名一致 + 语料佐证）"
+  },
+  {
+   "co": "Cradle Bio",
+   "cat": "ai",
+   "ats": "ab",
+   "tok": "cradlebio",
+   "n": 6,
+   "why": "E2 行业词 8 个：antibodies, antibody, biologics, flow cytometry, in vitro, molecular biology（token 'cradlebio' 与公司全名一致 + 语料佐证）"
+  },
+  {
+   "co": "Eikon Therapeutics",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "eikontherapeutics",
+   "n": 23,
+   "why": "E1 板面主干名相等：'Eikon Therapeutics'"
+  },
+  {
+   "co": "Enveda Biosciences",
+   "cat": "ai",
+   "ats": "lv",
+   "tok": "enveda",
+   "n": 5,
+   "why": "E2 行业词 6 个：bioanalytical, in vitro, in vivo, medicinal chemistry, pharmacology, translational"
+  },
+  {
+   "co": "Generate Biomedicines",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "generatebiomedicines",
+   "n": 14,
+   "why": "E1 板面主干名相等：'Generate Biomedicines'"
+  },
+  {
+   "co": "Iambic Therapeutics",
+   "cat": "ai",
+   "ats": "ab",
+   "tok": "iambic-therapeutics",
+   "n": 18,
+   "why": "E2 行业词 19 个：bioanalytical, biomarker, clinical trial, cmc, drug product, drug substance（token 'iambic-therapeutics' 与公司全名一致 + 语料佐证）"
+  },
+  {
+   "co": "Insitro",
+   "cat": "ai",
+   "ats": "ab",
+   "tok": "insitro",
+   "n": 15,
+   "why": "E2 行业词 18 个：antibody, biologics, biomarker, cell culture, clinical trial, cmc"
+  },
+  {
+   "co": "Isomorphic Labs",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "isomorphiclabs",
+   "n": 29,
+   "why": "E1 板面主干名相等：'Isomorphic Labs'"
+  },
+  {
+   "co": "Recursion Pharmaceuticals",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "recursionpharmaceuticals",
+   "n": 15,
+   "why": "E1 板面主干名相等：'Recursion'"
+  },
+  {
+   "co": "Relay Therapeutics",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "relaytherapeutics",
+   "n": 16,
+   "why": "E1 板面主干名相等：'Relay Therapeutics'"
+  },
+  {
+   "co": "Valo Health",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "valohealth",
+   "n": 3,
+   "why": "E1 板面主干名相等：'Valo Health'"
+  },
+  {
+   "co": "Xaira Therapeutics",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "xairatherapeutics",
+   "n": 21,
+   "why": "E1 板面主干名相等：'Xaira Therapeutics'"
+  },
+  {
+   "co": "Fate Therapeutics",
+   "cat": "cell",
+   "ats": "lv",
+   "tok": "fatetherapeutics",
+   "n": 5,
+   "why": "E2 行业词 3 个：clinical trial, gmp, regulatory affairs（token 'fatetherapeutics' 与公司全名一致 + 语料佐证）"
+  },
+  {
+   "co": "Lyell Immunopharma",
+   "cat": "cell",
+   "ats": "gh",
+   "tok": "lyellimmunopharma",
+   "n": 12,
+   "why": "E1 板面主干名相等：'Lyell Immunopharma'"
+  },
+  {
+   "co": "Obsidian Therapeutics",
+   "cat": "cell",
+   "ats": "gh",
+   "tok": "obsidiantherapeutics",
+   "n": 3,
+   "why": "E1 板面主干名相等：'Obsidian Therapeutics'"
+  },
+  {
+   "co": "Tr1X",
+   "cat": "cell",
+   "ats": "gh",
+   "tok": "tr1x",
+   "n": 1,
+   "why": "E1 板面主干名相等：'Tr1X'"
+  },
+  {
+   "co": "Umoja Biopharma",
+   "cat": "cell",
+   "ats": "gh",
+   "tok": "umojabiopharma",
+   "n": 10,
+   "why": "E1 板面主干名相等：'Umoja Biopharma'"
+  },
+  {
+   "co": "Vor Biopharma",
+   "cat": "cell",
+   "ats": "gh",
+   "tok": "vorbiopharma",
+   "n": 13,
+   "why": "E1 板面主干名相等：'Vor Bio'"
+  },
+  {
+   "co": "Arvinas",
+   "cat": "degrade",
+   "ats": "gh",
+   "tok": "arvinas",
+   "n": 2,
+   "why": "E1 板面主干名相等：'Arvinas'"
+  },
+  {
+   "co": "Kymera Therapeutics",
+   "cat": "degrade",
+   "ats": "gh",
+   "tok": "kymeratherapeutics",
+   "n": 32,
+   "why": "E1 板面主干名相等：'Kymera Therapeutics'"
+  },
+  {
+   "co": "Nurix Therapeutics",
+   "cat": "degrade",
+   "ats": "gh",
+   "tok": "nurix",
+   "n": 19,
+   "why": "E1 板面主干名相等：'Nurix'"
+  },
+  {
+   "co": "Color Health",
+   "cat": "dx",
+   "ats": "ab",
+   "tok": "color-health",
+   "n": 15,
+   "why": "E2 行业词 1 个：oncology（token 'color-health' 与公司全名一致 + 语料佐证）"
+  },
+  {
+   "co": "Delfi Diagnostics",
+   "cat": "dx",
+   "ats": "lv",
+   "tok": "delfidiagnostics",
+   "n": 6,
+   "why": "E2 行业词 3 个：fda, gmp, sequencing（token 'delfidiagnostics' 与公司全名一致 + 语料佐证）"
+  },
+  {
+   "co": "Freenome",
+   "cat": "dx",
+   "ats": "gh",
+   "tok": "freenome",
+   "n": 27,
+   "why": "E1 板面主干名相等：'Freenome'"
+  },
+  {
+   "co": "Natera",
+   "cat": "dx",
+   "ats": "gh",
+   "tok": "natera",
+   "n": 210,
+   "why": "E1 板面主干名相等：'Natera'"
+  },
+  {
+   "co": "Beam Therapeutics",
+   "cat": "edit",
+   "ats": "gh",
+   "tok": "beamtherapeutics",
+   "n": 23,
+   "why": "E1 板面主干名相等：'Beam Therapeutics'"
+  },
+  {
+   "co": "Prime Medicine",
+   "cat": "edit",
+   "ats": "gh",
+   "tok": "primemedicine",
+   "n": 6,
+   "why": "E1 板面主干名相等：'Prime Medicine'"
+  },
+  {
+   "co": "Verve Therapeutics",
+   "cat": "edit",
+   "ats": "gh",
+   "tok": "verve",
+   "n": 63,
+   "why": "E1 板面主干名相等：'Verve'"
+  },
+  {
+   "co": "Ultragenyx Pharmaceutical",
+   "cat": "gt",
+   "ats": "gh",
+   "tok": "ultragenyxpharmaceutical",
+   "n": 21,
+   "why": "E1 板面主干名相等：'Ultragenyx Pharmaceutical'"
+  },
+  {
+   "co": "Arc Institute",
+   "cat": "inst",
+   "ats": "gh",
+   "tok": "arcinstitute",
+   "n": 22,
+   "why": "E1 板面主干名相等：'Arc Institute'"
+  },
+  {
+   "co": "Chan Zuckerberg Initiative",
+   "cat": "inst",
+   "ats": "gh",
+   "tok": "chanzuckerberginitiative",
+   "n": 9,
+   "why": "E1 板面主干名相等：'Chan Zuckerberg Initiative'"
+  },
+  {
+   "co": "Akero Therapeutics",
+   "cat": "metab",
+   "ats": "gh",
+   "tok": "akerotherapeutics",
+   "n": 1,
+   "why": "E1 板面主干名相等：'Akero Therapeutics'"
+  },
+  {
+   "co": "Corcept Therapeutics",
+   "cat": "metab",
+   "ats": "gh",
+   "tok": "corcepttherapeutics",
+   "n": 83,
+   "why": "E1 板面主干名相等：'Corcept Therapeutics'"
+  },
+  {
+   "co": "Edgewise Therapeutics",
+   "cat": "metab",
+   "ats": "gh",
+   "tok": "edgewisetherapeutics",
+   "n": 11,
+   "why": "E1 板面主干名相等：'Edgewise Therapeutics'"
+  },
+  {
+   "co": "Blueprint Medicines",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "blueprintmedicines",
+   "n": 5,
+   "why": "E2 行业词 2 个：immunology, oncology（板面名 'Blueprint Medicines, a Sanofi company' 部分相符 + 语料佐证）"
+  },
+  {
+   "co": "Erasca",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "erasca",
+   "n": 12,
+   "why": "E1 板面主干名相等：'Erasca'"
+  },
+  {
+   "co": "Kura Oncology",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "kuraoncology",
+   "n": 10,
+   "why": "E1 板面主干名相等：'Kura Oncology'"
+  },
+  {
+   "co": "Nuvalent",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "nuvalent",
+   "n": 4,
+   "why": "E1 板面主干名相等：'Nuvalent, Inc.'"
+  },
+  {
+   "co": "Olema Oncology",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "olema",
+   "n": 22,
+   "why": "E1 板面主干名相等：'Olema Oncology'"
+  },
+  {
+   "co": "Revolution Medicines",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "revolutionmedicines",
+   "n": 279,
+   "why": "E1 板面主干名相等：'Revolution Medicines'"
+  },
+  {
+   "co": "Tango Therapeutics",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "tangotherapeutics",
+   "n": 13,
+   "why": "E1 板面主干名相等：'Tango Therapeutics'"
+  },
+  {
+   "co": "Treeline Biosciences",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "treelinebiosciences",
+   "n": 12,
+   "why": "E1 板面主干名相等：'Treeline Biosciences'"
+  },
+  {
+   "co": "Vaxcyte",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "vaxcyte",
+   "n": 53,
+   "why": "E1 板面主干名相等：'Vaxcyte'"
+  },
+  {
+   "co": "Xilio Therapeutics",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "xiliotherapeutics",
+   "n": 1,
+   "why": "E1 板面主干名相等：'Xilio Therapeutics'"
+  },
+  {
+   "co": "Alltrna",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "alltrna",
+   "n": 3,
+   "why": "E1 板面主干名相等：'Alltrna'"
+  },
+  {
+   "co": "Dyne Therapeutics",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "dynetherapeutics",
+   "n": 70,
+   "why": "E1 板面主干名相等：'Dyne Therapeutics'"
+  },
+  {
+   "co": "Entrada Therapeutics",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "entradatherapeutics",
+   "n": 8,
+   "why": "E1 板面主干名相等：'Entrada Therapeutics'"
+  },
+  {
+   "co": "Stoke Therapeutics",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "stoketherapeutics",
+   "n": 22,
+   "why": "E1 板面主干名相等：'Stoke Therapeutics'"
+  },
+  {
+   "co": "Strand Therapeutics",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "strandtherapeutics",
+   "n": 4,
+   "why": "E1 板面主干名相等：'Strand Therapeutics'"
+  },
+  {
+   "co": "Tessera Therapeutics",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "tesseratherapeutics",
+   "n": 6,
+   "why": "E1 板面主干名相等：'Tessera Therapeutics'"
+  },
+  {
+   "co": "Akoya Biosciences",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "akoya",
+   "n": 5,
+   "why": "E1 板面主干名相等：'Akoya'"
+  },
+  {
+   "co": "Alamar Biosciences",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "alamarbiosciences",
+   "n": 27,
+   "why": "E1 板面主干名相等：'Alamar Biosciences'"
+  },
+  {
+   "co": "Benchling",
+   "cat": "tools",
+   "ats": "ab",
+   "tok": "benchling",
+   "n": 55,
+   "why": "E2 行业词 11 个：antibody, bioanalytical, biologics, cell therapy, fda, gmp"
+  },
+  {
+   "co": "Cellanome",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "cellanome",
+   "n": 10,
+   "why": "E1 板面主干名相等：'Cellanome'"
+  },
+  {
+   "co": "Element Biosciences",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "elementbiosciences",
+   "n": 13,
+   "why": "E1 板面主干名相等：'Element Biosciences'"
+  },
+  {
+   "co": "Ginkgo Bioworks",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "ginkgobioworks",
+   "n": 19,
+   "why": "E1 板面主干名相等：'Ginkgo Bioworks Inc.'"
+  },
+  {
+   "co": "Maravai LifeSciences",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "maravailifesciences",
+   "n": 16,
+   "why": "E1 板面主干名相等：'Maravai LifeSciences'"
+  },
+  {
+   "co": "Parse Biosciences",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "parsebiosciences",
+   "n": 7,
+   "why": "E1 板面主干名相等：'Parse Biosciences'"
+  },
+  {
+   "co": "Seer",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "seer",
+   "n": 1,
+   "why": "E1 板面主干名相等：'Seer Inc.'"
+  },
+  {
+   "co": "Singular Genomics",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "singulargenomics",
+   "n": 6,
+   "why": "E1 板面主干名相等：'Singular Genomics'"
+  },
+  {
+   "co": "TriLink Biotechnologies",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "trilinkbiotechnologies",
+   "n": 9,
+   "why": "E1 板面主干名相等：'TriLink BioTechnologies'"
+  },
+  {
+   "co": "Twist Bioscience",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "twistbioscience",
+   "n": 33,
+   "why": "E1 板面主干名相等：'Twist Bioscience'"
+  },
+  {
+   "co": "Ultima Genomics",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "ultimagenomics",
+   "n": 15,
+   "why": "E1 板面主干名相等：'Ultima Genomics'"
+  },
+  {
+   "co": "Watchmaker Genomics",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "watchmakergenomics",
+   "n": 13,
+   "why": "E1 板面主干名相等：'Watchmaker Genomics'"
+  }
+ ],
+ "unjudged": [
+  {
+   "co": "Absci",
+   "cat": "ai",
+   "ats": "ab",
+   "tok": "absci",
+   "n": 3,
+   "why": "岗位仅 3 个（<5），语料不足以判断",
+   "unjudged": true
+  },
+  {
+   "co": "Alnylam Pharmaceuticals",
+   "cat": "rna",
+   "ats": "gh",
+   "tok": "alnylampharmaceuticals",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Caribou Bio",
+   "cat": "cell",
+   "ats": "gh",
+   "tok": "caribou",
+   "n": 3,
+   "why": "岗位仅 3 个（<5），语料不足以判断（板面名 'Caribou Financial' 部分相符 + 语料佐证）",
+   "unjudged": true
+  },
+  {
+   "co": "Caribou Biosciences",
+   "cat": "edit",
+   "ats": "gh",
+   "tok": "caribou",
+   "n": 3,
+   "why": "岗位仅 3 个（<5），语料不足以判断（板面名 'Caribou Financial' 部分相符 + 语料佐证）",
+   "unjudged": true
+  },
+  {
+   "co": "Day One Biopharmaceuticals",
+   "cat": "pharma",
+   "ats": "gh",
+   "tok": "dayonebiopharmaceuticals",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Genesis Therapeutics",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "genesis",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Integrated DNA Technologies",
+   "cat": "tools",
+   "ats": "gh",
+   "tok": "integrated",
+   "n": 1,
+   "why": "岗位仅 1 个（<5），语料不足以判断（板面名 'Integrated Lawn Care' 部分相符 + 语料佐证）",
+   "unjudged": true
+  },
+  {
+   "co": "Jaguar Gene Therapy",
+   "cat": "gt",
+   "ats": "gh",
+   "tok": "jaguar",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Korro Bio",
+   "cat": "rna",
+   "ats": "lv",
+   "tok": "korrobio",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Latent Labs",
+   "cat": "ai",
+   "ats": "gh",
+   "tok": "latent",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Plexium",
+   "cat": "degrade",
+   "ats": "gh",
+   "tok": "plexium",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Tune Therapeutics",
+   "cat": "edit",
+   "ats": "gh",
+   "tok": "tunetherapeutics",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  },
+  {
+   "co": "Voyager Therapeutics",
+   "cat": "gt",
+   "ats": "gh",
+   "tok": "voyagertherapeutics",
+   "n": 0,
+   "why": "板面为空（空板面不构成证据）",
+   "unjudged": true
+  }
+ ],
+ "no_board": [
+  "10x Genomics",
+  "2seventy bio",
+  "89bio",
+  "ADARx Pharmaceuticals",
+  "AbbVie",
+  "Adicet Bio",
+  "Aera Therapeutics",
+  "Agilent Technologies",
+  "Aldevron",
+  "Alexion Pharmaceuticals",
+  "Alida Bio",
+  "Allen Institute",
+  "Allogene Therapeutics",
+  "Altimmune",
+  "Altius Institute",
+  "Ambros Therapeutics",
+  "Amgen",
+  "Arbor Biotechnologies",
+  "Arcus Biosciences",
+  "Arrowhead Pharmaceuticals",
+  "Arsenal Biosciences",
+  "Askbio",
+  "AstraZeneca",
+  "Atomwise",
+  "Avidity Biosciences",
+  "BigHat Biosciences",
+  "Bio-Techne",
+  "BioAge Labs",
+  "Biogen",
+  "Bristol Myers Squibb",
+  "Broad Institute",
+  "Bruker",
+  "C4 Therapeutics",
+  "Cabaletta Bio",
+  "Calico Life Sciences",
+  "Camp4 Therapeutics",
+  "Capsida Biotherapeutics",
+  "Capstan Therapeutics",
+  "Cargo Therapeutics",
+  "Caris Life Sciences",
+  "Century Therapeutics",
+  "Ceptur Therapeutics",
+  "Chroma Medicine",
+  "Codexis",
+  "Cold Spring Harbor Laboratory",
+  "Cue Health",
+  "Curio Bioscience",
+  "Cytiva",
+  "Dana-Farber Cancer Institute",
+  "Danaher",
+  "Deciphera Pharmaceuticals",
+  "Dicerna Pharmaceuticals",
+  "Dovetail Genomics",
+  "Editas Medicine",
+  "Eli Lilly and Company",
+  "Emendo Biotherapeutics",
+  "Emerald Cloud Lab",
+  "Empirico",
+  "Encoded Therapeutics",
+  "Epic Bio",
+  "EvolutionaryScale",
+  "Exact Sciences",
+  "Excision BioTherapeutics",
+  "Exelixis",
+  "Exscientia",
+  "Firefly Bio",
+  "Flagship Pioneering",
+  "Foghorn Therapeutics",
+  "Foundation Medicine",
+  "Fred Hutchinson Cancer Center",
+  "GSK",
+  "Garuda Therapeutics",
+  "Genascence",
+  "Genentech",
+  "Gilead Sciences",
+  "Gladstone Institutes",
+  "Grail",
+  "Graphite Bio",
+  "Guardant Health",
+  "Ikena Oncology",
+  "Illumina",
+  "Immunitas Therapeutics",
+  "Incyte",
+  "Intellia Therapeutics",
+  "Invitae",
+  "Ionis Pharmaceuticals",
+  "Jackson Laboratory",
+  "Jazz Pharmaceuticals",
+  "Johnson and Johnson",
+  "Jounce Therapeutics",
+  "Kallyope",
+  "Karius",
+  "Krystal Biotech",
+  "Kyverna Therapeutics",
+  "Laronde",
+  "Latus Bio",
+  "Life Biosciences",
+  "Madrigal Pharmaceuticals",
+  "Mammoth Biosciences",
+  "Merck",
+  "Metagenomi",
+  "Metsera",
+  "Mirati Therapeutics",
+  "Mission Bio",
+  "Moderna",
+  "Monte Rosa Therapeutics",
+  "Myriad Genetics",
+  "Nabla Bio",
+  "Nanostring Technologies",
+  "Nautilus Biotechnology",
+  "Neomorph",
+  "Neomorph Bio",
+  "New England Biolabs",
+  "New York Genome Center",
+  "Novo Nordisk",
+  "Nvelop Therapeutics",
+  "Ohana Biosciences",
+  "Olink",
+  "Opentrons",
+  "Orna Therapeutics",
+  "Oxford Nanopore Technologies",
+  "PTC Therapeutics",
+  "Pacific Biosciences",
+  "Passage Bio",
+  "Pathos AI",
+  "Pfizer",
+  "Photys Therapeutics",
+  "Qiagen",
+  "Quanterix",
+  "Ractigen Therapeutics",
+  "Regeneron Pharmaceuticals",
+  "Regenxbio",
+  "Renagade Therapeutics",
+  "Repare Therapeutics",
+  "Replicate Bioscience",
+  "Revvity",
+  "Rubedo Life Sciences",
+  "Salk Institute",
+  "Sana Biotechnology",
+  "Sanofi",
+  "Sarepta Therapeutics",
+  "Sartorius",
+  "Scale Biosciences",
+  "Schrodinger",
+  "Scorpion Therapeutics",
+  "Scribe Therapeutics",
+  "Scripps Research",
+  "Seagen",
+  "Shape Therapeutics",
+  "Solid Biosciences",
+  "Somite AI",
+  "Spark Therapeutics",
+  "Springworks Therapeutics",
+  "St Jude Children's Research Hospital",
+  "Standard BioTools",
+  "Strateos",
+  "Structure Therapeutics",
+  "Superluminal Medicines",
+  "Switch Therapeutics",
+  "Tahoe Therapeutics",
+  "Takeda",
+  "Taysha Gene Therapies",
+  "Tecan",
+  "Tempus AI",
+  "Terray Therapeutics",
+  "Thermo Fisher Scientific",
+  "Triana Biomedicines",
+  "Truvian Health",
+  "Turn Biotechnologies",
+  "Unity Biotechnology",
+  "Van Andel Institute",
+  "Vertex Pharmaceuticals",
+  "Veru",
+  "Viking Therapeutics",
+  "Vividion Therapeutics",
+  "Vizgen",
+  "Wave Life Sciences",
+  "Werewolf Therapeutics",
+  "Whitehead Institute",
+  "Zealand Pharma",
+  "Zentalis Pharmaceuticals"
+ ]
+}
