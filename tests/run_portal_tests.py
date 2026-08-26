@@ -82,6 +82,10 @@ def build(html_path=None, fixture_path=None):
         # curated.json 的顶层键也叫 grants(与 index.html 里 CURATED=c.grants 一致)
         "curated":   jload("curated.json", {}).get("grants", []),
         "jobs":      jload("jobs.json", {}).get("jobs", []),
+        # 新增检索源必须同步喂数据 —— 否则 B9「每个源都被搜到过」会红。
+        # 2026-08 就是这么发现企业岗位面板漏喂的:面板自己的 48 条断言全绿,
+        # 但全局搜索里这个源永远 0 命中,只有跨面板的 B9 抓得到。
+        "ijobs":     jload("industry_jobs.json", {}).get("jobs", []),
         "changes":   jload("changes.json", {}).get("changes", []),
         "papers":    papers_blob["papers"],
         "papmeta":   papers_blob["meta"],

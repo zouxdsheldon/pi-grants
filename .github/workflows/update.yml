@@ -31,6 +31,13 @@ jobs:
         run: python scripts/fetch_grants.py
       - name: Fetch academic jobs
         run: python scripts/fetch_jobs.py || echo "jobs fetch failed, keeping previous data/jobs.json"
+      - name: Fetch industry jobs (Greenhouse + Lever)
+        # 沙箱里这两个 API 不可达,只有 CI 的网络能抓 —— 所以本地改脚本后
+        # 只能靠这一步验证。失败时保留上一版 industry_jobs.json,不把整轮拖死。
+        run: python scripts/fetch_industry_jobs.py || echo "industry fetch failed, keeping previous data/industry_jobs.json"
+      - name: Industry panel tests (score integrity + escaping)
+        # 数据契约自检不需要 jsdom;DOM 部分缺 jsdom 会明确跳过而非假装通过。
+        run: python tests/run_industry_tests.py || echo "industry tests failed — data still published, check the log"
       - name: Import Pivot CSV drops (data/pivot_inbox/*.csv)
         # 你把 Pivot 导出的 CSV 提交进 data/pivot_inbox/,这一步自动并入
         # curated.json 并删掉已消费的文件。空目录时它什么也不做。
@@ -76,6 +83,7 @@ jobs:
           # 目录不在仓库里 → `git add data/interests_inbox` fatal → 提交步骤失败。
           # 现在两个收件箱都有 .gitkeep 保底,这里再加一层:缺了就跳过,不再拖垮提交。
           for p in data/grants.json data/grant_deadlines.ics data/jobs.json \
+                   data/industry_jobs.json \
                    data/curated.json data/pivot_inbox \
                    data/interests.json data/interests_inbox \
                    data/papers.json data/paper_first_seen.json \

@@ -11,7 +11,7 @@
      · 期刊的发文数必须能从 papers.json 原地复算出来
      · 层级判定必须是精确匹配,子串误命中必须被抓到
    ========================================================== */
-LIVE = T.live; CURATED = T.curated; JOBS = T.jobs;
+LIVE = T.live; CURATED = T.curated; JOBS = T.jobs;  IJOBS = T.ijobs || [];
 PAPERS = T.papers; PAPMETA = T.papmeta; CITENET = T.citenet;
 INTERESTS = T.interests; INTMAP = {}; INTERESTS.forEach(function(x){INTMAP[x.id]=x;});
 CHANGES = T.changes;

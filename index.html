@@ -775,6 +775,7 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   <button class="tab tab2" data-p="whatsnew">🔄 更新动态</button>
   <button class="tab" data-p="myapps">🎯 我能申的</button>
   <button class="tab" data-p="jobs">🎓 学术职位</button>
+  <button class="tab" data-p="ind">🏭 企业岗位</button>
   <button class="tab tab2" data-p="papers">🔔 文献追踪</button>
   <button class="tab tab2" data-p="mydirs">🎯 我的研究方向</button>
   <button class="tab tab2" data-p="pipeline">📋 我的申请管线</button>
@@ -1001,6 +1002,30 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <span class="status" id="boardStat" style="margin:0"></span>
   </div>
   <div id="boardWrap"></div>
+</div>
+
+<div class="panel" id="ind">
+  <div class="hstrip" data-help="ind"></div>
+  <div class="chipbar" id="chips_ind"></div>
+  <div class="honest">🏭 <b>企业 / 工厂岗位</b> —— 每日自动抓取 <b id="indCo">…</b> 家生物医药与工具公司的官方招聘系统(Greenhouse / Lever),按 <code>data/interests.json</code> 里你的方向词库打分。<br>
+  <b>关于分数,说实话:</b>①关键词按<b>词界</b>匹配(修过一次 bug —— "delivering revenue" 曾被算成 "liver");②公司简介/福利/EEO 段落按「同公司高频重复句」<b>自动剔除</b>再打分,本次剔掉 <b id="indBoil">…</b> 句,所以设施、销售岗不再靠公司平台介绍蒙分;③非研究职能族(BD/销售/运营)按族<b>折减</b>而不隐藏 —— 你想看就还在,只是不会挤到前面。<b>分数只是排序工具,不是评价</b>。<br>
+  <b>抓不到的部分:</b>国内药企/CRO、大动物与农业生物技术、试剂仪器厂商多数不用这两套系统,已单列在下方「② 手工核实清单」。</div>
+  <div class="calbanner" id="indBanner"></div>
+  <div class="actions" style="margin:10px 0" id="indFamChips"></div>
+  <div class="fbar">
+    <input type="text" id="indq" placeholder="🔍 搜岗位 / 公司 / 命中词…">
+    <select id="indCoSel"><option value="">公司(全部)</option></select>
+    <select id="indCat"><option value="">公司类型(全部)</option></select>
+    <select id="indFit"><option value="">契合度(全部)</option><option value="5">≥5 高度契合</option><option value="3">≥3 相关</option><option value="1">≥1 有命中词</option></select>
+    <select id="indDays"><option value="">发布时间(全部)</option><option value="7">近 7 天</option><option value="30">近 30 天</option><option value="90">近 90 天</option></select>
+    <select id="indSort"><option value="def">排序:研发优先+契合度</option><option value="score">排序:契合度高→低</option><option value="date">排序:发布新→旧</option><option value="co">排序:公司 A→Z</option></select>
+    <label><input type="checkbox" id="ind_onlytrk"> 只看已关注</label>
+    <label><input type="checkbox" id="ind_hidenr"> 隐藏非研究职能(BD/销售/运营)</label>
+    <button class="rst" id="indRst">↺ 重置</button>
+  </div>
+  <div class="actions" style="margin:0 0 6px" id="indRegionChips"></div>
+  <div class="status" id="indStatus" style="margin:4px 0"></div>
+  <div id="indWrap"></div>
 </div>
 
 <div class="panel" id="papers">
@@ -2897,6 +2922,7 @@ paragraphs + introductions from high-impact papers in my field). Please:
 <script>
 let LIVE=[], CURATED=[], CHANGES=[], META={}, CUR_REGION="";
 let JOBS=[], JOBMETA={}, JOB_LVL="all", JOB_REGION="";
+let IJOBS=[], IJMETA={}, IJ_FAM="all", IJ_REGION="";
 let INSTS=[], BOARDS=[], INST_REGION="", INST_FIT="";
 let PAPERS=[], PAPMETA={}, INTERESTS=[], INTMAP={}, PAP_TAGFILT="", PAP_WIRED=false;
 let INTCFG={};
@@ -3384,6 +3410,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   t.classList.add("active");document.getElementById(t.dataset.p).classList.add("active");
   if(t.dataset.p==="myapps")renderMyApps();
   if(t.dataset.p==="jobs")renderJobs();
+  if(t.dataset.p==="ind")renderInd();
   if(t.dataset.p==="pipeline")renderPipeline();
   if(t.dataset.p==="whatsnew")renderChanges();
   if(t.dataset.p==="calendar")renderCalendar();
@@ -3423,6 +3450,7 @@ var HUB_SECTIONS=[
  {h:"② 找人 · 同行与去处", st:"谁在做同一件事,以及哪里在招人",
   tools:[
    {p:"jobs", ic:"🎓", nm:"学术职位", ds:"教职 / 博后 / 研究员岗位,按地区与层级筛选", cnt:()=>JOBS.length, u:"个岗位"},
+   {p:"ind", ic:"🏭", nm:"企业岗位", ds:"生物医药/工具公司岗位,按职能族与契合度筛选", cnt:()=>IJOBS.length, u:"个岗位"},
    {ext:"https://zouxdsheldon.github.io/pi-intel/", ic:"🧭", nm:"PI 情报地图",
     ds:"从本站语料里抽出的 48 位 PI:方向指纹、竞争/互补象限、方向漂移轨迹", cnt:()=>48, u:"位 PI"},
   ]},
@@ -3551,7 +3579,8 @@ var SIDE_NAV=[
     {p:"tpivot",   ic:"📥", t:"Pivot 表格导入"}
   ]},
   {g:"② 找职位", items:[
-    {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"}
+    {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"},
+    {p:"ind", ic:"🏭", t:"企业岗位", n:"indN"}
   ]},
   {g:"③ 读文献 · 查数据库", items:[
     {p:"mydirs",  ic:"🎯", t:"我的研究方向", nw:1},
@@ -4496,6 +4525,9 @@ var GS_GROUPS=[
  {k:"jobs",   ic:"🎓", label:"学术职位", panel:"jobs",
   rows:()=>JOBS, txt:j=>[j.title,j.company,j.location,j.level,j.desc].join(" "),
   t:j=>j.title, m:j=>[j.company,j.location,j.date].filter(Boolean).join(" · ")},
+ {k:"ind",    ic:"🏭", label:"企业岗位", panel:"ind",
+  rows:()=>IJOBS, txt:j=>[j.title,j.company,j.location,j.famlabel,j.desc].join(" "),
+  t:j=>j.title, m:j=>[j.company,j.location,j.date].filter(Boolean).join(" · ")},
  {k:"papers", ic:"📚", label:"文献", panel:"papers",
   rows:()=>PAPERS, txt:p=>[p.title,p.abstract,p.journal,(p.authors||[]).join(" "),(p.keywords||[]).join(" ")].join(" "),
   t:p=>p.title, m:p=>[p.journal,p.year,p.cites!=null?(p.cites+" 引"):""].filter(Boolean).join(" · ")},
@@ -4750,7 +4782,7 @@ function toggleTrack(g){
 /* ---------- load data ---------- */
 async function loadData(){
   try{
-    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,pvr,cnet,jrn]=await Promise.all([
+    const [g,c,ch,jb,inst,pp,ints,scfg,fnd,psch,pvr,cnet,jrn,ijb]=await Promise.all([
       fetch("data/grants.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/curated.json?_="+Date.now()).then(r=>r.json()),
       fetch("data/changes.json?_="+Date.now()).then(r=>r.ok?r.json():{changes:[]}).catch(()=>({changes:[]})),
@@ -4764,8 +4796,9 @@ async function loadData(){
       fetch("data/pivot_rules.json?_="+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
       fetch("data/citenet.json?_="+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
       fetch("data/journals.json?_="+Date.now()).then(r=>r.ok?r.json():{journals:[],meta:{}}).catch(()=>({journals:[],meta:{}})),
+      fetch("data/industry_jobs.json?_="+Date.now()).then(r=>r.ok?r.json():{jobs:[]}).catch(()=>({jobs:[]})),
     ]);
-    LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb;
+    LIVE=g.grants||[]; META=g; CURATED=c.grants||[]; CHANGES=ch.changes||[]; JOBS=jb.jobs||[]; JOBMETA=jb; IJOBS=ijb.jobs||[]; IJMETA=ijb;
     INSTS=inst.institutions||[]; BOARDS=inst.boards||[];
     PAPERS=pp.papers||[]; PAPMETA=pp.meta||{}; INTERESTS=(ints.interests||[]);
     INTCFG=ints||{};   /* 方向编辑器要读 exclude / bands,不只是 interests */
@@ -4783,6 +4816,7 @@ async function loadData(){
     CAL_EV=buildCalEvents(); document.getElementById("calN").textContent=CAL_EV.filter(e=>e.mine).length;
     try{renderMyApps();}catch(e){console.warn("myapps",e);}
     try{renderJobs();}catch(e){console.warn("jobs",e);}
+    try{renderInd();}catch(e){console.warn("ind",e);}
     try{renderPapers();}catch(e){console.warn("papers",e);}
     JOURNALS=(jrn&&jrn.journals)||[]; JMETA=(jrn&&jrn.meta)||{};
     document.getElementById("jrnN").textContent=JOURNALS.length;
@@ -4920,7 +4954,7 @@ const fitRank={"高":0,"中":1,"低":2};
    dropdown could read "(908)" while the visible list held 26 rows. Both
    helpers recount on every render against all OTHER active filters
    (skip-own-dimension), and preserve the current selection. */
-function facetSel(sel, ph, items, keyOf, passOther){
+function facetSel(sel, ph, items, keyOf, passOther, labelOf){
   if(!sel)return "";
   const cur=sel.value, cnt={}, all={};
   items.forEach(x=>{const k=keyOf(x); if(k===null||k===undefined||k==="")return;
@@ -4928,7 +4962,9 @@ function facetSel(sel, ph, items, keyOf, passOther){
   sel.innerHTML=`<option value="">${ph}</option>`+
     Object.keys(all).sort((a,b)=>(cnt[b]||0)-(cnt[a]||0)).map(k=>{
       const v=String(k).replace(/"/g,"&quot;");
-      const lab=String(k).length>42?String(k).slice(0,42)+"…":k;
+      /* labelOf 可选：数据里存的是短码(rna/degrade)，显示要用中文标签 */
+      const disp=labelOf?String(labelOf(k)):String(k);
+      const lab=disp.length>42?disp.slice(0,42)+"…":disp;
       return `<option value="${v}"${String(k)===cur?" selected":""}>${lab} (${cnt[k]||0})</option>`;
     }).join("");
   sel.value=cur;                       // survives if the option still exists
@@ -5318,6 +5354,104 @@ function tierOf(rf,ecls){
   if(rf>=1)return"C";
   return null;
 }
+/* ================= 🏭 企业岗位 · 渲染 =================
+   与「学术职位」同构:分数只用于排序,非研究职能族按 FAM_WEIGHT 折减(在
+   抓取脚本里做),这里不再二次隐藏 —— 用户勾选 ind_hidenr 才隐藏。       */
+function trackInd(id){
+  const t=getTracked(); const o=IJOBS.find(x=>(x.url||x.title).slice(0,40)===id);
+  if(!o)return;
+  if(t["ind_"+id])delete t["ind_"+id];
+  else t["ind_"+id]={title:o.title,agency:o.company,close:"",url:o.url,
+        amount:"企业岗位",status:"感兴趣",notes:o.region+" · "+(o.famlabel||"")};
+  setTracked(t);renderInd();
+}
+function renderInd(){
+  const wrap=document.getElementById("indWrap");
+  if(!wrap)return;
+  if(!IJOBS.length){wrap.innerHTML='<p style="color:var(--muted);padding:16px">企业岗位数据尚未生成(首次部署后等每日任务运行,或手动触发 Actions 的 fetch_industry_jobs)。</p>';const z=document.getElementById("indN"); if(z)z.textContent="0"; return;}
+  const FAMS=IJMETA.fam_label||{};
+  const q=(document.getElementById("indq").value||"").toLowerCase();
+  const coF=document.getElementById("indCoSel").value;
+  const catF=document.getElementById("indCat").value;
+  const fitF=+document.getElementById("indFit").value||0;
+  const dayF=+document.getElementById("indDays").value||0;
+  const sortF=document.getElementById("indSort").value;
+  const onlyTrk=document.getElementById("ind_onlytrk").checked;
+  const hideNR=document.getElementById("ind_hidenr").checked;
+  const NONRES={field:1,ops:1,biz:1};
+  const trkNow=getTracked(), nowMs=Date.now();
+  const ipass=(j,skip)=>{
+    if(skip!=="fam"&&IJ_FAM!=="all"&&j.fam!==IJ_FAM)return false;
+    if(skip!=="rg"&&IJ_REGION&&j.region!==IJ_REGION)return false;
+    if(skip!=="co"&&coF&&j.company!==coF)return false;
+    if(skip!=="cat"&&catF&&j.cat!==catF)return false;
+    if(hideNR&&NONRES[j.fam])return false;
+    if(fitF&&(j.score||0)<fitF)return false;
+    if(onlyTrk&&!trkNow["ind_"+(j.url||j.title).slice(0,40)])return false;
+    if(dayF){const t=Date.parse(j.date||"");if(isNaN(t)||(nowMs-t)/864e5>dayF)return false;}
+    if(q&&!((j.title||"")+(j.company||"")+(j.hits||[]).join(" ")+(j.desc||"")).toLowerCase().includes(q))return false;
+    return true;};
+  /* 职能族 chip:计数排除自身筛选,否则选中一族后其它族全变 0 就切不动 */
+  const famBox=document.getElementById("indFamChips");
+  const famKeys=Object.keys(FAMS);
+  famBox.innerHTML='<span class="chip ifam'+(IJ_FAM==="all"?" active":"")+'" data-fam="all">全部 ('+IJOBS.filter(j=>ipass(j,"fam")).length+')</span>'+
+    famKeys.map(k=>{const n=IJOBS.filter(j=>ipass(j,"fam")&&j.fam===k).length;
+      return n?'<span class="chip ifam'+(IJ_FAM===k?" active":"")+'" data-fam="'+k+'">'+esc2(FAMS[k])+' ('+n+')</span>':"";}).join("");
+  famBox.querySelectorAll(".chip.ifam").forEach(c=>c.onclick=()=>{IJ_FAM=c.dataset.fam;renderInd();});
+  facetChips(document.getElementById("indRegionChips"),"irg","irg",IJOBS,
+    j=>j.region,j=>ipass(j,"rg"),IJ_REGION,"全部地区",v=>{IJ_REGION=v;renderInd();});
+  facetSel(document.getElementById("indCoSel"),"公司(全部)",IJOBS,j=>j.company,j=>ipass(j,"co"));
+  /* cat_label 的值是 [标签, 备注] 二元组,直接插值会把整段备注写进下拉框 */
+  const CATL=IJMETA.cat_label||{};
+  const catName=k=>{const v=CATL[k];return Array.isArray(v)?v[0]:(v||k);};
+  const catNote=k=>{const v=CATL[k];return Array.isArray(v)?(v[1]||""):"";};
+  facetSel(document.getElementById("indCat"),"公司类型(全部)",IJOBS,
+    j=>j.cat,j=>ipass(j,"cat"),catName);
+  let R=IJOBS.filter(j=>ipass(j,null));
+  const nres=R.filter(j=>!NONRES[j.fam]).length;
+  const hi=R.filter(j=>(j.score||0)>=5).length;
+  document.getElementById("indBanner").innerHTML=
+    '<div class="kpi"><b>'+R.length+'</b>🏭 匹配岗位</div>'+
+    '<div class="kpi k30"><b>'+nres+'</b>研发/计算/转化/工艺</div>'+
+    '<div class="kpi k90"><b>'+(IJMETA.n_companies||0)+'</b>家公司</div>'+
+    '<div class="kpi kmine"><b>'+hi+'</b>🎯 高度契合(≥5)</div>';
+  const nEl=document.getElementById("indN"); if(nEl)nEl.textContent=nres;
+  const cn=document.getElementById("indCo"); if(cn)cn.textContent=IJMETA.n_companies||0;
+  const bn=document.getElementById("indBoil"); if(bn)bn.textContent=IJMETA.n_boilerplate_sents||0;
+  document.getElementById("indStatus").textContent=
+    "来源 "+(IJMETA.source||"Greenhouse + Lever")+" · 共 "+(IJMETA.count||IJOBS.length)+
+    " 条 · 最后刷新 "+(IJMETA.updated||"?")+" · 当前筛出 "+R.length+" 个";
+  const tracked=getTracked();
+  if(sortF==="score")R=R.slice().sort((a,b)=>b.score-a.score);
+  else if(sortF==="date")R=R.slice().sort((a,b)=>(Date.parse(b.date||"")||0)-(Date.parse(a.date||"")||0));
+  else if(sortF==="co")R=R.slice().sort((a,b)=>String(a.company||"").localeCompare(String(b.company||"")));
+  else R=R.slice().sort((a,b)=>(NONRES[a.fam]?1:0)-(NONRES[b.fam]?1:0)||b.score-a.score);
+  let html="";
+  R.forEach(j=>{
+    const id=(j.url||j.title).slice(0,40), isT=!!tracked["ind_"+id];
+    /* url 来自外部 API，进 href 属性同样要转义 —— 属性上下文的引号闭合是注入点 */
+    const U=esc2(j.url||"#");
+    const hitTags=(j.hits||[]).length?j.hits.map(h=>'<span class="mtag hit">🎯 '+esc2(h)+'</span>').join("")
+                 :'<span class="mtag">无方向命中词</span>';
+    const dis=(j.raw_score!=null&&j.raw_score!==j.score)
+      ?'<span class="mtag" title="非研究职能族按族折减,原始命中分 '+j.raw_score+'">↓ 折减(原 '+j.raw_score+')</span>':"";
+    html+='<div class="card mrow"><div class="top">'+
+      '<span class="name"><a href="'+U+'" target="_blank">'+esc2(j.title||"(无标题)")+'</a></span>'+
+      '<span class="msc">契合 '+(j.score||0)+'</span>'+
+      '<span class="jlvl pd">'+esc2(j.famlabel||"")+'</span>'+
+      '<span class="ftype">'+esc2(j.region||"")+'</span></div>'+
+      '<div class="funder">'+esc2(j.company||"")+' · '+esc2(j.location||"")+' · '+
+        esc2(catName(j.cat))+' · '+esc2(j.ats||"")+'</div>'+
+      '<div class="mtags">'+hitTags+dis+'</div>'+
+      (j.cnote?'<div class="note" style="color:var(--muted);font-size:12.5px">🏢 '+esc2(j.cnote)+'</div>':"")+
+      (j.desc?'<div class="note" style="color:var(--muted);font-size:12.5px">'+esc2(j.desc.slice(0,400))+(j.desc.length>400?"…":"")+'</div>':"")+
+      '<div class="actions"><a class="btn" href="'+U+'" target="_blank">🔗 打开职位页</a>'+
+      '<button class="btn'+(isT?" on":"")+'" onclick="trackInd(\''+id.replace(/'/g,"\\'")+'\')">'+(isT?"✓ 已关注":"📌 关注")+'</button>'+
+      '</div></div>';
+  });
+  wrap.innerHTML=html||'<p style="color:var(--muted);padding:16px">当前筛选无结果 —— 试试清空关键词或点「↺ 重置」。</p>';
+}
+
 /* ================= 🎓 学术职位 · 渲染 =================
    数据源:data/jobs.json(GitHub Actions 每日抓取 jobRxiv 并按方向打分)。
    本页仅做展示 + 前端筛选(级别 / 地区 / 关键词),数据刷新后自动更新。*/
@@ -5422,6 +5556,18 @@ document.getElementById("jobRst").onclick=()=>{
   document.querySelectorAll("#jobs .chip.lvl").forEach(x=>x.classList.toggle("active",x.dataset.lvl==="all"));
   document.querySelectorAll("#jobs .chip.rg").forEach(x=>x.classList.toggle("active",x.dataset.rg===""));
   renderJobs();};
+
+document.getElementById("indq").addEventListener("input",renderInd);
+["indCoSel","indCat","indFit","indDays","indSort","ind_onlytrk","ind_hidenr"].forEach(id=>
+  document.getElementById(id).addEventListener("change",renderInd));
+document.getElementById("indRst").onclick=()=>{
+  document.getElementById("indq").value="";
+  ["indCoSel","indCat","indFit","indDays"].forEach(i=>document.getElementById(i).value="");
+  document.getElementById("indSort").value="def";
+  document.getElementById("ind_onlytrk").checked=false;
+  document.getElementById("ind_hidenr").checked=false;
+  IJ_FAM="all";IJ_REGION="";
+  renderInd();};
 
 /* ---------- TOP 院所直投目录 + 领域招聘板 ---------- */
 function instTrack(idx){
@@ -7616,6 +7762,15 @@ var HELP = {
       {t:"只看 Nature Careers",set:[["jobSrc","Nature Careers"]]},
       {t:"院所目录:仅已核实链接",set:[["instStatus","verified"]]}],
   caveat:"契合度只是**关键词打分**,不是对岗位描述的理解。分低不代表不适合,只代表你的词库没命中。"},
+ ind:{what:"每日抓取 27 家生物医药 / 工具公司**官方招聘系统**(Greenhouse · Lever)的全部在招岗位,按职能族分类,按你的方向词库打分。",
+  how:["**先用职能族芯片收窄**:研发科学家 / 计算 / 转化 / 工艺 是你的正面出口;BD·销售·运营留在列表里但已折减,想看就翻,不会挤前排。",
+       "**契合度只是排序工具**。≥5 是词库命中密集的岗,≥1 表示至少有一个方向词。分 0 不等于不能投 —— 只说明这条岗位描述里没出现你的词。",
+       "点「📌 关注」进 📋 我的申请管线,和资助、学术职位同表追进度。"],
+  ex:[{t:"研发岗 + 高度契合",set:[["indFit","5"]]},
+      {t:"只看近 30 天",set:[["indDays","30"]]},
+      {t:"隐藏 BD/销售/运营",set:[["ind_hidenr","1"]]}],
+  caveat:"**三件事说清楚**:①分数只看关键词,不理解岗位内容;②公司简介/福利/EEO 段落已按「同公司高频重复句」自动剔除后再打分(修过两个真 bug:裸子串把 delivering 算成 liver;先截断再剔样板导致 58% 岗位无文本),但剔除是统计判据,可能有漏网;③**国内药企 / CRO / 大动物与农业生物技术 / 试剂仪器厂商多数不用这两套系统,抓不到** —— 那部分只能自己按下方公司清单去官网翻。"},
+
 
  mydirs:{what:"换课题就来这一页:填方向名 + 几个关键词,面板替你写 data/interests.json,并生成 PubMed / Europe PMC / Crossref 的检索式。你不用打开任何文件,也不用学 [tiab] 那套语法。",
   how:["**四步换方向:**① 点「读回当前线上方向」把现在的 8 个方向调出来 → ② 改名字、加减关键词(打字后按回车或逗号成词,点 × 删词) → ③ 点「联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → ④ 点「下载方向表」再点「打开收件箱」把文件拖进去、Commit —— **Commit 完抓取立刻自动开跑**(约 5–15 分钟跑完),不用等第二天,也不用去 Actions 手动点。跑完刷新「🔔 文献追踪」就是新方向的结果;页面不会自己提示你好了,自己刷一下。",
@@ -7673,6 +7828,9 @@ var PFILT = {
          ["my_onlyhit","仅命中方向"],["my_onlytrk","仅已关注"]],
  jobs:[["jobq","搜索"],["jobSrc","来源"],["jobFit","契合度"],["jobDays","发布时间"],
        ["jobSort",null],["job_onlytrk","仅已关注"]],
+ ind:[["indq","搜索"],["indCoSel","公司"],["indCat","公司类型"],["indFit","契合度"],
+      ["indDays","发布时间"],["indSort",null],["ind_onlytrk","仅已关注"],
+      ["ind_hidenr","隐藏非研究职能"]],
  papers:[["papq","搜索"],["papDir","方向"],["papSrc","来源"],["papJournal","期刊"],["papTier","层级"],
          ["papType","类型"],["papNov","新颖度"],["papMeth","方法"],["papBand","相关度"],["papWin","时间"],
          ["papSort",null],["pap_oa","仅OA"],["pap_hot","仅Hotspot"],["pap_gap","仅Gap"],
@@ -9826,6 +9984,7 @@ var TFEXTRA = {
   whatsnew:{nm:"更新动态",   en:"What's new", alias:["新增","变化","diff"], kw:"上次抓取以来新增/变化的机会"},
   pipeline:{nm:"申请管线",   en:"Application pipeline", alias:["进度","管线","tracker"], kw:"跟踪自己每份申请的进度"},
   jobs:    {nm:"学术职位",   en:"Faculty jobs", alias:["tenure","faculty","招聘","职位","岗位"], kw:"检索独立 PI / faculty 职位"},
+ ind:     {nm:"企业岗位",   en:"Industry jobs", alias:["industry","company","biotech","企业","公司","工厂","药企"], kw:"检索生物医药企业岗位"},
   papers:  {nm:"文献追踪",   en:"Paper tracking", alias:["追踪","本站语料","方向"], kw:"追踪你关注方向的最新论文"},
   journals:{nm:"期刊查选",   en:"Journal picker", alias:["投哪","选刊","期刊","IF","影响因子"], kw:"按本站语料选投稿期刊"},
   writing: {nm:"写作指导",   en:"Grant writing", alias:["写本子","模板","Specific Aims","proposal"], kw:"基金写作模板与逐段指导"}
