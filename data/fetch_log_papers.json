@@ -1,298 +1,291 @@
 {
- "updated": "2026-09-02 15:06",
+ "updated": "2026-09-03 15:08",
  "log": [
   {
    "source": "pubmed",
    "direction": "tdmd",
    "n": 30,
-   "seconds": 1.71,
+   "seconds": 2.91,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tdmd",
    "n": 17,
-   "seconds": 9.85,
+   "seconds": 2.98,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tdmd",
    "n": 9,
-   "seconds": 0.88,
+   "seconds": 1.13,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tdmd",
-   "n": 0,
-   "seconds": 3.79,
-   "error": null
-  },
-  {
-   "source": "crossref",
-   "direction": "tdmd",
-   "n": 100,
-   "seconds": 0.52,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "ampk",
-   "n": 94,
-   "seconds": 1.61,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "ampk",
-   "n": 78,
-   "seconds": 1.96,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "ampk",
-   "n": 4,
-   "seconds": 0.91,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "ampk",
-   "n": 0,
-   "seconds": 3.74,
-   "error": null
-  },
-  {
-   "source": "crossref",
-   "direction": "ampk",
-   "n": 100,
-   "seconds": 0.43,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "biogenesis",
-   "n": 150,
-   "seconds": 2.17,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "biogenesis",
-   "n": 151,
-   "seconds": 5.35,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "biogenesis",
-   "n": 26,
-   "seconds": 2.97,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "biogenesis",
-   "n": 0,
-   "seconds": 3.79,
-   "error": null
-  },
-  {
-   "source": "crossref",
-   "direction": "biogenesis",
-   "n": 100,
-   "seconds": 0.53,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "tut",
-   "n": 33,
-   "seconds": 1.29,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "tut",
-   "n": 25,
-   "seconds": 0.99,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "tut",
-   "n": 8,
-   "seconds": 0.75,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "tut",
-   "n": 0,
-   "seconds": 3.74,
-   "error": null
-  },
-  {
-   "source": "crossref",
-   "direction": "tut",
-   "n": 100,
-   "seconds": 0.48,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "mir29fib",
-   "n": 31,
-   "seconds": 1.4,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "mir29fib",
-   "n": 29,
-   "seconds": 1.86,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "mir29fib",
-   "n": 3,
-   "seconds": 0.8,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "mir29fib",
-   "n": 0,
-   "seconds": 3.88,
-   "error": null
-  },
-  {
-   "source": "crossref",
-   "direction": "mir29fib",
-   "n": 100,
-   "seconds": 0.37,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "metab",
-   "n": 150,
-   "seconds": 2.19,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "metab",
-   "n": 200,
-   "seconds": 4.34,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "metab",
-   "n": 0,
-   "seconds": 10.57,
-   "error": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
-  },
-  {
-   "source": "arxiv",
-   "direction": "metab",
    "n": 0,
    "seconds": 3.81,
    "error": null
   },
   {
    "source": "crossref",
+   "direction": "tdmd",
+   "n": 100,
+   "seconds": 0.58,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "ampk",
+   "n": 95,
+   "seconds": 1.79,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "ampk",
+   "n": 79,
+   "seconds": 2.07,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "ampk",
+   "n": 4,
+   "seconds": 0.98,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "ampk",
+   "n": 0,
+   "seconds": 6.85,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "ampk",
+   "n": 100,
+   "seconds": 0.76,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "biogenesis",
+   "n": 150,
+   "seconds": 4.36,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "biogenesis",
+   "n": 150,
+   "seconds": 5.22,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "biogenesis",
+   "n": 26,
+   "seconds": 1.42,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "biogenesis",
+   "n": 0,
+   "seconds": 3.77,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "biogenesis",
+   "n": 100,
+   "seconds": 0.75,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "tut",
+   "n": 33,
+   "seconds": 1.53,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "tut",
+   "n": 25,
+   "seconds": 1.56,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "tut",
+   "n": 8,
+   "seconds": 1.32,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "tut",
+   "n": 0,
+   "seconds": 3.74,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "tut",
+   "n": 100,
+   "seconds": 0.62,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "mir29fib",
+   "n": 31,
+   "seconds": 2.33,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "mir29fib",
+   "n": 29,
+   "seconds": 1.29,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "mir29fib",
+   "n": 3,
+   "seconds": 0.64,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "mir29fib",
+   "n": 0,
+   "seconds": 3.86,
+   "error": null
+  },
+  {
+   "source": "crossref",
+   "direction": "mir29fib",
+   "n": 100,
+   "seconds": 0.73,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "metab",
+   "n": 150,
+   "seconds": 4.83,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "metab",
+   "n": 200,
+   "seconds": 5.76,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "metab",
+   "n": 20,
+   "seconds": 1.56,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "metab",
+   "n": 0,
+   "seconds": 3.98,
+   "error": null
+  },
+  {
+   "source": "crossref",
    "direction": "metab",
    "n": 100,
-   "seconds": 0.57,
+   "seconds": 0.56,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "models",
    "n": 150,
-   "seconds": 3.41,
+   "seconds": 2.2,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "models",
-   "n": 0,
-   "seconds": 10.97,
-   "error": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+   "n": 25,
+   "seconds": 1.55,
+   "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "models",
-   "n": 0,
-   "seconds": 10.85,
-   "error": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+   "n": 6,
+   "seconds": 1.11,
+   "error": null
   },
   {
    "source": "arxiv",
    "direction": "models",
    "n": 0,
-   "seconds": 3.71,
+   "seconds": 3.87,
    "error": null
   },
   {
    "source": "crossref",
    "direction": "models",
    "n": 100,
-   "seconds": 0.4,
+   "seconds": 0.54,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "tools",
    "n": 40,
-   "seconds": 2.28,
+   "seconds": 1.71,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tools",
-   "n": 0,
-   "seconds": 10.35,
-   "error": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+   "n": 23,
+   "seconds": 1.57,
+   "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tools",
-   "n": 0,
-   "seconds": 10.76,
-   "error": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+   "n": 1,
+   "seconds": 0.6,
+   "error": null
   },
   {
    "source": "arxiv",
    "direction": "tools",
    "n": 1,
-   "seconds": 3.78,
+   "seconds": 3.75,
    "error": null
   },
   {
    "source": "crossref",
    "direction": "tools",
    "n": 100,
-   "seconds": 0.35,
+   "seconds": 0.73,
    "error": null
   },
   {
    "source": "biorxiv",
-   "direction": "page0",
-   "n": 0,
-   "seconds": 16.63,
-   "error": "分页中断: TimeoutError"
-  },
-  {
-   "source": "biorxiv",
-   "direction": "scan0+cut",
-   "n": 0,
-   "seconds": 16.64,
+   "direction": "scan1530+cut",
+   "n": 426,
+   "seconds": 241.82,
    "error": null
   }
  ]
