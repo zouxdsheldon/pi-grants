@@ -4,7 +4,7 @@
   <link>https://zouxdsheldon.github.io/pi-grants/digest.html</link>
   <description>按 data/interests.json 里配置的研究方向 × 六个数据源,每日自动抓取、去重、透明打分,并标注 Hotspot / Gap / Question。</description>
   <language>zh-cn</language>
-  <lastBuildDate>Sat, 05 Sep 2026 13:59:54 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 06 Sep 2026 14:12:47 +0000</lastBuildDate>
   <generator>scripts/build_digest.py</generator>
   <item>
     <title>[近 7 天新发] Plasma small RNA profiling reveals a three-miRNA signature associated with early beta cell dysfunction across glucose tolerance stages.</title>
@@ -12,15 +12,15 @@
     <guid isPermaLink="false">10.1371/journal.pone.0075348</guid>
     <pubDate>Sun, 06 Sep 2026 08:00:00 +0000</pubDate>
     <category>疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI</category>
-    <description>相关性 0.90 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Diabetologia · 2026-09-06 | 被引 0(0.0/月)</description>
+    <description>相关性 0.91 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Diabetologia · 2026-09-06 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] MicroRNA modulation and crosstalk of SREBP and NF-κB pathways in herbal nanoparticle therapies for hypercholesterolemia.</title>
-    <link>https://europepmc.org/article/MED/42697381</link>
-    <guid isPermaLink="false">10.1016/j.fitote.2026.107451</guid>
-    <pubDate>Fri, 04 Sep 2026 08:00:00 +0000</pubDate>
-    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.79 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Fitoterapia · 2026-09-04 | 被引 0(0.0/月) | ❓ 作者提出的问题:“Future studies should prioritize mechanistic investigations, standardized nanoparticle formulations, and well-designed clinical trials to validate miRNA-targeted herbal nanomedicine as a precision therapeutic strategy for hypercholesterolemia and associated cardiovascular disorders.”</description>
+    <title>[近 7 天新发] Therapeutic Potential of Gene Modified MSC-Exos in Insulin Resistance: Mitochondrial Crosstalk and miRNA Regulation.</title>
+    <link>https://pubmed.ncbi.nlm.nih.gov/42698159/</link>
+    <guid isPermaLink="false">10.1111/jcmm.71342</guid>
+    <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
+    <category>miR-29 / 纤维化与器官重塑</category>
+    <description>相关性 0.83 · high · miR-29 / 纤维化与器官重塑 | Journal of cellular and molecular medicine · 2026-09-01</description>
   </item>
   <item>
     <title>[近 7 天新发] MicroRNA-Driven Regulation of β-Cell Function in Type 2 Diabetes: Molecular Mechanisms, Network Insights, and Translational Perspectives.</title>
@@ -28,7 +28,7 @@
     <guid isPermaLink="false">10.1111/apha.70288</guid>
     <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
     <category>疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI</category>
-    <description>相关性 0.77 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Acta physiologica (Oxford, England) · 2026-09-01 | 被引 0(0.0/月)</description>
+    <description>相关性 0.78 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Acta physiologica (Oxford, England) · 2026-09-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] miRNAs as cell-intrinsic epigenetic regulators in muscle in type 2 diabetes.</title>
@@ -39,12 +39,12 @@
     <description>相关性 0.69 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Signal transduction and targeted therapy · 2026-09-02 | 🕳️ Gap 原句:“However, to what extent these alterations are in response to factors in the in vivo milieu or are cell-intrinsic remains unclear.”</description>
   </item>
   <item>
-    <title>[近 7 天新发] Therapeutic Potential of Gene Modified MSC-Exos in Insulin Resistance: Mitochondrial Crosstalk and miRNA Regulation.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/42698159/</link>
-    <guid isPermaLink="false">10.1111/jcmm.71342</guid>
-    <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
-    <category>miR-29 / 纤维化与器官重塑</category>
-    <description>相关性 0.68 · high · miR-29 / 纤维化与器官重塑 | Journal of cellular and molecular medicine · 2026-09-01</description>
+    <title>[近 7 天新发] MicroRNA modulation and crosstalk of SREBP and NF-κB pathways in herbal nanoparticle therapies for hypercholesterolemia.</title>
+    <link>https://pubmed.ncbi.nlm.nih.gov/42697381/</link>
+    <guid isPermaLink="false">10.1016/j.fitote.2026.107451</guid>
+    <pubDate>Fri, 04 Sep 2026 08:00:00 +0000</pubDate>
+    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
+    <description>相关性 0.64 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Fitoterapia · 2026-09-04 | 被引 0(0.0/月) | ❓ 作者提出的问题:“Future studies should prioritize mechanistic investigations, standardized nanoparticle formulations, and well-designed clinical trials to validate miRNA-targeted herbal nanomedicine as a precision therapeutic strategy for hypercholesterolemia and associated cardiovascular disorders.”</description>
   </item>
   <item>
     <title>[近 7 天新发] Targeting miR-10 alleviates atherosclerosis by enhancing intestinal ABCA1-mediated cholesterol efflux and repairing intestinal barrier.</title>
@@ -63,20 +63,12 @@
     <description>相关性 0.57 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | World Journal of Nephrology · 2026-09-25 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] Adipose-derived microRNA-518a drives hepatic cholesterol dysregulation and hypertension-related vascular remodeling in metabolic dysfunction-associated steatohepatitis via the MST1-AMPK-SREBP2 axis.</title>
-    <link>https://europepmc.org/article/MED/42683512</link>
-    <guid isPermaLink="false">10.1080/10641963.2026.2716134</guid>
-    <pubDate>Wed, 02 Sep 2026 08:00:00 +0000</pubDate>
-    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.56 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Clinical and experimental hypertension (New York, N.Y. : 1993) · 2026-09-02 | 被引 0(0.0/月)</description>
-  </item>
-  <item>
     <title>[近 7 天新发] From smooth to 'breaking bad': vascular smooth muscle cell phenotypic switching at the heart of plaque vulnerability.</title>
     <link>https://europepmc.org/article/MED/42657523</link>
     <guid isPermaLink="false">10.1097/mol.0000000000001056</guid>
-    <pubDate>Mon, 31 Aug 2026 08:00:00 +0000</pubDate>
+    <pubDate>Thu, 03 Sep 2026 08:00:00 +0000</pubDate>
     <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.55 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Current opinion in lipidology · 2026-08-31 | 被引 0(0.0/月)</description>
+    <description>相关性 0.55 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Current opinion in lipidology · 2026-09-03 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] Adaptive response of breastmilk metabotype and miRNAs patterns in a rat model of gestational diabetes and its postpartum evolution.</title>
@@ -87,14 +79,6 @@
     <description>相关性 0.52 · medium · 类器官 / 碱基与先导编辑工具 | The Journal of nutritional biochemistry · 2026-11-27 | 🕳️ Gap 原句:“How the BM in GDM-induced changes influence insulin signaling and contribute to-or interfere with-these clinical benefits remains unknown.”</description>
   </item>
   <item>
-    <title>[近 7 天新发] Serum vs. exosomal miRNA signatures in South Asian adults with prediabetes: implications for T2DM risk prediction.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/42468611/</link>
-    <guid isPermaLink="false">10.1016/j.diabres.2026.113443</guid>
-    <pubDate>Thu, 17 Sep 2026 08:00:00 +0000</pubDate>
-    <category>类器官 / 碱基与先导编辑工具</category>
-    <description>相关性 0.52 · medium · 类器官 / 碱基与先导编辑工具 | Diabetes research and clinical practice · 2026-09-17</description>
-  </item>
-  <item>
     <title>[近 7 天新发] Long non-coding RNA GAS5 binds to miR-137 and regulates Nrf2 to ameliorate insulin resistance in adipose tissue in gestational diabetes mellitus.</title>
     <link>https://pubmed.ncbi.nlm.nih.gov/42698187/</link>
     <guid isPermaLink="false">10.1111/dme.70451</guid>
@@ -103,28 +87,20 @@
     <description>相关性 0.52 · medium · 类器官 / 碱基与先导编辑工具 | Diabetic medicine : a journal of the British Diabetic Association · 2026-09-04</description>
   </item>
   <item>
+    <title>[近 7 天新发] Compartmentalization-inspired dual-chamber CRISPR sensing coupled with single-atom electrocatalysis for crosstalk-free multiplex microRNA detection</title>
+    <link>https://doi.org/10.1016/j.bios.2026.119016</link>
+    <guid isPermaLink="false">10.1016/j.bios.2026.119016</guid>
+    <pubDate>Sun, 01 Nov 2026 08:00:00 +0000</pubDate>
+    <category>类器官 / 碱基与先导编辑工具</category>
+    <description>相关性 0.51 · medium · 类器官 / 碱基与先导编辑工具 | Biosensors and Bioelectronics · 2026-11-01 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
     <title>[近 7 天新发] lncRNA TUG1 mediates palmitic acid‑induced neuronal lipotoxic injury via the miR‑449a‑5p/caspase‑3 and Akt/GSK‑3β axes.</title>
     <link>https://pubmed.ncbi.nlm.nih.gov/42663279/</link>
     <guid isPermaLink="false">10.1016/j.neulet.2024.137732</guid>
     <pubDate>Sat, 28 Nov 2026 08:00:00 +0000</pubDate>
     <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
     <description>相关性 0.50 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | International journal of molecular medicine · 2026-11-28</description>
-  </item>
-  <item>
-    <title>[近 7 天新发] Compartmentalization-inspired dual-chamber CRISPR sensing coupled with single-atom electrocatalysis for crosstalk-free multiplex microRNA detection</title>
-    <link>https://doi.org/10.1016/j.bios.2026.119016</link>
-    <guid isPermaLink="false">10.1016/j.bios.2026.119016</guid>
-    <pubDate>Sun, 01 Nov 2026 08:00:00 +0000</pubDate>
-    <category>类器官 / 碱基与先导编辑工具</category>
-    <description>相关性 0.49 · medium · 类器官 / 碱基与先导编辑工具 | Biosensors and Bioelectronics · 2026-11-01 | 被引 0(0.0/月)</description>
-  </item>
-  <item>
-    <title>[近 7 天新发] Investigating Dietary microRNA Stability and Function Using a Transgenic Milk Model With Unique microRNA Sequences</title>
-    <link>https://doi.org/10.1096/fj.202601184r</link>
-    <guid isPermaLink="false">10.1096/fj.202601184r</guid>
-    <pubDate>Thu, 03 Sep 2026 08:00:00 +0000</pubDate>
-    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.49 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | The FASEB Journal · 2026-09-03 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] Intra-nanocomposite resonance energy transfer-based electrochemiluminescence biosensor for cervical cancer microRNA assay</title>
@@ -140,7 +116,7 @@
     <guid isPermaLink="false">10.1016/j.genrep.2026.102528</guid>
     <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.48 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Gene Reports · 2026-09-01 | 被引 0(0.0/月)</description>
+    <description>相关性 0.47 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Gene Reports · 2026-09-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] Xiao-Ke-Shen-An formula alleviates inflammation, oxidative stress and fibrosis in diabetic kidney disease via JAK2/STAT3 and metabolic regulation</title>
@@ -148,7 +124,7 @@
     <guid isPermaLink="false">10.53388/tmr2027003</guid>
     <pubDate>Fri, 01 Jan 2027 08:00:00 +0000</pubDate>
     <category>miR-29 / 纤维化与器官重塑</category>
-    <description>相关性 0.44 · medium · miR-29 / 纤维化与器官重塑 | Traditional Medicine Research · 2027-01-01 | 被引 0(0.0/月)</description>
+    <description>相关性 0.43 · medium · miR-29 / 纤维化与器官重塑 | Traditional Medicine Research · 2027-01-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] Overexpression of LINC00472 alleviates diabetic kidney disease progression via the miR-21-5p/STAT3 axis.</title>
@@ -167,12 +143,28 @@
     <description>相关性 0.41 · medium · miRNA 生物发生核心机器 | Genes &amp; diseases · 2026-09-12</description>
   </item>
   <item>
+    <title>[近 7 天新发] Adipose-derived microRNA-518a drives hepatic cholesterol dysregulation and hypertension-related vascular remodeling in metabolic dysfunction-associated steatohepatitis via the MST1-AMPK-SREBP2 axis.</title>
+    <link>https://europepmc.org/article/MED/42683512</link>
+    <guid isPermaLink="false">10.1080/10641963.2026.2716134</guid>
+    <pubDate>Wed, 02 Sep 2026 08:00:00 +0000</pubDate>
+    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
+    <description>相关性 0.41 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Clinical and experimental hypertension (New York, N.Y. : 1993) · 2026-09-02 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
     <title>[近 7 天新发] GPER1/GIPC1-AMPKα signaling alleviates hepatic steatosis via regulating lipid metabolism and fatty acid oxidation-related gene expression: A novel target in MASLD</title>
     <link>https://doi.org/10.1016/j.bbadis.2026.168399</link>
     <guid isPermaLink="false">10.1016/j.bbadis.2026.168399</guid>
     <pubDate>Fri, 01 Jan 2027 08:00:00 +0000</pubDate>
     <category>AMPK / 能量应激与代谢记忆</category>
     <description>相关性 0.40 · medium · AMPK / 能量应激与代谢记忆 | Biochimica et Biophysica Acta (BBA) - Molecular Basis of Disease · 2027-01-01 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
+    <title>[近 7 天新发] Direct microRNA detection via topologically engineered CRISPR/Cas12a cascade amplification assay</title>
+    <link>https://doi.org/10.1016/j.saa.2026.128016</link>
+    <guid isPermaLink="false">10.1016/j.saa.2026.128016</guid>
+    <pubDate>Sun, 01 Nov 2026 08:00:00 +0000</pubDate>
+    <category>类器官 / 碱基与先导编辑工具</category>
+    <description>相关性 0.39 · medium · 类器官 / 碱基与先导编辑工具 | Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy · 2026-11-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] Potential Involvement of Redox and Inflammatory Signalling in the Antihyperglycemic and Antioxidant Effects of Harmaline in Male Mice With Type 2 Diabetes.</title>
@@ -199,22 +191,6 @@
     <description>相关性 0.38 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Biochimica et Biophysica Acta (BBA) - Molecular and Cell Biology of Lipids · 2026-12-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] Direct microRNA detection via topologically engineered CRISPR/Cas12a cascade amplification assay</title>
-    <link>https://doi.org/10.1016/j.saa.2026.128016</link>
-    <guid isPermaLink="false">10.1016/j.saa.2026.128016</guid>
-    <pubDate>Sun, 01 Nov 2026 08:00:00 +0000</pubDate>
-    <category>类器官 / 碱基与先导编辑工具</category>
-    <description>相关性 0.37 · medium · 类器官 / 碱基与先导编辑工具 | Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy · 2026-11-01 | 被引 0(0.0/月)</description>
-  </item>
-  <item>
-    <title>[近 7 天新发] Lactylation modifications in human cancer: From molecular mechanisms to cancer therapy</title>
-    <link>https://doi.org/10.1016/j.tice.2026.103815</link>
-    <guid isPermaLink="false">10.1016/j.tice.2026.103815</guid>
-    <pubDate>Mon, 01 Feb 2027 08:00:00 +0000</pubDate>
-    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.37 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Tissue and Cell · 2027-02-01 | 被引 0(0.0/月)</description>
-  </item>
-  <item>
     <title>[近 7 天新发] Metformin promotes apoptosis in colorectal cancer through the miR-211-5p/MMP9 pathway</title>
     <link>https://doi.org/10.1016/j.adcanc.2026.100202</link>
     <guid isPermaLink="false">10.1016/j.adcanc.2026.100202</guid>
@@ -223,12 +199,36 @@
     <description>相关性 0.37 · medium · miR-29 / 纤维化与器官重塑 | Advances in Cancer Biology - Metastasis · 2026-12-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
+    <title>[近 7 天新发] Serum vs. exosomal miRNA signatures in South Asian adults with prediabetes: implications for T2DM risk prediction.</title>
+    <link>https://pubmed.ncbi.nlm.nih.gov/42468611/</link>
+    <guid isPermaLink="false">10.1016/j.diabres.2026.113443</guid>
+    <pubDate>Thu, 17 Sep 2026 08:00:00 +0000</pubDate>
+    <category>类器官 / 碱基与先导编辑工具</category>
+    <description>相关性 0.37 · medium · 类器官 / 碱基与先导编辑工具 | Diabetes research and clinical practice · 2026-09-17</description>
+  </item>
+  <item>
     <title>[近 7 天新发] Bioinformatic analyses of microRNA profiles and protein-protein interactions within leaves from Haberlea rhodopensis subjected to severe drought</title>
     <link>https://doi.org/10.1016/j.egg.2026.100477</link>
     <guid isPermaLink="false">10.1016/j.egg.2026.100477</guid>
     <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
     <category>类器官 / 碱基与先导编辑工具</category>
     <description>相关性 0.37 · medium · 类器官 / 碱基与先导编辑工具 | Ecological Genetics and Genomics · 2026-09-01 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
+    <title>[近 7 天新发] Lactylation modifications in human cancer: From molecular mechanisms to cancer therapy</title>
+    <link>https://doi.org/10.1016/j.tice.2026.103815</link>
+    <guid isPermaLink="false">10.1016/j.tice.2026.103815</guid>
+    <pubDate>Mon, 01 Feb 2027 08:00:00 +0000</pubDate>
+    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
+    <description>相关性 0.36 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Tissue and Cell · 2027-02-01 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
+    <title>[近 7 天新发] Adipose tissue macrophages in metabolic inflammation and disease: Insights from single-cell and multi-omics studies.</title>
+    <link>https://pubmed.ncbi.nlm.nih.gov/42447633/</link>
+    <guid isPermaLink="false">10.1016/j.cyto.2026.157192</guid>
+    <pubDate>Mon, 14 Sep 2026 08:00:00 +0000</pubDate>
+    <category>类器官 / 碱基与先导编辑工具</category>
+    <description>相关性 0.36 · medium · 类器官 / 碱基与先导编辑工具 | Cytokine · 2026-09-14</description>
   </item>
   <item>
     <title>[近 7 天新发] LncRNA PCAT7 drives tumorigenesis and glycolytic reprogramming in breast cancer via the ceRNA-mediated miR-204-5p/RUNX2 axis.</title>
@@ -247,14 +247,6 @@
     <description>相关性 0.36 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | 3 Biotech · 2026-09-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] Adipose tissue macrophages in metabolic inflammation and disease: Insights from single-cell and multi-omics studies.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/42447633/</link>
-    <guid isPermaLink="false">10.1016/j.cyto.2026.157192</guid>
-    <pubDate>Mon, 14 Sep 2026 08:00:00 +0000</pubDate>
-    <category>类器官 / 碱基与先导编辑工具</category>
-    <description>相关性 0.36 · medium · 类器官 / 碱基与先导编辑工具 | Cytokine · 2026-09-14</description>
-  </item>
-  <item>
     <title>[近 7 天新发] MicroRNA regulation of Aedes aegypti infected with three different pathogens: the Role of aae-miR-375 in targeting bre-4 to modulate mosquito immunity</title>
     <link>https://doi.org/10.1016/j.actatropica.2026.108239</link>
     <guid isPermaLink="false">10.1016/j.actatropica.2026.108239</guid>
@@ -271,20 +263,28 @@
     <description>相关性 0.34 · medium · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | European Journal of Pharmacology · 2026-09-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] MicroRNA regulation of macrophage polarization in lung cancer: Regulatory networks and therapeutic potential (Review)</title>
-    <link>https://doi.org/10.3892/ijo.2026.5934</link>
-    <guid isPermaLink="false">10.3892/ijo.2026.5934</guid>
-    <pubDate>Wed, 02 Sep 2026 08:00:00 +0000</pubDate>
-    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.34 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | International Journal of Oncology · 2026-09-02 | 被引 0(0.0/月)</description>
-  </item>
-  <item>
     <title>[近 7 天新发] A microRNA‐21‐Activatable Two‐Stage Signal Amplification Probe for Catalytic Photodynamic Therapy</title>
     <link>https://doi.org/10.1002/ange.6552551</link>
     <guid isPermaLink="false">10.1002/ange.6552551</guid>
     <pubDate>Fri, 04 Sep 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
     <description>相关性 0.34 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Angewandte Chemie · 2026-09-04 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
+    <title>[近 7 天新发] Investigating Dietary microRNA Stability and Function Using a Transgenic Milk Model With Unique microRNA Sequences</title>
+    <link>https://doi.org/10.1096/fj.202601184r</link>
+    <guid isPermaLink="false">10.1096/fj.202601184r</guid>
+    <pubDate>Thu, 03 Sep 2026 08:00:00 +0000</pubDate>
+    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
+    <description>相关性 0.34 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | The FASEB Journal · 2026-09-03 | 被引 0(0.0/月)</description>
+  </item>
+  <item>
+    <title>[近 7 天新发] MicroRNA regulation of macrophage polarization in lung cancer: Regulatory networks and therapeutic potential (Review)</title>
+    <link>https://doi.org/10.3892/ijo.2026.5934</link>
+    <guid isPermaLink="false">10.3892/ijo.2026.5934</guid>
+    <pubDate>Wed, 02 Sep 2026 08:00:00 +0000</pubDate>
+    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
+    <description>相关性 0.34 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | International Journal of Oncology · 2026-09-02 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[近 7 天新发] MicroRNA networks shaping the future of diagnosis, prognosis, and therapy in head and neck cancer</title>
@@ -308,23 +308,23 @@
     <guid isPermaLink="false">10.1016/j.jtice.2026.106858</guid>
     <pubDate>Tue, 01 Dec 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.33 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Journal of the Taiwan Institute of Chemical Engineers · 2026-12-01 | 被引 0(0.0/月)</description>
+    <description>相关性 0.32 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Journal of the Taiwan Institute of Chemical Engineers · 2026-12-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] Differential cardiac microRNA expression in anoxic Trachemys scripta elegans turtles</title>
-    <link>https://doi.org/10.1016/j.biochi.2026.06.018</link>
-    <guid isPermaLink="false">10.1016/j.biochi.2026.06.018</guid>
-    <pubDate>Thu, 01 Oct 2026 08:00:00 +0000</pubDate>
-    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.33 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Biochimie · 2026-10-01 | 被引 0(0.0/月)</description>
+    <title>[近 7 天新发] Photo‐Activated microRNA 20a Delivery via Core‐Shell‐Shell Nanoparticles for the Suppression of Head and Neck Cancer</title>
+    <link>https://doi.org/10.1002/jbm.a.70142</link>
+    <guid isPermaLink="false">10.1002/jbm.a.70142</guid>
+    <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
+    <category>疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI</category>
+    <description>相关性 0.32 · medium · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Journal of Biomedical Materials Research Part A · 2026-09-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
-    <title>[近 7 天新发] A dual-function DNA probe-enabled split crRNA/Cas12a system for microRNA detection</title>
-    <link>https://doi.org/10.1016/j.microc.2026.119305</link>
-    <guid isPermaLink="false">10.1016/j.microc.2026.119305</guid>
-    <pubDate>Thu, 01 Oct 2026 08:00:00 +0000</pubDate>
-    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.33 · medium · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Microchemical Journal · 2026-10-01 | 被引 0(0.0/月)</description>
+    <title>[近 7 天新发] Qualitative and quantitative detection of glucose, uric acid, and cholesterol in rat skin interstitial fluid by a porous microneedle</title>
+    <link>https://doi.org/10.1016/j.saa.2026.128654</link>
+    <guid isPermaLink="false">10.1016/j.saa.2026.128654</guid>
+    <pubDate>Fri, 01 Jan 2027 08:00:00 +0000</pubDate>
+    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
+    <description>相关性 0.32 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy · 2027-01-01 | 被引 0(0.0/月)</description>
   </item>
   <item>
     <title>[🔥 Hotspot] A lncRNA drives developmentally timed decay of all members of an essential microRNA family.</title>
@@ -332,15 +332,7 @@
     <guid isPermaLink="false">10.1101/gad.353314.125</guid>
     <pubDate>Mon, 04 May 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 1.00 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-05-04 | 被引 4(0.982/月)</description>
-  </item>
-  <item>
-    <title>[🔥 Hotspot] The E3 ubiquitin ligase mechanism specifying target-directed microRNA degradation.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/41542392/</link>
-    <guid isPermaLink="false">10.1101/2024.12.05.627081</guid>
-    <pubDate>Mon, 05 Jan 2026 08:00:00 +0000</pubDate>
-    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.96 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | bioRxiv : the preprint server for biology · 2026-01-05 | 被引 8(1.002/月)</description>
+    <description>相关性 1.00 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-05-04 | 被引 4(0.974/月)</description>
   </item>
   <item>
     <title>[🔥 Hotspot] Linking miRNAs to decay.</title>
@@ -348,7 +340,7 @@
     <guid isPermaLink="false">10.1101/gad.353649.126</guid>
     <pubDate>Mon, 04 May 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.78 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-05-04 | 被引 2(0.491/月)</description>
+    <description>相关性 0.77 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-05-04 | 被引 2(0.487/月)</description>
   </item>
   <item>
     <title>[🔥 Hotspot] The Life of MicroRNAs: Biogenesis, Function and Decay in Cancer.</title>
@@ -356,7 +348,7 @@
     <guid isPermaLink="false">10.3390/biom15101393</guid>
     <pubDate>Tue, 30 Sep 2025 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.62 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Biomolecules · 2025-09-30 | 被引 14(1.253/月)</description>
+    <description>相关性 0.61 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Biomolecules · 2025-09-30 | 被引 14(1.25/月)</description>
   </item>
   <item>
     <title>[🔥 Hotspot] Protective Effect of Isoflurane on Hypoxia/Reoxygenation-Induced Myocardial Injury via miR-548a-5p Regulation of PTEN.</title>
@@ -364,7 +356,7 @@
     <guid isPermaLink="false">10.1002/jbt.71041</guid>
     <pubDate>Sat, 01 Aug 2026 08:00:00 +0000</pubDate>
     <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.49 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Journal of biochemical and molecular toxicology · 2026-08-01 | 被引 1(0.87/月)</description>
+    <description>相关性 0.49 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Journal of biochemical and molecular toxicology · 2026-08-01 | 被引 1(0.846/月)</description>
   </item>
   <item>
     <title>[🔥 Hotspot] Circular RNAs: Key Regulators of Tumor Metabolic Reprogramming and Clinical Translation.</title>
@@ -372,15 +364,7 @@
     <guid isPermaLink="false">10.32604/or.2026.075012</guid>
     <pubDate>Tue, 24 Feb 2026 08:00:00 +0000</pubDate>
     <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
-    <description>相关性 0.49 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Oncology research · 2026-02-24 | 被引 9(1.419/月)</description>
-  </item>
-  <item>
-    <title>[🔥 Hotspot] PROTAC-Mediated Targeting of IKKβ and NR4A1 for AML Therapy</title>
-    <link>https://doi.org/10.1101/2025.09.24.678355</link>
-    <guid isPermaLink="false">10.1101/2025.09.24.678355</guid>
-    <pubDate>Tue, 14 Jul 2026 08:00:00 +0000</pubDate>
-    <category>类器官 / 碱基与先导编辑工具</category>
-    <description>相关性 0.48 · medium · 类器官 / 碱基与先导编辑工具 | bioRxiv · 2026-07-14</description>
+    <description>相关性 0.49 · medium · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Oncology research · 2026-02-24 | 被引 9(1.412/月)</description>
   </item>
   <item>
     <title>[🕳️ Gap] MiRNA Stability and Degradation: Dynamic Regulators of Cellular Regulatory Networks.</title>
@@ -391,20 +375,20 @@
     <description>相关性 0.85 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Wiley interdisciplinary reviews. RNA · 2026-01-01 | 被引 0(0.0/月) | 🕳️ Gap 原句:“From these insights, critical unresolved questions are delineated, such as identifying nucleases responsible for degrading TDMD-liberated miRNAs and elucidating compartment-specific degradation mechanisms in physiological contexts like the gut lumen and circulation.”</description>
   </item>
   <item>
-    <title>[🕳️ Gap] C. elegans E3 ubiquitin ligase EBAX-1 promotes non-apoptotic linker cell-type death through target-directed miRNA degradation</title>
-    <link>https://europepmc.org/article/PPR/PPR1228773</link>
-    <guid isPermaLink="false">10.64898/2026.01.07.698237</guid>
-    <pubDate>Thu, 08 Jan 2026 08:00:00 +0000</pubDate>
-    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.84 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | bioRxiv · 2026-01-08 | 被引 0(0.0/月) | 🕳️ Gap 原句:“In C. elegans , LCD execution is mediated by ubiquitin proteasome system (UPS) components, but their proteolytic targets are unknown.”</description>
-  </item>
-  <item>
     <title>[🕳️ Gap] Transcriptomic Profiling of MicroRNA and Non-Coding RNA from Whole Blood of African Americans with MASLD.</title>
     <link>https://europepmc.org/articles/PMC12940169</link>
     <guid isPermaLink="false">10.3390/ijms27041666</guid>
     <pubDate>Mon, 09 Feb 2026 08:00:00 +0000</pubDate>
     <category>miR-29 / 纤维化与器官重塑</category>
     <description>相关性 0.84 · high · miR-29 / 纤维化与器官重塑 | International journal of molecular sciences · 2026-02-09 | 被引 0(0.0/月) | 🕳️ Gap 原句:“Metabolic dysfunction-associated steatotic liver disease (MASLD), formerly known as non-alcoholic fatty liver disease (NAFLD), is a growing health concern, yet the role of non-coding RNAs (ncRNAs), including microRNAs (miRNAs), in its pathogenesis remains poorly understood.”</description>
+  </item>
+  <item>
+    <title>[🕳️ Gap] C. elegans E3 ubiquitin ligase EBAX-1 promotes non-apoptotic linker cell-type death through target-directed miRNA degradation</title>
+    <link>https://europepmc.org/article/PPR/PPR1228773</link>
+    <guid isPermaLink="false">10.64898/2026.01.07.698237</guid>
+    <pubDate>Thu, 08 Jan 2026 08:00:00 +0000</pubDate>
+    <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
+    <description>相关性 0.83 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | bioRxiv · 2026-01-08 | 被引 0(0.0/月) | 🕳️ Gap 原句:“In C. elegans , LCD execution is mediated by ubiquitin proteasome system (UPS) components, but their proteolytic targets are unknown.”</description>
   </item>
   <item>
     <title>[🕳️ Gap] Placenta-derived small extracellular vesicles transfer miR-520d-5p to mediate pancreatic β-cell injury in gestational diabetes mellitus by targeting SIRT1.</title>
@@ -415,14 +399,6 @@
     <description>相关性 0.83 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | BMC pregnancy and childbirth · 2026-06-17 | 🕳️ Gap 原句:“However, the mechanisms by which GDM-derived placental sEV induce pancreatic islet cell injury remain unclear.”</description>
   </item>
   <item>
-    <title>[🕳️ Gap] Circulating miRNAs Correlate With rIPC-Induced Cardioprotection and Its Impairment in Diabetic Myocardial Infarction via AMPK Signalling.</title>
-    <link>https://europepmc.org/articles/PMC13171722</link>
-    <guid isPermaLink="false">10.1111/jcmm.71163</guid>
-    <pubDate>Fri, 01 May 2026 08:00:00 +0000</pubDate>
-    <category>AMPK / 能量应激与代谢记忆</category>
-    <description>相关性 0.79 · high · AMPK / 能量应激与代谢记忆 | Journal of cellular and molecular medicine · 2026-05-01 | 被引 0(0.0/月) | 🕳️ Gap 原句:“Circulating microRNAs (miRNAs), which act as intercellular communicators, have been implicated in the systemic effects of rIPC, but their profiles and underlying mechanisms in diabetic conditions remain unclear.” | ❓ 作者提出的问题:“Nevertheless, the cellular source and upstream regulation of these miRNAs, as well as their effects on non-cardiac organs, warrant further investigation.”</description>
-  </item>
-  <item>
     <title>[🕳️ Gap] Identification of biomarkers associated with glycolysis and lactation in sarcopenia.</title>
     <link>https://europepmc.org/articles/PMC12546629</link>
     <guid isPermaLink="false">10.1038/s41598-025-99818-8</guid>
@@ -431,12 +407,12 @@
     <description>相关性 0.72 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Scientific reports · 2025-10-22 | 被引 2(0.191/月) | 🕳️ Gap 原句:“In recent years, several studies have highlighted the relationship between sarcopenia and glycolysis as well as lactylation; however, the underlying mechanisms remain unclear.” | ❓ 作者提出的问题:“Further investigation into the correlation between hub genes and immune cell infiltration revealed that MDH1 exhibited the most significant association with regulatory T cells (Tregs).”</description>
   </item>
   <item>
-    <title>[🕳️ Gap] Suppression of macrophage enriched miRNA 210-3p improves cardiac fibrosis and cardiac function following myocardial infarction.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/42396853/</link>
-    <guid isPermaLink="false">10.1177/13860291261459308</guid>
-    <pubDate>Sun, 03 May 2026 08:00:00 +0000</pubDate>
-    <category>miR-29 / 纤维化与器官重塑</category>
-    <description>相关性 0.69 · high · miR-29 / 纤维化与器官重塑 | Clinical hemorheology and microcirculation · 2026-05-03 | 🕳️ Gap 原句:“BackgroundAlthough it is well-known that immune cells such as monocytes or macrophages play important roles during the early phase of inflammatory response following cardiac damage, little is known about the role of immune cell-derived exosomes, especially their contents such as micro RNAs (miRNAs), in the immune cell-mediated regulation of cardiac remodeling.”</description>
+    <title>[🕳️ Gap] Autophagy regulates the maternal-to-zygotic transition through MAP1LC3B-mediated maternal mRNA decay.</title>
+    <link>https://europepmc.org/articles/PMC12834144</link>
+    <guid isPermaLink="false">10.1080/15548627.2025.2589911</guid>
+    <pubDate>Sun, 23 Nov 2025 08:00:00 +0000</pubDate>
+    <category>TUT4/7 尿苷化与 miRNA/mRNA 命运</category>
+    <description>相关性 0.70 · high · TUT4/7 尿苷化与 miRNA/mRNA 命运 | Autophagy · 2025-11-23 | 被引 4(0.424/月) | 🕳️ Gap 原句:“Although autophagy is known to participate in early embryonic development, its specific role in maternal mRNA clearance remains unclear.”</description>
   </item>
   <item>
     <title>[🕳️ Gap] Unraveling Bone-Skin Crosstalk Enables miRNA Nanoformulation for Cutaneous Neurovascular Reconstruction in Diabetic Mice.</title>
@@ -447,12 +423,12 @@
     <description>相关性 0.68 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Advanced science (Weinheim, Baden-Wurttemberg, Germany) · 2026-07-11 | 被引 0(0.0/月) | 🕳️ Gap 原句:“Paradoxically, remote orthopedic trauma robustly accelerates distal skin repair, yet the systemic molecular mediators driving this "bone-skin crosstalk" remain undefined, precluding its translation into non-invasive therapies.”</description>
   </item>
   <item>
-    <title>[🕳️ Gap] Mesenchymal Stem Cell-Derived Extracellular Vesicles Attenuate Diabetic β-Cell Apoptosis and Dedifferentiation by Delivering miR-4436.</title>
-    <link>https://pubmed.ncbi.nlm.nih.gov/42364047/</link>
-    <guid isPermaLink="false">10.1038/s41392-021-00765-3</guid>
-    <pubDate>Thu, 27 Aug 2026 08:00:00 +0000</pubDate>
-    <category>疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI</category>
-    <description>相关性 0.67 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Tissue engineering and regenerative medicine · 2026-08-27 | 🕳️ Gap 原句:“However, the effects of MSC-EVs on β-cell apoptosis and dedifferentiation in T2DM remain largely unclear.”</description>
+    <title>[🕳️ Gap] Hepatocyte nuclear factor 1 in renal lipid metabolism: molecular mechanisms and therapeutic potentials.</title>
+    <link>https://europepmc.org/articles/PMC12647356</link>
+    <guid isPermaLink="false">10.1007/s10565-025-10097-5</guid>
+    <pubDate>Wed, 26 Nov 2025 08:00:00 +0000</pubDate>
+    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
+    <description>相关性 0.65 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Cell biology and toxicology · 2025-11-26 | 被引 0(0.0/月) | 🕳️ Gap 原句:“Kidney disease is increasingly linked to dysregulated lipid metabolism, yet the molecular mechanisms driving renal lipotoxicity remain poorly understood.”</description>
   </item>
   <item>
     <title>[🕳️ Gap] Plagl1 and Lrrc58 control mammalian body size by triggering target-directed microRNA degradation of miR-322 and miR-503.</title>
@@ -460,7 +436,7 @@
     <guid isPermaLink="false">10.1186/1476-4598-9-229</guid>
     <pubDate>Mon, 02 Feb 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.66 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-02-02 | 🕳️ Gap 原句:“Despite widespread dysregulation of miRNAs in these animals, the vast majority of presumptive trigger RNAs that induce decay of ZSWIM8-regulated miRNAs remain undefined.”</description>
+    <description>相关性 0.65 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-02-02 | 🕳️ Gap 原句:“Despite widespread dysregulation of miRNAs in these animals, the vast majority of presumptive trigger RNAs that induce decay of ZSWIM8-regulated miRNAs remain undefined.”</description>
   </item>
   <item>
     <title>[🕳️ Gap] &amp;lt;i&amp;gt;Plagl1&amp;lt;/i&amp;gt; and &amp;lt;i&amp;gt;Lrrc58&amp;lt;/i&amp;gt; control mammalian body size by triggering target-directed microRNA degradation of miR-322 and miR-503.</title>
@@ -468,15 +444,15 @@
     <guid isPermaLink="false">10.1101/gad.353138.125</guid>
     <pubDate>Mon, 02 Feb 2026 08:00:00 +0000</pubDate>
     <category>ZSWIM8 / TDMD 靶标导向 miRNA 降解</category>
-    <description>相关性 0.66 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-02-02 | 被引 6(0.849/月) | 🕳️ Gap 原句:“Despite widespread dysregulation of miRNAs in these animals, the vast majority of presumptive trigger RNAs that induce decay of ZSWIM8-regulated miRNAs remain undefined.”</description>
+    <description>相关性 0.65 · high · ZSWIM8 / TDMD 靶标导向 miRNA 降解 | Genes &amp; development · 2026-02-02 | 被引 6(0.846/月) | 🕳️ Gap 原句:“Despite widespread dysregulation of miRNAs in these animals, the vast majority of presumptive trigger RNAs that induce decay of ZSWIM8-regulated miRNAs remain undefined.”</description>
   </item>
   <item>
-    <title>[❓ Question] Functions and Mechanisms of Diabetes-Linked Transcription Factors.</title>
-    <link>https://europepmc.org/article/MED/40917049</link>
-    <guid isPermaLink="false">10.31083/fbl36544</guid>
-    <pubDate>Fri, 01 Aug 2025 08:00:00 +0000</pubDate>
-    <category>疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI</category>
-    <description>相关性 0.89 · high · 疾病模型:T2D 猪 / DMD / IBD / 胃癌 MSI | Frontiers in bioscience (Landmark edition) · 2025-08-01 | 被引 1(0.076/月) | ❓ 作者提出的问题:“This review focuses on the involvement of pancreatic β-cells and transcription factors in diabetes development and their therapeutic implications, intending to develop and consolidate a basis for further research in this area and for the treatment of diabetes in the future.”</description>
+    <title>[🕳️ Gap] Oligo(uridine) tailing and exonucleolytic decay drive 40S ribosome degradation in response to stress</title>
+    <link>https://europepmc.org/article/PPR/PPR1210637</link>
+    <guid isPermaLink="false">10.64898/2026.04.26.720784</guid>
+    <pubDate>Mon, 27 Apr 2026 08:00:00 +0000</pubDate>
+    <category>TUT4/7 尿苷化与 miRNA/mRNA 命运</category>
+    <description>相关性 0.65 · high · TUT4/7 尿苷化与 miRNA/mRNA 命运 | bioRxiv · 2026-04-27 | 被引 0(0.0/月) | 🕳️ Gap 原句:“However, the mechanisms and factors that mediate rRNA decay remain unknown.”</description>
   </item>
   <item>
     <title>[❓ Question] Mitochondrial Hijacking and MicroRNA Crosstalk: Cancer Stem Cell-Mediated Immune Evasion and Metabolic Plasticity in the Tumor Microenvironment.</title>
@@ -485,5 +461,29 @@
     <pubDate>Fri, 15 May 2026 08:00:00 +0000</pubDate>
     <category>miR-29 / 纤维化与器官重塑</category>
     <description>相关性 0.79 · high · miR-29 / 纤维化与器官重塑 | Cancers · 2026-05-15 | 被引 0(0.0/月) | ❓ 作者提出的问题:“In parallel, mitochondria-associated proteins such as TSGA10 may also contribute to CSC-driven immunometabolism regulation and deserve further investigation.”</description>
+  </item>
+  <item>
+    <title>[❓ Question] MicroRNA Crosstalk in Metabolic Disorders: The Dual Role of miR-122 and miR-34a in NAFLD and Type 2 Diabetes.</title>
+    <link>https://europepmc.org/article/MED/42043466</link>
+    <guid isPermaLink="false">10.1007/s12033-026-01576-z</guid>
+    <pubDate>Mon, 27 Apr 2026 08:00:00 +0000</pubDate>
+    <category>AMPK / 能量应激与代谢记忆</category>
+    <description>相关性 0.69 · high · AMPK / 能量应激与代谢记忆 | Molecular biotechnology · 2026-04-27 | 被引 1(0.231/月) | ❓ 作者提出的问题:“Future research should focus on their therapeutic use and make targeted interventions to change their expression levels for disease management.”</description>
+  </item>
+  <item>
+    <title>[❓ Question] Crosstalk between microRNA and oxidative stress in ovarian cancer: diagnosis, pathogenesis and therapeutic resistance.</title>
+    <link>https://europepmc.org/articles/PMC12743700</link>
+    <guid isPermaLink="false">10.1007/s12032-025-03024-5</guid>
+    <pubDate>Sat, 27 Dec 2025 08:00:00 +0000</pubDate>
+    <category>miR-29 / 纤维化与器官重塑</category>
+    <description>相关性 0.67 · high · miR-29 / 纤维化与器官重塑 | Medical oncology (Northwood, London, England) · 2025-12-27 | 被引 1(0.12/月) | ❓ 作者提出的问题:“Future work should integrate redox profiling with miRNA expression to personalize treatment and assess performance relative to existing modalities like PARP inhibitors.”</description>
+  </item>
+  <item>
+    <title>[❓ Question] Epigenetic crossroads in intervertebral disc degeneration: Unlocking novel therapeutic avenues (Review).</title>
+    <link>https://europepmc.org/articles/PMC12930325</link>
+    <guid isPermaLink="false">10.3892/mmr.2026.13823</guid>
+    <pubDate>Fri, 13 Feb 2026 08:00:00 +0000</pubDate>
+    <category>代谢重编程:乳酸 / 乳酰化 / 胆固醇</category>
+    <description>相关性 0.65 · high · 代谢重编程:乳酸 / 乳酰化 / 胆固醇 | Molecular medicine reports · 2026-02-13 | 被引 2(0.297/月) | ❓ 作者提出的问题:“Future research should further explore the crosstalk between epigenetic and metabolic regulation to advance the development of personalized and precision medicine strategies for IDD intervention.”</description>
   </item>
 </channel></rss>
