@@ -1,298 +1,298 @@
 {
- "updated": "2026-09-11 15:03",
+ "updated": "2026-09-12 14:06",
  "log": [
   {
    "source": "pubmed",
    "direction": "tdmd",
-   "n": 29,
-   "seconds": 1.38,
+   "n": 28,
+   "seconds": 1.51,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tdmd",
    "n": 17,
-   "seconds": 1.79,
+   "seconds": 1.34,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tdmd",
-   "n": 8,
-   "seconds": 0.91,
+   "n": 7,
+   "seconds": 0.83,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tdmd",
    "n": 0,
-   "seconds": 3.77,
+   "seconds": 14.53,
    "error": null
   },
   {
    "source": "crossref",
    "direction": "tdmd",
    "n": 100,
-   "seconds": 3.54,
+   "seconds": 2.11,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "ampk",
    "n": 91,
-   "seconds": 2.26,
+   "seconds": 1.81,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "ampk",
    "n": 78,
-   "seconds": 2.73,
+   "seconds": 2.3,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "ampk",
    "n": 4,
-   "seconds": 0.75,
+   "seconds": 1.08,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "ampk",
    "n": 0,
-   "seconds": 3.7,
-   "error": null
+   "seconds": 30.04,
+   "error": "TimeoutError: The read operation timed out"
   },
   {
    "source": "crossref",
    "direction": "ampk",
    "n": 100,
-   "seconds": 2.26,
+   "seconds": 1.56,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "biogenesis",
    "n": 150,
-   "seconds": 3.42,
+   "seconds": 2.04,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "biogenesis",
-   "n": 147,
-   "seconds": 6.31,
+   "n": 146,
+   "seconds": 5.69,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "biogenesis",
    "n": 26,
-   "seconds": 1.41,
+   "seconds": 1.36,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "biogenesis",
    "n": 0,
-   "seconds": 3.71,
-   "error": null
+   "seconds": 5.17,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "biogenesis",
    "n": 100,
-   "seconds": 1.96,
+   "seconds": 1.43,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "tut",
    "n": 31,
-   "seconds": 1.97,
+   "seconds": 1.48,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tut",
    "n": 24,
-   "seconds": 1.45,
+   "seconds": 1.4,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tut",
    "n": 7,
-   "seconds": 0.98,
+   "seconds": 1.04,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tut",
    "n": 0,
-   "seconds": 3.84,
-   "error": null
+   "seconds": 20.18,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "tut",
    "n": 100,
-   "seconds": 2.98,
+   "seconds": 1.62,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "mir29fib",
    "n": 31,
-   "seconds": 1.42,
+   "seconds": 1.75,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "mir29fib",
    "n": 29,
-   "seconds": 1.67,
+   "seconds": 1.61,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "mir29fib",
    "n": 3,
-   "seconds": 0.73,
+   "seconds": 0.69,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "mir29fib",
    "n": 0,
-   "seconds": 3.75,
+   "seconds": 18.27,
    "error": null
   },
   {
    "source": "crossref",
    "direction": "mir29fib",
    "n": 100,
-   "seconds": 2.52,
+   "seconds": 1.65,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "metab",
    "n": 150,
-   "seconds": 2.22,
+   "seconds": 3.1,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "metab",
    "n": 200,
-   "seconds": 7.26,
+   "seconds": 7.17,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "metab",
    "n": 20,
-   "seconds": 1.23,
+   "seconds": 1.25,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "metab",
-   "n": 0,
-   "seconds": 4.69,
-   "error": null
-  },
-  {
-   "source": "crossref",
-   "direction": "metab",
-   "n": 100,
-   "seconds": 2.67,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "models",
-   "n": 150,
-   "seconds": 2.17,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "models",
-   "n": 24,
-   "seconds": 2.16,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "models",
-   "n": 7,
-   "seconds": 1.0,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "models",
    "n": 0,
    "seconds": 3.75,
    "error": null
   },
   {
    "source": "crossref",
+   "direction": "metab",
+   "n": 100,
+   "seconds": 1.21,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "models",
+   "n": 150,
+   "seconds": 2.27,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "models",
+   "n": 24,
+   "seconds": 1.99,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "models",
+   "n": 7,
+   "seconds": 0.85,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "models",
+   "n": 0,
+   "seconds": 4.04,
+   "error": null
+  },
+  {
+   "source": "crossref",
    "direction": "models",
    "n": 100,
-   "seconds": 1.08,
+   "seconds": 0.94,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "tools",
    "n": 35,
-   "seconds": 1.69,
+   "seconds": 1.52,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tools",
    "n": 21,
-   "seconds": 1.96,
+   "seconds": 1.28,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tools",
    "n": 1,
-   "seconds": 0.77,
+   "seconds": 0.65,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tools",
    "n": 1,
-   "seconds": 4.21,
+   "seconds": 3.75,
    "error": null
   },
   {
    "source": "crossref",
    "direction": "tools",
    "n": 100,
-   "seconds": 1.47,
+   "seconds": 0.79,
    "error": null
   },
   {
    "source": "biorxiv",
-   "direction": "page60",
+   "direction": "page540",
    "n": 0,
-   "seconds": 35.2,
+   "seconds": 96.25,
    "error": "分页中断: TimeoutError"
   },
   {
    "source": "biorxiv",
-   "direction": "scan60+cut",
-   "n": 18,
-   "seconds": 35.2,
+   "direction": "scan540+cut",
+   "n": 158,
+   "seconds": 96.25,
    "error": null
   }
  ]
