@@ -1,298 +1,298 @@
 {
- "updated": "2026-09-12 14:06",
+ "updated": "2026-09-13 15:00",
  "log": [
   {
    "source": "pubmed",
    "direction": "tdmd",
    "n": 28,
-   "seconds": 1.51,
+   "seconds": 1.56,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tdmd",
    "n": 17,
-   "seconds": 1.34,
+   "seconds": 1.8,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tdmd",
    "n": 7,
-   "seconds": 0.83,
+   "seconds": 0.8,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tdmd",
    "n": 0,
-   "seconds": 14.53,
-   "error": null
+   "seconds": 5.23,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "tdmd",
    "n": 100,
-   "seconds": 2.11,
+   "seconds": 2.26,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "ampk",
    "n": 91,
-   "seconds": 1.81,
+   "seconds": 2.03,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "ampk",
    "n": 78,
-   "seconds": 2.3,
+   "seconds": 2.16,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "ampk",
    "n": 4,
-   "seconds": 1.08,
+   "seconds": 0.68,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "ampk",
    "n": 0,
-   "seconds": 30.04,
-   "error": "TimeoutError: The read operation timed out"
+   "seconds": 20.67,
+   "error": "HTTPError: HTTP Error 429: Too Many Requests"
   },
   {
    "source": "crossref",
    "direction": "ampk",
    "n": 100,
-   "seconds": 1.56,
+   "seconds": 1.47,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "biogenesis",
    "n": 150,
-   "seconds": 2.04,
+   "seconds": 2.08,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "biogenesis",
    "n": 146,
-   "seconds": 5.69,
+   "seconds": 5.44,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "biogenesis",
    "n": 26,
-   "seconds": 1.36,
+   "seconds": 1.13,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "biogenesis",
    "n": 0,
-   "seconds": 5.17,
+   "seconds": 5.16,
    "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "biogenesis",
    "n": 100,
-   "seconds": 1.43,
+   "seconds": 1.84,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "tut",
    "n": 31,
-   "seconds": 1.48,
+   "seconds": 1.52,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tut",
    "n": 24,
-   "seconds": 1.4,
+   "seconds": 1.26,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tut",
    "n": 7,
-   "seconds": 1.04,
+   "seconds": 0.79,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tut",
    "n": 0,
-   "seconds": 20.18,
-   "error": "HTTPError: HTTP Error 429: Unknown Error"
+   "seconds": 20.3,
+   "error": "HTTPError: HTTP Error 429: Too Many Requests"
   },
   {
    "source": "crossref",
    "direction": "tut",
    "n": 100,
-   "seconds": 1.62,
+   "seconds": 1.29,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "mir29fib",
    "n": 31,
-   "seconds": 1.75,
+   "seconds": 1.59,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "mir29fib",
    "n": 29,
-   "seconds": 1.61,
+   "seconds": 1.88,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "mir29fib",
    "n": 3,
-   "seconds": 0.69,
+   "seconds": 0.66,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "mir29fib",
    "n": 0,
-   "seconds": 18.27,
-   "error": null
+   "seconds": 5.17,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "mir29fib",
    "n": 100,
-   "seconds": 1.65,
+   "seconds": 1.19,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "metab",
    "n": 150,
-   "seconds": 3.1,
+   "seconds": 4.43,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "metab",
    "n": 200,
-   "seconds": 7.17,
+   "seconds": 4.91,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "metab",
    "n": 20,
-   "seconds": 1.25,
+   "seconds": 1.47,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "metab",
    "n": 0,
-   "seconds": 3.75,
-   "error": null
+   "seconds": 20.63,
+   "error": "HTTPError: HTTP Error 429: Too Many Requests"
   },
   {
    "source": "crossref",
    "direction": "metab",
    "n": 100,
-   "seconds": 1.21,
+   "seconds": 1.03,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "models",
    "n": 150,
-   "seconds": 2.27,
+   "seconds": 2.28,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "models",
    "n": 24,
-   "seconds": 1.99,
+   "seconds": 1.31,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "models",
    "n": 7,
-   "seconds": 0.85,
+   "seconds": 0.86,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "models",
    "n": 0,
-   "seconds": 4.04,
-   "error": null
+   "seconds": 5.17,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "models",
    "n": 100,
-   "seconds": 0.94,
+   "seconds": 1.57,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "tools",
    "n": 35,
-   "seconds": 1.52,
+   "seconds": 1.6,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tools",
    "n": 21,
-   "seconds": 1.28,
+   "seconds": 1.25,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tools",
    "n": 1,
-   "seconds": 0.65,
+   "seconds": 1.08,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tools",
-   "n": 1,
-   "seconds": 3.75,
-   "error": null
+   "n": 0,
+   "seconds": 5.17,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "tools",
    "n": 100,
-   "seconds": 0.79,
+   "seconds": 1.01,
    "error": null
   },
   {
    "source": "biorxiv",
-   "direction": "page540",
+   "direction": "page30",
    "n": 0,
-   "seconds": 96.25,
+   "seconds": 19.14,
    "error": "分页中断: TimeoutError"
   },
   {
    "source": "biorxiv",
-   "direction": "scan540+cut",
-   "n": 158,
-   "seconds": 96.25,
+   "direction": "scan30+cut",
+   "n": 8,
+   "seconds": 19.14,
    "error": null
   }
  ]
