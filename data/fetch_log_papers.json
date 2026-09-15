@@ -1,298 +1,291 @@
 {
- "updated": "2026-09-14 16:52",
+ "updated": "2026-09-15 15:42",
  "log": [
   {
    "source": "pubmed",
    "direction": "tdmd",
    "n": 28,
-   "seconds": 0.95,
+   "seconds": 1.25,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tdmd",
    "n": 17,
-   "seconds": 1.14,
+   "seconds": 1.66,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tdmd",
    "n": 7,
-   "seconds": 0.55,
+   "seconds": 1.59,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tdmd",
    "n": 0,
-   "seconds": 5.28,
+   "seconds": 21.56,
    "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "tdmd",
    "n": 100,
-   "seconds": 2.09,
+   "seconds": 1.35,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "ampk",
    "n": 91,
-   "seconds": 1.36,
+   "seconds": 1.89,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "ampk",
    "n": 78,
-   "seconds": 1.38,
+   "seconds": 3.05,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "ampk",
    "n": 4,
-   "seconds": 1.22,
+   "seconds": 1.15,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "ampk",
    "n": 0,
-   "seconds": 30.04,
+   "seconds": 30.05,
    "error": "TimeoutError: The read operation timed out"
   },
   {
    "source": "crossref",
    "direction": "ampk",
    "n": 100,
-   "seconds": 1.74,
+   "seconds": 2.0,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "biogenesis",
-   "n": 150,
-   "seconds": 2.18,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "biogenesis",
-   "n": 146,
-   "seconds": 4.42,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "biogenesis",
-   "n": 25,
-   "seconds": 0.9,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "biogenesis",
-   "n": 0,
-   "seconds": 5.12,
-   "error": "HTTPError: HTTP Error 429: Unknown Error"
-  },
-  {
-   "source": "crossref",
-   "direction": "biogenesis",
-   "n": 100,
-   "seconds": 1.59,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "tut",
-   "n": 31,
-   "seconds": 0.87,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "tut",
-   "n": 24,
-   "seconds": 0.9,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "tut",
-   "n": 8,
-   "seconds": 0.61,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "tut",
-   "n": 0,
-   "seconds": 5.11,
-   "error": "HTTPError: HTTP Error 429: Unknown Error"
-  },
-  {
-   "source": "crossref",
-   "direction": "tut",
-   "n": 100,
-   "seconds": 1.61,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "mir29fib",
-   "n": 31,
-   "seconds": 0.95,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "mir29fib",
-   "n": 29,
-   "seconds": 1.05,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "mir29fib",
-   "n": 3,
-   "seconds": 0.46,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "mir29fib",
-   "n": 0,
-   "seconds": 5.14,
-   "error": "HTTPError: HTTP Error 429: Unknown Error"
-  },
-  {
-   "source": "crossref",
-   "direction": "mir29fib",
-   "n": 100,
-   "seconds": 1.33,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "metab",
-   "n": 150,
-   "seconds": 2.11,
-   "error": null
-  },
-  {
-   "source": "epmc",
-   "direction": "metab",
-   "n": 200,
-   "seconds": 3.6,
-   "error": null
-  },
-  {
-   "source": "epmc_ppr",
-   "direction": "metab",
-   "n": 21,
-   "seconds": 0.99,
-   "error": null
-  },
-  {
-   "source": "arxiv",
-   "direction": "metab",
-   "n": 0,
-   "seconds": 5.17,
-   "error": "HTTPError: HTTP Error 429: Unknown Error"
-  },
-  {
-   "source": "crossref",
-   "direction": "metab",
-   "n": 100,
-   "seconds": 1.37,
-   "error": null
-  },
-  {
-   "source": "pubmed",
-   "direction": "models",
    "n": 150,
    "seconds": 2.29,
    "error": null
   },
   {
    "source": "epmc",
+   "direction": "biogenesis",
+   "n": 147,
+   "seconds": 6.68,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "biogenesis",
+   "n": 25,
+   "seconds": 1.4,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "biogenesis",
+   "n": 0,
+   "seconds": 5.27,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
+  },
+  {
+   "source": "crossref",
+   "direction": "biogenesis",
+   "n": 100,
+   "seconds": 2.02,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "tut",
+   "n": 31,
+   "seconds": 1.24,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "tut",
+   "n": 24,
+   "seconds": 1.84,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "tut",
+   "n": 8,
+   "seconds": 0.9,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "tut",
+   "n": 0,
+   "seconds": 5.19,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
+  },
+  {
+   "source": "crossref",
+   "direction": "tut",
+   "n": 100,
+   "seconds": 2.65,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "mir29fib",
+   "n": 31,
+   "seconds": 1.83,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "mir29fib",
+   "n": 29,
+   "seconds": 1.95,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "mir29fib",
+   "n": 3,
+   "seconds": 1.21,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "mir29fib",
+   "n": 0,
+   "seconds": 30.05,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "source": "crossref",
+   "direction": "mir29fib",
+   "n": 100,
+   "seconds": 1.63,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "metab",
+   "n": 150,
+   "seconds": 2.24,
+   "error": null
+  },
+  {
+   "source": "epmc",
+   "direction": "metab",
+   "n": 200,
+   "seconds": 7.77,
+   "error": null
+  },
+  {
+   "source": "epmc_ppr",
+   "direction": "metab",
+   "n": 21,
+   "seconds": 2.6,
+   "error": null
+  },
+  {
+   "source": "arxiv",
+   "direction": "metab",
+   "n": 0,
+   "seconds": 20.72,
+   "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+   "source": "crossref",
+   "direction": "metab",
+   "n": 100,
+   "seconds": 1.95,
+   "error": null
+  },
+  {
+   "source": "pubmed",
+   "direction": "models",
+   "n": 150,
+   "seconds": 2.24,
+   "error": null
+  },
+  {
+   "source": "epmc",
    "direction": "models",
    "n": 24,
-   "seconds": 0.82,
+   "seconds": 1.36,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "models",
    "n": 7,
-   "seconds": 0.53,
+   "seconds": 1.64,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "models",
    "n": 0,
-   "seconds": 5.13,
+   "seconds": 5.2,
    "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "models",
    "n": 100,
-   "seconds": 1.65,
+   "seconds": 1.91,
    "error": null
   },
   {
    "source": "pubmed",
    "direction": "tools",
-   "n": 36,
-   "seconds": 1.0,
+   "n": 38,
+   "seconds": 1.58,
    "error": null
   },
   {
    "source": "epmc",
    "direction": "tools",
-   "n": 22,
-   "seconds": 0.93,
+   "n": 23,
+   "seconds": 1.54,
    "error": null
   },
   {
    "source": "epmc_ppr",
    "direction": "tools",
    "n": 1,
-   "seconds": 0.4,
+   "seconds": 0.93,
    "error": null
   },
   {
    "source": "arxiv",
    "direction": "tools",
    "n": 0,
-   "seconds": 20.61,
-   "error": "HTTPError: HTTP Error 429: Too Many Requests"
+   "seconds": 20.47,
+   "error": "HTTPError: HTTP Error 429: Unknown Error"
   },
   {
    "source": "crossref",
    "direction": "tools",
    "n": 100,
-   "seconds": 2.48,
+   "seconds": 2.21,
    "error": null
   },
   {
    "source": "biorxiv",
-   "direction": "page0",
-   "n": 0,
-   "seconds": 16.54,
-   "error": "分页中断: TimeoutError"
-  },
-  {
-   "source": "biorxiv",
-   "direction": "scan0+cut",
-   "n": 0,
-   "seconds": 16.54,
+   "direction": "scan1800+cut",
+   "n": 492,
+   "seconds": 177.39,
    "error": null
   }
  ]

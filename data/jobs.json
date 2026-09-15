@@ -1,16 +1,16 @@
 {
- "updated": "2026-09-14",
- "updated_utc": "2026-09-14T16:49:47.403066Z",
- "count": 730,
- "n_faculty": 458,
- "n_postdoc": 272,
+ "updated": "2026-09-15",
+ "updated_utc": "2026-09-15T15:35:21.464581Z",
+ "count": 723,
+ "n_faculty": 459,
+ "n_postdoc": 264,
  "source": "jobRxiv + jobs.ac.uk + Nature Careers + Science Careers — screened for life-sciences faculty/PI + postdoc",
- "n_jobrxiv": 337,
+ "n_jobrxiv": 329,
  "n_uk": 39,
  "by_src": {
-  "jobRxiv": 337,
+  "jobRxiv": 329,
   "jobs.ac.uk": 39,
-  "Nature Careers": 246,
+  "Nature Careers": 247,
   "Science Careers": 108
  },
  "jobs": [
@@ -734,23 +734,6 @@
    "score": 2,
    "hits": [
     "rna"
-   ],
-   "src": "Nature Careers"
-  },
-  {
-   "title": "Faculty position in Nucleic Acid Based Nanomedicine",
-   "company": "The University of British Columbia, Department of Cellular & Physiological Sciences",
-   "location": "Vancouver, British Columbia (CA)",
-   "region": "🇨🇦 加拿大",
-   "type": "Academic post",
-   "level": "faculty",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12862464/faculty-position-in-nucleic-acid-based-nanomedicine-/",
-   "desc": "The expected salary range is $140,000 - $220,000.",
-   "score": 2,
-   "hits": [
-    "physiolog",
-    "nucleic acid"
    ],
    "src": "Nature Careers"
   },
@@ -1649,22 +1632,6 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Faculty Positions | Department of Neurology, UCSF School of Medicine, and UCSF Health Division of Movement Disorders and Neuromodulation | Division of Neuroimmunology and Glial Biology",
-   "company": "UCSF",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "",
-   "level": "faculty",
-   "date": "Mon, 18 Aug 2025 04:00:00 +0000",
-   "url": "https://jobrxiv.org/job/faculty-positions-department-of-neurology-ucsf-school-of-medicine-and-ucsf-health-division-of-movement-disorders-and-neuromodulation-division-of-neuroimmunology-and-glial-biology/",
-   "desc": "Faculty Positions &#124; Department of Neurology, UCSF School of Medicine, and UCSF Health Division of Movement Disorders and Neuromodulation &#124; Division of Neuroimmunology and Glial Biology The Department of Neurology...",
-   "score": 1,
-   "hits": [
-    "immunolog"
-   ],
-   "src": "jobRxiv"
-  },
-  {
    "title": "Assistant Professor in Biochemistry/Biophysics",
    "company": "University of Kansas",
    "location": "United States (US)",
@@ -1953,22 +1920,6 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Assistant Professor (Tenure Track) – Early Career Clinician Scientist",
-   "company": "University of British Columbia Faculty",
-   "location": "Canada",
-   "region": "🇨🇦 加拿大",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 12 Aug 2026 02:01:26 +0000",
-   "url": "https://jobrxiv.org/job/assistant-professor-tenure-track-early-career-clinician-scientist/",
-   "desc": "Assistant Professor (Tenure Track) – Early Career Clinician Scientist The Department of Medical Genetics, at the University of British Columbia (UBC) invites applications for a full-time faculty position at the...",
-   "score": 1,
-   "hits": [
-    "genetic"
-   ],
-   "src": "jobRxiv"
-  },
-  {
    "title": "Assistant Professor in Cell and Developmental Biology",
    "company": "University of British Columbia Faculty",
    "location": "Canada",
@@ -2026,22 +1977,6 @@
    "date": "Sat, 04 Jul 2026 02:27:23 +0000",
    "url": "https://jobrxiv.org/job/tenure-track-assistant-professor-at-the-department-of-biomedicine/",
    "desc": "Tenure Track Assistant Professor at the Department of Biomedicine The Department of Biomedicine at the Faculty of Health Sciences at Aarhus University invites applications for a position as Tenure Track...",
-   "score": 1,
-   "hits": [
-    "biomedic"
-   ],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Professor / Associate Professor in Biomedical Innovation",
-   "company": "Aarhus University",
-   "location": "Denmark",
-   "region": "🇪🇺 欧洲",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 01 Jul 2026 23:22:06 +0000",
-   "url": "https://jobrxiv.org/job/professor-associate-professor-in-biomedical-innovation/",
-   "desc": "Professor / Associate Professor in Biomedical Innovation The Department of Biomedicine at Faculty of Health Sciences at Aarhus University invites applications for a position as Professor / Associate Professor per...",
    "score": 1,
    "hits": [
     "biomedic"
@@ -2513,6 +2448,22 @@
    "src": "Nature Careers"
   },
   {
+   "title": "Group Leader Position in Cancer Biology",
+   "company": "VIB",
+   "location": "Leuven",
+   "region": "🇪🇺 欧洲",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864626/group-leader-position-in-cancer-biology/",
+   "desc": "",
+   "score": 1,
+   "hits": [
+    "cancer"
+   ],
+   "src": "Nature Careers"
+  },
+  {
    "title": "Research group leader, Systems Immunology (m/f/d)",
    "company": "Personalwerk GmbH",
    "location": "17493, Riems (DE)",
@@ -2525,6 +2476,22 @@
    "score": 1,
    "hits": [
     "immunolog"
+   ],
+   "src": "Nature Careers"
+  },
+  {
+   "title": "Early Career Group Leader Position in Cancer Immunobiology",
+   "company": "VIB",
+   "location": "Leuven",
+   "region": "🇪🇺 欧洲",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864625/early-career-group-leader-position-in-cancer-immunobiology/",
+   "desc": "",
+   "score": 1,
+   "hits": [
+    "cancer"
    ],
    "src": "Nature Careers"
   },
@@ -2945,6 +2912,22 @@
    "src": "Science Careers"
   },
   {
+   "title": "Tenure Track Assistant Professor Biomedical Sciences",
+   "company": "Iowa State University",
+   "location": "",
+   "region": "🇺🇸 美国",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "Tue, 15 Sep 2026 04:30:08 -0500",
+   "url": "https://jobs.sciencecareers.org/job/680167/tenure-track-assistant-professor-biomedical-sciences/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
+   "desc": "See job description.: Iowa State University: Tenure Track Assistant Professor Biomedical Sciences Ames, IA Full Time R19889 Position Title: Tenure Track Assistant Professor Biomedical Ames",
+   "score": 1,
+   "hits": [
+    "biomedic"
+   ],
+   "src": "Science Careers"
+  },
+  {
    "title": "Assistant Professor in the Tenure Track",
    "company": "University of Utah",
    "location": "",
@@ -3002,6 +2985,22 @@
    "date": "Thu, 27 Aug 2026 17:17:00 -0500",
    "url": "https://jobs.sciencecareers.org/job/679857/assistant-professor-tenure-track-physiology/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
    "desc": "Commensurate with experience: University of Michigan Department of Molecular & Integrative Physiology: Tenure-track assistant professor in the Department of Molecular & Integrative Physiology at the University of Michigan Medical School. University of Michigan, Ann Arbor",
+   "score": 1,
+   "hits": [
+    "physiolog"
+   ],
+   "src": "Science Careers"
+  },
+  {
+   "title": "Assistant Professor - Plant Physiology",
+   "company": "Texas Tech University",
+   "location": "",
+   "region": "🇺🇸 美国",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "Mon, 14 Sep 2026 18:45:00 -0500",
+   "url": "https://jobs.sciencecareers.org/job/680112/assistant-professor-plant-physiology/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
+   "desc": "Compensation is commensurate upon the qualifications of the individual selected and budgetary guidelines of the hiring department. Grade 800: Texas Tech University: Assistant Professor position in Organismal-level Plant Physiology Lubbock, Texas",
    "score": 1,
    "hits": [
     "physiolog"
@@ -3569,6 +3568,62 @@
    "src": "jobRxiv"
   },
   {
+   "title": "Tenured or Tenure-track faculty positions in environmental engineering, science, and public health focused on the utilization of data science (DS) and artificial intelligence (AI) tools for research applications",
+   "company": "Johns Hopkins University",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
+   "url": "https://jobrxiv.org/job/tenured-or-tenure-track-faculty-positions-in-environmental-engineering-science-and-public-health-focused-on-the-utilization-of-data-science-ds-and-artificial-intelligence-ai-tools-for-research-a/",
+   "desc": "Tenured Or Tenure-Track Faculty Positions In Environmental Engineering, Science, And Public Health Focused On The Utilization Of Data Science (Ds) And Artificial Intelligence (Ai) Tools For Research Applications The Johns...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Faculty Proton Medical Physicist",
+   "company": "Johns Hopkins University",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
+   "url": "https://jobrxiv.org/job/faculty-proton-medical-physicist/",
+   "desc": "Faculty Proton Medical Physicist The Department of Radiation Oncology and Molecular Sciences at Johns Hopkins University is seeking highly motivated faculty at Assistant or Associate Professor level to provide specialized...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Faculty in Experimental Quantum Science",
+   "company": "Johns Hopkins University",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
+   "url": "https://jobrxiv.org/job/faculty-in-experimental-quantum-science/",
+   "desc": "Faculty In Experimental Quantum Science The Department of Physics and Astronomy of the Johns Hopkins University invites applications for a faculty appointment as assistant professor in experimental quantum science. The...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Faculty Medical Physicist",
+   "company": "Johns Hopkins University",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
+   "url": "https://jobrxiv.org/job/faculty-medical-physicist/",
+   "desc": "Faculty Medical Physicist The Department of Radiation Oncology and Molecular Sciences at Johns Hopkins University is seeking highly motivated faculty at Assistant or Associate Professor level to provide specialized skills...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
    "title": "Tenure-track faculty position in Data Science and Artificial Intelligence for Civil and Systems Engineering – all ranks",
    "company": "Johns Hopkins University",
    "location": "United States (US)",
@@ -3690,62 +3745,6 @@
    "date": "Wed, 11 Feb 2026 11:20:05 +0000",
    "url": "https://jobrxiv.org/job/tenure-track-faculty-2025-2026-2/",
    "desc": "Tenure-Track Faculty 2025-2026 Requisition #: A-174698-3 School: Whiting School of Engineering Location: Baltimore, MD Position Type: Faculty Shift Type: Full Time Salary Range: $150,000 &#8211; $450,000 Closing Date: Open until...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Tenured or Tenure-track faculty positions in environmental engineering, science, and public health focused on the utilization of data science (DS) and artificial intelligence (AI) tools for research applications",
-   "company": "Johns Hopkins University",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/tenured-or-tenure-track-faculty-positions-in-environmental-engineering-science-and-public-health-focused-on-the-utilization-of-data-science-ds-and-artificial-intelligence-ai-tools-for-research-a/",
-   "desc": "Tenured Or Tenure-Track Faculty Positions In Environmental Engineering, Science, And Public Health Focused On The Utilization Of Data Science (Ds) And Artificial Intelligence (Ai) Tools For Research Applications The Johns...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Faculty Proton Medical Physicist",
-   "company": "Johns Hopkins University",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/faculty-proton-medical-physicist/",
-   "desc": "Faculty Proton Medical Physicist The Department of Radiation Oncology and Molecular Sciences at Johns Hopkins University is seeking highly motivated faculty at Assistant or Associate Professor level to provide specialized...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Faculty in Experimental Quantum Science",
-   "company": "Johns Hopkins University",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/faculty-in-experimental-quantum-science/",
-   "desc": "Faculty In Experimental Quantum Science The Department of Physics and Astronomy of the Johns Hopkins University invites applications for a faculty appointment as assistant professor in experimental quantum science. The...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Faculty Medical Physicist",
-   "company": "Johns Hopkins University",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/faculty-medical-physicist/",
-   "desc": "Faculty Medical Physicist The Department of Radiation Oncology and Molecular Sciences at Johns Hopkins University is seeking highly motivated faculty at Assistant or Associate Professor level to provide specialized skills...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -3891,15 +3890,15 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Faculty Positions | Department of Neurology, UCSF School of Medicine, and UCSF Health, Division of Alcohol and Addiction Research Group | Division of Mechanisms of Neurological Disorders",
+   "title": "Fresno VACCHCS & UCSF Fresno – Hematology/Oncology Faculty",
    "company": "UCSF",
    "location": "United States (US)",
    "region": "🇺🇸 美国",
    "type": "Full-time",
    "level": "faculty",
    "date": "Mon, 18 Aug 2025 04:00:00 +0000",
-   "url": "https://jobrxiv.org/job/faculty-positions-department-of-neurology-ucsf-school-of-medicine-and-ucsf-health-division-of-alcohol-and-addiction-research-group-division-of-mechanisms-of-neurological-disorders/",
-   "desc": "Faculty Positions The Department of Neurology at UCSF is considering applicants for faculty positions at the Instructor, Assistant, Associate, and full Professor ranks of the Adjunct and In Residence faculty...",
+   "url": "https://jobrxiv.org/job/fresno-vacchcs-ucsf-fresno-hematology-oncology-faculty/",
+   "desc": "Fresno VACCHCS &#038; UCSF Fresno &#8211; Hematology/Oncology Faculty Fresno Medical Education Program / SCHOOL OF MEDICINE / UC San Francisco VA CENTRAL CALIFORNIA HEALTH CARE SYSTEM (VACCHCS) MEDICINE SERVICE/DEPARTMENT OF...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -4549,34 +4548,6 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Professor of Obstetrics and Gynaecology and Consultant Obstetrician / Gynaecologist – Clinical Academic and Research Lead",
-   "company": "University of Melbourne",
-   "location": "Australia",
-   "region": "🇦🇺 澳新",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 12 Aug 2026 19:33:05 +0000",
-   "url": "https://jobrxiv.org/job/professor-of-obstetrics-and-gynaecology-and-consultant-obstetrician-gynaecologist-clinical-academic-and-research-lead/",
-   "desc": "Professor of Obstetrics and Gynaecology and Consultant Obstetrician/Gynaecologist – Clinical Academic and Research Lead This role is a pivotal clinician-academic leadership position across the Women&apos;s and the University of Melbourne....",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Professor of Neonatology and Consultant Neonatologist – Clinical Academic and Research Lead",
-   "company": "University of Melbourne",
-   "location": "Australia",
-   "region": "🇦🇺 澳新",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 12 Aug 2026 19:33:05 +0000",
-   "url": "https://jobrxiv.org/job/professor-of-neonatology-and-consultant-neonatologist-clinical-academic-and-research-lead/",
-   "desc": "Professor of Neonatology and Consultant Neonatologist – Clinical Academic and Research Lead This prestigious joint appointment brings together academic leadership within the University of Melbourne with strategic research leadership and...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
    "title": "Professor of stroke research",
    "company": "Karolinska Institute",
    "location": "Sweden",
@@ -4768,6 +4739,48 @@
    "date": "Fri, 03 Jul 2026 21:46:06 +0000",
    "url": "https://jobrxiv.org/job/assistant-professor-paei-micro/",
    "desc": "Assistant Professor (PAEI Micro) Assistant Professor at the UBC Faculty of Dentistry, Department of Oral Biological and Medical Sciences Anticipated Start Date: Fall 2026 Starting salary is $150,000.00 and may...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Professor/ Associate Professor in Public Health Services Innovation",
+   "company": "Aarhus University",
+   "location": "Denmark",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 01 Jul 2026 23:22:06 +0000",
+   "url": "https://jobrxiv.org/job/professor-associate-professor-in-public-health-services-innovation/",
+   "desc": "Professor/ Associate Professor in Public Health Services Innovation The Department of Public Health at the Faculty of Health Sciences, Aarhus University, invites applications for a position at the level of...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Professor / Associate Professor in Clinical Innovation",
+   "company": "Aarhus University",
+   "location": "Denmark",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 01 Jul 2026 23:22:06 +0000",
+   "url": "https://jobrxiv.org/job/professor-associate-professor-in-clinical-innovation/",
+   "desc": "Professor / Associate Professor in Clinical Innovation The Department of Clinical Medicine at the Faculty of Health Sciences at Aarhus University invites applications for a position as Professor or Associate...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Full Professor or Associate Professor of Innovation in Dentistry",
+   "company": "Aarhus University",
+   "location": "Denmark",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 01 Jul 2026 23:22:06 +0000",
+   "url": "https://jobrxiv.org/job/full-professor-or-associate-professor-of-innovation-in-dentistry/",
+   "desc": "Full Professor Or Associate Professor Of Innovation In Dentistry The Department of Dentistry and Oral Health at Faculty of Health Sciences at Aarhus University invites applications for a position as...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -4969,6 +4982,20 @@
    "src": "jobRxiv"
   },
   {
+   "title": "Grigg Endowed Professor",
+   "company": "Johns Hopkins University",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
+   "type": "Full-time",
+   "level": "faculty",
+   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
+   "url": "https://jobrxiv.org/job/grigg-endowed-professor/",
+   "desc": "Grigg Endowed Professor The School of Education at Johns Hopkins University invites nominations and applications for the position of the Grigg Endowed Professor at the Assistant or Associate Professor rank....",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
    "title": "Assistant Professor",
    "company": "Johns Hopkins University",
    "location": "United States (US)",
@@ -5006,20 +5033,6 @@
    "date": "Wed, 11 Feb 2026 11:20:05 +0000",
    "url": "https://jobrxiv.org/job/chembe-systems-data-science-artificial-intelligence-professor-all-ranks/",
    "desc": "ChemBE Systems/Data Science/Artificial Intelligence Professor &#8211; All Ranks The Johns Hopkins University&apos;s Department of Chemical and Biomolecular Engineering seeks applicants for tenure-track/tenured faculty positions. Candidates with research and teaching interests...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Grigg Endowed Professor",
-   "company": "Johns Hopkins University",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "faculty",
-   "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/grigg-endowed-professor/",
-   "desc": "Grigg Endowed Professor The School of Education at Johns Hopkins University invites nominations and applications for the position of the Grigg Endowed Professor at the Assistant or Associate Professor rank....",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -5186,8 +5199,8 @@
    "type": "Full-time",
    "level": "faculty",
    "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/assistant-or-associate-professor/",
-   "desc": "Assistant or Associate Professor The Department of Medicine, Division of Nephrology at Johns Hopkins is seeking applications for master clinicians or clinical educators at the rank of Assistant Professor or...",
+   "url": "https://jobrxiv.org/job/assistant-or-associate-professor-2/",
+   "desc": "Assistant Or Associate Professor The Department of Medicine, Division of Nephrology at Johns Hopkins is seeking applications for master clinicians or clinical educators at the rank of Assistant Professor or...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -5200,8 +5213,8 @@
    "type": "Full-time",
    "level": "faculty",
    "date": "Wed, 11 Feb 2026 11:20:05 +0000",
-   "url": "https://jobrxiv.org/job/assistant-or-associate-professor-2/",
-   "desc": "Assistant Or Associate Professor The Department of Medicine, Division of Nephrology at Johns Hopkins is seeking applications for master clinicians or clinical educators at the rank of Assistant Professor or...",
+   "url": "https://jobrxiv.org/job/assistant-or-associate-professor/",
+   "desc": "Assistant or Associate Professor The Department of Medicine, Division of Nephrology at Johns Hopkins is seeking applications for master clinicians or clinical educators at the rank of Assistant Professor or...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -5375,20 +5388,6 @@
    "src": "Nature Careers"
   },
   {
-   "title": "Assistant Professor",
-   "company": "Columbia University Suh Lab",
-   "location": "New York City, New York (US)",
-   "region": "🇺🇸 美国",
-   "type": "Academic post",
-   "level": "faculty",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12861823/assistant-professor-/",
-   "desc": "$105,000 - $110,000",
-   "score": 0,
-   "hits": [],
-   "src": "Nature Careers"
-  },
-  {
    "title": "Senior Group Leader/Group Leader, Advanced Genome Technology - Plant Biology Institute",
    "company": "Ellison Institute of Technology",
    "location": "Oxford, Oxfordshire (GB)",
@@ -5412,6 +5411,20 @@
    "date": "",
    "url": "https://www.nature.com/naturecareers/job/12862758/assistant-professor-in-residence/",
    "desc": "$93,500 - $121,400",
+   "score": 0,
+   "hits": [],
+   "src": "Nature Careers"
+  },
+  {
+   "title": "Tenure-Track Faculty Position - in Biology and Biological Engineering",
+   "company": "California Institute of Technology - Division of Biology and Biological Engineering",
+   "location": "Pasadena, California",
+   "region": "🇺🇸 美国",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864612/tenure-track-faculty-position-in-biology-and-biological-engineering/",
+   "desc": "Salaries for professorial faculty at Caltech fall in the range $125,000-$400,000",
    "score": 0,
    "hits": [],
    "src": "Nature Careers"
@@ -5627,6 +5640,20 @@
    "src": "Nature Careers"
   },
   {
+   "title": "Assistant Professor (Tenure-Track) Faculty Position",
+   "company": "University of MI- College of Pharmacy",
+   "location": "Ann Arbor, Michigan",
+   "region": "🇺🇸 美国",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864602/assistant-professor-tenure-track-faculty-position/",
+   "desc": "Attractive benefits and compensation",
+   "score": 0,
+   "hits": [],
+   "src": "Nature Careers"
+  },
+  {
    "title": "Tenure-Track Faculty Positions for Physician-Scientists",
    "company": "Tohoku University",
    "location": "Japan (JP)",
@@ -5648,7 +5675,7 @@
    "type": "Academic post",
    "level": "faculty",
    "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12862906/faculty-positions-life-science-and-technology-/",
+   "url": "https://www.nature.com/naturecareers/job/12864473/faculty-positions-life-science-and-technology-/",
    "desc": "Competitive salary",
    "score": 0,
    "hits": [],
@@ -6229,6 +6256,20 @@
    "src": "Nature Careers"
   },
   {
+   "title": "Tenure-Track Professor in Life Science and AI",
+   "company": "Harvard University - Department of Molecular and Cellular Biology",
+   "location": "Cambridge, Massachusetts",
+   "region": "🇬🇧 英国",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864644/tenure-track-professor-in-life-science-and-ai/",
+   "desc": "$110,000 – $165,000",
+   "score": 0,
+   "hits": [],
+   "src": "Nature Careers"
+  },
+  {
    "title": "2 Positions - One Assistant Professor Ladder Rank & One Open Professor Ladder Rank",
    "company": "University of California Merced",
    "location": "Merced, California",
@@ -6523,6 +6564,20 @@
    "src": "Science Careers"
   },
   {
+   "title": "Invitation for Faculty Positions",
+   "company": "Unversity of California, Berkeley",
+   "location": "",
+   "region": "🇺🇸 美国",
+   "type": "Academic post",
+   "level": "faculty",
+   "date": "Tue, 15 Sep 2026 04:30:06 -0500",
+   "url": "https://jobs.sciencecareers.org/job/680166/invitation-for-faculty-positions/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
+   "desc": "See job description.: Unversity of California, Berkeley: Invitation for faculty position applications UC Berkeley is one of the world's leading public universities, and Berkeley Engineering consistently Berkeley",
+   "score": 0,
+   "hits": [],
+   "src": "Science Careers"
+  },
+  {
    "title": "Faculty in Neuro-oncology Research",
    "company": "UChicago",
    "location": "",
@@ -6560,20 +6615,6 @@
    "date": "Fri, 11 Sep 2026 15:11:00 -0500",
    "url": "https://jobs.sciencecareers.org/job/680127/tenure-track-faculty-planetary-sciences/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
    "desc": "Salary commensurate with experience: Massachusetts Institute of Technology: MIT invites applications for a tenure-track faculty position in the broad field of planetary science. Cambridge, Massachusetts (US)",
-   "score": 0,
-   "hits": [],
-   "src": "Science Careers"
-  },
-  {
-   "title": "Faculty Position in Multi-systems Biology",
-   "company": "Cold Spring Harbor Laboratory",
-   "location": "",
-   "region": "🇬🇧 英国",
-   "type": "Academic post",
-   "level": "faculty",
-   "date": "Thu, 03 Sep 2026 13:34:00 -0500",
-   "url": "https://jobs.sciencecareers.org/job/679977/faculty-position-in-multi-systems-biology/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
-   "desc": "$150,000.00 - $170,000.00 Annually: Cold Spring Harbor Laboratory: Cold Spring Harbor Laboratory (CSHL) seeks to hire a junior faculty member who will pursue a bold, innovative research program in multi-systems. Cold Spring Harbor, New York",
    "score": 0,
    "hits": [],
    "src": "Science Careers"
@@ -6644,20 +6685,6 @@
    "date": "Fri, 07 Aug 2026 16:37:00 -0500",
    "url": "https://jobs.sciencecareers.org/job/679610/tenure-track-faculty-position-in-plant-or-microbial-glycoscience-at-uga-ccrc/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
    "desc": "Commensurate with experience: The University of Georgia - Complex Carbohydrate Research Center: UGA seeks a tenure track faculty member - Asst, Assoc, or Full - to work in the CCRC with research interests in plant and/or microbial glycoscience. University of Georgia, Athens",
-   "score": 0,
-   "hits": [],
-   "src": "Science Careers"
-  },
-  {
-   "title": "Tenure Track Faculty Position",
-   "company": "UT Southwestern Medical Center - Pathology Department",
-   "location": "",
-   "region": "🌍 其它/国际",
-   "type": "Academic post",
-   "level": "faculty",
-   "date": "Thu, 16 Jul 2026 17:46:00 -0500",
-   "url": "https://jobs.sciencecareers.org/job/679367/tenure-track-faculty-position/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
-   "desc": "Commensurate with education and experience: UT Southwestern Medical Center - Pathology Department: UT Southwestern Medical Center is looking for exceptional individual to develop or continue groundbreaking basic or translational science... Dallas, Texas (US)",
    "score": 0,
    "hits": [],
    "src": "Science Careers"
@@ -6812,20 +6839,6 @@
    "date": "Tue, 08 Sep 2026 16:25:00 -0500",
    "url": "https://jobs.sciencecareers.org/job/680054/assistant-professor-in-chemistry/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
    "desc": "A reasonable estimated salary range for this position is $119,600 to $144,200, inclusive of the salary scale and off-scale salary components.: UC Davis Department of Chemistry: The Dept. of Chemistry at UC Davis invites applicants for a tenure-track Assistant Professor position whose research bridges AI and chemistry. Davis, California",
-   "score": 0,
-   "hits": [],
-   "src": "Science Careers"
-  },
-  {
-   "title": "Assistant Professor of Biology",
-   "company": "Whitman College",
-   "location": "",
-   "region": "🇺🇸 美国",
-   "type": "Academic post",
-   "level": "faculty",
-   "date": "Tue, 18 Aug 2026 19:12:08 -0500",
-   "url": "https://jobs.sciencecareers.org/job/679771/assistant-professor-of-biology/?TrackID=9&utm_source=rss&utm_medium=feed&utm_campaign=general",
-   "desc": "See job description.: Whitman College: Assistant Professor of Biology Location: Walla Walla, WA Open Date: Jul 30, 2026 Deadline: Description Located in the vibrant community Walla Walla",
    "score": 0,
    "hits": [],
    "src": "Science Careers"
@@ -7011,20 +7024,38 @@
    "src": "jobRxiv"
   },
   {
-   "title": "postdoctoral position in neuroscience – Fernandez Lab @ CCHMC",
-   "company": "Cincinnati Children&#039;s Hospital",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
+   "title": "Postdoctoral Research Fellow in RNA biology and disease mechanisms, group Garcia",
+   "company": "University of Helsinki",
+   "location": "Finland",
+   "region": "🇪🇺 欧洲",
    "type": "Full-time",
    "level": "postdoc",
-   "date": "Tue, 05 May 2026 21:31:39 +0000",
-   "url": "https://jobrxiv.org/job/cincinnati-childrens-hospital-27778-postdoctoral-position-in-neuroscience-fernandez-lab-cchmc-2/",
-   "desc": "Postdoc Position – Neuroscience (Cincinnati Children’s Hospital) The Fernandez Lab at Cincinnati Children’s Hospital is recruiting a postdoctoral fellow to study light-driven physiology, circadian/sleep biology, and gut–brain communication using mouse...",
+   "date": "Tue, 15 Sep 2026 02:36:59 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-research-fellow-in-rna-biology-and-disease-mechanisms-group-garcia/",
+   "desc": "Postdoctoral Research Fellow in RNA Biology and Disease Mechanisms, Group Garcia The Garcia group is looking for a highly motivated postdoctoral researcher with a strong interest in RNA biology and...",
    "score": 4,
    "hits": [
     "rna",
-    "physiolog",
-    "neuroscience"
+    "rna biology"
+   ],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Postdoctoral studies in Human Tumor Immunology and T-cell Biology (scholarship)",
+   "company": "Karolinska Institute",
+   "location": "Sweden",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Tue, 01 Sep 2026 18:27:11 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-studies-in-human-tumor-immunology-and-t-cell-biology-scholarship/",
+   "desc": "Postdoctoral Studies In Human Tumor Immunology And T-cell Biology (Scholarship) We are seeking a highly motivated postdoctoral researcher with a strong interest in human immunology, cancer and T-cell biology. By...",
+   "score": 4,
+   "hits": [
+    "cell biology",
+    "cancer",
+    "tumor",
+    "immunolog"
    ],
    "src": "jobRxiv"
   },
@@ -7154,19 +7185,19 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Postdoctoral Research Fellow – mRNA Cancer Immunotherapy",
-   "company": "University of Queensland",
-   "location": "Australia",
-   "region": "🇦🇺 澳新",
+   "title": "Postdoctoral Position in Neuroscience – Fernandez lab @CCHMC",
+   "company": "Cincinnati Children&#039;s Hospital",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
    "type": "Full-time",
    "level": "postdoc",
-   "date": "Wed, 02 Sep 2026 07:36:19 +0000",
-   "url": "https://jobrxiv.org/job/postdoctoral-research-fellow-mrna-cancer-immunotherapy/",
-   "desc": "Postdoctoral Research Fellow This is an exciting opportunity for an exceptional Postdoctoral Research Fellow to lead research at the Medical Research Future Fund (MRFF)-Funded Australian Personalised mRNA Immunotherapy Hub. You...",
+   "date": "Mon, 14 Sep 2026 18:06:00 +0000",
+   "url": "https://jobrxiv.org/job/cincinnati-childrens-hospital-27778-postdoctoral-position-in-neuroscience-fernandez-lab-cchmc-3/",
+   "desc": "Postdoctoral Position Neural circuits controlling food-anticipatory responses and motivated behavior Fernandez Lab · Cincinnati Children&#8217;s Hospital Medical Center https://www.scienceoflightcenter.org/diego-fernandez-lab We&#8217;re hiring a postdoctoral fellow to study how the brain anticipates...",
    "score": 3,
    "hits": [
     "rna",
-    "cancer"
+    "neuroscience"
    ],
    "src": "jobRxiv"
   },
@@ -7460,23 +7491,6 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Postdoctoral Research Scientist",
-   "company": "University of Oxford",
-   "location": "United Kingdom (UK)",
-   "region": "🇬🇧 英国",
-   "type": "Part-time",
-   "level": "postdoc",
-   "date": "Thu, 10 Sep 2026 19:03:11 +0000",
-   "url": "https://jobrxiv.org/job/postdoctoral-research-scientist-27/",
-   "desc": "Postdoctoral Research Scientist We are seeking to appoint a Postdoctoral Research Scientist to join Professor Tao Dong&apos;s Cancer Immunology and Immunotherapy group at the CAMS Oxford Institute. The research will...",
-   "score": 2,
-   "hits": [
-    "cancer",
-    "immunolog"
-   ],
-   "src": "jobRxiv"
-  },
-  {
    "title": "Postdoc in Environmental Regulation of Reproduction via RNA Modifications",
    "company": "NIH/NIEHS",
    "location": "United States (US)",
@@ -7502,6 +7516,22 @@
    "date": "Wed, 16 Apr 2025 00:40:24 +0000",
    "url": "https://jobrxiv.org/job/postdoctoral-fellow-2025-ai-informed-bioengineered-models-for-predicting-human-response-to-mrna-nanomedicines-and-vaccines/",
    "desc": "Postdoctoral Fellow – AI-Informed Bioengineered Models for Predicting Human Response to mRNA Nanomedicines and Vaccines Location: Gaithersburg, MD Competitive Salary, Bonus &#038; Benefits Package Do you have expertise in bioengineered...",
+   "score": 2,
+   "hits": [
+    "rna"
+   ],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Research Fellow in Experimental Particle Physics (MWAPP)",
+   "company": "Monash University",
+   "location": "Australia",
+   "region": "🇦🇺 澳新",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Mon, 14 Sep 2026 16:20:34 +0000",
+   "url": "https://jobrxiv.org/job/research-fellow-in-experimental-particle-physics-mwapp/",
+   "desc": "Research Fellow in Experimental Particle Physics (MWAPP) Join the School of Physics and Astronomy within the Faculty of Science as a Research Fellow and contribute to internationally recognised research in...",
    "score": 2,
    "hits": [
     "rna"
@@ -7590,22 +7620,6 @@
    "hits": [
     "immunolog",
     "microbiolog"
-   ],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Associate Scientist, Postdoctoral Fellow – Metabolic Disease (Onsite)",
-   "company": "Merck",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Sat, 05 Sep 2026 06:16:43 +0000",
-   "url": "https://jobrxiv.org/job/associate-scientist-postdoctoral-fellow-metabolic-disease-onsite/",
-   "desc": "Postdoctoral Research Fellow – Metabolic Disease Be a part of the legacy: Postdoctoral Research Fellow Program Our Research Laboratories&apos; Postdoctoral Research Fellow Program aims to be a best-in-industry program for...",
-   "score": 2,
-   "hits": [
-    "metaboli"
    ],
    "src": "jobRxiv"
   },
@@ -7959,6 +7973,38 @@
    "src": "jobRxiv"
   },
   {
+   "title": "Research Fellow – School of Biosciences – 107914 – Grade 7",
+   "company": "University of Birmingham",
+   "location": "United Kingdom (UK)",
+   "region": "🇬🇧 英国",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Mon, 14 Sep 2026 16:08:21 +0000",
+   "url": "https://jobrxiv.org/job/research-fellow-school-of-biosciences-107914-grade-7/",
+   "desc": "Research Fellow (Post-doc) in Computational Structural Biology School of Biosciences, College of Life and Environmental Sciences Location: University of Birmingham, Edgbaston, Birmingham UK Full time starting salary is normally in...",
+   "score": 1,
+   "hits": [
+    "structural biol"
+   ],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Research Fellow – Department of Immunology and Immunotherapy – 107952 – Grade 7",
+   "company": "University of Birmingham",
+   "location": "United Kingdom (UK)",
+   "region": "🇬🇧 英国",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Mon, 14 Sep 2026 16:08:21 +0000",
+   "url": "https://jobrxiv.org/job/research-fellow-department-of-immunology-and-immunotherapy-107952-grade-7/",
+   "desc": "Job Title Research Fellow Job Description Department of Immunology and Immunotherapy, School of Infection, Inflammation and Immunology, College of Medicine and Health University of Birmingham, Edgbaston, Birmingham UK Full time...",
+   "score": 1,
+   "hits": [
+    "immunolog"
+   ],
+   "src": "jobRxiv"
+  },
+  {
    "title": "Postdoctoral Research Fellow/Research Fellow in Statistical Genomics",
    "company": "University of Queensland",
    "location": "Australia",
@@ -7991,6 +8037,38 @@
    "src": "jobRxiv"
   },
   {
+   "title": "Postdoctoral Research Assistant",
+   "company": "University of Oxford",
+   "location": "United Kingdom (UK)",
+   "region": "🇬🇧 英国",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Mon, 14 Sep 2026 16:22:52 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-research-assistant-11/",
+   "desc": "Postdoctoral Research Assistant We are seeking to appoint a Postdoctoral Research Assistant to join the Department of Statistics at the University of Oxford, working on the development of the Genetic...",
+   "score": 1,
+   "hits": [
+    "genetic"
+   ],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Postdoctoral studies on the function of circuits and neuron subtypes (scholarship)",
+   "company": "Karolinska Institute",
+   "location": "Sweden",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Tue, 15 Sep 2026 04:50:34 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-studies-on-the-function-of-circuits-and-neuron-subtypes-scholarship/",
+   "desc": "Postdoctoral Studies On The Function Of Circuits And Neuron Subtypes (Scholarship) Do you want to contribute to top quality medical research? Division The Meletis laboratory, in the Department of Neuroscience,...",
+   "score": 1,
+   "hits": [
+    "neuroscience"
+   ],
+   "src": "jobRxiv"
+  },
+  {
    "title": "PostDoc Lvl 1 or 2, UCD Biomolecular and Biomedical Science, 18 months",
    "company": "University College Dublin",
    "location": "Ireland",
@@ -8003,38 +8081,6 @@
    "score": 1,
    "hits": [
     "biomedic"
-   ],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoctoral position in functional ancient microbial ecogenomics within the Ancient Environmental Genomics Initiative for Sustainability (AEGIS)",
-   "company": "University of Copenhagen",
-   "location": "Denmark",
-   "region": "🇪🇺 欧洲",
-   "type": "Part-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 21:44:48 +0000",
-   "url": "https://jobrxiv.org/job/postdoctoral-position-in-functional-ancient-microbial-ecogenomics-within-the-ancient-environmental-genomics-initiative-for-sustainability-aegis/",
-   "desc": "Postdoctoral Positions in Functional Ancient Microbial Ecology The Ancient Environmental Genomics Initiative for Sustainability (AEGIS) invites applications for three two-year postdoctoral positions in functional ancient microbial ecology, starting 1 November...",
-   "score": 1,
-   "hits": [
-    "genomic"
-   ],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoc in Ancient Human and Pathogen Genomics",
-   "company": "University of Copenhagen",
-   "location": "Denmark",
-   "region": "🇪🇺 欧洲",
-   "type": "Part-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 21:44:48 +0000",
-   "url": "https://jobrxiv.org/job/postdoc-in-ancient-human-and-pathogen-genomics/",
-   "desc": "Postdoctoral Researcher Position We are looking for a highly motivated and dynamic postdoc for a 2-year position to commence on 15 November 2026 or as soon as possible thereafter. The...",
-   "score": 1,
-   "hits": [
-    "genomic"
    ],
    "src": "jobRxiv"
   },
@@ -8423,22 +8469,6 @@
    "src": "jobs.ac.uk"
   },
   {
-   "title": "UCD Post-doctoral Researcher Level 1 or 2",
-   "company": "University College Dublin",
-   "location": "Dublin",
-   "region": "🇪🇺 欧洲",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "closes 19 Oct",
-   "url": "https://www.jobs.ac.uk/job/DSX710/ucd-post-doctoral-researcher-level-1-or-2",
-   "desc": "UCD School of Biomolecular and Biomedical Science",
-   "score": 1,
-   "hits": [
-    "biomedic"
-   ],
-   "src": "jobs.ac.uk"
-  },
-  {
    "title": "Postdoctoral Research Associate in Molecular Mechanisms of Transcription-Replication Conflicts",
    "company": "University of Oxford",
    "location": "Oxford",
@@ -8759,38 +8789,6 @@
    "src": "Nature Careers"
   },
   {
-   "title": "Postdoc (all genders) in intestinal immunity / section Regenerative Medicine and Immunology",
-   "company": "Universitätsklinikum Hamburg-Eppendorf",
-   "location": "Hamburg (DE)",
-   "region": "🇪🇺 欧洲",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12862129/postdoc-all-genders-in-intestinal-immunity-section-regenerative-medicine-and-immunology/",
-   "desc": "63.600 - 91.100",
-   "score": 1,
-   "hits": [
-    "immunolog"
-   ],
-   "src": "Nature Careers"
-  },
-  {
-   "title": "Postdoctoral Fellow – DNA Damage Response and Cancer Biology",
-   "company": "University of Oklahoma Health Campus",
-   "location": "Oklahoma City, Oklahoma",
-   "region": "🇺🇸 美国",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12862620/postdoctoral-fellow-dna-damage-response-and-cancer-biology/",
-   "desc": "Competitive",
-   "score": 1,
-   "hits": [
-    "cancer"
-   ],
-   "src": "Nature Careers"
-  },
-  {
    "title": "Postdoctoral Researchers – Human Immunology and Aging Mechanismsal position",
    "company": "NIH/LMBI",
    "location": "The National Institute on Aging (NIA) is located on Johns Hopkins Medical Center campus, Baltimore",
@@ -8912,6 +8910,22 @@
    "date": "",
    "url": "https://www.nature.com/naturecareers/job/12863040/postdoctoral-research-fellow-gu-lab/",
    "desc": "$72,000 - $76,385",
+   "score": 1,
+   "hits": [
+    "cancer"
+   ],
+   "src": "Nature Careers"
+  },
+  {
+   "title": "Postdoctoral Fellow – DNA Damage Response and Cancer Biology",
+   "company": "University of Oklahoma Health Campus",
+   "location": "Oklahoma City, Oklahoma",
+   "region": "🇺🇸 美国",
+   "type": "Academic post",
+   "level": "postdoc",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12862620/postdoctoral-fellow-dna-damage-response-and-cancer-biology/",
+   "desc": "Competitive",
    "score": 1,
    "hits": [
     "cancer"
@@ -9113,20 +9127,6 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Research Fellow – Applied Health Sciences – 106991 – Grade 7",
-   "company": "University of Birmingham",
-   "location": "United Kingdom (UK)",
-   "region": "🇬🇧 英国",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Mon, 17 Aug 2026 05:18:17 +0000",
-   "url": "https://jobrxiv.org/job/research-fellow-applied-health-sciences-106991-grade-7-2/",
-   "desc": "Job Description Department of Applied Health Sciences, School of Health Sciences, College of Medicine and Health Location: University of Birmingham, Edgbaston, Birmingham UK As this vacancy has limited funding the...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
    "title": "Research Fellow / Senior Research Fellow (Wireless Localization & Sensing)",
    "company": "Nanyang Technological University",
    "location": "Singapore",
@@ -9281,6 +9281,20 @@
    "src": "jobRxiv"
   },
   {
+   "title": "HITS Independent Postdoc Program",
+   "company": "HITS gGmbH",
+   "location": "Germany",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Tue, 15 Sep 2026 13:24:31 +0000",
+   "url": "https://jobrxiv.org/job/hits-ggmbh-27778-hits-independent-postdoc-program-4/",
+   "desc": "Think beyond the limits! Do you have an ambitious research idea that you wish to pursue in your postdoc? Are you interested in theoretical or computational science in an interdisciplinary...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
    "title": "Postdoc in Transition-Metal Catalysis & Organometallic Chemistry",
    "company": "University of Copenhagen",
    "location": "Denmark",
@@ -9351,20 +9365,6 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Electrical/Computer Engineering Research Associate",
-   "company": "The University of Texas at Austin Staff",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 22:59:32 +0000",
-   "url": "https://jobrxiv.org/job/electrical-computer-engineering-research-associate/",
-   "desc": "Electrical/Computer Engineering Research Associate Applied Research Laboratories is a University Affiliated Research Center at The University of Texas at Austin, located on the Pickle Research Campus in North Austin. Through...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
    "title": "GNSS Signals and Software Research Associate",
    "company": "The University of Texas at Austin Staff",
    "location": "United States (US)",
@@ -9374,6 +9374,20 @@
    "date": "Fri, 11 Sep 2026 22:59:32 +0000",
    "url": "https://jobrxiv.org/job/gnss-signals-and-software-research-associate/",
    "desc": "GNSS Signals And Software Research Associate Applied Research Laboratories is a University Affiliated Research Center at The University of Texas at Austin, located on the Pickle Research Campus in North...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Electrical/Computer Engineering Research Associate",
+   "company": "The University of Texas at Austin Staff",
+   "location": "United States (US)",
+   "region": "🇺🇸 美国",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Fri, 11 Sep 2026 22:59:32 +0000",
+   "url": "https://jobrxiv.org/job/electrical-computer-engineering-research-associate/",
+   "desc": "Electrical/Computer Engineering Research Associate Applied Research Laboratories is a University Affiliated Research Center at The University of Texas at Austin, located on the Pickle Research Campus in North Austin. Through...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -9402,20 +9416,6 @@
    "date": "Fri, 11 Sep 2026 16:57:35 +0000",
    "url": "https://jobrxiv.org/job/senior-research-fellow-lkcmedicine-10/",
    "desc": "Postdoctoral Research Fellow Opportunities The Lee Kong Chian School of Medicine (LKCMedicine) trains doctors who put patients at the centre of their exemplary care. The School, which offers both undergraduate...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Principal Research Scientist II Data",
-   "company": "AbbVie",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 12:32:03 +0000",
-   "url": "https://jobrxiv.org/job/principal-research-scientist-ii-data/",
-   "desc": "AbbVie Job Opportunity AbbVie&apos;s mission is to discover and deliver innovative medicines and solutions that solve serious health issues today and address the medical challenges of tomorrow. We strive to...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -9458,34 +9458,6 @@
    "date": "Thu, 10 Sep 2026 01:40:04 +0000",
    "url": "https://jobrxiv.org/job/principal-research-scientist-i-15/",
    "desc": "Principal Research Scientist I The Principal Research Scientist I will be an integral part of the Late-Stage Process Analytics group within the Analytical Development team in the Operations – Product...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Research Fellow (Atomic catalysts and Machine Learning)",
-   "company": "Nanyang Technological University",
-   "location": "Singapore",
-   "region": "🇸🇬 新加坡",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Wed, 09 Sep 2026 13:27:38 +0000",
-   "url": "https://jobrxiv.org/job/research-fellow-atomic-catalysts-and-machine-learning/",
-   "desc": "Join Our Team at the School of Physical and Mathematical Sciences, Nanyang Technological University, Singapore The School of Physical and Mathematical Sciences (SPMS) at NTU Singapore hosts research and education...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoctoral Fellow",
-   "company": "Australian National University",
-   "location": "Australia",
-   "region": "🇦🇺 澳新",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Wed, 09 Sep 2026 13:25:08 +0000",
-   "url": "https://jobrxiv.org/job/postdoctoral-fellow-64/",
-   "desc": "Postdoctoral Fellow Classification: Academic Level A Salary package: $91,546 &#8211; $114,906 plus 17% superannuation Term: Full time, Continuing Contingent Funding The Postdoctoral Fellow will be a member of the School...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -9542,6 +9514,20 @@
    "date": "Wed, 11 Feb 2026 11:20:05 +0000",
    "url": "https://jobrxiv.org/job/johns-hopkins-university-data-science-and-ai-institute-postdoctoral-fellowship/",
    "desc": "Johns Hopkins University Data Science and AI Institute Postdoctoral Fellowship The Johns Hopkins University Data Science and AI (DSAI) Institute welcomes applications for its Postdoctoral Fellowship program, seeking disciplinarily diverse...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Research Fellow (Computer Engineering/Computer Science/Electronics Engineering)",
+   "company": "Nanyang Technological University",
+   "location": "Singapore",
+   "region": "🇸🇬 新加坡",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Tue, 15 Sep 2026 04:00:50 +0000",
+   "url": "https://jobrxiv.org/job/research-fellow-computer-engineering-computer-science-electronics-engineering-57/",
+   "desc": "Research Scientist Young and research-intensive, Nanyang Technological University, Singapore (NTU Singapore) is ranked among the world&apos;s top universities. NTU&apos;s College of Computing and Data Science (CCDS) is a leading college...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -9743,113 +9729,57 @@
    "src": "jobRxiv"
   },
   {
-   "title": "Postdoc in modelling and digital twin development",
-   "company": "KTH Royal Institute of Technology",
+   "title": "Postdoctoral Scientist – AI/ML",
+   "company": "Johnson and Johnson",
+   "location": "Belgium",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Tue, 15 Sep 2026 06:38:57 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-scientist-ai-ml-2/",
+   "desc": "Post Doc – Data Analytics &#038; Computational Sciences Johnson &#038; Johnson Innovative Medicine is recruiting a Postdoctoral Scientist – AI/ML to join the Data, Data Science &#038; Artificial Intelligence (DDSAI)...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Postdoctoral Scientist – Multimodal AI",
+   "company": "Johnson and Johnson",
+   "location": "Belgium",
+   "region": "🇪🇺 欧洲",
+   "type": "Full-time",
+   "level": "postdoc",
+   "date": "Tue, 15 Sep 2026 06:38:57 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-scientist-multimodal-ai/",
+   "desc": "Post Doc – Data Analytics &#038; Computational Sciences Johnson &#038; Johnson Innovative Medicine Research &#038; Development, Data, Data Science &#038; AI organization, is recruiting a Postdoctoral Scientist in Multimodal AI...",
+   "score": 0,
+   "hits": [],
+   "src": "jobRxiv"
+  },
+  {
+   "title": "Postdoctoral position in machine learning for the development of novel semiconductor materials",
+   "company": "Lund University",
    "location": "Sweden",
    "region": "🇪🇺 欧洲",
    "type": "Full-time",
    "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 00:43:05 +0000",
-   "url": "https://jobrxiv.org/job/postdoc-in-modelling-and-digital-twin-development/",
-   "desc": "Postdoc In Modelling And Digital Twin Development Would you like to build a physics-based model and a digital twin of how bio-based materials are pressed and dried? We are looking...",
+   "date": "Mon, 14 Sep 2026 19:13:15 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-position-in-machine-learning-for-the-development-of-novel-semiconductor-materials/",
+   "desc": "Postdoctoral Position In Machine Learning For The Development Of Novel Semiconductor Materials Lund University was founded in 1666 and is repeatedly ranked among the world&apos;s top universities. The University has...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
   },
   {
-   "title": "Postdoc in process efficiency for nitrocellulose",
-   "company": "KTH Royal Institute of Technology",
-   "location": "Sweden",
-   "region": "🇪🇺 欧洲",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 00:43:05 +0000",
-   "url": "https://jobrxiv.org/job/postdoc-in-process-efficiency-for-nitrocellulose/",
-   "desc": "Postdoc In Process Efficiency For Nitrocellulose Would you like to make nitrocellulose production more resource-efficient and sustainable? We are looking for a postdoc at the competence centre Svenskt Krut at...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoc in cellulose feedstocks and small-scale nitration",
-   "company": "KTH Royal Institute of Technology",
-   "location": "Sweden",
-   "region": "🇪🇺 欧洲",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 00:43:05 +0000",
-   "url": "https://jobrxiv.org/job/postdoc-in-cellulose-feedstocks-and-small-scale-nitration/",
-   "desc": "Postdoc in Cellulose Feedstocks and Small-Scale Nitration Would you like to build the scientific foundation for Swedish nitrocellulose? We are looking for a postdoc at the competence centre Svenskt Krut...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoctoral positions in Quantitative Biology",
-   "company": "Stony Brook University",
-   "location": "United States (US)",
-   "region": "🇺🇸 美国",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Fri, 11 Sep 2026 00:00:39 +0000",
-   "url": "https://jobrxiv.org/job/stony-brook-university-27778-postdoctoral-positions-in-quantitative-biology/",
-   "desc": "Required Qualifications: (as evidenced by an attached resume) PhD (or foreign equivalent) in Applied Mathematics, Physics, Theoretical/Computational Biology, Bioengineering, or a closely related quantitative field in hand by the start...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Research Fellow (Computer Vision and Artificial Intelligence)",
-   "company": "Nanyang Technological University",
-   "location": "Singapore",
-   "region": "🇸🇬 新加坡",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Thu, 10 Sep 2026 23:36:48 +0000",
-   "url": "https://jobrxiv.org/job/research-fellow-computer-vision-and-artificial-intelligence-3/",
-   "desc": "Research Fellow Position Hyundai-NTU-A*STAR Corporate Lab offers an excellent R&#038;D environment to create novel technologies with the world leading automotive company, Hyundai by translating the research into the dark factory...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Research Associate (Materials Science & Engineering / Mechanical Engineering / Chemical Engineering)",
-   "company": "Nanyang Technological University",
-   "location": "Singapore",
-   "region": "🇸🇬 新加坡",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Thu, 10 Sep 2026 23:36:48 +0000",
-   "url": "https://jobrxiv.org/job/research-associate-materials-science-engineering-mechanical-engineering-chemical-engineering/",
-   "desc": "Research Associate The Singapore Centre for 3D Printing (SC3DP) is a research centre conducting fundamental and applied research in all aspects related to additive manufacturing. Our vision is to be...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Research Fellow (Flexible Electronics)",
-   "company": "Nanyang Technological University",
-   "location": "Singapore",
-   "region": "🇸🇬 新加坡",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Thu, 10 Sep 2026 23:36:48 +0000",
-   "url": "https://jobrxiv.org/job/research-fellow-flexible-electronics-4/",
-   "desc": "Research Fellow Position The School of Materials Science and Engineering (MSE) provides a vibrant and nurturing environment for staff and students to carry out inter-disciplinary research in key areas such...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Research Fellow/Senior Research Fellow",
-   "company": "UCL",
+   "title": "Postdoctoral researcher",
+   "company": "University of Oxford",
    "location": "United Kingdom (UK)",
    "region": "🇬🇧 英国",
    "type": "Full-time",
    "level": "postdoc",
-   "date": "Thu, 10 Sep 2026 20:19:04 +0000",
-   "url": "https://jobrxiv.org/job/research-fellow-senior-research-fellow-11/",
-   "desc": "Research Fellow/Senior Research Fellow We are looking for an excellent Postdoctoral Research Fellow to join the Hofer Lab at SWC. The project aims to determine the neural circuit mechanisms of...",
+   "date": "Mon, 14 Sep 2026 16:22:52 +0000",
+   "url": "https://jobrxiv.org/job/postdoctoral-researcher-16/",
+   "desc": "Postdoctoral Researcher in Computational Game Theory We are looking for a Postdoctoral Researcher in Computational Game Theory, including Social Choice Theory at the Department of Computer Science. The post-holder will...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -9864,34 +9794,6 @@
    "date": "Thu, 10 Sep 2026 19:03:11 +0000",
    "url": "https://jobrxiv.org/job/research-scientist-in-theoretical-biology/",
    "desc": "Research Scientist in Theoretical Biology Radcliffe Department of Medicine, MRC Weatherall Institute of Molecular Medicine, John Radcliffe Hospital, Headington, Oxford We have an exciting opportunity for a Research Scientist assistant...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoctoral Research Assistant in Chemical Biology and Medicinal Chemistry",
-   "company": "University of Oxford",
-   "location": "United Kingdom (UK)",
-   "region": "🇬🇧 英国",
-   "type": "Part-time",
-   "level": "postdoc",
-   "date": "Thu, 10 Sep 2026 01:29:21 +0000",
-   "url": "https://jobrxiv.org/job/postdoctoral-research-assistant-in-chemical-biology-and-medicinal-chemistry/",
-   "desc": "Postdoctoral Research Assistant in Chemical Biology and Medicinal Chemistry Applications are invited for a Postdoctoral Research Associate in Chemical Biology and Medicinal Chemistry to join a research team developing novel...",
-   "score": 0,
-   "hits": [],
-   "src": "jobRxiv"
-  },
-  {
-   "title": "Postdoctoral Research Associate in Inorganic Chemistry",
-   "company": "University of Oxford",
-   "location": "United Kingdom (UK)",
-   "region": "🇬🇧 英国",
-   "type": "Full-time",
-   "level": "postdoc",
-   "date": "Sat, 12 Sep 2026 05:08:39 +0000",
-   "url": "https://jobrxiv.org/job/postdoctoral-research-associate-in-inorganic-chemistry-3/",
-   "desc": "Postdoctoral Research Associate in Inorganic Chemistry Inorganic Chemistry Laboratory, South Parks Road, Oxford, OX1 3QR About the role: Applications are invited for a Postdoctoral Research Associate in molecular lanthanide chemistry...",
    "score": 0,
    "hits": [],
    "src": "jobRxiv"
@@ -10079,6 +9981,20 @@
    "src": "jobs.ac.uk"
   },
   {
+   "title": "Research Associate - Oligonucleotide Immune Therapies",
+   "company": "University of Cambridge",
+   "location": "Cambridge",
+   "region": "🇬🇧 英国",
+   "type": "Academic post",
+   "level": "postdoc",
+   "date": "closes 13 Oct",
+   "url": "https://www.jobs.ac.uk/job/DSY106/research-associate-oligonucleotide-immune-therapies",
+   "desc": "MRC Toxicology Unit",
+   "score": 0,
+   "hits": [],
+   "src": "jobs.ac.uk"
+  },
+  {
    "title": "Postdoctoral Researcher",
    "company": "University of Dundee",
    "location": "Dundee",
@@ -10149,20 +10065,6 @@
    "src": "jobs.ac.uk"
   },
   {
-   "title": "Postdoctoral Data Scientist",
-   "company": "University of Oxford",
-   "location": "Oxford",
-   "region": "🇬🇧 英国",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "closes 14 Sep",
-   "url": "https://www.jobs.ac.uk/job/DSQ463/postdoctoral-data-scientist",
-   "desc": "",
-   "score": 0,
-   "hits": [],
-   "src": "jobs.ac.uk"
-  },
-  {
    "title": "Postdoctoral Scientist - UOD2329",
    "company": "University of Dundee",
    "location": "Dundee",
@@ -10172,6 +10074,20 @@
    "date": "closes 07 Oct",
    "url": "https://www.jobs.ac.uk/job/DSP538/postdoctoral-scientist-uod2329",
    "desc": "",
+   "score": 0,
+   "hits": [],
+   "src": "jobs.ac.uk"
+  },
+  {
+   "title": "Research Associate in Engineering Biology",
+   "company": "Imperial College London",
+   "location": "London",
+   "region": "🇬🇧 英国",
+   "type": "Academic post",
+   "level": "postdoc",
+   "date": "closes 29 Sep",
+   "url": "https://www.jobs.ac.uk/job/DSY116/research-associate-in-engineering-biology",
+   "desc": "Department of Life Sciences",
    "score": 0,
    "hits": [],
    "src": "jobs.ac.uk"
@@ -10233,20 +10149,6 @@
    "src": "jobs.ac.uk"
   },
   {
-   "title": "Postdoctoral Research Associate",
-   "company": "The University of Edinburgh",
-   "location": "Edinburgh",
-   "region": "🇬🇧 英国",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "closes 30 Sep",
-   "url": "https://www.jobs.ac.uk/job/DSW899/postdoctoral-research-associate",
-   "desc": "Institute of Ecology and Evolution - Edinburgh University Group",
-   "score": 0,
-   "hits": [],
-   "src": "jobs.ac.uk"
-  },
-  {
    "title": "Research Associate/Senior Research Associate in Intracellular Transport and Protein Design",
    "company": "University of Bristol",
    "location": "Bristol",
@@ -10270,6 +10172,20 @@
    "date": "closes 27 Sep",
    "url": "https://www.jobs.ac.uk/job/DSX249/senior-research-associate",
    "desc": "Milner Therapeutics Institute",
+   "score": 0,
+   "hits": [],
+   "src": "jobs.ac.uk"
+  },
+  {
+   "title": "Senior Research Fellow (Control Engineering)",
+   "company": "University of Oxford",
+   "location": "Oxford",
+   "region": "🇬🇧 英国",
+   "type": "Academic post",
+   "level": "postdoc",
+   "date": "closes 19 Oct",
+   "url": "https://www.jobs.ac.uk/job/DSS210/senior-research-fellow-control-engineering",
+   "desc": "Department of Engineering Science",
    "score": 0,
    "hits": [],
    "src": "jobs.ac.uk"
@@ -10410,6 +10326,20 @@
    "date": "",
    "url": "https://www.nature.com/naturecareers/job/12862196/postdoctoral-research-fellow/",
    "desc": "Up to $70,000 for first year of employment",
+   "score": 0,
+   "hits": [],
+   "src": "Nature Careers"
+  },
+  {
+   "title": "Research Associate - Oligonucleotide Immune Therapies",
+   "company": "University of Cambridge",
+   "location": "Cambridge",
+   "region": "🇬🇧 英国",
+   "type": "Academic post",
+   "level": "postdoc",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864641/research-associate-oligonucleotide-immune-therapies/",
+   "desc": "£37,694-£46,049",
    "score": 0,
    "hits": [],
    "src": "Nature Careers"
@@ -10737,6 +10667,20 @@
    "src": "Nature Careers"
   },
   {
+   "title": "Postdoc Funke Group",
+   "company": "Human Technopole",
+   "location": "Milan (IT)",
+   "region": "🇪🇺 欧洲",
+   "type": "Academic post",
+   "level": "postdoc",
+   "date": "",
+   "url": "https://www.nature.com/naturecareers/job/12864494/postdoc-funke-group/",
+   "desc": "up to € 43.000,00",
+   "score": 0,
+   "hits": [],
+   "src": "Nature Careers"
+  },
+  {
    "title": "PostDoc Position: Bio-mediated conversion of CO2 from chemical capture agents",
    "company": "Aarhus University (AU)",
    "location": "Aarhus, Midtjylland (DK)",
@@ -10765,34 +10709,6 @@
    "src": "Nature Careers"
   },
   {
-   "title": "Postdoctoral Fellow - P Znamenskiy lab",
-   "company": "Francis Crick Institute",
-   "location": "London (Central), London (Greater) (GB)",
-   "region": "🇬🇧 英国",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12864355/postdoctoral-fellow-p-znamenskiy-lab/",
-   "desc": "From £47,500 with benefits, subject to skills and experience",
-   "score": 0,
-   "hits": [],
-   "src": "Nature Careers"
-  },
-  {
-   "title": "NTU AI-for-X Postdoctoral Fellowship 2026",
-   "company": "Nanyang Technological University (NTU)",
-   "location": "Singapore (SG)",
-   "region": "🇸🇬 新加坡",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12862618/ntu-ai-for-x-postdoctoral-fellowship-2026-/",
-   "desc": "SGD 100,000 to SGD 120,000 per annum + benefits",
-   "score": 0,
-   "hits": [],
-   "src": "Nature Careers"
-  },
-  {
    "title": "Postdoctoral Fellow in Cardiac Diseases and Aging",
    "company": "Mayo Clinic, Rochester",
    "location": "Rochester, Minnesota (US)",
@@ -10816,20 +10732,6 @@
    "date": "",
    "url": "https://www.nature.com/naturecareers/job/12862996/postdoctoral-associate-molecular-and-chemical-biology/",
    "desc": "$63,480",
-   "score": 0,
-   "hits": [],
-   "src": "Nature Careers"
-  },
-  {
-   "title": "Postdoctoral Researcher / Wissenschaftliche Mitarbeiterin / Wissenschaftlicher Mitarbeiter (d/w/m) i",
-   "company": "Charité – Universitätsmedizin Berlin",
-   "location": "10117, Mitte (DE)",
-   "region": "🇪🇺 欧洲",
-   "type": "Academic post",
-   "level": "postdoc",
-   "date": "",
-   "url": "https://www.nature.com/naturecareers/job/12862700/postdoctoral-researcher-wissenschaftliche-mitarbeiterin-wissenschaftlicher-mitarbeiter-d-w-m-i/",
-   "desc": "E13 TVöD VKA-K",
    "score": 0,
    "hits": [],
    "src": "Nature Careers"
