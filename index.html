@@ -366,6 +366,31 @@ a.dbnav b{font-weight:700}
 /* 面板原来是「两屏说明 + 18 个并排控件 + 852 张卡」。工作台把它变成一个队列:
    进来先看「该读什么」,而不是先读一段介绍。三张卡都是可点的筛选预设。 */
 .wbench{display:flex;gap:9px;flex-wrap:wrap;margin:2px 0 11px}
+/* ==== 我的研究方向:三步结构 ============================================
+   这一页原来把「想清楚做哪个方向」(路线图/立项书/阅读计划)和
+   「让网站按这个方向抓文献」(关键词表单)混在两个不同面板里,用户要来回跳。
+   现在按真实工作顺序串成三步:先定方向 → 再读文献 → 最后告诉系统。
+   .mstep 只是分节标题,不改动任何既有控件的 id。 */
+.mstep{display:flex;align-items:center;gap:10px;margin:22px 0 10px;padding-bottom:7px;
+  border-bottom:2px solid #E3DCF0}
+.mstep:first-of-type{margin-top:6px}
+.mstep .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#4A148C;color:#fff;
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.mstep .ttl{font-size:15.5px;font-weight:700;color:#4A148C}
+.mstep .sub{font-size:12.4px;color:#6b7280;font-weight:400}
+.mnav{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 2px}
+.mnav a{font-size:12.6px;padding:6px 12px;border-radius:7px;border:1px solid #D6C9EC;
+  background:#fff;color:#4A148C;text-decoration:none;font-weight:600}
+.mnav a:hover{background:#F3ECFB}
+.keyfacts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.keyfacts div{flex:1;min-width:210px;background:#fff;border:1px solid #E3DCF0;border-left:3px solid #4A148C;
+  border-radius:6px;padding:8px 11px;font-size:12.6px;line-height:1.6}
+.keyfacts b{color:#4A148C}
+.fmt{width:100%;font-size:12.4px;border-collapse:collapse;margin:8px 0}
+.fmt th{background:#EDE7F6;border:1px solid #d4c9e8;padding:5px;text-align:left}
+.fmt td{border:1px solid #d4c9e8;padding:5px}
+.fmt td.c{text-align:center}
+
 /* ==== 我的研究方向:给不写代码的人用的方向编辑器 ====================
    目标是「填表 + 三个按钮」,不是「教会他 JSON」。所以:
    - 每个方向一张卡,词用 chip 增删,没有裸文本框里的逗号规则要记
@@ -1181,11 +1206,90 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="panel" id="mydirs">
   <div class="hstrip" data-help="mydirs"></div>
 
-  <!-- 交付路径有两条,都不需要他碰 JSON:
-       A) 下载 .json → 拖进 GitHub 收件箱(有按钮直达,和 Pivot 收件箱同一套机制)
-       B) 只想先看看效果 → 「试算」只在浏览器里跑,不改任何文件
-       面板绝不声称自己能直接改服务器上的 interests.json —— 静态页没有服务端。 -->
+  <!-- 三步结构:先想清楚做哪个方向(第1步) → 按它读文献(第2步) → 告诉系统去抓(第3步)。
+       第3步的整块表单与全部控件 id 原样保留,JS 不用改。 -->
   <div class="calbanner" style="background:#F5F0FF;border-color:#D6C9EC">
+    <b>这一页把「我该做哪个方向」和「让网站按这个方向替我抓文献」串成三步，按顺序用就行：</b>
+    <div class="mnav">
+      <a href="#ms1">① 看分析与立项书</a>
+      <a href="#ms2">② 按计划读文献</a>
+      <a href="#ms3">③ 把方向填进系统</a>
+    </div>
+    <span class="note">第 1–2 步是<b>读和写</b>（报告、立项书、阅读计划，全部可下载可在线改）；
+    第 3 步是<b>设置</b>（填关键词，驱动「🔔 文献追踪」每天替你抓）。只想改抓取关键词，直接跳第 3 步。</span>
+  </div>
+
+  <div class="mstep" id="ms1"><span class="num">1</span>
+    <span><span class="ttl">我的方向分析与立项书</span>
+    <span class="sub">　据你真实 CV（17 篇发表 + 9 项基金）生成，不是模板</span></span></div>
+
+  <div class="keyfacts">
+    <div><b>6 个研究方向</b>按 CV 论文序号分类，逐方向做文献定位与<b>可持续性评分</b>，
+      并明确指出<b>建议退出</b>的那一条。</div>
+    <div><b>5 份完整立项书</b>：每份 3 个 Aim、具体实验与参数、<b>必须的对照</b>、预期结果
+      （全标 predicted/schematic）、<b>明确的放弃条件</b>。</div>
+    <div><b>核对更正：</b>按 CV 逐条数作者位次 = <b>一作 7 篇、末位 3 篇</b>（均为 Methods Mol Biol 书章节）、
+      <b>中间 7 篇</b>。旧简报写的「~11 first-author」是错的，已全部按 7 篇重算。</div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px">
+    <a class="abtn solid" href="research-roadmap.html" target="_blank"
+       style="text-decoration:none;background:#0D47A1">🧭 打开路线图应用（报告已内置，免 API Key）</a>
+    <a class="abtn solid" href="editor.html" target="_blank"
+       style="text-decoration:none;background:#4A148C">✏️ 在线编辑并导出 Word / Excel / PDF</a>
+    <a class="abtn" href="research-roadmap.html" download>⬇️ 下载单文件应用 (.html)</a>
+  </div>
+
+  <table class="fmt">
+    <tr><th style="width:42%">交付物</th><th style="width:15%">Word</th><th style="width:15%">PDF</th>
+        <th style="width:15%">Excel</th></tr>
+    <tr><td><b>科研未来规划报告</b><br><span class="note">14 节 · 42 表</span></td><td class="c"><a href="data/research_roadmap_report.docx" download>.docx</a></td><td class="c"><a href="data/research_roadmap_report.pdf" download>26 页</a></td><td class="c"><a href="data/research_roadmap_report.xlsx" download>43 表单</a></td></tr><tr><td><b>五方向完整立项书</b><br><span class="note">每方向 3 个 Aim + 放弃条件</span></td><td class="c"><a href="data/proposals_all_directions.docx" download>.docx</a></td><td class="c"><a href="data/proposals_all_directions.pdf" download>.pdf</a></td><td class="c"><a href="data/proposals_all_directions.xlsx" download>.xlsx</a></td></tr><tr><td><b>各方向技术与实验全清单</b><br><span class="note">关键参数 · 必须的对照 · 失败模式</span></td><td class="c"><a href="data/techniques_by_direction.docx" download>.docx</a></td><td class="c"><a href="data/techniques_by_direction.pdf" download>.pdf</a></td><td class="c"><a href="data/techniques_by_direction.xlsx" download>.xlsx</a></td></tr><tr><td><b>论文精读记录模板</b><br><span class="note">14 栏（含热点/空白/未来）</span></td><td class="c"><a href="data/paper_note_template.docx" download>.docx</a></td><td class="c"><a href="data/paper_note_template.pdf" download>.pdf</a></td><td class="c"><a href="data/paper_note_template.xlsx" download>.xlsx</a></td></tr><tr><td><b>12 周阅读计划工作簿</b><br><span class="note">11 表 · 含 4 本台账（证据/试剂/参数/空白）</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/reading_plan_12weeks.xlsx" download><b>.xlsx</b></a></td></tr><tr><td><b>68 篇笔记追踪表</b><br><span class="note">A–J 列已预填 PMID，K–X 列 14 栏待你填</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/paper_notes_tracker.xlsx" download><b>.xlsx</b></a></td></tr>
+  </table>
+
+  <details style="margin:4px 0 2px">
+    <summary style="cursor:pointer;font-weight:600;color:#4A148C;font-size:13px">
+      📘 两类下载有什么区别 / 在线编辑怎么用（点开看一眼）</summary>
+    <div style="padding:9px 4px;font-size:12.6px;line-height:1.75;color:#333">
+      <b>上表里的 .docx / .pdf / .xlsx 是真正的原生格式</b>，由 python-docx / xhtml2pdf / openpyxl 生成，
+      中文字体已嵌入并做过缺字检查（4 份 PDF 共 27,723 个中文字符，<b>0 个豆腐块</b>）。
+      Excel 版不是把文档塞进一个格子 —— <b>每张表格各成一个独立表单</b>。<br>
+      <b>而你在线编辑后导出</b>的 Word/Excel 是 HTML 封装的 <code>.doc</code> / <code>.xls</code>：
+      Word 与 Excel 都能直接打开、再另存为原生格式，但它<b>不是</b> OOXML。
+      本站是纯静态页（没有服务端），这是能做到的上限，所以按 <code>.doc</code>/<code>.xls</code> 命名而不谎称 .docx。
+      <b>在线导出 PDF 走浏览器「打印 → 存为 PDF」，输出是真 PDF。</b><br>
+      <b>在线编辑怎么用：</b>Markdown 文档左边改、右边实时预览；工作簿<b>双击单元格</b>即可改。
+      改动存在<b>你自己的浏览器</b>里（不上传任何服务器），有「还原」按钮。
+    </div>
+  </details>
+
+  <div class="mstep" id="ms2"><span class="num">2</span>
+    <span><span class="ttl">按选定方向读文献 · 12 周计划</span>
+    <span class="sub">　PubMed + Europe PMC 实时检索 632 篇候选 → 精选 68 篇</span></span></div>
+
+  <div class="keyfacts">
+    <div><b>68 篇全部是真实 PMID</b>，带期刊、年份、引用数，每篇都有我写的
+      <b>「为什么读」</b>和<b>「必须记下什么」</b> —— 不是一张标题清单。</div>
+    <div><b>每周一个产出物</b>：例如 W6 交申请书 Significance 初稿，
+      W12 交<b>两页 Specific Aims 定稿</b>。读完没写等于没读。</div>
+    <div><b>两周不能跳：W7</b> 处理 miR-29 的转录层替代解释（方向 2 的 go/no-go）；
+      <b>W12</b> 逐句读 2026 年最接近的三篇（竞争风险）。</div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px">
+    <a class="abtn solid" href="data/reading_plan_12weeks.xlsx" download
+       style="text-decoration:none;background:#2E7D32">⬇️ 12 周阅读计划工作簿 (.xlsx · 11 表)</a>
+    <a class="abtn solid" href="data/paper_notes_tracker.xlsx" download
+       style="text-decoration:none;background:#00695C">⬇️ 68 篇笔记追踪表 (.xlsx · 已预填 PMID)</a>
+    <a class="abtn" href="data/reading_pool.csv" download>⬇️ 632 篇完整候选池 (.csv)</a>
+  </div>
+  <img src="data/fig_reading_roadmap.png" alt="12 周文献阅读路线图：每周论文数按精读层级分色，右侧为周末产出物"
+       style="width:100%;max-width:900px;margin:8px 0 2px;border:1px solid #E2E8F0;border-radius:6px">
+
+  <div class="mstep" id="ms3"><span class="num">3</span>
+    <span><span class="ttl">把方向填进系统，驱动每日文献抓取</span>
+    <span class="sub">　填关键词即可，检索式自动生成，你永远不用写</span></span></div>
+
+<div class="calbanner" style="background:#F5F0FF;border-color:#D6C9EC">
     <b>第 1 步:先在这里定方向。定完了,「🔔 文献追踪」才是你每天要看的那一页。</b><br>
     填方向名 + 几个关键词 → 下面会<b>实时</b>告诉你「现有语料里命中多少」和「PubMed 全库有多大」→
     满意了点「下载方向表」→ 再点「打开收件箱」把文件拖进去 Commit。
@@ -2272,81 +2376,18 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     </div>
   </div>
 
-  <!-- ===== 科研未来规划(路线图)应用 ===== -->
   <div class="hcard" style="border-color:#0D47A1;background:#F5F9FF">
-    <h3 style="color:#0D47A1">🧭 科研未来规划 · 路线图应用（据你真实 CV + Scholar 生成）</h3>
+    <h3 style="color:#0D47A1">🧭 科研未来规划 · 路线图与立项书 —— 已移到「🎯 我的研究方向」</h3>
     <p style="font-size:13px;line-height:1.7;color:#333;margin:4px 0 8px">
-      把你的 <b>17 篇发表 + 9 项基金</b>拆成 <b>6 个研究方向</b>，逐方向做文献综述与定位、打可持续性评分，
-      给出<b>按优先级排序的 3 个未来方向</b>（含具体科学问题、为什么是你、切入路径、目标期刊、<b>放弃条件</b>），
-      再落成 12 周文献阅读表、技能学习表和<b>季度行动清单</b>。中英双语，11 节。
-      <br><b>核对更正:</b>按 CV 逐条数作者位次 = <b>一作 7 篇、末位 3 篇（均为 Methods Mol Biol 书章节）、中间 7 篇</b>；
-      项目里旧简报写的「~11 first-author」是错的，已全部按 7 篇重算。
-      <br><b>应用形态:</b>单文件网页，报告已内置，<b>不填 API Key 也能直接读</b>；填自己的 Key 可用新资料重跑并保留最近 10 版历史与差异对比。
+      据你真实 CV 生成的<b>方向分析报告（14 节）</b>、<b>五方向完整立项书</b>、
+      <b>12 周文献阅读计划</b>与<b>技术全清单</b>（Word / Excel / PDF 三种格式，可在线编辑），
+      现在和「把方向填进系统」放在同一页，按<b>①看分析 → ②读文献 → ③填进系统</b>三步排好了。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <a class="abtn wbtn" href="research-roadmap.html" target="_blank">🧭 打开路线图应用</a>
-      <a class="abtn" href="research-roadmap.html" download>⬇️ 下载单文件应用 (.html)</a>
-      <a class="abtn wbtn" href="editor.html" target="_blank">✏️ 在线编辑并导出 Word/Excel/PDF</a>
+      <a class="abtn solid" href="#" onclick="goPanel('mydirs');return false;"
+         style="text-decoration:none;background:#4A148C">🎯 去「我的研究方向」</a>
+      <a class="abtn" href="editor.html" target="_blank">✏️ 直接进在线编辑器</a>
     </div>
-
-    <p style="font-size:12.5px;color:#444;margin:10px 0 6px">
-      <b>2026-09 扩充 —— 全部交付物已改为 Word / Excel / PDF 三种格式：</b>第 12/13/14 节新增
-      <b>五个方向的完整立项书</b>（每个含 3 个 Aim、必须的对照、预期结果、<b>明确的放弃条件</b>）、
-      <b>12 周逐周文献阅读计划</b>（PubMed + Europe PMC 实时检索 632 篇候选池 → 精选 68 篇，全部带真实 PMID 与引用数）、
-      <b>各方向技术与实验全清单</b>（关键参数、必须的对照、常见失败模式、是否需要合作者）。
-      论文记录模板含<b>热点定位 / 空白 / 未来方向</b>三栏。
-      <br><b>可在线编辑：</b>点上面「✏️ 在线编辑并导出」——Markdown 文档左改右预览，工作簿双击单元格即改，
-      改动存在你自己的浏览器里（不上传服务器），随时导出 Word / Excel，或用浏览器打印存成 PDF。
-    </p>
-
-    <table style="width:100%;font-size:12.4px;border-collapse:collapse;margin:4px 0 8px">
-      <tr style="background:#EDE7F6">
-        <th style="border:1px solid #d4c9e8;padding:5px;text-align:left">交付物</th>
-        <th style="border:1px solid #d4c9e8;padding:5px">Word</th>
-        <th style="border:1px solid #d4c9e8;padding:5px">PDF</th>
-        <th style="border:1px solid #d4c9e8;padding:5px">Excel</th>
-        <th style="border:1px solid #d4c9e8;padding:5px">在线编辑</th>
-      </tr>
-      <tr><td style="border:1px solid #d4c9e8;padding:5px"><b>科研未来规划报告</b>（14 节 · 42 表）</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/research_roadmap_report.docx" download>.docx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/research_roadmap_report.pdf" download>26 页</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/research_roadmap_report.xlsx" download>43 表单</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="editor.html" target="_blank">✏️</a></td></tr>
-      <tr><td style="border:1px solid #d4c9e8;padding:5px"><b>五方向完整立项书</b></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/proposals_all_directions.docx" download>.docx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/proposals_all_directions.pdf" download>.pdf</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/proposals_all_directions.xlsx" download>.xlsx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="editor.html" target="_blank">✏️</a></td></tr>
-      <tr><td style="border:1px solid #d4c9e8;padding:5px"><b>各方向技术与实验全清单</b></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/techniques_by_direction.docx" download>.docx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/techniques_by_direction.pdf" download>.pdf</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/techniques_by_direction.xlsx" download>.xlsx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="editor.html" target="_blank">✏️</a></td></tr>
-      <tr><td style="border:1px solid #d4c9e8;padding:5px"><b>论文精读记录模板</b>（14 栏）</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/paper_note_template.docx" download>.docx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/paper_note_template.pdf" download>.pdf</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/paper_note_template.xlsx" download>.xlsx</a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="editor.html" target="_blank">✏️</a></td></tr>
-      <tr><td style="border:1px solid #d4c9e8;padding:5px"><b>12 周阅读计划工作簿</b>（11 表 · 含 4 本台账）</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center">—</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center">在线打印</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/reading_plan_12weeks.xlsx" download><b>.xlsx</b></a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="editor.html" target="_blank">✏️</a></td></tr>
-      <tr><td style="border:1px solid #d4c9e8;padding:5px"><b>68 篇笔记追踪表</b>（已预填 PMID，14 栏待填）</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center">—</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center">在线打印</td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="data/paper_notes_tracker.xlsx" download><b>.xlsx</b></a></td>
-        <td style="border:1px solid #d4c9e8;padding:5px;text-align:center"><a href="editor.html" target="_blank">✏️</a></td></tr>
-    </table>
-
-    <div class="honest" style="font-size:12.2px">
-      <b>格式诚实说明：</b>上表里的 .docx / .pdf / .xlsx 是用 python-docx / xhtml2pdf / openpyxl 生成的
-      <b>真正的原生格式</b>，中文字体已嵌入并做过缺字检查（4 份 PDF 共 27,723 个中文字符，<b>0 个豆腐块</b>）。
-      而<b>你在线编辑后导出</b>的 Word/Excel 是 HTML 封装的 <code>.doc</code> / <code>.xls</code> ——
-      Word 与 Excel 都能直接打开并另存为原生格式，但它不是 OOXML；这是纯静态网页（无后端）能做到的上限，
-      所以我按 <code>.doc</code>/<code>.xls</code> 命名而不谎称 .docx。在线导出 PDF 走浏览器「打印 → 存为 PDF」，输出是真 PDF。
-    </div>
-    <img src="data/fig_reading_roadmap.png" alt="12 周文献阅读路线图" style="width:100%;max-width:900px;margin-top:10px;border:1px solid #E2E8F0;border-radius:6px">
   </div>
 
   <!-- ===== 完整六部分骨架(Significance→Career) ===== -->
@@ -7934,8 +7975,11 @@ var HELP = {
   caveat:"**三件事说清楚**:①分数只看关键词,不理解岗位内容;②公司简介/福利/EEO 段落已按「同公司高频重复句」自动剔除后再打分(修过两个真 bug:裸子串把 delivering 算成 liver;先截断再剔样板导致 58% 岗位无文本),但剔除是统计判据,可能有漏网;③**国内药企 / CRO / 大动物与农业生物技术 / 试剂仪器厂商多数不用这两套系统,抓不到** —— 那部分只能自己按下方公司清单去官网翻。"},
 
 
- mydirs:{what:"换课题就来这一页:填方向名 + 几个关键词,面板替你写 data/interests.json,并生成 PubMed / Europe PMC / Crossref 的检索式。你不用打开任何文件,也不用学 [tiab] 那套语法。",
-  how:["**四步换方向:**① 点「读回当前线上方向」把现在的 8 个方向调出来 → ② 改名字、加减关键词(打字后按回车或逗号成词,点 × 删词) → ③ 点「联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → ④ 点「下载方向表」再点「打开收件箱」把文件拖进去、Commit —— **Commit 完抓取立刻自动开跑**(约 5–15 分钟跑完),不用等第二天,也不用去 Actions 手动点。跑完刷新「🔔 文献追踪」就是新方向的结果;页面不会自己提示你好了,自己刷一下。",
+ mydirs:{what:"这一页按真实工作顺序串成三步:**① 看方向分析与立项书**(据你真实 CV 生成的 14 节报告、五份完整立项书、技术全清单,Word/Excel/PDF 三格式且可在线编辑) → **② 按选定方向读文献**(12 周计划,632 篇候选里精选 68 篇真实 PMID,含逐周产出物与笔记追踪表) → **③ 把方向填进系统**(填方向名 + 几个关键词,面板替你写 data/interests.json 并生成检索式,驱动「🔔 文献追踪」每天抓)。前两步是读和写,第三步是设置;只想改抓取关键词就直接跳第 3 步。",
+  how:["**第 1 步要点:**报告把 17 篇发表 + 9 项基金拆成 6 个研究方向,逐方向打可持续性评分并明确指出**建议退出**的那一条;五份立项书每份含 3 个 Aim、必须的对照、预期结果(全标 predicted/schematic)与**明确的放弃条件**。核对更正:按 CV 逐条数作者位次 = **一作 7 篇、末位 3 篇(均为 Methods Mol Biol 书章节)、中间 7 篇**,旧简报的「~11 first-author」是错的。",
+       "**第 2 步要点:**68 篇全部带真实 PMID 与引用数,每篇有「为什么读」和「必须记下什么」;每周必须交一个产出物(W6 交 Significance 初稿,W12 交两页 Specific Aims 定稿)。**W7 与 W12 不能跳** —— 前者处理 miR-29 的转录层替代解释(方向 2 的 go/no-go),后者逐句读 2026 年最接近的三篇(竞争风险)。",
+       "**下载格式:**表里的 .docx/.pdf/.xlsx 是**真正的原生格式**(中文字体已嵌入,4 份 PDF 共 27,723 个中文字符、0 个豆腐块);**在线编辑后导出**的是 HTML 封装的 .doc/.xls —— Word/Excel 能直接打开并另存为原生格式,但不是 OOXML。静态页没有服务端,这是上限,所以不谎称 .docx。在线导 PDF 走浏览器打印,输出是真 PDF。",
+       "**第 3 步 · 四步换方向:**① 点「读回当前线上方向」把现在的 8 个方向调出来 → ② 改名字、加减关键词(打字后按回车或逗号成词,点 × 删词) → ③ 点「联网试算」看 PubMed 全库有多少篇,判断词写宽了还是窄了 → ④ 点「下载方向表」再点「打开收件箱」把文件拖进去、Commit —— **Commit 完抓取立刻自动开跑**(约 5–15 分钟跑完),不用等第二天,也不用去 Actions 手动点。跑完刷新「🔔 文献追踪」就是新方向的结果;页面不会自己提示你好了,自己刷一下。",
        "**核心词 vs 外围词:**核心词命中得满分,写最特异的词(基因名、专有名词、你论文标题里那种词);外围词命中得部分分,写相邻但不独占的词。宽词(lactate、cancer)放外围,别放核心。",
        "**试算读法:**PubMed 全库 0 篇 = 词大概拼错了;>5 万篇 = 太宽,抓回来多半不是你的领域;40–5 万之间比较合适。",
        "红框会在下载前拦住你:没名字、没核心词、权重越界、阈值高低颠倒 —— 和导入脚本同一套规则,所以面板放你过了,入库就不会被拒。"],
