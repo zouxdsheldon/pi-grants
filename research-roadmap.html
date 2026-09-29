@@ -195,22 +195,62 @@ textarea{resize:vertical;line-height:1.5}
   <textarea id="sNote" rows="5" placeholder="例：当前在做…；手头有…存档样本；合作者…；ZSWIM8 方向暂无未发表数据"></textarea>
 
   <h2 class="sec">4 · 运行 / Run</h2>
-  <div class="row">
-    <div>
-      <label class="f">Anthropic API Key（只存本机）</label>
-      <input type="password" id="apiKey" placeholder="sk-ant-...">
+
+  <div class="warn">
+    <b>先说清楚：Claude Pro 订阅里没有 API Key。</b>
+    Anthropic 官方帮助中心写明，Pro／Max／Team／Enterprise 这类订阅<b>不包含</b>通过 Claude Console 的 API 使用；
+    想用 API 必须另外在 <code>console.anthropic.com</code> 开一个 API 账户、单独充值按量付费 —— 那是另一笔钱。
+    <br><b>所以你不用去找 Key。</b>下面「方式 A」用你现有的 Pro 订阅就能跑完，零额外花费。
+    而且这份报告<b>已经内置在文件里</b>，不填任何东西就能在「报告」标签直接读、下载、打印。
+  </div>
+
+  <div style="background:#F3ECFB;border:1px solid #D6C9EC;border-radius:9px;padding:12px 14px;margin:10px 0">
+    <b style="color:var(--pp);font-size:14.5px">✅ 方式 A（推荐）· 用你的 Claude Pro，不需要 API Key</b>
+    <div class="note" style="margin:4px 0 8px">
+      三步：复制提示词 → 在 claude.ai 里粘贴发送 → 把 Claude 的回复粘回来。提示词已自动带上你在第 1–3 节填的全部内容。
     </div>
-    <div>
-      <label class="f">模型 Model</label>
-      <div style="display:flex;gap:6px">
-        <select id="model" style="flex:1"><option value="">— 先点右侧拉取 —</option></select>
-        <button class="btn gh sm" onclick="pullModels()">拉取</button>
-      </div>
+    <div class="bar" style="margin:6px 0">
+      <button class="btn" onclick="copyPrompt()">① 复制提示词</button>
+      <button class="btn gh sm" onclick="dlPrompt()">或下载为 .txt</button>
+      <a class="btn bl sm" href="https://claude.ai/new" target="_blank"
+         style="text-decoration:none">② 打开 claude.ai 粘贴</a>
+      <span class="note" id="pLen"></span>
+    </div>
+    <label class="f">③ 把 Claude 的完整回复粘贴到这里</label>
+    <textarea id="pasteBack" rows="6"
+      placeholder="在 claude.ai 里把 Claude 输出的整份 Markdown 报告全选复制，粘到这里，然后点下面的按钮"></textarea>
+    <div class="bar" style="margin:8px 0 0">
+      <button class="btn k" onclick="loadPasted()">③ 载入为报告</button>
+      <span class="note">载入后会进「报告」标签，并自动存进历史版本，可与旧版做差异对比。</span>
     </div>
   </div>
-  <div class="note">模型列表从你自己的账号实时拉取（<code>GET /v1/models</code>），所以这里不会写死任何过期的模型名。</div>
+
+  <details style="margin:10px 0">
+    <summary style="cursor:pointer;font-weight:700;color:var(--mu);font-size:13px">
+      方式 B（进阶）· 用 API Key 自动生成 —— 需单独开通并按量付费，Pro 订阅不含
+    </summary>
+    <div style="padding:8px 0 0">
+      <div class="row">
+        <div>
+          <label class="f">Anthropic API Key（只存本机，不会上传到本站）</label>
+          <input type="password" id="apiKey" placeholder="sk-ant-...">
+        </div>
+        <div>
+          <label class="f">模型 Model</label>
+          <div style="display:flex;gap:6px">
+            <select id="model" style="flex:1"><option value="">— 先点右侧拉取 —</option></select>
+            <button class="btn gh sm" onclick="pullModels()">拉取</button>
+          </div>
+        </div>
+      </div>
+      <div class="note">模型列表从你自己的账号实时拉取（<code>GET /v1/models</code>），所以这里不会写死任何过期的模型名。</div>
+      <div class="bar">
+        <button class="btn" id="runBtn" onclick="run()">▶ 运行完整分析（走 API，会计费）</button>
+      </div>
+    </div>
+  </details>
+
   <div class="bar">
-    <button class="btn" id="runBtn" onclick="run()">▶ 运行完整分析</button>
     <button class="btn gh" onclick="saveAll();flash('已保存到本机')">保存输入</button>
     <button class="btn gh" onclick="exportJSON()">导出会话 JSON</button>
     <button class="btn gh" onclick="document.getElementById('impFile').click()">导入会话 JSON</button>
@@ -1528,6 +1568,37 @@ sc||"（未提供）"
 }
 
 /* ---------- 运行（流式） ---------- */
+/* ===== 无 API Key 路径（Claude Pro 用户的主路径）=====
+   事实依据：Anthropic 帮助中心明确写 Pro/Max/Team/Enterprise 订阅不包含
+   Console 的 API 使用，API 要另开账户单独付费。所以对一个 Pro 用户来说，
+   「去填 API Key」是一条死路 —— 让他把提示词贴进 claude.ai、再把回复贴回来，
+   才是零成本且立刻可用的路径。复制失败要有下载兜底：clipboard API 在
+   非 HTTPS 或用户拒权时会直接 reject。 */
+function copyPrompt(){
+  var p=buildPrompt();
+  var done=function(){ flash('提示词已复制（'+p.length+' 字符）。去 claude.ai 粘贴发送，再把回复贴回第 ③ 步。'); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(p).then(done,function(){
+      dlPrompt(); flash('剪贴板被浏览器拒绝，已改为下载 .txt —— 打开它全选复制即可。','err');
+    });
+  } else { dlPrompt(); flash('这个浏览器不支持剪贴板写入，已改为下载 .txt。','err'); }
+  var l=document.getElementById('pLen'); if(l)l.textContent='提示词 '+p.length+' 字符';
+}
+function dlPrompt(){
+  var p=buildPrompt();
+  dl('roadmap-prompt-'+stamp()+'.txt','text/plain',p);
+  var l=document.getElementById('pLen'); if(l)l.textContent='提示词 '+p.length+' 字符';
+}
+function loadPasted(){
+  var t=document.getElementById('pasteBack').value.trim();
+  if(t.length<400){ flash('粘贴的内容太短（'+t.length+' 字符），看起来不是整份报告。请在 claude.ai 里全选 Claude 的回复再复制。','err'); return; }
+  if(t.indexOf('#')<0){ flash('没检测到任何 Markdown 标题（#）。请确认复制的是 Claude 输出的报告正文，而不是页面截图或片段。','err'); return; }
+  setReport(t,'从 claude.ai 粘贴载入');
+  pushHis(t,'claude.ai（Pro 订阅，无 API）');
+  tab('Rep');
+  flash('已载入并存进历史版本（'+t.length+' 字符）。');
+}
+
 function run(){
   var k=document.getElementById('apiKey').value.trim(),
       m=document.getElementById('model').value,
