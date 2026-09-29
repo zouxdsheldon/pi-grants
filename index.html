@@ -95,6 +95,17 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
    btn.click() 走这些按钮，而 display:none 的元素 .click() 依然生效。
    删掉按钮会把这些调用点全部打断，所以只隐藏、不删除。 */
 .tabs{display:none}
+/* 可回滚开关：body.tabson 时恢复顶部标签栏。
+   注意这里**不碰 .tab2** —— 33 个按钮里有 24 个在本次精简之前就一直是
+   display:none !important（见下面的 .tab2 规则），原本可见的只有 9 个。
+   所以打开开关恢复的是「改动前的原样」，而不是把 33 个全铺出来 ——
+   后者比这个站任何时候都更挤，而且侧栏已经能到达全部 33 个面板。 */
+body.tabson .tabs{display:flex;gap:6px;margin:14px 0 0;
+  border-bottom:2px solid var(--line);flex-wrap:wrap}
+.tabsw{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:12px;color:var(--muted)}
+.tabsw button{background:#fff;border:1px solid var(--line);border-radius:7px;padding:4px 10px;
+  font-size:11.8px;font-weight:700;color:var(--muted);cursor:pointer;font-family:inherit}
+.tabsw button:hover{border-color:#4A148C;color:#4A148C;background:#FAF4FF}
 /* 侧栏改为可折叠分组：静息状态只看到 6 行，点开才展开该组的面板 */
 .sgh{display:flex;align-items:center;gap:7px;padding:9px;border-radius:8px;cursor:pointer;
   font-size:12.6px;font-weight:800;color:var(--txt);user-select:none}
@@ -825,6 +836,10 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
 <div class="shell">
 <nav class="sidenav" id="sideNav"></nav>
 <div class="content">
+<div class="tabsw">
+  <button id="tabToggle" title="顶部标签栏与左侧分类栏指向的是同一批面板，默认收起以免同一套导航出现两遍">显示顶部标签栏</button>
+  <span id="tabToggleNote"></span>
+</div>
 <div class="tabs">
   <button class="tab active" data-p="hub">🏠 工具首页</button>
   <button class="tab" data-p="live">🇺🇸 联邦机会</button>
@@ -3848,6 +3863,34 @@ var SIDE_NAV=[
 ];
 
 function setN(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+/* ===== 顶部标签栏开关（可回滚） =====
+   本次精简把顶部标签整排隐藏了，因为它和左侧分类栏指向同一批面板。
+   但隐藏是一个判断，不该由我单方面锁定 —— 这里给一个开关，选择记在本机。
+   诚实说明：33 个 tab 按钮里 24 个在精简之前就一直是 .tab2{display:none!important}，
+   原本可见的只有 9 个。所以开关恢复的是「改动前的原样」(9 个)，不是 33 个全铺开。 */
+function tabsOn(){ try{ return localStorage.getItem("nav.tabs")==="1"; }catch(e){ return false; } }
+function applyTabs(){
+  var on=tabsOn();
+  document.body.classList.toggle("tabson", on);
+  var b=document.getElementById("tabToggle");
+  if(b) b.textContent = on ? "收起顶部标签栏" : "显示顶部标签栏";
+  var n=document.getElementById("tabToggleNote");
+  if(n){
+    var vis=document.querySelectorAll(".tabs .tab").length
+          - document.querySelectorAll(".tabs .tab2").length;
+    n.innerHTML = on
+      ? ("已恢复改动前的标签栏（"+vis+" 个；另 "
+         + document.querySelectorAll(".tabs .tab2").length
+         + " 个在本次精简之前就一直是隐藏的）。左侧分类栏可到达全部 "
+         + document.querySelectorAll(".tabs .tab").length + " 个面板。")
+      : "顶部标签与左侧分类栏重复，已收起。需要时点左边这个按钮恢复。";
+  }
+}
+function toggleTabs(){
+  try{ localStorage.setItem("nav.tabs", tabsOn() ? "0" : "1"); }catch(e){}
+  applyTabs();
+}
+
 function renderSideNav(){
   var nav=document.getElementById("sideNav"); if(!nav)return;
   var openG=null;
@@ -11801,6 +11844,8 @@ function pvDemoRun(){
 
 loadData();
 renderSideNav();
+  applyTabs();
+  var _tt=document.getElementById("tabToggle"); if(_tt)_tt.onclick=toggleTabs;
 try{checkElig();}catch(e){}
 
 
