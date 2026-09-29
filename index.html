@@ -88,7 +88,23 @@ header h1{font-size:19px}header .sub{opacity:.82;font-size:12.5px;margin-top:3px
 .plat a:hover{color:#fff;background:rgba(255,255,255,.06)}
 .plat a.on{color:#fff;border-bottom-color:#E6A817}
 
-.tabs{display:flex;gap:6px;margin:14px 0 0;border-bottom:2px solid var(--line);flex-wrap:wrap}
+/* ==== 导航精简 ============================================================
+   顶部这排标签原有 33 个按钮，和左侧边栏是同一套导航的两份，加上已有的
+   breadcrumb，用户要同时面对两条长导航。这里整排隐藏，但**保留在 DOM 里**：
+   所有切换（goPanel、卡片跳转、写作面板 crosstalk、测试里的 rerender）都靠
+   btn.click() 走这些按钮，而 display:none 的元素 .click() 依然生效。
+   删掉按钮会把这些调用点全部打断，所以只隐藏、不删除。 */
+.tabs{display:none}
+/* 侧栏改为可折叠分组：静息状态只看到 6 行，点开才展开该组的面板 */
+.sgh{display:flex;align-items:center;gap:7px;padding:9px;border-radius:8px;cursor:pointer;
+  font-size:12.6px;font-weight:800;color:var(--txt);user-select:none}
+.sgh:hover{background:#F3ECFB}
+.sgh .car{font-size:10px;color:var(--muted);width:9px;flex:0 0 9px}
+.sgh .cnt{margin-left:auto;font-size:10.5px;font-weight:700;color:var(--muted);
+  background:#F1ECF8;border-radius:9px;padding:1px 6px}
+.sgh.open{color:#4A148C;background:#F7F2FD}
+.sgbody{display:none;margin:0 0 4px 6px;padding-left:7px;border-left:2px solid #EDE7F6}
+.sgbody.open{display:block}
 .tab{padding:10px 15px;font-size:13.5px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px}
 .tab.active{color:var(--dark);border-bottom-color:var(--red)}
 /* ---- 检索中心:子标签 ---- */
@@ -1990,11 +2006,11 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
   <div class="tool-row">
     <label title="勾上则只看会新增哪些,不生成下载文件">仅预览<input type="checkbox" id="pvDry" checked></label>
-    <button class="gobtn" id="pvRun">解析并比对</button>
-    <button class="gobtn" id="pvDl" style="display:none;background:#2E7D32">⬇️ 下载合并后的 curated.json</button>
-    <button class="gobtn" id="pvDlNew" style="display:none;background:#0D47A1">⬇️ 只下载新增条目 CSV</button>
+    <button class="gobtn" id="pvtRun">解析并比对</button>
+    <button class="gobtn" id="pvtDl" style="display:none;background:#2E7D32">⬇️ 下载合并后的 curated.json</button>
+    <button class="gobtn" id="pvtDlNew" style="display:none;background:#0D47A1">⬇️ 只下载新增条目 CSV</button>
   </div>
-  <div id="pvOut" class="tout"></div>
+  <div id="pvtOut" class="tout"></div>
 </div>
 
 <!-- ============ 实验工具:克隆与 CRISPR ============ -->
@@ -2393,8 +2409,17 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     研究方向关键词在 <code>data/interests.json</code> 里改；基金清单在 <code>data/funds.json</code> 里增删。
   </div>
 
-  <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
+  
   <!-- ===== 基金类型选择器 + 双向匹配 ===== -->
+  <div class="mnav" style="margin:10px 0 2px">
+    <a href="#ws1">① 即用交付物（模板／草稿／骨架／资格自查）</a>
+    <a href="#ws2">② 方法论教程（六步法 · 中／EN）</a>
+  </div>
+
+  <div class="mstep" id="ws1"><span class="num">1</span>
+    <span><span class="ttl">即用交付物 —— 直接下载、直接往里填</span>
+    <span class="sub">　这一段<b>不分语言</b>：文件与模板中英文都在里面，切换语言不影响它</span></span></div>
+
   <div class="hcard" style="border-color:#1565C0;background:#EEF5FF">
     <h3 style="color:#0D47A1">🎯 先选你要写的基金类型（或从「找资助」页卡片点「✍️怎么写这个」自动带过来）</h3>
     <p style="font-size:13px;color:#444;margin:4px 0 8px">选中后，下方会给出<b>该类基金的官方说明 · 篇幅 · 资格 · 必写章节 · 针对性技巧</b>，并列出<b>当前还开着的同类资助</b>（点标题一键跳回搜索）。</p>
@@ -2514,6 +2539,12 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     </div>
     <div id="eligResult"></div>
   </div>
+
+  <div class="mstep" id="ws2"><span class="num">2</span>
+    <span><span class="ttl">方法论教程 —— 怎么从零写出一份本子</span>
+    <span class="sub">　只有这一段有中英两版，下面的 中／EN 按钮切换的是它</span></span></div>
+
+  <div class="langbar"><button class="langbtn active" data-l="zh" onclick="setLang('zh')">🇨🇳 中文</button><button class="langbtn" data-l="en" onclick="setLang('en')">🇬🇧 English</button></div>
 
   <div class="lang-zh">
   <div class="honest">✍️ 一站式<b>基金写作指导</b>:六步法(明确类型 → 官方说明 → 成功范例 → 逐节模板 → 语料库 → 实时更新)+ 每类基金<b>官方模板去哪下</b> + <b>可复制的起草提示词</b>。你已有一份完整的 AMPK–TDMD 旗舰提案(本项目 artifacts 里的 <code>proposal_AMPK_TDMD.md</code> / <code>proposal_zh.md</code>),下面的提示词就是让 Claude Science 把它<b>改写成各基金要求的格式</b>——复制 → 新开对话粘进去即可。</div>
@@ -3655,80 +3686,58 @@ var JOURNALS=[], JMETA={}, JSORT="n", JSORTDIR=-1, JOPEN={}, J_WIRED=false;
 
 /* 门户 → 面板 的映射。ext 表示跳到姊妹站。 */
 var HUB_SECTIONS=[
- {h:"⓿ 先从这里开始", st:"不确定该用哪个工具时,搜一下——按中英文名、别名和用途关键词匹配",
-  tools:[
-   {p:"tfind", ic:"🔎", nm:"工具搜索", ds:"输入你想干的事(如「查影响因子」「算样本量」「回复审稿人」),直接跳到对应工具", cnt:()=>Object.keys(TOOLDOC).length, u:"个工具已收录"},
+  /* 分区与左侧栏的 6 个分组**逐字一致** —— 之前落地页是 9 个分区 40 张卡、
+     侧栏是另一套分类，同一个工具在两处叫不同名字，这是「乱」的主要来源。
+     移除的 10 张卡：tlit/tdict/tbib/tcite/tgap/tzh/tpat 是「文献检索中心」的
+     子标签而不是独立面板（点 tsearch 进去就有，goPanel 的 SUB_OF 也照旧支持
+     直接跳转）；papers#hot / papers#nov / writing#tpl 是同一面板的排序或定位
+     快捷方式，与主卡重复。卡片对象本身原样保留，只改分组与顺序。 */
+  {h:"开始", st:"先认识这个站：搜一个词就能横跨资助／职位／文献／期刊", tools:[
+    {p:"tfind", ic:"🔎", nm:"工具搜索", ds:"输入你想干的事(如「查影响因子」「算样本量」「回复审稿人」),直接跳到对应工具", cnt:()=>Object.keys(TOOLDOC).length, u:"个工具已收录"},
+    {ext:"https://zouxdsheldon.github.io/pi-intel/", ic:"🧭", nm:"PI 情报地图",
+    ds:"从本站语料里抽出的 48 位 PI:方向指纹、竞争/互补象限、方向漂移轨迹", cnt:()=>48, u:"位 PI"}
   ]},
- {h:"① 找钱 · 资助机会", st:"从联邦数据库到各国 PI 项目,含截止日历与申请管线",
-  tools:[
-   {p:"live",     ic:"🇺🇸", nm:"美国联邦资助", ds:"Grants.gov 全量未过期机会,每日刷新,含金额/资格/截止推断", cnt:()=>LIVE.length,      u:"个机会"},
-   {p:"curated",  ic:"🌐", nm:"各国 PI 资助", ds:"人工逐条核实的早期 PI 项目:K99、海外优青、ECS、NRF…", cnt:()=>CURATED.length,   u:"个项目"},
-   {p:"calendar", ic:"📅", nm:"截止日历",     ds:"可订阅的 .ics 日历,截止日自动进你的日程", cnt:()=>(CAL_EV?CAL_EV.filter(e=>e.mine).length:0), u:"条截止"},
-   {p:"myapps",   ic:"🎯", nm:"我能申的",     ds:"按你填的档案自动过滤资格,分 A/B/C 档", cnt:()=>{try{return screenMine().length}catch(e){return 0}}, u:"个符合"},
-   {p:"tpivot",   ic:"📥", nm:"Pivot 表格导入", ds:"把 Pivot-RP 导出的 CSV 拖进来,自动去重、自动归国、生成可直接替换的 curated.json", cnt:()=>(CURATED||[]).filter(g=>g.cat==="Pivot 导入").length, u:"条已从 Pivot 导入"},
-   {p:"pipeline", ic:"📋", nm:"申请管线",     ds:"跟踪每份申请的状态:感兴趣 / 起草中 / 已提交 / 结果", cnt:()=>Object.keys(getTracked()).length, u:"份在跟"},
-   {p:"whatsnew", ic:"🔄", nm:"更新动态",     ds:"新增、金额变动、截止临近——只看变化的部分", cnt:()=>CHANGES.length, u:"条变化"},
+  {h:"① 找资助", st:"联邦机会每天自动刷新；各国 PI 项目人工核过；截止日期可导入日历", tools:[
+    {p:"live",     ic:"🇺🇸", nm:"美国联邦资助", ds:"Grants.gov 全量未过期机会,每日刷新,含金额/资格/截止推断", cnt:()=>LIVE.length,      u:"个机会"},
+    {p:"curated",  ic:"🌐", nm:"各国 PI 资助", ds:"人工逐条核实的早期 PI 项目:K99、海外优青、ECS、NRF…", cnt:()=>CURATED.length,   u:"个项目"},
+    {p:"myapps",   ic:"🎯", nm:"我能申的",     ds:"按你填的档案自动过滤资格,分 A/B/C 档", cnt:()=>{try{return screenMine().length}catch(e){return 0}}, u:"个符合"},
+    {p:"calendar", ic:"📅", nm:"截止日历",     ds:"可订阅的 .ics 日历,截止日自动进你的日程", cnt:()=>(CAL_EV?CAL_EV.filter(e=>e.mine).length:0), u:"条截止"},
+    {p:"whatsnew", ic:"🔄", nm:"更新动态",     ds:"新增、金额变动、截止临近——只看变化的部分", cnt:()=>CHANGES.length, u:"条变化"},
+    {p:"pipeline", ic:"📋", nm:"申请管线",     ds:"跟踪每份申请的状态:感兴趣 / 起草中 / 已提交 / 结果", cnt:()=>Object.keys(getTracked()).length, u:"份在跟"}
   ]},
- {h:"② 找人 · 同行与去处", st:"谁在做同一件事,以及哪里在招人",
-  tools:[
-   {p:"jobs", ic:"🎓", nm:"学术职位", ds:"教职 / 博后 / 研究员岗位,按地区与层级筛选", cnt:()=>JOBS.length, u:"个岗位"},
-   {p:"ind", ic:"🏭", nm:"企业岗位", ds:"生物医药/工具公司岗位,按职能族与契合度筛选", cnt:()=>IJOBS.length, u:"个岗位"},
-   {ext:"https://zouxdsheldon.github.io/pi-intel/", ic:"🧭", nm:"PI 情报地图",
-    ds:"从本站语料里抽出的 48 位 PI:方向指纹、竞争/互补象限、方向漂移轨迹", cnt:()=>48, u:"位 PI"},
+  {h:"② 定方向 · 读文献", st:"先定方向，再让系统每天替你追；临时要查一篇就用检索中心", tools:[
+    {p:"mydirs", ic:"🎯", nm:"① 我的研究方向", ds:"先在这里定方向:填关键词,面板替你生成检索式并试算命中量。改完提交,抓取立刻重跑", cnt:()=>INTERESTS.length, u:"个方向"},
+    {p:"papers", ic:"📚", nm:"② 文献追踪", ds:"按上面的方向每天跨 6 个源抓取并打分,这是你每天真正要看的那一页", cnt:()=>PAPERS.length, u:"篇在库"},
+    {p:"tsearch", ic:"📚", nm:"文献检索中心", ds:"下面七个检索工具合成一页,另附外站直达目录", cnt:()=>SITES.reduce((a,g)=>a+g.it.length,0), u:"个外站入口"},
+    {p:"tgene",  ic:"🧫", nm:"基因/靶点注释", ds:"MyGene + Ensembl + Open Targets:注释、转录本、基因–疾病证据", cnt:()=>3, u:"个数据库"},
+    {p:"ttrial", ic:"🏥", nm:"临床试验检索",   ds:"ClinicalTrials.gov API v2:按适应症/干预/期别查在研项目", cnt:()=>1, u:"个官方库"}
   ]},
- {h:"③ 读文献 · 查数据库", st:"左半边是「盯住你自己方向」的持续追踪,右半边是「临时要查一个东西」的实时检索",
-  tools:[
-   {sp:"A · 持续追踪自己的方向 —— 先定方向(第 1 步),再每天看追踪结果(第 2 步)"},
-   {p:"mydirs", ic:"🎯", nm:"① 我的研究方向", ds:"先在这里定方向:填关键词,面板替你生成检索式并试算命中量。改完提交,抓取立刻重跑", cnt:()=>INTERESTS.length, u:"个方向"},
-   {p:"papers", ic:"📚", nm:"② 文献追踪", ds:"按上面的方向每天跨 6 个源抓取并打分,这是你每天真正要看的那一页", cnt:()=>PAPERS.length, u:"篇在库"},
-   {p:"papers", ic:"🔥", nm:"热点论文", ds:"按引用增速排序的近期高关注论文", act:"hot",
-    cnt:()=>PAPERS.filter(p=>(p.hot_score||0)>0).length, u:"篇有热度"},
-   {p:"papers", ic:"💡", nm:"高新颖度", ds:"与既有语料差异最大的论文,常是新方法或新现象", act:"nov",
-    cnt:()=>PAPERS.filter(p=>(p.novelty_pct||0)>=80).length, u:"篇 ≥80 分位"},
-   {sp:"B · 现查一个具体问题 —— 实时调公开 API,数字是现算的命中数,不是缓存快照"},
-   {p:"tsearch", ic:"📚", nm:"文献检索中心", ds:"下面七个检索工具合成一页,另附外站直达目录", cnt:()=>SITES.reduce((a,g)=>a+g.it.length,0), u:"个外站入口"},
-   {p:"tlit",   ic:"📗", nm:"文献检索与导出", ds:"PubMed + Europe PMC 双源检索,一键导出 RIS / BibTeX", cnt:()=>2, u:"个数据源"},
-   {p:"tdict",  ic:"📖", nm:"生物医学词典",   ds:"MeSH 主题词:释义、全部同义词、副主题词、树号,并组装成检索式", cnt:()=>2, u:"种检索式"},
-   {p:"tbib",   ic:"📊", nm:"文献计量分析",   ds:"年份趋势、期刊/作者分布、MeSH 主题词与共现 —— 现算并作图", cnt:()=>5, u:"类统计"},
-   {p:"tcite",  ic:"🔗", nm:"引文追踪",       ds:"DOI 取参考文献(Crossref);PMID 取被引(Europe PMC)", cnt:()=>2, u:"个方向"},
-   {p:"tgap",   ic:"🕳️", nm:"交叉空白扫描",   ds:"先算独立期望再看实测——分母太小时直接拒绝下结论", cnt:()=>1, u:"个命中数源"},
-   {p:"tzh",    ic:"🇨🇳", nm:"中文文献检索",   ds:"检索被国际库收录的中文期刊,并与英文发文量对比(不覆盖 CNKI/万方)", cnt:()=>2, u:"种模式"},
-   {p:"tpat",   ic:"⚖️", nm:"专利检索",       ds:"生物医学关联专利的逐年趋势,并与论文数并排看转化热度", cnt:()=>1, u:"个专利子库"},
-   {sp:"C · 查一个基因 / 一个适应症在临床走到哪一步"},
-   {p:"tgene",  ic:"🧫", nm:"基因/靶点注释", ds:"MyGene + Ensembl + Open Targets:注释、转录本、基因–疾病证据", cnt:()=>3, u:"个数据库"},
-   {p:"ttrial", ic:"🏥", nm:"临床试验检索",   ds:"ClinicalTrials.gov API v2:按适应症/干预/期别查在研项目", cnt:()=>1, u:"个官方库"},
+  {h:"③ 找职位", st:"学术岗与企业岗分开；企业岗的公司板面都做过三重证据核验", tools:[
+    {p:"jobs", ic:"🎓", nm:"学术职位", ds:"教职 / 博后 / 研究员岗位,按地区与层级筛选", cnt:()=>JOBS.length, u:"个岗位"},
+    {p:"ind", ic:"🏭", nm:"企业岗位", ds:"生物医药/工具公司岗位,按职能族与契合度筛选", cnt:()=>IJOBS.length, u:"个岗位"}
   ]},
- {h:"④ 做实验 · 分子操作", st:"全部在你自己的浏览器里算,序列不出本机,断网也能用",
-  tools:[
-   {p:"tsite",   ic:"🧬", nm:"激酶位点扫描", ds:"AMPK 底物基序 PSSM:扫全部 S/T,给分值构成而不是黑箱总分", cnt:()=>1, u:"套已校验矩阵"},
-   {p:"tseq",    ic:"🔤", nm:"序列工具箱",   ds:"反向互补 / 六框翻译 / ORF / GC / 酶切 / 蛋白参数", cnt:()=>7, u:"个工具"},
-   {p:"tprimer", ic:"🧪", nm:"引物与密码子", ds:"最近邻 Tm 引物设计;四物种密码子表算 CAI 与优化", cnt:()=>4, u:"个物种表"},
-   {p:"tlookup", ic:"🔎", nm:"蛋白直查",     ds:"UniProt 拉序列/结构域/已知磷酸化位点,一键送进上面的工具", cnt:()=>2, u:"个数据库"},
-   {p:"tclone",  ic:"✂️", nm:"克隆与酶切",   ds:"限制酶全扫 + 模拟电泳 + Gibson 同源臂 + sgRNA/PAM 候选", cnt:()=>ENZ.length, u:"种限制酶"},
-   {p:"tbench",  ic:"🧮", nm:"实验台计算器", ds:"稀释 / mol↔g / 缓冲液 / RPM↔RCF / ΔΔCt / Beer-Lambert / A260", cnt:()=>7, u:"个算式"},
+  {h:"④ 做实验 · 分析数据", st:"位点、序列、引物、克隆、计算器，加统计与差异表达", tools:[
+    {p:"tsite",   ic:"🧬", nm:"激酶位点扫描", ds:"AMPK 底物基序 PSSM:扫全部 S/T,给分值构成而不是黑箱总分", cnt:()=>1, u:"套已校验矩阵"},
+    {p:"tseq",    ic:"🔤", nm:"序列工具箱",   ds:"反向互补 / 六框翻译 / ORF / GC / 酶切 / 蛋白参数", cnt:()=>7, u:"个工具"},
+    {p:"tprimer", ic:"🧪", nm:"引物与密码子", ds:"最近邻 Tm 引物设计;四物种密码子表算 CAI 与优化", cnt:()=>4, u:"个物种表"},
+    {p:"tlookup", ic:"🔎", nm:"蛋白直查",     ds:"UniProt 拉序列/结构域/已知磷酸化位点,一键送进上面的工具", cnt:()=>2, u:"个数据库"},
+    {p:"tclone",  ic:"✂️", nm:"克隆与酶切",   ds:"限制酶全扫 + 模拟电泳 + Gibson 同源臂 + sgRNA/PAM 候选", cnt:()=>ENZ.length, u:"种限制酶"},
+    {p:"tbench",  ic:"🧮", nm:"实验台计算器", ds:"稀释 / mol↔g / 缓冲液 / RPM↔RCF / ΔΔCt / Beer-Lambert / A260", cnt:()=>7, u:"个算式"},
+    {p:"tstat", ic:"📐", nm:"统计与样本量", ds:"功效/样本量、t 检验、ANOVA、多重校正、相关与回归", cnt:()=>5, u:"个模块"},
+    {p:"tde",   ic:"📈", nm:"差异表达与作图", ds:"log2FC + Welch p + BH q,火山图 / 相关热图 / PCA", cnt:()=>3, u:"类图"},
+    {p:"tpivot",   ic:"📥", nm:"Pivot 表格导入", ds:"把 Pivot-RP 导出的 CSV 拖进来,自动去重、自动归国、生成可直接替换的 curated.json", cnt:()=>(CURATED||[]).filter(g=>g.cat==="Pivot 导入").length, u:"条已从 Pivot 导入"}
   ]},
- {h:"⑤ 分析数据", st:"JS 实现已逐项对齐 scipy/statsmodels,数据不出本机",
-  tools:[
-   {p:"tstat", ic:"📐", nm:"统计与样本量", ds:"功效/样本量、t 检验、ANOVA、多重校正、相关与回归", cnt:()=>5, u:"个模块"},
-   {p:"tde",   ic:"📈", nm:"差异表达与作图", ds:"log2FC + Welch p + BH q,火山图 / 相关热图 / PCA", cnt:()=>3, u:"类图"},
+  {h:"⑤ 写本子 · 投稿", st:"模板与六类基金完整草稿、投前预检、选刊与投稿信", tools:[
+    {p:"writing", ic:"✍️", nm:"写作指导", ds:"逐段写法 + 你自己论文里提炼的语料库", cnt:()=>6, u:"类基金"},
+    {p:"tprev",   ic:"✅", nm:"投前预检",     ds:"估页数、核对分节是否齐、查硬性要点与残留占位符;也能直接输出分节骨架", cnt:()=>6, u:"类基金规格"},
+    {p:"tguide",  ic:"📋", nm:"报告规范核查", ds:"ARRIVE / NIH Rigor / CONSORT / PRISMA / STROBE / MDAR,每条标明该写在哪一节", cnt:()=>6, u:"套清单"},
+    {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
+    {p:"tjr",     ic:"🔍", nm:"期刊查询与预警", ds:"出版商、PubMed 是否收录、是否 OA、被引体量 + 预警信号(无影响因子,见说明)", cnt:()=>3, u:"个数据源"},
+    {p:"tletter", ic:"✉️", nm:"投稿信函生成",   ds:"cover letter / 回复审稿人 / 申诉 / 预咨询 / 催稿 / 撤稿,中英双语", cnt:()=>6, u:"类信函"}
   ]},
- {h:"⑥ 写本子 · 基金写作", st:"六类基金的完整可用初稿,只需替换填空标记",
-  tools:[
-   {p:"writing", ic:"✍️", nm:"写作指导", ds:"逐段写法 + 你自己论文里提炼的语料库", cnt:()=>6, u:"类基金"},
-   {p:"writing", ic:"📄", nm:"基金模板下载", ds:"K99/R00、F32、R01、海外优青、RGC ECS、NRF —— Word/PDF/Markdown", act:"tpl", cnt:()=>6, u:"份初稿"},
-   {p:"tprev",   ic:"✅", nm:"投前预检",     ds:"估页数、核对分节是否齐、查硬性要点与残留占位符;也能直接输出分节骨架", cnt:()=>6, u:"类基金规格"},
-   {p:"tguide",  ic:"📋", nm:"报告规范核查", ds:"ARRIVE / NIH Rigor / CONSORT / PRISMA / STROBE / MDAR,每条标明该写在哪一节", cnt:()=>6, u:"套清单"},
-  ]},
- {h:"⑦ 投稿 · 期刊查选", st:"基于本站语料的选刊参考(不提供影响因子)",
-  tools:[
-   {p:"journals", ic:"📖", nm:"期刊查选", ds:"按方向重合度选刊,可展开看该刊在本语料里的代表作", cnt:()=>JOURNALS.length, u:"本刊"},
-   {p:"tjr",     ic:"🔍", nm:"期刊查询与预警", ds:"出版商、PubMed 是否收录、是否 OA、被引体量 + 预警信号(无影响因子,见说明)", cnt:()=>3, u:"个数据源"},
-   {p:"tletter", ic:"✉️", nm:"投稿信函生成",   ds:"cover letter / 回复审稿人 / 申诉 / 预咨询 / 催稿 / 撤稿,中英双语", cnt:()=>6, u:"类信函"},
-  ]},
- {h:"⑧ 本站做不到的", st:"需要商业授权数据或服务器端算力 —— 直接给你能用的入口",
-  tools:[
-   {p:"texternal", ic:"🔌", nm:"需外部服务的工具", ds:"影响因子、润色降重、专利全库、BLAST/富集 —— 写清为什么做不了并给替代", cnt:()=>10, u:"条替代方案"},
-  ]},
+  {h:"⑥ 本站做不到的", st:"需要外部服务或本地算力的，老实标出来", tools:[
+    {p:"texternal", ic:"🔌", nm:"需外部服务的工具", ds:"影响因子、润色降重、专利全库、BLAST/富集 —— 写清为什么做不了并给替代", cnt:()=>10, u:"条替代方案"}
+  ]}
 ];
 
 function renderHub(){
@@ -3787,89 +3796,124 @@ function goPanel(p,act){
    只是 forward 到隐藏的 .tab[data-p] —— 所以 goPanel()、卡片墙跳转、
    写作面板 crosstalk、测试里的 rerender(pid) 全部保持原契约。 */
 var SIDE_NAV=[
-  {g:"", items:[
+  /* 6 个分组，33 个面板一个不少 —— 只是默认收起，点开才展开该组。
+     分组按「你此刻要干什么」，不按数据来源。 */
+  {g:"开始", ic:"🏠", items:[
     {p:"hub",   ic:"🏠", t:"工具首页"},
-    {p:"tfind", ic:"🔍", t:"找工具"}
-  ]},
-  {g:"① 找资助", items:[
-    {p:"live",     ic:"🇺🇸", t:"联邦机会",   n:"liveN"},
-    {p:"curated",  ic:"🌐", t:"各国 PI 资助", n:"curN"},
-    {p:"myapps",   ic:"🎯", t:"我能申的",   n:"myN"},
-    {p:"calendar", ic:"📅", t:"截止日历",   n:"calN"},
-    {p:"whatsnew", ic:"🔄", t:"更新动态",   n:"chgN"},
-    {p:"pipeline", ic:"📋", t:"申请管线"},
-    {p:"tpivot",   ic:"📥", t:"Pivot 表格导入"}
-  ]},
-  {g:"② 找职位", items:[
-    {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"},
-    {p:"ind", ic:"🏭", t:"企业岗位", n:"indN"}
-  ]},
-  {g:"③ 读文献 · 查数据库", items:[
-    {p:"mydirs",  ic:"🎯", t:"我的研究方向", nw:1},
-    {p:"papers",  ic:"🔔", t:"文献追踪",   n:"papN"},
-    {p:"tsearch", ic:"📚", t:"文献检索中心", nw:1},
-    {p:"tgene",   ic:"🧫", t:"基因疾病注释", nw:1},
-    {p:"ttrial",  ic:"🏥", t:"临床试验",   nw:1},
-    {p:"tdb",     ic:"🗃️", t:"科研数据集", nw:1}
-  ]},
-  {g:"④ 做实验 · 分子操作", items:[
-    {p:"tsite",  ic:"🧬", t:"位点扫描",   nw:1},
-    {p:"tseq",   ic:"🔤", t:"序列工具箱",  nw:1},
-    {p:"tprimer",ic:"🧪", t:"引物与密码子", nw:1},
-    {p:"tlookup",ic:"🔎", t:"蛋白直查",   nw:1},
-    {p:"tclone", ic:"✂️", t:"克隆与酶切",  nw:1},
-    {p:"tbench", ic:"🧮", t:"实验台计算器", nw:1}
-  ]},
-  {g:"⑤ 分析数据", items:[
-    {p:"tstat",  ic:"📐", t:"统计与样本量", nw:1},
-    {p:"tde",    ic:"📈", t:"差异表达可视化", nw:1}
-  ]},
-  {g:"⑥ 写本子", items:[
-    {p:"writing", ic:"✍️", t:"写作指导"},
-    {p:"tprev",   ic:"🩺", t:"投前预检",   nw:1},
-    {p:"tguide",  ic:"🧾", t:"报告规范核查", nw:1}
-  ]},
-  {g:"⑦ 投稿 · 选刊", items:[
-    {p:"journals", ic:"📖", t:"期刊查选",   n:"jrnN"},
-    {p:"tjr",      ic:"⚠️", t:"期刊查询预警", nw:1},
-    {p:"tletter",  ic:"✉️", t:"投稿信函",   nw:1}
-  ]},
-  {g:"", items:[
-    {p:"texternal", ic:"🔌", t:"需外部服务"}
-  ]},
-  {g:"", items:[
+    {p:"tfind", ic:"🔍", t:"找工具"},
     {p:"howto", ic:"📘", t:"使用说明"}
+  ]},
+  {g:"① 找资助", ic:"💰", items:[
+    {p:"live",     ic:"🇺🇸", t:"联邦机会",     n:"liveN"},
+    {p:"curated",  ic:"🌐", t:"各国 PI 资助", n:"curN"},
+    {p:"myapps",   ic:"🎯", t:"我能申的",     n:"myN"},
+    {p:"calendar", ic:"📅", t:"截止日历",     n:"calN"},
+    {p:"whatsnew", ic:"🔄", t:"更新动态",     n:"chgN"},
+    {p:"pipeline", ic:"📋", t:"申请管线"}
+  ]},
+  {g:"② 定方向 · 读文献", ic:"🎯", items:[
+    {p:"mydirs",  ic:"🎯", t:"我的研究方向", nw:1},
+    {p:"papers",  ic:"🔔", t:"文献追踪",     n:"papN"},
+    {p:"tsearch", ic:"📚", t:"文献检索中心"},
+    {p:"tgene",   ic:"🧫", t:"基因疾病注释"},
+    {p:"ttrial",  ic:"🏥", t:"临床试验"},
+    {p:"tdb",     ic:"🗃️", t:"科研数据集"}
+  ]},
+  {g:"③ 找职位", ic:"💼", items:[
+    {p:"jobs", ic:"🎓", t:"学术职位", n:"jobN"},
+    {p:"ind",  ic:"🏭", t:"企业岗位", n:"indN"}
+  ]},
+  {g:"④ 做实验 · 分析数据", ic:"🔬", items:[
+    {p:"tsite",     ic:"🧬", t:"位点扫描"},
+    {p:"tseq",      ic:"🔤", t:"序列工具箱"},
+    {p:"tprimer",   ic:"🧪", t:"引物与密码子"},
+    {p:"tlookup",   ic:"🔎", t:"蛋白直查"},
+    {p:"tclone",    ic:"✂️", t:"克隆与酶切"},
+    {p:"tbench",    ic:"🧮", t:"实验台计算器"},
+    {p:"tstat",     ic:"📐", t:"统计与样本量"},
+    {p:"tde",       ic:"📈", t:"差异表达可视化"},
+    {p:"tpivot",    ic:"📥", t:"Pivot 表格导入"}
+  ]},
+  {g:"⑤ 写本子 · 投稿", ic:"✍️", items:[
+    {p:"writing",  ic:"✍️", t:"写作指导"},
+    {p:"tprev",    ic:"🩺", t:"投前预检"},
+    {p:"tguide",   ic:"✅", t:"报告规范核查"},
+    {p:"journals", ic:"📖", t:"期刊查选",     n:"jrnN"},
+    {p:"tjr",      ic:"⚠️", t:"期刊查询预警"},
+    {p:"tletter",  ic:"✉️", t:"投稿信函"}
+  ]},
+  {g:"⑥ 本站做不到的", ic:"🔌", items:[
+    {p:"texternal", ic:"🔌", t:"需外部服务"}
   ]}
 ];
 
 function setN(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
 function renderSideNav(){
   var nav=document.getElementById("sideNav"); if(!nav)return;
+  var openG=null;
+  try{ openG=localStorage.getItem("nav.open"); }catch(e){}
   var h="";
-  SIDE_NAV.forEach(function(sec){
-    if(sec.g) h+='<div class="sgrp">'+sec.g+'</div>';
-    sec.items.forEach(function(it){
-      /* 只渲染页面上真实存在的面板 —— 免得侧栏出现点了没反应的死链 */
-      if(!document.getElementById(it.p)) return;
-      h+='<a class="sitem" data-side="'+it.p+'"><span class="sic">'+it.ic+'</span>'
-        +'<span class="stx">'+it.t+'</span>'
+  SIDE_NAV.forEach(function(sec,gi){
+    /* 只渲染页面上真实存在的面板 —— 免得侧栏出现点了没反应的死链 */
+    var live=sec.items.filter(function(it){ return document.getElementById(it.p); });
+    if(!live.length) return;
+    var isOpen=(openG===null? gi===0 : String(openG)===String(gi));
+    h+='<div class="sgh'+(isOpen?" open":"")+'" data-g="'+gi+'">'
+      +'<span class="car">'+(isOpen?"▾":"▸")+'</span>'
+      +'<span>'+(sec.ic||"")+' '+sec.g+'</span>'
+      +'<span class="cnt">'+live.length+'</span></div>';
+    h+='<div class="sgbody'+(isOpen?" open":"")+'" data-gb="'+gi+'">';
+    live.forEach(function(it){
+      h+='<a class="sitem" data-side="'+it.p+'" data-ing="'+gi+'">'
+        +'<span class="sic">'+it.ic+'</span><span class="stx">'+it.t+'</span>'
         +(it.n?'<span class="sn" id="'+it.n+'">…</span>':'')
         +(it.nw?'<span class="snew">新</span>':'')+'</a>';
     });
+    h+='</div>';
   });
   nav.innerHTML=h;
+  nav.querySelectorAll(".sgh").forEach(function(hd){
+    hd.onclick=function(){ toggleGrp(hd.getAttribute("data-g")); };
+  });
   nav.querySelectorAll("a.sitem").forEach(function(a){
-    a.onclick=function(){
-      goPanel(a.getAttribute("data-side"));
-    };
+    a.onclick=function(){ goPanel(a.getAttribute("data-side")); };
   });
   syncSideNav(document.querySelector(".tab.active")
     ? document.querySelector(".tab.active").dataset.p : "hub");
 }
-function syncSideNav(p){
-  document.querySelectorAll("#sideNav a.sitem").forEach(function(a){
-    a.classList.toggle("on", a.getAttribute("data-side")===p);
+
+/* 一次只展开一组：侧栏静息时是 6 行，这才是「简单」的来源。
+   记在 localStorage 里，刷新后停在你上次那组。 */
+function toggleGrp(gi){
+  var nav=document.getElementById("sideNav"); if(!nav)return;
+  var cur=nav.querySelector('.sgbody[data-gb="'+gi+'"]');
+  var willOpen=!(cur&&cur.classList.contains("open"));
+  nav.querySelectorAll(".sgbody").forEach(function(b){ b.classList.remove("open"); });
+  nav.querySelectorAll(".sgh").forEach(function(hd){
+    hd.classList.remove("open");
+    var c=hd.querySelector(".car"); if(c)c.textContent="\u25b8";
   });
+  if(willOpen&&cur){
+    cur.classList.add("open");
+    var hd2=nav.querySelector('.sgh[data-g="'+gi+'"]');
+    if(hd2){ hd2.classList.add("open");
+      var c2=hd2.querySelector(".car"); if(c2)c2.textContent="\u25be"; }
+    try{ localStorage.setItem("nav.open",gi); }catch(e){}
+  }
+}
+function syncSideNav(p){
+  var act=null;
+  document.querySelectorAll("#sideNav a.sitem").forEach(function(a){
+    var on=(a.getAttribute("data-side")===p);
+    a.classList.toggle("on", on);
+    if(on) act=a.getAttribute("data-ing");
+  });
+  /* 当前面板所在的组必须自动展开，否则从卡片跳转过来会看到高亮项藏在收起的组里 */
+  if(act!==null){
+    var nav=document.getElementById("sideNav");
+    var body=nav&&nav.querySelector('.sgbody[data-gb="'+act+'"]');
+    if(body&&!body.classList.contains("open")) toggleGrp(act);
+  }
   syncCrumb(p);
 }
 
@@ -8286,7 +8330,7 @@ function pvEntry(rec,idx,fname){
 }
 
 function pvProcess(files){
-  var out=document.getElementById("pvOut");
+  var out=document.getElementById("pvtOut");
   if(!PVRULES){ out.innerHTML='<div class="warn">导入规则还没加载好(data/pivot_rules.json),刷新页面重试。</div>'; return; }
   var have={}, added=[], dupIn=0, dupFile=0, noName=0, reports=[];
   (CURATED||[]).forEach(function(c){ have[pvNorm(c.name)+"|"+pvNorm(c.funder)]=1; });
@@ -8337,8 +8381,8 @@ function pvProcess(files){
      +'不复制 Pivot 的编辑或 AI 描述原文。每条都标了「待核实」,资格与公民要求以官方页为准。</div>';
   }
   out.innerHTML=h;
-  document.getElementById("pvDl").style.display=(added.length&&!document.getElementById("pvDry").checked)?"":"none";
-  document.getElementById("pvDlNew").style.display=added.length?"":"none";
+  document.getElementById("pvtDl").style.display=(added.length&&!document.getElementById("pvDry").checked)?"":"none";
+  document.getElementById("pvtDlNew").style.display=added.length?"":"none";
 }
 
 function pvDownload(name,text,mime){
@@ -8350,7 +8394,7 @@ function pvDownload(name,text,mime){
 
 function pvReadFiles(list){
   var files=[].slice.call(list).filter(function(f){return /\.csv$/i.test(f.name);});
-  if(!files.length){ document.getElementById("pvOut").innerHTML='<div class="warn">请选 .csv 文件(Pivot 导出时选 CSV,不要选 Excel)。</div>'; return; }
+  if(!files.length){ document.getElementById("pvtOut").innerHTML='<div class="warn">请选 .csv 文件(Pivot 导出时选 CSV,不要选 Excel)。</div>'; return; }
   var read=[], done=0;
   files.forEach(function(f,i){
     var fr=new FileReader();
@@ -8392,18 +8436,18 @@ function renderPivot(){
   ["dragleave","drop"].forEach(function(ev){ drop.addEventListener(ev,function(e){
     e.preventDefault(); drop.style.background="#FAF7FF"; }); });
   drop.addEventListener("drop",function(e){ if(e.dataTransfer&&e.dataTransfer.files.length) pvReadFiles(e.dataTransfer.files); });
-  document.getElementById("pvRun").onclick=function(){ if(inp.files.length) pvReadFiles(inp.files);
-    else document.getElementById("pvOut").innerHTML='<div class="warn">先拖入或选择 CSV。</div>'; };
+  document.getElementById("pvtRun").onclick=function(){ if(inp.files.length) pvReadFiles(inp.files);
+    else document.getElementById("pvtOut").innerHTML='<div class="warn">先拖入或选择 CSV。</div>'; };
   document.getElementById("pvDry").onchange=function(){
-    document.getElementById("pvDl").style.display=(PVPARSED&&PVPARSED.length&&!this.checked)?"":"none"; };
-  document.getElementById("pvDl").onclick=function(){
+    document.getElementById("pvtDl").style.display=(PVPARSED&&PVPARSED.length&&!this.checked)?"":"none"; };
+  document.getElementById("pvtDl").onclick=function(){
     if(!PVPARSED||!PVPARSED.length) return;
     var merged=(CURATED||[]).concat(PVPARSED);
     pvDownload("curated.json", JSON.stringify(
       {updated:new Date().toISOString().slice(0,16).replace("T"," ")+" (浏览器导入)",
        count:merged.length, source:"curated + Pivot 导入", grants:merged}, null, 1));
   };
-  document.getElementById("pvDlNew").onclick=function(){
+  document.getElementById("pvtDlNew").onclick=function(){
     if(!PVPARSED||!PVPARSED.length) return;
     var cols=["name","funder","region","deadline","amount","url"];
     var q=function(v){ return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'; };
