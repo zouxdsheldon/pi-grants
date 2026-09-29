@@ -1,12 +1,12 @@
-# 68 篇精读笔记 · 全文已补齐版
+# 68 篇精读笔记 · 全文已补齐版（v2）
 
-> **这一版与上一版的差别：**上一版里 ③关键图与可信度、⑥做了/漏了哪些对照、⑭要排队的参考文献 三栏标的是【需读全文核对】，⑦效应量有 23 篇标【摘要未报告数字】——因为摘要里确实没有这些内容。这一版**真的下载了全文**来填。
+> **覆盖：68 篇全部 14 栏已填。**③关键图与可信度、⑥做了/漏了哪些对照、⑦效应量、⑭要排队的参考文献 这四栏原本标【需读全文核对】/【摘要未报告数字】，现按全文填写。
 
-> **全文覆盖：68 篇中 43 篇**拿到开放全文（Europe PMC / NCBI PMC），已按全文补全那四栏。另 **25 篇无开放全文**（付费墙，或 PMC 里只有摘要记录），四栏保留原标记，需你用机构订阅自取。
+> 来源分三类：**43 篇**来自 Europe PMC / NCBI PMC 开放全文；**20 篇**来自你自己上传的 PDF；**5 篇**仍缺全文。
 
-> **已做的机械核对：**⑭栏引用的 **127 个 PMID 全部出自该文自己的参考文献表**；③栏引用的图号都能在该文图注中对应。两篇全文里确实没有定量数字的，如实写了【全文未见定量数字】。
+> **机械核对：**PMC 那 43 篇 ⑭栏引用的 **127 个 PMID 全部出自该文自己的参考文献表**；你提供的 20 篇 ⑭栏引用的文献标题全部能在该文全文里逐字回查到。5 篇全文确无定量数字的写了【全文未见定量数字】，1 篇方法学文如实说明其参考文献与三个方向无重叠、不予排队 —— 都没有编。
 
-> 每篇末尾都留了「**我的核对与补充**」——那部分是给你的，我不代填。
+> 每篇末尾「**我的核对与补充**」留给你，我不代填。
 
 ---
 
@@ -16,7 +16,7 @@
 
 ### T2 · To kill a microRNA: emerging concepts in target-directed microRNA degradation.
 
-**【全文已读】**　PMID 38224449　Nucleic acids research 2024　被引 62　https://pubmed.ncbi.nlm.nih.gov/38224449/
+**【全文已读 · PMC】**　PMID 38224449　Nucleic acids research 2024　被引 62　PMC10899785　https://pubmed.ncbi.nlm.nih.gov/38224449/
 
 
 **为什么读**
@@ -101,7 +101,7 @@ Fig. 3A/3B（PDB 6N4O、6NIT，用UCSF Chimera生成的结构图）支持"扩展
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -109,7 +109,7 @@ Fig. 3A/3B（PDB 6N4O、6NIT，用UCSF Chimera生成的结构图）支持"扩展
 
 ### T0 · A ubiquitin ligase mediates target-directed microRNA decay independently of tailing and trimming.
 
-**【全文已读】**　PMID 33184234　Science (New York, N.Y.) 2020　被引 201　https://pubmed.ncbi.nlm.nih.gov/33184234/
+**【全文已读 · PMC】**　PMID 33184234　Science (New York, N.Y.) 2020　被引 201　PMC8177725　https://pubmed.ncbi.nlm.nih.gov/33184234/
 
 
 **为什么读**
@@ -194,7 +194,7 @@ Fig. 1D是本文核心图：CRISPR-Cas9筛选中按MAGeCK排名绘制的基因�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -202,7 +202,7 @@ Fig. 1D是本文核心图：CRISPR-Cas9筛选中按MAGeCK排名绘制的基因�
 
 ### T0 · The ZSWIM8 ubiquitin ligase mediates target-directed microRNA degradation.
 
-**【全文已读】**　PMID 33184237　Science (New York, N.Y.) 2020　被引 191　https://pubmed.ncbi.nlm.nih.gov/33184237/
+**【全文已读 · PMC】**　PMID 33184237　Science (New York, N.Y.) 2020　被引 191　PMC8356967　https://pubmed.ncbi.nlm.nih.gov/33184237/
 
 
 **为什么读**
@@ -287,7 +287,7 @@ Fig. 3B/3C 最关键：在 MEF、induced mouse neurons 和 Drosophila S2 细胞�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -295,7 +295,7 @@ Fig. 3B/3C 最关键：在 MEF、induced mouse neurons 和 Drosophila S2 细胞�
 
 ### T0 · Structural Basis for Target-Directed MicroRNA Degradation.
 
-**【全文已读】**　PMID 31353209　Molecular cell 2019　被引 233　https://pubmed.ncbi.nlm.nih.gov/31353209/
+**【全文已读 · PMC】**　PMID 31353209　Molecular cell 2019　被引 233　PMC6754277　https://pubmed.ncbi.nlm.nih.gov/31353209/
 
 
 **为什么读**
@@ -380,7 +380,7 @@ Fig. 3D 是支撑该论文核心定量主张最关键的一张图：它用平衡
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -388,7 +388,7 @@ Fig. 3D 是支撑该论文核心定量主张最关键的一张图：它用平衡
 
 ### T1 · A Network of Noncoding Regulatory RNAs Acts in the Mammalian Brain.
 
-**【全文已读】**　PMID 29887379　Cell 2018　被引 551　https://pubmed.ncbi.nlm.nih.gov/29887379/
+**【全文已读 · PMC】**　PMID 29887379　Cell 2018　被引 551　PMC6559361　https://pubmed.ncbi.nlm.nih.gov/29887379/
 
 
 **为什么读**
@@ -473,7 +473,7 @@ Figure 1B–C：Cyrano−/− vs 野生型小脑和海马的小RNA测序，miR-7
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -481,7 +481,7 @@ Figure 1B–C：Cyrano−/− vs 野生型小脑和海马的小RNA测序，miR-7
 
 ### T2 · MicroRNA turnover: a tale of tailing, trimming, and targets.
 
-**【全文已读】**　PMID 35811249　Trends in biochemical sciences 2023　被引 72　https://pubmed.ncbi.nlm.nih.gov/35811249/
+**【全文已读 · PMC】**　PMID 35811249　Trends in biochemical sciences 2023　被引 72　PMC9789169　https://pubmed.ncbi.nlm.nih.gov/35811249/
 
 
 **为什么读**
@@ -566,7 +566,7 @@ tailing/trimming/targets 三条路线的框架综述
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -577,7 +577,7 @@ tailing/trimming/targets 三条路线的框架综述
 
 ### T0 · Widespread microRNA degradation elements in target mRNAs can assist the encoded proteins.
 
-**【全文已读】**　PMID 34819352　Genes & development 2021　被引 67　https://pubmed.ncbi.nlm.nih.gov/34819352/
+**【全文已读 · PMC】**　PMID 34819352　Genes & development 2021　被引 67　PMC8653786　https://pubmed.ncbi.nlm.nih.gov/34819352/
 
 
 **为什么读**
@@ -662,7 +662,7 @@ PMID 33184237《The ZSWIM8 ubiquitin ligase mediates target-directed microRNA de
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -670,7 +670,7 @@ PMID 33184237《The ZSWIM8 ubiquitin ligase mediates target-directed microRNA de
 
 ### T0 · Ago2 protects Drosophila siRNAs and microRNAs from target-directed degradation, even in the absence of 2'-O-methylation.
 
-**【全文已读】**　PMID 33853897　RNA (New York, N.Y.) 2021　被引 35　https://pubmed.ncbi.nlm.nih.gov/33853897/
+**【全文已读 · PMC】**　PMID 33853897　RNA (New York, N.Y.) 2021　被引 35　PMC8127995　https://pubmed.ncbi.nlm.nih.gov/33853897/
 
 
 **为什么读**
@@ -755,7 +755,7 @@ Fig. 1C/1D 是支持"Ago2 装载的小 RNA 不受 TDD 影响"这一主张的关�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -763,7 +763,7 @@ Fig. 1C/1D 是支持"Ago2 装载的小 RNA 不受 TDD 影响"这一主张的关�
 
 ### T1 · ZSWIM8 destabilizes many murine microRNAs and is required for proper embryonic growth and development.
 
-**【全文已读】**　PMID 37532519　Genome research 2023　被引 38　https://pubmed.ncbi.nlm.nih.gov/37532519/
+**【全文已读 · PMC】**　PMID 37532519　Genome research 2023　被引 38　PMC10620050　https://pubmed.ncbi.nlm.nih.gov/37532519/
 
 
 **为什么读**
@@ -848,7 +848,7 @@ Fig. 4A/4B是本文对Zswim8三个研究方向最直接相关的图：4A用sRNA-
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -856,7 +856,7 @@ Fig. 4A/4B是本文对Zswim8三个研究方向最直接相关的图：4A用sRNA-
 
 ### T0 · The E3 ubiquitin ligase mechanism specifying targeted microRNA degradation.
 
-**【全文已读】**　PMID 41851464　Nature 2026　被引 10　https://pubmed.ncbi.nlm.nih.gov/41851464/
+**【全文已读 · PMC】**　PMID 41851464　Nature 2026　被引 10　PMC13083262　https://pubmed.ncbi.nlm.nih.gov/41851464/
 
 
 **为什么读**
@@ -941,7 +941,7 @@ Fig. 1e：体外 co-IP 重构显示 ZSWIM8 优先与 AGO2–miR-7–CYRANOTrigge
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -949,7 +949,7 @@ Fig. 1e：体外 co-IP 重构显示 ZSWIM8 优先与 AGO2–miR-7–CYRANOTrigge
 
 ### T2 · The biogenesis and regulation of animal microRNAs.
 
-**【全文已读】**　PMID 39702526　Nature reviews. Molecular cell biology 2025　被引 115　https://pubmed.ncbi.nlm.nih.gov/39702526/
+**【全文已读 · PMC】**　PMID 39702526　Nature reviews. Molecular cell biology 2025　被引 115　　https://pubmed.ncbi.nlm.nih.gov/39702526/
 
 
 **为什么读**
@@ -1034,7 +1034,7 @@ Fig. 1e：体外 co-IP 重构显示 ZSWIM8 优先与 AGO2–miR-7–CYRANOTrigge
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1045,7 +1045,7 @@ Fig. 1e：体外 co-IP 重构显示 ZSWIM8 优先与 AGO2–miR-7–CYRANOTrigge
 
 ### T0 · Global analyses of the dynamics of mammalian microRNA metabolism.
 
-**【全文已读】**　PMID 31519739　Genome research 2019　被引 134　https://pubmed.ncbi.nlm.nih.gov/31519739/
+**【全文已读 · PMC】**　PMID 31519739　Genome research 2019　被引 134　PMC6836734　https://pubmed.ncbi.nlm.nih.gov/31519739/
 
 
 **为什么读**
@@ -1130,7 +1130,7 @@ Fig. 1D 展示了两次生物学重复间 guide strand 半衰期测量值的相�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1138,7 +1138,7 @@ Fig. 1D 展示了两次生物学重复间 guide strand 半衰期测量值的相�
 
 ### T0 · Analysis of microRNA turnover in mammalian cells following Dicer1 ablation.
 
-**【全文已读】**　PMID 21447562　Nucleic acids research 2011　被引 319　https://pubmed.ncbi.nlm.nih.gov/21447562/
+**【全文已读 · PMC】**　PMID 21447562　Nucleic acids research 2011　被引 319　PMC3141258　https://pubmed.ncbi.nlm.nih.gov/21447562/
 
 
 **为什么读**
@@ -1223,7 +1223,7 @@ Dicer1 敲除阻断的是新 pre-miRNA 加工这一步，但本文用的是"成�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1231,7 +1231,7 @@ Dicer1 敲除阻断的是新 pre-miRNA 加工这一步，但本文用的是"成�
 
 ### T0 · Thiol-linked alkylation of RNA to assess expression dynamics.
 
-**【全文已读】**　PMID 28945705　Nature methods 2017　被引 603　https://pubmed.ncbi.nlm.nih.gov/28945705/
+**【全文已读 · PMC】**　PMID 28945705　Nature methods 2017　被引 603　PMC5712218　https://pubmed.ncbi.nlm.nih.gov/28945705/
 
 
 **为什么读**
@@ -1316,7 +1316,7 @@ Fig.2c 是支撑 SLAM-seq 方法有效性的关键图：mESCs 经 100 µM s4U �
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1324,7 +1324,7 @@ Fig.2c 是支撑 SLAM-seq 方法有效性的关键图：mESCs 经 100 µM s4U �
 
 ### T1 · TAIL-seq: genome-wide determination of poly(A) tail length and 3' end modifications.
 
-**【仅摘要 · 待取全文】**　PMID 24582499　Molecular cell 2014　被引 393　https://pubmed.ncbi.nlm.nih.gov/24582499/
+**【全文已读 · 你提供的 PDF】**　PMID 24582499　Molecular cell 2014　被引 393　来源：1-s2.0-S109727651400121X-main.pdf　https://pubmed.ncbi.nlm.nih.gov/24582499/
 
 
 **为什么读**
@@ -1349,7 +1349,7 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时需找：(1) TAIL-seq建库流程图（通常为Figure 1），确认专用接头设计如何跨过poly(A)同聚物读出3′端序列；(2) 说明其单核苷酸分辨率的图/表，看能否分辨1-2nt级别的尾长差异；(3) 文中是否有小RNA或miRNA相关的补充方法/图，若无则需查找该组后续是否发表miRNA版TAIL-seq（第二种方法，即后续改良版是否称为"mTAIL-seq"或类似)。
+Figure 3A/3B 支持"mRNA广泛3'尿苷化"的主张：约一半mRNA物种的U-tail频率>5%，80%的mRNA物种尿苷化频率高于2%，且U-tail通常连接在短poly(A)尾（<25 nt）之后，可信度依据是转录组尺度的TAIL-seq定量分析（覆盖4,176个小鼠及4,091个人类基因，支持≥30 poly(A)+ tags）。Figure 4A/4B以同样方法呈现G-tail与poly(A)长度的关系（G-tail多见于较长poly(A)尾>40 nt），两者互为对照，提示U/G尾巴功能不同但均由同一独立定量流程（GMHMM+Viterbi解码，spike-in校准RMSE 14.8%）验证，并有Hire-PAT（Figure 1D）与northern blot（Figure S3B）两种独立方法交叉验证poly(A)长度测量的可靠性，增强了这些定量结论的可信度。
 
 
 **④ 方法要点**
@@ -1364,12 +1364,12 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时需逐条核对：(1) 是否设置了已知半衰期的mRNA作为阳性对照来验证TAIL-seq测得的poly(A)长度-半衰期相关性；(2) 测序深度/reads数是否足以支持miRNA这类短RNA的定量重复性；(3) 是否有生物学重复及不同细胞系间的一致性验证；(4) U-tail/G-tail的检出是否排除了测序/建库产生的人工尾巴(artifact)干扰。
+文中明确做了的对照包括：用0–118 nt不同长度的合成spike-in poly(A) oligo（500 reads/spike-in）训练GMHMM并估计RMSE=14.8%，作为测序准确性的内参对照；用Hire-PAT对5个spike-in和10个内源mRNA做独立验证（Figure 1D、S2C、S3A）；用northern blot对Spp1 mRNA的RNase H切割产物做独立验证（Figure S3B）；miR-1 transfection实验中以"非靶标基因（gray dots）"作为miR-1靶标（red dots）的对照组，并设3/6/9小时多个时间点比较poly(A)变化与mRNA水平变化的先后关系（Figure 2F）。缺少的关键对照：文中未提及针对U-tailing或G-tailing本身的功能性对照，例如敲低候选尿苷转移酶（TUT4/7等）或鸟苷转移酶后观察U/G-tail频率变化，这对于确认这些修饰是酶促且具有因果性（而非测序伪影或随机附加）非常重要，但全文未见此类基因扰动实验。
 
 
 **⑦ 效应量（必须带数字）**
 
-摘要给出的数字：HeLa和NIH 3T3细胞中poly(A)中位长度为50-100 nt；U尾主要接在<25nt的短poly(A)后，G尾主要接在>40nt的长poly(A)后。【摘要未报告数字】读全文时需补充：miRNA/小RNA尾长的分辨率（能分辨到几个核苷酸）、每个转录本平均测序深度、U/G尾修饰的全转录组比例。
+全文提供多组准确定量数字：NIH 3T3与HeLa细胞中位poly(A)长度分别为60 nt和59 nt（8–231 nt窗口内），基于中位数的转录组中位长度为61 nt（NIH 3T3）和60 nt（HeLa），poly(A)>231 nt仅占总体2%（正文Global Analysis of Poly(A) Tail段）。poly(A)长度与mRNA半衰期相关性p=2.83×10⁻⁵（Figure 2E）；与翻译效率无显著相关，p=0.893（NIH 3T3）、p=0.449（HeLa）（Figure S4B文字说明）。尿苷化方面：约50%的mRNA物种U-tail频率>5%，80%物种尿苷化频率>2%，SOGA2和PABPC4 mRNA尿苷化频率分别达41%和24%（Figure 3A对应正文段落）。miR-1转染实验中，poly(A)长度变化的Mann-Whitney U检验p值为：3小时5.84×10⁻⁴，6小时1.87×10⁻⁵，9小时6.63×10⁻⁴（Figure 2F图注）。spike-in测量误差RMSE平均14.8%（正文TAIL-seq方法学部分）。
 
 
 **⑧ 我不相信的一件事**
@@ -1404,12 +1404,12 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时需从参考文献里挑三类：(1) 同期发表的竞争性尾巴测序方法（如Bartel lab的PAL-seq）以对比技术优劣；(2) TUT4/7（也称ZCCHC11/ZCCHC6）介导RNA尿苷化的机制性引文，确认其在miRNA降解（尤其let-7、miR-29）中的已知作用；(3) 本文方法后续被用于miRNA专用测序的改良版引文（如mTAIL-seq），确认是否已有人做过miR-29的TAIL-seq数据。
+Behm-Ansmant, I., et al. (2006)《mRNA degradation by miRNAs and GW182 requires both CCR4:NOT deadenylase and DCP1:DCP2 decapping complexes》Genes Dev — 与方向①相关，阐述miRNA介导的去腺苷化机制，为TDMD/miRNA稳态调控提供背景。Guo, H., et al. (2010)《Mammalian microRNAs predominantly act to decrease target mRNA levels》Nature — 本文miR-1 transfection实验的靶标定义直接引自此文献，与方向①③miRNA稳态调控密切相关。Heo, I., et al. (2012)《Mono-uridylation of pre-microRNA as a key step in the biogenesis of group II let-7 microRNAs》Cell — 与方向②TUT4/7尿苷化miRNA生物合成直接相关，值得优先排查。Schmidt, M.J., West, S., and Norbury, C.J. (2011)《The human cytoplasmic RNA terminal U-transferase ZCCHC11 targets histone mRNAs for degradation》RNA — ZCCHC11即TUT4，与方向②TUT4/7介导的3'尿苷化机制高度相关。Rissland, O.S., Mikulasova, A., and Norbury, C.J. (2007)《Efficient RNA polyuridylation by noncanonical poly(A) polymerases》Mol. Cell. Biol. — 涉及非典型poly(A)聚合酶介导的尿苷化，与方向②TUT4/7对miR-29尿苷化的酶学机制相关。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1417,7 +1417,7 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 ### T2 · MiRNA Stability and Degradation: Dynamic Regulators of Cellular Regulatory Networks.
 
-**【仅摘要 · 待取全文】**　PMID 41608885　Wiley interdisciplinary reviews. RNA 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/41608885/
+**【全文已读 · 你提供的 PDF】**　PMID 41608885　Wiley interdisciplinary reviews. RNA 2026　被引 0　来源：WIRES-miRNA-stability-degradation.pdf　https://pubmed.ncbi.nlm.nih.gov/41608885/
 
 
 **为什么读**
@@ -1442,7 +1442,7 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1)综述中总结TDMD/uridylation/nuclease三条通路的示意图，确认是否列出了具体测半衰期的方法（如metabolic labeling、actinomycin D chase、4-thioU pulse-chase）及各方法的时间分辨率；(2)是否有第二种半衰期定量方式（如全基因组turnover rate建模）可与他计划用的方法对照；(3)"compartment-specific degradation"部分是否给出肠腔/循环中miRNA半衰期的具体数值范围。
+文中提供的图注仅覆盖 Figure 1（miRNA biogenesis pathway 示意图）和 Figure 2（miRISC 靶向沉默机制示意图），二者均为综述性示意图，未见实验数据图。正文提到 Figure 3 用于描绘 ZSWIM8-CUL3-RBX1-ARIH1 介导 AGO 多聚泛素化及后续降解的分级组装模型（TDMD 通路），但给到的文本中没有抓取到 Figure 3 的图注文字，故无法核实其具体标注内容。由于全文属于 Advanced Review 类综述，所有图均为机制示意图而非原始实验数据图，没有 n 值、重复次数或统计方法可供评估可信度，因此本文所有图均不能用作独立实验证据支持 AMPK-ZSWIM8、TUT4/7-miR-29 或乳酸修饰相关主张。
 
 
 **④ 方法要点**
@@ -1457,12 +1457,12 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条打勾：(1)综述在讨论TDMD时是否明确要求区分pri/pre-miRNA转录抑制 vs 成熟体降解（对应他的竞争解释——TGF-β/Smad3转录抑制miR-29的干扰因素）；(2)是否列出各降解通路研究中使用的阴性对照（如ZSWIM8催化死突变、TUT4/7双敲低对照）；(3)是否说明uridylation studies中如何排除转录变化的对照设计。
+给到的文本中没有 Methods/Experimental Procedures 正文（该部分仅显示参考文献列表片段），也没有本综述自身开展的实验及对照。文中对 TDMD 机制的描述（ZSWIM8 识别 match-bulge-match 结构、CUL3-Elongin BC-RBX1-ARIH1 分级组装、AGO 多聚泛素化后蛋白酶体降解）均引用自 Han et al. 2020 和 Shi et al. 2020 等原始研究，本文未做任何新实验或对照设计。因此本文缺少与 Sheldon 三个方向直接相关的对照实验（如 AMPK 激酶死突变体、ZSWIM8 S608/S609 磷酸化位点突变对照、TUT4/7 敲低后 miR-29 尿苷化水平的野生型对照、乳酸处理与未处理细胞的 AGO2/ZSWIM8 乳酰化对照），这些缺失的对照对验证磷酸化/尿苷化/乳酰化是否是因果驱动因素至关重要，仅靠综述描述无法替代。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：(1)ZSWIM8-TDMD导致的miRNA半衰期缩短倍数或时间常数(t1/2)的具体数值范围；(2)TUT4/7尿苷化对miR-29或类似miRNA降解速率的定量影响（如fold-change in decay rate）；(3)肠腔/循环等compartment中miRNA半衰期的已报道数值，用于建立他自己实验的对照基准。
+【全文未见定量数字】。给到的正文段落（摘要、Introduction、miRNA biogenesis/action 章节、TDMD 机制描述）均为机制性叙述，没有出现具体倍数、百分比、p 值或样本量 n 等定量数据。文中提及的 miR-21、miR-208a、miR-122、let-7 等案例也只是定性描述其功能后果（如"促进乳腺癌转移""驱动病理性心脏重构"），未附带原始论文中的数字。若需要获取具体效应量，需查阅该综述引用的原始实验论文（如 Han et al. 2020、Shi et al. 2020、Boele et al. 2014 等），而非本综述文本本身。
 
 
 **⑧ 我不相信的一件事**
@@ -1497,12 +1497,12 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要挑三类参考文献：①ZSWIM8-TDMD原始发现及后续机制论文（用于确认TDMD后核酸酶研究现状，判断方向1的可行性和竞争格局）；②TUT4/7-DIS3L2-miR-29/let-7降解相关原始论文（直接对应方向2，判断是否已有人在纤维化/肠道组织中做过）；③测定miRNA半衰期方法学论文（如metabolic labeling、pulse-chase、genome-wide turnover建模），用于补齐他"缺的技能"清单中的半衰期测定方案。
+1. Han, J. et al. 2020《Han et al. 2020》（文中引用，标题未在给到的参考文献段中完整列出，但正文多次引用其提出 ZSWIM8 识别 match-bulge-match 结构并驱动 TDMD 分级组装模型，与方向①AMPK-ZSWIM8-TDMD 直接相关，值得排队核实原文）。2. de la Mata, M., D. Gaidatzis, M. Vitanescu, et al. 2015《Potent Degradation of Neuronal miRNAs Induced by Highly Complementary Targets》EMBO Reports——阐述高互补性靶标诱导神经元 miRNA 降解的机制，是 TDMD 现象学基础文献，对理解 ZSWIM8-TDMD 通路的靶标识别原理有帮助，对应方向①。3. Boele, J., H. Persson, J. W. Shin, et al. 2014《PAPD5-Mediated 3′ Adenylation and Subsequent Degradation of miR-21 Is Disrupted in Proliferative Disease》PNAS——展示末端修饰（腺苷化）调控特定 miRNA 稳定性及降解的范例，方法学上可类比 TUT4/7 尿苷化对 miR-29 稳定性的调控，对应方向②。4. A. Yang, T. J. Shao, X. Bofill-De Ros, et al. 2020《AGO-Bound Mature miRNAs Are Oligouridylated by TUTs and Subsequently Degraded by DIS3L2》Nature Communications——直接描述 TUT 介导的 AGO 结合成熟 miRNA 尾部尿苷化及 DIS3L2 降解机制，与方向② TUT4/7-miR-29 尿苷化通路高度相关，值得排队查阅其具体实验体系是否可迁移至 miR-29/纤维化模型。5. D'Ambrogio, A., W. Gu, T. Udagawa, C. C. Mello, and J. D. Richter 2012《Specific miRNA Stabilization by Gld2-Catalyzed Monoadenylation》Cell Reports——展示特定核苷酸转移酶催化的单核苷酸加尾修饰对 miRNA 稳定性的正向调控，为理解代谢/翻译后修饰（可类比乳酰化）如何重编程 miRNA 稳态提供方法学参照，对应方向③。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1513,7 +1513,7 @@ TAIL-seq 首次实现全基因组尺度、单核苷酸分辨率的 mRNA 3′末�
 
 ### T0 · Similar substrate recognition motifs for mammalian AMP-activated protein kinase, higher plant HMG-CoA reductase kinase-A, yeast SNF1, and mammalian calmodulin-dependent protein kinase I.
 
-**【仅摘要 · 待取全文】**　PMID 7698321　FEBS letters 1995　被引 262　https://pubmed.ncbi.nlm.nih.gov/7698321/
+**【全文已读 · 你提供的 PDF】**　PMID 7698321　FEBS letters 1995　被引 262　来源：FEBS-1995-Dale-AMPK-motifs.pdf　https://pubmed.ncbi.nlm.nih.gov/7698321/
 
 
 **为什么读**
@@ -1538,7 +1538,7 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) 24个肽变体的完整列表及各自的磷酸化相对活性数值表（通常是Table 1或2），确定−3/−4/+4位每个突变对活性的定量影响百分比；(2) 是否有第二种方法（如定点突变的天然蛋白底物验证，而非仅合成肽）来交叉验证该基序；(3) 图中是否给出了HRK-A/Snf1/CaMKI四者motif差异的并列比较图，以便判断我的ZSWIM8 S608/S609位点两侧序列是否严格符合phi-beta-XX-S-XXX-phi。
+全文未抓到独立图注块，仅有 Table 1 与 Table 2 两个数据表，无 Fig 编号可点名。Table 1 给出 AMPK 与 HRK-A 对 'SAMS' 与 'AMARA' 及其22个变体肽的 V、Km、V/Km 稳态动力学参数（均标注±标准误），支持"AMARA'及其变体是AMPK/HRK-A底物识别的定量工具"这一主张；可信度依据是每个数值均带统计误差（由文献[22]的统计方法拟合Michaelis-Menten方程得出），但正文未提及重复次数(n)，也没有第二种独立方法（如质谱或结构法）验证，仅为体外激酶动力学测定。Table 2 是单一肽浓度(40 μM)下四种激酶（AMPK、HRK-A、SNF1、CaMKI）对24个变体肽的相对初始磷酸化速率，同样标注±SEM（"3-6 determinations"），用于比较四种激酶识别基序的异同，但该表本身不构成独立图，故可信度层面只能视为同一套数据的两种呈现方式，缺乏跨方法交叉验证。
 
 
 **④ 方法要点**
@@ -1553,12 +1553,12 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要核对的对照清单：①是否包含不含任何S/T的阴性对照肽以确认背景磷酸化本底；②是否用已知天然AMPK底物（如ACC1的Ser79位点序列）做阳性对照与合成肽结果比对一致性；③四种激酶的酶活力/比活是否用同一批肽标准化，避免因激酶制备批次差异导致基序权重判断偏差；④是否设置了非磷酸化位点（S→A突变）对照验证信号确实来自靶位点而非非特异磷酸化。
+文中做了的对照包括：用snf1-Δ10缺失株与其同源野生型比较'AMARA'及变体#3、#4的磷酸化，证实野生型经葡萄糖饥饿后磷酸化被刺激约10倍，而snf1-Δ株无此增加；并将snf1-Δ株的粗提物经同一纯化流程处理后确认不再磷酸化'AMARA'，以排除其他激酶污染。CaMKI组做的对照是所有肽的磷酸化均需CaMKIα activator预激活才能进行（未预激活则不磷酸化，正文标注"not shown"）。AMPK/HRK-A组做的对照是AMP刺激作用在'AMARA'与所有变体上与'SAMS'肽相同（"not shown"）。缺少的关键对照是：全文没有针对AGARAASAAALARRR等关键突变肽做非激酶对照（如无酶空白或热失活酶对照）的直接数据展示，也没有提供n值和重复次数的具体记录，这使得跨激酶效应量的比较缺乏独立验证支撑。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：每个位点突变（−5、−4、−3、+4等）导致磷酸化速率下降的具体倍数或百分比（如−3位R→A使活性降到多少%），以及AMPK与其他三种激酶对同一肽变体活性比值的定量数据，这些数字直接决定我的PSSM权重矩阵怎么打分。
+'AMARA' 对 AMPK 的 V/Km 比 'SAMS' 肽高3.8倍，对 HRK-A 高4.5倍（Table 1 及摘要句"with V/K m values 3.8-fold and 4.5-fold higher respectively than for the 'SAMS' peptide"）。SNF1 对'AMARA'的 V/Km 比'SAMS'低5倍，主要因 Km 由26 μM（AMPK上SAMS的Km）升至约650 μM（SNF1对AMARA的Km≈650 μM vs. SAMS的108 μM，见正文3.2节）。CaMKI对'AMARA'的V/Km比synapsin I肽（LRRRLSDANF）低6倍（正文4节discussion首句）。葡萄糖饥饿使野生型酵母中'AMARA'及两个变体肽的磷酸化被刺激约10倍（"stimulated ≈10-fold by removal of glucose from the medium"）。
 
 
 **⑧ 我不相信的一件事**
@@ -1593,12 +1593,16 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要挑三类参考文献：①本文引用的AMPK天然底物（如ACC、HMG-CoA reductase）磷酸化位点原始鉴定文献，用于比对合成肽结果与天然蛋白的一致性；②SNF1/Snf1激酶家族的结构或系统发生学文献，帮助理解四种激酶基序差异的分子基础；③CaMKI/CaMKII底物基序相关文献，用于排除我的ZSWIM8位点是否会被CaMK交叉磷酸化产生实验混杂。
+[9] Carling, D. et al. (1994) J. Biol. Chem. 269, 11442-11448 — 定义AMPK异源三聚体结构/激活机制，为方向①中AMPK磷酸化ZSWIM8(S608/S609)提供上游酶学基础。
+[10] Mitchelhill, K.I. et al. (1994) J. Biol. Chem. 269, 2361-2364 — 报道AMPK催化亚基结构与底物识别特性，支持方向①中AMPK底物motif分析。
+[12] Stapleton, D. et al. (1994) J. Biol. Chem. 269, 29343-29346 — AMPK亚基克隆/结构鉴定，可用于比对ZSWIM8磷酸化位点是否符合AMPK经典识别序列（方向①）。
+[14] Woods, A. et al. (1994) J. Biol. Chem. 269, 19509-19515 — 阐明AMPK与SNF1家族底物特异性关系，为跨激酶（AMPK/CaMKI）识别motif的方向①③提供保守性证据。
+[24] Knighton, D.R. et al. (1991) Science 253, 414-420 — 蛋白激酶催化域晶体结构，可为AGO2/ZSWIM8/TUT4-7潜在磷酸化/乳酰化位点的结构可及性分析（方向③）提供结构参照。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1606,7 +1610,7 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 ### T0 · Motif affinity and mass spectrometry proteomic approach for the discovery of cellular AMPK targets: identification of mitochondrial fission factor as a new AMPK substrate.
 
-**【仅摘要 · 待取全文】**　PMID 25683918　Cellular signalling 2015　被引 143　https://pubmed.ncbi.nlm.nih.gov/25683918/
+**【全文已读 · 你提供的 PDF】**　PMID 25683918　Cellular signalling 2015　被引 143　来源：1-s2.0-S089865681500042X-main.pdf　https://pubmed.ncbi.nlm.nih.gov/25683918/
 
 
 **为什么读**
@@ -1631,7 +1635,7 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1)57个候选蛋白的富集质谱图/表格，及AMPK-activator处理组 vs AMPK-null组的定量对比方式(倍数变化/谱数计数);(2)cingulin S137和MFF S129/S146磷酸化位点特异抗体的免疫印迹图，是否有時间曲线(transient phosphorylation)的定量;(3)是否有第二种独立验证方法(如体外kinase assay/32P标记)佐证质谱结果，而非仅依赖抗体识别。
+Fig. 1(A,B) 显示 AICAR(0.3 mM)+A769662(10 μM) 处理小鼠原代肝细胞 45 min 后，AMPKα T172、ACC 及 Raptor 磷酸化明显增强，p70S6K T389 磷酸化被抑制，p-AMPK motif 抗体识别的条带数量与强度也增加(Fig. 1A)；随后以该抗体或 IgG 对照做免疫沉淀，Coomassie 染色胶显示部分条带为处理组特异富集(Fig. 1B 星号标记)，用于后续 MS/MS 鉴定。可信度方面文中提到做了技术重复(exp1a/exp1b)以证实一致性和可重复性，但图注/正文未给出重复次数的统计检验(如 p 值)或第二种独立方法交叉验证富集条带的定量结果。Fig. 4 和 Fig. 5 分别用非磷酸化突变体(S129A/S146A)及内源 MFF 免疫沉淀+phospho-site 特异抗体验证 S129/S146 磷酸化随 AMPK 激活上调，Fig. 4A 图注明确标注"representative of two independent experiments"，可信度为两次独立重复但未见统计检验数字。
 
 
 **④ 方法要点**
@@ -1646,12 +1650,12 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时逐条核对：①是否设AMPK激活剂处理 vs 未处理的富集比较；②是否设AMPK基因缺失/敲低细胞系作为特异性阴性对照（排除抗体非特异结合）；③位点特异性磷酸抗体是否用非磷酸化突变体(S→A)细胞或磷酸酶处理组做特异性验证；④质谱鉴定磷酸化位点是否有生物学重复及统计阈值(FDR/倍数变化cutoff)。
+文中明确做的对照包括：非特异性对照抗体(rabbit IgG)用于免疫沉淀对照(Fig. 1B)；COS-1 细胞转染野生型 vs S137A cingulin 或 S129A/S146A MFF 等非磷酸化突变体作为磷酸化位点特异性对照(Fig. 2B、Fig. 4A)；未转染细胞作为空载对照(Fig. 2B)；以及 λ-phosphatase 处理免疫沉淀的 FLAG-MFF 以验证抗体识别的是磷酸化形式(Methods 2.6)。缺少的关键对照：未见使用 AMPK 激酶失活突变体(kinase-dead)或 AMPKα1/α2 基因敲除细胞/组织来直接证明 Fig. 1、Fig. 4、Fig. 5 中观察到的磷酸化确实依赖 AMPK 本身而非其他激酶(文中摘要提到用了"absent in hepatocytes lacking AMPK"的比较来筛选57个蛋白，但该敲除对照未在给定图注/正文段落中详细展示于 Fig.4/5 的验证实验里)；也未见针对 MFF/cingulin 磷酸化对其功能(如线粒体分裂)影响的功能性对照实验。
 
 
 **⑦ 效应量（必须带数字）**
 
-摘要给出唯一定量数字：识别到57个在激活剂处理肝细胞中特异富集、而AMPK缺失肝细胞中缺失的蛋白（57 proteins uniquely enriched...absent in AMPK-lacking hepatocytes）；MFF位点定位为S129(共有)与S146(变异体特异)，cingulin位点为S137；未报告富集倍数、质谱谱数、位点占有率等统计量——读全文时需补充这些数字。
+正文摘要给出的定量数字为：通过该蛋白质组学方法鉴定出 57 个在激活剂处理的肝细胞中特异富集、但在缺乳 AMPK 的肝细胞中不存在的蛋白(摘要句"We identified 57 proteins that were uniquely enriched in the activator-treated hepatocytes, but were absent in hepatocytes lacking AMPK.")。此外结果部分提到通过 LC-MS/MS 共检测到 549 个蛋白(2 肽段最低、95% 置信度)("A total of 549 proteins were detected (2 peptides minimum with 95% probability) across…")。AICAR 与 A769662 处理浓度及时间为定量参数：0.3 mM AICAR + 10 μM A769662，处理 45 min(Fig. 1 图注及 Methods)。除上述数字外，全文未见针对磷酸化条带强度倍数变化或统计学 p 值的具体定量数字。
 
 
 **⑧ 我不相信的一件事**
@@ -1686,12 +1690,12 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时从参考文献里挑：①AMPK底物识别基序(consensus motif)最初定义/PSSM构建的原始文献，用于校验我自己对ZSWIM8位点的基序打分依据；②本文所用phospho-AMPK-substrate motif抗体的原始开发/验证文献，判断该抗体识别特异性边界；③其他利用同类质谱/亲和富集策略发现AMPK新底物的平行研究，用于排查是否已有人筛到ZSWIM8/TUT4-7/AGO2同源位点，评估竞争风险。
+对 Sheldon 三个方向（AMPK 磷酸化调控代谢/TDMD、TUT/尿苷化纤维化、乳酸乳酰化重编程蛋白稳态）最相关的排队文献如下：[1] D.G. Hardie, F.A. Ross, S.A. Hawley《Nat. Rev. Mol. Cell Biol. 13 (2012) 251–262》— AMPK 综述，梳理 AMPK 激活机制与底物识别模体，是理解 AMPK 磷酸化 ZSWIM8 类底物模体的基础背景文献。[12] D.G. Hardie《Genes Dev. 25 (2011) 1895–1908》— 系统阐述 AMPK 底物识别模体(−5/−3位碱性、−5/+4位疏水)，直接支撑本文抗体设计思路，对研究 AMPK 磷酸化 ZSWIM8(S608/S609)的模体识别机制有参考价值。[33] D.F. Egan et al.《Science 331 (2011) 456–461》— AMPK 直接磷酸化 ULK1 调控自噬，展示 AMPK 磷酸化下游效应蛋白改变细胞稳态的范式，可类比 AMPK-ZSWIM8 磷酸化如何重塑 miRNA 代谢记忆通路。[16] D.M. Gwinn et al.《Mol. Cell 30 (2008) 214–226》— AMPK 磷酸化 TSC2 调控 mTOR 信号，作为 AMPK 底物磷酸化影响下游稳态调控机制的另一实例，对方向①中"AMPK 磷酸化加速降解相关底物"的机制类比有参考价值。以上文献均聚焦 AMPK 底物识别与磷酸化下游效应机制，与方向②(TUT4/7-miR-29-纤维化)及方向③(乳酸乳酰化修饰)在本文参考文献表中未见直接相关文献，故未排队。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1699,7 +1703,7 @@ AMPK的底物识别基序被精确定义为 phi-(X,beta)-XX-S/T-XXX-phi（phi=�
 
 ### T1 · Protein kinase substrate recognition studied using the recombinant catalytic domain of AMP-activated protein kinase and a model substrate.
 
-**【仅摘要 · 待取全文】**　PMID 11902845　Journal of molecular biology 2002　被引 146　https://pubmed.ncbi.nlm.nih.gov/11902845/
+**【全文已读 · 你提供的 PDF】**　PMID 11902845　Journal of molecular biology 2002　被引 146　来源：1-s2.0-S0022283601953161-main.pdf　https://pubmed.ncbi.nlm.nih.gov/11902845/
 
 
 **为什么读**
@@ -1724,7 +1728,7 @@ AMPK α1激酶结构域与底物ACC1的相互作用远超此前认知的P-3~P+4�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) GST-ACC 25个突变体和GST-KD 7个突变体的完整Km/Vmax或kcat/Km表格及对应图，确认哪些位点的动力学参数变化倍数最大(判定"关键"位点的定量阈值)；(2) 结构模型图(基于哪个已知激酶晶体结构模板同源建模，如CaMKI或CDK)及其与后续AMPK真实晶体结构(如有引用/后续对比)的吻合度；(3) 是否有第二种独立方法(如ITC、SPR或肽阵列筛选)验证该结合模型，还是仅依赖突变-动力学一种手段。
+Fig. 1 展示 AMPK α1 kinase domain 与底物 ACC1(60-85) 的结构模型，标出 M74(P-5)、R75(P-4)、S79(P)、L83(P+4) 等关键残基位置，支持"底物以 amphipathic helix 结合于疏水槽"的核心主张，但此图本身是同源建模而非晶体结构，可信度有限。Fig. 5、Fig. 6、Fig. 7、Fig. 8 分别用 kcat/Km 的 bar chart/graph（配 standard errors of the mean）对模型预测的关键残基（R75/M74、H73、amphipathic helix 上的 alanine scan、H82/L83）做突变验证，属于独立的酶活性动力学数据，与结构模型形成两种方法互证，可信度较高；但文中未给出这些图的具体重复次数(n)或统计检验方法（仅提及"error bars are standard errors of the mean"）。Fig. 2(a)(b) 用 AMPK activity assay 和 Western blot 两种独立方法证明 GFP-α1-KD 不依赖 β1/γ1 亚基即可稳定表达并保持活性，是本文少数有明确对照（±β1γ1 共转染）的图。
 
 
 **④ 方法要点**
@@ -1739,12 +1743,12 @@ AMPK α1激酶结构域与底物ACC1的相互作用远超此前认知的P-3~P+4�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对：①T172D组成性激活突变是否与野生型激酶经上游激酶(如LKB1/CaMKKβ)磷酸化激活后的动力学参数做过平行对照，以排除T172D本身改变底物特异性；②是否有GST单独(无融合底物/无融合激酶结构域)的阴性对照排除GST标签本身的非特异磷酸化贡献；③突变体的表达量/折叠正确性是否用CD光谱或类似方法确认，排除突变导致的错误折叠被误判为"结合减弱"；④是否用非底物肽或随机序列肽作为阴性对照验证磷酸化的序列特异性而非激酶的非特异性活性。
+明确做了的对照包括：①Fig. 2 中 GFP-α1 和 GFP-α1-KD 在"有/无 β1、γ1 亚基共表达"两种条件下的活性与 Western blot 对比；②Fig. 3 中 wild-type GST-α1-KD 与 T172D 突变体在"有/无 AMPKK 孵育"条件下的活化对比，并用 PP2A 去磷酸化处理验证 T172D 的组成性激活（正文称 wild-type 可被 PP2A 失活而 T172D 不敏感）；③Fig. 4(b) 中 wild-type GST-ACC 与 S79A 突变体的磷酸化对比，作为磷酸化位点特异性的阴性对照；④Table 1 中多组底物突变(P-18至P-5等位点)分别与 kinase 侧突变(L212R/E100A/D103A/D215A/D216A/D217A/D56R)做了"complementary mutation"组合对照，用于验证特定电荷/疏水相互作用配对。缺少的关键对照：文中没有提到对 GST 标签本身或空载体表达产物的磷酸化本底对照，也没有看到针对 AMPK T172D 组成性活性是否受 AMP 变构调节的阳性对照数据之外的定量重复次数说明；这些若缺失会削弱"该模型底物"背景磷酸化可忽略、以及动力学参数误差范围代表真实生物学重复而非技术重复的判断。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：25个GST-ACC突变体和7个GST-KD突变体中，各关键位点(P-16~P-5、P-6、P-4、P+3、P+4)突变后Km/Vmax(或kcat/Km)相对野生型的具体倍数变化，用于判断我自己做ZSWIM8 S608/S609周边序列PSSM打分时可接受的"结合力下降阈值"。
+"the activity of the GST-a1-KD mutant had a low but detectable activity that increased >100-fold on incubation with MgATP and the partially purified upstream kinase, AMPKK"（正文 Results 部分，对应 Fig. 3）。"The T172D mutant exhibited a specific activity 40-fold higher than the wild-type GST-a1-KD"（同段）。"native AMPK purified from rat liver was stimulated 2.5-fold"by 200 μM AMP（正文，无对应图号，标注"not shown"）。Table 1 给出具体 kinetic 数值示例：WT/WT 组合 kcat=6.33±0.29 s⁻¹，Km=4.67±1.48 μM，kcat/Km=1.35±0.20 s⁻¹mM⁻¹；WT substrate 配 L212R kinase 突变后 kcat/Km 降至 0.10±0.05 s⁻¹mM⁻¹。kcat for SAMS peptide phosphorylation by GST-α1-KD-T172D 为 4.2 s⁻¹（正文一句）。
 
 
 **⑧ 我不相信的一件事**
@@ -1779,12 +1783,12 @@ AMPK α1激酶结构域与底物ACC1的相互作用远超此前认知的P-3~P+4�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要挑三类参考文献：①本文所依据的同源建模模板激酶晶体结构原始文献(用于评估结构模型的可靠性来源，如CaMKI/CDK2/PKA晶体结构论文)；②本文引用的此前AMPK底物基序共识序列原始报道(判断本文相对旧共识究竟新增了哪些位点信息)；③本文方法学后续是否被作者或他人用于预测/验证其他AMPK新底物的跟进研究(判断该方法在本文之后的实际预测成功率/假阳性率如何)。
+Hardie, D. G. & Carling, D. (1997)《The AMP-activated protein kinase: fuel gauge of the mammalian cell?》Eur. J. Biochem. 246, 259-273 — 综述 AMPK 作为细胞能量感受器的下游磷酸化级联，对方向①的"AMPK 磷酸化底物→代谢通路"机制背景直接相关。Hardie, D. G. & Hawley, S. A. (2001)《AMP-activated protein kinase: the energy charge hypothesis revisited》BioEssays 23, 1112-1119 — 讨论 AMP/ATP 感知与 AMPK 激活机制，对方向①中"AMPK 磷酸化 ZSWIM8"上游能量信号背景值得排队。Zhou, G. et al. (2001)《Role of AMP-activated protein kinase in mechanism of metformin action》J. Clin. Invest. 108, 1167-1174 — 涉及 AMPK 药理激活与代谢调控，可为方向①"代谢记忆"提供药理干预参照。Blair, E. et al. (2001)《Mutations in the gamma(2) subunit of AMP-activated protein kinase cause familial hypertrophic cardiomyopathy: evidence for the central role of energy compromise in disease pathogenesis》Hum. Mol. Genet. 10, 1215-1220 — AMPK 亚基突变导致心肌病，与方向②"MYBPC3 心脏纤维化"组织表型有潜在关联，值得排队核实。Dale, S., Wilson, W. A., Edelman, A. M. & Hardie, D. G. (1995)《Similar substrate recognition motifs for mammalian AMP-activated protein kinase, higher plant HMG-CoA reductase kinase-A, yeast SNF1, and mammalian calmodulin-dependent protein kinase I》FEBS Letters 361, 191-195 — 建立 AMPK 底物识别核心motif，是本文底物特异性模型的基础，对理解 AMPK 磷酸化 ZSWIM8 特异位点(S608/S609)是否符合该 motif 有参考价值。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1792,7 +1796,7 @@ AMPK α1激酶结构域与底物ACC1的相互作用远超此前认知的P-3~P+4�
 
 ### T2 · AMPK: An Energy-Sensing Pathway with Multiple Inputs and Outputs.
 
-**【全文已读】**　PMID 26616193　Trends in cell biology 2016　被引 739　https://pubmed.ncbi.nlm.nih.gov/26616193/
+**【全文已读 · PMC】**　PMID 26616193　Trends in cell biology 2016　被引 739　PMC5881568　https://pubmed.ncbi.nlm.nih.gov/26616193/
 
 
 **为什么读**
@@ -1877,7 +1881,7 @@ Fig. 2（人 α1β2γ1 异三聚体与 AMP/staurosporine/β-cyclodextrin 复合�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1885,7 +1889,7 @@ Fig. 2（人 α1β2γ1 异三聚体与 AMP/staurosporine/β-cyclodextrin 复合�
 
 ### T1 · Detection of Multisite Phosphorylation of Intrinsically Disordered Proteins Using Phos-tag SDS-PAGE.
 
-**【仅摘要 · 待取全文】**　PMID 32696389　Methods in molecular biology (Clifton, N.J.) 2020　被引 13　https://pubmed.ncbi.nlm.nih.gov/32696389/
+**【仍缺全文 · 待补】**　PMID 32696389　Methods in molecular biology (Clifton, N.J.) 2020　被引 13　https://pubmed.ncbi.nlm.nih.gov/32696389/
 
 
 **为什么读**
@@ -1970,7 +1974,7 @@ Phos-tag 胶的条件；如何定量磷酸化化学计量比
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -1981,7 +1985,7 @@ Phos-tag 胶的条件；如何定量磷酸化化学计量比
 
 ### T0 · MicroRNA regulation of AMPK in nonalcoholic fatty liver disease.
 
-**【全文已读】**　PMID 37653034　Experimental & molecular medicine 2023　被引 28　https://pubmed.ncbi.nlm.nih.gov/37653034/
+**【全文已读 · PMC】**　PMID 37653034　Experimental & molecular medicine 2023　被引 28　PMC10545736　https://pubmed.ncbi.nlm.nih.gov/37653034/
 
 
 **为什么读**
@@ -2066,7 +2070,7 @@ AMPK 与 miRNA 互作的专门综述——我的直接上游文献
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2074,7 +2078,7 @@ AMPK 与 miRNA 互作的专门综述——我的直接上游文献
 
 ### T1 · MicroRNA-451 regulates LKB1/AMPK signaling and allows adaptation to metabolic stress in glioma cells.
 
-**【全文已读】**　PMID 20227367　Molecular cell 2010　被引 335　https://pubmed.ncbi.nlm.nih.gov/20227367/
+**【全文已读 · PMC】**　PMID 20227367　Molecular cell 2010　被引 335　PMC3125113　https://pubmed.ncbi.nlm.nih.gov/20227367/
 
 
 **为什么读**
@@ -2159,7 +2163,7 @@ Figure 5B/5C 是最关键的图：5B 显示 miR-451 处理导致内源性 LKB1 �
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2167,7 +2171,7 @@ Figure 5B/5C 是最关键的图：5B 显示 miR-451 处理导致内源性 LKB1 �
 
 ### T2 · AMPK directly activates mTORC2 to promote cell survival during acute energetic stress.
 
-**【全文已读】**　PMID 31186373　Science signaling 2019　被引 200　https://pubmed.ncbi.nlm.nih.gov/31186373/
+**【全文已读 · PMC】**　PMID 31186373　Science signaling 2019　被引 200　PMC6935248　https://pubmed.ncbi.nlm.nih.gov/31186373/
 
 
 **为什么读**
@@ -2252,7 +2256,7 @@ Fig. 1A支持"AICAR激活AMPK可提升mTORC2下游Akt Ser473磷酸化"这一主�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2260,7 +2264,7 @@ Fig. 1A支持"AICAR激活AMPK可提升mTORC2下游Akt Ser473磷酸化"这一主�
 
 ### T1 · A phosphorylation state-specific antibody recognizes Hsp27, a novel substrate of protein kinase D.
 
-**【仅摘要 · 待取全文】**　PMID 15728188　The Journal of biological chemistry 2005　被引 135　https://pubmed.ncbi.nlm.nih.gov/15728188/
+**【全文已读 · 你提供的 PDF】**　PMID 15728188　The Journal of biological chemistry 2005　被引 135　来源：1-s2.0-S0021925820660276-main.pdf　https://pubmed.ncbi.nlm.nih.gov/15728188/
 
 
 **为什么读**
@@ -2285,7 +2289,7 @@ Fig. 1A支持"AICAR激活AMPK可提升mTORC2下游Akt Ser473磷酸化"这一主�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：ELISA滴度曲线图、peptide array点阵图的具体图号；RNAi敲低PKD后免疫印迹条带消失的对照图；Hsp27 Ser82突变体(S82A)验证图，确认是否有第二种独立方法(如质谱)交叉验证该抗体特异性。
+本文核心图为 Fig. 1（A–C）：Fig. 1A 用固定单一氨基酸的降解肽库与纯化重组 PKD 及 [γ-32P]ATP 孵育，确认 PKD 在 -5 位偏好亲脂性残基（尤其 leucine）、在 -3 位偏好 arginine，每个斑点经定量并以背景磷酸化的百分比列表，属于体外激酶活性验证。Fig. 1B 是三项独立研究得到的 PKD 最优磷酸化基序比对示意图，用于说明抗体设计依据，非独立实验数据。Fig. 1C 是膜结合磷酸肽阵列与纯化 anti-PKD pMOTIF 抗体孵育后的特异性图谱，显示抗体在 -7/-6/-4/-3/-2/+1/+2 等位点的选择性，与 Fig.1A 的激酶偏好性相互印证，构成第二种独立方法（抗体结合谱 vs. 激酶磷酸化谱）对彼此可信度的支持。但该图注块本身未给出重复次数（n）或统计检验方法，故可信度依据仅限于"两种独立方法趋势一致"，无法进一步用统计学量化。
 
 
 **④ 方法要点**
@@ -2300,12 +2304,12 @@ Fig. 1A支持"AICAR激活AMPK可提升mTORC2下游Akt Ser473磷酸化"这一主�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条确认：①是否用磷酸酶(如λ-phosphatase)处理裂解物作为阴性对照证明信号依赖磷酸化状态；②是否有非磷酸化肽段/scrambled motif肽段的阴性对照；③siRNA敲低效率的定量（mRNA/蛋白双重验证）；④位点突变体(如S82A)是否完全消除信号，以及是否设置了野生型回补对照；⑤抗体是否在多个细胞系中重复验证而非仅HeLa单一细胞系。
+文中明确做了的对照：①用非磷酸化对照肽（non-phospho control peptides）做 ELISA，显示其反应性仅为对照磷酸肽的 3–5%，证明 anti-PKD pMOTIF 只结合磷酸化肽而非磷酸化肽；②用 RNAi 敲低内源 PKD1/PKD2（HEK293 细胞）以及敲低内源 Hsp27（RNAi，HeLa 细胞）来验证 27-kDa 条带的特异性归属；③用 GST-Hsp27 及其 S15A、S82A 点突变体做体外激酶实验，作为位点特异性对照；④用绿色荧光蛋白表达载体对照转染效率（80–90%）。缺少的关键对照：文本未提及 pSUPER 空载体（非靶向 RNAi）作为阴性对照在 Fig 图注/正文抓取段中被具体点名验证 Hsp27 敲低特异性（Methods 中提到"pSUPER or pSUPER-RNAi"作为并列处理但未在结果段明确称其为对照），也未见到非磷酸化型 S82A 突变体在细胞内（而非仅体外）背景下的完整对照数据描述；这类对照对排除 RNAi 脱靶效应、确认 Ser82 是细胞内真实生理磷酸化位点很重要，但给到的文本段未展示相关结果。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：抗体在ELISA中的检测灵敏度(EC50或滴度)、peptide array上对consensus基序与非consensus基序的信号比值(fold specificity)、siRNA敲低后信号下降的定量百分比、Hsp27 S82磷酸化被PKD特异性磷酸化的体外kinase assay Km/Vmax数值。
+全文抓取的文本中给出的定量信息主要是：非磷酸化对照肽的 ELISA 反应性为对照磷酸肽的 3–5%（正文"Non-phospho control peptides scored in the 3–5% range of control phosphopeptide"）；RNAi 转染效率为 80–90%（Methods"Transfection efficiencies (80–90%) were controlled using a green fluorescent protein expression vector"）。除此之外，Fig. 2A 中提到检测到 85、100、150、45、25、27 kDa 等条带分子量，但这是分子量而非效应量倍数。【全文未见定量数字】用于说明：给到的文本段中未见 Fig.3A（RNAi 敲低 Hsp27 后 27-kDa 条带免疫反应性降低）的具体倍数或 p 值，也未见 Fig.1A/1C 磷酸化/结合强度的具体百分比表格数值（仅文字描述趋势），故无法引用更精确的效应量数字。
 
 
 **⑧ 我不相信的一件事**
@@ -2340,12 +2344,12 @@ Fig. 1A支持"AICAR激活AMPK可提升mTORC2下游Akt Ser473磷酸化"这一主�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需从参考文献里挑三类：①该实验室此前发表的PKD底物鉴定原始论文(建立consensus motif来源)；②同期其他phospho-motif抗体技术论文(如CST公司发表的类似方法论文，用于比较验证标准差异)；③引用本文技术的后续应用论文(尤其是应用于AGC家族激酶如AMPK本身底物筛选的文献，看是否已有人用类似motif抗体策略筛选AMPK底物，判断是否与他的方向1存在方法学先占风险)。
+与 Sheldon 三个方向（AMPK/TDMD、TUT4/7-miR-29-纤维化、乳酸/乳酰化重编程 miRNA 稳态）直接相关的参考文献在本文参考文献表中均未出现——本文参考文献表列出的 23 篇文献均为 PKD/PKC 信号转导、磷酸化基序识别、Hsp27/HDAC5/RIN1 底物及相关方法学文献（如 Cohen 2002 Nat Cell Biol；Manning et al. 2002 Science；Van Lint et al. 2002 Trends Cell Biol 等），主题与 miRNA 代谢、TDMD、TUT4/7 尿苷化、AGO2/ZSWIM8 乳酰化等方向均无重叠。因此本栏严格依据"标题须逐字出自给到的参考文献段"的要求，明确说明：【全文参考文献段中未见与 Sheldon 三个研究方向相关的文献，故不予排队】。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2353,7 +2357,7 @@ Fig. 1A支持"AICAR激活AMPK可提升mTORC2下游Akt Ser473磷酸化"这一主�
 
 ### T2 · Global Phosphoproteomic Analysis Reveals the Involvement of Phosphorylation in Aflatoxins Biosynthesis in the Pathogenic Fungus Aspergillus flavus.
 
-**【全文已读】**　PMID 27667718　Scientific reports 2016　被引 30　https://pubmed.ncbi.nlm.nih.gov/27667718/
+**【全文已读 · PMC】**　PMID 27667718　Scientific reports 2016　被引 30　PMC5036175　https://pubmed.ncbi.nlm.nih.gov/27667718/
 
 
 **为什么读**
@@ -2438,7 +2442,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2449,7 +2453,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 ### T0 · Epigenetic mechanisms in diabetic complications and metabolic memory.
 
-**【全文已读】**　PMID 25481708　Diabetologia 2015　被引 369　https://pubmed.ncbi.nlm.nih.gov/25481708/
+**【全文已读 · PMC】**　PMID 25481708　Diabetologia 2015　被引 369　PMC4324095　https://pubmed.ncbi.nlm.nih.gov/25481708/
 
 
 **为什么读**
@@ -2534,7 +2538,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2542,7 +2546,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 ### T0 · MiRNAs in hyperglycemia-induced metabolic memory: established mechanisms and emerging nuclear activation concepts.
 
-**【全文已读】**　PMID 42321894　Diabetology & metabolic syndrome 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/42321894/
+**【全文已读 · PMC】**　PMID 42321894　Diabetology & metabolic syndrome 2026　被引 0　PMC13523302　https://pubmed.ncbi.nlm.nih.gov/42321894/
 
 
 **为什么读**
@@ -2627,7 +2631,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2635,7 +2639,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 ### T1 · The "Metabolic Memory" Theory and the Early Treatment of Hyperglycemia in Prevention of Diabetic Complications.
 
-**【全文已读】**　PMID 28452927　Nutrients 2017　被引 158　https://pubmed.ncbi.nlm.nih.gov/28452927/
+**【全文已读 · PMC】**　PMID 28452927　Nutrients 2017　被引 158　PMC5452167　https://pubmed.ncbi.nlm.nih.gov/28452927/
 
 
 **为什么读**
@@ -2720,7 +2724,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2728,7 +2732,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 ### T2 · Metabolic memory and diabetic nephropathy: potential role for epigenetic mechanisms.
 
-**【仅摘要 · 待取全文】**　PMID 20421885　Nature reviews. Nephrology 2010　被引 95　https://pubmed.ncbi.nlm.nih.gov/20421885/
+**【仍缺全文 · 待补】**　PMID 20421885　Nature reviews. Nephrology 2010　被引 95　https://pubmed.ncbi.nlm.nih.gov/20421885/
 
 
 **为什么读**
@@ -2813,7 +2817,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2821,7 +2825,7 @@ Fig. 1a：抗磷酸-Tyr抗体western blot显示A. flavus在1 d和6 d培养时全
 
 ### T1 · A pancreatic islet-specific microRNA regulates insulin secretion.
 
-**【仅摘要 · 待取全文】**　PMID 15538371　Nature 2004　被引 1608　https://pubmed.ncbi.nlm.nih.gov/15538371/
+**【全文已读 · 你提供的 PDF】**　PMID 15538371　Nature 2004　被引 1608　来源：nature03076.pdf　https://pubmed.ncbi.nlm.nih.gov/15538371/
 
 
 **为什么读**
@@ -2846,7 +2850,7 @@ miR-375 是胰岛特异性、进化保守的 miRNA，通过靶向 Mtpn 直接作
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) miR-375 过表达/敲低后 GSIS 的定量图（胰岛素分泌 ng/islet 或 fold change,及 n 值、重复次数）；(2) exocytosis 直接测定方法（如 patch-clamp capacitance 或 amperometry）及其代表性图；(3) Mtpn siRNA 表型是否与 miR-375 完全 phenocopy 的定量对比图；(4) 是否有第二种独立方法验证 miR-375 对 Mtpn 3'UTR 的直接结合（luciferase reporter mutant seed）。
+Fig. 3d,e最能支撑miR-375调控胰岛素分泌是通过影响exocytosis而非Ca2+信号这一核心主张：control（Ad-eGFP）β细胞十次去极化的膜电容增加为837±244 fF（n=9），Ad-375感染细胞仅为94±27 fF（n=10，P<0.01），降幅85%，属于独立于[Ca2+]i测量之外的第二种功能读数（patch-clamp capacitance），可信度较高。Fig. 4e/f通过luciferase reporter（pRL-Mtpn-WT vs pRL-Mtpn-MUT）验证Mtpn 3'UTR是miR-375的直接靶点，数据为三次独立实验±s.e.m.，n=6，属于两套独立方法（western blot下调+luciferase报告基因）交叉验证，可信度较高。Fig. 1d/f的siRNA/2'-O-methyl功能学实验则是最上游的功能证据链，但部分关键图（如Ca2+成像Fig. 3a,b）仅代表"五次实验中的代表性图"，属于定性展示，量化力度弱于capacitance数据。
 
 
 **④ 方法要点**
@@ -2861,12 +2865,12 @@ miR-375 是胰岛特异性、进化保守的 miRNA，通过靶向 Mtpn 直接作
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时逐条核对：①miR-375 过表达/抑制是否有 scrambled/mismatch antisense 对照；②Mtpn siRNA 是否设置非靶向 siRNA 对照及 rescue 实验（miR-375 抑制+Mtpn 过表达能否逆转表型）；③luciferase 3'UTR 报告基因是否有 seed-mutant 对照；④GSIS 测定是否有低糖/高糖两种条件对照及胰岛细胞存活率（避免毒性混淆）对照。
+文中明确做的对照包括：阴性对照si-apoM（apoM在β细胞不表达）、阳性对照si-Gck（靶向glucokinase验证siRNA功能有效性）、错义对照si-375MUT（miR-375核心序列突变，验证siRNA特异性而非脱靶效应）、2'-O-me-eGFP作为2'-O-me-375的抑制剂对照、以及luciferase实验中的pRL-Mtpn-MUT位点突变对照（验证3'UTR结合位点特异性）。腺病毒实验以Ad-eGFP（不含转基因）作为Ad-375的对照。缺少的关键对照是：没有看到针对miR-375的genetic loss-of-function（如敲除小鼠）来排除siRNA/2'-O-me寡核苷酸本身的脱靶效应或adenovirus过表达的非生理剂量效应，这对确认miR-375生理功能的必要性和充分性很重要；此外文中提到"additional targets of miR-375 are likely to contribute"，说明缺少对Mtpn是否为唯一或主要功能靶点的rescue实验对照（如miR-375过表达+Mtpn过表达回补）。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：miR-375 过表达使 GSIS 降低的具体百分比或 fold-change 及统计显著性；抑制内源 miR-375 后分泌增强的具体幅度；Mtpn siRNA phenocopy 效应的量化对比数值。
+效应量数字均可从正文抄出：①Ad-375在MOI 50使miR-375表达增加约2.5倍，25 mM葡萄糖刺激的胰岛素分泌降低约40%（对应Fig. 2a,b及正文"led to an ~2.5-fold increase...resulted in an ~40% reduction"）；②capacitance实验中control为837±244 fF（n=9）对比Ad-375的94±27 fF（n=10，P<0.01），降幅85%（Fig. 3d,e，正文明确给出）；③Ca2+/EGTA灌流实验中DC/Dt在Ad-375细胞降低63%（P<0.001，n=15–17，Fig. 3f,g），MIN6细胞中降低>80%；④2'-O-me-375使葡萄糖刺激胰岛素分泌增强1.4倍（相对2'-O-me-eGFP对照，Fig. 1f）；⑤si-Gck使glucokinase蛋白降低70%（Fig. 1e）；⑥luciferase实验中2'-O-me-375+pRL-Mtpn组荧光活性相对对照增加约2倍（n=6，Fig. 4e,f）；⑦si-Mtpn使胰岛素分泌降低约35%（Fig. 4h），使exocytosis降低约60%（Fig. 4i）；⑧docked granules数量在Ad-375感染细胞中增加35%（Supplementary Fig. 4，正文提及）。
 
 
 **⑧ 我不相信的一件事**
@@ -2901,12 +2905,20 @@ miR-375 是胰岛特异性、进化保守的 miRNA，通过靶向 Mtpn 直接作
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需从参考文献里挑三类：①miR-375 靶基因预测算法及原始 miRNA 克隆鉴定方法的方法学文献（用于评估其保守性分析是否可迁移到 miR-29/miR-33）；②同时期发表的其他胰岛特异 miRNA 功能研究（用于判断该领域后续是否已有人做 miR-375 降解/半衰期方向，评估竞争风险）；③Mtpn（myotrophin）在 exocytosis 通路中的分子机制原始文献（判断该靶基因通路是否与 TDMD/ZSWIM8 通路有交叉点）。
+1. Bartel, D. P. 2004《MicroRNAs: genomics, biogenesis, mechanism, and function》Cell — miRNA生物发生/功能综述，是理解ZSWIM8介导TDMD及miRNA稳态调控（方向①③）的基础背景文献。
+
+2. Tsuboi, T., da Silva Xavier, G., Leclerc, I. & Rutter, G. A. 2003《5′-AMP-activated protein kinase controls insulin-containing secretory vesicle dynamics》J. Biol. Chem. — 直接建立AMPK对胰岛分泌颗粒/代谢调控的机制，与方向①"AMPK磷酸化ZSWIM8加速代谢miRNA的TDMD→代谢记忆"高度相关，值得排队细读AMPK下游底物逻辑。
+
+3. Zhao, C., Wilson, M. C., Schuit, F., Halestrap, A. P. & Rutter, G. A. 2001《Expression and distribution of lactate/monocarboxylate transporter isoforms in pancreatic islets and the exocrine pancreas》Diabetes — 涉及胰岛中乳酸转运体表达，与方向③"乳酸/乳酰化修饰AGO2/ZSWIM8/TUT4-7"的代谢-表观遗传联系直接相关，可作为乳酸代谢在内分泌组织中作用的背景支持。
+
+4. Lewis, B. P., Shih, I. H., Jones-Rhoades, M. W., Bartel, D. P. & Burge, C. B. 2003《Prediction of mammalian microRNA targets》Cell — miRNA靶点预测方法学基础，可用于方向②中miR-29对纤维化相关靶基因（如MYBPC3、SAA3通路）的靶点分析。
+
+5. Lagos-Quintana, M. et al. 2002《Identification of tissue-specific microRNAs from mouse》Curr. Biol. — 组织特异性miRNA鉴定方法，对方向②中比较心脏（MYBPC3）与肠道（SAA3）组织中miR-29等纤维化相关miRNA的组织特异性表达提供方法学参考。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -2917,7 +2929,7 @@ miR-375 是胰岛特异性、进化保守的 miRNA，通过靶向 Mtpn 直接作
 
 ### T0 · TGF-β/Smad3 signaling promotes renal fibrosis by inhibiting miR-29.
 
-**【仅摘要 · 待取全文】**　PMID 21784902　Journal of the American Society of Nephrology : JASN 2011　被引 505　https://pubmed.ncbi.nlm.nih.gov/21784902/
+**【全文已读 · 你提供的 PDF】**　PMID 21784902　Journal of the American Society of Nephrology : JASN 2011　被引 505　来源：asn1462.pdf　https://pubmed.ncbi.nlm.nih.gov/21784902/
 
 
 **为什么读**
@@ -2942,7 +2954,7 @@ TGF-β/Smad3 通过直接结合 miR-29 启动子在转录层抑制其表达，�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) miR-29 microarray/real-time PCR 检测的是成熟体还是同时测了 pri-miR-29/pre-miR-29；(2) ChIP 或启动子结合实验的图（Smad3 ChIP-seq/ChIP-qPCR 具体结合位点图号）；(3) 是否有 pri-miR-29 与成熟 miR-29 的时间动力学对比图，用以区分转录 vs 降解贡献比例；(4) 有无第二种独立方法（如 nuclear run-on 或 actinomycin D chase）验证转录抑制而非降解加速。
+Fig.9（A-G）是本文对读者第②方向（TUT4/7/miR-29/器官纤维化，可与其 SAA3 肠、MYBPC3 心脏存档组织类比）最关键的图：在已建立的 UUO 肾纤维化模型（day 4起治疗、day 10取材）中，超声-微泡介导的miR-29b基因转移恢复了miR-29b水平（A，real-time PCR），并同步降低了Masson三色染色纤维化（B）、collagen I免疫组化沉积（C、D定量）及collagen I mRNA/蛋白（E real-time PCR，F/G Western blot定量）。可信度：每组至少6只小鼠（据Fig.11图注推断同批实验为≥6 mice/组），采用了独立的mRNA（real-time PCR）与蛋白（IHC+WB）两种方法交叉验证同一结论，并有Fig.10（collagen III）作为平行独立指标重复同一效应方向，提示结果较稳健。但正文未给出Fig.9的具体n值和确切统计量，只能依据Fig.11图注"at least six mice"做推断，不能确认Fig.9本身的n。
 
 
 **④ 方法要点**
@@ -2957,12 +2969,12 @@ TGF-β/Smad3 通过直接结合 miR-29 启动子在转录层抑制其表达，�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对：(1) 是否设置了 pri-miR-29 转录本定量作为转录活性的独立读出，与成熟体表达分开报告；(2) Smad3 ChIP 是否有 IgG/non-binding site 阴性对照；(3) miR-29b 递送实验是否有 scrambled miRNA 对照及递送效率对照；(4) 体外实验是否检测了 TUT4/7 或其他末端修饰/降解酶的表达变化作为排除性对照（若未检测，则该文完全没有排除降解层面贡献）。
+文中明确做的对照包括：①UUO对照 vs 正常(normal)小鼠；②Smad3 WT vs Smad3 KO小鼠（UUO模型）；③MEF细胞中Smad3 WT vs Smad3 KO vs Smad2 WT/KO，用以区分Smad3依赖 vs Smad2非依赖效应（Fig.2A）；④NRK52E细胞中Smad3 knockdown vs empty vector control（Fig.2D-G，CTL标注）；⑤Dox诱导miR-29b过表达 vs 非doxycycline处理细胞（Fig.4、Fig.6A）；⑥miR-29b knockdown（pSuper-sh-miR-29b）vs对照质粒（Fig.5、Fig.6B）；⑦基因治疗中UUO+control plasmid vs UUO+miR-29b转染（Fig.7、9、10、11，CV=control vector）。缺少的关键对照：全文未提及针对AGO2/ZSWIM8/TUT4-7本身的表达或活性检测，也没有miR-29 3′端尿苷化（uridylation）或TUTase相关的直接测定，这对读者方向②（miR-29尿苷化机制）而言是重要缺口，说明本文只证明miR-29丰度受Smad3转录调控，未涉及其3′修饰/降解通路。此外也未见针对乳酸/乳酰化（方向③）的任何处理或对照。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：miR-29（尤其miR-29b）在 WT vs Smad3 KO 中下降/升高的倍数（fold change）、miR-29b 过表达/knockdown对collagen I/III mRNA或蛋白表达的抑制/增强幅度百分比、ultrasound递送后纤维化评分（如Masson染色阳性面积)的具体统计数值。
+正文给出的定量数字主要是统计显著性符号而非具体倍数：如"*P<0.05, **P<0.01, ***P<0.001 versus normal mice; #P<0.05, ##P<0.01, ###P<0.001 versus Smad3 WT UUO"（Fig.1图注），以及TGF-β1处理浓度均为"2 ng/ml"，doxycycline浓度为"2 μg/ml for 24 hours"（Fig.2、4、6图注）。Smad3-binding site位于miR-29b2启动子上游"22 kb"处（Fig.3A、正文）。全文未见miR-29 fold-change、collagen蛋白变化倍数或Fig.9-11中各定量分析的具体数值——【全文未见定量数字】：抽取文本中Fig.1B提到"List of fold changes of miRNAs"但未给出具体数字，Fig.9D/G、Fig.10B/E、Fig.11B/E仅描述"quantitative analysis"而未在给到文本中列出实际数值。
 
 
 **⑧ 我不相信的一件事**
@@ -2997,12 +3009,12 @@ TGF-β/Smad3 通过直接结合 miR-29 启动子在转录层抑制其表达，�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需从参考文献里挑三类：①miR-29 在其他纤维化器官（肺、肝、心）中被 Smad3 或其他转录因子调控的后续验证文献，用于判断转录机制的普适性边界；②TUT4/7或其他尿苷转移酶在肾/肝纤维化中的独立报道，用于检验是否已有人在同一模型里做过降解层面的排除实验；③本文作者后续（Chung lab等）关于miR-29递送治疗纤维化的临床转化文献，用于评估该转录轴的下游竞争强度和专利/临床占位情况。
+1. van Rooij E, et al. 2008《Dysregulation of microRNAs after myocardial infarction reveals a role of miR-29 in cardiac fibrosis》Proc Natl Acad Sci USA — 与读者方向②直接相关，miR-29心脏纤维化机制可与其MYBPC3心脏存档组织对照验证。2. Roderburg C, et al. 2011《Micro-RNA profiling reveals a role for miR-29 in human and murine liver fibrosis》Hepatology — 提供miR-29在另一器官纤维化中的表达谱证据，可类比肠道SAA3组织中miR-29的作用。3. Maurer B, et al. 2010《MicroRNA-29, a key regulator of collagen expression in systemic sclerosis》Arthritis Rheum — 揭示miR-29对胶原表达的调控机制，与本文collagen I/III结果呼应，有助于理解miR-29-fibrosis轴的普适性。4. Chung AC, Huang XR, Meng X, Lan HY 2010《miR-192 mediates TGF-beta/Smad3-driven renal fibrosis》J Am Soc Nephrol — 同一实验室对Smad3下游另一miRNA(miR-192)的研究，方法学（UUO模型、Smad3 KO）与本文高度一致，值得排队比较miRNA稳态调控范式。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3010,7 +3022,7 @@ TGF-β/Smad3 通过直接结合 miR-29 启动子在转录层抑制其表达，�
 
 ### T0 · Suppression of microRNA-29 expression by TGF-β1 promotes collagen expression and renal fibrosis.
 
-**【仅摘要 · 待取全文】**　PMID 22095944　Journal of the American Society of Nephrology : JASN 2012　被引 442　https://pubmed.ncbi.nlm.nih.gov/22095944/
+**【全文已读 · 你提供的 PDF】**　PMID 22095944　Journal of the American Society of Nephrology : JASN 2012　被引 442　来源：ASN.2011010055.pdf　https://pubmed.ncbi.nlm.nih.gov/22095944/
 
 
 **为什么读**
@@ -3035,7 +3047,7 @@ TGF-β1在肾脏三种细胞（近端小管细胞、系膜细胞、足细胞）�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1)是否用qRT-PCR或northern blot分别测了pri-miR-29/pre-miR-29与mature miR-29，还是只测了mature miR-29（若只有mature体一个数据，则无法排除降解机制，摘要中"reduced expression"这一措辞下用的具体图/表编号需核实）；(2)三种肾纤维化模型（造模方法、时间点）的具体图号，判断是急性转录抑制窗口还是慢性稳态改变；(3)fasudil恢复miR-29表达的实验是否同时测了pri-miR-29，以判断ROCK抑制作用的是转录还是降解通路。
+Fig.4A–C是本文最关键的机制图：用collagen I、IVa1、IVa3的3'UTR luciferase报告基因证明TGF-b1可提高报告基因活性，而miR-29a/b/c共转染能阻止甚至逆转该升高，可信度较高，因为三个不同靶基因3'UTR均重复出现一致效应，且*P<0.05标注统计显著。Fig.4D进一步用miR-29结合位点突变体做了独立验证——突变后miR-29a/b/c不再能抑制luciferase活性，证明效应具有序列特异性而非非特异性抑制，这是本文对miR-29直接靶向collagen 3'UTR最有力的双重证据（野生型+突变体对照）。Fig.5A/D和Fig.7C则是体内证据，分别在糖尿病apoE小鼠(n=7/组)和adenine诱导纤维化小鼠(n=3/组)中重复观察到miR-29a/b/c下降，但样本量较小、依赖qPCR单一方法，可信度弱于体外luciferase实验。
 
 
 **④ 方法要点**
@@ -3050,12 +3062,12 @@ TGF-β1在肾脏三种细胞（近端小管细胞、系膜细胞、足细胞）�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对：①TGF-β1处理是否设了未处理对照及载体/scramble miRNA对照；②三种肾纤维化模型是否各自设了sham/vehicle对照；③fasudil实验是否有unmodified纤维化组和健康对照组三臂设计；④luciferase报告基因实验是否包含3'UTR突变对照（去除miR-29结合位点）以证明结合特异性；⑤是否测了miR-29前体（pri-/pre-miR-29）作为区分转录vs降解的关键对照，这是本篇能否被引用为"降解证据"的核心缺口。
+文中明确做的对照包括：miR-C（scrambled control miRNA）转染对照（Fig.2A-C、Fig.4A-C）、未处理/vehicle对照细胞（NRK52E、podocytes、mesangial cells的TGF-b1处理均设未处理对照组）、以及Fig.4D中miR-29结合位点突变的3'UTR luciferase构建体作为序列特异性对照，证明效应依赖miR-29直接结合而非非特异性影响。体内部分Fig.6A设了C-VE(非糖尿病)、D-VE(糖尿病+vehicle)、D-FA(fasudil治疗)、D-LOS(losartan治疗)四组对照。缺少的关键对照：全文未提及anti-miR-29或miR-29 antagomir的功能丧失实验（loss-of-function），只做了miR-29过表达（gain-of-function），无法排除内源miR-29是否为collagen调控所必需；此外Fig.5和Fig.7的体内miR-29下降未见针对ZSWIM8/TUT4-7等miRNA稳态调控通路的机制对照，是否经典TDMD降解未做区分。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：TGF-β1处理后miR-29a/b/c各自下降的倍数或百分比、collagen I/IV mRNA与蛋白上调的定量倍数、三种肾纤维化模型中miR-29表达降低的具体数值、以及fasudil给药后miR-29恢复的定量幅度，摘要仅给出方向性描述（reduced/increased/low levels）没有具体效应量。
+Mesangial cells中TGF-b1处理后miR-29a、miR-29b、miR-29c分别下降28%、46%、37%（P<0.05，出自Fig.3B对应正文一句"a significant decrease in miR-29a, miR-29b, and miR-29c levels (28%, 46%, and 37%, respectively; P<0.05 compared with controls)"）。NRK52E细胞中miR-29a相对丰度比miR-29b高10倍、比miR-29c高5倍（Fig.1F）；在小鼠肾脏中miR-29a比miR-29b高14倍、比miR-29c高4倍（Fig.5D）。转染效率方面，转染后miR-29a/b/c表达比未转染细胞高1000倍（正文提及，对应Supplemental Figure 1，非主图）。糖尿病apoE小鼠实验n=7/组（Fig.5A），adenine模型n=3/组（Fig.7A）。
 
 
 **⑧ 我不相信的一件事**
@@ -3090,12 +3102,12 @@ TGF-β1在肾脏三种细胞（近端小管细胞、系膜细胞、足细胞）�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】要从参考文献里挑三类：①该团队或他人是否有专门测miR-29前体(pri/pre-miR-29)动力学或半衰期的方法学文献（用于设计他自己的half-life实验）；②TUT4/7或其他3′尿苷化酶作用于miR-29的机制文献（判断是否已有人抢占方向2的核心假设）；③fasudil/Rho-kinase通路与miRNA稳态关系的后续文献（判断该药理对照是否已被别人用在纤维化-miRNA降解交叉研究中）。
+Sengupta S et al. 2008《MicroRNA 29c is down-regulated in nasopharyngeal carcinomas, up-regulating mRNAs encoding extracellular matrix proteins》Proc Natl Acad Sci U S A — 与方向②直接相关，是miR-29下调导致ECM蛋白上调的经典范例，可为TUT4/7对miR-29尿苷化调控机制提供比较对象。van Rooij E et al. 2008《Dysregulation of microRNAs after myocardial infarction reveals a role of miR-29 in cardiac fibrosis》Proc Natl Acad Sci U S A — 与方向②的MYBPC3心脏纤维化存档组织高度相关，miR-29在心脏纤维化中的作用可直接类比肾脏机制。Roderburg C et al. 2011《Micro-RNA profiling reveals a role for miR-29 in human and murine liver fibrosis》Hepatology — 补充miR-29在肝纤维化中的保守作用，有助于跨器官比较TUT4/7-miR-29-纤维化轴。Maurer B et al. 2010《MicroRNA-29, a key regulator of collagen expression in systemic sclerosis》Arthritis Rheum — 提供miR-29调控collagen的另一疾病模型佐证，可用于方向②机制的横向验证。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3103,7 +3115,7 @@ TGF-β1在肾脏三种细胞（近端小管细胞、系膜细胞、足细胞）�
 
 ### T1 · Micro-RNA profiling reveals a role for miR-29 in human and murine liver fibrosis.
 
-**【仅摘要 · 待取全文】**　PMID 20890893　Hepatology (Baltimore, Md.) 2011　被引 658　https://pubmed.ncbi.nlm.nih.gov/20890893/
+**【全文已读 · 你提供的 PDF】**　PMID 20890893　Hepatology (Baltimore, Md.) 2011　被引 658　来源：micro-rna-profiling-mir-29.pdf　https://pubmed.ncbi.nlm.nih.gov/20890893/
 
 
 **为什么读**
@@ -3128,7 +3140,7 @@ miR-29 家族在小鼠CCl4/BDL肝纤维化模型及人肝纤维化/肝硬化中�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1)miR-29a/b/c三个成员是否分别检测pri-miRNA/pre-miRNA水平（qPCR的specific stem-loop primer设计），若只测成熟体则无法排除降解层贡献；(2)人肝组织与血清miR-29a定量的具体图/表（fold change、n值、cirrhosis vs early fibrosis vs healthy分组样本量）；(3)HSC中TGF-β/LPS处理后miR-29下调的时间曲线（是否做了actinomycin D chase或pri-miRNA/mature比值，用以区分转录vs降解）；(4)是否有第二种方法（如northern blot验证miR-29 3′端是否有uridylation加尾）。
+Fig. 3C 支持"miR-29b 在肝纤维化中特异性下调、与胶原上调相关"这一主张：从 CCl4 处理6周的 C57BL/6 小鼠肝脏中经 FACS 分离原代 HSC（5只小鼠混合），qPCR 检测显示 miR-29b 出现">2000-fold"的剧烈下调，同时伴随 Col1a1 与 aSma 上调。Fig. 2A/B 则是跨遗传背景（Balb/c 与 C57BL/6，n=5 与 n=4-6/组）、跨时间点（6周与8周）的重复验证，且用了两种独立纤维化模型（CCl4 与胆管结扎 Fig. 2D）互证，可信度较高，但文中未给出这些图的具体统计检验方法（仅在正文中提及*P<0.05等星号标注）。Fig. 6A（血清 miR-29a）用了 box-whisker plot 并标注 ***P<0.001，但未见具体样本量 n，需结合 Supporting 材料核实。
 
 
 **④ 方法要点**
@@ -3143,12 +3155,12 @@ miR-29 家族在小鼠CCl4/BDL肝纤维化模型及人肝纤维化/肝硬化中�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对的对照清单：①CCl4/BDL模型是否有vehicle/sham对照及时间点梯度；②人组织队列是否按fibrosis stage分层且有年龄/性别/病因（酒精性vs病毒性vs NASH）匹配对照；③血清miR-29a检测是否有内参miRNA（如miR-16/cel-miR-39 spike-in）校正及hemolysis质控；④HSC体外实验TGF-β/LPS处理是否有receptor抑制剂/NF-κB抑制剂回复实验证明因果而非相关；⑤miR-29b过表达实验是否有scramble mimic对照及剂量-效应关系；⑥是否检测了pri-miR-29/pre-miR-29水平作为转录活性直接对照（这是区分转录vs降解假设的核心对照，摘要未提及需重点核对）。
+文中明确做了的对照包括：CCl4 处理组 vs. 溶剂(oil)对照组（Fig. 1A、2A、2B）；胆管结扎(BDL) vs. 假手术(sham)对照（Fig. 2D）；HSC 转染 miR-29b mimic vs. 转染112.5 ng scrambled miRNA 作为阴性对照（Fig. 4B-D）；人肝组织纤维化/肝硬化样本 vs. 非纤维化肝对照（Fig. 3E、Fig. 2E/F）；血清 miR-29a 患者 vs. 健康对照（Fig. 6A）。缺少的关键对照：文中未提及 miR-29 抑制剂(antagomir/LNA)体内敲低实验，也没有 rescue 实验（例如同时敲低 miR-29 靶基因验证特异性），这对确认 miR-29 与胶原表达的因果关系（而非相关性）很重要；此外未见针对 TUT4/7 尿苷化或 AGO2/ZSWIM8 乳酰化相关机制的任何对照，说明本文与 Sheldon 三个方向中的分子修饰机制无直接对照数据。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】摘要中无具体fold change、p值或n值数字。读全文时优先补：①miR-29a/b/c在CCl4和BDL模型中下调的fold change及统计量；②人晚期纤维化肝组织miR-29表达下降幅度及患者例数n；③血清miR-29a在肝硬化vs健康对照/早期纤维化之间的具体倍数差异及ROC/AUC（若做了biomarker性能评估）；④miR-29b过表达后collagen mRNA/蛋白下降的具体百分比。
+正文给出的准确数字：①Fig. 3C 提及原代 HSC 中 miR-29b 在纤维化肝脏中出现">2000-fold"下调（对应正文"a dramatic (>2000-fold) down-regulation"一句）；②Fig. 6A 血清 miR-29a 下调标注为 ***P<0.001；③Fig. 2A/B/D 及 Fig. 5A 多处星号标注 *P<0.05, **P<0.01, ***P<0.001，但未给出具体倍数；④样本量方面 Fig. 2A n=5/组，Fig. 2B n=4-6只/组，Fig. 2D n=4/组，Fig. 5A n=3/组，Fig. 3C/D 细胞来自2-5只小鼠混合。④关于 miR-29 差异表达 miRNA 数目：正文明确"31 miRNAs were differentially regulated"，其中"10 miRNAs were significantly overexpressed"，"21 miRNAs showed a significantly lower expression"（对应 Fig. 1A/B 及其相邻正文句）。
 
 
 **⑧ 我不相信的一件事**
@@ -3183,12 +3195,12 @@ miR-29 家族在小鼠CCl4/BDL肝纤维化模型及人肝纤维化/肝硬化中�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要从参考文献里挑三类：①miR-29转录调控机制的后续/上游文献（TGF-β/Smad3直接结合miR-29启动子/pri-miRNA的ChIP证据，用于评估转录解释的"强度上限"）；②miR-29在其他器官纤维化（肺、肾、心脏）中的验证性文献，用于评估跨器官一致性及是否有人已经做过pri/mature区分；③本文引用的miRNA芯片/qPCR方法学原始文献，核实其检测的是否为成熟体特异性引物，从而判断是否存在检测层面掩盖降解信号的可能。
+1. van Rooij E, et al. 2008《Dysregulation of microRNAs after myocardial infarction reveals a role of miR-29 in cardiac fibrosis》Proc Natl Acad Sci U S A — 与方向②高度相关，miR-29 在心脏纤维化中的作用可直接对照 Zou 手头的 MYBPC3 心脏存档组织中 miR-29 尿苷化研究。 2. Mott JL, Kobayashi S, Bronk SF, Gores GJ. 2007《mir-29 regulates Mcl-1 protein expression and apoptosis》Oncogene — miR-29 靶基因调控机制的经典参考，可为方向②的下游功能验证提供思路。 3. Xiong Y, et al. 2010《Effects of microRNA-29 on apoptosis, tumorigenicity, and prognosis of hepatocellular carcinoma》HEPATOLOGY — 补充 miR-29 在肝脏疾病中的功能谱，可用于方向②肠/肝纤维化组织比较背景。 4. Seki E, De Minicis S, Osterreicher CH, Kluwe J, Osawa Y, Brenner DA, et al. 2007《TLR4 enhances TGF-beta signaling and hepatic fibrosis》Nat Med — 涉及 TLR4/TGF-b/NF-kB 通路调控纤维化，对理解方向②器官纤维化的上游炎症信号（可能与代谢/乳酸信号交叉）有参考价值。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3196,7 +3208,7 @@ miR-29 家族在小鼠CCl4/BDL肝纤维化模型及人肝纤维化/肝硬化中�
 
 ### T1 · miR-29 is a major regulator of genes associated with pulmonary fibrosis.
 
-**【仅摘要 · 待取全文】**　PMID 20971881　American journal of respiratory cell and molecular biology 2011　被引 415　https://pubmed.ncbi.nlm.nih.gov/20971881/
+**【全文已读 · 你提供的 PDF】**　PMID 20971881　American journal of respiratory cell and molecular biology 2011　被引 415　来源：AJRCMB452287.pdf　https://pubmed.ncbi.nlm.nih.gov/20971881/
 
 
 **为什么读**
@@ -3221,7 +3233,7 @@ miR-29 是肺纤维化相关基因的主要调控者
 
 **③ 关键图与可信度**
 
-【需读全文核对】需去核对：(1) 图中 miR-29 表达定量用的是 Northern blot 还是 qPCR，是否报告了绝对拷贝数/半衰期数据；(2) IMR-90 knockdown 实验中 miR-29 前体(pri/pre)与成熟体是否分别测定，用什么方法（Northern探针位置）区分；(3) TGF-β1 处理时间点是否早到足以排除继发效应，是否有 actinomycin D 或类似转录抑制实验估算 miR-29 半衰期；(4) 是否有第二种独立方法（如 in situ hybridization 定量）验证miR-29 空间分布与靶基因反相关。
+Fig. 2A是支持"miR-29水平与其下游纤维化靶基因表达呈负相关"这一核心主张的关键图：bleomycin处理后miR-29逐渐下降，D28降至最低，随后D70、D140逐渐恢复，而Col3A1、Col4A1的表达与miR-29水平呈镜像变化。可信度方面，该图基于qRT-PCR定量数据，并有Fig. 1B（miRNA array结果，*P<0.05）和Fig. 2B–2E（ISH+Masson trichrome染色的独立影像学方法）交叉验证同一现象，属于两种独立方法（分子定量+组织原位）互证，但正文未给出该图具体的生物学重复次数（n）。另外Fig. 4A–D用IMR-90细胞的LNA knockdown/mimic实验（qRT-PCR、Western、Sircol assay）从功能上验证了miR-29对COL4A1、NID1、COL1A1及可溶性胶原水平的调控，是体外机制层面可信度较高的图。
 
 
 **④ 方法要点**
@@ -3236,12 +3248,12 @@ miR-29 是肺纤维化相关基因的主要调控者
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】需逐条核对：①miR-29 knockdown 效率对照（scramble antagomir/anti-miR对照）；②TGF-β1处理是否有中和抗体或受体抑制剂对照以确认特异性；③miR-29表达下降是否有转录本(pri-miR-29)水平对照以排除单纯转录调控；④博来霉素模型是否有生理盐水对照组及时间点对照；⑤IMR-90表达谱分析是否有多次生物学重复及统计校正方法。
+文中明确做了的对照包括：bleomycin处理组均设置了PBS注射的对照组（如Fig. 2B vs 2C，Fig. 3C vs 3F）；LNA knockdown实验设置了scrambled LNA oligo对照（Fig. 4A，"but not with scrambled LNA oligos"）；miR-29 mimic实验设置了control oligo对照（Fig. 4B，"as compared with control oligos"）；3'UTR luciferase实验设置了野生型vs突变型miR-29结合位点对照，以及miR-29 mimic vs miR-365 mimic的miRNA特异性对照（Fig. 5）。缺少的关键对照：文中未提及体内bleomycin模型中miR-29的rescue实验（例如外源补充miR-29 mimic能否逆转纤维化表型），这对确认miR-29下降是纤维化的因还是果很重要；此外Table 1所列基因芯片比较也未见针对anti-miR-29处理设置多个非靶向序列对照，仅提到scrambled LNA，无法完全排除LNA脱靶效应。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：miR-29下降的具体倍数(fold change)、与纤维化评分的相关系数(r或p值)、TGF-β1处理后miR-29抑制的时间曲线和IC50/剂量、knockdown后靶基因上调的倍数范围。
+miRNA array共检测609个miRNA，其中49个在bleomycin处理肺组织中at least one time point显著上下调（P<0.05，fold changes>2.0，出自p4正文及Table E2引用句）。Table 1列出anti-miR-29/SCR处理下多个基因的定量倍数变化，例如COL1A1 fold change=1.29（P=6.74E-02，应为E-03量级，原文数值6.74E-03）、COL3A1=1.56（P=1.03E-02）、COL4A1=1.53（P=1.33E-02）、NID1=2.05（P=1.20E-02）、ITGA11=1.38（P=1.03E-02），同表还列出对应TGF-β/CTRL处理下的fold change，如COL4A1在TGF-β组为4.46（P=2.31E-04）。这些数字均出自Table 1"CATEGORIES OF GENES ENRICHED IN UP-REGULATED GENE LIST IN miR-29 KNOCKDOWN CELLS"。
 
 
 **⑧ 我不相信的一件事**
@@ -3276,12 +3288,12 @@ miR-29 是肺纤维化相关基因的主要调控者
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需从参考文献里挑三类：①miR-29转录调控机制原始文献（TGF-β/Smad3抑制miR-29的分子机制论文，确认竞争解释的源头）；②miR-29降解/半衰期或miRNA 3′修饰相关文献（若有引用TUT4/7或尿苷化相关工作，确认是否已被涉及）；③本文引用的miR-29其他器官纤维化（心、肾、肝）功能验证文献，用于评估他跨组织（心脏/肠）外推的合理性。
+1. van Rooij E, Sutherland LB, Thatcher JE, et al. 2008《Dysregulation of microRNAs after myocardial infarction reveals a role of miR-29 in cardiac fibrosis》Proc Natl Acad Sci USA — 首次将miR-29与心脏纤维化关联，直接对应Sheldon方向②的MYBPC3心脏纤维化存档组织应用场景。2. Maurer B, Stanczyk J, Jungel A, et al. 2010《miR-29 is a key regulator of collagen expression in systemic sclerosis》Arthritis Rheum — 证明miR-29抑制胶原表达的机制在皮肤纤维化中同样成立，可与肠道SAA3纤维化模型的miR-29机制做跨组织比较。3. Pandit KV, Corcoran D, Yousef H, et al. 2010《Inhibition and role of let-7d in idiopathic pulmonary fibrosis》Am J Respir Crit Care Med — 与本文并列讨论的肺纤维化miRNA研究，提供let-7/miR-21/miR-29在同一bleomycin模型中的miRNA稳态调控范式，可为方向①③中miRNA稳态重编程机制提供比较框架。4. Liu G, Friggeri A, Yang Y, et al. 2010《Mir-21 mediates fibrogenic activation of pulmonary fibroblasts and lung fibrosis》J Exp Med — 展示TGF-β通路下游miRNA介导纤维化激活的机制，可与TUT4/7-miR-29尿苷化影响器官纤维化的方向②形成互补参考。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3289,7 +3301,7 @@ miR-29 是肺纤维化相关基因的主要调控者
 
 ### T1 · MicroRNA-29, a key regulator of collagen expression in systemic sclerosis.
 
-**【仅摘要 · 待取全文】**　PMID 20201077　Arthritis and rheumatism 2010　被引 428　https://pubmed.ncbi.nlm.nih.gov/20201077/
+**【仍缺全文 · 待补】**　PMID 20201077　Arthritis and rheumatism 2010　被引 428　https://pubmed.ncbi.nlm.nih.gov/20201077/
 
 
 **为什么读**
@@ -3374,7 +3386,7 @@ miR-29a 在 SSc（系统性硬化）皮肤与纤维化模型中下调，且该�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3382,7 +3394,7 @@ miR-29a 在 SSc（系统性硬化）皮肤与纤维化模型中下调，且该�
 
 ### T2 · miR-29b as an Anti-Fibrotic Therapeutic: Mechanisms, Disease Biology and Translational Opportunities.
 
-**【全文已读】**　PMID 42645200　Cells 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/42645200/
+**【全文已读 · PMC】**　PMID 42645200　Cells 2026　被引 0　PMC13510581　https://pubmed.ncbi.nlm.nih.gov/42645200/
 
 
 **为什么读**
@@ -3467,7 +3479,7 @@ miR-29a 在 SSc（系统性硬化）皮肤与纤维化模型中下调，且该�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3478,7 +3490,7 @@ miR-29a 在 SSc（系统性硬化）皮肤与纤维化模型中下调，且该�
 
 ### T0 · Zcchc11-dependent uridylation of microRNA directs cytokine expression.
 
-**【全文已读】**　PMID 19701194　Nature cell biology 2009　被引 246　https://pubmed.ncbi.nlm.nih.gov/19701194/
+**【全文已读 · PMC】**　PMID 19701194　Nature cell biology 2009　被引 246　PMC2759306　https://pubmed.ncbi.nlm.nih.gov/19701194/
 
 
 **为什么读**
@@ -3563,7 +3575,7 @@ Fig. 4e 是与 Sheldon TUT4/7-miR-29 方向最相关的关键图：它通过测�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3571,7 +3583,7 @@ Fig. 4e 是与 Sheldon TUT4/7-miR-29 方向最相关的关键图：它通过测�
 
 ### T0 · A role for the Perlman syndrome exonuclease Dis3l2 in the Lin28-let-7 pathway.
 
-**【全文已读】**　PMID 23594738　Nature 2013　被引 285　https://pubmed.ncbi.nlm.nih.gov/23594738/
+**【全文已读 · PMC】**　PMID 23594738　Nature 2013　被引 285　PMC3651781　https://pubmed.ncbi.nlm.nih.gov/23594738/
 
 
 **为什么读**
@@ -3656,7 +3668,7 @@ Fig. 2g-h（time course assay 及三次独立重复的定量）是本文最关�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3664,7 +3676,7 @@ Fig. 2g-h（time course assay 及三次独立重复的定量）是本文最关�
 
 ### T1 · Lin28 mediates the terminal uridylation of let-7 precursor MicroRNA.
 
-**【仅摘要 · 待取全文】**　PMID 18951094　Molecular cell 2008　被引 808　https://pubmed.ncbi.nlm.nih.gov/18951094/
+**【全文已读 · 你提供的 PDF】**　PMID 18951094　Molecular cell 2008　被引 808　来源：1-s2.0-S1097276508006606-main.pdf　https://pubmed.ncbi.nlm.nih.gov/18951094/
 
 
 **为什么读**
@@ -3689,7 +3701,7 @@ Lin28a/b 在细胞质中招募尿苷化机制，使 pre-let-7 3' 端尾部尿苷
 
 **③ 关键图与可信度**
 
-【需读全文核对】需确认：(1)尿苷化位点数与后果关系的图（单尿苷vs寡尿苷，判断是否此文已区分或需看后续TUT4/7/Zcchc11文章）；(2)up-let-7的定量方法（Northern blot深度测序？RT-qPCR？半衰期测定用什么方法-pulse chase还是actinomycin D chase）；(3)是否有体外重组Lin28+TUT反应的第二种验证方法（in vitro uridylation assay）。
+Figure 3A/3B 是本文核心图：Figure 3A 显示对 FLAG-Lin28a 免疫沉淀后，northern blot 检测到 pre-let-7a 上方出现一条延伸约18 nt的模糊带（星号标记的 up-let-7），而 ZFD 点突变的 Lin28a（mt）能结合 pre-let-7 却不能产生该延伸带，说明锌指结构域是催化尾巴延伸的关键；qRT-PCR 用于估算 IP 效率，SD 来自两组数据。Figure 3B 通过凝胶纯化+3′adaptor 连接+RT-PCR+克隆测序确定该延伸序列为14 nt、主要由U组成的3′尾（该U序列不在基因组中，说明是Drosha切割后添加），并以 RNase H/oligo-dA18 切割实验（Figure S8，非本图但正文提及）进一步佐证U尾存在。Figure 4A/4B 用体外尿苷化实验独立验证：合成pre-let-7a-1与含Lin28的细胞提取物+UTP孵育才出现延伸带（Lin28缺失或用ZFD突变体则无），且重组Lin28b蛋白（0、15、30、60、200 nM）呈剂量依赖方式诱导尿苷化，构成了对Figure 3体内结果的第二种独立方法（体外重组系统）验证，可信度较高。
 
 
 **④ 方法要点**
@@ -3704,12 +3716,12 @@ Lin28a/b 在细胞质中招募尿苷化机制，使 pre-let-7 3' 端尾部尿苷
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】需要核对的对照清单：(1)Lin28 knockdown/knockout对照是否恢复let-7成熟体；(2)尿苷化位点数目（单尿苷化vs寡尿苷化）是否分别对应不同的Dicer加工/降解命运，需要找突变尿苷化酶催化活性位点的对照；(3)是否有非let-7 pre-miRNA作为特异性对照排除Lin28非特异效应；(4)体外重组系统中TUT4/7身份是否已在此文确认（此文2008年可能尚未鉴定出TUT4/7为催化酶，需查是否只是描述现象而非机制酶）。
+文中明确做了的对照包括：(1) Lin28 ZFD点突变体（mt）作为催化死亡对照，用于证明单纯结合pre-let-7不足以诱导尿苷化（Figure 3A、4Aa）；(2) 转录负性Drosha突变体（TN Drosha）作为Drosha处理被完全阻断的阳性对照，用以区分Lin28作用是否发生在Drosha步骤（Figure 2A）；(3) miR-16-1/pre-miR-16及pre-miR-30a作为非let-7家族miRNA的特异性对照，证明Lin28诱导的尿苷化对let-7家族具有特异性（Figure 2A、4Ab、Figure S7/S9）；(4) 核质分离效率对照（RT-PCR和WB检测分离效率，Figure 2B）；(5) 体外降解实验中使用转录负性Dicer突变体，排除Dicer加工对pre-let-7降解速率的影响（Figure 4E）。文中未提及对Lin28敲减/过表达效率之外设置shRNA非靶向对照（如scrambled siRNA）的描述，也未看到对尿苷化转移酶（TUTase）本身进行敲低或抑制的直接功能性对照实验（正文仅推测其存在），这一缺失对于确认尿苷化酶身份及排除提取物中其他核酸酶/聚合酶活性干扰是重要的。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：uridylated pre-let-7占总pre-let-7的比例、Lin28过表达后let-7成熟体下降倍数、up-let-7半衰期与未尾部修饰pre-let-7半衰期的对比数值。
+正文中定量数字有限，多为定性描述或图注中未给出具体数值。可确认的定量信息：内源性up-let-7克隆比例——从Hep3B、Huh7、HepG2三种细胞克隆的let-7序列中，分别有26%、11%、15%的测序克隆带有3′U尾（正文"Multiple clones from these cells (26%, 11%, and 15% of the sequenced let-7 clones) contained 3′ U tails"）；up-let-7的3′尾长度为14 nt（Figure 3B相关正文："the long RNA species had 3′ terminal extension of 14 nt"）；延伸带比pre-let-7a-1长约18 nt（正文"18 nt longer than pre-let-7a-1"，对应Figure 3Aa星号带）；重组Lin28b蛋白体外尿苷化实验的剂量梯度为0、15、30、60、200 nM（Figure 4B）。除此之外，Figure 1、2、4等图注和正文未给出具体的倍数变化、p值或n值，【故其余效应量（如let-7上调倍数、pre-let-7减少百分比）全文未见定量数字】，仅有"markedly reduced"、"slightly but reproducibly reduced"等定性描述。
 
 
 **⑧ 我不相信的一件事**
@@ -3744,12 +3756,12 @@ Lin28a/b 在细胞质中招募尿苷化机制，使 pre-let-7 3' 端尾部尿苷
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需要从参考文献里挑三类：(1)确立TUT4/7/Zcchc11为催化酶身份的后续论文（如Heo 2009 Cell, Hagan 2009 NSMB）；(2)DIS3L2作为寡尿苷化RNA降解酶的鉴定文献（Chang 2013/Ustianenko）；(3)本文引用的Lin28-let-7早期发现文献（Viswanathan 2008 Science）以确认let-7调控的历史脉络及与miR-29/TDMD领域交叉引用情况。
+1) Newman, M.A., Thomson, J.M., and Hammond, S.M. (2008)《Lin-28 interaction with the Let-7 precursor loop mediates regulated microRNA processing》RNA — 与方向①③相关，同期独立报道Lin28与let-7前体loop的互作机制，可与ZSWIM8/TUT4-7对pre-miRNA的识别模式对照，值得排队理解RNA结合蛋白如何通过loop结构调控miRNA命运。2) Rybak, A., Fuchs, H., Smirnova, L., Brandt, C., Pohl, E.E., Nitsch, R., and Wulczyn, F.G. (2008)《A feedback loop comprising lin-28 and let-7 controls pre-let-7 maturation during neural stem-cell commitment》Nat. Cell Biol. — 涉及lin-28/let-7反馈环在细胞命运决定中的作用，对理解TUT4/7-miR-29在纤维化器官重编程中的类似反馈环（方向②）有直接参考价值。3) Viswanathan, S.R., Daley, G.Q., and Gregory, R.I. (2008)《Selective blockade of microRNA processing by Lin28》Science — 与本文同一时期报道Lin28对let-7加工的选择性阻断，是理解TUTase家族特异性识别miRNA前体（可外推至AGO2/ZSWIM8乳酰化修饰特异性，方向③）的重要背景文献。4) Ibrahim, F., Rohr, J., Jeong, W.J., Hesson, J., and Cerutti, H. (2006)《Untemplated oligoadenylation promotes degradation of RISC-cleaved transcripts》Science — 提出非模板寡聚腺苷化促进RISC切割产物降解的机制，与TUT4/7尿苷化-降解轴（方向②的miR-29尿苷化研究）具有直接可比性，值得排队比较poly(A)/poly(U)尾在miRNA稳态调控中的异同。5) Li, J., Yang, Z., Yu, B., Liu, J., and Chen, X. (2005)《Methylation protects miRNAs and siRNAs from a 3′-end uridylation activity in Arabidopsis》Curr. Biol. — 揭示甲基化保护miRNA免受3′尿苷化的机制，可为方向③中乳酰化修饰如何调控TUT4/7识别底物提供修饰竞争/保护机制的参照框架。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3757,7 +3769,7 @@ Lin28a/b 在细胞质中招募尿苷化机制，使 pre-let-7 3' 端尾部尿苷
 
 ### T1 · TUT4 in concert with Lin28 suppresses microRNA biogenesis through pre-microRNA uridylation.
 
-**【仅摘要 · 待取全文】**　PMID 19703396　Cell 2009　被引 665　https://pubmed.ncbi.nlm.nih.gov/19703396/
+**【全文已读 · 你提供的 PDF】**　PMID 19703396　Cell 2009　被引 665　来源：1-s2.0-S0092867409009647-main.pdf　https://pubmed.ncbi.nlm.nih.gov/19703396/
 
 
 **为什么读**
@@ -3782,7 +3794,7 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1)体外重组TUT4+Lin28+pre-let-7尾长/尿苷数的定量胶图及n值；(2)TUT4 knockdown后pre-let-7与mature let-7比例变化的定量(qPCR/northern)，区分pri/pre/mature三种形式的图；(3)是否有第二种独立方法（如CLIP或体外结合实验）验证GGAG motif特异性识别，而非仅靠序列比对推断。
+Figure 1B（qRT-PCR + semiquantitative RT-PCR）支持"TUT4 knockdown 通过转录后机制特异性抑制 let-7 生物合成"：在 mES 细胞(R1)中敲低 TUT4 48 hr 后，let-7a/let-7g/let-7f 的成熟体上调而 pri-let-7 不变，标准误来自两次独立实验，可信度中等（仅两次重复，未见第二种独立方法如 Northern blot 交叉验证该图）。Figure 3A（in vitro uridylation assay）支持"TUT4 需与 Lin28 共同作用才能尿苷化 pre-let-7"：用免疫沉淀的 FLAG-TUT4 WT 与催化死突变体(D1011A)对比，在加入 0.5 mM recombinant Lin28a/b 及 0.25 mM UTP 后才出现约100 nt 的 up-let-7a-1 条带，催化死突变体不产生延伸带，说明该活性依赖 TUT4 自身催化位点而非污染蛋白，可信度较高（有阴性对照 pre-miR-16-1 和突变体对照）。Figure 7A 支持"含 GGAG 序列motif 的 pre-miRNA（miR-107/143/200c 等）同样受 Lin28/TUT4 调控"，标准差来自三次（有GGAG组）和两次（无GGAG组）独立实验，属于图注中明确标注的重复数。
 
 
 **④ 方法要点**
@@ -3797,12 +3809,12 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时逐条核对：①是否设置TUT4催化死突变体作为阴性对照；②Lin28 knockdown后TUT4蛋白/mRNA水平是否作为对照检测（排除TUT4本身表达变化的混杂）；③非GGAG motif miRNA作为阴性对照是否检测尿苷化水平；④pri-let-7转录本水平是否作为对照排除转录层调控干扰（这对区分他的"降解假设"至关重要）。
+文中明确做的对照包括：①阴性对照 RNA pre-miR-16-1（贯穿 Figure 1A、2A-2C、3A/B、7A，用于证明 TUT4/Lin28 对 pre-let-7 的特异性）；②催化死突变体 TUT4(D1011A) 作为酶活性对照（Figure 3A），排除污染蛋白导致尿苷化；③核/质分离对照，用 tubulin（胞质）和 hnRNP C 或 lamin（核）监测分级效率（Figure 2D、2E）；④siRNA 特异性对照，用另一条针对 TUT4 mRNA不同位置的siRNA排除脱靶效应（正文提及"data not shown"）；⑤NTP 特异性对照，比较 UTP/ATP/CTP/GTP（Figure 3C）。缺少的关键对照：全文未提及体内(in vivo)敲低 TUT4 后直接检测 pre-let-7 尿苷化水平变化的定量数据，也未见 TUT4 在非 let-7 家族广泛 miRNA 上的全转录组敲低验证（仅 Figure 5A 做了 microarray，但未在本段文本中详细展开对照设计），这类全局性对照对排除 TUT4 通过其他非 Lin28 依赖途径影响 miRNA 稳态很重要。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：①TUT4 knockdown后let-7成熟体下降的具体倍数/百分比；②寡尿苷化尾的长度分布（几个U）；③干细胞标记基因下降的定量数值。
+正文明确给出的定量数字：TUT4 敲低后 let-7a、let-7g、let-7f 成熟体水平上升 2 到 4 倍（"increased by 2- to 4-fold upon TUT4 knockdown"，见 Figure 1B 对应正文段，标准误来自两次独立实验）；而 miR-16 水平未变化。In vitro uridylation 反应中使用的浓度为 0.5 mM recombinant Lin28、0.25 mM UTP（Figure 3A 图注），以及低浓度对照 0.025 mM NTP（Figure 3C）。Figure 7A 的标准差来自三次（含GGAG组）和两次（不含GGAG组）独立实验。除此之外全文提供的其余效应量均为图内条带强度描述性比较，未见更多具体倍数或 p 值。
 
 
 **⑧ 我不相信的一件事**
@@ -3837,12 +3849,12 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要从参考文献里挑三类：①Lin28诱导pre-let-7尿苷化的原始报道（Heo et al. 2008前作）确认本文是否为独立发现还是延续；②pre-miRNA末端环motif识别的结构生物学后续文献，用于比对miR-29是否含同源motif；③同期或稍早关于TUTase家族（TUT4/7/ZCCHC11命名沿革）的综述或原始鉴定文献，理清TUT4与TUT7命名对应关系，避免方向2中试剂/抗体设计出错。
+Heo, I., Joo, C., Cho, J., Ha, M., Han, J., and Kim, V.N. (2008). Lin28 mediates the terminal uridylation of let-7 precursor MicroRNA. Mol. Cell 32, 276–284. — 本文的直接前作，建立了 Lin28 介导 pre-let-7 尿苷化的现象学基础，是理解 ZSWIM8/TUT4-7 与 miRNA 稳态关系的必读背景。Katoh, T., Sakaguchi, Y., Miyauchi, K., Suzuki, T., Kashiwabara, S., and Baba, T. (2009). Selective stabilization of mammalian microRNAs by 30 adenylation mediated by the cytoplasmic poly(A) polymerase GLD-2. Genes Dev. 23, 433–438. — 展示同类 noncanonical PAP（GLD2/TUTase2）通过单腺苷化稳定成熟 miR-122，与方向③"乳酸/乳酰化修饰重编程 miRNA 稳态"中 TUT 家族酶的代谢调控机制形成对照，值得排队比较。Rybak, A., Fuchs, H., Smirnova, L., Brandt, C., Pohl, E.E., Nitsch, R., and Wulczyn, F.G. (2008). A feedback loop comprising lin-28 and let-7 controls pre-let-7 maturation during neural stem-cell commitment. Nat. Cell Biol. 10, 987–993. — 提供 Lin28/let-7 反馈环在神经干细胞命运决定中的功能证据，与方向②TUT4/7-miR-29-器官纤维化的组织特异性调控逻辑相关，可用于比较不同组织中 TUTase-miRNA 轴的下游表型。Viswanathan, S.R., Daley, G.Q., and Gregory, R.I. (2008). Selective blockade of microRNA processing by Lin28. Science 320, 97–100. — 与本文同期独立证实 Lin28 选择性阻断 let-7 加工，为方向①中"选择性靶向特定 miRNA 家族"的机制类比提供参照文献。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3850,7 +3862,7 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 ### T1 · Mono-uridylation of pre-microRNA as a key step in the biogenesis of group II let-7 microRNAs.
 
-**【仅摘要 · 待取全文】**　PMID 23063654　Cell 2012　被引 266　https://pubmed.ncbi.nlm.nih.gov/23063654/
+**【全文已读 · 你提供的 PDF】**　PMID 23063654　Cell 2012　被引 266　来源：1-s2.0-S0092867412011294-main.pdf　https://pubmed.ncbi.nlm.nih.gov/23063654/
 
 
 **为什么读**
@@ -3875,7 +3887,7 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) group I vs group II pre-miRNA 的分类图/表及各自比例，是否给出全基因组统计的 n 值；(2) TUT7/4/2 敲低后 let-7 成熟体 vs pre-let-7 水平变化的定量图（qPCR/Northern，需看 fold change 和统计检验）；(3) 体外重建实验（recombinant TUT + dsRNA substrate）中 1nt→2nt overhang 转化效率的定量方法（酶动力学或电泳定量）；(4) 是否有第二种方法（如深度测序读出 pre-miRNA 3'端异质性）验证 mono- vs oligo-uridylation 的区分。
+Fig 3B/3D：体外重构实验显示mono-uridylation显著提升Dicer加工效率——mono-uridylated pre-let-7a-1较未修饰对照被纯化Dicer切割更高效（两次独立实验测定加工效率，误差棒为SD），pre-let-7b差异更为剧烈（未修饰几乎不被切割，mono-U后被高效切割），可信度较高因为用了纯化蛋白的正交生化验证而非仅细胞表型。Fig 2B–D是另一组关键图，显示同时敲低TUT7/TUT4/TUT2（siTUT mix）使pre-let-7a积累而成熟let-7a下降，并用两次独立northern blot定量（Fig 2C，配对单尾t检验，*p<0.05, **p<0.01）及测序数据（Fig 2D，Fisher精确检验***p<0.001）支持，属于细胞内功能验证与生化重构互相印证的组合，可信度较高。
 
 
 **④ 方法要点**
@@ -3890,12 +3902,12 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对：①TUT7/4/2 三者单独 vs 联合敲低的表型是否有冗余互补（决定他方向2里敲哪个基因）；②是否用 catalytically dead TUT mutant 作阴性对照排除非催化功能；③Lin28 存在/不存在细胞系中 mono- vs oligo-uridylation 的比例对照（ES cells vs 体细胞）是否用同一批 pre-let-7 底物；④miR-105/let-7 之外是否检验了其他 group II miRNA（如摘要提到但未展开的成员）作为普遍性对照。
+做了的对照：Fig 1D/S1C-D 用催化死突变体（TUT7 D1060A、TUT2 D215A、TUT4 D1011A）排除污染酶活性的可能；Fig S1E 做了NTP特异性对照（换用其他NTP代替UTP）证明TUT7/4对U特异而TUT2利用范围更广；Fig 2A 用GAPDH作为western loading control，Fig 2B 用tRNA-lys作为northern loading control，并平行探测miR-16作为非let-7 miRNA的特异性对照（TUT敲低对miR-16影响不显著）；此外用了siDicer作为阳性对照比较TUT敲低效应强度，以及三组不同siRNA序列组合（siTUT mix之外两套）排除off-target效应（Fig S2A–C）。缺少的关键对照：文中未提及对TUT7/4/2三重敲低后let-7功能性下游读出（如let-7靶基因蛋白水平或细胞表型/增殖分化指标）的直接验证，也未做体内rescue实验（过表达WT酶挽救敲低表型）来确认表型是敲低特异性而非脱靶累积效应，这对确证TUTs是let-7生物合成必需组分而非仅参与稳态很重要。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：①group II pre-miRNA（1nt overhang）占全部 pre-miRNA 的具体比例（摘要仅说"the majority of let-7 and miR-105"）；②TUT 敲低后 let-7 成熟体下降的 fold change 及统计显著性；③体外尿苷化反应对 1nt overhang 底物的催化效率（Km/kcat 或百分比转化）。
+正文Figure 1A明确数字：145个pre-let-7克隆中，20%为mono-uridylated（Mono-U），60%为未修饰，1%为mono-A，14%为trimmed，5%为others。正文结果段落陈述：TUT7/4/2同时敲低（siTUT mix）后，mono-uridylated pre-let-7比例从20%降至3%（对应Fig 2D测序数据，Fisher精确检验p<0.001）。TUT4与pre-let-7相互作用时长为1.1±0.2秒（引用Yeom et al. 2011单分子SIMPlex数据，正文p3段落）。Fig 2C的northern定量给出统计显著性标注（*p<0.05, **p<0.01）但未在提供文本中给出具体倍数数值。
 
 
 **⑧ 我不相信的一件事**
@@ -3930,12 +3942,12 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要挑三类参考文献：①定义 group I/II pre-miRNA 分类标准的原始文献（Drosha 切割位点异质性的结构基础）；②Lin28-TUT4-oligouridylation 促降解 pre-let-7 的经典文献（Heo et al.），用于对比本文"促加工"的反例机制；③TUT7/4/2 在其他 miRNA（尤其代谢相关 miR-33/375）生物合成中的后续功能研究，判断是否已有人做过方向2/方向3 的雏形工作。
+Heo, I., Joo, C., Kim, Y.K., Ha, M., Yoon, M.J., Cho, J., Yeom, K.H., Han, J., and Kim, V.N. (2009). TUT4 in concert with Lin28 suppresses microRNA biogenesis through pre-microRNA uridylation. Cell 138, 696–708. — 与方向①②高度相关，是TUT4/Lin28介导pre-let-7 oligo-uridylation的关键前作，Sheldon可用于对比mono- vs oligo-uridylation的机制差异及代谢/纤维化背景下的功能分歧。 Jones, M.R., Quinton, L.J., Blahna, M.T., Neilson, J.R., Fu, S., Ivanov, A.R., Wolf, D.A., and Mizgerd, J.P. (2009). Zcchc11-dependent uridylation of microRNA directs cytokine expression. Nat. Cell Biol. 11, 1157–1163. — 直接将TUT4(Zcchc11)介导的miRNA尿苷化与细胞因子/炎症表型联系，对方向②器官纤维化中TUT4/7-miR-29轴的下游功能提供参考模型。 Burns, D.M., D'Ambrogio, A., Nottrott, S., and Richter, J.D. (2011). CPEB and two poly(A) polymerases control miR-122 stability and p53 mRNA translation. Nature 473, 105–108. — TUT2(GLD2)介导miRNA 3′端修饰调控稳定性的代表性工作，对方向③理解TUT2/TUT4-7介导的miRNA稳态重编程机制有参考价值。 Katoh, T., Sakaguchi, Y., Miyauchi, K., Suzuki, T., Kashiwabara, S., Baba, T., and Suzuki, T. (2009). Selective stabilization of mammalian microRNAs by 3' adenylation mediated by the cytoplasmic poly(A) polymerase GLD-2. Genes Dev. 23, 433–438. — 同样涉及TUT2对miR-122稳定性的3′端修饰机制，可与方向③中乳酸/乳酰化对AGO2/TUT酶活性调控的假设做类比参考。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -3943,7 +3955,7 @@ TUT4是Lin28招募到pre-let-7末端环GGAG motif的尿苷转移酶，其对pre-
 
 ### T1 · Uridylation by TUT4 and TUT7 marks mRNA for degradation.
 
-**【全文已读】**　PMID 25480299　Cell 2014　被引 259　https://pubmed.ncbi.nlm.nih.gov/25480299/
+**【全文已读 · PMC】**　PMID 25480299　Cell 2014　被引 259　PMC4720960　https://pubmed.ncbi.nlm.nih.gov/25480299/
 
 
 **为什么读**
@@ -4028,7 +4040,7 @@ Figure 1D/1E 支持"TUT4/7 敲低导致大多数mRNA尿苷化下降"的主张：
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4036,7 +4048,7 @@ Figure 1D/1E 支持"TUT4/7 敲低导致大多数mRNA尿苷化下降"的主张：
 
 ### T2 · Mechanistic insights into Lin28-dependent oligo-uridylylation of pre-let-7 by TUT4.
 
-**【全文已读】**　PMID 41521656　Nucleic acids research 2026　被引 1　https://pubmed.ncbi.nlm.nih.gov/41521656/
+**【全文已读 · PMC】**　PMID 41521656　Nucleic acids research 2026　被引 1　PMC12790862　https://pubmed.ncbi.nlm.nih.gov/41521656/
 
 
 **为什么读**
@@ -4121,7 +4133,7 @@ Fig 1C-D 给出hTUT4_mini:hLin28A:pre-let-7g_UUU三元复合物的cryo-EM密度�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4132,7 +4144,7 @@ Fig 1C-D 给出hTUT4_mini:hLin28A:pre-let-7g_UUU三元复合物的cryo-EM密度�
 
 ### T0 · Mechanisms, Management, and Treatment of Fibrosis in Patients With Inflammatory Bowel Diseases.
 
-**【全文已读】**　PMID 27720839　Gastroenterology 2017　被引 409　https://pubmed.ncbi.nlm.nih.gov/27720839/
+**【全文已读 · PMC】**　PMID 27720839　Gastroenterology 2017　被引 409　PMC5209279　https://pubmed.ncbi.nlm.nih.gov/27720839/
 
 
 **为什么读**
@@ -4217,7 +4229,7 @@ IBD 纤维化的机制、管理与治疗（Gastroenterology 综述）——临�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4225,7 +4237,7 @@ IBD 纤维化的机制、管理与治疗（Gastroenterology 综述）——临�
 
 ### T0 · TWIST1+FAP+ fibroblasts in the pathogenesis of intestinal fibrosis in Crohn's disease.
 
-**【全文已读】**　PMID 39024569　The Journal of clinical investigation 2024　被引 58　https://pubmed.ncbi.nlm.nih.gov/39024569/
+**【全文已读 · PMC】**　PMID 39024569　The Journal of clinical investigation 2024　被引 58　PMC11405050　https://pubmed.ncbi.nlm.nih.gov/39024569/
 
 
 **为什么读**
@@ -4310,7 +4322,7 @@ Figure 2C 和 2E：scRNA-seq 与流式细胞术均显示 FAP+ fibroblasts 在纤
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4318,7 +4330,7 @@ Figure 2C 和 2E：scRNA-seq 与流式细胞术均显示 FAP+ fibroblasts 在纤
 
 ### T1 · Mechanism of fibrosis and stricture formation in Crohn's disease.
 
-**【全文已读】**　PMID 33119150　Scandinavian journal of immunology 2020　被引 97　https://pubmed.ncbi.nlm.nih.gov/33119150/
+**【全文已读 · PMC】**　PMID 33119150　Scandinavian journal of immunology 2020　被引 97　PMC7757243　https://pubmed.ncbi.nlm.nih.gov/33119150/
 
 
 **为什么读**
@@ -4403,7 +4415,7 @@ Figure 2C 和 2E：scRNA-seq 与流式细胞术均显示 FAP+ fibroblasts 在纤
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4411,7 +4423,7 @@ Figure 2C 和 2E：scRNA-seq 与流式细胞术均显示 FAP+ fibroblasts 在纤
 
 ### T1 · Novel proteomic signatures of stricturing Crohn disease using a treatment-naive cohort.
 
-**【仅摘要 · 待取全文】**　PMID 42622514　Inflammatory bowel diseases 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/42622514/
+**【仍缺全文 · 待补】**　PMID 42622514　Inflammatory bowel diseases 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/42622514/
 
 
 **为什么读**
@@ -4496,7 +4508,7 @@ Figure 2C 和 2E：scRNA-seq 与流式细胞术均显示 FAP+ fibroblasts 在纤
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4504,7 +4516,7 @@ Figure 2C 和 2E：scRNA-seq 与流式细胞术均显示 FAP+ fibroblasts 在纤
 
 ### T1 · Specialized fibroblast differentiated states underlie scar formation in the infarcted mouse heart.
 
-**【全文已读】**　PMID 29664017　The Journal of clinical investigation 2018　被引 590　https://pubmed.ncbi.nlm.nih.gov/29664017/
+**【全文已读 · PMC】**　PMID 29664017　The Journal of clinical investigation 2018　被引 590　PMC5957472　https://pubmed.ncbi.nlm.nih.gov/29664017/
 
 
 **为什么读**
@@ -4589,7 +4601,7 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4597,7 +4609,7 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 ### T2 · Targeting immune-fibroblast cell communication in heart failure.
 
-**【全文已读】**　PMID 39443792　Nature 2024　被引 251　https://pubmed.ncbi.nlm.nih.gov/39443792/
+**【全文已读 · PMC】**　PMID 39443792　Nature 2024　被引 251　PMC12334188　https://pubmed.ncbi.nlm.nih.gov/39443792/
 
 
 **为什么读**
@@ -4682,7 +4694,7 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4693,7 +4705,7 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 ### T0 · Lactylation-driven METTL3-mediated RNA m6A modification promotes immunosuppression of tumor-infiltrating myeloid cells.
 
-**【仅摘要 · 待取全文】**　PMID 35320754　Molecular cell 2022　被引 737　https://pubmed.ncbi.nlm.nih.gov/35320754/
+**【全文已读 · 你提供的 PDF】**　PMID 35320754　Molecular cell 2022　被引 737　来源：1-s2.0-S1097276522002076-main.pdf　https://pubmed.ncbi.nlm.nih.gov/35320754/
 
 
 **为什么读**
@@ -4718,7 +4730,7 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 **③ 关键图与可信度**
 
-【需读全文核对】需确认：(1)两个乳酰化位点的具体残基编号及是否位于ZnF1/ZnF2哪个锌指亚域；(2)位点鉴定方法——是质谱(LC-MS/MS)鉴定还是仅靠序列比对+抗乳酰化抗体验证，质谱覆盖率/PTM谱图需要看方法学图；(3)位点突变体(K→R或K→Q)做了哪些功能实验（RNA结合EMSA/RIP、m6A水平qPCR-m6A/MeRIP-seq、下游Jak1蛋白翻译、STAT3磷酸化、小鼠肿瘤生长）分别对应哪几个图号；(4)是否有第二种独立方法（如CETSA、体外重组蛋白乳酰化+RNA pull-down）交叉验证乳酰化-RNA结合因果性。
+Fig 6A显示BM-Mφ与MC38经Transwell共培养后培养基及MC38肿瘤组织中L-乳酸浓度升高（乳酸检测试剂盒定量），支持"肿瘤微环境乳酸积累"的主张；Fig 6B/C为WT BM-Mφ与BM-MDSC经25 mM L-lactic acid处理不同时间后的western blot，显示METTL3等蛋白水平变化，属单次实验描述、图注未标注重复次数与统计方法。Fig 7A用分子对接（MOE软件）预测METTL3结构域（MTD、ZFD）与L-乳酸的结合亲和力，Fig 7B为LC-MS鉴定的METTL3乳酸化(Kla)位点，Fig 7C用IP方法在293T细胞中经FLAG-METTL3转染+25 mM乳酸处理后验证METTL3乳酸化，属于计算预测+质谱+免疫共沉淀三种独立方法互相印证，可信度较高，但正文片段未提供具体n值或重复次数。
 
 
 **④ 方法要点**
@@ -4733,12 +4745,12 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】需逐条核对：①乳酰化位点突变体是否有等量表达对照（WB确认蛋白稳定性不受突变影响）；②是否设置乳酸剥夺/LDHA抑制剂或乳酸添加的剂量-反应对照以证明乳酸依赖性而非其他代谢物；③H3K18la与METTL3自身乳酰化是否用了乳酰化特异性抗体的特异性对照（如competing free-lactyl肽段封闭实验）；④myeloid METTL3 KO小鼠是否有细胞类型特异性对照（如非髓系条件性KO）排除脱靶效应；⑤m6A-YTHDF1-JAK1轴是否有YTHDF1功能缺失回复实验作为因果链对照。
+明确做了的对照包括：Fig 1D/E中CRC肿瘤组织(T)与配对癌旁正常组织(N)的对照（two-tailed paired t test分析METTL3 MFI）；Fig 2A-C以及正文中WT（Mettl3fl/fl）与cKO（LysM-cre Mettl3fl/fl）小鼠/细胞的基因型对照；Fig 6D中siRNA-NC与siRNA-Ldha对照以验证乳酸生成酶LDHA对METTL3蛋白水平的必要性；Fig 4A/B中WT与cKO MDSC按不同MDSC/T细胞比例（1:1或2:1）配对比较T细胞增殖与IFN-γ产量。缺少的关键对照：给到的文本片段中未见METTL3乳酸化位点（如K281/K345）的点突变（乳酸化位点突变体如K-to-R/Q）与野生型METTL3的功能性对照实验描述，这类对照对证明"乳酸化位点本身"（而非乳酸处理的其他继发效应）介导ZFD捕获RNA能力的因果关系至关重要，但本次提供文本中未显示该实验细节。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：①两个乳酰化位点的乳酰化修饰化学计量比（stoichiometry, % modified）；②位点突变后RNA结合能力/m6A水平下降的定量倍数；③myeloid METTL3 KO后肿瘤体积/重量的定量数据及p值；④乳酸浓度-METTL3表达量的剂量反应曲线数值。
+正文摘录中给出的定量数字有限：Fig 3legend提及WT小鼠n=9–16、cKO小鼠具体n值未完整给出（"cKO, n ="后文本被截断）；Fig 4B中WT MDSC n=12、cKO MDSC n=12；Fig 1F/G的Kaplan-Meier生存分析及log rank test均报告p<0.05；Fig 1H/I的单变量与多变量Cox回归分析同样报告p<0.05。Fig 6/7涉及的乳酸浓度、METTL3蛋白倍数变化、乳酸化位点富集程度等具体数值，在给到的图注与正文片段中【未见定量数字】，仅有定性描述（如"significantly increased"），故这部分效应量无法从当前文本中抄出准确数字。
 
 
 **⑧ 我不相信的一件事**
@@ -4773,12 +4785,12 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需从参考文献中挑三类：①乳酰化发现的奠基文献（Zhang et al. 2019 Nature首次报道组蛌乳酰化H3K18la的方法学论文，核对质谱鉴定乳酰化位点的标准流程）；②METTL3/m6A调控机制的经典文献（用于理解m6A-YTHDF1-JAK1/STAT3轴在其他免疫细胞中的验证方式，可能对方向1代谢miRNA的m6A/降解交叉调控有参考价值）；③TIMs/肿瘤微环境乳酸代谢相关文献（了解乳酸浓度梯度测量方法，为方向3设计乳酸剂量反应实验提供对照值参考）。
+Irizarry-Caro, R.A. et al. (2020) 《TLR signaling adapter BCAP regulates inflammatory to reparatory macrophage transition by promoting histone lactylation》Proc. Natl. Acad. Sci. USA — 与方向③高度相关，展示了乳酸化(lactylation)如何调控巨噬细胞表型转变，可为AGO2/ZSWIM8乳酰化修饰提供方法学参照。Moreno-Yruela, C. et al. (2021)《Class I histone deacetylases (HDAC1‒3) are histone lysine delactylases》bioRxiv preprint — 提示组蛋白去乳酰化酶的存在，对方向③研究AGO2/ZSWIM8/TUT4-7乳酰化的可逆性及去修饰机制有直接参考价值。Liu, J. et al. (2020)《N6-methyladenosine of chromosome-associated regulatory RNA regulates chromatin state and transcription》Science — 展示m6A修饰调控RNA代谢与染色质状态的机制范式，可类比方向②TUT4/7尿苷化对miR-29代谢命运的调控逻辑。Diskin, C. et al. (2021)《Modification of proteins by metabolites in immunity》Immunity — 综述代谢物（包括乳酸）对蛋白质的翻译后修饰机制，与方向③"乳酸/乳酰化修饰重编程miRNA稳态相关酶"的整体假说框架高度契合。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4786,7 +4798,7 @@ Figure 1（J）：FACS 定量显示梗死区 Tcf21 lineage-traced 纤维细胞�
 
 ### T0 · Lactylation of METTL16 promotes cuproptosis via m6A-modification on FDX1 mRNA in gastric cancer.
 
-**【全文已读】**　PMID 37863889　Nature communications 2023　被引 455　https://pubmed.ncbi.nlm.nih.gov/37863889/
+**【全文已读 · PMC】**　PMID 37863889　Nature communications 2023　被引 455　PMC10589265　https://pubmed.ncbi.nlm.nih.gov/37863889/
 
 
 **为什么读**
@@ -4871,7 +4883,7 @@ Fig. 2a：m6A dot blot显示40对GC组织中RNA的整体m6A水平，且Cu浓度�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4879,7 +4891,7 @@ Fig. 2a：m6A dot blot显示40对GC组织中RNA的整体m6A水平，且Cu浓度�
 
 ### T0 · Alanyl-tRNA synthetase, AARS1, is a lactate sensor and lactyltransferase that lactylates p53 and contributes to tumorigenesis.
 
-**【仅摘要 · 待取全文】**　PMID 38653238　Cell 2024　被引 560　https://pubmed.ncbi.nlm.nih.gov/38653238/
+**【全文已读 · 你提供的 PDF】**　PMID 38653238　Cell 2024　被引 560　来源：1-s2.0-S0092867424003970-main.pdf　https://pubmed.ncbi.nlm.nih.gov/38653238/
 
 
 **为什么读**
@@ -4904,7 +4916,7 @@ AARS1 是一个双功能乳酸感受器兼酶：结合乳酸后催化生成 lact
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) AARS1 催化 lactate-AMP 生成及转乳酰化的体外重组酶实验图（底物特异性、Km/kcat 或至少定性动力学）；(2) 乳酰化位点鉴定的质谱图谱（LC-MS/MS 谱图、位点定位分数）；(3) 是否有第二种独立方法验证 K120/K139 乳酰化（如乳酰化特异抗体 western、突变体质谱对照）；(4) AARS1 全蛋白组底物列表图（火山图/维恩图），确认底物谱是否偏好特定结构域或序列motif，可类比判断 AGO2/ZSWIM8/TUT4-7 是否有潜在同源motif。
+关键图为Figure 3A：MST（微量热泳动）分析显示纯化的EcAlaRS和HsAlaRS可直接结合lactate而不结合acetate，Kd分别约13 mM和35 mM；可信度较高，因为该结合还通过Figure 3B/3C的biotin-lactate pull-down（可被β-alanine竞争）以及Figure 3D的结构对接分析进行了独立验证，属于两种以上独立方法（MST+pull-down+结构对接）交叉印证。另外Figure 4/5系列图注均标注"Data are representative of three independent experiments"，说明关键生化实验至少重复三次，并用two-tailed Student's t test做统计。但对Sheldon三个方向（AMPK-ZSWIM8-TDMD、TUT4/7-miR-29-纤维化、乳酸修饰miRNA稳态酶）而言，本文未涉及miRNA/AGO2/ZSWIM8/TUT4-7的直接实验图，仅提供AARS1作为乳酸感受器/lactyltransferase的机制学范式，可作为方向③的方法学参考图。
 
 
 **④ 方法要点**
@@ -4919,12 +4931,12 @@ AARS1 是一个双功能乳酸感受器兼酶：结合乳酸后催化生成 lact
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条打勾：(1) 是否有 AARS1 catalytically-dead 突变体（如 aminoacylation-dead 但保留乳酰转移活性 vs 双失活）作为阴性对照；(2) 是否排除了其他已知乳酰转移酶（如 p300）对 p53 K120/K139 的贡献；(3) β-alanine 处理是否有剂量-反应曲线及对 AARS1 正常氨基酸活化（tRNA 装载）功能的影响对照，以排除非特异性毒性；(4) 患者队列分析是否校正了肿瘤分期/p53 突变状态等混杂因素。
+文中明确做了的对照包括：MST和pull-down实验中以BSA或acetate作为阴性对照（Figure 3A、4C提到"does not bind to control BSA"，Figure 3A提到"not acetate"）；免疫共沉淀用control IgG作对照（Figure 4D）；siRNA实验设control siRNA（Figure 2D/E）；体内实验设Aarsfl/+ Cre−对照小鼠（Figure 7C/D）；TCL煮沸变性作为LCA阴性对照（正文"the TCLs for the 4th reaction were boiled at 95℃ for 5 min to denature proteins"）。缺少的关键对照：全文未见针对AGO2、ZSWIM8或TUT4/7的乳酸化/乳酰化特异性对照（如催化死突变体AARS1对这些蛋白乳酰化的直接验证），这对Sheldon方向③尤为重要，因为若要证明AARS1介导的乳酰化能重编程miRNA稳态酶，需要设立AARS1催化死突变（如5A突变体）处理这些蛋白的对照组，而本文只在p53和全局蛋白质组水平做了此类验证，未涉及miRNA通路蛋白。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：AARS1 催化 lactate-AMP 生成的酶动力学参数（Km、kcat）；p53 K120/K139 乳酰化水平的定量百分比或 fold change；β-alanine 处理后肿瘤体积/生长曲线的具体抑制百分比及统计学 p 值；乳酰化与患者预后的 HR（hazard ratio）及 95% CI。
+正文给出的准确数字包括：EcAlaRS与lactate的Kd约13 mM，HsAlaRS约35 mM（Figure 3A/正文）；β-alanine与EcAlaRS、HsAlaRS的Kd分别为2.7 mM和4.0 mM（Figure S5B/正文）；AARS1敲低后约80%的Klac肽段/蛋白强度下降，其中约10%下降超过10倍（正文引用Figure 2E/2F）；HsAlaRS过表达后约90%的Klac肽段/蛋白强度上升，其中近50%上升超过10倍（正文引用Figure 2H/2I）；p53K120Lac、K139Lac、DualLac对p53RE-DNA的结合亲和力分别下降约100倍、10倍和1000倍（正文引用Figure 5C–5E）；TCGA BRCA数据库中p53野生型患者n=633（Figure 1A）；IARC p53突变频率分析n=27,847（Figure 6A）。以上数字均直接出自给到的正文或图注文本，但均非Sheldon三个miRNA相关方向的直接数据。
 
 
 **⑧ 我不相信的一件事**
@@ -4959,12 +4971,12 @@ AARS1 是一个双功能乳酸感受器兼酶：结合乳酸后催化生成 lact
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】要从参考文献里挑三类：①组蛋白乳酰化奠基文献（Zhang et al. 2019 Nature，首次报道 histone lactylation）以确立乳酰化修饰的历史起点和检测方法学标准；②其他非组蛋白乳酰化底物文献（如糖酵解酶、代谢酶的乳酰化）以比较 AARS1 底物特异性与其他 writer（如 p300）的异同；③乳酰化蛋白质谱鉴定方法学文献（乳酰化特异抗体验证、质谱位点定位标准），用于评估他日后送样质谱合作时需要满足的证据标准。
+从参考文献段中挑选与Sheldon三个方向相关性最高的几篇：1. Zhang, D. et al. (2019)《Metabolic regulation of gene expression by histone lactylation》Nature — 首次报道lactylation这一修饰类型，是方向③（乳酸/乳酰化重编程miRNA稳态酶）的机制起点，值得排队细读其修饰检测方法。2. Certo, M. et al. (2022)《Understanding lactate sensing and signalling》Trends Endocrinol. Metab. — 综述乳酸感知与信号转导，可为方向③中乳酸如何被AGO2/ZSWIM8/TUT4-7"感知"提供背景框架。3. Ron-Harel, N. et al. (2019)《T Cell Activation Depends on Extracellular Alanine》Cell Rep. — 涉及alanine/AARS相关代谢与细胞活化的联系，可能对理解AARS1底物竞争（β-alanine vs lactate）在其他代谢记忆情境（呼应方向①的代谢记忆概念）有参考价值。4. Li, X. et al. (2022)《Lactate metabolism in human health and disease》Signal Transduct. Target. Ther. — 综述乳酸代谢在疾病中的作用，可能涉及纤维化等器官病理背景，对方向②（TUT4/7-miR-29-器官纤维化）中乳酸代谢与纤维化关联的背景阅读有帮助。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -4972,7 +4984,7 @@ AARS1 是一个双功能乳酸感受器兼酶：结合乳酸后催化生成 lact
 
 ### T1 · Metabolic regulation of homologous recombination repair by MRE11 lactylation.
 
-**【全文已读】**　PMID 38128537　Cell 2024　被引 410　https://pubmed.ncbi.nlm.nih.gov/38128537/
+**【全文已读 · PMC】**　PMID 38128537　Cell 2024　被引 410　PMC11725302　https://pubmed.ncbi.nlm.nih.gov/38128537/
 
 
 **为什么读**
@@ -5057,7 +5069,7 @@ Figure 2N：显示MRE11-K673la抗体特异性检测DNA损伤诱导的K673位点�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5065,7 +5077,7 @@ Figure 2N：显示MRE11-K673la抗体特异性检测DNA损伤诱导的K673位点�
 
 ### T1 · R-2-hydroxyglutarate attenuates aerobic glycolysis in leukemia by targeting the FTO/m6A/PFKP/LDHB axis.
 
-**【全文已读】**　PMID 33434505　Molecular cell 2021　被引 278　https://pubmed.ncbi.nlm.nih.gov/33434505/
+**【全文已读 · PMC】**　PMID 33434505　Molecular cell 2021　被引 278　PMC7935770　https://pubmed.ncbi.nlm.nih.gov/33434505/
 
 
 **为什么读**
@@ -5150,7 +5162,7 @@ Figure 2C–2E：R-2HG (300 μM, 48 h) 在 NOMO-1（敏感株）中用放射性�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5158,7 +5170,7 @@ Figure 2C–2E：R-2HG (300 μM, 48 h) 在 NOMO-1（敏感株）中用放射性�
 
 ### T2 · Metabolic Recoding of NSUN2-Mediated m5C Modification Promotes the Progression of Colorectal Cancer via the NSUN2/YBX1/m5C-ENO1 Positive Feedback Loop.
 
-**【全文已读】**　PMID 38769664　Advanced science (Weinheim, Baden-Wurttemberg, Germany) 2024　被引 151　https://pubmed.ncbi.nlm.nih.gov/38769664/
+**【全文已读 · PMC】**　PMID 38769664　Advanced science (Weinheim, Baden-Wurttemberg, Germany) 2024　被引 151　PMC11267267　https://pubmed.ncbi.nlm.nih.gov/38769664/
 
 
 **为什么读**
@@ -5243,7 +5255,7 @@ Fig.3D、3E：NSUN2 knockout SW480细胞的glucose uptake、lactate production�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5251,7 +5263,7 @@ Fig.3D、3E：NSUN2 knockout SW480细胞的glucose uptake、lactate production�
 
 ### T2 · Covalent allosteric inhibition of AARS1 lactyltransferase.
 
-**【全文已读】**　PMID 42744818　Nature communications 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/42744818/
+**【全文已读 · PMC】**　PMID 42744818　Nature communications 2026　被引 0　PMC13578339　https://pubmed.ncbi.nlm.nih.gov/42744818/
 
 
 **为什么读**
@@ -5336,7 +5348,7 @@ AARS1 是一个乳酸转移酶，其活性可被小分子共价变构抑制剂 X
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5347,7 +5359,7 @@ AARS1 是一个乳酸转移酶，其活性可被小分子共价变构抑制剂 X
 
 ### T0 · Intestinal organoids: a model of intestinal fibrosis for evaluating anti-fibrotic drugs.
 
-**【全文已读】**　PMID 25828392　Experimental and molecular pathology 2015　被引 78　https://pubmed.ncbi.nlm.nih.gov/25828392/
+**【全文已读 · PMC】**　PMID 25828392　Experimental and molecular pathology 2015　被引 78　PMC5915372　https://pubmed.ncbi.nlm.nih.gov/25828392/
 
 
 **为什么读**
@@ -5432,7 +5444,7 @@ Figure 3E–F最值得关注：Western blot显示TGFβ（2 ng/mL，96 h）诱导
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5440,7 +5452,7 @@ Figure 3E–F最值得关注：Western blot显示TGFβ（2 ng/mL，96 h）诱导
 
 ### T1 · Search-and-replace genome editing without double-strand breaks or donor DNA.
 
-**【全文已读】**　PMID 31634902　Nature 2019　被引 3705　https://pubmed.ncbi.nlm.nih.gov/31634902/
+**【全文已读 · PMC】**　PMID 31634902　Nature 2019　被引 3705　PMC6907074　https://pubmed.ncbi.nlm.nih.gov/31634902/
 
 
 **为什么读**
@@ -5525,7 +5537,7 @@ Fig. 1f（配合 Extended Data Fig. 2）：报告基因质粒（GFP-stop-mCherry
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5533,7 +5545,7 @@ Fig. 1f（配合 Extended Data Fig. 2）：报告基因质粒（GFP-stop-mCherry
 
 ### T1 · Cytosine and adenine base editing of the brain, liver, retina, heart and skeletal muscle of mice via adeno-associated viruses.
 
-**【全文已读】**　PMID 31937940　Nature biomedical engineering 2020　被引 430　https://pubmed.ncbi.nlm.nih.gov/31937940/
+**【全文已读 · PMC】**　PMID 31937940　Nature biomedical engineering 2020　被引 430　PMC6980783　https://pubmed.ncbi.nlm.nih.gov/31937940/
 
 
 **为什么读**
@@ -5618,7 +5630,7 @@ Npu-BE3 六位点平均编辑效率为 34±6.4%，高于完整 BE3 的 22±7.9%�
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5626,7 +5638,7 @@ Npu-BE3 六位点平均编辑效率为 34±6.4%，高于完整 BE3 的 22±7.9%�
 
 ### T1 · Massively parallel assessment of human variants with base editor screens.
 
-**【仅摘要 · 待取全文】**　PMID 33606977　Cell 2021　被引 307　https://pubmed.ncbi.nlm.nih.gov/33606977/
+**【全文已读 · 你提供的 PDF】**　PMID 33606977　Cell 2021　被引 307　来源：1-s2.0-S009286742100012X-main.pdf　https://pubmed.ncbi.nlm.nih.gov/33606977/
 
 
 **为什么读**
@@ -5651,7 +5663,7 @@ Npu-BE3 六位点平均编辑效率为 34±6.4%，高于完整 BE3 的 22±7.9%�
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) 文库设计与 sgRNA-变异对应关系的具体图（可能是 Fig.1），确认编辑窗口/PAM 限制如何限定可编辑碱基范围，能否推广到 ZSWIM8 S608/S609 等特定密码子；(2) BRCA1/2 阳性/阴性选择筛选的定量方法（存活率/enrichment score，第二种方法是否用测序read count做fold-change还是用统计模型如MAGeCK）；(3) ClinVar 52,034变异筛选的通量与假阳性率数据所在图表。
+本文核心图为 Figure 2（B、C）：展示 BRCA1/BRCA2 tiling BE screen 中预测引入 nonsense 与 splice site 突变的 sgRNA 相对 silent 突变显著 depletion，用 Z score<2 的百分比标注，可信度依据是三次重复（triplicate，>10,000 cells/sgRNA 覆盖度）、replicate Pearson's r>0.95，并与独立的 ClinVar gold-standard 数据集（AUC 0.85 for BRCA1, 0.96 for BRCA2）以及与 Findlay et al. 2018 的 SGE 数据（Pearson's r=0.44，HAP1 单独比较时 r=0.55）做了正交验证，属于双方法交叉确认。Figure 3（B–D）则用 sg1–sg13 的个体验证实验（day7/14/21 deep sequencing + CRISPResso2）进一步支持 Figure 2 的初筛结果，其中 sg5 的等位基因分析给出了具体可信度数字。这些数字均直接来自文中对应图注或紧邻正文陈述，未见 Sheldon 关注的 miRNA/TDMD/lactylation 相关内容，本文与三个研究方向（AMPK-ZSWIM8-TDMD、TUT4/7-miR-29-纤维化、lactate/lactylation-AGO2）无直接图或数据关联。
 
 
 **④ 方法要点**
@@ -5666,12 +5678,12 @@ Npu-BE3 六位点平均编辑效率为 34±6.4%，高于完整 BE3 的 22±7.9%�
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对：(1) 编辑效率/purity的对照（未编辑对照、synonymous/silent sgRNA对照）；(2) BRCA1/2已知LOF突变作为阳性对照的具体清单及其筛选中排名/富集倍数；(3) 是否有非靶效应（off-target editing、RNA editing byproduct）的对照实验；(4) ClinVar变异筛选中benign变异作为阴性对照的表现。
+文中明确做的对照包括：non-targeting 与 intergenic sgRNA 作为阴性对照；靶向非必需细胞表面标志物的 sgRNA 作为 negative (targeting) controls（Figure 1B/E）；预测引入 no-edit 或 silent 突变的 sgRNA 作为内部阴性对照，用以估计假阳性率；以及用 wtCas9 平行筛选（A375、MELJUSO）验证 BE 特异性depletion而非guide表达失败（Figures S1F, S1G）。对于BRCA1/BRCA2筛选，还用ClinVar gold-standard P/LP vs B/LB变异集作为外部对照，以及与Findlay et al. 2018 SGE数据集比较作为正交方法对照。本文缺少的关键对照：没有提供针对Sheldon方向所需的miRNA稳态、TDMD相关基因（ZSWIM8、TUT4/7）或乳酸/乳酰化处理组的对照，因为本文主题是base editor screen评估DNA变异功能，与代谢miRNA调控无关，故无法从中获得相关对照信息。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：BRCA1/BRCA2已知LOF突变筛选的精确率(precision)/AUC数值；BH3 mimetics和PARP inhibitors筛选中鉴定出的抗性/敏感突变的具体数目和effect size（如富集倍数、p值）；52,034个变异中最终功能注释成功（可分类为LOF/neutral）的比例。
+效应量数字（均逐字抄自正文/图注）：Figure 1 legend提到"sgRNAs predicted to introduce nonsense mutations (n = 95) or splice site mutations (n = 37)"，Pearson's r = 0.44（Rule Set 2 score与depletion相关性，Figure 1C）。正文提到BE3.9max与BE4max性能对比："30.5% and 35.1% of sgRNAs predicted to introduce nonsense mutations or splice site-disrupting mutations, respectively, were depleted with a Z score < 2, compared to 9.4% and 22.2% for BE4Max"。BRCA1/BRCA2部分："72% (44/61) and 77% (17/22) of sgRNAs predicted to introduce nonsense mutations or splice site mutations...scored as either strong or intermediate hits, in contrast to 21% (23/111) of silent sgRNAs"；ClinVar AUC="0.85 for BRCA1 and 0.96 for BRCA2"；BRCA1筛选"sensitivity of 0.70 and a specificity of 0.84"，BRCA2"sensitivity of 0.84 and a specificity of 0.86"；sg5验证"decreased from 46.2% of reads on day 7 post-transduction to 13.5% on day 21"（Z score = 6.57）。这些数字均与Sheldon的AMPK/TDMD/TUT4-7/lactylation三个方向无关，全文未见任何miRNA、ZSWIM8、TUT4/7或乳酸修饰相关的定量数字。
 
 
 **⑧ 我不相信的一件事**
@@ -5706,12 +5718,12 @@ Npu-BE3 六位点平均编辑效率为 34±6.4%，高于完整 BE3 的 22±7.9%�
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】读全文时要挑三类参考文献：①该文引用的其他CBE/ABE筛选平台方法学论文（如Cas9变体、编辑器优化文献），判断是否有更适合产生磷酸化模拟突变的新型编辑器；②BRCA1/2功能筛选相关的既往低通量验证研究，用作效应量比较基准；③ClinVar数据库及变异注释相关文献，评估其变异-表型映射方法能否直接迁移到miRNA降解酶基因。
+本文参考文献表中检索后未见与Sheldon三个方向（①AMPK磷酸化ZSWIM8/TDMD；②TUT4/7-miR-29尿苷化-纤维化；③乳酸/乳酰化修饰AGO2/ZSWIM8/TUT4-7）直接相关的文献标题。参考文献列表主题集中于base editing技术（如Komor et al. 2016《Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage》Nature）、BRCA1/BRCA2功能验证（Findlay et al. 2018《Accurate classification of BRCA1 variants with saturation genome editing》Nature）、以及MCL1/BCL2L1/PARP1药物筛选，均与miRNA代谢稳态、TDMD或蛋白乳酰化无关。唯一勉强相关的是Chen et al. 2019《miR-103/107 prolong Wnt/b-catenin signaling and colorectal cancer stemness by targeting Axin2》Sci. Rep.，因涉及miRNA功能但主题（Wnt通路/结直肠癌干性）与Sheldon三个方向（TDMD、纤维化、乳酰化）均不重合，价值有限。【全文未见与Sheldon三方向紧密相关的参考文献，故不做勉强推荐排队】。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5719,7 +5731,7 @@ Npu-BE3 六位点平均编辑效率为 34±6.4%，高于完整 BE3 的 22±7.9%�
 
 ### T1 · High-Resolution In Vivo Identification of miRNA Targets by Halo-Enhanced Ago2 Pull-Down.
 
-**【全文已读】**　PMID 32497496　Molecular cell 2020　被引 50　https://pubmed.ncbi.nlm.nih.gov/32497496/
+**【全文已读 · PMC】**　PMID 32497496　Molecular cell 2020　被引 50　PMC7446397　https://pubmed.ncbi.nlm.nih.gov/32497496/
 
 
 **为什么读**
@@ -5804,7 +5816,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5812,7 +5824,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 ### T2 · Updated Protocols for 3D and 2D Culture and Histological Analysis of Intestinal Organoids.
 
-**【仅摘要 · 待取全文】**　PMID 42763855　Methods in molecular biology (Clifton, N.J.) 2027　被引 0　https://pubmed.ncbi.nlm.nih.gov/42763855/
+**【仍缺全文 · 待补】**　PMID 42763855　Methods in molecular biology (Clifton, N.J.) 2027　被引 0　https://pubmed.ncbi.nlm.nih.gov/42763855/
 
 
 **为什么读**
@@ -5897,7 +5909,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -5908,7 +5920,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 ### T0 · The E3 ubiquitin ligase mechanism specifying target-directed microRNA degradation.
 
-**【仅摘要 · 待取全文】**　PMID 41542392　bioRxiv : the preprint server for biology 2026　被引 未获取　https://pubmed.ncbi.nlm.nih.gov/41542392/
+**【全文已读 · 你提供的 PDF】**　PMID 41542392　bioRxiv : the preprint server for biology 2026　被引 未获取　来源：nihpp-2026.01.05.697729v1.pdf　https://pubmed.ncbi.nlm.nih.gov/41542392/
 
 
 **为什么读**
@@ -5933,7 +5945,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **③ 关键图与可信度**
 
-【需读全文核对】需确认：(1)cryo-EM解析的具体复合物组成及分辨率（图1-2附近）；(2)miRNA从AGO2口袋"挤出"的构象变化对比图，是否有不同miRNA/trigger对（尤其miR-29/miR-33/miR-375相关trigger）的验证；(3)是否有生化方法（如in vitro泛素化assay、体外重建体系）作为第二种独立验证手段，及其所用miRNA种类和浓度梯度；(4)ZSWIM8识别位点的关键残基突变数据是否可作对照。
+Figure 1e-f 是最关键的可信度图：e 图用 in vitro co-IP（AGO2–miR-7 预结合放射标记的 trigger/seed-only 靶RNA，再加纯化的 ZSWIM8 拉下）证明 ZSWIM8 优先结合 trigger 复合物而非 seed-only 复合物，并用 TNRC6 来源的 T6B 肽作归一化对照，n=3 technical replicates，量化数据以符号+均值线呈现；f 图在此基础上加入 trigger 侧翼序列，同样用 co-IP 量化，n=3 technical replicates。Figure 2 是独立的结构验证（cryo-EM，整体分辨率3.1 Å），从另一角度（结构而非结合亲和力）支持 ZSWIM8 二聚体钳状包裹 AGO2–miR-7–trigger 复合物这一结论，二者互为独立方法印证。Figure 1c/d 是体外重组泛素化实验（荧光标记 AGO2*，SDS-PAGE 检测 AGO2*-UBn），显示 ZSWIM8-CUL3-ARIH1 特异性组合下才发生 trigger 依赖的多聚泛素化，但标注为代表性实验（representative experiment），n=2 technical replicates，重复次数偏低，需谨慎看待其统计强度。
 
 
 **④ 方法要点**
@@ -5948,12 +5960,12 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】需要逐条核对的对照清单：①是否设置无trigger RNA或非cognate trigger的阴性对照复合物结构；②ZSWIM8识别界面突变体是否有泛素化活性丧失的功能对照；③是否用已知非TDMD底物miRNA-AGO2复合物作为特异性对照；④是否检测了ZSWIM8已知或潜在磷酸化位点（尤其S608/S609区域）在此结构中的位置及其是否位于AGO2/CUL3结合界面，这是判断竞争风险最关键的一条。
+文中明确做了的对照包括：①seed-only 突变靶RNA（破坏与miRNA 3′区配对）作为阴性对照，证明单纯seed配对不足以驱动泛素化或ZSWIM8结合（Figure 1b-c,e-f）；②T6B肽（TNRC6来源，不区分靶RNA类型地结合AGO-miRNA）作为归一化对照，排除AGO2-miR-7与不同靶RNA结合量本身差异的干扰（Figure 1e-f, Extended Data Figure 1a）；③cullin/E2酶配对特异性对照，用CUL2-ARIH1、CUL5-ARIH2替换CUL3-ARIH1，证明只有ZSWIM8-CUL3-ARIH1组合能支持泛素化（Figure 1d）；④3′-supplementary pairing（仅7nt而非14nt互补）靶RNA作对照，证明弱的3′配对不足以驱动TDMD式识别（Extended Data Figure 1b,c）；⑤miRNA-trigger配对特异性交叉对照，miR-27a trigger HSUR1对miR-7-AGO2无效，miR-7 trigger CYRANO对miR-27a-AGO2无效（Extended Data Figure 1i）。给到的正文段落中未见到细胞内内源性ZSWIM8敲低/敲除后miRNA稳定性的直接对照（该类实验推测在其他图或既往文献22,23中），也未见到本次给出文本中提及乳酸/乳酰化相关的任何对照，这对Sheldon方向③（乳酸重编程AGO2/ZSWIM8/TUT4-7）而言是明显缺失——若要将本文结论外推到乳酰化调控，需要补充AMPK磷酸化状态或乳酰化修饰下ZSWIM8与AGO2结合能力的对照实验。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：cryo-EM分辨率数值、复合物解离常数(Kd)或结合亲和力数据、体外多聚泛素化反应的动力学参数（如泛素化速率、AGO2降解半衰期的体外测定值），以及不同trigger/miRNA对（尤其是否覆盖miR-29/33/375相关trigger）之间选择性的定量比较。
+Figure 1e：ZSWIM8与trigger结合的AGO2-miR-7复合物相比seed-only复合物有「up to 70-fold」的共沉淀富集（正文："up to 70-fold preference for co-IP of target RNAs with trigger pairing over seed-only pairing"）。Figure 1f：加入trigger侧翼CYRANO序列（增加85nt）后，co-IP效率提升「100-fold」，具体数值为无侧翼序列时需300 nM ZSWIM8才能达到15%的pulldown，而有侧翼序列时仅需3 nM（正文对应句）；且延长trigger序列后选择性仍保持「>100-fold」（相对seed-only对照）。Figure 2：cryo-EM最终重建整体分辨率为3.1 Å（正文："The final reconstruction has an overall resolution of 3.1 Å"）。Figure 1j：细胞内TDMD报告基因实验中，ZSWIM8变体的显著性用one-way ANOVA + Dunnett's多重比较检验，标注"***P < 0.0001"，n = 2 biological replicates。
 
 
 **⑧ 我不相信的一件事**
@@ -5988,12 +6000,12 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需要从参考文献里挑三类：①ZSWIM8/CUL3发现的原始文献（ref 22,23，Han et al./Shi et al. 2020 Cell类，确认是否已提及任何PTM线索）；②AGO2泛素化及其降解通路相关文献（是否有既往报道AGO2磷酸化如Hippo/EGFR通路调控AGO2稳定性，可作为方向3乳酸化假设的先例）；③本文引用的TDMD trigger RNA原始鉴定文献（ref 6-21），核对是否包含miR-29/33/375的已知trigger，用于判断该结构模型是否已经用这些具体miRNA验证过。
+1. Shi, C. Y. et al. 2020《The ZSWIM8 ubiquitin ligase mediates target-directed microRNA degradation》Science 370, eabc9359 — 直接提出ZSWIM8介导TDMD的遗传学基础，是本文结构/生化机制工作的直接前身，对方向①（AMPK磷酸化ZSWIM8调控TDMD代谢记忆）至关重要。2. Han, J. et al. 2020《A ubiquitin ligase mediates target-directed microRNA decay independently of tailing and trimming》Science 370, eabc9546 — 与上文并列提出ZSWIM8-CUL3依赖的TDMD机制不依赖尾切修剪，对方向②（TUT4/7尾巴化与TDMD关系的区分）提供关键背景对照。3. Shi, C. Y. et al. 2023《ZSWIM8 destabilizes many murine microRNAs and is required for proper embryonic growth and development》Genome Res. 33, 1482–1496 — 提供ZSWIM8在小鼠组织中广泛调控miRNA稳定性的体内证据，可为方向②中MYBPC3心脏/SAA3肠存档组织中ZSWIM8-TDMD活性的组织特异性分析提供参照框架。4. Sheu-Gruttadauria, J. et al. 2019《Structural Basis for Target-Directed MicroRNA Degradation》Mol. Cell 75, 1243-1255.e7 — 早期AGO-miRNA-trigger结构工作，为本文cryo-EM结构比较（Figure 3a中提到PDB 6NIT）提供直接结构演化背景，对理解ZSWIM8如何识别AGO构象变化（方向③中乳酸/乳酰化可能通过改变AGO2构象间接影响TDMD）具参考价值。5. Kleaveland, B., Shi, C. Y., Stefano, J. & Bartel, D. P. 2018《A Network of Noncoding Regulatory RNAs Acts in the Mammalian Brain》Cell 174, 350-362.e17 — 首次系统描述CYRANO-miR-7这一本文核心trigger-miRNA对的生理网络，为方向①中miR-7/CYRANO代谢记忆通路的功能背景提供支撑。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -6001,7 +6013,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 ### T0 · Canonical and non-canonical miRNA degradation shapes state transitions and stemness in breast cancer.
 
-**【仅摘要 · 待取全文】**　PMID 42608480　The EMBO journal 2026　被引 0　https://pubmed.ncbi.nlm.nih.gov/42608480/
+**【全文已读 · 你提供的 PDF】**　PMID 42608480　The EMBO journal 2026　被引 0　来源：s44318-026-00889-8.pdf　https://pubmed.ncbi.nlm.nih.gov/42608480/
 
 
 **为什么读**
@@ -6026,7 +6038,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：①19个高置信TDMD底物的鉴定标准（miRNA-seq在CRISPRi-ZSWIM8-KD前后的fold-change阈值、AGO2-eCLIP的peak calling参数）；②miR-29b-3p/miR-33a/b-5p是否区分了pri/pre-miRNA与成熟体丰度（关键：排除转录层TGF-β/Smad3抑制的混杂）；③非经典TDMD（SERPINE1→miR-30c-5p）机制图是在哪张图、是否有第二种方法（如降解动力学pulse-chase或actinomycin D半衰期测定）验证降解而非转录抑制；④是否有磷酸化/翻译后修饰相关的ZSWIM8调控证据（对方向1有无交叉）。
+Fig 3F/3J–L 是本文最相关的关键图：Fig 3J,K 用 GFP 报告基因的“TDMD assay”证明 ABCA1 和 HADHB 的 MDE 能在 SUM159PT 和 MDA-MB-436 两种细胞中诱导 miR-33a-5p/miR-33b-5p 降解，并用 RT-qPCR 与 sRNA-Seq 两种方法交叉验证，可信度较高。Fig 3L 进一步做了 pri-miR-33、SREBF1/SREBF2 host gene 的对照，排除了转录层面的间接效应，增强了该结论的特异性。Fig 2E/2F 的 TDMD net effect 分析（N=3 生物学重复，L2FC≥0.3 阈值）支持 miR-29b-3p、miR-33a/b-5p 属于 19 个高置信 TDMD substrates，为 Sheldon 方向②（miR-29 相关）提供了独立数据支撑，但文中并未直接涉及 TUT4/7 尿苷化或乳酸乳酰化修饰，这两个方向在给到的文本里未见对应图。
 
 
 **④ 方法要点**
@@ -6041,12 +6053,12 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条核对：①miR-29b-3p成熟体下降是否伴随pri-miR-29/pre-miR-29不变（排除转录抑制混杂，这是他领域公认的竞争解释）；②ZSWIM8 CRISPRi的敲低效率及off-target对照；③AGO2-eCLIP是否有IgG/input对照；④非经典TDMD是否用了蛋白酶体抑制剂(MG132)和ZSWIM8催化死突变体做双重排除对照；⑤NREP/SERPINE1过表达或敲低的剂量-反应对照及是否验证直接结合（3′端配对区域突变体）。
+明确做了的对照：(1) ZSWIM8 KD 用三种独立 sgRNA（sgRNA28/34/42）加三种对照（Empty Vector、sgRNA LacZ、非靶向 Neg1），Fig 1B,C；(2) TDMD net effect 计算中用 pri-miRNA、host gene、matched-strand miRNA 作为 Test assay 排除转录效应（Fig 2B–D）；(3) Fig 3L 检测 pri-miR-33、SREBF1/SREBF2 排除 ABCA1/HADHB 过表达的转录性间接效应；(4) miR-eCLIP 用两个生物学重复复现 peak（Fig EV2B–D）。缺少的关键对照：文中提到 ABCA1、HADHB 的验证仅基于外源过表达的 TDMD assay，缺少对内源 MDE 的直接敲除/编辑对照（作者自己承认"perturbation experiments presented here are based on overexpression...conclusive demonstration...would require manipulation of the endogenous MDE"），这对确认这两个 trigger 在生理条件下真实驱动 TDMD 很重要。给到的文本中未见与 TUT4/7 尿苷化或 AGO2/ZSWIM8 乳酸乳酰化修饰相关的任何对照设计。
 
 
 **⑦ 效应量（必须带数字）**
 
-摘要中明确数字仅为"19个高置信TDMD底物"，其余（miR-29b-3p、miR-33a/b-5p、miR-30c-5p的降解幅度、耐药倍数、干性标志物变化）均未报告具体数值。【摘要未报告数字】读全文时优先补：miR-29b-3p/miR-30c-5p在ZSWIM8-KD或非经典TDMD阻断后的fold-change、NREP/SERPINE1表达量与miRNA降解的定量相关系数、紫杉醇IC50变化倍数。
+从正文抄出的准确数字：ZSWIM8 KD 导致其表达下降 >80%（Fig 1B，"produced a robust knockdown of the target (>80% reduction of ZSWIM8 expression, Fig. 1B)"）；筛出 63 个候选 TDMD substrates（L2FC>0.3，p<0.05，Fig 1D,E），其中 28 个 FDR<0.05，5 个多细胞系支持；33 个候选 substrates 中 17/33（27%）在多个细胞系中上调（Fig 1E 附近正文）；候选 substrates 平均积累幅度 average L2FC 0.79；最终获得 19 个高置信（HC）TDMD substrates，TDMD net effect ≥0.3 L2FC（Fig 2E,F），HC 集合平均 L2FC=0.97，net-effect L2FC=0.79（正文，Dataset EV1）；miR-eCLIP 共识别 983（对照组）和617（ZSWIM8 KD 组）reproducible chimeric genes，对应129个miRNA（Fig EV2E）；识别出16个 miRNA target occupancy 显著增加（average L2FC>0.5，Fig 3C,D）；miR-eCLIP chimeric peaks 中 seed match 占比>85%（Fig EV2D）。全文未见与 AMPK/ZSWIM8 S608/S609 磷酸化、TUT4/7 尿苷化、乳酸乳酰化修饰相关的定量数字。
 
 
 **⑧ 我不相信的一件事**
@@ -6081,12 +6093,12 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】要从参考文献里挑三类：①ZSWIM8/TDMD原始机制文献（Han/Bartel等奠基性论文，确认经典TDMD的判定标准来源）；②非经典（ZSWIM8非依赖）miRNA降解此前是否有报道（判断本文"非经典TDMD"是否真正首创或已有先例，如XRN降解通路相关文献）；③miR-29/miR-33/miR-375在代谢或纤维化中的既有转录调控文献（尤其TGF-β/Smad3-miR-29那篇竞争解释论文，确认本文是否引用并回应了这一竞争假说）。
+1. Bitetti A et al (2018)《MicroRNA degradation by a conserved target RNA regulates animal behavior》Nat Struct Mol Biol — NREP 作为 miR-29b-3p 内源 TDMD trigger 的原始发现，与 Sheldon 方向②（miR-29 纤维化）直接相关，可作为其 MYBPC3/SAA3 组织中 NREP-miR-29 轴的比较依据。 2. Li L et al (2021)《Widespread microRNA degradation elements in target mRNAs can assist the encoded proteins》Genes Dev — 提出 TDMD 中 trigger 结合但无降解的模型，为方向①中 ZSWIM8 磷酸化调控 TDMD 效率提供机制参照。 3. Han J, Mendell JT (2023)《MicroRNA turnover: a tale of tailing, trimming, and targets》Trends Biochem Sci — 综述 miRNA tailing/trimming 与 TUT4/7 相关机制，与方向②的 TUT4/7 尿苷化直接相关，值得排队细读。 4. Sheu-Gruttadauria J et al (2019)《Structural basis for target-directed microRNA degradation》Mol Cell — 阐明 AGO:miRNA 复合物构象变化及被 ZSWIM8 识别的结构基础，对方向③（乳酸乳酰化修饰 AGO2/ZSWIM8 如何影响该构象识别）有参考价值。 5. Simeone I et al (2022)《Prediction and pan-cancer analysis of mammalian transcripts involved in target directed miRNA degradation》Nucleic Acids Res — TDMDfinder 方法学来源及泛癌 TDMD 图谱，方向①②③均可能借鉴其预测框架来筛选新的 trigger/substrate 对。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -6094,7 +6106,7 @@ Figure 2E（Volcano plot）支持"HEAP识别的Lefty2 3'UTR结合位点是真实
 
 ### T1 · C. elegans E3 ubiquitin ligase EBAX-1 promotes non-apoptotic linker cell-type death through target-directed miRNA degradation.
 
-**【仅摘要 · 待取全文】**　PMID 41542532　bioRxiv : the preprint server for biology 2026　被引 未获取　https://pubmed.ncbi.nlm.nih.gov/41542532/
+**【全文已读 · 你提供的 PDF】**　PMID 41542532　bioRxiv : the preprint server for biology 2026　被引 未获取　来源：nihpp-2026.01.07.698237v1.pdf　https://pubmed.ncbi.nlm.nih.gov/41542532/
 
 
 **为什么读**
@@ -6119,7 +6131,7 @@ C. elegans EBAX-1（ZSWIM8同源物）通过TDMD降解mir-35家族miRNA，从而
 
 **③ 关键图与可信度**
 
-【需读全文核对】读全文时要找：(1) mir-35家族miRNA在ebax-1突变体中丰度变化的定量图（qPCR或small RNA-seq，n值、fold change）；(2) 是否有pri/pre-mir-35 vs 成熟mir-35的区分实验（这是判断"降解假设"是否成立的关键，本文摘要未提及）；(3) viln-1 mRNA/蛋白上调的定量数据及其与mir-35结合位点突变的rescue实验；(4) EBAX-1的Cullin-2结合motif突变体的LCD表型图，是否有第二种独立方法（如降解速率测定/pulse-chase）验证TDMD而非转录抑制。
+Figure 1e/f/g 是核心证据：Figure 1e 显示 L4-to-adult 转变后24小时 ebax-1(tm2321) 与 ebax-1(ju699) 两个独立缺失突变体 linker cell 存活频率相近（两个独立等位基因互相印证），Figure 1f 显示 ebax-1(tm2321) btbd-2(syb7669) 双突变体存活率高于任一单突变体，Figure 1g 显示野生型 ebax-1 基因组转基因可完全恢复 ebax-1(tm2321) 突变体的 linker cell death（回复实验证明表型确由 ebax-1 缺失所致）。此外 Figure 1i 用序列切片电镜（serial-section electron microscopy）在 0-2 小时（n=3）和24小时（n=1）两个时间点观察到 ebax-1 突变体 linker cell 保留核周异染色质、核膜无皱褶但线粒体/内质网仍肿胀，提供了形态学层面的独立验证，但样本量很小（n=1-3），可信度有限。
 
 
 **④ 方法要点**
@@ -6134,12 +6146,12 @@ C. elegans EBAX-1（ZSWIM8同源物）通过TDMD降解mir-35家族miRNA，从而
 
 **⑥ 做了/漏了哪些对照**
 
-【需读全文核对】读全文时要逐条打勾：①是否有ebax-1 Cullin-2 motif点突变（催化死亡对照）区分E3连接酶活性依赖与非依赖功能；②是否检测了mir-35前体（pri/pre）水平以排除转录/加工层面而非降解层面的效应；③viln-1 3'UTR的mir-35结合位点突变rescue对照，排除off-target效应；④是否用非LCD细胞类型或非dying时间点作为阴性对照证明时空特异性；⑤是否有ZSWIM8/EBAX-1蛋白水平或降解活性的直接生化验证（而非仅遗传上位关系）。
+明确做了的对照包括：用两个独立缺失等位基因 ebax-1(tm2321) 和 ebax-1(ju699) 互相印证表型（Figure 2a, 1e）；用野生型 ebax-1 基因组转基因回复实验证明因果性（Figure 1g）；用 mig-24p::ebax-1（linker cell 特异性表达）恢复 rescue 而 lin-48p::ebax-1（U.I/rp 吞噬细胞特异性表达）不能 rescue，以此区分细胞自主性 vs 非自主性作用（Figure 2c）；用 auxin 处理时间窗口对照（L1-L3 阶段 vs L3 之后）确定 EBAX-1 起作用的发育时间点（Figure 2f,g）；用 eft-3 广谱启动子驱动 TIR1 与 mig-24p 特异性启动子驱动 TIR1 做比较（Supplementary Fig. 2a,b）。文中未提及的关键缺失对照：没有看到针对 miRNA TDMD 机制本身的直接生化验证（如 AGO 上 miRNA 定量、miRNA half-life 测定或 TDMD 靶标的直接 CLIP/降解实验），这些正文片段中没有出现，对判断 EBAX-1 是否真的通过 miRNA 降解发挥作用很重要，但从提供文本看未见。
 
 
 **⑦ 效应量（必须带数字）**
 
-【摘要未报告数字】读全文时优先补：ebax-1突变体中mir-35家族miRNA丰度的具体fold-change及统计量；viln-1表达上调的定量倍数；LCD表型的定量恢复比例（如"loss of mir-35 restores LCD to X%的ebax-1突变体"）。
+效应量数字（均出自正文）：野生型young-adult 雄性中97%的 linker cell 在24小时后已完全降解或正在死亡（n=241，见 p6 "97% of linker cells in wild-type animals are fully degraded or dying at this stage (n=241)"）。ebax-1(tm2321) 突变体中0-2小时后44%的雄性表现 linker cell 存活，而携带 mig-24p::ebax-1 转基因（3个转基因株系检测）的 ebax-1(tm2321) 突变体中只有7%表现存活（Figure 2c，"44% of ebax-1(tm2321) mutant males exhibit linker cell survival 0-2 hours post the larva-to-adult molt, only 7% of ebax-1(tm2321) mutants carrying the mig-24p::ebax-1 transgene display surviving linker cells"）。电镜观察样本量为0-2小时 n=3，24小时 n=1（p7，Figure 1i）。
 
 
 **⑧ 我不相信的一件事**
@@ -6174,12 +6186,12 @@ C. elegans EBAX-1（ZSWIM8同源物）通过TDMD降解mir-35家族miRNA，从而
 
 **⑭ 要排队的参考文献**
 
-【需读全文核对】需从参考文献里挑三类：①ZSWIM8/EBAX-1首次被鉴定为TDMD介导E3连接酶的奠基性文献（Bartel lab 2020年Science系列），核对本文机制描述与奠基工作的一致性；②C. elegans linker cell death既往UPS机制研究（本文作者前期工作），了解LCD领域历史脉络及是否有竞争实验室；③mir-35家族及其在线虫发育中功能的既往文献，判断该miRNA家族是否有哺乳动物功能同源类比可借鉴到miR-29/miR-33/miR-375。
+25. Han, J. et al. 2020《A ubiquitin ligase mediates target-directed microRNA decay independently of tailing and trimming》Science — 与 EBAX-1/ZSWIM8 介导的 TDMD 机制直接相关，是本文 TDMD 假说的核心引用之一，对方向①最相关。26. Shi, C. Y. et al. 2020《The ZSWIM8 ubiquitin ligase mediates target-directed microRNA degradation》Science — ZSWIM8（EBAX-1 哺乳动物同源蛋白）介导 TDMD 的原创发现文献，是理解 AMPK-ZSWIM8-TDMD 通路的基础背景文献，强烈建议排队。39. Stubna, M. W., Shukla, A. & Bartel, D. P. 2024《Widespread destabilization of C. elegans microRNAs by the E3 ubiquitin ligase EBAX-1》RNA — 直接研究 EBAX-1 介导 miRNA 广泛降解的全基因组范围机制，对理解 EBAX-1/ZSWIM8 miRNA 稳态调控（方向①③）高度相关。38. Donnelly, B. F. et al. 2022《The developmentally timed decay of an essential microRNA family is seed-sequence dependent》Cell Rep. — 研究 miRNA 家族（含 mir-35 家族）发育性降解的序列依赖机制，对理解 miRNA 稳态调控网络（方向①③）有参考价值。36. Buhagiar, A. F. & Kleaveland, B. 2024《To kill a microRNA: emerging concepts in target-directed microRNA degradation》Nucleic Acids Res. — TDMD 领域综述，可为方向①②③提供全局机制框架参考。
 
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -6187,7 +6199,7 @@ C. elegans EBAX-1（ZSWIM8同源物）通过TDMD降解mir-35家族miRNA，从而
 
 ### T1 · Prediction and pan-cancer analysis of mammalian transcripts involved in target directed miRNA degradation.
 
-**【全文已读】**　PMID 35137158　Nucleic acids research 2022　被引 37　https://pubmed.ncbi.nlm.nih.gov/35137158/
+**【全文已读 · PMC】**　PMID 35137158　Nucleic acids research 2022　被引 37　PMC8887481　https://pubmed.ncbi.nlm.nih.gov/35137158/
 
 
 **为什么读**
@@ -6272,7 +6284,7 @@ Fig 3E-G 与 Fig 4（A-L）支持核心主张：预测的 TDMD pair（如 SERPIN
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---
@@ -6280,7 +6292,7 @@ Fig 3E-G 与 Fig 4（A-L）支持核心主张：预测的 TDMD pair（如 SERPIN
 
 ### T1 · Structural basis for activity switching in polymerases determining the fate of let-7 pre-miRNAs.
 
-**【全文已读】**　PMID 39054354　Nature structural & molecular biology 2024　被引 5　https://pubmed.ncbi.nlm.nih.gov/39054354/
+**【全文已读 · PMC】**　PMID 39054354　Nature structural & molecular biology 2024　被引 5　PMC11402785　https://pubmed.ncbi.nlm.nih.gov/39054354/
 
 
 **为什么读**
@@ -6365,7 +6377,7 @@ Table 1给出的定量数字：TUT4/RNA/LIN28A复合物cryo-EM图谱分辨率3.6
 
 **我的核对与补充（留白）**
 
-〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、读全文后补到的数字、我的动作〕
+〔在此手写：③挑的关键图你是否认同、⑥指出的缺失对照是否真缺、⑭里你要真读的是哪几篇、我的动作〕
 
 
 ---

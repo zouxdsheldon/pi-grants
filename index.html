@@ -1343,23 +1343,27 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <a class="abtn" href="data/reading_pool.csv" download>⬇️ 632 篇完整候选池 (.csv)</a>
   </div>
   <div style="background:#FFF9E6;border:1px solid #FFD980;border-radius:7px;padding:10px 12px;margin:10px 0 4px">
-    <b style="color:#1B5E20">📝 68 篇的 14 栏笔记已填好 —— 其中 43 篇是<u>真的下载了全文</u>来填的</b>
+    <b style="color:#1B5E20">📝 68 篇 × 14 栏全部填好 —— 63 篇是<u>真的读了全文</u>填的</b>
     <p style="font-size:12.7px;line-height:1.72;color:#333;margin:5px 0 7px">
-      原来有三栏（③关键图与可信度、⑥做了/漏了哪些对照、⑭要排队的参考文献）标的是「需读全文核对」，
-      ⑦效应量有 23 篇标「摘要未报告数字」—— 因为摘要里确实没有这些内容。
-      现在已从 Europe PMC / NCBI PMC 下载全文，按<b>真实图注、Methods 与参考文献表</b>补齐：
-      <b>68 篇里 43 篇已按全文填</b>（表内「全文来源」列标绿），
-      另 <b>25 篇无开放全文</b>（付费墙）保留原标记并单列成「25 篇待取全文」表，需你用 MSKCC 订阅自取。
-      <br><b>已机械核对两件事：</b>⑭栏引用的 <b>127 个 PMID 全部出自该文自己的参考文献表</b>，无一例外；
-      ③栏引用的图号都能在该文图注中对应上。两篇全文里确实没有定量数字的，如实写了「全文未见定量数字」，没有编。
-      <br>「我的核对与补充」列仍然留空给你 —— 最值得你亲手做的三件事写在「这份表怎么用」表里。
+      ③关键图与可信度、⑥做了/漏了哪些对照、⑦效应量、⑭要排队的参考文献 这四栏原本标「需读全文核对」/「摘要未报告数字」——
+      摘要里确实没有这些内容。现已按全文填写，来源分三类：
+      <b>43 篇</b>来自 Europe PMC / NCBI PMC 开放全文（表内标绿）、
+      <b>20 篇</b>来自 Sheldon 自己上传的 PDF（标蓝）、
+      <b>仅剩 5 篇</b>缺全文（标黄，单列成表）。
+      <br><b>机械核对：</b>PMC 那 43 篇里 ⑭栏引用的 <b>127 个 PMID 全部出自该文自己的参考文献表</b>；
+      你提供的 20 篇里 ⑭栏引用的文献标题<b>全部能在该文全文中逐字回查到</b>。
+      5 篇全文确无定量数字的写了「全文未见定量数字」，1 篇方法学文如实说明其参考文献与三个方向无重叠、不予排队——都没有编。
+      <br><b>审计中抓到的真实问题：</b>Europe PMC 全文接口对 20 篇返回 500（含 ZSWIM8 两篇 Science），
+      换 NCBI PMC 全部取到——不是没权限，是单一数据源的缺陷；另有一次误判：PDF 文本层把 <code>5′</code> 抽成 <code>50</code>
+      并断行，导致一条真实参考文献被我判成编造，核对逻辑改成避开 prime 的中段子串后确认它确实在原文。
+      <br>「我的核对与补充」列仍留空给你。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <a class="abtn solid" href="data/paper_notes_68_fulltext.xlsx?v=20260929c" download
+      <a class="abtn solid" href="data/paper_notes_68_fulltext.xlsx?v=20260929d" download
          style="text-decoration:none;background:#1B5E20">⬇️ 【新】全文已补齐版 (.xlsx · 28 列 · 43 篇按全文填)</a>
-      <a class="abtn" href="data/paper_notes_68_fulltext.docx?v=20260929c" download>⬇️ 全文版 Word</a>
-      <a class="abtn" href="data/paper_notes_68_fulltext.pdf?v=20260929c" download>⬇️ 全文版 PDF (70 页)</a>
-      <a class="abtn" href="data/paper_notes_68_fulltext.md?v=20260929c" download>⬇️ 全文版 Markdown</a>
+      <a class="abtn" href="data/paper_notes_68_fulltext.docx?v=20260929d" download>⬇️ 全文版 Word</a>
+      <a class="abtn" href="data/paper_notes_68_fulltext.pdf?v=20260929d" download>⬇️ 全文版 PDF (70 页)</a>
+      <a class="abtn" href="data/paper_notes_68_fulltext.md?v=20260929d" download>⬇️ 全文版 Markdown</a>
       <a class="abtn solid" href="data/paper_notes_68_prefilled.xlsx" download
          style="text-decoration:none;background:#7A5200">⬇️ 摘要版 (.xlsx · 27 列可筛选)</a>
       <a class="abtn" href="data/paper_notes_68_prefilled.docx" download>⬇️ Word (.docx)</a>
