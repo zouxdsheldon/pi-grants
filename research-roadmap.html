@@ -113,7 +113,9 @@ textarea{resize:vertical;line-height:1.5}
 <body>
 <header>
   <h1>科研未来规划 · Research Roadmap Planner</h1>
-  <div class="sub">单文件离线应用 · 数据只存在你自己的浏览器里 · Single-file, offline, all data stays in your browser</div>
+  <div class="sub"><span style="background:rgba(255,255,255,.24);border-radius:9px;padding:1px 9px;
+    font-weight:700;margin-right:8px" title="看不到这个版本号，说明你手里是旧版：请强制刷新（Mac: Cmd+Shift+R / Win: Ctrl+F5），或重新下载一次">
+    v2026-09-29 · 免 API Key 可用</span>单文件离线应用 · 数据只存在你自己的浏览器里 · Single-file, offline</div>
 </header>
 
 <div class="wrap">
@@ -1605,7 +1607,9 @@ function run(){
       cv=document.getElementById('cvText').value.trim(),
       sc=document.getElementById('schText').value.trim();
   if(!cv&&!sc){ flash('CV 和 Scholar 文本都是空的——至少给一个，否则报告只能靠编。','err'); return; }
-  if(!k){ flash('没填 API Key。内置报告已可用，如果只想读报告请点「报告」标签。','err'); return; }
+  if(!k){ flash('这条路需要 API Key，而 Claude Pro／Max 订阅不含 API（要另开账户单独付费）。'
+    +'请改用上面的「方式 A」：① 复制提示词 → ② 在 claude.ai 粘贴 → ③ 把回复粘回来，零额外花费。'
+    +'只想读现成报告的话，点「报告」标签。','err'); return; }
   if(!m){ flash('先点「拉取」选一个模型','err'); return; }
 
   var btn=document.getElementById('runBtn'); btn.disabled=true;
