@@ -1343,27 +1343,26 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <a class="abtn" href="data/reading_pool.csv" download>⬇️ 632 篇完整候选池 (.csv)</a>
   </div>
   <div style="background:#FFF9E6;border:1px solid #FFD980;border-radius:7px;padding:10px 12px;margin:10px 0 4px">
-    <b style="color:#1B5E20">📝 68 篇 × 14 栏全部填好 —— 63 篇是<u>真的读了全文</u>填的</b>
+    <b style="color:#1B5E20">📝 68 篇 × 14 栏全部填完 —— 已无任何一栏标着「需读全文核对」</b>
     <p style="font-size:12.7px;line-height:1.72;color:#333;margin:5px 0 7px">
-      ③关键图与可信度、⑥做了/漏了哪些对照、⑦效应量、⑭要排队的参考文献 这四栏原本标「需读全文核对」/「摘要未报告数字」——
-      摘要里确实没有这些内容。现已按全文填写，来源分三类：
-      <b>43 篇</b>来自 Europe PMC / NCBI PMC 开放全文（表内标绿）、
-      <b>20 篇</b>来自 Sheldon 自己上传的 PDF（标蓝）、
-      <b>仅剩 5 篇</b>缺全文（标黄，单列成表）。
-      <br><b>机械核对：</b>PMC 那 43 篇里 ⑭栏引用的 <b>127 个 PMID 全部出自该文自己的参考文献表</b>；
-      你提供的 20 篇里 ⑭栏引用的文献标题<b>全部能在该文全文中逐字回查到</b>。
-      5 篇全文确无定量数字的写了「全文未见定量数字」，1 篇方法学文如实说明其参考文献与三个方向无重叠、不予排队——都没有编。
-      <br><b>审计中抓到的真实问题：</b>Europe PMC 全文接口对 20 篇返回 500（含 ZSWIM8 两篇 Science），
-      换 NCBI PMC 全部取到——不是没权限，是单一数据源的缺陷；另有一次误判：PDF 文本层把 <code>5′</code> 抽成 <code>50</code>
-      并断行，导致一条真实参考文献被我判成编造，核对逻辑改成避开 prime 的中段子串后确认它确实在原文。
+      来源三类：<b>43 篇</b> Europe PMC / NCBI PMC 开放全文（绿）、
+      <b>22 篇</b> Sheldon 自己上传的 PDF（蓝，含 MMB 2141 第 40 章 Phos-tag、MMB 3059 第 9 章肠类器官方案）、
+      <b>3 篇替代文献</b>（紫）—— 原文拿不到开放全文，换成同角色、可取全文的论文。
+      <br><b>替代是降级不是等价：</b>三篇层级都判为 T2／相关度 3，原文是 T1/T2／4-3。
+      周7 miR-29 硬化症 → miR-29:miR-199 比值协调 MSC 修复肺纤维化（Mol Ther Nucleic Acids 2025）；
+      周6 代谢记忆综述 → 同命题 2025 年版（Genes）；
+      周9 克罗恩狭窄蛋白质组 → 同刊同病的转录组研究（IBD 2025）。逐条理由在「3 篇替代对照」表里。
+      <br><b>机械核对：</b>PMC 那 43 篇 ⑭栏的 <b>127 个 PMID 全部出自该文自己的参考文献表</b>；
+      PDF 篇与替代篇的 ⑭栏标题<b>全部能在该文全文逐字回查到</b>；③栏图号全部能对应。
+      另把 4 处「对作者／单位的猜测」按全文作者名单与单位改写成实证或「全文未给出」。
       <br>「我的核对与补充」列仍留空给你。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <a class="abtn solid" href="data/paper_notes_68_fulltext.xlsx?v=20260929d" download
-         style="text-decoration:none;background:#1B5E20">⬇️ 【新】全文已补齐版 (.xlsx · 28 列 · 43 篇按全文填)</a>
-      <a class="abtn" href="data/paper_notes_68_fulltext.docx?v=20260929d" download>⬇️ 全文版 Word</a>
-      <a class="abtn" href="data/paper_notes_68_fulltext.pdf?v=20260929d" download>⬇️ 全文版 PDF (70 页)</a>
-      <a class="abtn" href="data/paper_notes_68_fulltext.md?v=20260929d" download>⬇️ 全文版 Markdown</a>
+      <a class="abtn solid" href="data/paper_notes_68_fulltext.xlsx?v=20260929e" download
+         style="text-decoration:none;background:#1B5E20">⬇️ 【新】全部已补齐 (.xlsx · 68/68 · 43 PMC + 22 你的 PDF + 3 替代)</a>
+      <a class="abtn" href="data/paper_notes_68_fulltext.docx?v=20260929e" download>⬇️ 全文版 Word</a>
+      <a class="abtn" href="data/paper_notes_68_fulltext.pdf?v=20260929e" download>⬇️ 全文版 PDF (70 页)</a>
+      <a class="abtn" href="data/paper_notes_68_fulltext.md?v=20260929e" download>⬇️ 全文版 Markdown</a>
       <a class="abtn solid" href="data/paper_notes_68_prefilled.xlsx" download
          style="text-decoration:none;background:#7A5200">⬇️ 摘要版 (.xlsx · 27 列可筛选)</a>
       <a class="abtn" href="data/paper_notes_68_prefilled.docx" download>⬇️ Word (.docx)</a>
