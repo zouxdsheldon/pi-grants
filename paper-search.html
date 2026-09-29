@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文献检索与汇总台账 · Paper Search &amp; Ledger</title>
+<style>
+:root{--pp:#4A148C;--bb:#0D47A1;--bg:#faf8fd;--ln:#e3dcf0;--tx:#1f2430;--mu:#6b7280;
+ --ok:#1b7f4d;--rd:#b3261e;--wr:#7A5200;--wrb:#FFEFC2}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+ background:var(--bg);color:var(--tx);font-size:14.6px;line-height:1.6}
+header{background:linear-gradient(100deg,#4A148C,#0D47A1);color:#fff;padding:15px 20px}
+header h1{margin:0 0 3px;font-size:19px}header .sub{font-size:12.4px;opacity:.93}
+.wrap{max-width:1680px;margin:0 auto;padding:0 14px 60px}
+.btn{background:var(--pp);color:#fff;border:0;border-radius:7px;padding:8px 14px;font-size:13.3px;
+ cursor:pointer;font-weight:600;font-family:inherit;text-decoration:none;display:inline-block}
+.btn:hover{filter:brightness(1.12)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.g{background:#fff;color:var(--pp);border:1px solid var(--pp)}
+.btn.b{background:var(--bb)}.btn.k{background:#1b7f4d}.btn.o{background:#00695C}
+.btn.sm{padding:5px 10px;font-size:12.2px;font-weight:500}
+input[type=text],input[type=number],select,textarea{width:100%;padding:7px 9px;border:1px solid var(--ln);
+ border-radius:6px;font-size:13.2px;font-family:inherit;background:#fff;color:var(--tx)}
+.card{background:#fff;border:1px solid var(--ln);border-radius:9px;padding:13px;margin:11px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:170px}
+label.f{display:block;font-size:12.4px;font-weight:700;color:var(--mu);margin:8px 0 3px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 4px}
+.note{font-size:12.3px;color:var(--mu);margin:3px 0}
+.warn{background:var(--wrb);border:1px solid #FFD980;color:var(--wr);border-radius:7px;padding:9px 12px;
+ font-size:12.5px;margin:9px 0}
+.danger{background:#FDE7E7;border:1px solid #f0b4b4;color:#b3261e;border-radius:7px;padding:10px 12px;
+ font-size:12.6px;margin:9px 0}
+.qbox{background:#2b2135;color:#eee;border-radius:7px;padding:9px 11px;font-size:12.1px;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;margin:6px 0}
+#stat{font-size:12.7px;color:var(--mu);min-height:18px}
+.err{color:var(--rd);font-weight:600}.okc{color:var(--ok);font-weight:600}
+table.t{width:100%;border-collapse:collapse;font-size:11.9px}
+table.t th{background:#EDE7F6;border:1px solid #d4c9e8;padding:4px 5px;text-align:left;
+ position:sticky;top:0;cursor:pointer;white-space:nowrap}
+table.t td{border:1px solid #d4c9e8;padding:4px 5px;vertical-align:top}
+table.t tr:hover td{background:#FAF7FE}
+.scroll{max-height:62vh;overflow:auto;border:1px solid var(--ln);border-radius:7px}
+.badge{display:inline-block;font-size:10.5px;padding:1px 6px;border-radius:9px;margin:1px 2px 1px 0}
+.b-src{background:#E3F2E8;color:#1b7f4d;border:1px solid #9ed1b2}
+.b-inf{background:#FFEFC2;color:#7A5200;border:1px solid #FFD980}
+.b-dir{background:#EDE7F6;color:#4A148C;border:1px solid #c5b3e6}
+.b-rev{background:#E8EEF9;color:#0D47A1;border:1px solid #b3c6e8}
+.ev{font-size:11.4px;color:#4a3a5c;background:#F7F4FC;border-left:2px solid #c5b3e6;
+ padding:3px 6px;margin:2px 0;border-radius:0 4px 4px 0}
+.ladder td{font-size:11.8px}
+.ladder .z{color:#b3261e;font-weight:700}
+details summary{cursor:pointer;font-weight:600;color:var(--pp);font-size:12.8px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0}
+.tabs button{background:#fff;border:1px solid var(--ln);border-bottom:none;border-radius:7px 7px 0 0;
+ padding:8px 14px;font-size:13.2px;cursor:pointer;color:var(--mu);font-weight:600}
+.tabs button.on{background:var(--pp);color:#fff;border-color:var(--pp)}
+.pane{display:none;background:#fff;border:1px solid var(--ln);border-radius:0 8px 8px 8px;padding:13px}
+.pane.on{display:block}
+@media print{header,.tabs,.bar,.warn,.danger{display:none!important}.pane{display:block!important;border:0}}
+</style></head><body>
+<header>
+  <h1>文献检索与汇总台账 · Paper Search &amp; Ledger</h1>
+  <div class="sub">关键词检索 → 逐篇抽取细节 → 汇总成一张可核对的总表 → 每次检索都记进台账，随时导出 Excel / Word / CSV / Markdown</div>
+</header>
+<div class="wrap">
+
+<div class="danger">
+  <b>⚠ 先记住这一条，它能省掉一个严重误判：</b>
+  <b>把 3 个以上词用 AND 串起来，PubMed 返回 0 篇是常态，这不是「研究空白」的证据</b> —— 只是检索式太窄。
+  本工具因此内置<b>子句阶梯</b>：只要全交集 &lt; 5 篇，它会自动把检索式拆成<b>单词计数</b>与<b>两两组合计数</b>并列给你看。
+  判断空白要看<b>两两组合的最小值</b>，不是看全交集。<br>
+  同理，PubMed 若把引号短语判为「未收录」会<b>整条丢掉该短语</b>，AND 随即塌成 0 —— 本工具会显式警告并自动去引号重试。
+  <span class="note">这两个坑都是实测踩到的：一次 21 条检索式里有 20 条因为这两个原因报 0，看起来像「遍地空白」。</span>
+</div>
+
+<div class="card">
+  <div style="font-weight:700;color:var(--pp);margin-bottom:4px">① 组检索式</div>
+  <div class="row">
+    <div><label class="f">核心词（必须全部出现，AND）</label>
+      <input type="text" id="core" placeholder="ZSWIM8, TDMD"></div>
+    <div><label class="f">任一词（出现其一即可，OR）</label>
+      <input type="text" id="anyw" placeholder="AMPK, energy stress, phosphorylation"></div>
+    <div><label class="f">排除词（NOT）</label>
+      <input type="text" id="notw" placeholder="plant, virus"></div>
+  </div>
+  <div class="row">
+    <div><label class="f">字段限定</label>
+      <select id="fld">
+        <option value="[tiab]">标题+摘要 [tiab]（推荐）</option>
+        <option value="[ti]">仅标题 [ti]（最严）</option>
+        <option value="">全字段（最宽，含参考文献等）</option>
+        <option value="[mh]">MeSH 主题词 [mh]</option>
+      </select></div>
+    <div><label class="f">起始年</label><input type="number" id="y0" value="2015" min="1950" max="2030"></div>
+    <div><label class="f">截止年</label><input type="number" id="y1" value="2026" min="1950" max="2030"></div>
+    <div><label class="f">文章类型</label>
+      <select id="pt">
+        <option value="">不限</option>
+        <option value="NOT review[pt]">排除综述</option>
+        <option value="AND review[pt]">仅综述</option>
+        <option value="AND (clinicaltrial[pt] OR randomizedcontrolledtrial[pt])">仅临床试验</option>
+      </select></div>
+    <div><label class="f">排序</label>
+      <select id="sort"><option value="relevance">相关性</option><option value="pub_date">最新优先</option>
+      <option value="Journal">期刊名</option></select></div>
+    <div><label class="f">抓取上限</label>
+      <select id="lim"><option>40</option><option selected>80</option><option>150</option><option>300</option></select></div>
+  </div>
+  <label class="f">或者：直接手写 PubMed 检索式（填了这里就忽略上面所有格子）</label>
+  <input type="text" id="raw" placeholder='例：(ZSWIM8[tiab] OR TDMD[tiab]) AND miR-29[tiab] AND 2018:2026[dp]'>
+  <div class="bar">
+    <button class="btn" id="run">🔍 检索</button>
+    <button class="btn o sm" id="ladderBtn">📐 只看子句阶梯（不抓正文）</button>
+    <button class="btn g sm" id="demo">试一个示例</button>
+  </div>
+  <div id="stat"></div>
+  <div id="qshow"></div>
+  <div id="ladderBox"></div>
+</div>
+
+<div class="tabs">
+  <button class="on" data-p="res">本次结果</button>
+  <button data-p="mast">汇总总表</button>
+  <button data-p="led">检索台账</button>
+  <button data-p="how">怎么用 / 局限</button>
+</div>
+
+<div class="pane on" id="res">
+  <div class="bar">
+    <button class="btn k sm" id="keepAll">✓ 全部收进总表</button>
+    <button class="btn g sm" id="keepSel">✓ 收进总表（勾选的）</button>
+    <span class="note" id="resN"></span>
+  </div>
+  <div class="note">列头可点击排序。<b>方法/数字/空白</b>三列是确定性抽取，展开可看触发它的原句。</div>
+  <div class="scroll" id="resWrap"></div>
+</div>
+
+<div class="pane" id="mast">
+  <div class="bar">
+    <button class="btn k sm" id="mX">⬇ 总表导 Excel</button>
+    <button class="btn b sm" id="mW">⬇ 总表导 Word</button>
+    <button class="btn sm" id="mC">⬇ 总表导 CSV</button>
+    <button class="btn g sm" id="mM">⬇ 总表导 Markdown</button>
+    <span style="flex:1"></span>
+    <button class="btn g sm" id="mClr">清空总表</button>
+  </div>
+  <div class="note" id="mastN"></div>
+  <div class="scroll" id="mastWrap"></div>
+</div>
+
+<div class="pane" id="led">
+  <div class="bar">
+    <button class="btn k sm" id="lX">⬇ 台账导 Excel</button>
+    <button class="btn g sm" id="lM">⬇ 台账导 Markdown</button>
+    <span style="flex:1"></span>
+    <button class="btn g sm" id="lClr">清空台账</button>
+  </div>
+  <div class="note">每次检索都记一行：执行时间、<b>实际送给 PubMed 的检索式</b>、全库命中数、抓取数、收进总表数、子句阶梯结论。
+    这一页的用途是<b>三个月后你还能复现当时那次检索</b>。</div>
+  <div class="scroll" id="ledWrap"></div>
+</div>
+
+<div class="pane" id="how">
+  <div style="font-size:13px;line-height:1.8">
+    <b style="color:var(--pp)">这个工具做什么</b><br>
+    把一次关键词检索变成一张<b>可核对的表</b>，并把每次检索记进台账，最后汇总成一张跨检索的总表 —— 供你以后回查与追踪。<br><br>
+    <b style="color:var(--pp)">抽取是确定性的，不调大模型</b><br>
+    方法、数字、空白三列全部由<b>词边界正则</b>在摘要原文上抽取，<b>每条都附触发它的整句</b>，你可以当场核对。
+    所以屏幕上不会有「读着有道理但查不到出处」的句子。<br><br>
+    <b style="color:var(--pp)">实测能力上限</b>（在 12 周阅读计划那 68 篇真实摘要上逐项测过）<br>
+    · 方法抽取：<b>50 / 68</b> 篇有命中（共 104 条）<br>
+    · 效应量：<b>10 / 68</b> 篇 —— 这不是漏抓，我用宽模式在原文里核对过，真实分布正好也是 10。机制类与结构类摘要普遍不报倍数/p 值。<br>
+    · 空白句：<b>18 / 68</b> 篇 —— 作者的「尚不清楚」多写在 Discussion 末尾而非摘要。<br>
+    · 摘要分段：只有 <b>4 / 68</b> 是出版方结构化摘要（标 <span class="badge b-src">来自出版方</span>），其余 64 篇按线索句<b>规则推断</b>（标 <span class="badge b-inf">规则推断</span>）。推断会出错，所以两者用不同徽章区分。<br><br>
+    <b style="color:var(--pp)">已知局限 —— 请当成读数说明</b><br>
+    · <b>命中数是检索当日值</b>，会随 PubMed 收录变化。台账里记了执行时间，就是为了让你知道那个数字是什么时候的。<br>
+    · <b>被引数来自 Europe PMC，它经常 503</b>。取不到时显示「未获取」而<b>不是 0</b> —— 抓取失败和真的零引用长得一模一样，不能混为一谈。<br>
+    · <b>全交集为 0 不是空白证据</b>（见页首红框）。判断空白请看子句阶梯里<b>两两组合的最小值</b>；即便它是 0，也只说明<b>这两个词从未在标题/摘要里共现</b>，不等于没人想过这个问题。<br>
+    · <b>只检索 PubMed</b>。预印本（bioRxiv/medRxiv）、arXiv、以及未被 PubMed 收录的期刊<b>抓不到</b>。想覆盖预印本请另用本站「🔔 文献追踪」面板。<br>
+    · 抽取只看<b>摘要</b>。关键图、对照、参考文献这三类信息<b>从摘要原则上得不到</b> —— 要那些请用「🔎 论文速读与笔记工具」逐篇做笔记。<br><br>
+    <b style="color:var(--pp)">数据存在哪</b><br>
+    总表与台账都存在<b>你自己的浏览器</b>里（localStorage），<b>不上传任何服务器</b>。换电脑或清缓存前请先导出。<br><br>
+    <b style="color:var(--pp)">导出格式的诚实说明</b><br>
+    导出的 Word/Excel 是 <b>HTML 封装的 <code>.doc</code> / <code>.xls</code></b>：Word 与 Excel 都能直接打开、再另存为原生格式，但它<b>不是</b> OOXML。
+    本站是纯静态页（没有后端），这是能做到的上限，所以按 <code>.doc</code>/<code>.xls</code> 命名而<b>不谎称</b> .docx。CSV 与 Markdown 是标准文本格式。
+  </div>
+</div>
+</div>
+
+<script>
+/* ======================================================================
+   文献检索与汇总台账
+
+   两个实测踩到的坑，已内置为主动防护（不要移除）：
+   A) 3 个以上子句 AND 起来，PubMed 返回 0 是常态 —— 这不是研究空白。
+      → 全交集 < 5 时自动跑「子句阶梯」：单词计数 + 两两组合计数。
+        判空白看两两最小值，不看全交集。
+   B) 引号短语若不在 PubMed 短语索引里，整条短语被丢弃，AND 塌成 0，
+      而 esearch 只在 warninglist.quotedphrasesnotfound 里悄悄提一句。
+      → 显式警告 + 自动去引号重试。
+   诚实契约：被引数取不到显示「未获取」而非 0；规则推断的摘要分段与
+   出版方标注用不同徽章区分；每条抽取都附触发原句。
+   ====================================================================== */
+/* ====== 共享抽取层（与 paper-notes.html 逐字节相同，勿单边修改）====== */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+/* ---------------- 句子切分（保留原句用于取证） ---------------- */
+function splitSentences(t){
+  if(!t) return [];
+  var protected_=String(t)
+    .replace(/(\b[A-Z])\.(\s*[A-Z]\.)/g,'$1<DOT>$2')      /* 人名缩写 */
+    .replace(/\b(e\.g|i\.e|vs|et al|Fig|approx|ca)\./gi,'$1<DOT>')
+    .replace(/(\d)\.(\d)/g,'$1<DOT>$2');                   /* 小数 */
+  return protected_.split(/(?<=[.!?;])\s+(?=[A-Z0-9(«"'\u4e00-\u9fff])/)
+    .map(function(x){return x.replace(/<DOT>/g,'.').trim();})
+    .filter(function(x){return x.length>2;});
+}
+
+/* ---------------- 摘要分段：出版方标注 vs 规则推断 ---------------- */
+var CUES=[
+ ['背景 Background', /^(background|introduction|context|rationale|purpose|objective|aim)/i,
+   /\b(remains? (unclear|unknown)|little is known|however|although|it is (not )?(well )?(understood|known))\b/i],
+ ['方法 Methods',    /^(methods?|materials|design|approach|experimental)/i,
+   /\b(we (used|performed|generated|applied|measured|analy[sz]ed)|using|were (treated|transfected|injected|cultured))\b/i],
+ ['结果 Results',    /^(results?|findings)/i,
+   /\b(we (found|show|observed|identified|demonstrate)|(increased|decreased|reduced|elevated|abolished)\b|\bP\s*[<=>])/i],
+ ['结论 Conclusions',/^(conclusions?|significance|implications?|summary|interpretation)/i,
+   /\b(these (results|data|findings) (suggest|indicate|demonstrate|show)|we conclude|our (results|findings) (suggest|reveal))\b/i]
+];
+function structureAbstract(abs, labeled){
+  /* labeled: [{label, text}] 来自 efetch 的 AbstractText@Label（若有） */
+  if(labeled && labeled.length && labeled.some(function(x){return x.label;})){
+    return {origin:'source', parts:labeled.filter(function(x){return x.text;}).map(function(x){
+      return {name:(x.label||'正文'), text:x.text};})};
+  }
+  var sents=splitSentences(abs), parts=[];
+  var cur='背景 Background';
+  var buf={};
+  sents.forEach(function(s){
+    for(var i=0;i<CUES.length;i++){
+      if(CUES[i][2].test(s)){ cur=CUES[i][0]; break; }
+    }
+    (buf[cur]=buf[cur]||[]).push(s);
+  });
+  ['背景 Background','方法 Methods','结果 Results','结论 Conclusions'].forEach(function(k){
+    if(buf[k]&&buf[k].length) parts.push({name:k, text:buf[k].join(' ')});
+  });
+  if(!parts.length && abs) parts.push({name:'正文（无法分段）', text:abs});
+  return {origin:'inferred', parts:parts};
+}
+
+/* ---------------- 数字与效应量：逐句取证 ---------------- */
+var NUMPATS=[
+ ['百分比', /\b\d{1,3}(?:\.\d+)?\s?%/g],
+ ['倍数',   /\b\d+(?:\.\d+)?[-\s]?fold\b/gi],
+ ['P 值',   /\bP\s?[<=>]\s?0?\.\d+/gi],
+ ['样本量', /\bn\s?=\s?\d+/gi],
+ ['浓度/时长', /\b\d+(?:\.\d+)?\s?(?:nM|µM|uM|mM|M|mg\/kg|µg|ug|mg|ng\/ml|h|hr|hours?|min|days?|weeks?)\b/gi],
+ ['分辨率/长度', /\b\d+(?:\.\d+)?\s?(?:Å|angstrom|nt|bp|kb|kDa|aa)\b/gi]
+];
+function findNumbers(abs){
+  var out=[];
+  splitSentences(abs).forEach(function(s){
+    NUMPATS.forEach(function(pp){
+      var re=new RegExp(pp[1].source, pp[1].flags.replace('g','')+'g'), m;
+      while((m=re.exec(s))!==null){ out.push({kind:pp[0], hit:m[0], sent:s}); }
+    });
+  });
+  var seen={}, uniq=[];
+  out.forEach(function(o){var k=o.kind+'|'+o.hit+'|'+o.sent.slice(0,40);
+    if(!seen[k]){seen[k]=1;uniq.push(o);}});
+  return uniq;
+}
+
+/* ---------------- 方法证据：词边界 + 触发原句 ---------------- */
+var METHODS=[
+ ['小 RNA 测序',        ['small RNA[- ]seq(uencing)?','smallRNA[- ]seq','miRNA[- ]seq(uencing)?','sRNA[- ]seq']],
+ ['RNA-seq',            ['RNA[- ]seq(uencing)?','transcriptom(e|ic) (analysis|profiling|sequencing)']],
+ ['3′ 末端 / 尾巴测序', ['TAIL[- ]seq','3.? end sequencing','poly\\(A\\) tail length','tailseq']],
+ ['代谢标记 / 半衰期',  ['SLAM[- ]seq','4[- ]?thiouridine','4sU','metabolic (RNA )?labeling','half[- ]life',
+                        'actinomycin D','pulse[- ]chase','decay rate']],
+ ['CLIP / RIP',         ['\\bCLIP\\b','iCLIP','PAR[- ]CLIP','eCLIP','HITS[- ]CLIP','RIP\\b','RNA immunoprecipitation',
+                        'immunoprecipitat(e|ed|ion)']],
+ ['基因敲除 / 敲低',    ['knock[- ]?out','\\bKO\\b','knock[- ]?down','siRNA','shRNA','\\bASO\\b','antisense oligo']],
+ ['CRISPR / 编辑',      ['CRISPR','Cas9','base edit(or|ing)','prime edit(or|ing)','knock[- ]?in']],
+ ['体外激酶 / 磷酸化',  ['in vitro kinase','kinase assay','phosphorylat(e|ed|ion)','phospho[- ]specific',
+                        'Phos[- ]tag','\\bATP\\b']],
+ ['质谱 / 蛋白组',      ['mass spectrometr(y|ic)','\\bLC[- ]MS','proteomic','\\bMS/MS\\b','phosphoproteom']],
+ ['结构生物学',         ['cryo[- ]?EM','crystal structure','crystallograph','\\bNMR\\b','AlphaFold']],
+ ['类器官 / 3D',        ['organoid','spheroid','air[- ]liquid interface']],
+ ['动物模型',           ['\\bmice\\b','\\bmouse\\b','\\brat(s)?\\b','zebrafish','\\bpig(s)?\\b','porcine',
+                        'in vivo','xenograft']],
+ ['人源样本',           ['patient(s)?','human (biops|tissue|sample|cohort)','clinical (cohort|sample)','\\bcohort\\b']],
+ ['报告基因 / 荧光',    ['reporter (assay|construct|gene)','luciferase','\\bGFP\\b','fluorescen(t|ce)']],
+ ['成像 / 组化',        ['immunohistochemi','immunofluorescen','confocal','microscop(y|e)','\\bIHC\\b']],
+ ['流式',               ['flow cytometr','\\bFACS\\b']],
+ ['qPCR / western',     ['\\bqPCR\\b','\\bRT[- ]qPCR\\b','real[- ]time PCR','western blot','immunoblot']],
+ ['生信 / 预测',        ['bioinformatic','computational (analysis|model|prediction)','machine learning',
+                        'in silico','\\bPSSM\\b','motif (analysis|search)']]
+];
+function methodRegex(list){ return new RegExp('(?:'+list.join('|')+')','i'); }
+function findMethods(abs){
+  var sents=splitSentences(abs), out=[];
+  METHODS.forEach(function(md){
+    var re=methodRegex(md[1]);
+    for(var i=0;i<sents.length;i++){
+      var m=sents[i].match(re);
+      if(m){ out.push({name:md[0], hit:m[0], sent:sents[i]}); break; }
+    }
+  });
+  return out;
+}
+
+/* ---------------- 作者自己承认的空白 / 未来方向 ---------------- */
+/* 这条正则被真实语料改过三次，三个都是系统性缺陷（对 68 篇摘要跑「宽模式命中但本模式漏掉」
+   逐句读 reject 才发现的，不是读代码发现的）：
+   1) 形容词前可以插副词 —— "remains **largely** unknown / largely elusive" 原来全漏。故加 (?:\w+ly\s+)?
+   2) 形容词表不全 —— unexplored / uncharacterized / understudied 原来不在表里，漏掉 3 篇。
+   3) **结尾的 \b 会被紧贴的文献角标吃掉** —— Nature 正文里是 "poorly understood23-25."，
+      d 与 2 都是词字符，之间没有词边界，于是整条不命中。改用 (?![a-z]) ：
+      允许后面接数字/标点，但仍拒绝 "KOala" 这种词内命中。 */
+var GAPRE=/\b(remains?\s+(?:\w+ly\s+)?(?:to\s+be|unclear|unknown|elusive|poorly|incompletely|unexplored|unexamined|uncharacteri[sz]ed|undefined|understudied|obscure)|remain\s+(?:\w+ly\s+)?(?:unclear|unknown|elusive|unexplored|uncharacteri[sz]ed|undefined)|little is known|not (?:yet |well )?(?:been )?(?:known|understood|characteri[sz]ed|determined|established|explored)|(?:poorly|incompletely|insufficiently) (?:understood|characteri[sz]ed|defined|explored)|unclear (?:how|whether|why)|it (?:is|remains) (?:unclear|unknown)|future (?:studies|work|research|investigations?)|warrants? (?:further|investigation)|further (?:studies|work|investigation)s? (?:are|is) (?:needed|required|warranted)|open question|yet to be|has not been|have not been|lack(?:ing|s)? (?:of )?(?:understanding|knowledge|evidence)|limitation)(?![a-z])/i;
+function findGaps(abs){
+  return splitSentences(abs).filter(function(s){return GAPRE.test(s);})
+    .map(function(s){return {sent:s, hit:(s.match(GAPRE)||[''])[0]};});
+}
+
+/* ---------------- 与 Sheldon 三个方向的接口（词边界） ---------------- */
+var DIRS=[
+ {id:'D1', name:'方向1 AMPK–ZSWIM8–代谢记忆',
+  terms:['ZSWIM8','TDMD','target[- ]directed','AMPK','AMP[- ]activated','energy stress','Cul3','\\bAGO2\\b',
+         'Argonaute','metabolic memory','glucose','diabet(es|ic)','phosphorylat','ubiquitin ligase','miR-33','miR-375']},
+ {id:'D2', name:'方向2 TUT4/7–miR-29–纤维化',
+  terms:['TUT4','TUT7','ZCCHC11','ZCCHC6','uridylat','DIS3L2','miR-29','fibro(sis|tic|blast)','collagen',
+         'TGF-?.?(beta|β)','Smad','stricture','Crohn','myofibroblast','3.? end']},
+ {id:'D3', name:'方向3 乳酸/乳酰化 × 小 RNA',
+  terms:['lactylat','lactate','lactic acid','AARS1','glycolysi','Warburg','METTL3','METTL16','m6A',
+         'non[- ]histone','acetylat','metabolite']}
+];
+function matchDirections(text){
+  var t=String(text||''), out=[];
+  DIRS.forEach(function(d){
+    var hits=[];
+    d.terms.forEach(function(tm){
+      var re=new RegExp('(?:^|[^A-Za-z0-9])('+tm+')(?=[^A-Za-z0-9]|$)','i');
+      var m=t.match(re); if(m) hits.push(m[1]);
+    });
+    if(hits.length) out.push({id:d.id, name:d.name, hits:hits});
+  });
+  return out.sort(function(a,b){return b.hits.length-a.hits.length;});
+}
+
+
+var LS='psearch_';
+var NCBI='https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
+var EPMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';
+var RES=[];            /* 本次结果 */
+var LASTQ='';          /* 实际送出的检索式 */
+var LASTN=null;        /* 全库命中数 */
+var LASTLADDER=null;
+
+function stat(m,cls){document.getElementById('stat').innerHTML=cls?('<span class="'+cls+'">'+esc(m)+'</span>'):esc(m);}
+function jget(u){return fetch(u).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
+function tget(u){return fetch(u).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text();});}
+function terms(s){return String(s||'').split(/[,，;；\n]+/).map(function(x){return x.trim();}).filter(Boolean);}
+
+/* ---------------- 组检索式 ---------------- */
+function buildQuery(){
+  var raw=document.getElementById('raw').value.trim();
+  if(raw) return {q:raw, handmade:true, clauses:topClauses(raw)};
+  var f=document.getElementById('fld').value;
+  var wrap=function(t){ return /\s/.test(t) ? ('"'+t+'"'+f) : (t+f); };
+  var cl=[];
+  terms(document.getElementById('core').value).forEach(function(t){ cl.push(wrap(t)); });
+  var anyt=terms(document.getElementById('anyw').value);
+  if(anyt.length) cl.push('('+anyt.map(wrap).join(' OR ')+')');
+  var q=cl.join(' AND ');
+  var y0=document.getElementById('y0').value, y1=document.getElementById('y1').value;
+  if(y0&&y1) q=(q?q+' AND ':'')+y0+':'+y1+'[dp]';
+  var nots=terms(document.getElementById('notw').value);
+  if(nots.length) q+=' NOT ('+nots.map(wrap).join(' OR ')+')';
+  var pt=document.getElementById('pt').value;
+  if(pt) q+=' '+pt;
+  return {q:q, handmade:false, clauses:cl};
+}
+/* 顶层 AND 切分（括号内的 OR 保留在一起） */
+function topClauses(q){
+  var out=[],d=0,buf='';
+  var toks=q.split(/(\(|\)|\bAND\b|\bNOT\b)/);
+  for(var i=0;i<toks.length;i++){
+    var t=toks[i];
+    if(t==='('){d++;buf+=t;}
+    else if(t===')'){d--;buf+=t;}
+    else if((t==='AND'||t==='NOT')&&d===0){ if(buf.trim())out.push(buf.trim()); buf=''; if(t==='NOT')break; }
+    else buf+=t;
+  }
+  if(buf.trim())out.push(buf.trim());
+  return out.filter(function(c){ return c && !/^\d{4}:\d{4}\[dp\]$/.test(c) && !/\[pt\]/.test(c); });
+}
+/* 单词不该加引号：PubMed 短语索引里没有的引号短语会被整条丢弃 */
+function unquoteSingles(q){ return q.replace(/"([A-Za-z0-9\-\+\/]+)"/g,'$1'); }
+
+/* ---------------- esearch（带 quotedphrasesnotfound 自动修复） ---------------- */
+function esearch(q,retmax,sort){
+  var u=NCBI+'esearch.fcgi?db=pubmed&retmode=json&retmax='+(retmax||0)+
+        (sort?('&sort='+encodeURIComponent(sort)):'')+'&term='+encodeURIComponent(q);
+  return jget(u).then(function(d){
+    var r=d.esearchresult||{};
+    var nf=(r.warninglist||{}).quotedphrasesnotfound||[];
+    return {count:parseInt(r.count||'0',10), ids:r.idlist||[], notfound:nf, q:q};
+  });
+}
+function esearchFixed(q,retmax,sort){
+  return esearch(q,retmax,sort).then(function(r){
+    if(!r.notfound.length) return r;
+    var q2=q;
+    r.notfound.forEach(function(ph){ q2=q2.split('"'+ph+'"').join(ph); });
+    if(q2===q) q2=unquoteSingles(q);
+    return esearch(q2,retmax,sort).then(function(r2){
+      r2.fixedFrom=q; r2.notfoundOrig=r.notfound;
+      return (r2.count>=r.count)?r2:r;
+    });
+  });
+}
+
+/* ---------------- 子句阶梯：防「窄检索式的 0 被当成空白」 ---------------- */
+function runLadder(cl){
+  var jobs=[];
+  cl.forEach(function(c){ jobs.push({kind:'single',key:c,q:c}); });
+  for(var i=0;i<cl.length;i++) for(var j=i+1;j<cl.length;j++)
+    jobs.push({kind:'pair',key:cl[i]+' AND '+cl[j],q:cl[i]+' AND '+cl[j]});
+  var out={singles:{},pairs:{}};
+  return jobs.reduce(function(chain,job){
+    return chain.then(function(){
+      return esearch(job.q,0).then(function(r){
+        out[job.kind==='single'?'singles':'pairs'][job.key]=r.count;
+      }).catch(function(){ out[job.kind==='single'?'singles':'pairs'][job.key]=null; });
+    });
+  },Promise.resolve()).then(function(){
+    var pv=Object.keys(out.pairs).map(function(k){return out.pairs[k];})
+            .filter(function(v){return v!==null;});
+    out.minPair=pv.length?Math.min.apply(null,pv):null;
+    out.verdict = out.minPair===null ? '未能判定'
+      : out.minPair===0 ? '两两词对从未共现（最强的空白线索，但仍不等于没人想过）'
+      : out.minPair<=10 ? '极少（两两最小 '+out.minPair+' 篇）'
+      : out.minPair<=60 ? '少人做（两两最小 '+out.minPair+' 篇）'
+      : '已有相当多工作（两两最小 '+out.minPair+' 篇）';
+    return out;
+  });
+}
+function showLadder(L,cl){
+  if(!L){document.getElementById('ladderBox').innerHTML='';return;}
+  var h='<details open style="margin:8px 0"><summary>📐 子句阶梯 —— '+esc(L.verdict)+'</summary>'+
+   '<div class="note" style="margin:6px 0">全交集少或为 0 时<b>只看这张表</b>：'+
+   '判断拥挤程度要用<b>两两组合的最小值</b>，因为 3 个以上子句 AND 起来返回 0 是常态。</div>'+
+   '<table class="t ladder"><tr><th>层级</th><th>检索式</th><th>全库命中</th></tr>';
+  Object.keys(L.singles).forEach(function(k){
+    h+='<tr><td>单词</td><td><code>'+esc(k)+'</code></td><td>'+
+       (L.singles[k]===null?'取数失败':esc(String(L.singles[k])))+'</td></tr>';});
+  Object.keys(L.pairs).forEach(function(k){
+    var v=L.pairs[k];
+    h+='<tr><td>两两</td><td><code>'+esc(k)+'</code></td><td'+(v===0?' class="z"':'')+'>'+
+       (v===null?'取数失败':esc(String(v)))+'</td></tr>';});
+  h+='<tr><td><b>全交集</b></td><td><code>'+esc(LASTQ)+'</code></td><td><b>'+
+     (LASTN===null?'—':esc(String(LASTN)))+'</b></td></tr></table></details>';
+  document.getElementById('ladderBox').innerHTML=h;
+}
+
+/* ---------------- 抓取并逐篇富集 ---------------- */
+function esummary(ids){
+  if(!ids.length) return Promise.resolve({});
+  return jget(NCBI+'esummary.fcgi?db=pubmed&retmode=json&id='+ids.join(',')).then(function(d){
+    var r=d.result||{},o={};
+    (r.uids||[]).forEach(function(u){
+      var x=r[u]||{};
+      o[u]={pmid:u,title:x.title||'',journal:x.fulljournalname||x.source||'',
+            year:(x.pubdate||'').slice(0,4),
+            authors:(x.authors||[]).slice(0,3).map(function(a){return a.name;}).join(', '),
+            nauth:(x.authors||[]).length,
+            doi:(x.elocationid||'').replace(/^doi:\s*/i,''),
+            ptypes:(x.pubtype||[])};
+    });
+    return o;
+  });
+}
+function efetchMany(ids){
+  return tget(NCBI+'efetch.fcgi?db=pubmed&retmode=xml&rettype=abstract&id='+ids.join(',')).then(function(xml){
+    var doc=new DOMParser().parseFromString(xml,'text/xml'),o={};
+    [].forEach.call(doc.querySelectorAll('PubmedArticle'),function(art){
+      var pid=art.querySelector('PMID'); if(!pid)return;
+      var labeled=[].map.call(art.querySelectorAll('AbstractText'),function(n){
+        return {label:n.getAttribute('Label')||'',text:(n.textContent||'').trim()};});
+      o[(pid.textContent||'').trim()]={
+        labeled:labeled,
+        abstract:labeled.map(function(x){return (x.label?x.label+': ':'')+x.text;}).join('\n'),
+        mesh:[].map.call(art.querySelectorAll('DescriptorName'),function(n){return (n.textContent||'').trim();})
+      };
+    });
+    return o;
+  });
+}
+/* 被引数：Europe PMC 经常 503 —— 失败一律 null，界面显示「未获取」，绝不填 0 */
+function citesFor(ids){
+  var q=ids.map(function(i){return 'EXT_ID:'+i;}).join(' OR ');
+  return jget(EPMC+'search?format=json&pageSize='+ids.length+'&query='+
+              encodeURIComponent('('+q+') AND SRC:MED'))
+    .then(function(d){
+      var o={};
+      ((d.resultList||{}).result||[]).forEach(function(r){
+        if(r.pmid) o[r.pmid]=(typeof r.citedByCount==='number')?r.citedByCount:null;});
+      return {map:o,ok:true,note:'Europe PMC'};
+    })
+    .catch(function(e){ return {map:{},ok:false,note:'未获取（Europe PMC 不可达：'+e.message+'）'}; });
+}
+
+function doSearch(){
+  var B=buildQuery();
+  if(!B.q.trim()){ stat('先填核心词，或直接手写检索式。','err'); return; }
+  var lim=parseInt(document.getElementById('lim').value,10);
+  var sort=document.getElementById('sort').value;
+  document.getElementById('ladderBox').innerHTML='';
+  stat('正在检索 PubMed…');
+  esearchFixed(B.q,lim,sort).then(function(r){
+    LASTQ=r.q; LASTN=r.count;
+    var warn='';
+    if(r.notfoundOrig&&r.notfoundOrig.length)
+      warn='<div class="warn"><b>PubMed 报告有引号短语不在其短语索引里：</b><code>'+
+        esc(r.notfoundOrig.join('、'))+'</code> —— 这会让整条短语被丢弃、AND 塌成 0。'+
+        '已<b>自动去引号重试</b>，下面用的是修正后的检索式。</div>';
+    document.getElementById('qshow').innerHTML=warn+
+      '<div class="note">实际送给 PubMed 的检索式（可复制回查）：</div><div class="qbox">'+esc(r.q)+'</div>'+
+      '<div class="note">全库命中 <b>'+r.count+'</b> 篇（检索当日值），本次抓取前 <b>'+
+      Math.min(r.ids.length,lim)+'</b> 篇，排序：'+esc(sort)+'</div>';
+    if(r.count<5 && B.clauses.length>=2){
+      stat('命中很少 —— 正在自动跑子句阶梯，判断这是「真的少」还是「检索式太窄」…');
+      return runLadder(B.clauses).then(function(L){
+        LASTLADDER=L; showLadder(L,B.clauses);
+        return r;
+      });
+    }
+    LASTLADDER=null;
+    return r;
+  }).then(function(r){
+    if(!r.ids.length){ RES=[]; renderRes();
+      stat('没有命中。'+(LASTLADDER?'请看上面的子句阶梯 —— 先确认是不是检索式太窄。':'换更宽的词或放宽字段限定。'),'err');
+      logSearch(0); return; }
+    stat('已拿到 '+r.ids.length+' 个 PMID，正在取摘要与被引数…');
+    return Promise.all([esummary(r.ids), efetchMany(r.ids), citesFor(r.ids)])
+      .then(function(a){
+        var sum=a[0],det=a[1],cit=a[2];
+        RES=r.ids.map(function(id){
+          var s=sum[id]||{pmid:id}, d=det[id]||{labeled:[],abstract:'',mesh:[]};
+          var st=structureAbstract(d.abstract,d.labeled);
+          return {pmid:id, title:s.title||'', journal:s.journal||'', year:s.year||'',
+            authors:s.authors||'', nauth:s.nauth||0, doi:s.doi||'',
+            ptypes:s.ptypes||[], isReview:(s.ptypes||[]).some(function(t){return /review/i.test(t);}),
+            abstract:d.abstract, mesh:d.mesh||[], secOrigin:st.origin,
+            cites:(cit.map[id]===undefined?null:cit.map[id]), citeNote:cit.note,
+            methods:findMethods(d.abstract), nums:findNumbers(d.abstract),
+            gaps:findGaps(d.abstract), dirs:matchDirections((s.title||'')+' '+d.abstract+' '+(d.mesh||[]).join(' ')),
+            query:LASTQ, found:new Date().toISOString()};
+        });
+        renderRes();
+        var nAbs=RES.filter(function(x){return x.abstract;}).length;
+        stat('完成：'+RES.length+' 篇，其中 '+nAbs+' 篇有摘要'+
+             (cit.ok?'':'；被引数未获取（'+cit.note+'）'),'okc');
+        logSearch(RES.length);
+      });
+  }).catch(function(e){ stat('检索失败：'+e.message,'err'); });
+}
+
+/* ---------------- 本次结果表 ---------------- */
+var SORTK='cites',SORTD=-1;
+function evHTML(list,fmt,label){
+  if(!list.length) return '<span class="note">—</span>';
+  return '<details><summary>'+list.length+' '+label+'</summary>'+
+    list.map(fmt).join('')+'</details>';
+}
+function renderRes(){
+  var box=document.getElementById('resWrap');
+  document.getElementById('resN').textContent=RES.length?('本次 '+RES.length+' 篇'):'';
+  if(!RES.length){ box.innerHTML='<div class="note" style="padding:10px">还没有结果。</div>'; return; }
+  var rows=RES.slice().sort(function(a,b){
+    var x=a[SORTK],y=b[SORTK];
+    if(SORTK==='cites'){x=(x===null?-1:x);y=(y===null?-1:y);}
+    if(typeof x==='string'){return SORTD*String(x).localeCompare(String(y));}
+    return SORTD*((x||0)-(y||0));
+  });
+  var h='<table class="t"><tr>'+
+   '<th></th><th data-k="pmid">PMID</th><th data-k="year">年</th><th data-k="journal">期刊</th>'+
+   '<th data-k="cites">被引</th><th data-k="title">标题</th><th>类型</th><th>方向重叠</th>'+
+   '<th>方法证据</th><th>数字/效应量</th><th>空白句</th><th>摘要</th></tr>';
+  rows.forEach(function(r){
+    h+='<tr><td><input type="checkbox" class="pick" value="'+esc(r.pmid)+'"></td>'+
+      '<td><a href="https://pubmed.ncbi.nlm.nih.gov/'+esc(r.pmid)+'/" target="_blank">'+esc(r.pmid)+'</a></td>'+
+      '<td>'+esc(r.year)+'</td><td>'+esc(r.journal.slice(0,26))+'</td>'+
+      '<td>'+(r.cites===null?'<span class="note" title="'+esc(r.citeNote)+'">未获取</span>':esc(String(r.cites)))+'</td>'+
+      '<td style="min-width:260px">'+esc(r.title)+
+        '<div class="note">'+esc(r.authors)+(r.nauth>3?' 等 '+r.nauth+' 人':'')+'</div></td>'+
+      '<td>'+(r.isReview?'<span class="badge b-rev">综述</span>':'研究')+'</td>'+
+      '<td>'+(r.dirs.length?r.dirs.map(function(d){
+          return '<span class="badge b-dir" title="'+esc(d.hits.join('、'))+'">'+esc(d.id)+'·'+d.hits.length+'</span>';}).join(''):
+          '<span class="note">无</span>')+'</td>'+
+      '<td style="min-width:150px">'+evHTML(r.methods,function(m){
+          return '<div class="ev"><b>'+esc(m.name)+'</b>（'+esc(m.hit)+'）<br>'+esc(m.sent)+'</div>';},'类')+'</td>'+
+      '<td style="min-width:140px">'+evHTML(r.nums,function(n){
+          return '<div class="ev"><b>'+esc(n.hit)+'</b> ['+esc(n.kind)+']<br>'+esc(n.sent)+'</div>';},'处')+'</td>'+
+      '<td style="min-width:130px">'+evHTML(r.gaps,function(g){
+          return '<div class="ev">'+esc(g.sent)+'</div>';},'句')+'</td>'+
+      '<td style="min-width:120px">'+(r.abstract?
+          ('<details><summary>'+(r.secOrigin==='source'?
+            '<span class="badge b-src">出版方分段</span>':'<span class="badge b-inf">规则推断</span>')+
+            '</summary><div class="ev">'+esc(r.abstract)+'</div></details>'):
+          '<span class="note">无摘要</span>')+'</td></tr>';
+  });
+  box.innerHTML=h+'</table>';
+  [].forEach.call(box.querySelectorAll('th[data-k]'),function(th){
+    th.onclick=function(){ var k=th.dataset.k;
+      if(SORTK===k)SORTD=-SORTD; else {SORTK=k;SORTD=-1;} renderRes(); };});
+}
+
+/* ---------------- 总表 & 台账（localStorage） ---------------- */
+function getMaster(){try{return JSON.parse(localStorage.getItem(LS+'master')||'{}');}catch(e){return {};}}
+function putMaster(o){try{localStorage.setItem(LS+'master',JSON.stringify(o));}catch(e){stat('本机存储已满，先导出再清理。','err');}}
+function getLedger(){try{return JSON.parse(localStorage.getItem(LS+'ledger')||'[]');}catch(e){return [];}}
+function putLedger(a){try{localStorage.setItem(LS+'ledger',JSON.stringify(a));}catch(e){}}
+function slim(r){
+  return {pmid:r.pmid,title:r.title,journal:r.journal,year:r.year,authors:r.authors,nauth:r.nauth,
+    doi:r.doi,isReview:r.isReview,cites:r.cites,citeNote:r.citeNote,secOrigin:r.secOrigin,
+    methods:r.methods.map(function(m){return {name:m.name,hit:m.hit,sent:m.sent};}),
+    nums:r.nums.map(function(n){return {kind:n.kind,hit:n.hit,sent:n.sent};}),
+    gaps:r.gaps.map(function(g){return {sent:g.sent};}),
+    dirs:r.dirs.map(function(d){return {id:d.id,name:d.name,hits:d.hits};}),
+    abstract:r.abstract, queries:[r.query], found:r.found};
+}
+function keep(list){
+  if(!list.length){stat('没有可收的条目。','err');return;}
+  var M=getMaster(),added=0,merged=0;
+  list.forEach(function(r){
+    if(M[r.pmid]){ if(M[r.pmid].queries.indexOf(r.query)<0){M[r.pmid].queries.push(r.query);merged++;} }
+    else { M[r.pmid]=slim(r); added++; }
+  });
+  putMaster(M);
+  var L=getLedger();
+  if(L.length){ L[0].kept=(L[0].kept||0)+added; L[0].merged=(L[0].merged||0)+merged; putLedger(L); }
+  stat('已收进总表：新增 '+added+' 篇，已存在并合并检索式 '+merged+' 篇。总表现有 '+Object.keys(M).length+' 篇。','okc');
+  renderMaster(); renderLedger();
+}
+function logSearch(fetched){
+  var L=getLedger();
+  L.unshift({ts:new Date().toISOString(), query:LASTQ, total:LASTN, fetched:fetched, kept:0, merged:0,
+    ladder: LASTLADDER?{minPair:LASTLADDER.minPair,verdict:LASTLADDER.verdict,
+      singles:LASTLADDER.singles,pairs:LASTLADDER.pairs}:null,
+    sort:document.getElementById('sort').value, limit:document.getElementById('lim').value});
+  putLedger(L.slice(0,200)); renderLedger();
+}
+function renderMaster(){
+  var M=getMaster(),ks=Object.keys(M);
+  document.getElementById('mastN').innerHTML='总表 <b>'+ks.length+'</b> 篇（跨全部检索去重，按 PMID）。'+
+    '「来自哪次检索」列记录了它被哪些检索式命中 —— 同一篇被多个检索式命中，往往说明它在你的问题域中心。';
+  var box=document.getElementById('mastWrap');
+  if(!ks.length){box.innerHTML='<div class="note" style="padding:10px">总表是空的。在「本次结果」里点「收进总表」。</div>';return;}
+  ks.sort(function(a,b){var x=M[a].cites,y=M[b].cites;return (y===null?-1:y)-(x===null?-1:x);});
+  var h='<table class="t"><tr><th>PMID</th><th>年</th><th>期刊</th><th>被引</th><th>标题</th>'+
+    '<th>方向重叠</th><th>方法数</th><th>数字数</th><th>空白句数</th><th>来自哪次检索</th><th></th></tr>';
+  ks.forEach(function(k){
+    var r=M[k];
+    h+='<tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/'+esc(k)+'/" target="_blank">'+esc(k)+'</a></td>'+
+      '<td>'+esc(r.year)+'</td><td>'+esc((r.journal||'').slice(0,24))+'</td>'+
+      '<td>'+(r.cites===null?'<span class="note">未获取</span>':esc(String(r.cites)))+'</td>'+
+      '<td style="min-width:240px">'+esc(r.title)+(r.isReview?' <span class="badge b-rev">综述</span>':'')+'</td>'+
+      '<td>'+(r.dirs||[]).map(function(d){return '<span class="badge b-dir">'+esc(d.id)+'·'+d.hits.length+'</span>';}).join('')+'</td>'+
+      '<td>'+(r.methods||[]).length+'</td><td>'+(r.nums||[]).length+'</td><td>'+(r.gaps||[]).length+'</td>'+
+      '<td style="min-width:200px"><details><summary>'+(r.queries||[]).length+' 次</summary>'+
+        (r.queries||[]).map(function(q){return '<div class="ev">'+esc(q)+'</div>';}).join('')+'</details></td>'+
+      '<td><button class="btn g sm" data-del="'+esc(k)+'">移除</button></td></tr>';
+  });
+  box.innerHTML=h+'</table>';
+  [].forEach.call(box.querySelectorAll('[data-del]'),function(b){
+    b.onclick=function(){var M2=getMaster();delete M2[b.dataset.del];putMaster(M2);renderMaster();};});
+}
+function renderLedger(){
+  var L=getLedger(),box=document.getElementById('ledWrap');
+  if(!L.length){box.innerHTML='<div class="note" style="padding:10px">台账是空的。</div>';return;}
+  var h='<table class="t"><tr><th>时间</th><th>检索式（实际送出）</th><th>全库命中</th><th>抓取</th>'+
+    '<th>收进总表</th><th>排序/上限</th><th>子句阶梯结论</th></tr>';
+  L.forEach(function(e){
+    h+='<tr><td>'+esc(String(e.ts).slice(0,16).replace('T',' '))+'</td>'+
+      '<td style="min-width:300px"><code>'+esc(e.query)+'</code></td>'+
+      '<td>'+(e.total===null?'—':esc(String(e.total)))+'</td><td>'+esc(String(e.fetched))+'</td>'+
+      '<td>'+esc(String(e.kept||0))+(e.merged?(' <span class="note">(+'+e.merged+' 合并)</span>'):'')+'</td>'+
+      '<td>'+esc(String(e.sort||''))+' / '+esc(String(e.limit||''))+'</td>'+
+      '<td style="min-width:200px">'+(e.ladder?
+        ('<details><summary>'+esc(e.ladder.verdict)+'</summary>'+
+         Object.keys(e.ladder.pairs||{}).map(function(k){
+           return '<div class="ev">'+esc(k)+' → '+esc(String(e.ladder.pairs[k]))+'</div>';}).join('')+
+         '</details>'):'<span class="note">未触发（命中充足）</span>')+'</td></tr>';
+  });
+  box.innerHTML=h+'</table>';
+}
+
+/* ---------------- 导出 ---------------- */
+function stamp(){var d=new Date(),p=function(x){return String(x).padStart(2,'0');};
+  return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes());}
+function dl(name,mime,text){
+  var b=new Blob(['\ufeff'+text],{type:mime+';charset=utf-8'});
+  var u=URL.createObjectURL(b),a=document.createElement('a');
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u);},1500);
+}
+var MCOLS=[['pmid','PMID'],['year','年'],['journal','期刊'],['isReview','类型'],['cites','被引'],
+ ['title','标题'],['authors','作者'],['nauth','作者数'],['doi','DOI'],['dirs','方向重叠'],
+ ['methods','方法证据（含触发原句）'],['nums','数字/效应量（含触发原句）'],['gaps','作者承认的空白（原句）'],
+ ['secOrigin','摘要分段来源'],['queries','来自哪次检索'],['abstract','摘要原文'],['found','首次命中时间']];
+function cellOf(r,k){
+  if(k==='isReview') return r.isReview?'综述':'研究';
+  if(k==='cites') return (r.cites===null?('未获取（'+(r.citeNote||'')+'）'):String(r.cites));
+  if(k==='dirs') return (r.dirs||[]).map(function(d){return d.name+'：'+d.hits.join('、');}).join('\n');
+  if(k==='methods') return (r.methods||[]).map(function(m){return '· '+m.name+'（命中 '+m.hit+'）\n  原句：'+m.sent;}).join('\n');
+  if(k==='nums') return (r.nums||[]).map(function(n){return '· ['+n.kind+'] '+n.hit+'\n  原句：'+n.sent;}).join('\n');
+  if(k==='gaps') return (r.gaps||[]).map(function(g){return '· '+g.sent;}).join('\n');
+  if(k==='secOrigin') return r.secOrigin==='source'?'出版方标注':'规则推断（可能出错）';
+  if(k==='queries') return (r.queries||[]).join('\n');
+  if(k==='found') return String(r.found||'').slice(0,16).replace('T',' ');
+  return String(r[k]===undefined||r[k]===null?'':r[k]);
+}
+function masterList(){var M=getMaster();return Object.keys(M).map(function(k){return M[k];});}
+function xlsTable(cols,rows,rowfn){
+  var h='<table><tr>'+cols.map(function(c){return '<th>'+esc(c[1])+'</th>';}).join('')+'</tr>';
+  rows.forEach(function(r){ h+='<tr>'+cols.map(function(c){
+    return '<td>'+esc(rowfn(r,c[0])).replace(/\n/g,'<br>')+'</td>';}).join('')+'</tr>'; });
+  return h+'</table>';
+}
+function xlsDoc(inner){
+  return '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8">'+
+   '<style>td,th{border:1px solid #999;font-size:10pt;vertical-align:top}'+
+   'th{background:#EDE7F6;font-weight:bold}br{mso-data-placement:same-cell}</style></head><body>'+
+   inner+'</body></html>';
+}
+document.getElementById('mX').onclick=function(){
+  var L=masterList(); if(!L.length){stat('总表是空的。','err');return;}
+  dl('paper-master-'+stamp()+'.xls','application/vnd.ms-excel',xlsDoc(xlsTable(MCOLS,L,cellOf)));
+  stat('已导出总表 '+L.length+' 篇（Excel 可直接打开，再另存为 .xlsx）。','okc');};
+document.getElementById('mC').onclick=function(){
+  var L=masterList(); if(!L.length){stat('总表是空的。','err');return;}
+  var q=function(s){return '"'+String(s).replace(/"/g,'""')+'"';};
+  var csv=MCOLS.map(function(c){return q(c[1]);}).join(',')+'\n'+
+    L.map(function(r){return MCOLS.map(function(c){return q(cellOf(r,c[0]));}).join(',');}).join('\n');
+  dl('paper-master-'+stamp()+'.csv','text/csv',csv);
+  stat('已导出 CSV '+L.length+' 行。','okc');};
+document.getElementById('mM').onclick=function(){
+  var L=masterList(); if(!L.length){stat('总表是空的。','err');return;}
+  var s='# 文献汇总总表\n\n生成时间：'+new Date().toISOString().slice(0,16).replace('T',' ')+
+    '　｜　共 '+L.length+' 篇（跨全部检索按 PMID 去重）\n\n'+
+    '> 被引数来自 Europe PMC，取不到时标「未获取」而非 0。摘要分段标「规则推断」的可能出错。\n\n';
+  L.forEach(function(r){
+    s+='## '+r.title+'\n\n**'+(r.journal||'')+' '+(r.year||'')+'** ｜ PMID '+
+      '[`'+r.pmid+'`](https://pubmed.ncbi.nlm.nih.gov/'+r.pmid+'/)'+
+      (r.doi?(' ｜ DOI `'+r.doi+'`'):'')+' ｜ 被引 '+cellOf(r,'cites')+
+      ' ｜ '+(r.isReview?'综述':'研究')+'\n\n';
+    MCOLS.slice(9).forEach(function(c){
+      var v=cellOf(r,c[0]); if(v) s+='**'+c[1]+'**\n\n'+v+'\n\n';});
+    s+='---\n\n';
+  });
+  dl('paper-master-'+stamp()+'.md','text/markdown',s);
+  stat('已导出 Markdown。','okc');};
+document.getElementById('mW').onclick=function(){
+  var L=masterList(); if(!L.length){stat('总表是空的。','err');return;}
+  var h='<html xmlns:o="urn:schemas-microsoft-com:office:office" '+
+   'xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'+
+   '<head><meta charset="utf-8"><style>@page{size:A4 landscape;margin:1.5cm}'+
+   'body{font-family:"Arial Unicode MS","PingFang SC","Microsoft YaHei",sans-serif;font-size:9.5pt}'+
+   'h1{color:#4A148C;font-size:14pt}h2{color:#0D47A1;font-size:11pt;margin:10pt 0 3pt}'+
+   'p{margin:2pt 0}b{color:#4A148C}</style></head><body><h1>文献汇总总表（'+L.length+' 篇）</h1>'+
+   '<p>生成时间 '+new Date().toISOString().slice(0,16).replace('T',' ')+
+   '　｜　被引数取不到时标「未获取」而非 0；摘要分段标「规则推断」的可能出错。</p>';
+  L.forEach(function(r){
+    h+='<h2>'+esc(r.title)+'</h2><p><i>'+esc(r.journal||'')+' '+esc(r.year||'')+' ｜ PMID '+esc(r.pmid)+
+      ' ｜ 被引 '+esc(cellOf(r,'cites'))+' ｜ '+(r.isReview?'综述':'研究')+'</i></p>';
+    MCOLS.slice(9).forEach(function(c){
+      var v=cellOf(r,c[0]); if(v) h+='<p><b>'+esc(c[1])+'：</b><br>'+esc(v).replace(/\n/g,'<br>')+'</p>';});
+  });
+  dl('paper-master-'+stamp()+'.doc','application/msword',h+'</body></html>');
+  stat('已导出 Word（可直接打开，再另存为 .docx）。','okc');};
+var LCOLS=[['ts','执行时间'],['query','实际送出的检索式'],['total','全库命中'],['fetched','抓取'],
+ ['kept','收进总表'],['merged','合并'],['sort','排序'],['limit','上限'],['verdict','子句阶梯结论'],['ladder','阶梯明细']];
+function ledCell(e,k){
+  if(k==='ts') return String(e.ts).slice(0,16).replace('T',' ');
+  if(k==='verdict') return e.ladder?e.ladder.verdict:'未触发（命中充足）';
+  if(k==='ladder'){
+    if(!e.ladder) return '';
+    var s=Object.keys(e.ladder.singles||{}).map(function(x){return '单词 '+x+' → '+e.ladder.singles[x];});
+    var p=Object.keys(e.ladder.pairs||{}).map(function(x){return '两两 '+x+' → '+e.ladder.pairs[x];});
+    return s.concat(p).join('\n');
+  }
+  return String(e[k]===undefined||e[k]===null?'':e[k]);
+}
+document.getElementById('lX').onclick=function(){
+  var L=getLedger(); if(!L.length){stat('台账是空的。','err');return;}
+  dl('search-ledger-'+stamp()+'.xls','application/vnd.ms-excel',xlsDoc(xlsTable(LCOLS,L,ledCell)));
+  stat('已导出台账 '+L.length+' 次检索。','okc');};
+document.getElementById('lM').onclick=function(){
+  var L=getLedger(); if(!L.length){stat('台账是空的。','err');return;}
+  var s='# 检索台账\n\n共 '+L.length+' 次检索。命中数均为**执行当日值**。\n\n'+
+    '| 时间 | 检索式 | 全库命中 | 抓取 | 收进总表 | 子句阶梯结论 |\n|---|---|---|---|---|---|\n';
+  L.forEach(function(e){
+    s+='| '+ledCell(e,'ts')+' | `'+String(e.query).replace(/\|/g,'\\|')+'` | '+
+      (e.total===null?'—':e.total)+' | '+e.fetched+' | '+(e.kept||0)+' | '+
+      ledCell(e,'verdict')+' |\n';});
+  dl('search-ledger-'+stamp()+'.md','text/markdown',s);
+  stat('已导出台账 Markdown。','okc');};
+document.getElementById('mClr').onclick=function(){
+  if(!confirm('清空总表？建议先导出。不可撤销。'))return;
+  localStorage.removeItem(LS+'master');renderMaster();};
+document.getElementById('lClr').onclick=function(){
+  if(!confirm('清空检索台账？建议先导出。不可撤销。'))return;
+  localStorage.removeItem(LS+'ledger');renderLedger();};
+
+/* ---------------- 交互 ---------------- */
+document.getElementById('run').onclick=doSearch;
+document.getElementById('raw').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+document.getElementById('core').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+document.getElementById('ladderBtn').onclick=function(){
+  var B=buildQuery();
+  if(B.clauses.length<2){stat('至少要有两个子句才能拆阶梯。','err');return;}
+  LASTQ=B.q; stat('正在跑子句阶梯…');
+  esearch(B.q,0).then(function(r){LASTN=r.count;return runLadder(B.clauses);})
+   .then(function(L){LASTLADDER=L;showLadder(L,B.clauses);
+     stat('阶梯完成：'+L.verdict,'okc');})
+   .catch(function(e){stat('失败：'+e.message,'err');});
+};
+document.getElementById('demo').onclick=function(){
+  document.getElementById('core').value='ZSWIM8';
+  document.getElementById('anyw').value='TDMD, target-directed, microRNA degradation';
+  document.getElementById('notw').value='';
+  document.getElementById('raw').value='';
+  doSearch();
+};
+document.getElementById('keepAll').onclick=function(){keep(RES);};
+document.getElementById('keepSel').onclick=function(){
+  var sel={};
+  [].forEach.call(document.querySelectorAll('.pick:checked'),function(c){sel[c.value]=1;});
+  keep(RES.filter(function(r){return sel[r.pmid];}));};
+[].forEach.call(document.querySelectorAll('.tabs button'),function(b){
+  b.onclick=function(){
+    [].forEach.call(document.querySelectorAll('.tabs button'),function(x){x.className=(x===b?'on':'');});
+    [].forEach.call(document.querySelectorAll('.pane'),function(p){
+      p.className='pane'+(p.id===b.dataset.p?' on':'');});};});
+renderRes(); renderMaster(); renderLedger();
+</script>
+</body></html>

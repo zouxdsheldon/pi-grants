@@ -1246,6 +1246,29 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <tr><td><b>科研未来规划报告</b><br><span class="note">14 节 · 42 表</span></td><td class="c"><a href="data/research_roadmap_report.docx" download>.docx</a></td><td class="c"><a href="data/research_roadmap_report.pdf" download>26 页</a></td><td class="c"><a href="data/research_roadmap_report.xlsx" download>43 表单</a></td></tr><tr><td><b>五方向完整立项书</b><br><span class="note">每方向 3 个 Aim + 放弃条件</span></td><td class="c"><a href="data/proposals_all_directions.docx" download>.docx</a></td><td class="c"><a href="data/proposals_all_directions.pdf" download>.pdf</a></td><td class="c"><a href="data/proposals_all_directions.xlsx" download>.xlsx</a></td></tr><tr><td><b>各方向技术与实验全清单</b><br><span class="note">关键参数 · 必须的对照 · 失败模式</span></td><td class="c"><a href="data/techniques_by_direction.docx" download>.docx</a></td><td class="c"><a href="data/techniques_by_direction.pdf" download>.pdf</a></td><td class="c"><a href="data/techniques_by_direction.xlsx" download>.xlsx</a></td></tr><tr><td><b>论文精读记录模板</b><br><span class="note">14 栏（含热点/空白/未来）</span></td><td class="c"><a href="data/paper_note_template.docx" download>.docx</a></td><td class="c"><a href="data/paper_note_template.pdf" download>.pdf</a></td><td class="c"><a href="data/paper_note_template.xlsx" download>.xlsx</a></td></tr><tr><td><b>12 周阅读计划工作簿</b><br><span class="note">11 表 · 含 4 本台账（证据/试剂/参数/空白）</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/reading_plan_12weeks.xlsx" download><b>.xlsx</b></a></td></tr><tr><td><b>68 篇笔记追踪表</b><br><span class="note">A–J 列已预填 PMID，K–X 列 14 栏待你填</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/paper_notes_tracker.xlsx" download><b>.xlsx</b></a></td></tr>
   </table>
 
+  <div style="background:#F3ECFB;border:1px solid #D6C9EC;border-radius:7px;padding:11px 13px;margin:10px 0 4px">
+    <b style="color:#4A148C">🌳 三大方向已各展开 7 个子方向（共 21 个），每个都配 4 篇真实文献 + 逐篇笔记</b>
+    <p style="font-size:12.7px;line-height:1.72;color:#333;margin:5px 0 7px">
+      每个子方向是<b>可独立写成一个 Aim</b> 的粒度，覆盖五个层次（机制生化／底物特异性／疾病落点／方法工具／转化治疗），
+      含<b>科学前提（逐条标 [已发表]/[本项目计算]/[待测]）、第一个关键实验、必须的对照、为什么是你、可行性、
+      明确的放弃条件、目标期刊与基金、首篇预计</b>。共 <b>84 篇文献笔记</b>。
+      <br><b>拥挤程度全部用 PubMed 实时核查过，但判定依据不是检索式的全交集 —— 这一点很重要：</b>
+      把 3 个以上词 AND 起来返回 0 篇是常态，<b>不是研究空白的证据</b>。第一轮 21 条检索式有 20 条报 0，
+      查下去发现是「引号短语被 PubMed 整条丢弃」＋「子句一多必然为 0」两个原因。所以最终一律按
+      <b>两两组合的最小共现数</b>判定，单词计数与两两计数<b>全部列出供你复算</b>。
+      <br>计数器自检：<code>ZSWIM8[tiab]</code>=45、<code>lactylation[tiab]</code>=2628（正控），
+      <code>zzqxwv[tiab]</code>=0（负控）；<code>AMPK[tiab] AND ZSWIM8[tiab]</code>=<b>0 且无短语警告</b> ——
+      这是个<b>真实的零</b>，也正是方向 1 的核心前提至今无人直接检验的证据。
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="abtn solid" href="data/subdirections_21.xlsx" download
+         style="text-decoration:none;background:#4A148C">⬇️ 21 子方向 + 84 篇笔记 (.xlsx · 4 表)</a>
+      <a class="abtn" href="data/subdirections_21.docx" download>⬇️ Word (.docx)</a>
+      <a class="abtn" href="data/subdirections_21.pdf" download>⬇️ PDF (51 页)</a>
+      <a class="abtn" href="data/subdirections_21.md" download>⬇️ Markdown</a>
+    </div>
+  </div>
+
   <details style="margin:4px 0 2px">
     <summary style="cursor:pointer;font-weight:600;color:#4A148C;font-size:13px">
       📘 两类下载有什么区别 / 在线编辑怎么用（点开看一眼）</summary>
@@ -1282,8 +1305,63 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
        style="text-decoration:none;background:#00695C">⬇️ 68 篇笔记追踪表 (.xlsx · 已预填 PMID)</a>
     <a class="abtn" href="data/reading_pool.csv" download>⬇️ 632 篇完整候选池 (.csv)</a>
   </div>
+  <div style="background:#FFF9E6;border:1px solid #FFD980;border-radius:7px;padding:10px 12px;margin:10px 0 4px">
+    <b style="color:#7A5200">📝 68 篇的 14 栏笔记已经替你预填好底稿 —— 你只需核对与补充，不用从空白开始</b>
+    <p style="font-size:12.7px;line-height:1.72;color:#333;margin:5px 0 7px">
+      每篇的<b>标题、摘要全文、MeSH、被引数</b>都是实时抓取的；14 栏底稿<b>仅依据抓到的摘要原文</b>生成，
+      明确禁止编造。因此：<br>
+      · <b>③ 关键图、⑥ 对照、⑭ 参考文献</b>这三栏，68 篇<b>全部</b>以「【需读全文核对】」开头 ——
+        这三件事从摘要原则上得不到，底稿给的是<b>「读全文时要去找什么」的核对清单</b>，不是答案。<br>
+      · <b>⑦ 效应量</b>：68 篇里<b>只有 10 篇的摘要报告了数字</b>（我用宽模式在原文里核对过，真实分布正好也是 10），
+        其余 60 篇标着「【摘要未报告数字】」并写明要补什么。机制类与结构类摘要普遍不报倍数/p 值，<b>这不是漏抓</b>。<br>
+      · <b>⑧「我不相信的一件事」</b>是针对该文具体主张的质疑，但那是模型的质疑，<b>你必须自己判断是否同意</b>。<br>
+      按相关度排序可先读：<b>5 分 18 篇、4 分 29 篇</b>。
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="abtn solid" href="data/paper_notes_68_prefilled.xlsx" download
+         style="text-decoration:none;background:#7A5200">⬇️ 68 篇预填笔记 (.xlsx · 27 列可筛选)</a>
+      <a class="abtn" href="data/paper_notes_68_prefilled.docx" download>⬇️ Word (.docx)</a>
+      <a class="abtn" href="data/paper_notes_68_prefilled.pdf" download>⬇️ PDF</a>
+      <a class="abtn" href="data/paper_notes_68_prefilled.md" download>⬇️ Markdown</a>
+    </div>
+  </div>
   <img src="data/fig_reading_roadmap.png" alt="12 周文献阅读路线图：每周论文数按精读层级分色，右侧为周末产出物"
        style="width:100%;max-width:900px;margin:8px 0 2px;border:1px solid #E2E8F0;border-radius:6px">
+
+  <div class="card" style="border-color:#00695C;background:#F2FAF8;padding:13px;margin:14px 0 2px">
+    <div style="font-weight:700;color:#00695C;font-size:14.5px;margin-bottom:4px">
+      🔎 临时读一篇不在计划里的论文？用「论文速读与笔记工具」</div>
+    <p style="font-size:12.9px;line-height:1.7;color:#333;margin:4px 0 8px">
+      贴<b>标题 / 链接 / DOI / PMID / 关键词</b>任意一种 → 工具去 PubMed 取回摘要 →
+      自动把<b>数字与效应量、方法证据、作者自己承认的空白</b>逐句摘出来，<b>每条都带触发它的那句原文</b>，
+      并搭好同一套 14 栏笔记骨架 → 你只需核对与补充 → 存进笔记库，可<b>整库导出 Word / Excel / Markdown</b>。
+      <br><b>不调大模型</b>，全部是词边界正则的确定性抽取，所以每一条都能当场回溯到原文。
+      <span class="note">在 12 周计划那 68 篇真实摘要上实测：方法 50/68、效应量 10/68、空白句 18/68 —— 实测值与已知局限写在工具页里。</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="abtn solid" href="paper-notes.html" target="_blank"
+         style="text-decoration:none;background:#00695C">🔎 打开论文速读与笔记工具</a>
+      <a class="abtn" href="paper-notes.html" download>⬇️ 下载工具 (.html，离线可用)</a>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#4A148C;background:#FBF8FF;padding:13px;margin:10px 0 2px">
+    <div style="font-weight:700;color:#4A148C;font-size:14.5px;margin-bottom:4px">
+      📚 关键词检索 + 汇总台账「文献检索与汇总台账」</div>
+    <p style="font-size:12.9px;line-height:1.7;color:#333;margin:4px 0 8px">
+      填<b>核心词 / 任一词 / 排除词</b>（或直接手写检索式）→ 工具组出检索式并<b>把实际送给 PubMed 的那一条显示出来</b>供你核对 →
+      逐篇抽取<b>方法证据、数字与效应量、作者承认的空白、与你三个方向的重叠</b>（每条附原句）→
+      勾选收进<b>跨检索去重的汇总总表</b> → 导出 <b>Excel / Word / CSV / Markdown</b>。
+      <br><b>每次检索都记进台账</b>：执行时间、实际检索式、全库命中、抓取数、收进数 —— 三个月后你还能复现当时那次检索。
+      <br><b>内置一个防误判机制：</b>只要全交集 &lt; 5 篇，它<b>自动拆出子句阶梯</b>（单词计数 + 两两组合计数），
+      因为 3 个以上词 AND 起来返回 0 是常态，<b>那不是研究空白</b>。PubMed 丢弃引号短语时也会显式警告并自动去引号重试。
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="abtn solid" href="paper-search.html" target="_blank"
+         style="text-decoration:none;background:#4A148C">📚 打开文献检索与汇总台账</a>
+      <a class="abtn" href="paper-search.html" download>⬇️ 下载工具 (.html，离线可用)</a>
+    </div>
+  </div>
 
   <div class="mstep" id="ms3"><span class="num">3</span>
     <span><span class="ttl">把方向填进系统，驱动每日文献抓取</span>
