@@ -8,6 +8,14 @@
 
 ---
 
+
+> **2026-09-29 更新（本次并入 68 篇全文笔记的结果）**
+> 阅读计划那 68 篇的笔记已按全文填完（43 篇开放全文 + 22 篇你下载的 PDF + 3 篇替代文献），读全文带来的改动已经并进正文，不只是附在末尾：
+> · §12 方向 1 新增 **P2b**（机器判别的定量尺度：trigger 偏好 up to 70 倍；加侧翼后 3 nM vs 300 nM）与 **P8**（⚠️ ZSWIM8 同源物 EBAX-1 有非 TDMD 功能 → KO 表型不能直接归因于 TDMD）；
+> · §12 方向 2 的竞争解释 **P3 被量化**（28%／46%／37%；Smad3 位点在上游 22 kb），新增 **P6**（三成员丰度差 5–14 倍），**Aim 1 因此有了定量门槛**而不只是方向性判断；
+> · §13 的 W6/W7/W9 三篇换成可取全文的替代文献并**明示为 T2 降级**；分层时间预算按实际层级重算为 39.5 小时（原写 33 小时，与它自己给出的每篇时长 26×60+28×25+14×10=40 h 不符，已改为按实际层级计算的值）；
+> · §10 关闭「四栏待核对」这一缺口，并列出读全文后**新暴露的三处缺口**（A 丰度不对称、B 归因约束、C 代谢记忆证据器官偏差）。
+
 ## 1 · 研究分类 / Research Classification
 
 ### 中文
@@ -230,8 +238,21 @@ Three blunt points: (1) you are carrying six lines, two of which (D's lncRNA wor
 | 37653034 | *Experimental & Molecular Medicine* 2023 — AMPK 与 miRNA（综述） | 方向 1 上游信号 |
 | 25481708 | *Diabetologia* 2015 — 代谢记忆的表观遗传机制 | 方向 1 疾病概念 |
 | 15538371 | *Nature* 2004 — miR-375 调控胰岛素分泌（Poy 等） | 候选 miRNA 依据 |
+| **41542392** | **2026 — TDMD 的 E3 机制：ZSWIM8 对 trigger 配对复合体偏好 up to 70 倍；加侧翼序列后共沉淀效率再升 100 倍（3 nM vs 300 nM）** | **方向 1 的定量尺度** |
+| **41542532** | **2026 — 线虫 EBAX-1（ZSWIM8 同源物）驱动 linker cell 非凋亡死亡（野生型 97% 降解，n=241）** | **⚠️ 归因约束：KO 表型 ≠ TDMD** |
+| **22095944** | ***JASN* 2012 — TGF-β1 抑制 miR-29：系膜细胞中 29a/b/c 分别降 28%／46%／37%；三个成员丰度差 5–14 倍（Fig.1F）** | **方向 2 竞争解释 + 实验设计约束** |
+| **39977234** | ***IBD* 2025 — 纤维狭窄型克罗恩转录组：81 个重叠 DEG（64 上/17 下），GREM1／SERPINE1／LY96 为狭窄特异候选，GREM1 经 scRNA-seq 定位于成纤维细胞** | **方向 2/4 的人源落点** |
+| **41465114** | ***Genes* 2025 — 从代谢记忆到表观遗传记忆（替代 2010 年 Nat Rev Nephrol 版）** | **方向 1 疾病概念（更新版）** |
 
-### 阅读顺序与时间安排 / Reading order and time budget
+> **2026-09-29 更新 —— 这一节的粗排已被 §13 的逐周计划取代，且 68 篇笔记已全部按全文填好。**
+> 68 篇 × 14 栏已无任何一栏标着「需读全文核对」：**43 篇**来自 Europe PMC / NCBI PMC 开放全文，
+> **22 篇**来自我自己下载的 PDF（含 MMB 2141 第 40 章 Phos-tag SDS-PAGE、MMB 3059 第 9 章肠类器官方案），
+> **3 篇**因原文无开放全文换成了同角色替代文献（层级一并降为 T2，不当等价替换）。
+> 核对方式：开放全文那 43 篇里 ⑭栏引用的 127 个 PMID 全部出自该文自己的参考文献表；
+> PDF 篇与替代篇的引用标题全部能在该文全文逐字回查到；③栏图号全部能对应。
+> **所以下面这张 6 段式粗排只作为背景保留，实际执行按 §13.1 的十二周表。**
+
+### 阅读顺序与时间安排（粗排，已被 §13 取代）/ Reading order and time budget
 
 **中文**
 
@@ -318,6 +339,16 @@ Three blunt points: (1) you are carrying six lines, two of which (D's lncRNA wor
 
 **数字上的一处不一致，请你确认：** 两处记录的引用数不同 —— 一处记 669 引 / h=10，一处记 675 引。这是抓取日期不同造成的，**用于申请书前请你自己去 Scholar 看当日值**。此外 PhD 期有三篇方法学论文处于 60–130 引区间，但**我没有逐篇核对哪个数对应哪篇，所以本报告不给它们分配引用数**。
 
+**2026-09-29 已关闭的一处缺口：** 阅读计划里那 68 篇的「关键图与可信度／做了漏了哪些对照／效应量／要排队的参考文献」四栏此前标着「需读全文核对」——现已全部按全文填写（43 篇开放全文 + 22 篇你下载的 PDF + 3 篇替代文献），并做了两道机械核对（引用的 127 个 PMID 全部出自各文自己的参考文献表；PDF 篇与替代篇的引用标题可在全文逐字回查）。另把 4 处「对作者/单位的猜测」按全文作者名单改写成实证或「全文未给出」。
+
+**读全文后新暴露的三处缺口（此前看摘要看不出来）：**
+
+| # | 新缺口 | 影响哪一节 |
+|---|---|---|
+| A | **miR-29 三个成员丰度差 5–14 倍**（PMID 22095944 Fig.1F），文献普遍用合并读出 | §12 方向 2 Aim 1 的样本量与内参必须按最低丰度成员定 |
+| B | **ZSWIM8 的线虫同源物 EBAX-1 有非 TDMD 功能**（驱动 linker cell 非凋亡死亡，PMID 41542532） | §12 方向 1 Aim 3：KO 表型不能直接归因于 TDMD，必须补底物层证据 |
+| C | **代谢记忆那条线的证据基础主要来自视网膜/内皮细胞**，PMID 41465114 全文未涉及任何 miRNA 稳态蛋白 | §12 方向 1 的疾病叙事仍缺器官特异（肾小管/胰岛）的复糖-撤糖对照文献 |
+
 **明确属于推测、不是从你资料推出的结论：**
 1. 第 2 节所有「领域进展/热点/空白/趋势」出自我的领域知识；
 2. 第 4 节的可持续性评分是**我的主观量化**，不是客观指标；
@@ -332,6 +363,7 @@ Three blunt points: (1) you are carrying six lines, two of which (D's lncRNA wor
 | 2 | **你的签证/身份状态**（H-1B？J-1？绿卡进程？） | 直接决定美国路径（K99 已基本关门、F32 需公民/绿卡）是否还有意义，以及亚洲路径的时间窗 |
 | 3 | **手上真实的未发表数据清单** | 你此前明确说 ZSWIM8 方向无未发表数据；若其他方向有，能大幅改变 Q1–Q2 的排期 |
 | 4 | **存档样本的实际可及性**——MYBPC3 心脏与 SAA3 肠组织现在还在不在、在谁手里 | 方向 2「零成本起步」完全依赖这一点 |
+| 4b | **那 3 篇无开放全文的原文**（20201077 硬化症 miR-29、20421885 代谢记忆综述、42622514 狭窄型克罗恩蛋白质组）——MSKCC 订阅能否取到 | 取到后可把替代文献换回原文并恢复层级；替代只是让计划不断档 |
 | 5 | **教学/带学生记录** | faculty 申请必需，CV 目前只有辅导员与学生工作，没有科研 mentoring 记录 |
 | 6 | **年龄/毕业年限的准确数字** | 海外优青等有年龄上限与博士学位年限要求，需精确到月 |
 | 7 | **可用的推荐人名单与他们的意愿** | Q4 需要 3 位通讯级推荐人 |
@@ -401,11 +433,13 @@ Each section is presented **Chinese first, English second**. **Tables use biling
 |---|---|---|---|
 | P1 | ZSWIM8–Cul3 是 TDMD 的执行者 | `[已发表]` | PMID 33184234 / 33184237（两篇独立 *Science* 2020） |
 | P2 | 靶标识别依赖 AGO2 构象改变，机器对构象敏感 | `[已发表]` | PMID 31353209（*Mol Cell* 2019 结构）；PMID 41851464（*Nature* 2026 冷冻电镜） |
+| **P2b** | **机器的靶标判别有定量尺度：ZSWIM8 对「trigger 配对」复合体的共沉淀偏好达 up to 70 倍；加入 trigger 侧翼序列（+85 nt）后共沉淀效率再提升 100 倍——无侧翼需 300 nM ZSWIM8 才达 15% pulldown，有侧翼仅需 3 nM** | `[已发表]` | **PMID 41542392（Farnung & Slobodyanyuk，通讯 Schulman/Bartel）Fig 1e/1f。对我的意义：这给了 Aim 2 体外重构的动态范围（3 nM–300 nM 两个数量级），磷酸化若改变判别效率，应能在这个窗口内读出** |
 | P3 | AGO2 亦可保护 miRNA 免于 TDMD —— 降解/保护是可调平衡 | `[已发表]` | PMID 33853897 |
 | P4 | AMPK 底物基序为 −3/−4 碱性 + +4 疏水 | `[已发表]` | PMID 7698321（原始生化）；PMID 25683918（基序亲和 + 质谱发现流程） |
 | P5 | ZSWIM8-S608/S609 落在该基序内、且处于无序区（易被激酶接近） | `[本项目计算]` | 自建透明 PSSM：S609 98.3 百分位 / S608 96.4 / S1202 82.7。**分值本身不构成证据** |
 | P6 | 代谢记忆存在且具表观遗传基础 | `[已发表]` | PMID 25481708；PMID 42321894（2026 综述，miRNA 与高血糖代谢记忆） |
 | P7 | 上游信号如何调控 miRNA 降解机器 —— **几乎空白** | `[待测]` | AMPK 已知底物分类中几乎没有 RNA 结合蛋白（PMID 26616193） |
+| **P8** | **⚠️ ZSWIM8 的功能不止 TDMD：其线虫同源物 EBAX-1 驱动 linker cell 的非凋亡性程序性死亡（野生型 97% 的 linker cell 在 L4→成虫后 24 h 已降解，n=241；ebax-1 突变体 44% 存活，linker-cell 特异性回复后降至 7%）** | `[已发表]` | **PMID 41542532。对 Aim 3 的直接约束：ZSWIM8-KO 在代谢记忆模型里出现表型，不能直接归因于 TDMD——必须同时给出底物层证据（该 miRNA 半衰期改变 + 触发靶标依赖性），否则归因会被审稿人打回** |
 
 ##### 1.3 Aim 1 — AMPK 是否直接磷酸化 ZSWIM8（12 个月 go/no-go）
 **实验**
@@ -463,17 +497,20 @@ Each section is presented **Chinese first, English second**. **Tables use biling
 ##### 2.2 科学前提 —— 以及一个必须正面处理的竞争解释
 | # | 前提 | 等级 | 依据 |
 |---|---|---|---|
-| P1 | miR-29 是跨器官的抗纤维化核心 miRNA | `[已发表]` | 肝 PMID 20890893；肾 21784902；肺 20971881；皮肤/SSc 20201077 |
+| P1 | miR-29 是跨器官的抗纤维化核心 miRNA | `[已发表]` | 肝 PMID 20890893；肾 21784902；肺 20971881。（原引的皮肤/SSc PMID 20201077 无开放全文，阅读计划中已换为 PMID 40124162 —— 见 §13 替代说明） |
 | P2 | 尿苷化可把 RNA 导向降解，并改变炎症输出 | `[已发表]` | PMID 19701194（Zcchc11 尿苷化 miRNA → 细胞因子）；25480299（TUT4/7 标记 mRNA 降解）；23594738（DIS3L2 执行降解） |
-| **P3** | **miR-29 下降由 TGF-β/Smad3 在转录层驱动** | `[已发表]` | **PMID 21784902、22095944 —— 这是我的降解假设最强的替代解释** |
+| **P3** | **miR-29 下降由 TGF-β/Smad3 在转录层驱动 —— 且已被定量到位** | `[已发表]` | **PMID 22095944：系膜细胞中 TGF-β1 处理后 miR-29a/b/c 分别下降 28%／46%／37%（P<0.05）；Fig.4A–C 用 collagen I、IVa1、IVa3 三个 3′UTR 荧光素酶报告基因证明 miR-29 直接压制，Fig.4D 用结合位点突变体证明序列特异性。PMID 21784902：Smad3 结合位点定位在 miR-29b2 启动子上游 22 kb（Fig.3A），并有 Smad3-KO 小鼠与 MEF 的 Smad3 vs Smad2 分离对照。这是我的降解假设最强的替代解释，且它的证据链比我原先估计的更完整** |
 | P4 | 尿苷化也可**促进**前体加工（反例） | `[已发表]` | PMID 23063654（单尿苷化促进第 II 组前体生成）；39054354（末端转移酶活性切换决定 let-7 命运） |
 | P5 | 纤维化时 miR-29 的**末端状态**如何变化 | `[待测]` | 文献普遍只测成熟体丰度，未测 3′ 末端 |
+| **P6** | **⚠️ miR-29 三个成员丰度差一个量级：NRK52E 中 miR-29a 比 miR-29b 高 10 倍、比 miR-29c 高 5 倍；小鼠肾脏中 miR-29a 比 miR-29b 高 14 倍** | `[已发表]` | **PMID 22095944 Fig.1F。对 Aim 1 的直接后果：三个成员必须分开定量、不能用「miR-29」一个合并读出；且低丰度成员（29b/29c）的降解信号更容易被测量噪声吞掉——样本量与内参选择要按最低丰度的那个成员来定** |
 
 > **这一条决定方向 2 成立与否，必须写进申请书正面回应：**
 > 既然 TGF-β/Smad3 已在转录层解释了 miR-29 下降，我的第一个实验就**不是**测成熟体，而是测 **pri/pre-miR-29 与成熟体的比值**。若前体同步下降 → 转录机制主导，假设降级；若前体不变而成熟体下降 → 降解/加工层被打开，假设成立。**这是一个真正的 go/no-go，而不是一个必然成功的实验。**
 
 ##### 2.3 Aim 1 — 区分转录 vs 降解（零成本起步，9 个月内可完成）
-**实验** 在你已发表的两个模型的**存档组织**上：① qPCR 测 pri-/pre-/成熟 miR-29a/b/c 三层；② 小 RNA 3′ 末端测序（TAIL-seq 思路，PMID 24582499）测尿苷化比例；③ 与纤维化程度（胶原定量）做相关。
+**实验** 在你已发表的两个模型的**存档组织**上：① qPCR 测 pri-/pre-/成熟 miR-29a/b/c 三层，**三个成员分开做、不合并**（依据 P6：成员间丰度差 5–14 倍）；② 小 RNA 3′ 末端测序（TAIL-seq 思路，PMID 24582499）测尿苷化比例；③ 与纤维化程度（胶原定量）做相关。
+
+**这个 Aim 的定量门槛（读完全文后才定得下来）**：转录路线在系膜细胞里给出的成熟体降幅是 28–46%（PMID 22095944）。所以我的判据不能只看「成熟体是否下降」，而要看**前体/成熟体比值**是否偏离：若成熟体降 ~30–45% 且前体同步等比下降 → 落在转录解释的射程内，假设降级；若前体不变或降幅明显小于成熟体 → 降解/加工层被打开。样本量按最低丰度成员（miR-29b）估，不按 miR-29a。
 **体系**：MYBPC3 缺失心脏（CV #7）+ SAA3 缺失 DSS-IBD 肠（CV #5）——**两个不同器官，同一逻辑**，这是几乎无人具备的对照。
 
 ##### 2.4 Aim 2 — TUT4/7 是否是执行者
@@ -481,7 +518,7 @@ Each section is presented **Chinese first, English second**. **Tables use biling
 **关键对照** 必须同时检验「加工层 vs 降解层」：若 TUT4/7 敲低同时改变前体加工，则效应不能归因于降解（依据 P4 的反例）。
 
 ##### 2.5 Aim 3 — 可药控性
-**实验** ASO 阻断 miR-29 的尿苷化位点 / TUT4-7 抑制剂（若可得）→ 纤维化消退读出；人源验证用狭窄型克罗恩病样本的分子标记对齐（PMID 42622514），病理亚群参照 TWIST1⁺FAP⁺ 成纤维细胞（PMID 39024569）。
+**实验** ASO 阻断 miR-29 的尿苷化位点 / TUT4-7 抑制剂（若可得）→ 纤维化消退读出；人源验证用狭窄型克罗恩病样本的分子标记对齐（**PMID 39977234**：81 个重叠 DEG，GREM1／SERPINE1／LY96 为狭窄特异候选，GREM1 经 scRNA-seq 定位于成纤维细胞；⚠️ 该研究无健康对照、无功能学验证，这些基因只是**关联标志**，只能用作对齐坐标、不能当已验证 biomarker 写。原计划引的 PMID 42622514 无开放全文），病理亚群参照 TWIST1⁺FAP⁺ 成纤维细胞（PMID 39024569）。
 **临床语境** IBD 纤维化的未满足需求与终点取自 PMID 27720839（*Gastroenterology* 综述）；**心、肠纤维化目前零获批药**——这是 Significance 的核心数字。
 
 ##### 2.6 时间线 · 目标产出 · 放弃条件
@@ -617,9 +654,14 @@ Five proposals under one thesis: metabolic and signalling state controlling miRN
 | W11 | P4 方法 | 平台与编辑：方向 4/5 的可行性底座 | 25828392 | 我能不能用类器官 + 碱基编辑，把 TDMD 做成可定量的活体读出？ | 方向 4/5 的技术路线图一页（含建系时间线） |
 | W12 | P4 写作 | 收口：竞争监视 + 写出 Specific Aims | 41542392 | 谁正在做和我最接近的事？我的 Aims 与他们的差异能不能一句话说清？ | **两页 Specific Aims 定稿**，交给 3 位 PI 做「你能拥有这个问题吗」测试 |
 
-**分层时间预算**：T0 精读 ~60 min（26 篇）· T1 结构化速读 ~25 min（28 篇）· T2 略读 ~10 min（14 篇），共 68 篇，约 33 小时。候选池 632 篇（PubMed + Europe PMC 实时检索，见 `reading_pool.csv`）。
+**分层时间预算**：T0 精读 ~60 min（26 篇）· T1 结构化速读 ~25 min（26 篇）· T2 略读 ~10 min（16 篇），共 68 篇，约 40 小时。候选池 632 篇（PubMed + Europe PMC 实时检索，见 `reading_pool.csv`）。
+
+> **2026-09-29：68 篇的 14 栏笔记已按全文预填，你是核对而不是从空白开始。**
+> 三篇替代文献（W6 的 41465114、W7 的 40124162、W9 的 39977234）层级判为 T2，因此 T1 由 28 减至 26、T2 由 14 增至 16——**这是降级，不是等价替换**；若你能用机构订阅取到原文，应恢复原层级并按原文重填。
+> 预填稿见 `paper_notes_68_fulltext.xlsx`（28 列可筛选，按来源三色标注）。
 
 > **两个不能跳的周**：**W7** 处理 miR-29 的转录层替代解释（这是方向 2 的 go/no-go）；**W12** 逐句读 2026 年最接近的三篇（竞争风险）。
+> **读完全文后 W7 的形势更紧，不是更松**：转录路线已经有定位到上游 22 kb 的 Smad3 结合位点（PMID 21784902 Fig.3A）和 28%／46%／37% 的成员分辨降幅（PMID 22095944），而四篇里**没有一篇测过前体**——所以 W7 要交的决策备忘必须直接回答：我的前体/成熟体比值实验，能不能把降幅落在转录解释的射程之外。
 
 ### 13.2 每周论文清单（含为什么读 / 必须记下什么）
 
@@ -705,12 +747,12 @@ Five proposals under one thesis: metabolic and signalling state controlling miRN
 | T0 | [25481708](https://pubmed.ncbi.nlm.nih.gov/25481708/) | 2015 | Diabetologia | 369 | Epigenetic mechanisms in diabetic complications and metabolic memory | 代谢记忆的表观遗传机制经典综述——疾病概念的来源 | 既有解释分几类；哪一类最被接受；RNA 稳定性有没有被提及 |
 | T0 | [42321894](https://pubmed.ncbi.nlm.nih.gov/42321894/) | 2026 | Diabetology & metabolic syndrome | 0 | MiRNAs in hyperglycemia-induced metabolic memory: established mechanisms and emerging nuclear activation concepts | 2026 年综述：miRNA 在高血糖诱导的代谢记忆中的作用——**离我最近的已发表论述** | 它讲的是 miRNA 表达变化还是降解变化；我的角度是否仍然空白 |
 | T1 | [28452927](https://pubmed.ncbi.nlm.nih.gov/28452927/) | 2017 | Nutrients | 158 | The "Metabolic Memory" Theory and the Early Treatment of Hyperglycemia in Prevention of Diabetic Complications | 代谢记忆理论与早期干预的临床语境 | 临床证据的强度与队列（用于写 Significance 的数字） |
-| T2 | [20421885](https://pubmed.ncbi.nlm.nih.gov/20421885/) | 2010 | Nature reviews. Nephrology | 95 | Metabolic memory and diabetic nephropathy: potential role for epigenetic mechanisms | 糖尿病肾病中的代谢记忆与表观遗传 | 器官特异性证据 |
+| T2 | [41465114](https://pubmed.ncbi.nlm.nih.gov/41465114/) | 2025 | Genes | 13 | From Metabolic to Epigenetic Memory: The Impact of Hyperglycemia-Induced Epigenetic Signature | **【替代】**原 PMID 20421885（Nat Rev Nephrol 2010）无开放全文，换成同命题 2025 年版 | ①它把记忆机制分成 AGE 形成／ROS-线粒体损伤／表观修饰／持续表达改变四臂（Fig.1）——但 **Fig.1/Fig.3 是 BioRender 示意图，不是数据图，只能当框架引用**；②可直接用的硬数字只有 GBD 的 57.6%／43.2%（空腹血糖受损与高血压对 CKD 发病率的贡献）与「高糖 14 天 + 复糖 7 天后 fibronectin mRNA 持续过表达数周」；③**全文未涉及 AGO2／TUT4-7／ZSWIM8 任何 miRNA 稳态机制，我的角度在这篇里仍然是空白** |
 | T1 | [15538371](https://pubmed.ncbi.nlm.nih.gov/15538371/) | 2004 | Nature | 1608 | A pancreatic islet-specific microRNA regulates insulin secretion | miR-375 调控胰岛素分泌——候选 miRNA 的功能依据 | miR-375 的功能强度；敲低/过表达的表型 |
 
 #### W7 · 竞争风险周：miR-29 为什么被关掉——转录解释已经很强
 **本周问题：** 如果 TGF-β/Smad3 在转录层已经解释了 miR-29 下降，我的降解假设还剩多少空间？  
-**配套计算任务：** 把四篇 miR-29 论文的效应量列成一张表（mRNA 降幅 vs 成熟体降幅）  
+**配套计算任务：** 把四篇 miR-29 论文的效应量列成一张表（mRNA 降幅 vs 成熟体降幅）。**已有的数字（读全文后取得，可直接抄）：** PMID 22095944 系膜细胞 miR-29a/b/c 降 28%／46%／37%（P<0.05）、NRK52E 中 29a 比 29b 高 10 倍、小鼠肾中高 14 倍；PMID 21784902 只给显著性符号未给倍数，其 Smad3 结合位点在 miR-29b2 上游 22 kb；PMID 40124162 collagen 1α1 降至 33±15.2% vs BLM 组 116±35%（p<0.01）。**空缺的那一格是「前体降幅」——四篇都没测，这正是我的入口。**  
 **配套实验准备：** 在心/肠存档样本上先测 miR-29 前体 vs 成熟体比值（区分转录 vs 降解）  
 **周末产出物：** **一页决策备忘：我的方向 2 是否仍然成立**（这是 go/no-go）
 
@@ -720,7 +762,7 @@ Five proposals under one thesis: metabolic and signalling state controlling miRN
 | T0 | [22095944](https://pubmed.ncbi.nlm.nih.gov/22095944/) | 2012 | Journal of the American Society of | 442 | Suppression of microRNA-29 expression by TGF-β1 promotes collagen expression and renal fibrosis | TGF-β1 抑制 miR-29 表达促进胶原表达 | 同上：他们有没有测前体；这决定我能否声称「降解」 |
 | T1 | [20890893](https://pubmed.ncbi.nlm.nih.gov/20890893/) | 2011 | Hepatology (Baltimore, Md.) | 658 | Micro-RNA profiling reveals a role for miR-29 in human and murine liver fibrosis | miR-29 在人与小鼠肝纤维化中的作用（经典） | 跨器官的一致性；效应量 |
 | T1 | [20971881](https://pubmed.ncbi.nlm.nih.gov/20971881/) | 2011 | American journal of respiratory ce | 415 | miR-29 is a major regulator of genes associated with pulmonary fibrosis | miR-29 是肺纤维化相关基因的主要调控者 | 靶基因网络；胶原读出方式 |
-| T1 | [20201077](https://pubmed.ncbi.nlm.nih.gov/20201077/) | 2010 | Arthritis and rheumatism | 428 | MicroRNA-29, a key regulator of collagen expression in systemic sclerosis | 系统性硬化中 miR-29 作为胶原关键调控者 | 人源样本证据 |
+| T2 | [40124162](https://pubmed.ncbi.nlm.nih.gov/40124162/) | 2025 | Molecular therapy. Nucleic acids | 4 | Ratio of miRNA-29 to miRNA-199 expression coordinates mesenchymal stem cell repair of bleomycin-induced pulmonary injury | **【替代】**原 PMID 20201077（Arthritis Rheum 2010，皮肤/SSc）无开放全文。另一候选 PMID 40021656 正好是硬化症皮肤，但其机制是 TGF-β1/Smad3、miR-29 零提及，故选保留 miR-29 机制主体的这篇；代价是组织从皮肤换成肺，与 20971881 重叠 | ①**miR-29:miR-199 比值**是本文核心读出——这是一个我可以直接测的协调变量，比单测 miR-29 更抗噪；②治疗窗口：ASC 在 day 12（纤维化已建立后）给药仍有效，collagen 1α1 降至 33±15.2%（vs BLM 组 116±35%，p<0.01）；③**因果验证只用双转染（29KI/199KO），没有单独敲低/过表达对照，无法拆开两个 miRNA 各自的贡献** —— 我若要用这个比值，必须自己补单变量对照 |
 | T2 | [42645200](https://pubmed.ncbi.nlm.nih.gov/42645200/) | 2026 | Cells | 0 | miR-29b as an Anti-Fibrotic Therapeutic: Mechanisms, Disease Biology and Translational Opportunities | 2026 年 miR-29b 抗纤维化治疗综述 | 十余年未成药的原因被归结为什么（递送？还是机制未明？） |
 
 #### W8 · 尿苷化机器：TUT4/7 与 DIS3L2 的完整通路
@@ -750,7 +792,7 @@ Five proposals under one thesis: metabolic and signalling state controlling miRN
 | T0 | [27720839](https://pubmed.ncbi.nlm.nih.gov/27720839/) | 2017 | Gastroenterology | 409 | Mechanisms, Management, and Treatment of Fibrosis in Patients With Inflammatory Bowel Diseases | IBD 纤维化的机制、管理与治疗（Gastroenterology 综述）——临床未满足需求的权威出处 | 狭窄的临床终点与发生率数字（写 Significance 用）；现有治疗为何无效 |
 | T0 | [39024569](https://pubmed.ncbi.nlm.nih.gov/39024569/) | 2024 | The Journal of clinical investigat | 58 | TWIST1+FAP+ fibroblasts in the pathogenesis of intestinal fibrosis in Crohn's disease | TWIST1+FAP+ 成纤维细胞在克罗恩病肠纤维化中的作用（JCI 2024） | 病理性亚群的标记组合；他们如何从单细胞走到功能验证 |
 | T1 | [33119150](https://pubmed.ncbi.nlm.nih.gov/33119150/) | 2020 | Scandinavian journal of immunology | 97 | Mechanism of fibrosis and stricture formation in Crohn's disease | 克罗恩病狭窄形成的机制 | 狭窄与炎症的可分离性 |
-| T1 | [42622514](https://pubmed.ncbi.nlm.nih.gov/42622514/) | 2026 | Inflammatory bowel diseases | 0 | Novel proteomic signatures of stricturing Crohn disease using a treatment-naive cohort | 2026 年狭窄型克罗恩病的蛋白组学特征 | 可作为人源验证的分子标记 |
+| T2 | [39977234](https://pubmed.ncbi.nlm.nih.gov/39977234/) | 2025 | Inflammatory bowel diseases | 5 | Novel Transcriptomic Signatures in Fibrostenotic Crohn's Disease: Dysregulated Pathways, Promising Biomarkers | **【替代】**原 PMID 42622514（同刊 2026 蛋白质组）无开放全文，换成同刊同病同问题的转录组研究 | ①81 个重叠 DEG（64 上／17 下），**GREM1、SERPINE1、LY96** 为狭窄特异候选，GREM1 经 scRNA-seq（3 例、31,195 个细胞）定位于成纤维细胞；②设计上有配对内部对照（同一患者狭窄／近端／远端三点取材，RHI≤3 排除活动性炎症）并用公共数据集 GSE192786（19 纤维 vs 21 非纤维）外部验证；③**但没有健康对照，无法区分「CD 特异」与「狭窄特异」；Fig.4 的功效分析基于合成数据而非真实前瞻队列；也无功能学验证 —— 这些基因目前只是关联标志，不能当已验证 biomarker 引用** |
 | T1 | [29664017](https://pubmed.ncbi.nlm.nih.gov/29664017/) | 2018 | The Journal of clinical investigat | 590 | Specialized fibroblast differentiated states underlie scar formation in the infarcted mouse heart | 特化成纤维细胞状态决定瘢痕形成 | 成纤维细胞命运的分类框架 |
 | T2 | [39443792](https://pubmed.ncbi.nlm.nih.gov/39443792/) | 2024 | Nature | 251 | Targeting immune-fibroblast cell communication in heart failure | 靶向心衰中的免疫-成纤维细胞通讯（Nature 2024） | 心脏侧的最新框架，用于我的 MYBPC3 线 |
 
@@ -1012,7 +1054,7 @@ Fields 6, 7 and 8 are what separate a reader from a reviewer; fields 9, 10 and 1
 | **加工层 vs 降解层判别** | 排除「尿苷化促进加工」的反例解释 | 🔴（概念） | 同时测前体加工效率与成熟体半衰期 | 必做 —— 否则效应不能归因于降解 | 忽略这一步是本方向最可能被拒的理由 | 23063654, 39054354 |
 | 胶原/纤维化定量读出 | 表型终点 | ✅ | 羟脯氨酸定量、Sirius red/Masson 定量（非仅染色）、类器官硬度 | 未处理与 TGF-β 刺激两端标定 | 只做定性染色 → 无效应量 | 25828392 |
 | 存档组织分析 | **零成本起步** | ✅ | — | 两器官（心 MYBPC3 / 肠 SAA3）平行分析 | 样本 RNA 降解 → 先测 RIN | CV #5, #7 |
-| 人源验证 | 提升转化说服力 | 🤝 | 狭窄型克罗恩病样本 | 对齐已发表分子标记与病理亚群 | — | 42622514, 39024569, 27720839 |
+| 人源验证 | 提升转化说服力 | 🤝 | 狭窄型克罗恩病样本 | 对齐已发表分子标记与病理亚群 | — | 39977234, 39024569, 27720839 |
 
 ---
 

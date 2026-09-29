@@ -1261,6 +1261,22 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       （全标 predicted/schematic）、<b>明确的放弃条件</b>。</div>
     <div><b>核对更正：</b>按 CV 逐条数作者位次 = <b>一作 7 篇、末位 3 篇</b>（均为 Methods Mol Biol 书章节）、
       <b>中间 7 篇</b>。旧简报写的「~11 first-author」是错的，已全部按 7 篇重算。</div>
+    <div style="background:#F3E5F5;border:1px solid #CE93D8;border-radius:6px;padding:9px 11px;margin:7px 0">
+      <b style="color:#4A148C">2026-09-29 · 68 篇全文笔记已并入报告正文（不是附在末尾）</b>
+      <br><span style="font-size:12.5px;line-height:1.7;color:#333">
+      读完全文后有 4 处改动了实验设计，已写进 §12：
+      <b>① 方向 1 新增 P2b</b> —— 机器判别有定量尺度（ZSWIM8 对 trigger 配对偏好 up to 70 倍；加侧翼序列后
+      3 nM 即可达到无侧翼 300 nM 的效果），这给了 Aim 2 体外重构的动态范围；
+      <b>② 方向 1 新增 P8 警示</b> —— ZSWIM8 的线虫同源物 EBAX-1 有非 TDMD 功能，所以 KO 表型
+      <u>不能直接归因于 TDMD</u>，Aim 3 必须补底物层证据；
+      <b>③ 方向 2 的竞争解释被量化</b> —— TGF-β1 使 miR-29a/b/c 分别降 28%／46%／37%、Smad3 位点在上游 22 kb，
+      所以 Aim 1 从方向性判断升级成<u>有定量门槛</u>的 go/no-go；
+      <b>④ 方向 2 新增 P6</b> —— 三个 miR-29 成员丰度差 5–14 倍，样本量与内参必须按最低丰度成员定。
+      <br>另：§13 的 W6/W7/W9 换成可取全文的替代文献并明示为 T2 降级；分层时间预算按实际层级重算为
+      <b>39.5 小时</b>（原写 33 小时，与它自己给的每篇时长算出的 40 h 不符）；§10 关闭「四栏待核对」缺口，
+      并列出读全文后<b>新暴露的三处缺口</b>。
+      </span>
+    </div>
     <div><b>不需要 API Key。</b>报告已内置在文件里，不填任何东西就能读／下载／打印。
       要换新资料重跑：<b>你的 Claude Pro 订阅就够了</b> —— 应用第 4 节给的是
       <b>① 复制提示词 → ② 在 claude.ai 粘贴 → ③ 把回复粘回来</b>三步，零额外花费，
@@ -1270,17 +1286,17 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
   </div>
 
   <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px">
-    <a class="abtn solid" href="research-roadmap.html?v=20260929b" target="_blank"
+    <a class="abtn solid" href="research-roadmap.html?v=20260929f" target="_blank"
        style="text-decoration:none;background:#0D47A1">🧭 打开路线图应用（报告已内置，免 API Key）</a>
     <a class="abtn solid" href="editor.html?v=20260929b" target="_blank"
        style="text-decoration:none;background:#4A148C">✏️ 在线编辑并导出 Word / Excel / PDF</a>
-    <a class="abtn" href="research-roadmap.html?v=20260929b" download>⬇️ 下载单文件应用 (.html)</a>
+    <a class="abtn" href="research-roadmap.html?v=20260929f" download>⬇️ 下载单文件应用 (.html)</a>
   </div>
 
   <table class="fmt">
     <tr><th style="width:42%">交付物</th><th style="width:15%">Word</th><th style="width:15%">PDF</th>
         <th style="width:15%">Excel</th></tr>
-    <tr><td><b>科研未来规划报告</b><br><span class="note">14 节 · 42 表</span></td><td class="c"><a href="data/research_roadmap_report.docx" download>.docx</a></td><td class="c"><a href="data/research_roadmap_report.pdf" download>26 页</a></td><td class="c"><a href="data/research_roadmap_report.xlsx" download>43 表单</a></td></tr><tr><td><b>五方向完整立项书</b><br><span class="note">每方向 3 个 Aim + 放弃条件</span></td><td class="c"><a href="data/proposals_all_directions.docx" download>.docx</a></td><td class="c"><a href="data/proposals_all_directions.pdf" download>.pdf</a></td><td class="c"><a href="data/proposals_all_directions.xlsx" download>.xlsx</a></td></tr><tr><td><b>各方向技术与实验全清单</b><br><span class="note">关键参数 · 必须的对照 · 失败模式</span></td><td class="c"><a href="data/techniques_by_direction.docx" download>.docx</a></td><td class="c"><a href="data/techniques_by_direction.pdf" download>.pdf</a></td><td class="c"><a href="data/techniques_by_direction.xlsx" download>.xlsx</a></td></tr><tr><td><b>论文精读记录模板</b><br><span class="note">14 栏（含热点/空白/未来）</span></td><td class="c"><a href="data/paper_note_template.docx" download>.docx</a></td><td class="c"><a href="data/paper_note_template.pdf" download>.pdf</a></td><td class="c"><a href="data/paper_note_template.xlsx" download>.xlsx</a></td></tr><tr><td><b>12 周阅读计划工作簿</b><br><span class="note">11 表 · 含 4 本台账（证据/试剂/参数/空白）</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/reading_plan_12weeks.xlsx" download><b>.xlsx</b></a></td></tr><tr><td><b>68 篇笔记追踪表</b><br><span class="note">A–J 列已预填 PMID，K–X 列 14 栏待你填</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/paper_notes_tracker.xlsx" download><b>.xlsx</b></a></td></tr>
+    <tr><td><b>科研未来规划报告</b><br><span class="note">14 节 · 42 表</span></td><td class="c"><a href="data/research_roadmap_report.docx?v=20260929f" download>.docx</a></td><td class="c"><a href="data/research_roadmap_report.pdf?v=20260929f" download>26 页</a></td><td class="c"><a href="data/research_roadmap_report.xlsx?v=20260929f" download>43 表单</a></td></tr><tr><td><b>五方向完整立项书</b><br><span class="note">每方向 3 个 Aim + 放弃条件</span></td><td class="c"><a href="data/proposals_all_directions.docx" download>.docx</a></td><td class="c"><a href="data/proposals_all_directions.pdf" download>.pdf</a></td><td class="c"><a href="data/proposals_all_directions.xlsx" download>.xlsx</a></td></tr><tr><td><b>各方向技术与实验全清单</b><br><span class="note">关键参数 · 必须的对照 · 失败模式</span></td><td class="c"><a href="data/techniques_by_direction.docx" download>.docx</a></td><td class="c"><a href="data/techniques_by_direction.pdf" download>.pdf</a></td><td class="c"><a href="data/techniques_by_direction.xlsx" download>.xlsx</a></td></tr><tr><td><b>论文精读记录模板</b><br><span class="note">14 栏（含热点/空白/未来）</span></td><td class="c"><a href="data/paper_note_template.docx" download>.docx</a></td><td class="c"><a href="data/paper_note_template.pdf" download>.pdf</a></td><td class="c"><a href="data/paper_note_template.xlsx" download>.xlsx</a></td></tr><tr><td><b>12 周阅读计划工作簿</b><br><span class="note">11 表 · 含 4 本台账（证据/试剂/参数/空白）</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/reading_plan_12weeks.xlsx" download><b>.xlsx</b></a></td></tr><tr><td><b>68 篇笔记追踪表</b><br><span class="note">A–J 列已预填 PMID，K–X 列 14 栏待你填</span></td><td class="c">—</td><td class="c">在线打印</td><td class="c"><a href="data/paper_notes_tracker.xlsx" download><b>.xlsx</b></a></td></tr>
   </table>
 
   <div style="background:#F3ECFB;border:1px solid #D6C9EC;border-radius:7px;padding:11px 13px;margin:10px 0 4px">
