@@ -31,6 +31,7 @@ textarea{resize:vertical;line-height:1.55}
 .b-src{background:#E3F2E8;color:#1b7f4d;border:1px solid #9ed1b2}
 .b-inf{background:#FFEFC2;color:#7A5200;border:1px solid #FFD980}
 .b-need{background:#FDE7E7;color:#b3261e;border:1px solid #f0b4b4}
+.b-ok2{background:#E8F5E9;color:#1b7f4d;border:1px solid #a5d6a7}
 .b-dir{background:#EDE7F6;color:#4A148C;border:1px solid #c5b3e6}
 .fld{margin:11px 0}
 .fld label{display:block;font-size:12.8px;font-weight:700;color:var(--pp);margin-bottom:3px}
@@ -66,8 +67,13 @@ table.sum td{border:1px solid #d4c9e8;padding:4px 6px;vertical-align:top}
   <b>这个工具替你做什么、不替你做什么 —— 先看这一条：</b><br>
   它做的是<b>确定性抽取</b>：从 PubMed 取回摘要原文，再用词边界正则把<b>数字与效应量、方法证据、作者自己承认的空白</b>逐句摘出来，
   <b>每一条都带触发它的那句原文</b>，你可以当场核对。它<b>不调用大模型</b>，所以屏幕上不会出现"读着有道理但查不到出处"的句子。<br>
-  它<b>不</b>替你读全文。<span class="badge b-need">需读全文</span> 标记的三栏（关键图与可信度、做了/漏了哪些对照、要排队的参考文献）
-  <b>从摘要原则上得不到</b>，所以工具只给你「读全文时要去找什么」的核对清单，不编答案。
+  <b>它现在会替你读全文</b>：查到论文后自动去 Europe PMC / NCBI PMC 取<b>开放全文</b>，把原先只能给核对清单的三栏
+  （<b>关键图与可信度、做了/漏了哪些对照、要排队的参考文献</b>）与<b>效应量</b>按全文真实内容填好 ——
+  图注里的 n／±／统计检验逐条列出、对照按四类逐条检索并原句留证、参考文献按<b>引用语境</b>分成
+  「支撑核心假设 / 方法出处 / 与它结论相反」三类。仍然<b>不调用大模型</b>。<br>
+  <b>三条边界，说在前面：</b>① <b>只有 PMC 开放全文能填满</b>，付费墙的填不满 —— 此时三栏保留核对清单并告诉你原因，不编答案；
+  ② 「漏了哪些对照」报告的是<b>「本文正文里检索不到这一类对照句」</b>，不等于作者没做（可能在补充材料里）；
+  ③ 哪张是主图、哪条局限你能做、⑧不相信的那件事，工具<b>不替你判断</b>。
 </div>
 
 <details class="noprint" style="margin:8px 0">
@@ -461,8 +467,25 @@ function loadPaper(pmid, sources){
            cites:c.cites, citeNote:c.note, sources:sources.concat(['Europe PMC（被引数）'])};
       document.getElementById('cands').innerHTML='';
       if(!CUR.abstract){ stat('这篇在 PubMed 没有摘要（可能是书章节或会议摘要），抽取栏位会是空的。','err'); }
-      else stat('已取回摘要 '+CUR.abstract.length+' 字符，已搭好笔记骨架。','okc');
+      else stat('已取回摘要 '+CUR.abstract.length+' 字符。正在找 PMC 开放全文…','okc');
       renderPaper(); renderForm();
+      return ftResolve(pmid).then(function(m){
+        if(!m||!m.pmcid){ CUR.ftMeta=null; CUR.ftNote='PubMed 未登记 PMC 号 —— 这篇很可能在付费墙后，三栏保留核对清单。'; renderPaper(); renderForm(); return; }
+        stat('找到 '+m.pmcid+'，正在取全文…');
+        return ftFetch(m.pmcid).then(function(g){
+          var parsed=ftParse(g.xml);
+          if(!parsed){ CUR.ftMeta=null; CUR.ftNote='取到 '+m.pmcid+' 但 XML 解析失败，三栏保留核对清单。'; }
+          else if(!parsed.figs.length && !parsed.refs.length && (parsed.body||'').length<2000){
+            CUR.ftMeta=null; CUR.ftNote=m.pmcid+' 在 PMC 里只有摘要级记录（无图注、无参考表、正文 '+(parsed.body||'').length+' 字符），填不满，三栏保留核对清单。';
+          } else { CUR.ft=parsed; CUR.ftMeta={pmcid:m.pmcid,src:g.src,oa:m.oa,lic:m.lic}; CUR.ftNote=''; }
+          renderPaper(); renderForm();
+          if(CUR.ftMeta) stat('已取全文（'+g.src+'，'+parsed.figs.length+' 张图 / '+parsed.refs.length+' 条参考文献），③⑥⑦⑭ 已按全文填好。','okc');
+          else stat(CUR.ftNote,'err');
+        }).catch(function(e){
+          CUR.ftMeta=null; CUR.ftNote='两个全文接口都没取到（'+e.message+'）—— 三栏保留核对清单。';
+          renderPaper(); renderForm(); stat(CUR.ftNote,'err');
+        });
+      });
     });
   }).catch(function(e){ stat('取回失败：'+e.message,'err'); });
 }
@@ -480,7 +503,17 @@ function renderPaper(){
     (p.doi?(' · DOI <a href="https://doi.org/'+esc(p.doi)+'" target="_blank">'+esc(p.doi)+'</a>'):'')+
     ' · 被引 '+(p.cites==null?('<b>未获取</b> <span class="note">('+esc(p.citeNote)+')</span>'):esc(String(p.cites)))+
     (p.ptypes&&p.ptypes.length?(' · '+esc(p.ptypes.slice(0,3).join('/'))):'')+'</div>';
-  h+='<div class="srcline"><span>数据来源：'+esc((p.sources||[]).join(' + '))+'</span></div>';
+  h+='<div class="srcline"><span>数据来源：'+esc((p.sources||[]).join(' + '))+
+     (p.ftMeta?(' + <b style="color:#1b7f4d">'+esc(p.ftMeta.src)+'（开放全文 '+esc(p.ftMeta.pmcid)+
+       (p.ftMeta.lic?(' · '+esc(p.ftMeta.lic)):'')+'）</b>'):'')+'</span></div>';
+  if(p.ftMeta && p.ft){
+    h+='<div class="srcline" style="background:#E8F5E9;border-color:#a5d6a7"><span>'+
+       '<b style="color:#1b7f4d">全文已抽取</b>：'+p.ft.figs.length+' 张图注 · '+p.ft.tables.length+' 张表 · '+
+       p.ft.refs.length+' 条参考文献 · Methods '+(p.ft.methods||'').length+' 字符 · Results '+(p.ft.results||'').length+
+       ' 字符 · 引文上下文 '+p.ft.xrefs.length+' 处</span></div>';
+  } else if(p.ftNote){
+    h+='<div class="srcline" style="background:#FDE7E7;border-color:#f0b4b4"><span><b style="color:#b3261e">未取到开放全文</b>：'+esc(p.ftNote)+'</span></div>';
+  }
   if(dirs.length){
     h+='<div style="margin:8px 0 2px;font-size:12.8px"><b>与你三个方向的重叠</b>（词边界匹配，非语义判断）：<br>'+
       dirs.map(function(d){
@@ -499,6 +532,318 @@ function renderPaper(){
 }
 
 /* ---------------- 搭骨架：14 栏 ---------------- */
+/* ==================== 全文抽取模块 ====================
+   目的：把原先标「需读全文核对」的三栏（③关键图 ⑥对照 ⑭参考文献）与⑦效应量
+   改成真正按全文填好，而不是只给核对清单。
+
+   为什么能在浏览器里做：Europe PMC 的 fullTextXML 与 NCBI efetch(db=pmc)
+   都返回 Access-Control-Allow-Origin: *（本项目实测），静态页可直接取全文，
+   不需要后端，也不需要任何大模型 API。
+
+   诚实边界（写进界面，不只写在注释）：
+   · 只有 PMC 开放全文能填满；付费墙的论文保留核对清单并说明原因。
+   · 抽取是 JATS 结构解析 + 词边界正则，每条都附触发原句，可当场回查。
+   · 「漏了哪些对照」报告的是「本文正文里检索不到这一类对照句」，不等于作者没做
+     （可能在补充材料里），所以措辞一律用「未检索到」。
+
+   以下 5 个坑都是在真实论文上实测踩到并修掉的，改动前请先看注释：
+   1) 上标式引用的 xref 父节点是 <sup>，textContent 只有编号「1」——必须向上找段落 + 字符偏移定位句子。
+   2) 只取最近一层 sec 标题会漏判：Methods 的子节叫「Ethical Approval」，匹配不上 /method/。
+   3) 有出版方的参考文献完全没有 <article-title>（实测 0/100 条），只用 title||pmid 做键会整批丢失。
+   4) 正文里不用 however/previously 的论文，三类都判不出来——需要纯计数的兜底。
+   5) 坏 XML：浏览器 DOMParser 返回含 <parsererror> 的文档，xmldom 直接抛异常——两种都要接住。
+======================================================================== */
+
+var EPMC_BASE='https://www.ebi.ac.uk/europepmc/webservices/rest';
+
+function ftResolve(pmid){
+  var q='EXT_ID:'+pmid+' AND SRC:MED';
+  return jget(EPMC_BASE+'/search?format=json&resultType=core&pageSize=1&query='+encodeURIComponent(q))
+    .then(function(r){
+      var x=(((r||{}).resultList||{}).result||[])[0]||{};
+      if(!x.pmcid) return null;
+      return {pmcid:x.pmcid, inPMC:x.inPMC, oa:x.isOpenAccess, lic:x.license||''};
+    }).catch(function(){ return null; });
+}
+
+/* Europe PMC 对部分文章的 fullTextXML 返回 500（本项目实测 20/45 篇，含两篇 Science），
+   此时改走 NCBI PMC efetch —— 同一批文章全部取到。单一数据源是缺陷，不是没权限。 */
+function ftFetch(pmcid){
+  return tget(EPMC_BASE+'/'+pmcid+'/fullTextXML').then(function(t){
+    if(!t||t.length<3000) throw new Error('too short');
+    return {xml:t, src:'Europe PMC fullTextXML'};
+  }).catch(function(){
+    var id=String(pmcid).replace(/^PMC/,'');
+    return tget('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&retmode=xml&id='+id)
+      .then(function(t){
+        if(!t||t.length<3000) throw new Error('no full text');
+        return {xml:t, src:'NCBI PMC efetch'};
+      });
+  });
+}
+
+function xrefOffset(root,target){
+  /* 按文档顺序累加文本长度，遇到 target 即返回其起始偏移；-1 表示未找到 */
+  var n=0, found=-1;
+  (function walk(el){
+    if(found>=0) return;
+    if(el===target){ found=n; return; }
+    if(el.nodeType===3){ n+=String(el.nodeValue||'').replace(/\s+/g,' ').length; return; }
+    var c=el.childNodes;
+    for(var i=0;c&&i<c.length;i++){ walk(c[i]); if(found>=0) return; }
+  })(root);
+  return found;
+}
+function pickSentence(text,off){
+  if(off<0) return '';
+  var sents=splitSentences(text), acc=0;
+  for(var i=0;i<sents.length;i++){
+    var s=sents[i], start=text.indexOf(s,acc);
+    if(start<0) start=acc;
+    var end=start+s.length;
+    if(off>=start-2 && off<=end+2) return s;
+    acc=end;
+  }
+  return sents.length?sents[sents.length-1]:'';
+}
+function txtOf(el){ return el? String(el.textContent||'').replace(/\s+/g,' ').trim() : ''; }
+
+function ftParse(xml){
+  /* 坑 5：两种坏 XML 行为都要接住，否则整页崩 */
+  var doc;
+  try { doc=new DOMParser().parseFromString(xml,'text/xml'); }
+  catch(e){ return null; }
+  if(!doc || !doc.documentElement) return null;
+  if(doc.getElementsByTagName('parsererror').length) return null;
+
+  var out={figs:[],tables:[],methods:'',results:'',discussion:'',body:'',refs:[],xrefs:[],secs:[]};
+  var figs=doc.getElementsByTagName('fig');
+  for(var i=0;i<figs.length;i++){
+    var lb=txtOf(figs[i].getElementsByTagName('label')[0]);
+    var cp=txtOf(figs[i].getElementsByTagName('caption')[0]);
+    if(lb||cp) out.figs.push({label:lb||('Figure '+(i+1)), caption:cp});
+  }
+  var tbs=doc.getElementsByTagName('table-wrap');
+  for(var t=0;t<tbs.length;t++){
+    out.tables.push({label:txtOf(tbs[t].getElementsByTagName('label')[0])||('Table '+(t+1)),
+                     caption:txtOf(tbs[t].getElementsByTagName('caption')[0])});
+  }
+
+  var body=doc.getElementsByTagName('body')[0];
+  if(body){
+    var secs=body.getElementsByTagName('sec');
+    for(var s=0;s<secs.length;s++){
+      var ti=txtOf(secs[s].getElementsByTagName('title')[0]);
+      var bd=txtOf(secs[s]);
+      out.secs.push({title:ti, len:bd.length});
+      if(/method|material|experimental procedure/i.test(ti) && bd.length>out.methods.length) out.methods=bd;
+      else if(/^result/i.test(ti) && bd.length>out.results.length) out.results=bd;
+      else if(/discussion|conclusion/i.test(ti) && bd.length>out.discussion.length) out.discussion=bd;
+    }
+    var clone=body.cloneNode(true);
+    var rl=clone.getElementsByTagName('ref-list');
+    while(rl.length){ rl[0].parentNode.removeChild(rl[0]); }
+    out.body=txtOf(clone);
+
+    var xs=body.getElementsByTagName('xref');
+    for(var x=0;x<xs.length;x++){
+      if((xs[x].getAttribute('ref-type')||'')!=='bibr') continue;
+      var rid=xs[x].getAttribute('rid')||'';
+      var node=xs[x], pEl=null, chain=[], up=node;
+      while(up && up.nodeName!=='body'){
+        if(!pEl && (up.nodeName==='p' || up.nodeName==='title' || up.nodeName==='caption')) pEl=up;
+        /* 坑 2：收集整条祖先 sec 标题链，而不是只取最近一层 */
+        if(up.nodeName==='sec'){ var tt=txtOf(up.getElementsByTagName('title')[0]); if(tt) chain.unshift(tt); }
+        up=up.parentNode;
+      }
+      if(!pEl) pEl=node.parentNode;
+      /* 坑 1：用段落 + 字符偏移定位到 xref 真正所在的那一句 */
+      var ptxt=txtOf(pEl);
+      var sent=pickSentence(ptxt, xrefOffset(pEl,node));
+      out.xrefs.push({rid:rid, sent:(sent||ptxt).slice(0,400), sec:chain.join(' › ')});
+    }
+  }
+
+  var refs=doc.getElementsByTagName('ref');
+  for(var r=0;r<refs.length;r++){
+    var id=refs[r].getAttribute('id')||'';
+    var ti2=txtOf(refs[r].getElementsByTagName('article-title')[0]);
+    var src=txtOf(refs[r].getElementsByTagName('source')[0]);
+    var yr=txtOf(refs[r].getElementsByTagName('year')[0]);
+    var sn=refs[r].getElementsByTagName('surname')[0];
+    var pm='';
+    var ids=refs[r].getElementsByTagName('pub-id');
+    for(var q=0;q<ids.length;q++){ if((ids[q].getAttribute('pub-id-type')||'')==='pmid') pm=txtOf(ids[q]); }
+    /* 坑 3：没有 article-title 时另存整条引文原文，作兜底键与兜底显示 */
+    var raw=txtOf(refs[r]).slice(0,240);
+    if(ti2||src||raw) out.refs.push({id:id,title:ti2,src:src,year:yr,first:txtOf(sn),pmid:pm,raw:raw});
+  }
+  return out;
+}
+
+var FIG_Q=[
+  {k:'样本量', re:/\bn\s*=\s*\d+/i},
+  {k:'误差/离散', re:/(±|\bSEM\b|\bSD\b|s\.e\.m|standard (error|deviation)|interquartile)/i},
+  {k:'统计检验', re:/(\bP\s*[<>=]|\bp\s*[<>=]|two-?tailed|ANOVA|t-?test|Mann-?Whitney|Wilcoxon|Kruskal)/i},
+  {k:'重复次数', re:/(biological|technical|independent)\s+(replicate|experiment)|\bn\s*=\s*\d+\s*(mice|animals|patients|donors)/i},
+  {k:'标尺（代表性图像）', re:/scale bar/i}
+];
+function figCred(figs){
+  return figs.map(function(f){
+    return {label:f.label, caption:f.caption,
+            marks:FIG_Q.filter(function(q){return q.re.test(f.caption);}).map(function(q){return q.k;})};
+  });
+}
+
+var CTRL_CATS=[
+ {k:'① 阴性对照（无处理/无酶/加扰序列）',
+  re:/\b(vehicle|untreated|mock|scrambled?|non-?targeting|scramble control|control (si|sh)RNA|control (plasmid|vector|peptide|antibody|IgG|mimic)|empty vector|no[- ]enzyme|heat-?inactivated|saline)\b/i},
+ {k:'② 遗传对照（敲除/敲低 + 回补，或位点突变体）',
+  re:/\b(knock-?outs?|knock-?downs?|\bKO\b|shRNA|siRNA|CRISPR|rescue|re-?expression|add-?back|point mutants?|catalytically (dead|inactive)|kinase-?dead|deletion mutants?|null allele)\b/i},
+ {k:'③ 剂量 / 时间依赖',
+  re:/\b(dose-?dependen|concentration-?dependen|time-?dependen|time[- ]course|titrat)/i},
+ {k:'④ 第二种独立方法验证',
+  re:/\b(orthogonal|independent (method|approach|assay|allele)|confirmed by|validated by|second (independent )?(method|assay|approach)|corroborat)/i}
+];
+function ctrlScan(text){
+  var sents=splitSentences(text);
+  return CTRL_CATS.map(function(c){
+    var hits=[];
+    for(var i=0;i<sents.length && hits.length<2;i++){
+      if(c.re.test(sents[i])){
+        var m=sents[i].match(c.re);
+        hits.push({sent:sents[i].slice(0,340), hit:m?m[0]:''});
+      }
+    }
+    return {k:c.k, hits:hits};
+  });
+}
+
+var LIM_RE=/\b(limitation|caveat|we (did not|could not|cannot)|was not (addressed|examined|tested)|remains? (unclear|unknown|to be determined)|future (studies|work|experiments)|further (studies|work|investigation)|beyond the scope)\b/i;
+function limScan(text){
+  var out=[], sents=splitSentences(text);
+  for(var i=0;i<sents.length && out.length<6;i++){
+    if(LIM_RE.test(sents[i])){ var m=sents[i].match(LIM_RE); out.push({sent:sents[i].slice(0,340), hit:m?m[0]:''}); }
+  }
+  return out;
+}
+
+var CONTRA_RE=/\b(however|in contrast|contrary|unlike|whereas|but (see|in)|discrepan|conflict|at odds|challenged?|inconsistent)\b/i;
+var SUPPORT_RE=/\b(we (hypothesi[sz]ed|reasoned|predicted)|previously (showed|shown|demonstrated|reported)|established|building on|consistent with (our|the) (hypothesis|model)|as (shown|demonstrated) (previously|by))\b/i;
+function refTriage(ft){
+  var byId={}; ft.refs.forEach(function(r){ byId[r.id]=r; });
+  var seen={}, out={method:[],support:[],contra:[],often:[]};
+  /* 坑 4 的兜底：纯计数，不含判断 */
+  var cnt={};
+  ft.xrefs.forEach(function(x){ cnt[x.rid]=(cnt[x.rid]||0)+1; });
+  var rank=Object.keys(cnt).map(function(k){return {rid:k,n:cnt[k]};})
+            .sort(function(a,b){return b.n-a.n;});
+  ft.xrefs.forEach(function(x){
+    var r=byId[x.rid]; if(!r) return;
+    var key=(r.pmid||r.title||r.raw||r.id||'').slice(0,60); if(!key) return;
+    var isM=/method|material|experimental procedure/i.test(x.sec||'');
+    var isC=CONTRA_RE.test(x.sent);
+    var isS=SUPPORT_RE.test(x.sent);
+    var bucket=isC?'contra':(isM?'method':(isS?'support':null));
+    if(!bucket) return;
+    var kk=bucket+'|'+key; if(seen[kk]) return; seen[kk]=1;
+    if(out[bucket].length<4) out[bucket].push({ref:r, ctx:x.sent.slice(0,260), sec:x.sec||''});
+  });
+  if(!out.support.length && !out.method.length && !out.contra.length){
+    for(var i=0;i<rank.length && out.often.length<5;i++){
+      if(rank[i].n<2) break;
+      var rr=byId[rank[i].rid]; if(!rr) continue;
+      var ctx='';
+      for(var j=0;j<ft.xrefs.length;j++){ if(ft.xrefs[j].rid===rank[i].rid){ ctx=ft.xrefs[j].sent; break; } }
+      out.often.push({ref:rr, ctx:ctx.slice(0,260), sec:'被引用 '+rank[i].n+' 次'});
+    }
+  }
+  return out;
+}
+
+function refLine(o){
+  var r=o.ref, head;
+  if(r.title){
+    head=(r.first?(r.first+' 等 '):'')+(r.year||'')+'《'+r.title+'》'+(r.src||'');
+  } else {
+    head='（该文参考表未提供结构化标题，以下为参考表原文）'+(r.raw||r.src||r.id||'');
+  }
+  return '· '+head+(r.pmid?(' · PMID '+r.pmid):' · 该文参考表未给 PMID')+
+         '\n    引用语境'+(o.sec?('（'+o.sec+'）'):'')+'：'+o.ctx;
+}
+
+function ftScaffold(sc, ft, meta){
+  var q=figCred(ft.figs);
+  var withQ=q.filter(function(f){return f.marks.length;});
+  var srcNote='【全文已读 · '+meta.src+' · '+meta.pmcid+'】';
+
+  if(ft.figs.length){
+    var top=(withQ.length?withQ:q).slice(0,3);
+    sc.f3=srcNote+'共 '+ft.figs.length+' 张图'+(ft.tables.length?('、'+ft.tables.length+' 张表'):'')+
+      '，其中 '+withQ.length+' 张图注含定量线索（n=／±／统计检验／重复次数／标尺）。\n'+
+      top.map(function(f){
+        return '· '+f.label+(f.marks.length?('　定量线索：'+f.marks.join('、')):'　图注未给定量线索')+
+               '\n    图注：'+f.caption.slice(0,300);
+      }).join('\n')+
+      '\n全部图号：'+q.map(function(f){return f.label;}).join('、')+
+      '\n【仍须你判断】哪一张是支撑主结论的那张 —— 工具只报告图注里有什么，不替你选主图。';
+  }
+  var cs=ctrlScan((ft.methods||'')+' '+(ft.results||'')+' '+(ft.body||''));
+  var missing=cs.filter(function(c){return !c.hits.length;});
+  sc.f6=srcNote+'按四类逐条检索全文（每条附原句，可当场回查）：\n'+
+    cs.map(function(c){
+      if(!c.hits.length) return c.k+'　→　**全文中未检索到这一类对照句**';
+      return c.k+'　→　检索到 '+c.hits.length+' 句\n'+
+        c.hits.map(function(h){return '    · （命中 "'+h.hit+'"）'+h.sent;}).join('\n');
+    }).join('\n')+
+    (missing.length
+      ? ('\n\n**未检索到的 '+missing.length+' 类：'+missing.map(function(m){return m.k.replace(/（.*/,'');}).join('、')+
+         '** —— 注意措辞：这是「本文正文里检索不到」，不等于作者没做（可能在补充材料或未写明）。'+
+         '若确实未做，这一条往往就是你的切入点。')
+      : '\n\n四类对照全部检索到 —— 这篇在对照上做得比较完整，切入点要从别处找。');
+
+  var fullNums=findNumbers((ft.results||'')+' '+(ft.body||''));
+  var pri=fullNums.filter(function(n){return /[Pp]\s*[<>=]|±/.test(n.sent);});
+  var use=(pri.length>=4?pri:fullNums);
+  if(use.length){
+    sc.f7=srcNote+'从全文 Results/正文抽到 '+fullNums.length+' 处数字（其中 '+pri.length+
+      ' 处所在句带 p 值或 ±），逐条附原句，请核对单位与比较基准：\n'+
+      use.slice(0,12).map(function(n){return '· ['+n.kind+'] '+n.hit+'\n    原句：'+n.sent;}).join('\n');
+  }
+  if(ft.methods){
+    var mm=findMethods(ft.methods);
+    if(mm.length){
+      sc.f4=srcNote+'来自 Methods 正文（不是摘要），抽到 '+mm.length+' 类方法，每条附原句：\n'+
+        mm.map(function(m){return '· '+m.name+'（命中 "'+m.hit+'"）\n    原句：'+m.sent;}).join('\n');
+    }
+    var sysm=(ft.methods.match(/\b(HEK ?293[A-Z]*|HeLa|K562|U2OS|NIH ?3T3|MEFs?|iPSCs?|organoids?|C57BL\/6[A-Za-z]*|BALB\/c|Sprague-?Dawley|Wistar|zebrafish|C\. ?elegans|Drosophila|primary (human|mouse|rat) [a-z ]{3,24}|patient-derived|biopsy|biopsies)\b/gi)||[]);
+    var uniq=[]; sysm.forEach(function(x){ if(uniq.indexOf(x)<0&&uniq.length<10) uniq.push(x); });
+    if(uniq.length){
+      sc.f5=srcNote+'Methods 里出现的体系：'+uniq.join('、')+
+        '\n【仍须你判断】结论能外推到哪一步为止？细胞系→小鼠→人，越靠后越值钱。'+
+        '若只有细胞系，写清「本文未做在体验证」。';
+    }
+  }
+  var lims=limScan((ft.discussion||'')+' '+(ft.body||''));
+  if(lims.length){
+    sc.f10=srcNote+'作者自己承认的局限/未解（'+lims.length+' 句，全部原文）：\n'+
+      lims.map(function(l){return '· （命中 "'+l.hit+'"）'+l.sent;}).join('\n')+
+      '\n【仍须你标注】哪一条是你能做的。';
+    sc.f11='【由上面 '+lims.length+' 句作者自述的局限推演，请你确认】'+
+      '如果这条线再走三年最可能出什么？然后三选一：我该跟进 / 我该绕开（太拥挤）/ 我该抢在前面。';
+  }
+  var tr=refTriage(ft), parts=[];
+  if(tr.support.length) parts.push('**① 用来支撑核心假设的**（引用语境含「我们假设／此前已证明／建立于」等）：\n'+tr.support.map(refLine).join('\n'));
+  if(tr.method.length)  parts.push('**② 方法出处**（引用出现在 Methods 章节，含其子节）：\n'+tr.method.map(refLine).join('\n'));
+  if(tr.contra.length)  parts.push('**③ 与它结论相反 / 有张力的**（引用语境含 however、in contrast、unlike 等）：\n'+tr.contra.map(refLine).join('\n'));
+  if(tr.often.length)   parts.push('**本文正文里几乎不用 however／previously 这类标志词，三类都判不出来**，'+
+    '所以改用纯计数：**被本文反复引用的文献**（引用次数越多说明在论证里越吃重，这不含任何判断）：\n'+tr.often.map(refLine).join('\n'));
+  sc.f14=srcNote+'共 '+ft.refs.length+' 条参考文献，按引用语境自动分类（每条附引用语境原句，可当场回查）：\n'+
+    (parts.length?parts.join('\n\n'):'本文参考文献的引用语境里没有可自动判定的标志词，且没有任何一篇被引用两次以上 —— 请自己翻参考表挑。')+
+    (tr.contra.length?'':'\n\n**没有检索到「相反结论」类引用** —— 可能作者没有正面引反面证据，这本身值得记一笔。');
+  return sc;
+}
+
 function scaffold(){
   var p=CUR, abs=p.abstract||'';
   var st=structureAbstract(abs,p.labeled);
@@ -510,7 +855,7 @@ function scaffold(){
 
   function evlist(arr,fmt){ return arr.map(fmt).join('\n'); }
 
-  return {
+  var SC = {
     f1: concl ? ('【抽取·待你改写成自己的话】'+splitSentences(concl).slice(0,2).join(' ')) :
                 '【摘要未提供结论段】请读全文后自己写一句。',
     f2: bg ? ('【抽取自背景段】'+splitSentences(bg).slice(0,2).join(' ')) :
@@ -553,6 +898,9 @@ function scaffold(){
     f14: '【需读全文核对】把本文参考文献里这三类挑出来排进队列：① 它用来支撑核心假设的那 2–3 篇；'+
          '② 方法出处；③ 与它结论相反的那篇（如果作者诚实地引了）。'
   };
+  /* 取到 PMC 开放全文时，用全文抽取覆盖 ③⑥⑦⑭ 与 ④⑤⑩⑪ —— 不再留核对清单 */
+  if(CUR.ft && CUR.ftMeta){ try { SC = ftScaffold(SC, CUR.ft, CUR.ftMeta); } catch(e){ CUR.ftErr=e.message; } }
+  return SC;
 }
 
 var FLDS=[
@@ -575,12 +923,17 @@ function renderForm(){
   var saved=getNote(noteKey())||{};
   var sc=scaffold();
   var h='<div style="font-weight:700;color:var(--pp);margin-bottom:2px">② 核对与补充（骨架已填好，你只需改和加）</div>'+
-    '<div class="note">带 <span class="badge b-need">需读全文</span> 的三栏是<b>核对清单</b>，不是答案。'+
+    (CUR.ftMeta
+      ? ('<div class="note"><b style="color:var(--ok)">已取到开放全文（'+esc(CUR.ftMeta.src)+' · '+esc(CUR.ftMeta.pmcid)+
+         '）</b>：③关键图、⑥对照、⑦效应量、⑭参考文献已按<b>全文</b>填好（每条附原句）；'+
+         '④方法要点与⑤体系边界改用 Methods 正文而非摘要。留给你的是⑧不相信的那件事，与各栏标「仍须你判断」处。')
+      : ('<div class="note">带 <span class="badge b-need">需读全文</span> 的三栏仍是<b>核对清单</b> —— '+
+         esc(CUR.ftNote||'未取到开放全文')+'。'))+
     '每次改动自动存本机。</div>';
   FLDS.forEach(function(f){
     var need=/需读全文/.test(f[2]);
     h+='<div class="fld"><label>'+esc(f[1])+
-       (need?'<span class="badge b-need">需读全文</span>':'')+
+       (need?(CUR.ftMeta?'<span class="badge b-ok2">全文已填</span>':'<span class="badge b-need">需读全文</span>'):'')+
        (f[2]&&!need?('<span class="hint">'+esc(f[2])+'</span>'):'')+'</label>'+
        '<textarea id="ta_'+f[0]+'" rows="'+(/f4|f7|f10/.test(f[0])?6:3)+'">'+
        esc(saved[f[0]]!==undefined?saved[f[0]]:sc[f[0]])+'</textarea></div>';

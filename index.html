@@ -1395,14 +1395,20 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
     <p style="font-size:12.9px;line-height:1.7;color:#333;margin:4px 0 8px">
       贴<b>标题 / 链接 / DOI / PMID / 关键词</b>任意一种 → 工具去 PubMed 取回摘要 →
       自动把<b>数字与效应量、方法证据、作者自己承认的空白</b>逐句摘出来，<b>每条都带触发它的那句原文</b>，
-      并搭好同一套 14 栏笔记骨架 → 你只需核对与补充 → 存进笔记库，可<b>整库导出 Word / Excel / Markdown</b>。
-      <br><b>不调大模型</b>，全部是词边界正则的确定性抽取，所以每一条都能当场回溯到原文。
-      <span class="note">在 12 周计划那 68 篇真实摘要上实测：方法 50/68、效应量 10/68、空白句 18/68 —— 实测值与已知局限写在工具页里。</span>
+      并搭好同一套 14 栏笔记骨架 → 存进笔记库，可<b>整库导出 Word / Excel / Markdown</b>。
+      <br><b style="color:#00695C">现在它会替你读全文，14 栏不再留核对清单：</b>查到论文后自动去
+      Europe PMC / NCBI PMC 取<b>开放全文</b>（一个接口 500 时自动改走另一个），把原先只能给清单的三栏
+      —— <b>③关键图与可信度、⑥做了/漏了哪些对照、⑭要排队的参考文献</b> —— 与<b>⑦效应量</b>按全文填好：
+      图注里的 n／±／统计检验逐条列出、对照按四类逐条检索并原句留证、参考文献按<b>引用语境</b>分成
+      「支撑核心假设 / 方法出处 / 与它结论相反」三类。④方法与⑤体系边界改用 Methods 正文而非摘要。
+      <br><b>仍不调大模型</b>，全部是 JATS 结构解析 + 词边界正则，每条都能当场回溯到原文。
+      <span class="note">两条边界：只有 PMC 开放全文能填满，付费墙的保留清单并说明原因；「漏了哪些对照」说的是
+      「正文里检索不到」，不等于作者没做。⑧「我不相信的一件事」与各栏标「仍须你判断」处仍归你。</span>
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <a class="abtn solid" href="paper-notes.html?v=20260929b" target="_blank"
+      <a class="abtn solid" href="paper-notes.html?v=20261005a" target="_blank"
          style="text-decoration:none;background:#00695C">🔎 打开论文速读与笔记工具</a>
-      <a class="abtn" href="paper-notes.html?v=20260929b" download>⬇️ 下载工具 (.html，离线可用)</a>
+      <a class="abtn" href="paper-notes.html?v=20261005a" download>⬇️ 下载工具 (.html，离线可用)</a>
     </div>
   </div>
 
@@ -1413,14 +1419,28 @@ footer{text-align:center;font-size:11.5px;color:var(--muted);margin-top:26px;pad
       填<b>核心词 / 任一词 / 排除词</b>（或直接手写检索式）→ 工具组出检索式并<b>把实际送给 PubMed 的那一条显示出来</b>供你核对 →
       逐篇抽取<b>方法证据、数字与效应量、作者承认的空白、与你三个方向的重叠</b>（每条附原句）→
       勾选收进<b>跨检索去重的汇总总表</b> → 导出 <b>Excel / Word / CSV / Markdown</b>。
+      <br><b style="color:#4A148C">现在每篇按「四层」抓全：</b>
+      <b>① 过程</b>（库 / 检索日期 / 完整检索式 / 限定 / 命中 / 去重 / 筛选漏斗，导出时单独一个表单）、
+      <b>② 题录</b>（卷 / 期 / 页 / 语言 / MeSH 与作者关键词 / 全部作者 / 标准引用格式 Vancouver / URL，缺的写「未给」不补）、
+      <b>③ 筛选状态</b>（阅读状态 / 优先级 / 相关度 / 纳入排除 / 排除原因 / 标签 / 核心 / 引用状态 / 质量评分 / 严谨性 / 偏差风险，
+      默认一律「待定」<b>不替你选</b>，且存在独立键里重新检索也冲不掉）、
+      <b>④ 内容精读</b>（研究类型 / 问题 / 理论 / 方法 / 样本 / 变量 / 分析 / 主要发现 / 关键数据 / 结论 / 局限 / 未来方向，
+      每条附原句，并<b>按文献类型自动切换</b>：综述抓检索策略与纳入研究数、实证抓 <b>PICOS</b>、理论抓命题与边界条件）、
+      <b>⑤ 使用信息</b>（可直接引用的原句自动给；页码、支持/反驳哪条假设、放论文哪部分、与你研究的关系、批判评论由你填）。
+      导出 Excel 共 <b>56 列 3 个表单</b>，<b>表头第二行标出每列是 auto 还是要你填</b>。
+      <br><b style="color:#4A148C">摘要有天花板，所以加了「📄 取全文补齐内容层」：</b>逐篇取 PMC 开放全文后，
+      把样本、分析方法、数字、发现、结论、局限、<b>四类对照</b>、<b>图注定量线索</b>按全文重填并标【全文】。
+      实测同一篇（PMID 40124162）：摘要级样本 0 / 分析 0 / 数字 1 → 全文级
+      <b>样本 8 / 分析 1 / 数字 14 / 方法 5 / 发现 4 / 结论 3 / 局限 5 / 定量图 4</b>。
+      取不到的付费墙条目保持摘要级并在「内容来源」列写明原因，两者可区分。
       <br><b>每次检索都记进台账</b>：执行时间、实际检索式、全库命中、抓取数、收进数 —— 三个月后你还能复现当时那次检索。
       <br><b>内置一个防误判机制：</b>只要全交集 &lt; 5 篇，它<b>自动拆出子句阶梯</b>（单词计数 + 两两组合计数），
       因为 3 个以上词 AND 起来返回 0 是常态，<b>那不是研究空白</b>。PubMed 丢弃引号短语时也会显式警告并自动去引号重试。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <a class="abtn solid" href="paper-search.html?v=20260929b" target="_blank"
+      <a class="abtn solid" href="paper-search.html?v=20261005a" target="_blank"
          style="text-decoration:none;background:#4A148C">📚 打开文献检索与汇总台账</a>
-      <a class="abtn" href="paper-search.html?v=20260929b" download>⬇️ 下载工具 (.html，离线可用)</a>
+      <a class="abtn" href="paper-search.html?v=20261005a" download>⬇️ 下载工具 (.html，离线可用)</a>
     </div>
   </div>
 
