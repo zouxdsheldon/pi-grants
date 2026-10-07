@@ -18,7 +18,7 @@ header h1{margin:0 0 3px;font-size:19px}header .sub{font-size:12.5px;opacity:.93
 .btn.b{background:var(--bb)}.btn.k{background:#1b7f4d}.btn.sm{padding:5px 10px;font-size:12.4px;font-weight:500}
 input[type=text],textarea,select{width:100%;padding:8px 10px;border:1px solid var(--ln);border-radius:6px;
  font-size:13.4px;font-family:inherit;background:#fff;color:var(--tx)}
-textarea{resize:vertical;line-height:1.55}
+textarea{resize:vertical;line-height:1.55;max-height:60vh;overflow-y:auto}
 .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 6px}
 .note{font-size:12.4px;color:var(--mu);margin:4px 0}
 .warn{background:var(--wrb);border:1px solid #FFD980;color:var(--wr);border-radius:7px;padding:9px 12px;
@@ -187,6 +187,10 @@ function splitSentences(t){
     .replace(/(\b[A-Z])\.(\s*[A-Z]\.)/g,'$1<DOT>$2')      /* 人名缩写 */
     .replace(/\b(e\.g|i\.e|vs|et al|Fig|approx|ca)\./gi,'$1<DOT>')
     .replace(/(\d)\.(\d)/g,'$1<DOT>$2');                   /* 小数 */
+  /* 实测坑：PMC 全文把节与节直接连起来写成 "muscle.In conclusion, ..."（句号后没有空格），
+     只按「句末标点 + 空白」切会把整段当成一句，结论句因此永远抽不出来。
+     下面先把这种无空格边界补一个空格，缩写与小数已在上面被 <DOT> 保护住，不会误切。 */
+  protected_=protected_.replace(/([a-z0-9\)])([.!?])([A-Z])/g,'$1$2 $3');
   return protected_.split(/(?<=[.!?;])\s+(?=[A-Z0-9(«"'\u4e00-\u9fff])/)
     .map(function(x){return x.replace(/<DOT>/g,'.').trim();})
     .filter(function(x){return x.length>2;});
@@ -229,7 +233,9 @@ function structureAbstract(abs, labeled){
 var NUMPATS=[
  ['百分比', /\b\d{1,3}(?:\.\d+)?\s?%/g],
  ['倍数',   /\b\d+(?:\.\d+)?[-\s]?fold\b/gi],
- ['P 值',   /\bP\s?[<=>]\s?0?\.\d+/gi],
+ /* 实测坑：期刊普遍用 Unicode ≤ ≥（本项目实测某篇全文 p ≤ 出现 11 次、ASCII p < 只有 2 次），
+    只认 [<=>] 会把绝大多数 p 值漏掉，连带让「含 p 值的句子」统计严重偏低。 */
+ ['P 值',   /\bP\s?[<=>≤≥＜＞]\s?0?\.\d+/gi],
  ['样本量', /\bn\s?=\s?\d+/gi],
  ['浓度/时长', /\b\d+(?:\.\d+)?\s?(?:nM|µM|uM|mM|M|mg\/kg|µg|ug|mg|ng\/ml|h|hr|hours?|min|days?|weeks?)\b/gi],
  ['分辨率/长度', /\b\d+(?:\.\d+)?\s?(?:Å|angstrom|nt|bp|kb|kDa|aa)\b/gi]
@@ -616,12 +622,12 @@ function ftParse(xml){
   if(!doc || !doc.documentElement) return null;
   if(doc.getElementsByTagName('parsererror').length) return null;
 
-  var out={figs:[],tables:[],methods:'',results:'',discussion:'',body:'',refs:[],xrefs:[],secs:[]};
+  var out={figs:[],tables:[],methods:'',results:'',discussion:'',intro:'',body:'',refs:[],xrefs:[],figrefs:{},secs:[]};
   var figs=doc.getElementsByTagName('fig');
   for(var i=0;i<figs.length;i++){
     var lb=txtOf(figs[i].getElementsByTagName('label')[0]);
     var cp=txtOf(figs[i].getElementsByTagName('caption')[0]);
-    if(lb||cp) out.figs.push({label:lb||('Figure '+(i+1)), caption:cp});
+    if(lb||cp) out.figs.push({label:lb||('Figure '+(i+1)), caption:cp, id:figs[i].getAttribute('id')||''});
   }
   var tbs=doc.getElementsByTagName('table-wrap');
   for(var t=0;t<tbs.length;t++){
@@ -639,6 +645,7 @@ function ftParse(xml){
       if(/method|material|experimental procedure/i.test(ti) && bd.length>out.methods.length) out.methods=bd;
       else if(/^result/i.test(ti) && bd.length>out.results.length) out.results=bd;
       else if(/discussion|conclusion/i.test(ti) && bd.length>out.discussion.length) out.discussion=bd;
+      else if(/^(introduction|background)/i.test(ti) && bd.length>out.intro.length) out.intro=bd;
     }
     var clone=body.cloneNode(true);
     var rl=clone.getElementsByTagName('ref-list');
@@ -662,6 +669,18 @@ function ftParse(xml){
       var sent=pickSentence(ptxt, xrefOffset(pEl,node));
       out.xrefs.push({rid:rid, sent:(sent||ptxt).slice(0,400), sec:chain.join(' › ')});
     }
+    /* 图的引用语境。实测坑：正文里不一定写成 "Figure 1"（本项目实测某篇按 "Figure S1" 等写法，
+       纯文本搜索 7 张图全部 0 命中），所以走 xref ref-type="fig" —— 同一篇改走 xref 后 7/7 全有语境。
+       这些句子才是图的可信度证据：图注常只说画了什么，正文才说 n 多少、差异多大。 */
+    var fx=body.getElementsByTagName('xref');
+    for(var y=0;y<fx.length;y++){
+      if((fx[y].getAttribute('ref-type')||'')!=='fig') continue;
+      var frid=fx[y].getAttribute('rid')||'', fp=fx[y].parentNode, up2=fx[y];
+      while(up2 && up2.nodeName!=='body'){ if(up2.nodeName==='p'){ fp=up2; break; } up2=up2.parentNode; }
+      var fptxt=txtOf(fp), fsent=pickSentence(fptxt, xrefOffset(fp,fx[y]));
+      if(!out.figrefs[frid]) out.figrefs[frid]=[];
+      if(out.figrefs[frid].length<3) out.figrefs[frid].push((fsent||fptxt).slice(0,320));
+    }
   }
 
   var refs=doc.getElementsByTagName('ref');
@@ -670,6 +689,9 @@ function ftParse(xml){
     var ti2=txtOf(refs[r].getElementsByTagName('article-title')[0]);
     var src=txtOf(refs[r].getElementsByTagName('source')[0]);
     var yr=txtOf(refs[r].getElementsByTagName('year')[0]);
+    /* 实测坑：有出版方的 JATS 参考文献没有结构化 <year>（实测某篇 0/52 条有），
+       但整条引文原文里有 "(2025)" 这样的年份 —— 退而从原文里取，否则年份分布恒为空。 */
+    if(!yr){ var ym=txtOf(refs[r]).match(/\((19|20)\d{2}\)|\b(19|20)\d{2}\b/); if(ym) yr=ym[0].replace(/[()]/g,''); }
     var sn=refs[r].getElementsByTagName('surname')[0];
     var pm='';
     var ids=refs[r].getElementsByTagName('pub-id');
@@ -681,16 +703,22 @@ function ftParse(xml){
   return out;
 }
 
+/* 体系词表。实测坑：原来只有细胞系与常见啮齿类，一篇以猪为模型的 DMD 论文只抽到 "Biopsies" ——
+   porcine / pig / DMDΔ52 / skeletal muscle 全漏。体系抽错会直接误导「外推边界」的判断。 */
+var SYS_RE=/\b(HEK ?293[A-Z]*|HeLa|K562|U2OS|NIH ?3T3|MEFs?|iPSCs?|ESCs?|organoids?|enteroids?|spheroids?|C57BL\/6[A-Za-z]*|BALB\/c|129S[A-Za-z0-9]*|NOD\/?SCID|NSG|Sprague-?Dawley|Wistar|zebrafish|C\. ?elegans|Drosophila|Xenopus|rhesus|macaque|non-?human primates?|pigs?|porcine|swine|Landrace|Yucatan|minipigs?|rabbits?|canine|dogs?|GRMD|sheep|bovine|chicken|mdx(?:-?[0-9A-Za-z]+)?|DMD[Δ∆][0-9]+(?:[–\-][0-9]+)?|exon ?[0-9]+ (?:deletion|skipping)|knock-?in mice|knock-?out mice|transgenic (?:mice|pigs?|rats?)|patient-?derived (?:xenografts?|organoids?|cells?|fibroblasts?)|PDX|primary (?:human|mouse|rat|porcine) [a-z ]{3,24}|myoblasts?|myotubes?|satellite cells?|skeletal muscle|cardiac muscle|diaphragm|gastrocnemius|tibialis anterior|biceps femoris|biopsy|biopsies|post-?mortem (?:tissue|samples?))\b/gi;
 var FIG_Q=[
   {k:'样本量', re:/\bn\s*=\s*\d+/i},
   {k:'误差/离散', re:/(±|\bSEM\b|\bSD\b|s\.e\.m|standard (error|deviation)|interquartile)/i},
-  {k:'统计检验', re:/(\bP\s*[<>=]|\bp\s*[<>=]|two-?tailed|ANOVA|t-?test|Mann-?Whitney|Wilcoxon|Kruskal)/i},
+  /* 同上：必须认 Unicode ≤ ≥，否则「adjusted p ≤ 0.05」这种图注判不出有统计检验 */
+  {k:'统计检验', re:/([Pp]\s*[<>=≤≥＜＞]|two-?tailed|ANOVA|t-?test|Mann-?Whitney|Wilcoxon|Kruskal|adjusted\s+p|FDR|q\s*[<≤]|Benjamini)/i},
   {k:'重复次数', re:/(biological|technical|independent)\s+(replicate|experiment)|\bn\s*=\s*\d+\s*(mice|animals|patients|donors)/i},
   {k:'标尺（代表性图像）', re:/scale bar/i}
 ];
 function figCred(figs){
   return figs.map(function(f){
-    return {label:f.label, caption:f.caption,
+    /* id 必须带出去：上层要用它去 ft.figrefs 取这张图的正文引用语境。
+       实测坑：早先这里新建对象时漏了 id，结果 7/7 张图明明都有引用语境，界面却显示 0 张。 */
+    return {label:f.label, caption:f.caption, id:f.id||'',
             marks:FIG_Q.filter(function(q){return q.re.test(f.caption);}).map(function(q){return q.k;})};
   });
 }
@@ -778,15 +806,23 @@ function ftScaffold(sc, ft, meta){
   var srcNote='【全文已读 · '+meta.src+' · '+meta.pmcid+'】';
 
   if(ft.figs.length){
-    var top=(withQ.length?withQ:q).slice(0,3);
+    /* 图注常只说"画了什么"，正文引用语境才说 n 多少、差异多大 —— 两者都给，才算可信度证据。 */
+    q.forEach(function(f){ f.cites=(ft.figrefs&&ft.figrefs[f.id])||[]; });
+    var withC=q.filter(function(f){return f.cites.length;});
+    var top=q.slice(0,4);
     sc.f3=srcNote+'共 '+ft.figs.length+' 张图'+(ft.tables.length?('、'+ft.tables.length+' 张表'):'')+
-      '，其中 '+withQ.length+' 张图注含定量线索（n=／±／统计检验／重复次数／标尺）。\n'+
+      '，其中 '+withQ.length+' 张图注含定量线索（n=／±／统计检验／重复次数／标尺）、'+
+      withC.length+' 张能在正文里找到引用语境。\n'+
       top.map(function(f){
-        return '· '+f.label+(f.marks.length?('　定量线索：'+f.marks.join('、')):'　图注未给定量线索')+
-               '\n    图注：'+f.caption.slice(0,300);
+        var L='· '+f.label+(f.marks.length?('　图注定量线索：'+f.marks.join('、')):'　图注未给定量线索');
+        L+='\n    图注：'+f.caption.slice(0,260);
+        if(f.cites.length) L+='\n    正文怎么用它（'+f.cites.length+' 处，原句）：'+
+          f.cites.map(function(c){return '\n      · '+c;}).join('');
+        else L+='\n    正文中未检索到对这张图的引用语境';
+        return L;
       }).join('\n')+
-      '\n全部图号：'+q.map(function(f){return f.label;}).join('、')+
-      '\n【仍须你判断】哪一张是支撑主结论的那张 —— 工具只报告图注里有什么，不替你选主图。';
+      (q.length>4?('\n全部图号：'+q.map(function(f){return f.label;}).join('、')):'')+
+      '\n【仍须你判断】哪一张是支撑主结论的那张 —— 工具只报告图注与正文里有什么，不替你选主图。';
   }
   var cs=ctrlScan((ft.methods||'')+' '+(ft.results||'')+' '+(ft.body||''));
   var missing=cs.filter(function(c){return !c.hits.length;});
@@ -803,7 +839,8 @@ function ftScaffold(sc, ft, meta){
       : '\n\n四类对照全部检索到 —— 这篇在对照上做得比较完整，切入点要从别处找。');
 
   var fullNums=findNumbers((ft.results||'')+' '+(ft.body||''));
-  var pri=fullNums.filter(function(n){return /[Pp]\s*[<>=]|±/.test(n.sent);});
+  /* 同样必须认 Unicode ≤ ≥ —— 否则整篇 p ≤ 0.05 的论文会被报成"只有 1 处带 p 值" */
+  var pri=fullNums.filter(function(n){return /[Pp]\s*[<>=≤≥＜＞]|±|adjusted\s+p|\bFDR\b|\bq\s*[<≤]/.test(n.sent);});
   var use=(pri.length>=4?pri:fullNums);
   if(use.length){
     sc.f7=srcNote+'从全文 Results/正文抽到 '+fullNums.length+' 处数字（其中 '+pri.length+
@@ -816,7 +853,10 @@ function ftScaffold(sc, ft, meta){
       sc.f4=srcNote+'来自 Methods 正文（不是摘要），抽到 '+mm.length+' 类方法，每条附原句：\n'+
         mm.map(function(m){return '· '+m.name+'（命中 "'+m.hit+'"）\n    原句：'+m.sent;}).join('\n');
     }
-    var sysm=(ft.methods.match(/\b(HEK ?293[A-Z]*|HeLa|K562|U2OS|NIH ?3T3|MEFs?|iPSCs?|organoids?|C57BL\/6[A-Za-z]*|BALB\/c|Sprague-?Dawley|Wistar|zebrafish|C\. ?elegans|Drosophila|primary (human|mouse|rat) [a-z ]{3,24}|patient-derived|biopsy|biopsies)\b/gi)||[]);
+    /* 实测坑：原词表只有细胞系与常见啮齿类，一篇以猪为模型的 DMD 论文只抽到 "Biopsies" —— 
+       porcine / pig / DMDΔ52 / skeletal muscle 全漏。体系抽错会直接误导⑤的外推判断，所以补全：
+       大动物模型、命名疾病模型、肌肉与原代体系、类器官与移植模型。 */
+    var sysm=((ft.methods||'')+' '+(ft.body||'')).match(SYS_RE)||[];
     var uniq=[]; sysm.forEach(function(x){ if(uniq.indexOf(x)<0&&uniq.length<10) uniq.push(x); });
     if(uniq.length){
       sc.f5=srcNote+'Methods 里出现的体系：'+uniq.join('、')+
@@ -831,6 +871,67 @@ function ftScaffold(sc, ft, meta){
       '\n【仍须你标注】哪一条是你能做的。';
     sc.f11='【由上面 '+lims.length+' 句作者自述的局限推演，请你确认】'+
       '如果这条线再走三年最可能出什么？然后三选一：我该跟进 / 我该绕开（太拥挤）/ 我该抢在前面。';
+  }
+  /* ① 一句话结论：Discussion 里作者自己的结论句。明确要求你改写 —— ①的规矩是「用我自己的话」。 */
+  var CONC_RE=/\b(in conclusion|we conclude|taken together|collectively|in summary|overall,|our (results|findings|data) (show|demonstrate|suggest|indicate|reveal)|this study (shows|demonstrates|establishes))\b/i;
+  var dsent=splitSentences(ft.discussion||'');
+  var concS=dsent.filter(function(x){return CONC_RE.test(x);}).slice(0,3);
+  if(!concS.length && dsent.length) concS=dsent.slice(-2);   /* 退路：Discussion 末两句，位置启发式，下面注明 */
+  if(concS.length){
+    sc.f1=srcNote+'作者自己的结论句（'+(dsent.filter(function(x){return CONC_RE.test(x);}).length?'按 in conclusion／we conclude 等标志词命中':'标志词未命中，退而取 Discussion 末两句，属位置启发式')+'）：\n'+
+      concS.map(function(x){return '· '+x;}).join('\n')+
+      '\n【这一栏的规矩是「用你自己的话」】上面是原文，请改写成一句你自己的话 —— 抄原文等于没读懂。';
+  }
+  /* ② 它回答了哪个问题：Introduction 里的空白句 + 末两句（研究目的按惯例写在 Introduction 末尾）。 */
+  var GAP_RE=/\b(remains? (unclear|unknown|poorly understood|largely unknown|elusive|to be)|it is (unclear|unknown|not known)|ha(s|ve) not (yet )?been|few studies|little is known|poorly (understood|characteri[sz]ed)|no (study|studies) (has|have)|unexplored|unresolved)\b/i;
+  var AIM_RE=/\b(here,? we|in (this|the present) (study|work|report)|we (therefore |thus |here )?(sought|aimed|set out|investigated|examined|characteri[sz]ed|asked|addressed|hypothesi[sz]ed|generated|performed)|the (aim|goal|objective|purpose) of (this|the present))\b/i;
+  var isent=splitSentences(ft.intro||'');
+  if(isent.length){
+    var gaps2=isent.filter(function(x){return GAP_RE.test(x);}).slice(0,2);
+    var aims=isent.filter(function(x){return AIM_RE.test(x);}).slice(0,2);
+    var tail=isent.slice(-2);
+    sc.f2=srcNote+'来自 Introduction（'+isent.length+' 句）：\n'+
+      (gaps2.length?('【作者点明的空白】\n'+gaps2.map(function(x){return '· '+x;}).join('\n')+'\n'):'【Introduction 里没有检索到"尚不清楚/未被研究"这类空白句】\n')+
+      (aims.length?('【作者自述的目的】\n'+aims.map(function(x){return '· '+x;}).join('\n')+'\n'):'')+
+      '【Introduction 末两句】（研究目的按惯例写在这里 —— 这是位置启发式，不是标志词命中，请自己核对）\n'+
+      tail.map(function(x){return '· '+x;}).join('\n')+
+      '\n【仍须你写】把它压成一句：它回答了哪个此前开放的问题？';
+  }
+  /* ⑨ 热点定位：补一条可计算的客观线索 —— 参考文献的年份分布说明这条线动得多快。 */
+  var ryrs=ft.refs.map(function(r){return parseInt(r.year,10);}).filter(function(y){return y>1960&&y<2100;});
+  if(ryrs.length>=5){
+    ryrs.sort(function(a,b){return a-b;});
+    var med=ryrs[Math.floor(ryrs.length/2)], now=new Date().getFullYear();
+    var rec=ryrs.filter(function(y){return y>=now-3;}).length;
+    sc.f9=(sc.f9||'')+'\n【全文补充的客观线索】它引的 '+ryrs.length+' 条有年份的参考文献：中位年份 '+med+
+      '、近三年占 '+Math.round(100*rec/ryrs.length)+'%（'+rec+'/'+ryrs.length+'）。'+
+      (rec/ryrs.length>0.4?'引文高度集中在近三年 → 这条线正在快速推进，抢时间的压力大。'
+                          :'引文年份分散 → 这条线推进较慢，或作者在接一个较老的传统。');
+  }
+  /* ⑫ 与我课题的接口：摘要级常常一个词都不重叠，但全文里往往有 —— 用全文重新匹配。 */
+  if(typeof matchDirections==='function'){
+    var dFull=matchDirections((ft.methods||'')+' '+(ft.results||'')+' '+(ft.discussion||'')+' '+(ft.intro||''));
+    if(dFull.length){
+      sc.f12=srcNote+'摘要级没有重叠，但全文里有（这正是只读摘要会漏掉的那类关联）：\n'+
+        dFull.map(function(d){return '· '+d.id+'　命中词：'+d.hits.join('、');}).join('\n')+
+        '\n【仍须你判断】是概念相关、方法相关，还是疾病模型相关？只有方法相关也值得记 —— 可搬的技术就是接口。';
+    } else {
+      sc.f12=srcNote+'全文里也没有与你三个方向重叠的关键词。'+
+        '\n【仍须你判断】如果你仍觉得相关，写清是哪一层的相关（概念？方法？疾病模型？）—— 工具只能报告词面重叠，报告不了概念上的类比。';
+    }
+  }
+  /* ⑬ 一个可执行动作：体系与方法槽位用全文里真实出现的填上，你只补"做什么、预期什么"。 */
+  var mNames=findMethods(ft.methods||ft.body||'').map(function(m){return m.name;});
+  var sysU=[]; ((ft.methods||'')+' '+(ft.body||'')).match(SYS_RE)
+    && ((ft.methods||'')+' '+(ft.body||'')).match(SYS_RE).forEach(function(x){
+      var v=String(x); if(sysU.indexOf(v)<0 && sysU.length<8) sysU.push(v); });
+  if(sysU.length || mNames.length){
+    sc.f13='【按此句式填，槽位已按全文预填】我要在 '+
+      (sysU.length?('〔'+sysU.slice(0,4).join(' / ')+'　←本文用过的体系，选一个或换成你自己的〕'):'〔____ 体系〕')+
+      ' 里做 '+(mNames.length?('〔'+mNames.slice(0,4).join(' / ')+'　←本文用过的方法，选一个〕'):'〔____〕')+
+      '，预期 〔____〕。'+
+      '\n【仍须你填】"预期什么"工具填不了 —— 那是你的假设，不是本文的内容。'+
+      '\n填完同步进阅读计划工作簿的台账 A「我的动作」列。';
   }
   var tr=refTriage(ft), parts=[];
   if(tr.support.length) parts.push('**① 用来支撑核心假设的**（引用语境含「我们假设／此前已证明／建立于」等）：\n'+tr.support.map(refLine).join('\n'));
@@ -919,14 +1020,23 @@ var FLDS=[
  ['f13','⑬ 一个可执行动作','同步进台账 A'],
  ['f14','⑭ 要排队的参考文献','需读全文']
 ];
+/* 按内容估算需要的行数：换行数 + 长行折行数，封顶 26 行（再长就让它自己滚）。 */
+function taRows(v){
+  var t=String(v||''); if(!t) return 3;
+  var lines=t.split('\n'), n=0;
+  lines.forEach(function(L){ n += Math.max(1, Math.ceil(L.length/78)); });
+  return Math.max(3, Math.min(26, n+1));
+}
 function renderForm(){
   var saved=getNote(noteKey())||{};
   var sc=scaffold();
   var h='<div style="font-weight:700;color:var(--pp);margin-bottom:2px">② 核对与补充（骨架已填好，你只需改和加）</div>'+
     (CUR.ftMeta
       ? ('<div class="note"><b style="color:var(--ok)">已取到开放全文（'+esc(CUR.ftMeta.src)+' · '+esc(CUR.ftMeta.pmcid)+
-         '）</b>：③关键图、⑥对照、⑦效应量、⑭参考文献已按<b>全文</b>填好（每条附原句）；'+
-         '④方法要点与⑤体系边界改用 Methods 正文而非摘要。留给你的是⑧不相信的那件事，与各栏标「仍须你判断」处。')
+         '）</b>：①结论句、②它回答了哪个问题、③关键图（含<b>正文怎么用这张图</b>）、⑥对照、⑦效应量、'+
+         '⑨热点线索、⑩局限、⑪未来走向、⑫与你课题的接口、⑬可执行动作、⑭参考文献 —— <b>全部按全文填好</b>，每条附原句；'+
+         '④方法要点与⑤体系边界改用 Methods 正文而非摘要。'+
+         '<b>只剩 ⑧「有一件事我不相信」留给你</b>（这一栏工具不能代填），以及各栏标「仍须你判断」处。')
       : ('<div class="note">带 <span class="badge b-need">需读全文</span> 的三栏仍是<b>核对清单</b> —— '+
          esc(CUR.ftNote||'未取到开放全文')+'。'))+
     '每次改动自动存本机。</div>';
@@ -935,7 +1045,9 @@ function renderForm(){
     h+='<div class="fld"><label>'+esc(f[1])+
        (need?(CUR.ftMeta?'<span class="badge b-ok2">全文已填</span>':'<span class="badge b-need">需读全文</span>'):'')+
        (f[2]&&!need?('<span class="hint">'+esc(f[2])+'</span>'):'')+'</label>'+
-       '<textarea id="ta_'+f[0]+'" rows="'+(/f4|f7|f10/.test(f[0])?6:3)+'">'+
+       /* 行数按内容实际长度算，上限 26 行。实测坑：取到全文后内容从两三行涨到几十行，
+          固定 rows=3 会把填好的东西全藏在小框里滚动条后面 —— 等于白填。 */
+       '<textarea id="ta_'+f[0]+'" rows="'+taRows(saved[f[0]]!==undefined?saved[f[0]]:sc[f[0]])+'">'+
        esc(saved[f[0]]!==undefined?saved[f[0]]:sc[f[0]])+'</textarea></div>';
   });
   h+='<div class="fld"><label>阅读层级 / 相关度（自填）</label>'+

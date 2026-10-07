@@ -262,6 +262,10 @@ function splitSentences(t){
     .replace(/(\b[A-Z])\.(\s*[A-Z]\.)/g,'$1<DOT>$2')      /* 人名缩写 */
     .replace(/\b(e\.g|i\.e|vs|et al|Fig|approx|ca)\./gi,'$1<DOT>')
     .replace(/(\d)\.(\d)/g,'$1<DOT>$2');                   /* 小数 */
+  /* 实测坑：PMC 全文把节与节直接连起来写成 "muscle.In conclusion, ..."（句号后没有空格），
+     只按「句末标点 + 空白」切会把整段当成一句，结论句因此永远抽不出来。
+     下面先把这种无空格边界补一个空格，缩写与小数已在上面被 <DOT> 保护住，不会误切。 */
+  protected_=protected_.replace(/([a-z0-9\)])([.!?])([A-Z])/g,'$1$2 $3');
   return protected_.split(/(?<=[.!?;])\s+(?=[A-Z0-9(«"'\u4e00-\u9fff])/)
     .map(function(x){return x.replace(/<DOT>/g,'.').trim();})
     .filter(function(x){return x.length>2;});
@@ -304,7 +308,9 @@ function structureAbstract(abs, labeled){
 var NUMPATS=[
  ['百分比', /\b\d{1,3}(?:\.\d+)?\s?%/g],
  ['倍数',   /\b\d+(?:\.\d+)?[-\s]?fold\b/gi],
- ['P 值',   /\bP\s?[<=>]\s?0?\.\d+/gi],
+ /* 实测坑：期刊普遍用 Unicode ≤ ≥（本项目实测某篇全文 p ≤ 出现 11 次、ASCII p < 只有 2 次），
+    只认 [<=>] 会把绝大多数 p 值漏掉，连带让「含 p 值的句子」统计严重偏低。 */
+ ['P 值',   /\bP\s?[<=>≤≥＜＞]\s?0?\.\d+/gi],
  ['样本量', /\bn\s?=\s?\d+/gi],
  ['浓度/时长', /\b\d+(?:\.\d+)?\s?(?:nM|µM|uM|mM|M|mg\/kg|µg|ug|mg|ng\/ml|h|hr|hours?|min|days?|weeks?)\b/gi],
  ['分辨率/长度', /\b\d+(?:\.\d+)?\s?(?:Å|angstrom|nt|bp|kb|kDa|aa)\b/gi]
@@ -993,12 +999,12 @@ function ftParse(xml){
   if(!doc || !doc.documentElement) return null;
   if(doc.getElementsByTagName('parsererror').length) return null;
 
-  var out={figs:[],tables:[],methods:'',results:'',discussion:'',body:'',refs:[],xrefs:[],secs:[]};
+  var out={figs:[],tables:[],methods:'',results:'',discussion:'',intro:'',body:'',refs:[],xrefs:[],figrefs:{},secs:[]};
   var figs=doc.getElementsByTagName('fig');
   for(var i=0;i<figs.length;i++){
     var lb=txtOf(figs[i].getElementsByTagName('label')[0]);
     var cp=txtOf(figs[i].getElementsByTagName('caption')[0]);
-    if(lb||cp) out.figs.push({label:lb||('Figure '+(i+1)), caption:cp});
+    if(lb||cp) out.figs.push({label:lb||('Figure '+(i+1)), caption:cp, id:figs[i].getAttribute('id')||''});
   }
   var tbs=doc.getElementsByTagName('table-wrap');
   for(var t=0;t<tbs.length;t++){
@@ -1016,6 +1022,7 @@ function ftParse(xml){
       if(/method|material|experimental procedure/i.test(ti) && bd.length>out.methods.length) out.methods=bd;
       else if(/^result/i.test(ti) && bd.length>out.results.length) out.results=bd;
       else if(/discussion|conclusion/i.test(ti) && bd.length>out.discussion.length) out.discussion=bd;
+      else if(/^(introduction|background)/i.test(ti) && bd.length>out.intro.length) out.intro=bd;
     }
     var clone=body.cloneNode(true);
     var rl=clone.getElementsByTagName('ref-list');
@@ -1039,6 +1046,17 @@ function ftParse(xml){
       var sent=pickSentence(ptxt, xrefOffset(pEl,node));
       out.xrefs.push({rid:rid, sent:(sent||ptxt).slice(0,400), sec:chain.join(' › ')});
     }
+    /* 图的引用语境。实测坑：正文里不一定写成 "Figure 1"（实测某篇按 "Figure S1" 等写法，
+       纯文本搜索 7 张图全部 0 命中），所以走 xref ref-type="fig" —— 改走 xref 后 7/7 全有语境。 */
+    var fx=body.getElementsByTagName('xref');
+    for(var y=0;y<fx.length;y++){
+      if((fx[y].getAttribute('ref-type')||'')!=='fig') continue;
+      var frid=fx[y].getAttribute('rid')||'', fp=fx[y].parentNode, up2=fx[y];
+      while(up2 && up2.nodeName!=='body'){ if(up2.nodeName==='p'){ fp=up2; break; } up2=up2.parentNode; }
+      var fptxt=txtOf(fp), fsent=pickSentence(fptxt, xrefOffset(fp,fx[y]));
+      if(!out.figrefs[frid]) out.figrefs[frid]=[];
+      if(out.figrefs[frid].length<3) out.figrefs[frid].push((fsent||fptxt).slice(0,320));
+    }
   }
 
   var refs=doc.getElementsByTagName('ref');
@@ -1047,6 +1065,9 @@ function ftParse(xml){
     var ti2=txtOf(refs[r].getElementsByTagName('article-title')[0]);
     var src=txtOf(refs[r].getElementsByTagName('source')[0]);
     var yr=txtOf(refs[r].getElementsByTagName('year')[0]);
+    /* 实测坑：有出版方的 JATS 参考文献没有结构化 <year>（实测某篇 0/52 条有），
+       但整条引文原文里有 "(2025)" 这样的年份 —— 退而从原文里取，否则年份分布恒为空。 */
+    if(!yr){ var ym=txtOf(refs[r]).match(/\((19|20)\d{2}\)|\b(19|20)\d{2}\b/); if(ym) yr=ym[0].replace(/[()]/g,''); }
     var sn=refs[r].getElementsByTagName('surname')[0];
     var pm='';
     var ids=refs[r].getElementsByTagName('pub-id');
@@ -1058,16 +1079,22 @@ function ftParse(xml){
   return out;
 }
 
+/* 体系词表。实测坑：原来只有细胞系与常见啮齿类，一篇以猪为模型的 DMD 论文只抽到 "Biopsies" ——
+   porcine / pig / DMDΔ52 / skeletal muscle 全漏。体系抽错会直接误导「外推边界」的判断。 */
+var SYS_RE=/\b(HEK ?293[A-Z]*|HeLa|K562|U2OS|NIH ?3T3|MEFs?|iPSCs?|ESCs?|organoids?|enteroids?|spheroids?|C57BL\/6[A-Za-z]*|BALB\/c|129S[A-Za-z0-9]*|NOD\/?SCID|NSG|Sprague-?Dawley|Wistar|zebrafish|C\. ?elegans|Drosophila|Xenopus|rhesus|macaque|non-?human primates?|pigs?|porcine|swine|Landrace|Yucatan|minipigs?|rabbits?|canine|dogs?|GRMD|sheep|bovine|chicken|mdx(?:-?[0-9A-Za-z]+)?|DMD[Δ∆][0-9]+(?:[–\-][0-9]+)?|exon ?[0-9]+ (?:deletion|skipping)|knock-?in mice|knock-?out mice|transgenic (?:mice|pigs?|rats?)|patient-?derived (?:xenografts?|organoids?|cells?|fibroblasts?)|PDX|primary (?:human|mouse|rat|porcine) [a-z ]{3,24}|myoblasts?|myotubes?|satellite cells?|skeletal muscle|cardiac muscle|diaphragm|gastrocnemius|tibialis anterior|biceps femoris|biopsy|biopsies|post-?mortem (?:tissue|samples?))\b/gi;
 var FIG_Q=[
   {k:'样本量', re:/\bn\s*=\s*\d+/i},
   {k:'误差/离散', re:/(±|\bSEM\b|\bSD\b|s\.e\.m|standard (error|deviation)|interquartile)/i},
-  {k:'统计检验', re:/(\bP\s*[<>=]|\bp\s*[<>=]|two-?tailed|ANOVA|t-?test|Mann-?Whitney|Wilcoxon|Kruskal)/i},
+  /* 同上：必须认 Unicode ≤ ≥，否则「adjusted p ≤ 0.05」这种图注判不出有统计检验 */
+  {k:'统计检验', re:/([Pp]\s*[<>=≤≥＜＞]|two-?tailed|ANOVA|t-?test|Mann-?Whitney|Wilcoxon|Kruskal|adjusted\s+p|FDR|q\s*[<≤]|Benjamini)/i},
   {k:'重复次数', re:/(biological|technical|independent)\s+(replicate|experiment)|\bn\s*=\s*\d+\s*(mice|animals|patients|donors)/i},
   {k:'标尺（代表性图像）', re:/scale bar/i}
 ];
 function figCred(figs){
   return figs.map(function(f){
-    return {label:f.label, caption:f.caption,
+    /* id 必须带出去：上层要用它去 ft.figrefs 取这张图的正文引用语境。
+       实测坑：早先这里新建对象时漏了 id，结果 7/7 张图明明都有引用语境，界面却显示 0 张。 */
+    return {label:f.label, caption:f.caption, id:f.id||'',
             marks:FIG_Q.filter(function(q){return q.re.test(f.caption);}).map(function(q){return q.k;})};
   });
 }
@@ -1163,7 +1190,13 @@ function ftEnrich(r, ft, meta){
   o.future=futureScan((ft.discussion||'')+' '+bodyAll);
   o.limits=limScan((ft.discussion||'')+' '+bodyAll);
   o.ctrl=ctrlScan(bodyAll);
-  o.figq=figCred(ft.figs).filter(function(f){return f.marks.length;}).slice(0,4);
+  o.figq=figCred(ft.figs).map(function(f){
+    f.cites=(ft.figrefs&&ft.figrefs[f.id])||[];  /* 正文引用语境才有 n 与差异大小 */
+    return f;
+  }).filter(function(f){return f.marks.length||f.cites.length;}).slice(0,5);
+  o.systems=[];
+  var sm=((ft.methods||'')+' '+(ft.body||'')).match(SYS_RE)||[];
+  sm.forEach(function(x){ if(o.systems.indexOf(x)<0 && o.systems.length<12) o.systems.push(x); });
   o.findings=splitSentences(ft.results||bodyAll).filter(function(s){
     return /\b(we (found|show|observed|identified|demonstrate)|significantly|increased|decreased|reduced|elevated)\b/i.test(s);}).slice(0,4);
   o.conclusion=splitSentences(ft.discussion||'').filter(function(s){
